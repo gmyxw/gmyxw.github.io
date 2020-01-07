@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-37 Never redefine a function&#39;s inherited default parameter value - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-37 Never redefine a function&#39;s inherited default parameter value</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-02 21:15</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Defaul parameter values are statically bound, while virtual function - the only functions we should be overriding - are dynamically bound.</p>
+<p>As item 36 suggests, we should never redefine an inherited non-virtual function, so we only need to focus on the case where we inherit a virtual function with a default parameter value.</p>
+<p>To make things clear, first we need to understand the difference between static and dynamic binding:</p>
+<ul>
+<li>an object's <em>static type</em> is the type we declare it to have in the program text</li>
+<li>an object's <em>dynamic type</em> is determined by the type of the object to which it currently refers.</li>
+</ul>
+<p>For example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// a class for geometric shapes
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">Shape</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">enum</span> <span style="color:#75af00">ShapeColor</span> <span style="color:#111">{</span><span style="color:#111">Red</span><span style="color:#111">,</span> <span style="color:#111">Green</span><span style="color:#111">,</span> <span style="color:#111">Blue</span><span style="color:#111">}</span><span style="color:#111">;</span>
+    <span style="color:#75715e">// all shapes must offer a function to draw themselves
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">draw</span><span style="color:#111">(</span><span style="color:#111">ShapeColor</span> <span style="color:#111">color</span> <span style="color:#f92672">=</span> <span style="color:#111">Red</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Rectangle</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Shape</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// different default parameter value -&gt; bad
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">draw</span><span style="color:#111">(</span><span style="color:#111">ShapeColor</span> <span style="color:#111">color</span> <span style="color:#f92672">=</span> <span style="color:#111">Green</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Circle</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Shape</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">draw</span><span style="color:#111">(</span><span style="color:#111">ShapeColor</span> <span style="color:#111">color</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Shape</span> <span style="color:#f92672">*</span><span style="color:#111">ps</span><span style="color:#111">;</span>  <span style="color:#75715e">// static type = Shape*, no dynamic type (no object referred to)
+</span><span style="color:#75715e"></span><span style="color:#111">Shape</span> <span style="color:#f92672">*</span><span style="color:#111">pr</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Rectangle</span> <span style="color:#75715e">// static type = Shape*, dynamic type = Rectangle*
+</span><span style="color:#75715e"></span><span style="color:#111">Shape</span> <span style="color:#f92672">*</span><span style="color:#111">pc</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Circle</span><span style="color:#111">;</span>  <span style="color:#75715e">// static type = Shape*, dynamic type = Circle*
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Notice that the static type of <code>ps</code>, <code>pr</code>, and <code>pr</code> are all &ldquo;pointer-to-<code>Shape</code>&rdquo;, and that it makes no difference what they're <em>really</em> pointing to.</p>
+<p><em>Dynamic types</em> , as their name suggests,  can change as a program runs, typically through assignments:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">ps</span> <span style="color:#f92672">=</span> <span style="color:#111">pr</span><span style="color:#111">;</span>  <span style="color:#75715e">// ps&#39;s dynamic type is now Rectangle*
+</span><span style="color:#75715e"></span><span style="color:#111">ps</span> <span style="color:#f92672">=</span> <span style="color:#111">pc</span><span style="color:#111">;</span>  <span style="color:#75715e">// ps&#39;s dynamic type is now Circle*
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Virtual functions are <em>dynamically bound</em>, meaning that the particular function called is determined by the dynamic type of the object through which it's invoked:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">pc</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#111">draw</span><span style="color:#111">(</span><span style="color:#111">Shape</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">Red</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// calls Circle::draw(Shape::Red)
+</span><span style="color:#75715e"></span><span style="color:#111">pr</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#111">draw</span><span style="color:#111">(</span><span style="color:#111">Shape</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">Red</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// calls Rectangle::draw(Shape::Red)
+</span></code></pre></td></tr></table>
+</div>
+</div><p>However, since default parameters are statically bound, when calling a virtual function defined in a <em>derived class</em>, it is possible that the default parameter value we are using is from a <em>base class</em>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">pr</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#111">draw</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls Rectangle::draw(Shape::Red)
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In this case, even though the virtual function is called according to dynamic type <code>Rectangle*</code>, the default parameter value is taken from the <code>Shape</code> class (<code>Shape::Red</code>) rather than the derived <code>Rectangle</code> class (<code>Shape::Green</code> is expected). This result is almost certainly unanticipated.</p>
+<p>The problem here is that the default parameter value of virtual function <code>draw</code> is redefined in a derived class. This inconsistency between the function call's dynamic binding and the default parameter value's statical binding is mainly due to C++'s insistence on runtime efficiency.</p>
+<p>When we're having trouble making a virtual function behave the way we'd like, it's wise to consider alternative designs, which item 35 happens to offer. One of the alternatives is the <em>non-virtual-interface idiom</em>:<br>
+in order to make clear that the default value for <code>draw</code>'s color parameter should always be <code>Red</code>, we could declare a public non-virtual function in the base class calling a private virtual function that derived classes may redefine. According to item 36, such an non-virtual function should never be overridden by derived classes. Thus, simply specify the default parameter in the non-virtual function, and we're done:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Shape</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">enum</span> <span style="color:#75af00">ShapeColor</span> <span style="color:#111">{</span><span style="color:#111">Red</span><span style="color:#111">,</span> <span style="color:#111">Green</span><span style="color:#111">,</span> <span style="color:#111">Blue</span><span style="color:#111">}</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#75af00">draw</span><span style="color:#111">(</span><span style="color:#111">ShapeColor</span> <span style="color:#111">color</span> <span style="color:#f92672">=</span> <span style="color:#111">Red</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>  <span style="color:#75715e">// now non-virtual
+</span><span style="color:#75715e"></span>    <span style="color:#111">{</span>
+        <span style="color:#111">doDraw</span><span style="color:#111">(</span><span style="color:#111">color</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls the private virtual
+</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">doDraw</span><span style="color:#111">(</span><span style="color:#111">ShapeColor</span> <span style="color:#111">color</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>  <span style="color:#75715e">// the actual work is done in this func
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Rectangle</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Shape</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">doDraw</span><span style="color:#111">(</span><span style="color:#111">ShapeColor</span> <span style="color:#111">color</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span> <span style="color:#75715e">// note lack of a default param value
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

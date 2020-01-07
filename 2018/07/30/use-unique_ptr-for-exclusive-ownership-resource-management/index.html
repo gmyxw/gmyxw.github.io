@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-18 Use std::unique_ptr for Exclusive-ownership Resource Management - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-18 Use std::unique_ptr for Exclusive-ownership Resource Management</h1>
+  </div>
+<div class="meta">
+  <div>2018-07-30 15:18</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p><code>std::unique_ptr</code> is a small, fast, move-only smart pointer for managing resources with exclusive-ownership semantics.</p>
+<p>Some facts:</p>
+<ul>
+<li><code>std::unique_ptr</code> embodies <em>exclusive ownership</em> semantics: a non-null <code>std::unique_ptr</code> owns what it points to</li>
+<li>Moving a <code>std::unique_ptr</code> transfers ownershiip from the source pointer to the destination pointer</li>
+<li>Copying a <code>std::unique_ptr</code> isn't allowed (it's <em>move-only type</em>)</li>
+<li>Upong destruction, a non-null <code>std::unique_ptr</code> destroys its resource by calling its deleter (by default the deleter simply applies <code>delete</code> to the raw pointer inside the <code>std::unique_ptr</code>)</li>
+<li><code>std::unique_ptr</code> can easily and efficiently converts to a <code>std::shared_ptr</code></li>
+</ul>
+<p>Factory functions and Pimpl Idiom are two common use case for <code>std::ptr</code>s. For example, supporse we have a hierarchy for types of investments (e.g., stocks, bonds, real estate, etc.) with a factory function alllocating an object on the heap and returning a pointer to it:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Investment</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#f92672">~</span><span style="color:#111">Investment</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span><span style="color:#960050;background-color:#1e0010">`</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Stock</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Investment</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Bond</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Investment</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">RealEstate</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Invesetment</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">Ts</span><span style="color:#f92672">&gt;</span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">unique_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#111">,</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">delInvmt</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span>  <span style="color:#75715e">// return std::unique_ptr to an object 
+</span><span style="color:#75715e"></span><span style="color:#111">makeInvestment</span><span style="color:#111">(</span><span style="color:#111">Ts</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">params</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// created from the given args with cutomized deleter
+</span></code></pre></td></tr></table>
+</div>
+</div><p>By the help of <code>std::unique_ptr</code>, clients will no longer worry about deleting it:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">{</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">auto</span> <span style="color:#111">pInvestment</span> <span style="color:#f92672">=</span> <span style="color:#111">makeInvestment</span><span style="color:#111">(</span> <span style="color:#111">arguments</span> <span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span>  <span style="color:#75715e">// destroy *pInvestment
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Callers can also take use of <code>std::unique_ptr</code>'s feature to adapt it to its more flexible sibling <code>std::shared_ptr</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span> <span style="color:#111">sp</span> <span style="color:#f92672">=</span> <span style="color:#111">makeInvestment</span><span style="color:#111">(</span> <span style="color:#111">arguments</span> <span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="implementation">Implementation</h4>
+<p>For C++11, we can implement the factory function this way:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">delInvmt</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#111">Investment</span><span style="color:#f92672">*</span> <span style="color:#111">pInvestment</span><span style="color:#111">)</span>       <span style="color:#75715e">// custom deleter
+</span><span style="color:#75715e"></span>                <span style="color:#111">{</span>                                 <span style="color:#75715e">// (a lambda expression)
+</span><span style="color:#75715e"></span>                    <span style="color:#111">makeLogEntry</span><span style="color:#111">(</span><span style="color:#111">pInvestment</span><span style="color:#111">)</span><span style="color:#111">;</span>   
+                    <span style="color:#00a8c8">delete</span> <span style="color:#111">pInvestment</span><span style="color:#111">;</span>
+                <span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">Ts</span><span style="color:#f92672">&gt;</span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">unique_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#111">,</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">delInvmt</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span>
+<span style="color:#111">makeInvestment</span><span style="color:#111">(</span><span style="color:#111">Ts</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">params</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">unique_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#111">,</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">delInvmt</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#111">pInv</span><span style="color:#111">(</span><span style="color:#00a8c8">nullptr</span><span style="color:#111">,</span> <span style="color:#111">delInvmt</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span> <span style="color:#75715e">/* a Stock should be created */</span> <span style="color:#111">)</span>
+    <span style="color:#111">{</span>
+        <span style="color:#111">pInv</span><span style="color:#111">.</span><span style="color:#111">reset</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Stock</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">Ts</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">params</span><span style="color:#111">)</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+    <span style="color:#00a8c8">else</span> <span style="color:#75af00">if</span> <span style="color:#111">(</span> <span style="color:#75715e">/* a Bond should be created */</span> <span style="color:#111">)</span>
+    <span style="color:#111">{</span>
+        <span style="color:#111">pInv</span><span style="color:#111">.</span><span style="color:#111">reset</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Bond</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">Ts</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">params</span><span style="color:#111">)</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+    <span style="color:#00a8c8">else</span> <span style="color:#75af00">if</span> <span style="color:#111">(</span> <span style="color:#75715e">/* a RealEstate should be created */</span> <span style="color:#111">)</span>
+    <span style="color:#111">{</span>
+        <span style="color:#111">pInv</span><span style="color:#111">.</span><span style="color:#111">reset</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">RealEstate</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">Ts</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">params</span><span style="color:#111">)</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">pInv</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>In C++14, we could use function return type deduction to make it simpler and more encapsulated:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">Ts</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">auto</span> <span style="color:#111">makeInvestment</span><span style="color:#111">(</span><span style="color:#111">Ts</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">params</span><span style="color:#111">)</span> <span style="color:#75715e">// C++14
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>
+    <span style="color:#00a8c8">auto</span> <span style="color:#111">delInvmt</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#111">Investment</span><span style="color:#f92672">*</span> <span style="color:#111">pInvestment</span><span style="color:#111">)</span>     <span style="color:#75715e">// now inside makeInvestment
+</span><span style="color:#75715e"></span>                    <span style="color:#111">{</span>
+                        <span style="color:#111">makeLogEntry</span><span style="color:#111">(</span><span style="color:#111">pInvestment</span><span style="color:#111">)</span><span style="color:#111">;</span>
+                        <span style="color:#00a8c8">delete</span> <span style="color:#111">pInvestment</span><span style="color:#111">;</span>
+                    <span style="color:#111">}</span><span style="color:#111">;</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">unique_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#111">,</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">delInvmt</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pInv</span><span style="color:#111">(</span><span style="color:#00a8c8">nullptr</span><span style="color:#111">,</span> <span style="color:#111">delInvmt</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#75715e">// as before
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>It is worth thinking about the size impact on a <code>std::unique_ptr</code> after introducing a custome deleter:</p>
+<ul>
+<li>if the deleter is a function pointer, the size of a <code>std::unique_ptr</code> generally grow from one (the size of a raw pointer) to two</li>
+<li>if the deleter is a function object, the change in size depends on how much state is stored in the function object
+<ul>
+<li>Stateless function objects (e.g., from lambda expressions with no captures) typically incur no size penalty when used as deleters (still one word)</li>
+<li>Function object deleters with extensive state can yield <code>std::unique_ptr</code> objects of significant size.</li>
+</ul>
+</li>
+</ul>
+<h4 id="two-forms">Two forms</h4>
+<p><code>std::unique_ptr</code> comes in two forms</p>
+<ul>
+<li><code>std::unique_ptr&lt;T&gt;</code> for individule objects, which lacks indexing operator (<code>operator[]</code>)</li>
+<li><code>std::unique_ptr&lt;T[]&gt;</code> for arrays, which lacks dereferencing operators (<code>operator*</code> and <code>operator-&gt;</code>)</li>
+</ul>
+<p>Generally, <code>std::array</code>, <code>std::vector</code>, and <code>std::string</code> are always better data structure choices than raw arrays, so the only situation where <code>std::unique_ptr&lt;T[]&gt;</code> makes sense would be when we're using a C-like API that returns a raw pointer to a heap array that we assume ownership of.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

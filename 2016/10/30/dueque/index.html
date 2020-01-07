@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>When use Dueque - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>When use Dueque</h1>
+  </div>
+<div class="meta">
+  <div>2016-10-30 00:00</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/algorithm/">#algorithm</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Deque vs. LinkedList vs. Stack</p>
+<p>Quote From javadoc:</p>
+<blockquote>
+<p>ArrayDeque is likely to be faster than Stack when used as a stack, and faster than LinkedList when used as a queue.</p>
+</blockquote>
+<h2 id="use-arraydeque-or-linkedlist-as-queue0">Use ArrayDeque or LinkedList as queue<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></h2>
+<h3 id="cons-of-linked-list">Cons of Linked List</h3>
+<ul>
+<li>Linked structures are the worst structure to iterate with a cache miss on each element</li>
+<li>Have to allocating a node for each item to insert, which essentially involves JVM/OS and expensive</li>
+<li>For pop() operation, it mark internal nodes eligible for garbage collection and that's more work behind the scene</li>
+</ul>
+<h3 id="pros-of-linked-list">Pros of Linked List</h3>
+<ul>
+<li>When <strong>removing the current element</strong> during iteration, LinkedList has better performance</li>
+<li>Worth to note: LinkedList supports null element</li>
+</ul>
+<h3 id="when-use-arraydeque-as-queue">When use ArrayDeque as queue</h3>
+<ul>
+<li>if only need to add/remove of both ends, use ArrayDeque</li>
+<li>e.g.: when using BFS, consider ArrayDeque first.</li>
+</ul>
+<h2 id="use-arraydeque-or-stack-as-stack1">Use ArrayDeque or Stack as Stack<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></h2>
+<p><code>Deque</code> exposes a set of operations which is all about being able to fetch/add/remove items from the start or end of a collection, iterate etc. There's deliverately no way to access an element by position, which <code>Stack</code> exposes because it's a subclass of <code>Vector</code>, making the <code>Stack</code> <strong>inconsistent</strong>.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p><a href="http://stackoverflow.com/questions/6163166/why-is-arraydeque-better-than-linkedlist">http://stackoverflow.com/questions/6163166/why-is-arraydeque-better-than-linkedlist</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p><a href="http://stackoverflow.com/questions/12524826/why-should-i-use-deque-over-stack">http://stackoverflow.com/questions/12524826/why-should-i-use-deque-over-stack</a> <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

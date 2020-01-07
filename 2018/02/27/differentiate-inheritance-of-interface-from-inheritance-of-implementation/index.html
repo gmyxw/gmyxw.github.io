@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-34 Differentiate between inheritance of interface and inheritance of implementation - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-34 Differentiate between inheritance of interface and inheritance of implementation</h1>
+  </div>
+<div class="meta">
+  <div>2018-02-27 20:53</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Inheritance of interface is different from inheritance of implementatino.</p>
+<!-- toc -->
+<p>Under public inheritance, derived classes always inherit base class interfaces, but may act differently in terms of base class implementation inheritance:</p>
+<ul>
+<li>Pure virtual functions specify inheritance of interface only</li>
+<li>Simple (impure) virtual functions specify inheritance of interface plus inheritance of a default implementation</li>
+<li>Non-virtual functions specify inheritance of interface plus inheritance of a mandatory implementation</li>
+</ul>
+<p>To show the implementation differences above, we can define following classes for an example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Shape</span> <span style="color:#111">{</span>  <span style="color:#75715e">// abstract class
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">draw</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>  <span style="color:#75715e">// pure virtual function, draws the current obj.
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">error</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span><span style="color:#f92672">&amp;</span> <span style="color:#111">msg</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// impure virtual function, called by member functions if they need to report an error
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">int</span> <span style="color:#75af00">objectID</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span> <span style="color:#75715e">// non-virtual function, returns a unique integer identifier for the current obj.
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Rectangle</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Shape</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Ellipse</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Shape</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Since derived classes <code>Rectangle</code> and <code>Ellipse</code> are both public inherited, according to item 32, this means <code>is-a</code>, so anything that is true of the base class must also apply to derived classes. Thus, the member function <em>interfaces</em> are always inherited.</p>
+<h1 id="pure-virtual-functions">Pure virtual functions</h1>
+<p>For pure virtual functions, there are two features we have to note:</p>
+<ul>
+<li>they <em>must</em> be redeclared by any concrete class that inherits them</li>
+<li>they typically have no definition in abstract classes</li>
+</ul>
+<p>From these feature, we can conclude that:</p>
+<blockquote>
+<p><strong>The purpose of declaring a pure virtual function is to have derived classes inherit a function <em>interface only</em>.</strong></p>
+</blockquote>
+<p>Here, the declaration of <code>Shape::draw</code> says to the client of the <code>Shape</code> that, &ldquo;you have to provide a <code>draw</code> function, but I don't know how you're going to implement it.&rdquo;</p>
+<p>Incidentally, C++ allows us to provide an implementation for <code>Shape::draw</code> (example: pure virtual destructor in item 7). However, the only way to call it would be to qualify the call with the class name:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Shape</span> <span style="color:#f92672">*</span><span style="color:#111">ps</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Shape</span><span style="color:#111">;</span>  <span style="color:#75715e">// error! Shape is abstract
+</span><span style="color:#75715e"></span><span style="color:#111">Shape</span> <span style="color:#f92672">*</span><span style="color:#111">ps1</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Rectangle</span><span style="color:#111">;</span>  <span style="color:#75715e">// fine
+</span><span style="color:#75715e"></span><span style="color:#111">ps1</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#111">draw</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// call Rectangle::draw
+</span><span style="color:#75715e"></span><span style="color:#111">ps1</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#111">Shape</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">draw</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// call Shape::draw
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This feature is generally of limited utility, except that it can be employed as a mechanism for providing a safer-than-usual default implementation for simple virtual functions as we'll see below.</p>
+<h1 id="simple-impure-virtual-functions">Simple (impure) virtual functions</h1>
+<p>Simple virtual functions provide an implementation that derived classes may override, which means that</p>
+<blockquote>
+<p><strong>The purpose of declaring a simple virtual function is to have derived classes inherit a function <em>interface as well as default implementation</em>.</strong></p>
+</blockquote>
+<p>For example, the declaration of <code>error</code> function tells us that &ldquo;You have to supoort an <code>error</code> function, but if you don't want to write your own, you can fall back on the default version in the <code>Shape</code> class.&rdquo;</p>
+<h2 id="potential-danger">Potential danger</h2>
+<p>However, in the perspective of class design, there's a potential danger to allow simple virtual functions to specify both a function interface and a default implementation. That is: a derived class is allowed to inherit the default implementation without <strong>explicitly</strong> saying that it wanted to. For example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Airport</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span> <span style="color:#75715e">// represents airports
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Airplane</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">fly</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">void</span> <span style="color:#111">Airplane</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">fly</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">default</span> <span style="color:#111">code</span> <span style="color:#00a8c8">for</span> <span style="color:#111">flying</span> <span style="color:#111">an</span> <span style="color:#111">airplane</span> <span style="color:#111">to</span> <span style="color:#111">the</span> <span style="color:#111">given</span> <span style="color:#111">destination</span>
+<span style="color:#111">}</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">ModelA</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Airplane</span><span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">ModelB</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Airplane</span><span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Suppose both <code>ModelA</code> and <code>ModelB</code> inherit the base class <code>Airplane</code> without re-implementing the simple virtual function <code>fly</code>. Chances are that <code>ModelB</code> is actually a new type of model, yet its programmer simply forgets to redefine the <code>fly</code> function.</p>
+<h2 id="separate-interface-from-default-implementation">Separate interface from default implementation</h2>
+<p>To make our design more foolproof, we may separate functions for providing interface and default implementation, such as below:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Airplane</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">fly</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">protected</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#111">defaultFly</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span>
+        <span style="color:#00a8c8">default</span> <span style="color:#111">code</span> <span style="color:#00a8c8">for</span> <span style="color:#111">flying</span> <span style="color:#111">an</span> <span style="color:#111">airplane</span> <span style="color:#111">to</span> <span style="color:#111">the</span> <span style="color:#111">given</span> <span style="color:#111">destination</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">ModelA</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Airplane</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">fly</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span> <span style="color:#111">defaultFly</span><span style="color:#111">(</span><span style="color:#111">destination</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">ModelB</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Airplane</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">fly</span><span style="color:#111">(</span><span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">void</span> <span style="color:#111">ModelB</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">fly</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">special</span> <span style="color:#111">code</span> <span style="color:#00a8c8">for</span> <span style="color:#111">flying</span> <span style="color:#111">a</span> <span style="color:#111">ModelB</span> <span style="color:#111">airplane</span> <span style="color:#111">to</span> <span style="color:#111">the</span> <span style="color:#111">given</span> <span style="color:#111">destination</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="take-use-of-pure-virtual-function">Take use of pure virtual function</h2>
+<p>Some people may feel this design is redundant, arguing that this will polllute the class namespace with a proliferation of closely related function names. Then we may take advantage of the fact that pure virtual functions, which insists on redeclaring in concrete derived classes, may also have implementations of their own:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Airplane</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">fly</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">void</span> <span style="color:#111">Airplane</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">fly</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">desination</span><span style="color:#111">)</span>  <span style="color:#75715e">// an implementation of a pure virtual function
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>
+    <span style="color:#00a8c8">default</span> <span style="color:#111">code</span> <span style="color:#00a8c8">for</span> <span style="color:#111">flying</span> <span style="color:#111">an</span> <span style="color:#111">airplane</span> <span style="color:#111">to</span> <span style="color:#111">the</span> <span style="color:#111">given</span> <span style="color:#111">destination</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">ModelA</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Airplane</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">fly</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span> <span style="color:#111">Airplane</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">fly</span><span style="color:#111">(</span><span style="color:#111">destination</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">ModelB</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Airplane</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">fly</span><span style="color:#111">(</span><span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">void</span> <span style="color:#111">ModelB</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">fly</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Airport</span><span style="color:#f92672">&amp;</span> <span style="color:#111">destination</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">special</span> <span style="color:#111">code</span> <span style="color:#00a8c8">for</span> <span style="color:#111">flying</span> <span style="color:#111">a</span> <span style="color:#111">ModelB</span> <span style="color:#111">airplane</span> <span style="color:#111">to</span> <span style="color:#111">the</span> <span style="color:#111">given</span> <span style="color:#111">destination</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>In essence, this design breaks <code>fly</code> into two fundamental components:</p>
+<ul>
+<li><code>fly</code>'s declaration specifies its interface, which derived classes <em>must use</em></li>
+<li><code>fly</code>'s definition specifies its default behavior, which derived classes <em>may use</em> by explicitly request it</li>
+</ul>
+<p>However, in merging <code>fly</code> and <code>defaultFly</code>, we have lost the ability to give the two functions different protection levels: previously <code>protected</code> code in <code>defaultFly</code> is now <code>public</code> in <code>fly</code>.</p>
+<h1 id="non-virtual-function">Non-virtual function</h1>
+<p>A non-virtual member function specifies an <em>invariant over specialization</em> (a point discussed in item 36), identifying behavior that is not supposed to change, no matter how specialized a derived class becomes. Thus:</p>
+<blockquote>
+<p><strong>The purpose of declaring a non-virtual function is to have derived classes inherit a function <em>interface as well as</em> a mandatory implementation.</strong></p>
+</blockquote>
+<p>The declaration for <code>Shape::objectId</code> is basically say, &ldquo;Every <code>Shape</code> object has a function that yields an object identifier, and that identifier is always conputed the same way. That way is determined by the definition of <code>Shape::objectID</code>, and no derived class should try to chagne how it's done.&rdquo;</p>
+<h1 id="summary">Summary</h1>
+<p>The differences in declarations for pure virtual, simple virtual and non-virtual functions allow us to specify with precision what we want derived classes to inherit: interface only, interface and a default implementation, or interface and a mandatory implementation, respectively.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-44 Factor parameter-independent code out of templates - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-44 Factor parameter-independent code out of templates</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-10 20:24</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Templates generate multiple classes and multiple functions, so any template code not dependent on a template parameter (either non-type template parameters or type parameters) causes bloat: eliminate bloat due to non-type template parameters by replacing template parameters with function parameters or class data members; reduce bloat caused from type parameters by sharing implementations for instantiation types with identical binary representations.</p>
+<!-- toc -->
+<p>When writing templates, since there's only one copy of the template source code, we have to analyze it carefully to avoid the implicit replication that may take place when a template is instantiated multiple times.</p>
+<h1 id="bloat-due-to-non-type-template-parameters">Bloat due to non-type template parameters</h1>
+<p>For example, suppose we'd like to write a template for fixed-size square matrices that support matrix inversion:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">n</span><span style="color:#f92672">&gt;</span>  <span style="color:#75715e">// template for n*n matrices of obejcts of type T
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">SquareMatrix</span><span style="color:#111">{</span>
+<span style="color:#111">pubic</span><span style="color:#111">:</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#111">invert</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// invert the matrix in place
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This template takes a type parameter <code>T</code> as well as a <em>non-type parameter</em> <code>n</code> of type <code>size_t</code>. This example is actually a classic way for template-induced code bloat:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">SquareMatrix</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">double</span><span style="color:#111">,</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">&gt;</span> <span style="color:#111">sm1</span><span style="color:#111">;</span>
+<span style="color:#111">sm1</span><span style="color:#111">.</span><span style="color:#111">invert</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// call SquareMatrix&lt;double, 5&gt;::invert
+</span><span style="color:#75715e"></span><span style="color:#111">SquareMatrix</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">double</span><span style="color:#111">,</span> <span style="color:#ae81ff">10</span><span style="color:#f92672">&gt;</span> <span style="color:#111">sm2</span><span style="color:#111">;</span>
+<span style="color:#111">sm2</span><span style="color:#111">.</span><span style="color:#111">invert</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// call SquareMatrix&lt;double, 10&gt;::invert
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In the statements above, two copies of <code>invert</code> will be instantiated, and these two version of <code>invert</code> are character-for-character identical except for the use of 5 in one version and 10 in the other. To reduce the code bloat, we could redesign and call a parameterized function instead.</p>
+<h2 id="replace-with-function-parameters">Replace with function parameters</h2>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>     <span style="color:#75715e">// size-independent base class for square matrices
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">SquareMatrixBase</span><span style="color:#111">{</span>  <span style="color:#75715e">// all matrices holding a givin type of object will share a single base class with a single copy of this base class&#39;s version of invert
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">protected</span><span style="color:#f92672">:</span> 
+    <span style="color:#75715e">// intend only to be a way for derived classes to avoid code replication, so declared as protected instaend of public
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">void</span> <span style="color:#111">invert</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">matrixSize</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// invert matrix of the given size
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">n</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">SqureMatrix</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">private</span> <span style="color:#111">SquareMatrixBase</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">{</span> <span style="color:#75715e">// not a is-a relationship, using private inheritance only for base class implementation, item 39
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">using</span> <span style="color:#111">SquareMatrixBase</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">invert</span><span style="color:#111">;</span>  <span style="color:#75715e">// avoid hiding base version of invert, item 33
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>                                 <span style="color:#75715e">// make inline call to base class version of invert:
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">void</span> <span style="color:#111">invert</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#00a8c8">this</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#111">invert</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>  <span style="color:#75715e">// 1. it&#39;s implicit inline, so there&#39;s no addictional cost of calling it, item 30
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>                                 <span style="color:#75715e">// 2. use &#34;this-&gt;&#34; so that function names in templatized base classes are revealed in derived classes, item 43
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This design addressed the issue of code bloat, but it also introduces a problem: <code>SquareMatrixBase::invert</code> only knows the size of the data, but it does not know where the data for a particular matrix is, because only the derived class knows that. We could add another parameter to <code>SquareMatrixBase::invert</code>, such as a pointer to the beginning of a chunk of memory that stores the matrix's data.</p>
+<p>However, an alternative and possibly better solution will be to have <code>SquareMatrixBase</code> store both a pointer to the memory for the matrix values, as well as the matrix size, so that any other functions asking for the matrix memory address or matrix size can be written in a address-independent-and-size-independent manner, and moved into <code>SquareMatrixBase</code>.</p>
+<h2 id="replace-with-class-data-members">Replace with class data members</h2>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">SquareMatrixBase</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">protected</span><span style="color:#f92672">:</span>
+    <span style="color:#111">SquareMatrixBase</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">n</span><span style="color:#111">,</span> <span style="color:#111">T</span> <span style="color:#f92672">*</span><span style="color:#111">pMem</span><span style="color:#111">)</span>  <span style="color:#75715e">// store matrix size and a ptr to matrix values
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">:</span> <span style="color:#111">size</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">)</span><span style="color:#111">,</span> <span style="color:#111">pData</span><span style="color:#111">(</span><span style="color:#111">pMem</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#111">}</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#75af00">setDataPtr</span><span style="color:#111">(</span><span style="color:#111">T</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">pData</span> <span style="color:#f92672">=</span> <span style="color:#111">ptr</span><span style="color:#111">;</span> <span style="color:#111">}</span>  <span style="color:#75715e">// reassign pData
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">;</span>  <span style="color:#75715e">// size of matrix
+</span><span style="color:#75715e"></span>    <span style="color:#111">T</span> <span style="color:#f92672">*</span><span style="color:#111">pData</span><span style="color:#111">;</span>  <span style="color:#75715e">// pointer to matrix values
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">n</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">SquareMatrix</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">private</span> <span style="color:#111">SqureMatrixBase</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">SquareMatrix</span><span style="color:#111">(</span><span style="color:#111">)</span>  <span style="color:#75715e">// send matrix size and data ptr to base class
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">:</span> <span style="color:#111">SquareMatrixBase</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">,</span> <span style="color:#111">data</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#111">}</span> 
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">T</span> <span style="color:#111">data</span><span style="color:#111">[</span><span style="color:#111">n</span><span style="color:#f92672">*</span><span style="color:#111">n</span><span style="color:#111">]</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Objects of such type have no need for dynamic memory allocation, but the objects could be very large. An alternative would be to put the data for each matrix on the heap:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">n</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">SquareMatrix</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">private</span> <span style="color:#111">SqureMatrixBase</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">SquareMatrix</span><span style="color:#111">(</span><span style="color:#111">)</span>  
+    <span style="color:#f92672">:</span> <span style="color:#111">SquareMatrixBase</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">,</span> <span style="color:#ae81ff">0</span><span style="color:#111">)</span><span style="color:#111">,</span>         <span style="color:#75715e">// set base class ptr to null
+</span><span style="color:#75715e"></span>      <span style="color:#111">pData</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">T</span><span style="color:#111">[</span><span style="color:#111">n</span><span style="color:#f92672">*</span><span style="color:#111">n</span><span style="color:#111">]</span><span style="color:#111">)</span>                  <span style="color:#75715e">// allocate memory for matrix values and save a ptr to the memory
+</span><span style="color:#75715e"></span>    <span style="color:#111">{</span> <span style="color:#00a8c8">this</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#111">setDataPtr</span><span style="color:#111">(</span><span style="color:#111">pData</span><span style="color:#111">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>   <span style="color:#75715e">// give a copy of the ptr to the base class
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">boost</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">scoped_array</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pData</span><span style="color:#111">;</span>  <span style="color:#75715e">// see item 13 for info on boost::scoped_array
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>No matter where the matrix value data is stored, the result from a bloat point of view is that many <code>SquareMatrix</code>'s member functions can be simple inline calls to base class versions that are shared with all other matrices holding the same type of data, regardless of their size.</p>
+<h2 id="efficiency-concerns">Efficiency concerns</h2>
+<p>In terms of efficiency, it is possible that the version of <code>invert</code> with the matrix sizes hardwired into them generates better code than the shared version whose size is passed as a function parameter or is stored in the object: in the size-specific versions, the sizes would be compile-time constants, hence eligible for optimizations such as constant propagation (they'll be folded into the generated instructions as imeediate operands), which can't be done in the size-independent version.</p>
+<p>On the other side, the size-independent version decreases the size of executable by having only one version of <code>invert</code> for multiple matrix sizes, and this could reduce the program's working set size and improve locality of reference in the instruction cache, which may in term compensating for any lost optimizations in size-specific versions of <code>invert</code>. The only way to tell which version is better one is to try them both and observe the behavior on the particular platform and on representative data sets.</p>
+<h2 id="other-trade-offs">Other trade-offs</h2>
+<p>Speaking of size of objects, we should observe that there's an extra size of a pointer in each <code>SquareMatrix</code> object, because, as the derived class, <code>SquareMatrix</code> could get to the data by alternative designs such as having the base class store a <code>protected</code> pointer to the matrix data. However, this new design also has some disadvantages:</p>
+<ol>
+<li>it may lead to the loss of encapsulation described in item 22</li>
+<li>it may also lead to resource management complications: since derived class may either dynamically alloacate the matrix data, or physically store the data inside the derived class object, if we only let the base class store a pointer to that data, it is hard for base class to determine whether the pointer should be deleted or not.</li>
+</ol>
+<p>At some point, a little code replication seems like a mercy to keep away from complication.</p>
+<h1 id="bloat-due-to-type-parameters">Bloat due to type parameters</h1>
+<p>On many platforms, <code>int</code> and <code>long</code> have the same binary representation, so the member functions for <code>vector&lt;int&gt;</code> and <code>vector&lt;long&gt;</code> would likely be identical. Some linkers will merge identical function implementations, but some will not, and that means that some templates instantiated on both <code>int</code> and <code>long</code> could cause code bloat in some environments.</p>
+<p>Similarly, on most platforms, all pointer types have the same binary representation, so templates holding pointer types (e.g., <code>list&lt;int*&gt;</code>, <code>list&lt;const int*&gt;</code>, <code>list&lt;SquareMatrix&lt;long, 3&gt;*&gt;</code>, etc.) should be able to use a single underlying implementation for each member function. Typically, this is achieved by implementing member functions that work with strongly typed pointers (i.e., <code>T*</code> pointers) by having them call functions that work with untyped pointers (i.e., <code>void*</code> pointers), which is how some of standart C++ library do for templates like <code>vector</code>, <code>deque</code>, and <code>list</code>.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-4 Initialize objects before they&#39;re used - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-4 Initialize objects before they&#39;re used</h1>
+  </div>
+<div class="meta">
+  <div>2018-01-22 18:47</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Since C++ is fickle about initialization, some good coding style is suggested.</p>
+<!-- toc -->
+<p>There are basically only 3 rules we need to remember if wanting to avoid tragedy of using objects before they're initialized:</p>
+<ol>
+<li>always manually initialize non-member objects of <em>built-in</em> type, becauese C++ sometimes initializes them and sometimes not.</li>
+<li>in constructors, prefer to use member initialization list to assignment inside the constructor body; data members in the initialization list is suggested to be in the same order as they are declared in the class (which helps to avoid reader confusion)</li>
+<li>replacing non-local static objects with local static objects in order to avoid initialization order problems across translation units.</li>
+</ol>
+<h1 id="1-initialize-non-member--built-in--type-object">1. Initialize non-member <em>built-in</em> type object</h1>
+<p>No need to remember rules about when built-in type object initialization is guaranteed to take place and when it isn't, for they're too complicated to know.</p>
+<p>Just form a good habit to always initialize objects before using them manually.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">int</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#75715e">// manual init. of an int
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">text</span> <span style="color:#f92672">=</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">A C-style string</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span> <span style="color:#75715e">// manual init. of a pointer
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">double</span> <span style="color:#111">d</span><span style="color:#111">;</span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">cin</span> <span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#111">d</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="2-initialize-data-member-with-member-initialization-list">2. Initialize data member with member initialization list</h1>
+<p>The arguments in the initialization list are used as constructor arguments for the various data members (will be copy-constructed), which will be more efficient than a call to the default constructor followed by a calll to the copy assignment operator.</p>
+<ol>
+<li>For data members of <code>const</code> and references, since they can't be assigned (item 5), initialization list must be used.</li>
+<li>For built-in type data members, even though there's no difference in cost betweeen initialization and assignment, it is a good habit to place them in member initialization list for consistency.</li>
+<li>For data members of user-defined type, since compilers will automatically call default constructors for absent ones in initialization list, even if you just want to call the default constructor, it is still a good habit to call the default constructors in the initialization list, just to make a good habbit to guarantee there's no data member left uninitialzed.</li>
+</ol>
+<p>Exception: multiple constructors share large common member initialization list may consider moving assignment to a single (private) function called by all the constructors, which will be helpful for initializing values from reading a file or database.</p>
+<h1 id="3-initialze-non-local-static-objects-defined-in-different-translation-units">3. Initialze non-local static objects defined in different translation units</h1>
+<h2 id="glossary">Glossary:</h2>
+<ol>
+<li><em>static object</em>: one that exists from the time it's constructed until the end of the program (i.e., their destructors will be called when <em>main</em> finishes executing)</li>
+<li><strong>local</strong> <em>static object</em>:
+<ul>
+<li>objects declared <em>static</em> inside functions (it's local to a function)</li>
+</ul>
+</li>
+<li><strong>non-local</strong> <em>static object</em>:
+<ul>
+<li>global objects</li>
+<li>objects defined at namespace scope</li>
+<li>objects declared <em>static</em> inside classes</li>
+<li>objects declared <em>static</em> at file scope</li>
+</ul>
+</li>
+<li><em>translation unit</em>: the source code giving rise to a single object file (basically a single source file plus all of its #include files)</li>
+</ol>
+<p>Below is an example of non-local static objects requiring correct order of initialization (firstly tfs, secondly tempDir):</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//========================
+</span><span style="color:#75715e"></span><span style="color:#75715e">// fileSystem.h       
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">FileSystem</span> <span style="color:#111">{</span>            <span style="color:#75715e">// created by library developer
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">numDisks</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">extern</span> <span style="color:#111">FileSystem</span> <span style="color:#111">tfs</span><span style="color:#111">;</span>        <span style="color:#75715e">// non-local static object for clients to use 
+</span><span style="color:#75715e"></span>                              <span style="color:#75715e">// &#34;tfs&#34; = &#34;the file system&#34;
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">//========================
+</span><span style="color:#75715e"></span><span style="color:#75715e">// directory.h           
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&lt;fileSystem.h&gt;       // created by library client</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">Directory</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Directory</span><span style="color:#111">(</span> <span style="color:#111">params</span> <span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">Directory</span> <span style="color:#75af00">tempDir</span><span style="color:#111">(</span> <span style="color:#111">params</span> <span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// non-local static object for
+</span><span style="color:#75715e"></span>                              <span style="color:#75715e">// directory of temporary files
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">//========================
+</span><span style="color:#75715e"></span><span style="color:#75715e">// directory.cpp
+</span><span style="color:#75715e"></span><span style="color:#111">Directory</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">Directory</span><span style="color:#111">(</span> <span style="color:#111">params</span> <span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">disks</span> <span style="color:#f92672">=</span> <span style="color:#111">tfs</span><span style="color:#111">.</span><span style="color:#111">numDisks</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// use the tfs objects
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Since the relative order of initialization of non-local static objects (tfs vs. tempDir) defined in different translation units (fileSystem vs. directory) is undefined, and given the fact that C++ guarantees that local static objects are initialized when the object's definition is first encountered during a call to that function, simply replace direct accesses to non-local static objects with calls to functions that return references to local static objects, and the problem is solved, with a little bonus of saving the cost of constructing/destructing the object in the situation of the function never being called (this design implementation is the well-known singleton pattern):</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//========================
+</span><span style="color:#75715e"></span><span style="color:#75715e">// fileSystem.h       
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">FileSystem</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>     <span style="color:#75715e">// as before
+</span><span style="color:#75715e"></span>
+<span style="color:#111">FileSystem</span><span style="color:#f92672">&amp;</span> <span style="color:#111">tfs</span><span style="color:#111">(</span><span style="color:#111">)</span>           <span style="color:#75715e">// replace the tfs object;
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>                           <span style="color:#75715e">// could also be static in the FileSystem class
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#111">FileSystem</span> <span style="color:#111">fs</span><span style="color:#111">;</span>   <span style="color:#75715e">// define and initialize a local static object
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#111">fs</span><span style="color:#111">;</span>              <span style="color:#75715e">// return a reference to it
+</span><span style="color:#75715e"></span><span style="color:#111">}</span> 
+
+<span style="color:#75715e">//========================
+</span><span style="color:#75715e"></span><span style="color:#75715e">// directory.h           
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">include</span> <span style="color:#75715e">&lt;fileSystem.h&gt;       </span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">Directory</span> <span style="color:#111">{</span> <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">}</span><span style="color:#111">;</span>          <span style="color:#75715e">// as before
+</span><span style="color:#75715e"></span>
+<span style="color:#111">Directory</span><span style="color:#f92672">&amp;</span> <span style="color:#111">tempDir</span><span style="color:#111">(</span> <span style="color:#111">params</span> <span style="color:#111">)</span>      <span style="color:#75715e">// replace the tempDir object;
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>                                 <span style="color:#75715e">// could also be static in the Directory class
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#111">Directory</span> <span style="color:#75af00">td</span><span style="color:#111">(</span><span style="color:#111">params</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// definea and initialize a local static object
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#111">td</span><span style="color:#111">;</span>                    <span style="color:#75715e">// return a reference to it
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+<span style="color:#75715e">//========================
+</span><span style="color:#75715e"></span><span style="color:#75715e">// directory.cpp
+</span><span style="color:#75715e"></span><span style="color:#111">Directory</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">Directory</span><span style="color:#111">(</span> <span style="color:#111">params</span> <span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">disks</span> <span style="color:#f92672">=</span> <span style="color:#111">tfs</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">.</span><span style="color:#111">numDisks</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// use the new tfs()
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>P.S.: There's limitation for non-<code>const</code> static object (local or non-local) in multiple threads scenarios. One way to deal with the trouble is to manually invoke all the reference-returning functions during the single-threaded startup portion of the program to eliminate initialization-related race condition.</p>
+</blockquote></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-13 Use objects to manage resources - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-13 Use objects to manage resources</h1>
+  </div>
+<div class="meta">
+  <div>2018-02-01 18:20</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Use RAII objects such as <code>tr1::shared_ptr</code> and <code>auto_ptr</code> to prevent resource leaks.</p>
+<!-- toc -->
+<p>First of all, let's make clear the concept: a resource is something that we need to return to the system once we're done using it, such as dynamically allocated memory, file descriptors, mutex locks, fonts and brushes in graphical user interfaces (GUIs), database connections, and network sockets.</p>
+<p>The motivation of using objects to manage resources is that, it is hard to write manually managed code to deal with complex control flow where necessary resource handling operation such as <code>delete</code> may have to be skipped due to premature <code>continue</code> statement or unexpected exception, ending up with resource leak.</p>
+<p>On the other hand, by putting resources inside objects, we can rely on C++'s automatic destructor invocation to make sure that the resources are released properly. Luckily, there're two kinds of <em>smart pointer</em> that is ideal for this kind of situation:</p>
+<ol>
+<li><code>std::auto_ptr</code>: destructor automatically calls <code>delete</code> on what it points to when the <code>auto_ptr</code> is destroyed. There's only one <code>auto_ptr</code> pointing to the underlying resoures each time</li>
+<li><code>std::tr1::shared_ptr</code>: is a <code>reference-counting smart pointer (RCSP)</code>. Similar to garbage collection but can't break cycles of references (e.g.: two otherwise unused objects pointing to one another).</li>
+</ol>
+<h1 id="1-auto-ptr">1. <code>auto_ptr</code></h1>
+<p>We can use <code>auto_ptr</code> to manage a class <code>Investment</code> that comes with a factory function (item 7) without worrying about resource leak:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Investment</span><span style="color:#f92672">*</span> <span style="color:#75af00">createInvestment</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// factory function, return ptr to dynamically allocated object
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">f</span><span style="color:#111">(</span><span style="color:#111">)</span> 
+<span style="color:#111">{</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">auto_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pInv</span><span style="color:#111">(</span><span style="color:#111">createInvestment</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// call factory function
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>  <span style="color:#75715e">// use pInv like a pointer
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>        <span style="color:#75715e">// automatically delete pInv via auto_ptr&#39;s dtor
+</span></code></pre></td></tr></table>
+</div>
+</div><p>There are two critical aspects worth noting:</p>
+<ol>
+<li>Resources are acquired and immediately turned over to resource-managing objects. It is a common trick to acquire a resource and initialize a resource-managing object in the same statement, which is called <em>Resource Acquisition Is Initialization (<strong>RAII</strong>)</em>.</li>
+<li>Resource-managing objects use their destructors to ensure that resources are released. Things could be tricky when the act of releasing resources can lead to exceptions being thrown, which is the matter addressed in Item 8.</li>
+</ol>
+<p>Pay attention to the limitation of <code>auto_ptr</code>: its <strong>sole ownership of the resource policy</strong> requires that copying <code>auto_ptr</code>s via copy constructor or copy assignment operator sets them to null:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">auto_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pInv1</span><span style="color:#111">(</span><span style="color:#111">createInvestment</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// pInv1 points to the object returned from the factory function
+</span><span style="color:#75715e"></span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">auto_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pInv2</span><span style="color:#111">(</span><span style="color:#111">pInv1</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// pInv2 now points to the object; pInv1 is null 
+</span><span style="color:#75715e"></span>
+<span style="color:#111">pInv1</span> <span style="color:#f92672">=</span> <span style="color:#111">pInv2</span><span style="color:#111">;</span>  <span style="color:#75715e">// pInv1 points to the object, and pInv2 is null now
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="2-shared-ptr">2. <code>shared_ptr</code></h1>
+<p>An alternative <strong>RAII</strong> object, <code>shared_ptr</code>, is an RCSP(reference-counting smart pointer), which is a smart pointer that keeps track of how many objects point to a particular resource and automatically deletes  the resource when nobody is pointing to it any longer. The code above is almost the same as with <code>shared_ptr</code>, but copying behavior is much more natural:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#75af00">f</span><span style="color:#111">(</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pInv</span><span style="color:#111">(</span><span style="color:#111">createInvestment</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// call factory function
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>  <span style="color:#75715e">// use pInv as before
+</span><span style="color:#75715e"></span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pInv1</span><span style="color:#111">(</span><span style="color:#111">createInvestment</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// pInv1 points to the object returned from createInvestment
+</span><span style="color:#75715e"></span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pInv2</span><span style="color:#111">(</span><span style="color:#111">pInv1</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// both pInv1 and pInv2 now point to the object
+</span><span style="color:#75715e"></span>
+    <span style="color:#111">pInv1</span> <span style="color:#f92672">=</span> <span style="color:#111">pInv2</span><span style="color:#111">;</span>  <span style="color:#75715e">// nothing has changed
+</span><span style="color:#75715e"></span>
+<span style="color:#111">}</span>        <span style="color:#75715e">// automatically delete pInv via shared_ptr&#39;s dtor
+</span></code></pre></td></tr></table>
+</div>
+</div><p>There is more information on <code>tr1::shared_ptr</code> in item 14, item 18, and item 54. For now, another point worth noting is that, since both <code>auto_ptr</code> and <code>tr1::shared_ptr</code> use <code>delete</code> in their destructors rather than <code>delete []</code> (item 16), it is a bad idea to wrap dynamically allocated arrays with <code>auto_ptr</code> or <code>tr1::shared_ptr</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">auto_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pStr</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span><span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// wrong delete form will be used, bad idea!
+</span><span style="color:#75715e"></span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pInt</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#00a8c8">int</span><span style="color:#111">[</span><span style="color:#ae81ff">1024</span><span style="color:#111">]</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// same problem
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Since having <code>createInvestment</code> returning a raw pointer type is error-prone, we'll see in item 18 that an interface modification is preferred.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

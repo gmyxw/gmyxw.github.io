@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on sy123.ml</title>
+    <link>https://sy123.ml/categories/</link>
+    <description>Recent content in Categories on sy123.ml</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>2007-2020 Zhili.</copyright>
+    <lastBuildDate>Sun, 05 Jan 2020 18:42:45 -0500</lastBuildDate>
+    
+	<atom:link href="https://sy123.ml/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>visual</title>
+      <link>https://sy123.ml/categories/visual/</link>
+      <pubDate>Sun, 05 Jan 2020 18:42:45 -0500</pubDate>
+      
+      <guid>https://sy123.ml/categories/visual/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>weekly</title>
+      <link>https://sy123.ml/categories/weekly/</link>
+      <pubDate>Sun, 05 Jan 2020 18:42:45 -0500</pubDate>
+      
+      <guid>https://sy123.ml/categories/weekly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>thoughts</title>
+      <link>https://sy123.ml/categories/thoughts/</link>
+      <pubDate>Tue, 09 Jul 2019 12:56:29 -0400</pubDate>
+      
+      <guid>https://sy123.ml/categories/thoughts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>music</title>
+      <link>https://sy123.ml/categories/music/</link>
+      <pubDate>Sat, 15 Jun 2019 19:39:39 -0400</pubDate>
+      
+      <guid>https://sy123.ml/categories/music/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>notes</title>
+      <link>https://sy123.ml/categories/notes/</link>
+      <pubDate>Sat, 15 Jun 2019 19:39:39 -0400</pubDate>
+      
+      <guid>https://sy123.ml/categories/notes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>coding</title>
+      <link>https://sy123.ml/categories/coding/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sy123.ml/categories/coding/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>technology</title>
+      <link>https://sy123.ml/categories/technology/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sy123.ml/categories/technology/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>camera</title>
+      <link>https://sy123.ml/categories/camera/</link>
+      <pubDate>Sat, 02 Jun 2018 21:39:34 -0400</pubDate>
+      
+      <guid>https://sy123.ml/categories/camera/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>instruments</title>
+      <link>https://sy123.ml/categories/instruments/</link>
+      <pubDate>Sun, 22 Apr 2018 14:10:15 -0400</pubDate>
+      
+      <guid>https://sy123.ml/categories/instruments/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>electronic</title>
+      <link>https://sy123.ml/categories/electronic/</link>
+      <pubDate>Sun, 01 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://sy123.ml/categories/electronic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gallery</title>
+      <link>https://sy123.ml/categories/gallery/</link>
+      <pubDate>Sun, 01 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://sy123.ml/categories/gallery/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

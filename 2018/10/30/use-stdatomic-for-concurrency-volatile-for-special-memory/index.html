@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-40 Use std::atomic for Concurrency, volatile for Special Memory - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-40 Use std::atomic for Concurrency, volatile for Special Memory</h1>
+  </div>
+<div class="meta">
+  <div>2018-10-30 19:05</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p><code>std::atomic</code> is for data accessed from multiple threads without using mutexes (concurrent usage); <code>volatile</code> is for memory where reads and writes should not be optimised away (special memory).</p>
+<h1 id="stdatomic-template"><code>std::atomic</code> template</h1>
+<p>Instantiations of <code>std::atomic</code> template offer operations that are guaranteed to be seen as atomic by other threads, as if they were inside a mutex-protected critical section, generally with the support of special machine instructions that are more efficient than the case of mutex. For example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">atomic</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">ai</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// init. ai to 0
+</span><span style="color:#75715e"></span><span style="color:#111">ai</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>                 <span style="color:#75715e">// atomically set ai to 10
+</span><span style="color:#75715e"></span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">cout</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#111">ai</span><span style="color:#111">;</span>         <span style="color:#75715e">// atomically read ai&#39;s value
+</span><span style="color:#75715e"></span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">ai</span><span style="color:#111">;</span>                    <span style="color:#75715e">// atomically increment ai to 11
+</span><span style="color:#75715e"></span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#111">ai</span><span style="color:#111">;</span>                    <span style="color:#75715e">// atomically decrement ai to 10
+</span></code></pre></td></tr></table>
+</div>
+</div><p>During execution of these statements, other threads reading <code>ai</code> may see only values of 0, 10, or 11 (assuming, of course, this is the only thread modifying <code>ai</code>). Two things worth noting here:</p>
+<ol>
+<li>For <code>std::cout &lt;&lt; ai;</code>, only the read of <code>ai</code> is atomic, so it's possible that between the time <code>ai</code>'s value is rad and <code>operator&lt;&lt;</code> is invoked to write it to standard output, another thread may modify <code>ai</code>'s value.</li>
+<li>The increment and decrement of <code>ai</code> are <em>read-modify-write (RMW)</em> operations, and they execute atomatically as well, which is one of the nicest characteristics of the <code>std::atomic</code> types that they guarantee all member functions on <code>std::atomic</code> types will be seen by other threads as atomic.</li>
+<li>The use of <code>std::atomic</code> imposes restrictions that no code precedes a write of a <code>std::atomic</code> variable may take place afterwards. No reorder tricks for compiler/hardwaes for speed-up optimization purpose.</li>
+</ol>
+<p>In contrast, <code>volatile</code> offers <em>no guarantee of operation atomicity</em> and suffer <em>insufficient restrictions on code reordering</em> - basically not useful in multithreaded context. Say if we have a counter defined as <code>volatile int vc(0)</code>, and there are two threads increment the <code>volatile</code> counter simultaneously, then the ending value of <code>vc</code> need not be <code>2</code> - the RMW operation in each of two threads may take place in any order, involving in a data race, which leading to undefined behavior according to Standard's decree.</p>
+<p>The place in which <code>volatile</code> shines is in the context where <em>redundant loads</em> and <em>dead stores</em> should not be optimized away, that is, we need special memory to perform such kinds of redundent reads and superfluous writes:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">y</span> <span style="color:#f92672">=</span> <span style="color:#111">x</span><span style="color:#111">;</span>  <span style="color:#75715e">// read x
+</span><span style="color:#75715e"></span><span style="color:#111">y</span> <span style="color:#f92672">=</span> <span style="color:#111">x</span><span style="color:#111">;</span>       <span style="color:#75715e">// read x again
+</span><span style="color:#75715e"></span>
+<span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>      <span style="color:#75715e">// write x
+</span><span style="color:#75715e"></span><span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span><span style="color:#111">;</span>      <span style="color:#75715e">// write x again
+</span></code></pre></td></tr></table>
+</div>
+</div><p>The most common kind of special memory is memory used for <em>memory-mapped I/O</em>, which is used for communication with peripherals, e.g., external sensors or displays, printers, network ports, etc. rather than reading or writing normal memory (i.e., RAM). <code>volatile</code> is the way to tell compilers that we're dealing with special memory.</p>
+<p>Because <code>std::atomic</code> and <code>volatile</code> serve different purposes, they can be used together:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">volatile</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">atomic</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vai</span><span style="color:#111">;</span>  <span style="color:#75715e">// operations on vai are atomic and can&#39;t be optimized away
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This could be useful if <code>vai</code> corresponded to a memory-mapped I/O location that was concurrently accessed by multiple threads.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

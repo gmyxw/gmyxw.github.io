@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>notes on sy123.ml</title>
+    <link>https://sy123.ml/categories/notes/</link>
+    <description>Recent content in notes on sy123.ml</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>2007-2020 Zhili.</copyright>
+    <lastBuildDate>Sat, 15 Jun 2019 19:39:39 -0400</lastBuildDate>
+    
+	<atom:link href="https://sy123.ml/categories/notes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Basic Musicianship Review</title>
+      <link>https://sy123.ml/2019/06/15/basic-musicianship-review/</link>
+      <pubDate>Sat, 15 Jun 2019 19:39:39 -0400</pubDate>
+      
+      <guid>https://sy123.ml/2019/06/15/basic-musicianship-review/</guid>
+      <description>&lt;p&gt;A review of some basic music theory before the NYU Steinhardt music technology placement exam.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A simple archive for music generation</title>
+      <link>https://sy123.ml/2018/05/31/music-generation-archive/</link>
+      <pubDate>Thu, 31 May 2018 16:07:41 -0400</pubDate>
+      
+      <guid>https://sy123.ml/2018/05/31/music-generation-archive/</guid>
+      <description>&lt;p&gt;A random collection of recent works on music generation.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

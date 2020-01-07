@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[MECpp]Item-34 Understand How to Combine C&#43;&#43; and C in the Same Program - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[MECpp]Item-34 Understand How to Combine C&#43;&#43; and C in the Same Program</h1>
+  </div>
+<div class="meta">
+  <div>2018-05-23 18:38</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>There are five points worth noting if we want to mix C++ and C in the same program.</p>
+<!-- toc -->
+<h1 id="summary">Summary</h1>
+<ul>
+<li>Make sure the C++ and C compilers produce compatible object files</li>
+<li>Declare functions to be used by both languages <code>extern C</code></li>
+<li>If at all possible, write <code>main</code> in C++</li>
+<li>Always use <code>delete</code> with memory from <code>new</code>; always use <code>free</code> with memory from <code>malloc</code></li>
+<li>Limit what we pass between the two languages to data structures that compile under C; the C++ version of structs may contain nonvirtual member functions</li>
+</ul>
+<h2 id="1-compatible-object-files">1. Compatible object files</h2>
+<p>Before mix together object files produced by some C compiler with those from C++ compiler, we have to make sure they both share the same implementation-dependent features, such as the size of <code>int</code>s and <code>double</code>s, the mechanism by which parameters are passed from caller to callee, and whether the caller or the callee orchestrates the passing.</p>
+<h2 id="2-name-mangling">2. Name Mangling</h2>
+<p>Name mangling is the process through which the C++ compilers give each function in our program a unique name, which is unnecessary in C because we can't overload function names in C.</p>
+<p>For example, when we write this in C++:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#75af00">drawLine</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">x1</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">y1</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">x2</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">y2</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// suppose this is mangled into xyzzy
+</span><span style="color:#75715e"></span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">drawLine</span><span style="color:#111">(</span><span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">b</span><span style="color:#111">,</span> <span style="color:#111">c</span><span style="color:#111">,</span> <span style="color:#111">d</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// call to unmangled function name in source code
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Then the statement will be translated by the C++ compiler into the mangled version of that function, so the object file conbtains a function call that corresponds to this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">xyzzy</span><span style="color:#111">(</span><span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">b</span><span style="color:#111">,</span> <span style="color:#111">c</span><span style="color:#111">,</span> <span style="color:#111">d</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// call to mangled function name
+</span></code></pre></td></tr></table>
+</div>
+</div><p>However, if <code>drawLine</code> is a C function, the object file (or archive or dynamically linked library, etc.) that contains the compiled version of <code>drawLine</code> contains a function called <code>drawLine</code> - no name mangling occurs. When trying to link mixed style object files together, we may get an error, because the linker is looking for a function called <code>xyzzy</code>, and there is no such function.</p>
+<p>To solve this problem, we tell C++ compilers not to mangle certain function names:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">extern</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">C</span><span style="color:#d88200">&#34;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#111">drawLine</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">x1</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">y1</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">x2</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">y2</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Note that there is only <code>extern &quot;C&quot;</code>, no <code>extern &quot;Pascal&quot;</code> or <code>extern &quot;FORTRAN&quot;</code> or anything else. <code>extern &quot;C&quot;</code> means that the function should be called as if it <em>were</em> written in C (Technically, <code>extern &quot;C&quot;</code> means the function has C linkage, which guarantees that name mangling is suppressed.)</p>
+<p>For a slew of functions whose names don't need mangling, we enclose them in curly braces. For header files we want to share by both C++ and C, we take advantage of preprocessor symbol &ldquo;__cplusplus&rdquo;, which is defined only for C++ compilations:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#</span><span style="color:#75715e">ifdef __cplusplus</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">extern</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">C</span><span style="color:#d88200">&#34;</span> <span style="color:#111">{</span>
+<span style="color:#75715e">#</span><span style="color:#75715e">endif</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">void</span> <span style="color:#75af00">drawLine</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">x1</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">y1</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">x2</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">y2</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#75af00">twiddleBits</span><span style="color:#111">(</span><span style="color:#00a8c8">unsigned</span> <span style="color:#00a8c8">char</span> <span style="color:#111">bits</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#75af00">simulate</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">iterations</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#75715e">#</span><span style="color:#75715e">ifdef __cplusplus</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+<span style="color:#75715e">#</span><span style="color:#75715e">endif</span><span style="color:#75715e">
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="3-initialization-of-statics">3. Initialization of Statics</h2>
+<p>In C++, the constructors of static class objects and objects at global, namespace, and file scope are usually called before the body of <code>main</code> is executed, which is known as <em>static initialization</em>. Similarly, objects that are created through static initialization must have their destructors called during <em>static destruction</em>, which typically take place after <code>main</code> has finished executing.</p>
+<p>The implementation of static initialization as well as static destruction is usually achieved by compilers by inserting a call to a special compiler-written function at the beginning of <code>main</code>, which takes care of static initialization (similarly with static destruction):</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">argc</span><span style="color:#111">,</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">argv</span><span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">performStaticInitialization</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// generated by the compiler
+</span><span style="color:#75715e"></span>
+    <span style="color:#111">the</span> <span style="color:#111">statements</span> <span style="color:#111">we</span> <span style="color:#111">put</span> <span style="color:#111">in</span> <span style="color:#111">main</span><span style="color:#111">;</span>
+
+    <span style="color:#111">performStaticDestruction</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// generated by the compiler
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The point is, if a software contains a C++ part, which is compiled with this approach to initialize and destruct static objects (they usually do), we should write <code>main</code> in C++.</p>
+<p>If most of a program is in C and C++ is only a support library, it would make more sense to write <code>main</code> in C. Nevertheless, in case of static objects in C++ library (if it doesn't now, it probably will in the future, see MECpp item 32), so it's still a good idea to write <code>main</code> in C++: simply call the C version <code>realMain</code> in a wrapper <code>main</code> in C++:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">extern</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">C</span><span style="color:#d88200">&#34;</span> 
+<span style="color:#00a8c8">int</span> <span style="color:#111">realMain</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">argc</span><span style="color:#111">,</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">argv</span><span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// implement this function in C
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">main</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">argc</span><span style="color:#111">,</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">argv</span><span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">)</span> <span style="color:#75715e">// write this in C++
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">realMain</span><span style="color:#111">(</span><span style="color:#111">argc</span><span style="color:#111">,</span> <span style="color:#111">argv</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-dynamic-memory-allocation">4. Dynamic Memory Allocation</h2>
+<p>Recall MECpp Item 8: the C++ parts of a program use <code>new</code> and <code>delete</code>, and the C parts of a program use <code>malloc</code> (and its variants) and <code>free</code>. Mismatched allocation and deallocation operation for dynamic memory yields undefined behavior, so never call <code>free</code> on a <code>new</code>ed pointer, nor <code>delete</code>ing a <code>malloc</code>ed pointer.</p>
+<p>Sometimes this is easier said than done, because some functions are not in the standard library, or not available in the uniform implementation on different computing platforms, making it hard to judge the correct deallocation operation:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#75af00">strdup</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">ps</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// return a copy of the string pointed to by ps
+</span></code></pre></td></tr></table>
+</div>
+</div><p>If the <code>strdup</code> is from a C library, we need to call <code>free</code>; if it was written for a C++ library, we should call <code>delete</code>. If we can't make sure, then simply avoid calling such functions.</p>
+<h2 id="5-data-structure-compatibility">5. Data Structure Compatibility</h2>
+<p>C functions can not understand C++ features, so if we want to pass data between C++ and C programs, we are limited to those concepts that C can express: naturally, <code>struct</code>s and variables of built-in types (e.g., <code>int</code>s, <code>char</code>s, etc.)</p>
+<p>Because the rules governing the layout of a <code>struct</code> in C++ are consistent with those of C, if we can add structs with nonvirtual member, objects of such structs (or class) containing only non-virtual functions should be compatible with their C counterparts, whose structure definition lacks only the member function declarations, and we are safe to pass them back and forth between C++ and C.</p>
+<p>Adding <em>virtual</em> functions ends the game, because the addition of virtual functions to a class cuases objects of that type to use a different memory layout (MECpp item 24). Having a struct inherit from another struct (or class) usually changes its layout, too, so structs with base structs (or classes) are also poor candidates for exchange with C functions.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

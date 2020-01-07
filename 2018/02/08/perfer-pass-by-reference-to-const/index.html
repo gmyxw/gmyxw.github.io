@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-20 Perfer pass-by-reference-to-const to pass-by-value - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-20 Perfer pass-by-reference-to-const to pass-by-value</h1>
+  </div>
+<div class="meta">
+  <div>2018-02-08 16:26</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Pass by reference-to-<code>const</code> is typically more efficient than pass by value and avoids the slicing problem.</p>
+<p>Pass-by-value can be an expensive operation. For example, consider the following class hierarchy:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Person</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Person</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// parameters omitted for simplisity
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">virtual</span> <span style="color:#f92672">~</span><span style="color:#111">Person</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// item 7 explains why virtual
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">name</span><span style="color:#111">;</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">address</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Student</span><span style="color:#f92672">:</span><span style="color:#00a8c8">public</span> <span style="color:#111">Person</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Student</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>   <span style="color:#75715e">// parameters omitted for simplisity
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">~</span><span style="color:#111">Student</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">schoolName</span><span style="color:#111">;</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">schoolAddress</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now consider what will happen if we call a function <code>validateStudent</code>, which takes a <code>Student</code> argument (by value) and returns whether it is a real student:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">bool</span> <span style="color:#75af00">validateStudent</span><span style="color:#111">(</span><span style="color:#111">Student</span> <span style="color:#111">s</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// pass a Student object by value
+</span><span style="color:#75715e"></span><span style="color:#111">Student</span> <span style="color:#111">plato</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">bool</span> <span style="color:#111">platoIsOK</span> <span style="color:#f92672">=</span> <span style="color:#111">validateStudent</span><span style="color:#111">(</span><span style="color:#111">plato</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// call the function
+</span></code></pre></td></tr></table>
+</div>
+</div><p>A <code>Student</code> object has two <code>string</code> object within it, while its base class <code>Person</code> contains two additional <code>string</code> type data members. So the parameter-passing cost of this function is one call to the <code>Student</code> copy constructor matched with two <code>string</code> copy constructor, and one call to the base class <code>Person</code>'s copy constructor, which also entails two more <code>string</code> construction. When the <code>Student</code> object is destroyed, each constructor call is matched by a destructor call. Overall, the cost of passing a <code>Student</code> by value is six constructors and six destructors.</p>
+<p>It would be nice is there were a way to bypass all those constructions and destructions. The answer is: pass by reference-to-<code>const</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">bool</span> <span style="color:#75af00">validateStudent</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Student</span><span style="color:#f92672">&amp;</span> <span style="color:#111">s</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Since no new objects are being created, there's no constructor or destructor call. The <code>const</code> in the revised parameter declaration is important, for it guarantees that the callers would not worry about <code>validateStudent</code> making changes to the <code>Student</code> they passed in (when passing by value, <code>validateStudent</code> would be able to modify only a <em>copy</em> of the <code>Student</code> they passed in, so the callers know they are shielded from any changes the function might make to the <code>Student</code>).</p>
+<p>Apart from efficiency, passing parameters by reference also avoids the <code>slicing problem</code>: when a derived class object is passed (by value) as a base class object, the base class copy constructor is called, and the extra features in derived class object are &ldquo;sliced&rdquo; off. For example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Window</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">name</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>     <span style="color:#75715e">// return name of window
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">display</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span> <span style="color:#75715e">// draw window and contents
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">windowWiScroBars</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Window</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#111">display</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Below is a bad example if you want to write a function to print out a window's name and then display the window:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#75af00">printNameAndDisplay</span><span style="color:#111">(</span><span style="color:#111">Window</span> <span style="color:#111">w</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">cout</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#111">w</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">w</span><span style="color:#111">.</span><span style="color:#111">displey</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>When you call this functiona with a <code>WindowWithScrollBars</code> object:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">WindowWithScrollBars</span> <span style="color:#111">wwsb</span><span style="color:#111">;</span>
+<span style="color:#111">printNameAndDisplay</span><span style="color:#111">(</span><span style="color:#111">wwsb</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Since it is passed by value, the parameter <code>w</code> will be constructed as a <code>Window</code> object. Regardless of the type of object passed to the function, inside <code>printNameAndDisplay</code>, <code>w</code> will act like an object of class <code>Window</code> (it <em>is</em> an object of class <code>Window</code> after all), and all the specialized information that made <code>wwsb</code> act like a <code>WindowWithScrollBars</code> object will be sliced off.</p>
+<p>However, if we revised the function declaration like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#75af00">printNameAndDisplay</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Window</span><span style="color:#f92672">&amp;</span> <span style="color:#111">w</span><span style="color:#111">)</span>  <span style="color:#75715e">// fine, parameter won&#39;t be sliced
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">cout</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#111">w</span><span style="color:#111">.</span><span style="color:#111">name</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">w</span><span style="color:#111">.</span><span style="color:#111">display</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now <code>w</code> will act like whatever kind of window is actually passed in.</p>
+<h3 id="exception">Exception</h3>
+<p>In general, the only types for which we can reasonably assume that pass-by-value is inexpensive are:</p>
+<ul>
+<li>built-in types</li>
+<li>STL iterator</li>
+<li>function object types</li>
+</ul>
+<p>Under the hood of the C++ compiler, a reference is implemented as pointers, so passing by reference usually means passing a pointer. This is why for built-in types (e.g., an <code>int</code>), it's more efficient to pass it by value than by reference. Also, iterators and function objects in the STL are more efficient to copy and are not subject to the slicing problem because they are designed to be passed by value (this is an example where rules change depending on which part of C++ we are using, see item 0).</p>
+<p>On the other hand, we can not conclude that all small types are necessarily good pass-by-value candidate:</p>
+<ol>
+<li>
+<p>the user-defined types, despite being small in terms of size, may have expensive copy constructors, such as most STL containers that contain little more than a pointer but leading to copying everything they point to when applying copying operation.</p>
+</li>
+<li>
+<p>even if the copy constructors are inexpensive, compilers may treat user-defined small types differently with buiilt-in types: for example, some compilters refuse to put objects consisting of only a <code>double</code> into a register, even though they will happily place naked <code>double</code>s there, so we can be better off passing such objects by reference, for compilers will certainly put pointers (the implementation of references) into registers.</p>
+</li>
+<li>
+<p>a type that is small now may be bigger in a future release, for its internal implementation may change; things can even change when we switch to a different C++ implementation, for example, some implementations of the standard library's <code>string</code> type are seven times as big as others.</p>
+</li>
+</ol>
+<p>In summary, for everything else other than built-in types and STL iterator and function object types, follow the advice and prefer pass-by-reference-to-<code>const</code> over pass-by-value.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

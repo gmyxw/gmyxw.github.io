@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[MECpp]Item-8 Understand the Different Meanings of New and Delete - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[MECpp]Item-8 Understand the Different Meanings of New and Delete</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-30 17:09</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>The behaviors of <code>new</code> operator and <code>operator new</code> is different.</p>
+<!-- toc -->
+<h1 id="relationship-between-new-operator-and-operator-new">Relationship between &lsquo;<code>new</code> operator&rsquo; and &lsquo;<code>operator new</code>&rsquo;</h1>
+<p>Consider the following code:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">string</span> <span style="color:#f92672">*</span><span style="color:#111">ps</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Memory Management</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The <code>new</code> operator here is built into the language and always does the same two things:</p>
+<ul>
+<li>first, it calls <code>operator new</code> to allocate enough memory to hold an object of the type requested.</li>
+<li>second, it calls a constructor to initialize an object in the memory that was allocated.</li>
+</ul>
+<p>Thus, when compiler sees the code above, they must generate code equivalent to this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">memory</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// get raw memory for a string object
+</span><span style="color:#75715e"></span><span style="color:#111">call</span> <span style="color:#111">string</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Memory Management</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span> <span style="color:#111">on</span> <span style="color:#f92672">*</span><span style="color:#111">memory</span> <span style="color:#75715e">// init. the object in the memory. 
+</span><span style="color:#75715e"></span>                                                    <span style="color:#75715e">// as programmer, directly calling the ctor is prohibited
+</span><span style="color:#75715e"></span><span style="color:#111">string</span> <span style="color:#f92672">*</span><span style="color:#111">ps</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#111">stirng</span><span style="color:#f92672">*</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">memory</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// make ps point to the new object
+</span></code></pre></td></tr></table>
+</div>
+</div><p>So if we want to create an object on the heap, use the <code>new</code> operator and it both allocates memory and calls a constructor for the object.</p>
+<p>However, if we want to do some customized behaviors, we may consider following options:</p>
+<ol>
+<li>
+<p>if we only want to allocate memory, just call <code>operator new</code> directly:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">rawMemory</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">string</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>if we want to customize the memory allocation that takes place when heap objects are created, write our own version of <code>operator new</code> and use the <code>new</code> operator, which will automatically invoke the custom version of <code>operator new</code></p>
+</li>
+<li>
+<p>if we want to construct an object in memory we've already got a pointer to, use <strong>placement <code>new</code></strong>.</p>
+<p>A special version of <code>oeprator new</code> called <em>placement <code>new</code></em> allows us to construct an object in the memory that's already been allocated, which is helpful for applications using shared memory or memory-mapped I/O, where objects must be placed at specific addresses or in memory allocated by special routines:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Widget</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">widgetSize</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">Widget</span> <span style="color:#f92672">*</span> <span style="color:#75af00">constructWidgetInBuffer</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">buffer</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">widgetSize</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">new</span> <span style="color:#111">(</span><span style="color:#111">buffer</span><span style="color:#111">)</span> <span style="color:#111">Widget</span><span style="color:#111">(</span><span style="color:#111">widgetSize</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Here, an additional argument (<code>buffer</code>) is being specified for the implicit call that the <code>new</code> operator makes to a special version of <code>operator new</code> known as placement <code>new</code> in standard C++ library<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">new</span><span style="color:#111">(</span><span style="color:#111">size_t</span><span style="color:#111">,</span> <span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">location</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">location</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>All placement <code>new</code> has to do is return the pointer that's passed into it, because the memory for the object is already known. The unused (but mandatory) <code>size_t</code> parameter has no name to keep compilers from complaining about its not being used (MECpp item 6).</p>
+</li>
+</ol>
+<h1 id="deletion-and-memory-deallocation">Deletion and memory deallocation</h1>
+<p>The <code>delete</code> operator also includes two steps: destructing the object and deallocating the memory occupied by that object. The second part of memory deallocation is performed by the <code>operator delete</code> function:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">delete</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">memoryToBeDeallocated</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Hence, for a pointer to string <code>ps</code>, <code>delete ps;</code> causes compilers to generate code that approximately corresponds to this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">ps</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">~</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>         <span style="color:#75715e">// call the object&#39;s dtor
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">operator</span> <span style="color:#75af00">delete</span><span style="color:#111">(</span><span style="color:#111">ps</span><span style="color:#111">)</span><span style="color:#111">;</span>   <span style="color:#75715e">// deallocate the memory the object occupied
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Some implications:</p>
+<ul>
+<li><strong>If we want to deal with raw, uninitialized memory</strong>, we should call <code>operator new</code> to get memory and <code>operator delete</code> to return it to the system (the C++ equivalent of calling <code>malloc</code> and <code>free</code>):</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">buffer</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span> <span style="color:#111">(</span><span style="color:#ae81ff">50</span><span style="color:#f92672">*</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#00a8c8">char</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// allocate enough memory to hold 50 chars, call no ctor
+</span><span style="color:#75715e"></span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">delete</span><span style="color:#111">(</span><span style="color:#111">buffer</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// deallocate the memory; call no dtor
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>If we use placement <code>new</code> to create an object in some memory</strong>, we should avoid using the <code>delete</code> operator on that memory:</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// function to allocating and deallocating memory in shared memory
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span> <span style="color:#75af00">mallocShared</span><span style="color:#111">(</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">freeShared</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">memory</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">sharedMemory</span> <span style="color:#f92672">=</span> <span style="color:#111">mallocShared</span><span style="color:#111">(</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">Widget</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">Widget</span> <span style="color:#f92672">*</span><span style="color:#111">pw</span> <span style="color:#f92672">=</span> <span style="color:#111">constructWidgetInBuffer</span><span style="color:#111">(</span><span style="color:#111">sharedMemory</span><span style="color:#111">,</span> <span style="color:#ae81ff">10</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// as above
+</span><span style="color:#75715e"></span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">delete</span> <span style="color:#111">pw</span><span style="color:#111">;</span> <span style="color:#75715e">// undefined! sharedMemory came from mallocShared, not operator new
+</span><span style="color:#75715e"></span><span style="color:#111">pw</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">~</span><span style="color:#111">Widget</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// fine. destructs the Widget pointed to by pw, no memory deallocation performed
+</span><span style="color:#75715e"></span><span style="color:#111">freeShared</span><span style="color:#111">(</span><span style="color:#111">pw</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// fine, deallocate the memory pointed to by pw, but calls no dtor
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="arrays">Arrays</h1>
+<p>For array allocation:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">string</span> <span style="color:#f92672">*</span><span style="color:#111">ps</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">string</span><span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]</span><span style="color:#111">;</span> <span style="color:#75715e">// allocate an array of objects
+</span></code></pre></td></tr></table>
+</div>
+</div><p>The <code>new</code> being used is still the <code>new</code> operator, but the behavior here is slightly different from the case for single-object creation:</p>
+<ul>
+<li>in the first step, memory is allocated by <code>operator new[]</code> instead of <code>operator new</code></li>
+<li>in the second step, the constructor is called for <em>each object</em> in the array, so here the default constructor for <code>string</code> is called 10 times.</li>
+</ul>
+<p>Similarly, when the <code>delete</code> operator is used on an array, it calls a destructor for each array element and then calls <code>operator delete[]</code> to deallocate the memory.</p>
+<p>Just as we can replace or overload <code>operator new</code> and <code>operator delete</code>, we can do the same trick to <code>operator new []</code> and <code>operator delete []</code> to seize the control of memrory allocation and deallocation for arrays.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>To use placement <code>new</code>, all we have to do is is <code>#include &lt;new&gt;</code>. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

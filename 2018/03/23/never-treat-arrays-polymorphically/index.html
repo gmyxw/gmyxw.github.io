@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[MECpp]Item-3 Never Treat Arrays Polymorphically - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[MECpp]Item-3 Never Treat Arrays Polymorphically</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-23 18:59</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Array operations almost always involve pointer arithmetic, so arrays and polymorphism don't mix.</p>
+<p>C++ allows us to manipulate <em>arrays</em> of derived class objects through base class pointers and references, but it almost nerver works athe way we want it to.</p>
+<p>For example, suppose following base class <code>BST</code> (binary search tree objects) and its derived class <code>BalancedBST</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">BST</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">BalancedBST</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">BST</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>For a function working with an array of <code>BST</code>s, it works fine when we pass it an array of <code>BST</code> objects:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#75af00">printBSTArray</span><span style="color:#111">(</span><span style="color:#111">ostream</span><span style="color:#f92672">&amp;</span> <span style="color:#111">s</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">BST</span> <span style="color:#111">array</span><span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">numElements</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">numElements</span><span style="color:#111">;</span> <span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">s</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#111">array</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span><span style="color:#111">;</span> <span style="color:#75715e">// assumes operator&lt;&lt; is defined for BST objects
+</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+
+<span style="color:#111">BST</span> <span style="color:#111">BSTArray</span><span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]</span><span style="color:#111">;</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">printBSTArray</span><span style="color:#111">(</span><span style="color:#111">cout</span><span style="color:#111">,</span> <span style="color:#111">BSTArray</span><span style="color:#111">,</span> <span style="color:#ae81ff">10</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// work fine
+</span></code></pre></td></tr></table>
+</div>
+</div><p>However, when passing an array of <code>BalancedBST</code> objects:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">BalancedBST</span> <span style="color:#111">bBSTArray</span><span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]</span><span style="color:#111">;</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">printBSTArray</span><span style="color:#111">(</span><span style="color:#111">cout</span><span style="color:#111">,</span> <span style="color:#111">bBSTArray</span><span style="color:#111">,</span> <span style="color:#ae81ff">10</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The compilers will accept this function call without complaint, but then for <code>array[i</code>]`, they will generate code involving pointer arithmetic:</p>
+<ul>
+<li><code>array[i]</code> is just shorthand for expression <code>*(array+i)</code></li>
+<li>the distance between the memory location pointed to by <code>array</code> and by <code>array+i</code> is calculated through <code>i*sizeof(object in the array)</code></li>
+<li>the parameter <code>array</code> is declared to be of type <code>array-of-BST</code>, so each element of the array is regard as <code>BST</code>, and thus the distance is <code>i*sizeof(BST)</code></li>
+<li>the size of an object of type <code>BalancedBST</code> usually is larger than their base class ones&rsquo; size, because derived class usually has extra data members</li>
+<li>If it is, the ointer arithmetic generated for <code>printBSTArray</code> will be wrong for arrays of <code>BalancedBST</code> objects</li>
+</ul>
+<hr>
+<p>Another problem will pop up if we try to delete an array of derived class objects through a base class pointer:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#75af00">deleteArray</span><span style="color:#111">(</span><span style="color:#111">ostream</span><span style="color:#f92672">&amp;</span> <span style="color:#111">logStream</span><span style="color:#111">,</span> <span style="color:#111">BST</span> <span style="color:#111">array</span><span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">logStream</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Deleting array at address </span><span style="color:#d88200">&#34;</span>
+              <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#00a8c8">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">void</span><span style="color:#f92672">*</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">array</span><span style="color:#111">)</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#d88200"></span><span style="color:#d88200">&#39;</span><span style="color:#d88200">\n</span><span style="color:#d88200">&#39;</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">delete</span> <span style="color:#111">[</span><span style="color:#111">]</span> <span style="color:#111">array</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#111">BalancedBST</span> <span style="color:#f92672">*</span><span style="color:#111">balTreeArray</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">BalancedBST</span><span style="color:#111">[</span><span style="color:#ae81ff">50</span><span style="color:#111">]</span><span style="color:#111">;</span> <span style="color:#75715e">// create a BalancedBST array
+</span><span style="color:#75715e"></span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">deleteArray</span><span style="color:#111">(</span><span style="color:#111">cout</span><span style="color:#111">,</span> <span style="color:#111">balTreeArray</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// log its deletion
+</span></code></pre></td></tr></table>
+</div>
+</div><p>There's pointer arithmetic going on here, too: when compilers see the statement <code>delete [] array;</code>, they will generate code that looks like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">the</span> <span style="color:#111">number</span> <span style="color:#111">of</span> <span style="color:#111">elements</span> <span style="color:#111">in</span> <span style="color:#111">the</span> <span style="color:#111">array</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#111">i</span><span style="color:#111">)</span> 
+<span style="color:#111">{</span>
+    <span style="color:#111">array</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span><span style="color:#111">.</span><span style="color:#111">BST</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#f92672">~</span><span style="color:#111">BST</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// call array[i]&#39;s destructor
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now we understand why the language specification says that the result of deleting an array of derived class objects through a base class pointers is undefined: here, again, polymorphism meets pointer arithmetic.</p>
+<p>In the point of software designing, as MECpp-item 33 suggests, we're unlikely to make the mistake of treating an array polymorphically if we avoid having a concrete class (like <code>BalancedBST</code>) inherit from another concrete class (such as <code>BST</code>).</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

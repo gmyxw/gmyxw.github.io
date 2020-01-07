@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-34 Prefer Lambdas to std::bind - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-34 Prefer Lambdas to std::bind</h1>
+  </div>
+<div class="meta">
+  <div>2018-08-24 20:07</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Lambdas are more readable, more expressive, and may be more efficient than using <code>std::bind</code>.</p>
+<!-- toc -->
+<h1 id="more-readable">More readable</h1>
+<p>Suppose we want a function to set up an audible alarm that will go off an hour after it's set and that will stay on for 30 seconds, with the alarm sound remaining undecided.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">using</span> <span style="color:#111">Time</span> <span style="color:#f92672">=</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">chrono</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">steady_clock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">time_point</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">enum</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Sount</span> <span style="color:#111">{</span><span style="color:#111">Beep</span><span style="color:#111">,</span> <span style="color:#111">Siren</span><span style="color:#111">,</span> <span style="color:#111">Whistle</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">using</span> <span style="color:#111">Duration</span> <span style="color:#f92672">=</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">chrono</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">steady_clock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">duration</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">setAlarm</span><span style="color:#111">(</span><span style="color:#111">Time</span> <span style="color:#111">t</span><span style="color:#111">,</span> <span style="color:#111">Sound</span> <span style="color:#111">s</span><span style="color:#111">,</span> <span style="color:#111">Duration</span> <span style="color:#111">d</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// at time t, make sound s for duration d
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In C++14, it is very easy to write a lambda version, which is also straight-forward to read:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">setSoundL</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#111">Sound</span> <span style="color:#111">s</span><span style="color:#111">)</span>
+                 <span style="color:#111">{</span>
+                     <span style="color:#00a8c8">using</span> <span style="color:#00a8c8">namespace</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">chrono</span><span style="color:#111">;</span>
+                     <span style="color:#00a8c8">using</span> <span style="color:#00a8c8">namespace</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">literals</span><span style="color:#111">;</span>
+                     <span style="color:#111">setAlarm</span><span style="color:#111">(</span><span style="color:#111">steady_clock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">now</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span><span style="color:#111">h</span><span style="color:#111">,</span>  <span style="color:#75715e">// alarm to go off
+</span><span style="color:#75715e"></span>                              <span style="color:#111">s</span><span style="color:#111">,</span>                         <span style="color:#75715e">// in an hour for
+</span><span style="color:#75715e"></span>                              <span style="color:#ae81ff">30</span><span style="color:#111">s</span><span style="color:#111">)</span><span style="color:#111">;</span>                      <span style="color:#75715e">// 30 seconds
+</span><span style="color:#75715e"></span>                 <span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If we decide to use <code>std::bind</code>, it looks like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">setSoundB</span> <span style="color:#f92672">=</span> 
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">setAlarm</span><span style="color:#111">,</span>
+              <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">plus</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">,</span>
+                        <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">steady_clock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">now</span><span style="color:#111">)</span><span style="color:#111">,</span>
+                        <span style="color:#ae81ff">1</span><span style="color:#111">h</span><span style="color:#111">)</span><span style="color:#111">,</span>
+              <span style="color:#111">_1</span><span style="color:#111">,</span>
+              <span style="color:#ae81ff">30</span><span style="color:#111">s</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Here, we used two extra <code>bind</code> inside the outer <code>bind</code> instead of passing <code>now() + 1h</code> directly as an argument of <code>std::bind</code>, because we want to defer evaluation of the timestamp expression until when <code>setAlarm</code> is called, rather than when <code>std::bind</code> is called. In C++11, however, the template type argument for the standard operator tempaltes can not be omitted, so the C++11 <code>std::bind</code> equivalent look like this shxt:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">struct</span> <span style="color:#75af00">genericAdder</span> <span style="color:#111">{</span>  
+    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T1</span><span style="color:#111">,</span> <span style="color:#00a8c8">typename</span> <span style="color:#111">T2</span><span style="color:#f92672">&gt;</span>  
+    <span style="color:#00a8c8">auto</span> <span style="color:#00a8c8">operator</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">(</span><span style="color:#111">T1</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">param1</span><span style="color:#111">,</span> <span style="color:#111">T2</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">param2</span><span style="color:#111">)</span>    
+        <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">T1</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">param1</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">T2</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">param2</span><span style="color:#111">)</span><span style="color:#111">)</span>  
+    <span style="color:#111">{</span>    
+        <span style="color:#00a8c8">return</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">T1</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">param1</span><span style="color:#111">)</span> <span style="color:#f92672">+</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">T2</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">param2</span><span style="color:#111">)</span><span style="color:#111">;</span>  
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">auto</span> <span style="color:#111">setSoundB</span> <span style="color:#f92672">=</span> 
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">setAlarm</span><span style="color:#111">,</span>
+              <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">genericAdder</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">,</span>
+                        <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">steady_clock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">now</span><span style="color:#111">)</span><span style="color:#111">,</span>
+                        <span style="color:#111">hours</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">,</span>  <span style="color:#75715e">// std::literals is in C++14
+</span><span style="color:#75715e"></span>              <span style="color:#111">_1</span><span style="color:#111">,</span>
+              <span style="color:#111">seconds</span><span style="color:#111">(</span><span style="color:#ae81ff">30</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Moreover, if we have another overloaded function for <code>setAlarm</code>, which takes a new parameter specifying the alarm volume:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">enum</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Volum</span> <span style="color:#111">{</span><span style="color:#111">Normal</span><span style="color:#111">,</span> <span style="color:#111">Loud</span><span style="color:#111">,</span> <span style="color:#111">VeryLoud</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">setAlarm</span><span style="color:#111">(</span><span style="color:#111">Time</span> <span style="color:#111">t</span><span style="color:#111">,</span> <span style="color:#111">Sound</span> <span style="color:#111">s</span><span style="color:#111">,</span> <span style="color:#111">Duration</span> <span style="color:#111">d</span><span style="color:#111">,</span> <span style="color:#111">Volume</span> <span style="color:#111">v</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The lambda above continues to work, because overload resolution chooses the three-argument version of <code>setAlarm</code>.</p>
+<p>However, the <code>std::bind</code> version fails to compile now, because compilers have no way to determine which of the two <code>setAlarm</code> functions they should pass to <code>std::bind</code> - by the function name alone it is ambiguous.</p>
+<p>To specify the exactly which one we want, we need to cast <code>setAlarm</code> to the proper function pointer type:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">using</span> <span style="color:#111">SetAlarm3ParamType</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">void</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">)</span><span style="color:#111">(</span><span style="color:#111">Time</span> <span style="color:#111">t</span><span style="color:#111">,</span> <span style="color:#111">Sound</span> <span style="color:#111">s</span><span style="color:#111">,</span> <span style="color:#111">Duration</span> <span style="color:#111">d</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">auto</span> <span style="color:#111">setSoundB</span> <span style="color:#f92672">=</span> 
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#00a8c8">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#111">SetAlarm3ParamType</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">setAlarm</span><span style="color:#111">)</span><span style="color:#111">,</span>
+              <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">plus</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">,</span>
+                        <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">steady_clock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">now</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">,</span>
+                        <span style="color:#ae81ff">1</span><span style="color:#111">h</span><span style="color:#111">)</span><span style="color:#111">,</span>
+              <span style="color:#111">_1</span><span style="color:#111">,</span>
+              <span style="color:#ae81ff">30</span><span style="color:#111">s</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="more-efficient">More efficient</h1>
+<p>The cast above introduces another side effect:</p>
+<ul>
+<li><code>std::bind</code> passes a function pointer to <code>setAlarm</code>, which means inside the function call operator for <code>setSoundB</code> (i.e., the function call operator <code>()</code> for the bind object), the call to <code>setAlarm</code> takes place through a function pointer, which generally can't be fully inlined</li>
+<li>inside the function call operator for <code>setSoundL</code> (i.e., the function call operator of the lambda's closure class), the call to <code>setAlarm</code> is a normal function invocation, which can be inlined by compilers</li>
+</ul>
+<p>This means using lambdas might generate faster code than using <code>std::bind</code>.</p>
+<h1 id="more-expressive">More expressive</h1>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">betweenL</span> <span style="color:#f92672">=</span> 
+    <span style="color:#111">[</span><span style="color:#111">lowVal</span><span style="color:#111">,</span> <span style="color:#111">highVal</span><span style="color:#111">]</span>
+    <span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span> <span style="color:#111">val</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">lowVal</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#111">val</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">val</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#111">highVal</span><span style="color:#111">;</span> <span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">using</span> <span style="color:#00a8c8">namespace</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">placeholders</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">auto</span> <span style="color:#111">betweenB</span> <span style="color:#f92672">=</span> 
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">logical_and</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">,</span>
+              <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">less_equal</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">,</span> <span style="color:#111">lowVal</span><span style="color:#111">,</span> <span style="color:#111">_1</span><span style="color:#111">)</span><span style="color:#111">,</span>
+              <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">less_equal</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">,</span> <span style="color:#111">_1</span><span style="color:#111">,</span> <span style="color:#111">highVal</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Moreover, the placeholders (e.g., <code>_1</code>, <code>_2</code>, etc.) are opaque in that it doesn't specify how parameters are passed and stored in the bind object, by value or by reference. We have to memorize that it's stored by value. Lambda, however, specifies capture mode very clearly.</p>
+<h1 id="edge-cases">Edge cases</h1>
+<p>In C++14, there's no reasonable use case for <code>std::bind</code>. In C++11, two constrained situations my be useful:</p>
+<ol>
+<li>
+<p>Move capture, as item 32 explains.</p>
+</li>
+<li>
+<p>Polymorphic function objects: this takes use of bind object's perfect forwarding ability</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">PolyWidget</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#00a8c8">operator</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">T</span><span style="color:#f92672">&amp;</span> <span style="color:#111">param</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#111">PolyWidget</span> <span style="color:#111">pw</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">auto</span> <span style="color:#111">boundPW</span> <span style="color:#f92672">=</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#111">pw</span><span style="color:#111">,</span> <span style="color:#111">_1</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">boundPW</span><span style="color:#111">(</span><span style="color:#ae81ff">1942</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// pass int to PolyWidget::operator()
+</span><span style="color:#75715e"></span><span style="color:#111">boundPW</span><span style="color:#111">(</span><span style="color:#00a8c8">nullptr</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// pass nullptr to PolyWidget::operator()
+</span><span style="color:#75715e"></span><span style="color:#111">boundPW</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">RoseGun</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// pass string literal to PolyWidget::operator()
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In C++14, simply do this combining lambda with <code>auto</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">boundPW</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">pw</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span> <span style="color:#111">param</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">pw</span><span style="color:#111">(</span><span style="color:#111">param</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

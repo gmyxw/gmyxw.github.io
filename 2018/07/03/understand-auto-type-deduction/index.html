@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-2 Understand Auto Type Deduction - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-2 Understand Auto Type Deduction</h1>
+  </div>
+<div class="meta">
+  <div>2018-07-03 10:07</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p><code>auto</code> type deduction is usually the same as template type deduction, with an exception in the case of braced initializer. Also, in C++14, as a function return type or a lambda parameter, <code>auto</code> implies template type deduction instead of <code>auto</code> type deduction.</p>
+<p>With only one curious exception, <code>auto</code> type deduction <em>is</em> template type deduction. In the case of general function template form and its general function call:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#111">f</span><span style="color:#111">(</span><span style="color:#111">ParamType</span> <span style="color:#111">param</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">f</span><span style="color:#111">(</span><span style="color:#111">expr</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// general call
+</span></code></pre></td></tr></table>
+</div>
+</div><p>compilers use <code>expr</code> to deduce types for <code>T</code> and <code>ParamType</code>. Similarly, in the case where a variable is declared using <code>auto</code>, <code>auto</code> plays the role of <code>T</code>, and the type specifier for the variable acts as <code>ParamType</code>.</p>
+<p>Therefore, there are also three cases based on the type specifier:</p>
+<ul>
+<li>Case 1: the type specifier is a pointer or reference, but not a universal reference</li>
+<li>Case 2: the type specifier is a universal reference</li>
+<li>Case 3: the type specifier is neither a pointer nor a reference</li>
+</ul>
+<p>For example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">27</span><span style="color:#111">;</span>  <span style="color:#75715e">// case 3. type specifier is simply auto by itself.
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">auto</span> <span style="color:#111">cx</span> <span style="color:#f92672">=</span> <span style="color:#111">x</span><span style="color:#111">;</span> <span style="color:#75715e">// case 3. type specifier is const auto.
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rx</span> <span style="color:#f92672">=</span> <span style="color:#111">x</span><span style="color:#111">;</span> <span style="color:#75715e">// case 1. type specifier is const auto&amp;. 
+</span><span style="color:#75715e"></span><span style="color:#75715e">// case 2:
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">uref1</span> <span style="color:#f92672">=</span> <span style="color:#111">x</span><span style="color:#111">;</span> <span style="color:#75715e">// x is int and lvalue, so uref1&#39;s type is int&amp;
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">uref2</span> <span style="color:#f92672">=</span> <span style="color:#111">cx</span><span style="color:#111">;</span> <span style="color:#75715e">// cx is const int and lvalue, so uref2&#39;s type is const int&amp;
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">uref3</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">27</span><span style="color:#111">;</span> <span style="color:#75715e">// 27 is int and rvlue, so uref3&#39;s type is int&amp;&amp;
+</span><span style="color:#75715e"></span><span style="color:#75715e">// array and function names decay into pointers for non-ref type specifiers:
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#111">name</span><span style="color:#111">[</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">R. N. Briggs</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span> <span style="color:#75715e">// name&#39;s type is const char [13]
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span> <span style="color:#111">arr1</span> <span style="color:#f92672">=</span> <span style="color:#111">name</span><span style="color:#111">;</span>  <span style="color:#75715e">// arr1&#39;s type is const char*
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span> <span style="color:#111">arr2</span> <span style="color:#f92672">=</span> <span style="color:#111">name</span><span style="color:#111">;</span>  <span style="color:#75715e">// arr2&#39;s type is const char (&amp;)[13]
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#75af00">someFunc</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">,</span> <span style="color:#00a8c8">double</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// someFunc is a function, type is void(int, double)
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span> <span style="color:#111">func1</span> <span style="color:#f92672">=</span> <span style="color:#111">someFunc</span><span style="color:#111">;</span> <span style="color:#75715e">// func1&#39;s type is void (*)(int, double)
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span> <span style="color:#111">func2</span> <span style="color:#f92672">=</span> <span style="color:#111">someFunc</span><span style="color:#111">;</span> <span style="color:#75715e">// func2&#39;s type is void (&amp;)(int, double)
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="exception-uniform-initialization">Exception: uniform initialization</h4>
+<p>C++98 provides two syntactic choices when we want to declare an int with an initial value:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">int</span> <span style="color:#111">x1</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">27</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#75af00">x2</span><span style="color:#111">(</span><span style="color:#ae81ff">27</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>By introducing uniform initialization, C++11 adds these two forms:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">int</span> <span style="color:#111">x3</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span> <span style="color:#ae81ff">27</span> <span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">int</span> <span style="color:#111">x4</span><span style="color:#111">{</span> <span style="color:#ae81ff">27</span> <span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>As EMCpp 5 explains, there are advantages to declare variables using <code>auto</code>, so we may prefer:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">x1</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">27</span><span style="color:#111">;</span>  <span style="color:#75715e">// type is int, value is 27
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span> <span style="color:#75af00">x2</span><span style="color:#111">(</span><span style="color:#ae81ff">27</span><span style="color:#111">)</span><span style="color:#111">;</span>   <span style="color:#75715e">// ditto
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span> <span style="color:#111">x3</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span> <span style="color:#ae81ff">27</span> <span style="color:#111">}</span><span style="color:#111">;</span>  <span style="color:#75715e">// type is std::initializer_list&lt;int&gt;, value is {27}
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span> <span style="color:#111">x4</span><span style="color:#111">{</span> <span style="color:#ae81ff">27</span> <span style="color:#111">}</span><span style="color:#111">;</span>  <span style="color:#75715e">// ditto
+</span></code></pre></td></tr></table>
+</div>
+</div><p>However, after this modification, while the first two statements do declare a variable of type <code>int</code> with value 27, the second two actually declare a variable of type <code>std::initializer_list&lt;int&gt;</code> containing a single element with value 27.</p>
+<p>In fact, when an auto-declared variable is initialized with a braced initializer, <code>auto</code> will assume that the braced initilizer represents a <code>std::initializer_list</code>, which itself is a template for some type <code>T</code>, so there are actually two kinds of type deduction taking place:</p>
+<ol>
+<li><code>auto</code> type deduction: the type is an instantiation of <code>std::initializer_list</code></li>
+<li>template type deduction: the type <code>T</code> in <code>std::initializer_list&lt;T&gt;</code></li>
+</ol>
+<p><strong>The only real difference between <code>auto</code> and template type deduction is the assumption that a braced initializer represents a <code>std::initializer_list</code>.</strong> This lead to some interesting results:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span> <span style="color:#ae81ff">11</span><span style="color:#111">,</span> <span style="color:#ae81ff">23</span><span style="color:#111">,</span> <span style="color:#ae81ff">9</span> <span style="color:#111">}</span><span style="color:#111">;</span>  <span style="color:#75715e">// x&#39;s type is std::initializer_list&lt;int&gt;
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#111">f1</span><span style="color:#111">(</span><span style="color:#111">T</span> <span style="color:#111">param</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">f1</span><span style="color:#111">(</span><span style="color:#111">{</span> <span style="color:#ae81ff">11</span><span style="color:#111">,</span> <span style="color:#ae81ff">23</span><span style="color:#111">,</span> <span style="color:#ae81ff">9</span> <span style="color:#111">}</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// error! can&#39;t deduce type for T. Do not recognise the type for braced initializer
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#111">f2</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">initializer_list</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span> <span style="color:#111">initList</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">f</span><span style="color:#111">(</span><span style="color:#111">{</span> <span style="color:#ae81ff">11</span><span style="color:#111">,</span> <span style="color:#ae81ff">23</span><span style="color:#111">,</span> <span style="color:#ae81ff">9</span> <span style="color:#111">}</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// T deduced as T, and initList&#39;s type is std::initializer_list&lt;int&gt;
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="more-exceptions-in-c14">More exceptions in C++14</h4>
+<p>C++14 permits to use <code>auto</code> as a function's return type as well as in lambda parameter declarations. However, these uses of <code>auto</code> employ <em>tamplate type deduction</em>, not <code>auto</code> type deduction - so a braced initializer won't imply the type of <code>std::initializer_list</code> automatically, and following statement won't compile:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// auto in return type
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">auto</span> <span style="color:#75af00">createInitList</span><span style="color:#111">(</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">{</span> <span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">2</span><span style="color:#111">,</span> <span style="color:#ae81ff">3</span> <span style="color:#111">}</span><span style="color:#111">;</span>  <span style="color:#75715e">// error: can&#39;t deduce type for { 1, 2, 3 }
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+<span style="color:#75715e">// auto in a parameter type specification in a C++14 lambda
+</span><span style="color:#75715e"></span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">v</span><span style="color:#111">;</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">auto</span> <span style="color:#111">resetV</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#f92672">&amp;</span><span style="color:#111">v</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">auto</span><span style="color:#f92672">&amp;</span> <span style="color:#111">newValue</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">v</span> <span style="color:#f92672">=</span> <span style="color:#111">newValue</span><span style="color:#111">;</span> <span style="color:#111">}</span><span style="color:#111">;</span>  <span style="color:#75715e">// C++14 lambda, second auto is in parameter list
+</span><span style="color:#75715e"></span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">resetV</span><span style="color:#111">(</span><span style="color:#111">{</span> <span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">2</span><span style="color:#111">,</span> <span style="color:#ae81ff">3</span> <span style="color:#111">}</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// error: can&#39;t deduce type for { 1, 2, 3 }
+</span></code></pre></td></tr></table>
+</div>
+</div></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

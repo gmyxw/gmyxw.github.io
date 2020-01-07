@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-40 Use multiple inheritance judiciously - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-40 Use multiple inheritance judiciously</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-06 17:35</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Being more complex than single inheritance, Multiple inheritance (MI) can lead to ambiguity issues and to the need for virtual inheritance, the latter of which imposes costs in size, speed, and complexity of initialization and assignment, so it's more practical to make &ldquo;empty&rdquo; virtual base classes.</p>
+<!-- toc -->
+<h1 id="ambiguity">Ambiguity</h1>
+<p>In the realm of MI, one thing worth noting is that it becomes possible to inherit the same name (e.g., function, typedef, etc.) from more than one base class:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">BorrowableItem</span> <span style="color:#111">{</span>  <span style="color:#75715e">// something a library lets you borrow
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#111">checkOut</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// check the item out from the library
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">ElectronicGadget</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">bool</span> <span style="color:#111">checkOut</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span> <span style="color:#75715e">// perfom self-test, return whether test succeeds
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">MP3Player</span><span style="color:#f92672">:</span>  <span style="color:#75715e">// Multiple inheritance
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">public</span> <span style="color:#111">BorrowableItem</span><span style="color:#111">,</span>
+    <span style="color:#00a8c8">public</span> <span style="color:#111">ElectronicGadget</span>
+<span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">MP3Player</span> <span style="color:#111">mp</span><span style="color:#111">;</span>
+<span style="color:#111">mp</span><span style="color:#111">.</span><span style="color:#111">checkOut</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// ambiguous!
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In the example above, even though only the public one in <code>BorrowableItem</code> of the two <code>checkOut</code> functions is accessible, the call to <code>checkOut</code> is ambiguous, because before seeing whether a function is accessible, C++ first identifies the function that's the best match for the call, and in this case both <code>checkOut</code>s are equally good matches, so there's no best match. The accessibility of <code>ElectronicGadget::checkOut</code> is never examined.</p>
+<p>To resolve the ambiguity, specify which base class's function to call:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">mp</span><span style="color:#111">.</span><span style="color:#111">BorrowableItem</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">checkOut</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="virtual-inheritance">Virtual inheritance</h1>
+<p>It is not uncommon in the world of MI to encounter the classical case of &ldquo;deadly MI diamond&rdquo;, where there are more than one path between a base class and a derived class:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">File</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">InputFile</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">File</span><span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">OutputFile</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">File</span><span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">IOFile</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">InputFile</span><span style="color:#111">,</span>
+              <span style="color:#00a8c8">public</span> <span style="color:#111">OutputFile</span>
+<span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>          File
+        ↗      ↖
+InputFile       OutputFile
+        ↖      ↗
+         IOFile
+</code></pre><p>Here, between <code>File</code> and <code>IOFile</code>, we've found two paths either through <code>InputFile</code> or <code>OutputFile</code>, and we come to the following question:</p>
+<blockquote>
+<p>Do we want the data members in the base class to be replicated for each of the paths?</p>
+</blockquote>
+<p>By default, C++ performs the replication, so if there's a data member named <code>fileName</code> in the <code>File</code>, <code>IOFile</code> will inherits a copy from each of its base classes <code>InputFile</code> and <code>OutputFile</code>, resulting in two <code>fielName</code> data members in <code>IOFile</code>.</p>
+<p>If this is not what we want, we must make the <code>File</code> a <em>virtual base class</em>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">File</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">InputFile</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">public</span> <span style="color:#111">File</span><span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">OutputFile</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">public</span> <span style="color:#111">File</span><span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">IOFile</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">InputFile</span><span style="color:#111">,</span>
+              <span style="color:#00a8c8">public</span> <span style="color:#111">OutputFile</span>
+<span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><pre><code>           File
+(virtual)↗      ↖(virtual)
+InputFile       OutputFile
+         ↖      ↗
+         IOFile
+</code></pre><p>From the viewpoint of correct behavior, public inheritance should always be virtual. However, inheritance costs both in terms of memory and runtime: compared to their counterparts without virtual inheritance, objects created from clases using virtual inheritance are generally larger, and access to data members in virtual base classes is also slower.</p>
+<p>To make things more complicated, it is required that the responsibility for initializing a virtual base is borne by the <em>most derived class</em> in the hierarchy, which implies:</p>
+<ul>
+<li>classes derived from virtual bases that requires initialization must be awared of their virtual bases</li>
+<li>when a new derived class is added to the hierarchy, it must assume initialization responsibilities for its virtual bases (both direct and indirect).</li>
+</ul>
+<p>To make things easier to handle, we could adopt following strategy:</p>
+<ul>
+<li>Use non-virtual by default, and don't use virtual bases unless we need to</li>
+<li>If we must use a virtual base classes, avoid putting data in them<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></li>
+</ul>
+<h1 id="example-of-legitimate-mi-usecase">Example of legitimate MI usecase</h1>
+<p>Multiple inheritance does have legitimate uses. One scenario involves combining public inheritance from an Interface class with private inheritance from a class that provides help of implementation.</p>
+<p>For example, we want to implement the following C++ Interface class (from item 31) to model persons:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">IPerson</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span><span style="color:#f92672">:</span> <span style="color:#f92672">~</span><span style="color:#111">IPerson</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+    <span style="color:#00a8c8">virtual</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">name</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">birthDate</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We want to create a concrete class <code>CPerson</code>, and luckily, we find following old database-specific class <code>PersonInfo</code> offering the essense of what <code>CPerson</code> needs:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">PersonInfo</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">explicit</span> <span style="color:#111">PersonInfo</span><span style="color:#111">(</span><span style="color:#111">DatabaseID</span> <span style="color:#111">pid</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#f92672">~</span><span style="color:#111">PersonInfo</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#75af00">theName</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#75af00">theBirthDate</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#111">valueDelimOpen</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#75af00">valueDelimClose</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#111">PersonInfo</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">valueDilimOpen</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">[</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span>  <span style="color:#75715e">// default opening delimiter
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+<span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#111">PersonInfo</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">valueDilimClose</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">]</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span>  <span style="color:#75715e">// default closing delimiter
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+<span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#111">PersonInfo</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">theName</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+<span style="color:#111">{</span>
+    <span style="color:#75715e">// reserve buffer for return value, 
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// it&#39;s automatically init. to all zeros due to static
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">char</span> <span style="color:#111">value</span><span style="color:#111">[</span><span style="color:#111">Max_Formatted_Field_Value_Length</span><span style="color:#111">]</span><span style="color:#111">;</span>
+
+    <span style="color:#75715e">// write opening delimiter
+</span><span style="color:#75715e"></span>    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">strcpy</span><span style="color:#111">(</span><span style="color:#111">value</span><span style="color:#111">,</span> <span style="color:#111">valueDelimOpen</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+    <span style="color:#111">append</span> <span style="color:#00a8c8">this</span> <span style="color:#111">obj</span><span style="color:#111">.</span><span style="color:#960050;background-color:#1e0010">&#39;</span><span style="color:#111">s</span> <span style="color:#111">name</span> <span style="color:#111">fields</span> <span style="color:#111">to</span> <span style="color:#111">the</span> <span style="color:#111">string</span> <span style="color:#111">in</span> <span style="color:#111">value</span>
+
+    <span style="color:#75715e">// write closing delimiter
+</span><span style="color:#75715e"></span>    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">strcat</span><span style="color:#111">(</span><span style="color:#111">value</span><span style="color:#111">,</span> <span style="color:#111">valueDelimClose</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+    <span style="color:#00a8c8">return</span> <span style="color:#111">value</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This design of <code>PersonInfo::theName</code> is antiquated indeed: it use a fix-size static buffer, which is rife for both overrun and threading problems (item 21). Let's set such imperfection aside, and focus on <code>theName</code>, which calls virtual function <code>valueDelimOpen</code> and <code>valueDelimClose</code>, so the result returnd by <code>theName</code> is dependent not only on <code>PersonInfo</code> but also on the classes derived from <code>PersonInfo</code>.</p>
+<p>Apparently, the relationship between <code>CPerson</code> and <code>PersonInfo</code> is <code>is-implemented-in-terms-of</code> (we just want to re-use some of the code. That's all). Also, suppose that we want our target class <code>CPerson</code> to return unadorned values (return &ldquo;Name&rdquo; instead of &ldquo;[Name]&quot;), which requires redefining of the virtual functions in <code>PersonInfo</code>. Thus between the composition (item 38) and private inheritance (item 39) we prefer private inheritance, because simple composition will not let us redefine the virtual functions in <code>PersonInfo</code><sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<p>Thus, we could make following reasonable multiple inheritance:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">IPerson</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span> <span style="color:#75715e">// the interface. same as above
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">DatabaseID</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span> <span style="color:#75715e">// used below
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">PersonInfo</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>  <span style="color:#75715e">// used for implementing the IPerson interface
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">CPerson</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">IPerson</span><span style="color:#111">,</span> <span style="color:#00a8c8">private</span> <span style="color:#111">PersonInfo</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">explicit</span> <span style="color:#111">CPerson</span><span style="color:#111">(</span><span style="color:#111">DatabaseID</span> <span style="color:#111">pid</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#f92672">:</span> <span style="color:#111">PersonInfo</span><span style="color:#111">(</span><span style="color:#111">pid</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#111">}</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">name</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+    <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">PersonInfo</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">theName</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>  <span style="color:#75715e">// implementing the IPerson member function
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">virtual</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">birthDate</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+    <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">PersonInfo</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">theBirthDate</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span> <span style="color:#75715e">// implementing the IPerson member function
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#111">valueDelimOpen</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span> <span style="color:#111">}</span> <span style="color:#75715e">// inherited virtual delimiter functions
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#75af00">valueDelimClose</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span> <span style="color:#111">}</span> <span style="color:#75715e">// inherited virtual delimiter functions
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>In UML, the design looks like this:</p>
+<pre><code>     IPerson   PersonInfo
+        ↖      ↗(private)
+         IOFile
+</code></pre><h1 id="summary">Summary</h1>
+<p>Compared to single inheritance (SI), multiple inheritance (MI) is typically more complicated to use and more complicated to understand, so if SI design is more or less equivalent to an MI design, we prefer the SI design. Sometimes, though, MI is the clearest, most maintainable, most reasonable way to get the job done. When that's the case, just use it, with judiciousness.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Without any standalone data, we don't worry about oddities in the initialization and assignment rules for the virtual bases. This is exactly why the Interfaces in Java and .NET, which are in many ways comparable to virtual base classes in C++, are not allowed to contain any data. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Complex composition that is combined with public inheritance, as showed in item 39, may also meed our needs, but here we just use private inheritance because it's easy to understand. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-3 Use const whenever possible - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-3 Use const whenever possible</h1>
+  </div>
+<div class="meta">
+  <div>2018-01-19 14:31</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Useful tips on using <code>const</code> in C++.</p>
+<!-- toc -->
+<p>The <code>const</code> keyword allows you to specify a semantic constraint and compilers will enforce that constraint. It is remarkably versatile:</p>
+<ol>
+<li>outside of class, you may use it for constants at global or namespace scope, as well as for objects declared static at file, function or block scope</li>
+<li>inside classes, you may use it for both static and non-static data members, for pointers</li>
+<li>when declaring functions, you may also refer <code>const</code> to function's return value, function parameters, and, for member functions, to the function as a whole</li>
+</ol>
+<h1 id="1-const-pointer">1. <code>const</code> pointer</h1>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">char</span> <span style="color:#111">greeting</span><span style="color:#111">[</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Hello</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">p</span> <span style="color:#f92672">=</span> <span style="color:#111">greeting</span><span style="color:#111">;</span> <span style="color:#75715e">// non-const pointer, non-const data
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">p</span> <span style="color:#f92672">=</span> <span style="color:#111">greeting</span><span style="color:#111">;</span> <span style="color:#75715e">// non-const pointer, const data
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">const</span> <span style="color:#111">p</span> <span style="color:#f92672">=</span> <span style="color:#111">greeting</span><span style="color:#111">;</span> <span style="color:#75715e">// const pointer, non-const data
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">const</span> <span style="color:#111">p</span> <span style="color:#f92672">=</span> <span style="color:#111">greeting</span><span style="color:#111">;</span> <span style="color:#75715e">// const pointer, const data
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">char</span> <span style="color:#00a8c8">const</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">const</span> <span style="color:#111">p</span> <span style="color:#f92672">=</span> <span style="color:#111">greeting</span><span style="color:#111">;</span> <span style="color:#75715e">// const pointer, const data
+</span></code></pre></td></tr></table>
+</div>
+</div><p>If the <code>const</code> appears to the left of the asterisk, what's pointed to is constant; if the word <code>const</code> appears to the right of the asterisk, the pointer itself is constant. It's helpful to read pointer declarations right to left: <code>const char * const p</code> reads as &ldquo;p is a constant pointer to constant chars&rdquo;.</p>
+<h1 id="2-const-iterator">2. <code>const</code> iterator</h1>
+<p>STL iterators are modeled on pointers. Treat it like this:</p>
+<ol>
+<li>iterator -&gt; <code>T*</code> pointer</li>
+<li>const iterator -&gt; <code>T* const</code> pointer</li>
+<li>const_iterator -&gt; <code>const T*</code> pointer</li>
+</ol>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vec</span><span style="color:#111">;</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">const</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">iterator</span> <span style="color:#111">iter</span> <span style="color:#f92672">=</span> <span style="color:#111">vec</span><span style="color:#111">.</span><span style="color:#111">begin</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// acts like T* const
+</span><span style="color:#75715e"></span><span style="color:#f92672">*</span><span style="color:#111">iter</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#75715e">// OK.
+</span><span style="color:#75715e"></span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">iter</span><span style="color:#111">;</span>     <span style="color:#75715e">// error.
+</span><span style="color:#75715e"></span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">const_iterator</span> <span style="color:#111">cIter</span> <span style="color:#f92672">=</span> <span style="color:#111">vec</span><span style="color:#111">.</span><span style="color:#111">begin</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// acts like const T*
+</span><span style="color:#75715e"></span><span style="color:#f92672">*</span><span style="color:#111">cIter</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#75715e">// error.
+</span><span style="color:#75715e"></span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">cIter</span><span style="color:#111">;</span>     <span style="color:#75715e">// OK.
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="3-const-function-return-value">3. <code>const</code> function return value</h1>
+<p>Generally speaking, having a function return a constant value is inappropriate, but sometimes doing so may reduce implicit errors out of incidence without giving up safety or efficiency.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Rational</span> <span style="color:#111">{</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#75715e">// contains no operator*
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">lhs</span><span style="color:#111">,</span> 
+                         <span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Declaring the return value of <code>operator*</code> to be const prevent typos like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">a</span> <span style="color:#f92672">*</span> <span style="color:#111">b</span> <span style="color:#f92672">=</span> <span style="color:#111">c</span><span style="color:#111">)</span> <span style="color:#75715e">// meant to do a comparison for some user-defined objects
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="4-const-function-parameters">4. <code>const</code> function parameters</h1>
+<p><code>const</code> parameters act just like local <code>const</code> objects. Unless there's a need to modify aparameter or local object, be sure to declare it <code>const</code>, for it may save you from annoying errors like <code>if (a = b)</code> above.</p>
+<h1 id="5-const-member-functions">5. <code>const</code> member functions</h1>
+<p>The purpose of <code>const</code> on member functions is to identify which member functions may be invoked on <code>const</code> objects, which benefits us for:</p>
+<ol>
+<li>making the interface of a class easier to understand (which functions may modify an object and which may not)</li>
+<li>making it possible to work with <code>const</code>-qualified objects (which makes up a very important C++ feature: overloading member functions differing only in their constness)</li>
+</ol>
+<h2 id="51-bitwise-constness-vs-logical-constness">5.1 Bitwise constness vs. Logical constness</h2>
+<h2 id="511-bitwise-constness">5.1.1 Bitwise constness</h2>
+<blockquote>
+<p>Bitwise constness: a member function is const if and only if it doesn't modify any of the object's data members (excluding those that are static). This is also C++'s definition of constness</p>
+</blockquote>
+<p>However, member functions that don't act very <em>const</em> pass the bitwise test, such as a function including a <code>char* const</code> pointer manipulating a <code>char*</code> type class member:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">CTextBlock</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#75715e">//inappropriate but bitwise const declaration of operator[]
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">char</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">position</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> 
+    <span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#111">pText</span><span style="color:#111">[</span><span style="color:#111">position</span><span style="color:#111">]</span><span style="color:#111">;</span><span style="color:#111">}</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">pText</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Since operator[]&lsquo;s implementation doesn't modify pText in any way, compilers will happily generate code after verifying that it is indeed bitwise const. However, when you create a constant object with a particular value and invoke only <code>const</code> member functions on it, you can still change its value:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">const</span> <span style="color:#111">CTextBlock</span> <span style="color:#75af00">cctb</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Hello</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// declare constant object
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">pc</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">cctb</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span><span style="color:#111">;</span> <span style="color:#75715e">// call the const operator[]
+</span><span style="color:#75715e"></span><span style="color:#f92672">*</span><span style="color:#111">pc</span> <span style="color:#f92672">=</span> <span style="color:#d88200"></span><span style="color:#d88200">&#39;</span><span style="color:#d88200">J</span><span style="color:#d88200">&#39;</span>  <span style="color:#75715e">// cctb has value &#34;Jello&#34; now
+</span></code></pre></td></tr></table>
+</div>
+</div><p>To solve this problem, we may store data as a string instead of communicating through a C API char*:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">TextBlock</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#75715e">// operator[] for const objects
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#111">[</span><span style="color:#111">]</span> <span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">position</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+    <span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#111">text</span><span style="color:#111">[</span><span style="color:#111">position</span><span style="color:#111">]</span><span style="color:#111">;</span><span style="color:#111">}</span>
+    <span style="color:#75715e">// operator[] for non-const objects
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">char</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#111">[</span><span style="color:#111">]</span> <span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">position</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+    <span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#111">text</span><span style="color:#111">[</span><span style="color:#111">posion</span><span style="color:#111">]</span><span style="color:#111">;</span><span style="color:#111">}</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">text</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Remeber the C++ feature mentioned above? By overloading operator[] and giving the different versions different return types, we can handle const and non-const TextBlock objects differently:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">TextBlock</span> <span style="color:#75af00">tb</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Hello</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">const</span> <span style="color:#111">TextBlock</span> <span style="color:#75af00">ctb</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">World</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">cout</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#111">tb</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span><span style="color:#111">;</span>  <span style="color:#75715e">// fine, call and reading a non-const TextBlock object
+</span><span style="color:#75715e"></span><span style="color:#111">tb</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#d88200"></span><span style="color:#d88200">&#39;</span><span style="color:#d88200">x</span><span style="color:#d88200">&#39;</span><span style="color:#111">;</span>         <span style="color:#75715e">// fine, call and writing a non-const TextBlock object
+</span><span style="color:#75715e"></span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">cout</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#111">ctb</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span><span style="color:#111">;</span> <span style="color:#75715e">// fine, call and reading a const TextBlock object
+</span><span style="color:#75715e"></span><span style="color:#111">ctb</span><span style="color:#111">[</span><span style="color:#ae81ff">0</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#d88200"></span><span style="color:#d88200">&#39;</span><span style="color:#d88200">x</span><span style="color:#d88200">&#39;</span><span style="color:#111">;</span>        <span style="color:#75715e">// error! call to a const TextBlock object is fine
+</span><span style="color:#75715e"></span>                     <span style="color:#75715e">// but making an assignment to returned const char&amp; type gives us an error
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id="512-logical-constness">5.1.2 Logical constness</h2>
+<blockquote>
+<p>Logical constness: a const member function might modify some of the bits in the object on which it's invoked, but only in ways that clients cannot detect.</p>
+</blockquote>
+<p>A typical example of logical constness shows in such a scenario: say we want to cache the length for a CTextBlock object, and we define it like as</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">CTextBlock</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">length</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">pText</span><span style="color:#111">;</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">textLength</span><span style="color:#111">;</span>
+    <span style="color:#111">book</span> <span style="color:#111">lengthIsValid</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">CTextBlock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">length</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#f92672">!</span><span style="color:#111">lengthIsValid</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">textLength</span> <span style="color:#f92672">=</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">strlen</span><span style="color:#111">(</span><span style="color:#111">pText</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// error: can&#39;t asssign to textLength 
+</span><span style="color:#75715e"></span>        <span style="color:#111">lengthIsValid</span> <span style="color:#f92672">=</span> <span style="color:#111">true</span><span style="color:#111">;</span>            <span style="color:#75715e">// and lengthIsValid in a const member function
+</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">textLength</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Bitwise constness test fails and compilers complains due to the assignment to textLength and lengthIsValid, but it is supposed to be valid for <code>const</code> CTextBlock objects. The solution is to take advantage of C++'s keyword <code>mutable</code>, which frees non-static data members from the constraints of bitwise constness:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">CTextBlock</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">length</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span><span style="color:#111">pText</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">mutable</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">textLength</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">mutable</span> <span style="color:#111">book</span> <span style="color:#111">lengthIsValid</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">CTextBlock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">length</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">if</span><span style="color:#111">(</span><span style="color:#f92672">!</span><span style="color:#111">lengthIsValid</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">textLength</span> <span style="color:#f92672">=</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">strlen</span><span style="color:#111">(</span><span style="color:#111">pText</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// error: can&#39;t asssign to textLength 
+</span><span style="color:#75715e"></span>        <span style="color:#111">lengthIsValid</span> <span style="color:#f92672">=</span> <span style="color:#111">true</span><span style="color:#111">;</span>            <span style="color:#75715e">// and lengthIsValid in a const member function
+</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">textLength</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>According to the mutable's definition, you may notice that <code>const</code> member function will not check bitwise constness for static data members. This is because following <a href="https://stackoverflow.com/questions/43936404/why-can-a-const-member-function-modify-a-static-data-member">facts</a>:</p>
+<ol>
+<li>The <code>this</code> pointer in a <code>const</code> qualified member function is a <code>const</code> type, and <code>this</code> is inherently related to an <em>instance</em> of a class</li>
+<li><code>static</code> data members are not related to a class instance</li>
+<li>For non-static data member <code>lengthIsValid = true;</code>, think of it as <code>this-&gt;lengthIsValid = true;</code>, which is not compilable when the type of <code>this</code> is <code>const CTextBlock*</code> without <code>mutable</code> added.</li>
+<li>Think of static data member <code>staticMember</code> as <code>CTextBlock::staticMember</code>, so there's no constraints from <code>const</code> type <code>this</code> pointer.</li>
+</ol>
+<h2 id="52-avoiding-duplication-in-const-and-non-const-member-function">5.2 Avoiding duplication in <code>const</code> and non-<code>const</code> member function</h2>
+<p>There are two versions of operator[] in class TextBlock, which is duplication and tempts us to have one version of operator[] call the other one. Although generally speaking casting is a bad idea, here we may find enough reasons to justify its usage so long as we use it properly (note that we call <code>const</code> version in non-<code>const</code> version, not the other way around!):</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">TextBlock</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">position</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+    <span style="color:#111">{</span>
+        <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>    <span style="color:#75715e">// some extra tasks such as bounds checking, 
+</span><span style="color:#75715e"></span>        <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>    <span style="color:#75715e">// log access data, verify data integrity 
+</span><span style="color:#75715e"></span>        <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>    <span style="color:#75715e">// to make code duplication unbearablly tedious
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">return</span> <span style="color:#111">text</span><span style="color:#111">[</span><span style="color:#111">position</span><span style="color:#111">]</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+    <span style="color:#00a8c8">char</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">position</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> 
+    <span style="color:#111">{</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">char</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&gt;</span> <span style="color:#111">(</span> <span style="color:#75715e">// cast away const on return type
+</span><span style="color:#75715e"></span>            <span style="color:#00a8c8">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">const</span> <span style="color:#111">TextBlock</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">)</span><span style="color:#111">[</span><span style="color:#111">position</span><span style="color:#111">]</span><span style="color:#111">;</span> <span style="color:#75715e">// add const to *this&#39;s type in order to call const version of operator[]
+</span><span style="color:#75715e"></span>        <span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>It's definitely worth knowing this technique of implementing a non-<code>const</code> member function in terms of its <code>const</code> twin, although the syntax is somehow ungainly.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

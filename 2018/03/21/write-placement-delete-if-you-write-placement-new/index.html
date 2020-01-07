@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-52 Write placement delete if you write placement new - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-52 Write placement delete if you write placement new</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-21 15:48</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>When we write a placement version of <code>operator new</code>, be sure to write the corresponding placement version of <code>operator delete</code> to avoid subtle, intermittent memory leaks. When we do so, pay attention not to unintentionally hide the normal versions of <code>new</code> and <code>delete</code></p>
+<!-- toc -->
+<h1 id="placement-version-of-new">Placement version of <code>new</code></h1>
+<p>When an <code>operator new</code> function takes extra parameters (other than the mandatory <code>size_t</code> argument), that function is known as a <em>placement version of <code>new</code></em>. For example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span><span style="color:#111">,</span> <span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">pMemory</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// placement new
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This specific version of placement <code>new</code> is in C++'s standard library (access through <code>#include&lt;new&gt;</code>) and is the original placement <code>new</code>. Later, people also use the term &ldquo;placement <code>new</code>&rdquo; to refer any version of <code>operator new</code> that takes extra arguments. The phrace &ldquo;placement <code>delete</code>&rdquo; also derives from this version.</p>
+<h1 id="to-avoid-subtle-memory-leak">To avoid subtle memory leak</h1>
+<p>Suppose we want to write a class-specific <code>operator new</code> that requires specification of an <code>ostream</code> to which allocation information should be logged:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">ostream</span><span style="color:#f92672">&amp;</span> <span style="color:#111">logStream</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bad_alloc</span><span style="color:#111">)</span> <span style="color:#75715e">// non-normal form of new
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">delete</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">pMemory</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// normal class-specific form of delete
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>And we call it this to log allocation informatino to <code>cerr</code> when dynamically creating a <code>Wdiget</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Widget</span> <span style="color:#f92672">*</span><span style="color:#111">pw</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">cerr</span><span style="color:#111">)</span> <span style="color:#111">Widget</span><span style="color:#111">;</span> <span style="color:#75715e">// call operator new, passing cerr as the ostream; cause memory leak when Widget constructor throws
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Let's consider a special subtle situation: if memory allocation succeeds and the <code>Widget</code> constructor throws an exception, since <code>pw</code> not yet assigned and client code can't deallocate the memory, the runtime system is responsible for undoing the allocation that <code>operator new</code> performed. However, we're now using a non-normal version of <code>operator new</code>, unless it finds a version of <code>operator delete</code> that takes <em>the same number and types of extra arguments</em> as <code>operator new</code>, the runtime system choose to do nothing, so no <code>operator delete</code> will be called, ending up with memory leak.</p>
+<p>To eliminate the memory leak in this situation, we need to match the placement <code>new</code> with a placement <code>delete</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">ostream</span><span style="color:#f92672">&amp;</span> <span style="color:#111">logStream</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bad_alloc</span><span style="color:#111">)</span> <span style="color:#75715e">// non-normal form of new
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">delete</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">pMemory</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">delete</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">pMemory</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">ostream</span><span style="color:#f92672">&amp;</span> <span style="color:#111">logStream</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">corresponding</span> <span style="color:#111">non</span><span style="color:#f92672">-</span><span style="color:#111">normal</span> <span style="color:#111">form</span> <span style="color:#111">of</span> <span style="color:#00a8c8">delete</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Now following code will work without leak:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Widget</span> <span style="color:#f92672">*</span><span style="color:#111">pw</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">cerr</span><span style="color:#111">)</span> <span style="color:#111">Widget</span><span style="color:#111">;</span> <span style="color:#75715e">// no potential leak
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">delete</span> <span style="color:#111">pw</span><span style="color:#111">;</span>  <span style="color:#75715e">// invokes the normal operator delete
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="do-not-hide-normal-form-of-new-and-delete">Do not hide normal form of <code>new</code> and <code>delete</code></h1>
+<p>By default, C++ offers the following forms of <code>operator new</code> (and corresponding <code>operator delete</code>) at global scope:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bad_alloc</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// normal new
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span><span style="color:#111">,</span> <span style="color:#00a8c8">void</span><span style="color:#f92672">*</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bad_alloc</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// placement new
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">nothrow_t</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// nothrow new, item 49
+</span></code></pre></td></tr></table>
+</div>
+</div><p>According to item 33, member function names hide functions with the same names in outer scopes, so we want to avoid having class-specific <code>new</code>s hide other <code>new</code>s that our client expect. For example, if the base class declares only a placement <code>new</code>, clients will find the normal version of <code>new</code> unavailable:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Base</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">ostream</span><span style="color:#f92672">&amp;</span> <span style="color:#111">logStream</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bad_alloc</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// hide the normal global form
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">Base</span> <span style="color:#f92672">*</span><span style="color:#111">pb</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Base</span><span style="color:#111">;</span> <span style="color:#75715e">// error! the normal form is hidden
+</span><span style="color:#75715e"></span><span style="color:#111">Base</span> <span style="color:#f92672">*</span><span style="color:#111">pb</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">cerr</span><span style="color:#111">)</span> <span style="color:#111">Base</span><span style="color:#111">;</span>  <span style="color:#75715e">// fine, call the placement new
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Similarly, redeclaring <code>operator new</code> in derived classes hide both global and inherited versions of <code>operator new</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Derived</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Base</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bad_alloc</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// redeclare the normal form
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">Derived</span> <span style="color:#f92672">*</span><span style="color:#111">pd</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">clog</span><span style="color:#111">)</span> <span style="color:#111">Derived</span><span style="color:#111">;</span> <span style="color:#75715e">// error! Base&#39;s placement new is hidden
+</span><span style="color:#75715e"></span><span style="color:#111">Derived</span> <span style="color:#f92672">*</span><span style="color:#111">pd</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Derived</span><span style="color:#111">;</span> <span style="color:#75715e">// fine, call Derived&#39;s operator new
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In order to make normal version of <code>operator new</code> accessible in addition to customed ones, we need to declare all forms (both standard version and placement version) in our class. If we want class-specific standard versions to behave in the usual way, just have the them call the global versions. An easy way to do this is to create a base class containing all the normal forms of <code>new</code> and <code>delete</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">StandardNewDeleteForm</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// normal new/delete
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bad_alloc</span><span style="color:#111">)</span> 
+    <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">(</span><span style="color:#111">size</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">delete</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">pMemory</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span> <span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">delete</span><span style="color:#111">(</span><span style="color:#111">pMemory</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+
+    <span style="color:#75715e">// placement new/delete
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">,</span> <span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bad_alloc</span><span style="color:#111">)</span> 
+    <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">(</span><span style="color:#111">size</span><span style="color:#111">,</span> <span style="color:#111">ptr</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">delete</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">pMemory</span><span style="color:#111">,</span> <span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">ptr</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span> <span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">delete</span><span style="color:#111">(</span><span style="color:#111">pMemory</span><span style="color:#111">,</span> <span style="color:#111">ptr</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+
+    <span style="color:#75715e">// nothrow new/delete
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">nothrow_t</span><span style="color:#f92672">&amp;</span> <span style="color:#111">nt</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">)</span> 
+    <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">(</span><span style="color:#111">size</span><span style="color:#111">,</span> <span style="color:#111">nt</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">delete</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">pMemory</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">nothrow_t</span><span style="color:#f92672">&amp;</span> <span style="color:#111">nt</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span> <span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">delete</span><span style="color:#111">(</span><span style="color:#111">pMemory</span><span style="color:#111">,</span> <span style="color:#111">nt</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Clients who want to augment the standard forms with custom forms can just use inheritance and <code>using</code> declarations (item 33) to get all forms accessible:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">StandardNewDeleteForms</span> <span style="color:#111">{</span> <span style="color:#75715e">// inherit std forms
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">using</span> <span style="color:#111">StandardNewDeleteForms</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">;</span>     <span style="color:#75715e">// make std forms of new visible
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">using</span> <span style="color:#111">StandardNewDeleteForms</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">delete</span><span style="color:#111">;</span>  <span style="color:#75715e">// make std forms of delete visible
+</span><span style="color:#75715e"></span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span><span style="color:#f92672">*</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">new</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">ostream</span><span style="color:#f92672">&amp;</span> <span style="color:#111">logStream</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bad_alloc</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// custom placement new
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">void</span> <span style="color:#00a8c8">operator</span> <span style="color:#75af00">delete</span><span style="color:#111">(</span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">pMemory</span><span style="color:#111">,</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">ostream</span><span style="color:#f92672">&amp;</span> <span style="color:#111">logStream</span><span style="color:#111">)</span> <span style="color:#00a8c8">throw</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// corresponding placement delete
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[MECpp]Item-6 Distinguish Between Prefix and Postfix Forms of Increment and Decrement Operators - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[MECpp]Item-6 Distinguish Between Prefix and Postfix Forms of Increment and Decrement Operators</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-28 13:03</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>The prefix and postfix forms of increment and decrement operators return <em>different types</em>: prefix forms return a reference, while postfix forms return a <em>const</em> object. For efficiency, prefer prefix forms unless the behavior of postfix ones is necessary. To guarantee consistency, implement postfix operators in terms of the prefix operators.</p>
+<!-- toc -->
+<h1 id="case-study">Case Study</h1>
+<p>Overloaded functions are differentiated on the basis of the parameter types they take, but neither prefix nor postfix increment or decrement takes an argument. To surmount this linguistic pothole, it was decreed that postfix forms take in <code>int</code> argument, and compilers silently pass 0 as that <code>int</code> when those functions are called:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">UPInt</span> <span style="color:#111">{</span>  <span style="color:#75715e">// customized &#34;unlimited precisioin int&#34;
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">UPInt</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>           <span style="color:#75715e">// prefiex ++
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">const</span> <span style="color:#111">UPInt</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span><span style="color:#111">;</span>   <span style="color:#75715e">// postfix ++
+</span><span style="color:#75715e"></span>
+    <span style="color:#111">UPInt</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>           <span style="color:#75715e">// prefiex --
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">const</span> <span style="color:#111">UPInt</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span><span style="color:#111">;</span>   <span style="color:#75715e">// postfix --
+</span><span style="color:#75715e"></span>    
+    <span style="color:#111">UPInt</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">+</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span><span style="color:#111">;</span>        <span style="color:#75715e">// += operator for UPInts and ints
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>    
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">UPInt</span> <span style="color:#111">i</span><span style="color:#111">;</span>
+
+<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">i</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls i.operator++();
+</span><span style="color:#75715e"></span><span style="color:#111">i</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls i.operator++(0);
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#111">i</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls i.operator--();
+</span><span style="color:#75715e"></span><span style="color:#111">i</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls i.operator--(0);
+</span></code></pre></td></tr></table>
+</div>
+</div><p>The return types difference is caused by the different behavior between prefix forms and postfix forms. For <code>++operator</code>:</p>
+<ul>
+<li>Prefix form is &ldquo;increment and fetch&rdquo;</li>
+<li>Postfix form is &ldquo;fetch and increment&rdquo;</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// prefix form: increment and fetch
+</span><span style="color:#75715e"></span><span style="color:#111">UPInt</span><span style="color:#f92672">&amp;</span> <span style="color:#111">UPInt</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">(</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#f92672">*</span><span style="color:#00a8c8">this</span> <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">;</span>    <span style="color:#75715e">// increment
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">;</span>  <span style="color:#75715e">// fetch
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+<span style="color:#75715e">// postfix form: fetch and increment
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#111">UPInt</span> <span style="color:#111">UPInt</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">const</span> <span style="color:#111">UPInt</span> <span style="color:#111">oldVal</span> <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">;</span>  <span style="color:#75715e">// fetch
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">)</span><span style="color:#111">;</span>                   <span style="color:#75715e">// increment
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#111">oldVal</span><span style="color:#111">;</span>               <span style="color:#75715e">// return what was fetched
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Apart from the obvious inefficiency resulting from the fact that postfix increment function creates a temporary object for its return value (MECpp item 19), as well as the explicit temporary object <code>oldVal</code> that has to be constructed and destructed, leading to the conclusion that prefix increment should be used whenever possible for its inherently higher efficiency, there are three points worth noting for the implementation of postfix form of <code>operator++</code>:</p>
+<h2 id="1-omit-the-parameter-name">1. Omit the parameter name</h2>
+<p>Since the purpose of the parameter is only to distinguish prefix from postfix function invocation, the postfix operator makes no use of its parameter. Omitting parameter names avoids warnings from some compilers who insist that we use named parameters in the body of the function to which they apply.</p>
+<h2 id="2-return-a-const-object">2. Return a <code>const</code> object</h2>
+<p>There are two reasons to return a <code>const</code> object:</p>
+<ul>
+<li>
+<p>it's consistent with the behavior of the built-in types, since <code>int</code>s most certainly do not allow double application of postfix increment:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">int</span> <span style="color:#111">i</span><span style="color:#111">;</span>
+<span style="color:#111">i</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">;</span>  <span style="color:#75715e">// error!
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>if return value is not const, the behavior will be counterintuitive and confusing: after applying <code>i++++</code>, the second <code>operator++</code> changes the value of the object returned from the first invocation, instead of the value of the original object. Hence, <code>i</code> ends up being incremented only once.</p>
+</li>
+</ul>
+<h2 id="3-implement-postfix-operators-in-terms-of-the-prefix-ones">3. Implement postfix operators in terms of the prefix ones</h2>
+<p>Both the prefix and postfix increment operators do the same thing: incrementing a value. In order to guarantee implementation won't diverge over time, postfix increment and decrement should be implemented <em>in terms of</em> their prefix counterparts. Then we only need to maintain the prefix versions.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

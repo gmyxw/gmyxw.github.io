@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-36 Never redefine an inherited non-virtaul function - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-36 Never redefine an inherited non-virtaul function</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-01 20:22</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>A generalized basic rule from item 7.</p>
+<p>Suppose we have an inheritance hierarchy defined like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">B</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#111">mf</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">D</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">B</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span> 
+    <span style="color:#00a8c8">void</span> <span style="color:#111">mf</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// hide B::mf
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>According to item 33, this will lead to following behavior:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cp" data-lang="cp"><span style="color:#111">D</span> <span style="color:#111">x</span><span style="color:#111">;</span>  <span style="color:#75715e">// x is an object of type D
+</span><span style="color:#75715e"></span><span style="color:#111">B</span> <span style="color:#f92672">*</span><span style="color:#111">pB</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">x</span><span style="color:#111">;</span>  <span style="color:#75715e">// get pointer to x
+</span><span style="color:#75715e"></span><span style="color:#111">D</span> <span style="color:#f92672">*</span><span style="color:#111">pD</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">x</span><span style="color:#111">;</span>  <span style="color:#75715e">// get pointer to x
+</span><span style="color:#75715e"></span>
+<span style="color:#111">pB</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#111">mf</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls B::mf
+</span><span style="color:#75715e"></span><span style="color:#111">pD</span><span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span><span style="color:#111">mf</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls D::mf
+</span></code></pre></td></tr></table>
+</div>
+</div><p>The reason for this two-faced behavior if that non-virtual functions like <code>B::mf</code> and <code>D::mf</code> are statically bound (item 37), which means that non-virtual functions invoked through pB will <em>always</em> be those defined for class B, even if pB points to an object of a class derived from <code>B</code>. This mismatched behavior exhibits inconsistent behavior, since any given D object may act like either a B or a D (depending on the pointer type) when <code>mf</code> is called.</p>
+<p>On the other hand, virtual functions are dynamically bound (item 37), so if <code>mf</code> were a virtual function, a call to <code>mf</code> through either pB or pD would result in an invocation of <code>D::mf</code>, because pB and pD <em>really</em> point to is an object of type D.</p>
+<p>Worse than the inconsistent behavior problem in the real world, the example above basically shows a contradiction in class design, theoretically:</p>
+<ul>
+<li>public inheritance means is-a (item 32), so everything that applies to B object also applies to D object</li>
+<li>a non-virtual function in the base class establishes an invariant over specialization that classes derived from <code>B</code> must inherit both the interface <em>and</em> the implementation (item 34), and <code>mf</code> is such an non-virtual function in <code>B</code></li>
+</ul>
+<p>As long as we redefine the <code>mf</code>, an inherited non-virtual function, one of the conditions above will break, leading to two solutions: either make the <code>mf</code> virtual, or change the class relationship from &lsquo;is-a&rsquo; to something else.</p>
+<p>In fact, this is exactly the same argument in item 7, which exlains why destructors in polymophic base classes should be virtual. In essence, item 7 is nothing more than a special case of this item.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

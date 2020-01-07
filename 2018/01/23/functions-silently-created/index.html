@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-5 What functions C&#43;&#43; silently generates - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-5 What functions C&#43;&#43; silently generates</h1>
+  </div>
+<div class="meta">
+  <div>2018-01-23 18:42</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Compilers may implicitly generate their own versions of default constructor, copy constructor, copy assignment operator, and destructor.</p>
+<p>All the compiler generated functions will be both <code>public</code> and <code>inline</code> (item 30). An empty class declared like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Empty</span><span style="color:#111">{</span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>is essentially equivalent to:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Empty</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Empty</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">}</span> <span style="color:#75715e">// default constructor
+</span><span style="color:#75715e"></span>    <span style="color:#111">Empty</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Empty</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">}</span> <span style="color:#75715e">// copy constructor
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">~</span><span style="color:#111">Empty</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">}</span>  <span style="color:#75715e">// destructor
+</span><span style="color:#75715e"></span>                      <span style="color:#75715e">// will be _virtual_ only if inheriting 
+</span><span style="color:#75715e"></span>                      <span style="color:#75715e">// from a base class with virtual destructor
+</span><span style="color:#75715e"></span>    <span style="color:#111">Empty</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Empty</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">}</span> <span style="color:#75715e">// copy assignment operator
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>These functions are generated only if they are needed:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Empty</span> <span style="color:#111">e1</span><span style="color:#111">;</span>     <span style="color:#75715e">// default constructor and destructor generated
+</span><span style="color:#75715e"></span><span style="color:#111">Empty</span> <span style="color:#75af00">e2</span><span style="color:#111">(</span><span style="color:#111">e1</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// copy constructor generated
+</span><span style="color:#75715e"></span><span style="color:#111">e2</span> <span style="color:#f92672">=</span> <span style="color:#111">e1</span><span style="color:#111">;</span>      <span style="color:#75715e">// copy assignment operator generated
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Basically, the generated default <code>constructor</code> and the <code>destructor</code> will invocate constructors and destructors of base classes and non-static data members, while the <code>copy constructor</code> will simply copy each non-static data member of the source object to the target object.</p>
+<blockquote>
+<p>specifically,</p>
+</blockquote>
+<ol>
+<li>for data member of user-defined type, call the data member's copy constructor with source object's corresponding member's value as argument</li>
+<li>for data member of built-in type, directly copy the corresponding source data member's bits</li>
+</ol>
+<p>Copy assignment operator behaves generally the same as copy constructor, but the code is only generated when the resulting code is both legal and has a reasonable chance of making sense. For example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">NamedObject</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">NamedObject</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span><span style="color:#f92672">&amp;</span> <span style="color:#111">name</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">T</span><span style="color:#f92672">&amp;</span> <span style="color:#111">value</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span><span style="color:#f92672">&amp;</span> <span style="color:#111">nameValue</span><span style="color:#111">;</span>  <span style="color:#75715e">// a reference
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">const</span> <span style="color:#111">T</span> <span style="color:#111">objectValue</span><span style="color:#111">;</span>     <span style="color:#75715e">// a const
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>In below situation, implicitly generated copy assignment operator will make no sense for nameValue and illegal for objectValue:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">youngMan</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">child</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">oldMan</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">adult</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#111">NamedObject</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">p</span><span style="color:#111">(</span><span style="color:#111">youngMan</span><span style="color:#111">,</span> <span style="color:#ae81ff">10</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">NamedObject</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">s</span><span style="color:#111">(</span><span style="color:#111">oldMan</span><span style="color:#111">,</span> <span style="color:#ae81ff">50</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#111">p</span> <span style="color:#f92672">=</span> <span style="color:#111">s</span><span style="color:#111">;</span> <span style="color:#75715e">// nameValue assignment will make no sense!
+</span><span style="color:#75715e"></span>       <span style="color:#75715e">// objectValue assignment will be illegal due to its constness
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Since p.nameValue and s.nameValue refer to different string object, the assignment will be in a conundrum:</p>
+<ol>
+<li>should compiler choose to let p.nameValue refer to new string object? (actually C++ does not allow reference referring to different one)?</li>
+<li>should compiler choose to change the string content &ldquo;child&rdquo; to &ldquo;adult&rdquo;? (this will affect other objects that hold pointers or references to original string &ldquo;child&rdquo;)</li>
+</ol>
+<p>Neither will be sensible, so C++ refuses to compile the code. In this situation, a copy assignment operator must be defined manually.</p>
+<p>Finally, derived classes will not be able to have generated implicit copy assignment operators if base classes declare the copy assignment operator <em>private</em>, for derived copy assignment operators are supposed to handle base class parts, but they don't have the right to invoke the base member functions in this situation.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

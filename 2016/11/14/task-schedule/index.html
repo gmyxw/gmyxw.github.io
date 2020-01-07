@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Task schedule - greedy algorithm - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Task schedule - greedy algorithm</h1>
+  </div>
+<div class="meta">
+  <div>2016-11-14 00:00</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/algorithm/">#algorithm</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Use greedy algorigthm to solve task scheduleing problem.</p>
+<h3 id="starter">Starter</h3>
+<p>Given tasks with cooldown time between the same task. Calculate the minimum total time to finish all the tasks. The order of tasks cannot be changed.
+e.g.:
+Given tasks：[12323], and cooldown time is 3
+Return: 7, since length of [1 2 3 _ _ 2 3] is 7</p>
+<p>Method: Use hashmap to store the most recent same tasks's time</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">min_time</span><span style="color:#f92672">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#111">tasks</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">interval</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">if</span><span style="color:#f92672">(</span><span style="color:#111">tasks</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#00a8c8">null</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> <span style="color:#111">tasks</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">0</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#111">Map</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">map</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">HashMap</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">time</span> <span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">for</span><span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">task</span> <span style="color:#f92672">:</span> <span style="color:#111">tasks</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+        <span style="color:#111">Integer</span> <span style="color:#111">task_last_time</span> <span style="color:#f92672">=</span> <span style="color:#111">map</span><span style="color:#f92672">.</span><span style="color:#75af00">get</span><span style="color:#f92672">(</span><span style="color:#111">task</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">if</span><span style="color:#f92672">(</span><span style="color:#111">task_last_time</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#00a8c8">null</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">task_last_time</span> <span style="color:#f92672">+</span> <span style="color:#111">interval</span> <span style="color:#f92672">+</span> <span style="color:#111">1</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">time</span><span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+            <span style="color:#111">time</span> <span style="color:#f92672">=</span> <span style="color:#111">task_last_time</span> <span style="color:#f92672">+</span> <span style="color:#111">interval</span> <span style="color:#f92672">+</span> <span style="color:#111">1</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#111">map</span><span style="color:#f92672">.</span><span style="color:#75af00">put</span><span style="color:#f92672">(</span><span style="color:#111">task</span><span style="color:#f92672">,</span> <span style="color:#111">time</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#111">time</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">time</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+    <span style="color:#75715e">// Improve: space complexity a little to no more than  O(n)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// use LinkedHashMap to remove the elder task that exceeds the cooldown time
+</span><span style="color:#75715e"></span>    <span style="color:#111">Map</span><span style="color:#f92672">&lt;</span><span style="color:#111">K</span><span style="color:#f92672">,</span><span style="color:#111">V</span><span style="color:#f92672">&gt;</span> <span style="color:#111">map</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">LinkedHashMap</span><span style="color:#f92672">&lt;</span><span style="color:#111">K</span><span style="color:#f92672">,</span><span style="color:#111">V</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">cooldown</span><span style="color:#f92672">,</span> <span style="color:#111">1</span><span style="color:#f92672">.</span><span style="color:#75af00">0f</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>  <span style="color:#75715e">// load factor 1.0
+</span><span style="color:#75715e"></span>        <span style="color:#75af00">@Override</span>
+        <span style="color:#00a8c8">protected</span> <span style="color:#00a8c8">boolean</span> <span style="color:#75af00">removeEldestEntry</span><span style="color:#f92672">(</span><span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">K</span><span style="color:#f92672">,</span><span style="color:#111">V</span><span style="color:#f92672">&gt;</span> <span style="color:#111">eldest</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#00a8c8">return</span> <span style="color:#111">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">cooldown</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span><span style="color:#f92672">;</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="follow-up-what-if-the-order-is-ok-to-change">Follow up: What if the order is OK to change?</h3>
+<p>Method: Greedy algorithm - always look for the task with highest remaining time at each time.</p>
+<p>There are two version of implementation:</p>
+<ol>
+<li>Use priorityQueue to sort the tasks with highest remaining times, time: O(nlog(n)), where n is the total number of tasks, space: O(n)</li>
+<li>Use two array to store the remaining times and available time for each task, and each time scan these two arraies to find the appropriate task time: O(klog(n)), where k is the number of task kinds, space: O(n)</li>
+</ol>
+<p>Using method One：</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">schedule</span><span style="color:#f92672">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#111">tasks</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">cooldown</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">HashMap</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">freqMap</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">HashMap</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">t</span> <span style="color:#f92672">:</span> <span style="color:#111">tasks</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">freqMap</span><span style="color:#f92672">.</span><span style="color:#75af00">put</span><span style="color:#f92672">(</span><span style="color:#111">t</span><span style="color:#f92672">,</span> <span style="color:#111">freqMap</span><span style="color:#f92672">.</span><span style="color:#75af00">getOrDefault</span><span style="color:#f92672">(</span><span style="color:#111">t</span><span style="color:#f92672">,</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#111">1</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#111">Queue</span><span style="color:#f92672">&lt;</span><span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#111">maxHeap</span> <span style="color:#f92672">=</span>
+            <span style="color:#00a8c8">new</span> <span style="color:#111">PriorityQueue</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#111">freqMap</span><span style="color:#f92672">.</span><span style="color:#75af00">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Comparator</span><span style="color:#f92672">&lt;</span><span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    <span style="color:#75af00">@Override</span>
+                    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">compare</span><span style="color:#f92672">(</span><span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">e1</span><span style="color:#f92672">,</span> <span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">e2</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                        <span style="color:#00a8c8">return</span> <span style="color:#111">e2</span><span style="color:#f92672">.</span><span style="color:#75af00">getValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> <span style="color:#111">e1</span><span style="color:#f92672">.</span><span style="color:#75af00">getValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                    <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#111">Deque</span><span style="color:#f92672">&lt;</span><span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#111">waitQueue</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">ArrayDeque</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#111">HashMap</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">timeMap</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">HashMap</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">int</span> <span style="color:#111">time</span> <span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">;</span>
+        <span style="color:#111">maxHeap</span><span style="color:#f92672">.</span><span style="color:#75af00">addAll</span><span style="color:#f92672">(</span><span style="color:#111">freqMap</span><span style="color:#f92672">.</span><span style="color:#75af00">entrySet</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>        
+        <span style="color:#00a8c8">while</span> <span style="color:#f92672">(</span><span style="color:#f92672">!</span><span style="color:#111">maxHeap</span><span style="color:#f92672">.</span><span style="color:#75af00">isEmpty</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> <span style="color:#f92672">!</span><span style="color:#111">waitQueue</span><span style="color:#f92672">.</span><span style="color:#75af00">isEmpty</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#f92672">!</span><span style="color:#111">maxHeap</span><span style="color:#f92672">.</span><span style="color:#75af00">isEmpty</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">cur</span> <span style="color:#f92672">=</span> <span style="color:#111">maxHeap</span><span style="color:#f92672">.</span><span style="color:#75af00">poll</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#111">time</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+                <span style="color:#111">timeMap</span><span style="color:#f92672">.</span><span style="color:#75af00">put</span><span style="color:#f92672">(</span><span style="color:#111">cur</span><span style="color:#f92672">.</span><span style="color:#75af00">getKey</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> <span style="color:#111">time</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#111">cur</span><span style="color:#f92672">.</span><span style="color:#75af00">setValue</span><span style="color:#f92672">(</span><span style="color:#111">cur</span><span style="color:#f92672">.</span><span style="color:#75af00">getValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> <span style="color:#111">1</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#111">waitQueue</span><span style="color:#f92672">.</span><span style="color:#75af00">offer</span><span style="color:#f92672">(</span><span style="color:#111">cur</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">waitQueue</span><span style="color:#f92672">.</span><span style="color:#75af00">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">cooldown</span> <span style="color:#f92672">+</span> <span style="color:#111">1</span><span style="color:#f92672">)</span> <span style="color:#00a8c8">continue</span><span style="color:#f92672">;</span>
+                <span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">front</span> <span style="color:#f92672">=</span> <span style="color:#111">waitQueue</span><span style="color:#f92672">.</span><span style="color:#75af00">poll</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">front</span><span style="color:#f92672">.</span><span style="color:#75af00">getValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#111">maxHeap</span><span style="color:#f92672">.</span><span style="color:#75af00">offer</span><span style="color:#f92672">(</span><span style="color:#111">front</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span> <span style="color:#00a8c8">else</span> <span style="color:#f92672">{</span>
+                <span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Integer</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">front</span> <span style="color:#f92672">=</span> <span style="color:#111">waitQueue</span><span style="color:#f92672">.</span><span style="color:#75af00">poll</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">front</span><span style="color:#f92672">.</span><span style="color:#75af00">getValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    <span style="color:#111">maxHeap</span><span style="color:#f92672">.</span><span style="color:#75af00">offer</span><span style="color:#f92672">(</span><span style="color:#111">front</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                    <span style="color:#111">time</span> <span style="color:#f92672">=</span> <span style="color:#111">timeMap</span><span style="color:#f92672">.</span><span style="color:#75af00">get</span><span style="color:#f92672">(</span><span style="color:#111">front</span><span style="color:#f92672">.</span><span style="color:#75af00">getKey</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#111">cooldown</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">time</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>        
+</code></pre></td></tr></table>
+</div>
+</div><p>Similar question: LC358 Rearrange String k Distance Apart</p>
+<p>Method one:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">rearrangeString</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">str</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">k</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#111">HashMap</span><span style="color:#f92672">&lt;</span><span style="color:#111">Character</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">map</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">HashMap</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#f92672">(</span><span style="color:#00a8c8">char</span> <span style="color:#111">c</span> <span style="color:#f92672">:</span> <span style="color:#111">str</span><span style="color:#f92672">.</span><span style="color:#75af00">toCharArray</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">map</span><span style="color:#f92672">.</span><span style="color:#75af00">put</span><span style="color:#f92672">(</span><span style="color:#111">c</span><span style="color:#f92672">,</span> <span style="color:#111">map</span><span style="color:#f92672">.</span><span style="color:#75af00">getOrDefault</span><span style="color:#f92672">(</span><span style="color:#111">c</span><span style="color:#f92672">,</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#111">1</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#111">Queue</span><span style="color:#f92672">&lt;</span><span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Character</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#111">maxHeap</span> <span style="color:#f92672">=</span>
+            <span style="color:#00a8c8">new</span> <span style="color:#111">PriorityQueue</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#111">map</span><span style="color:#f92672">.</span><span style="color:#75af00">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Comparator</span><span style="color:#f92672">&lt;</span><span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Character</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                    <span style="color:#75af00">@Override</span>
+                    <span style="color:#00a8c8">public</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">compare</span><span style="color:#f92672">(</span><span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Character</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">e1</span><span style="color:#f92672">,</span> <span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Character</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">e2</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                        <span style="color:#00a8c8">return</span> <span style="color:#111">e2</span><span style="color:#f92672">.</span><span style="color:#75af00">getValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> <span style="color:#111">e1</span><span style="color:#f92672">.</span><span style="color:#75af00">getValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+                    <span style="color:#f92672">}</span>
+                <span style="color:#f92672">}</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#111">Deque</span><span style="color:#f92672">&lt;</span><span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Character</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#111">waitQueue</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">ArrayDeque</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#111">maxHeap</span><span style="color:#f92672">.</span><span style="color:#75af00">addAll</span><span style="color:#f92672">(</span><span style="color:#111">map</span><span style="color:#f92672">.</span><span style="color:#75af00">entrySet</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#111">StringBuilder</span> <span style="color:#111">sb</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">StringBuilder</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">while</span> <span style="color:#f92672">(</span><span style="color:#f92672">!</span><span style="color:#111">maxHeap</span><span style="color:#f92672">.</span><span style="color:#75af00">isEmpty</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Character</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">cur</span> <span style="color:#f92672">=</span> <span style="color:#111">maxHeap</span><span style="color:#f92672">.</span><span style="color:#75af00">poll</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#111">sb</span><span style="color:#f92672">.</span><span style="color:#75af00">append</span><span style="color:#f92672">(</span><span style="color:#111">cur</span><span style="color:#f92672">.</span><span style="color:#75af00">getKey</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#111">cur</span><span style="color:#f92672">.</span><span style="color:#75af00">setValue</span><span style="color:#f92672">(</span><span style="color:#111">cur</span><span style="color:#f92672">.</span><span style="color:#75af00">getValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">-</span><span style="color:#111">1</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#111">waitQueue</span><span style="color:#f92672">.</span><span style="color:#75af00">offer</span><span style="color:#f92672">(</span><span style="color:#111">cur</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">waitQueue</span><span style="color:#f92672">.</span><span style="color:#75af00">size</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">k</span><span style="color:#f92672">)</span> <span style="color:#00a8c8">continue</span><span style="color:#f92672">;</span>
+            <span style="color:#111">Map</span><span style="color:#f92672">.</span><span style="color:#75af00">Entry</span><span style="color:#f92672">&lt;</span><span style="color:#111">Character</span><span style="color:#f92672">,</span> <span style="color:#111">Integer</span><span style="color:#f92672">&gt;</span> <span style="color:#111">front</span> <span style="color:#f92672">=</span> <span style="color:#111">waitQueue</span><span style="color:#f92672">.</span><span style="color:#75af00">poll</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">front</span><span style="color:#f92672">.</span><span style="color:#75af00">getValue</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#111">maxHeap</span><span style="color:#f92672">.</span><span style="color:#75af00">offer</span><span style="color:#f92672">(</span><span style="color:#111">front</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">sb</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">str</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">?</span> <span style="color:#111">sb</span><span style="color:#f92672">.</span><span style="color:#75af00">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">:</span> <span style="color:#d88200">&#34;&#34;</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Method two:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">rearrangeString</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">str</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">k</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#111">count</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#00a8c8">int</span><span style="color:#f92672">[</span><span style="color:#111">26</span><span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#111">valid</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#00a8c8">int</span><span style="color:#f92672">[</span><span style="color:#111">26</span><span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+        <span style="color:#111">StringBuilder</span> <span style="color:#111">sb</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">StringBuilder</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">str</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#111">i</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">count</span><span style="color:#f92672">[</span><span style="color:#111">str</span><span style="color:#f92672">.</span><span style="color:#75af00">charAt</span><span style="color:#f92672">(</span><span style="color:#111">i</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> <span style="color:#d88200">&#39;a&#39;</span><span style="color:#f92672">]</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">str</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#111">i</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#00a8c8">int</span> <span style="color:#111">c</span> <span style="color:#f92672">=</span> <span style="color:#111">findNext</span><span style="color:#f92672">(</span><span style="color:#111">count</span><span style="color:#f92672">,</span> <span style="color:#111">valid</span><span style="color:#f92672">,</span> <span style="color:#111">i</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">c</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#111">1</span><span style="color:#f92672">)</span> <span style="color:#00a8c8">return</span> <span style="color:#d88200">&#34;&#34;</span><span style="color:#f92672">;</span>
+            <span style="color:#111">sb</span><span style="color:#f92672">.</span><span style="color:#75af00">append</span><span style="color:#f92672">(</span><span style="color:#f92672">(</span><span style="color:#00a8c8">char</span><span style="color:#f92672">)</span><span style="color:#f92672">(</span><span style="color:#d88200">&#39;a&#39;</span><span style="color:#f92672">+</span><span style="color:#111">c</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#111">count</span><span style="color:#f92672">[</span><span style="color:#111">c</span><span style="color:#f92672">]</span> <span style="color:#f92672">-</span><span style="color:#f92672">=</span> <span style="color:#111">1</span><span style="color:#f92672">;</span>
+            <span style="color:#111">valid</span><span style="color:#f92672">[</span><span style="color:#111">c</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span> <span style="color:#f92672">+</span> <span style="color:#111">k</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">sb</span><span style="color:#f92672">.</span><span style="color:#75af00">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#00a8c8">private</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">findNext</span><span style="color:#f92672">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#111">count</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#111">valid</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">index</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">int</span> <span style="color:#111">pos</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#111">1</span><span style="color:#f92672">,</span> <span style="color:#111">max</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#111">1</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">26</span><span style="color:#f92672">;</span> <span style="color:#111">i</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">count</span><span style="color:#f92672">[</span><span style="color:#111">i</span><span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">0</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">count</span><span style="color:#f92672">[</span><span style="color:#111">i</span><span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">max</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">index</span> <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> <span style="color:#111">valid</span><span style="color:#f92672">[</span><span style="color:#111">i</span><span style="color:#f92672">]</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#111">pos</span> <span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#f92672">;</span>
+                <span style="color:#111">max</span> <span style="color:#f92672">=</span> <span style="color:#111">count</span><span style="color:#f92672">[</span><span style="color:#111">i</span><span style="color:#f92672">]</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#00a8c8">return</span> <span style="color:#111">pos</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-19 Use std::Shared_ptr for Shared-ownership Resource Management - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-19 Use std::Shared_ptr for Shared-ownership Resource Management</h1>
+  </div>
+<div class="meta">
+  <div>2018-07-31 17:59</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p><code>std::shared_ptrs</code> offer convenience approaching that of garbage collection for the shared lifetime management of arbitrary resources.</p>
+<!-- toc -->
+<h1 id="some-facts">Some facts</h1>
+<ul>
+<li><code>std::shared_ptr</code>s are twice the size of a raw pointer:
+<ul>
+<li>a raw pointer to the resource</li>
+<li>a raw pointer to the resource's <em>control block</em>, which is dynamically allocated and contains
+<ul>
+<li>reference count</li>
+<li>weak count</li>
+<li>other optional data (e.g., custom deleter, allocator, etc)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>increments and decrements of the reference count are atomic
+<ul>
+<li>reading and writing reference counts is typically slower than non-atomic operations and comparatively costly</li>
+<li>the related atomic operations typically map to individual machine instructions. Admittedly, they are expensive compared to non-atomic instructons, but they're still just single instructions</li>
+<li>move-constructing a <code>std::shared_ptr</code> from another <code>std::shared_ptr</code> requires no refernece count manipulation</li>
+</ul>
+</li>
+<li>Default resource destruction is via <code>delete</code>, but custom deleters are supported
+<ul>
+<li>the type of the deleter has no effect on the type of the <code>std::shared_ptr</code> (they're in the control block)</li>
+</ul>
+</li>
+<li><code>std::shared_ptr</code> is designed only for pointers to single objects, and can't work with arrays, unlike <code>std::unique_ptr</code></li>
+</ul>
+<p>Basically, this is how a <code>std::shared_ptr&lt;T&gt;</code> object looks like in the memory:</p>
+<pre><code> std::shared_ptr&lt;T&gt;
+┌──────────────────────┐   ┌──────────┐
+│      Ptr to T        ├──&gt;│ T Object │
+├──────────────────────┤   └──────────┘
+│ Ptr to Control Block ├───┐
+└──────────────────────┘   ↓     Control Block
+                           ┌───────────────────────┐
+                           │    Reference Count    │
+                           ├───────────────────────┤
+                           │      Weak Count       │
+                           ├───────────────────────┤
+                           │      Other Data       │
+                           │ (e.g., custom deleter,│
+                           │   allocator, etc.)    │
+                           └───────────────────────┘
+
+</code></pre><p>It is worth noting that <code>std::shared_ptr</code> design is more flexible than <code>std::unique_ptr</code> in the aspect of specifying custom deleters, because, unlike <code>std::unique_ptr</code>, the type of the deleter is not part of the type of the <code>std::shared_ptr</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">customDeleter1</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#111">Widget</span> <span style="color:#f92672">*</span><span style="color:#111">pw</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">auto</span> <span style="color:#111">customDeleter2</span> <span style="color:#f92672">=</span> <span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#111">Widget</span> <span style="color:#f92672">*</span><span style="color:#111">pw</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">unique_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Widget</span><span style="color:#111">,</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">customDeleter1</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span> <span style="color:#111">upw1</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Widget</span><span style="color:#111">,</span> <span style="color:#111">customDeleter1</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">unique_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Widget</span><span style="color:#111">,</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">customDeleter2</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span> <span style="color:#111">upw2</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Widget</span><span style="color:#111">,</span> <span style="color:#111">customDeleter1</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Widget</span><span style="color:#f92672">&gt;</span> <span style="color:#111">spw1</span> <span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">widget</span><span style="color:#111">,</span> <span style="color:#111">customDeleter1</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Widget</span><span style="color:#f92672">&gt;</span> <span style="color:#111">spw2</span> <span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">widget</span><span style="color:#111">,</span> <span style="color:#111">customDeleter2</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Widget</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#111">vpw</span> <span style="color:#111">{</span> <span style="color:#111">spw1</span><span style="color:#111">,</span> <span style="color:#111">spw2</span> <span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Apart from placing <code>spw1</code> and <code>spw2</code> in the same container, we could also assign one to another, or pass them into a function taking a parameter of type <code>std::shared_ptr&lt;Widget&gt;</code>. None of these things can be done with <code>std::unique_ptr</code>s, since their types differ due to different custom deleters.</p>
+<h1 id="avoid-multiple-control-blocks-from-this-pointer">Avoid multiple control blocks from <code>this</code> pointer</h1>
+<p>Below is the rules to create the control block:</p>
+<ul>
+<li>a control block is created when <code>std::make_shared</code> (EMCpp item 20) is called (which manufactures a new object to point to)</li>
+<li>a control block is created when <code>std::shared_ptr</code> is constructed from a unique-ownership pointer (i.e., a <code>std::unique_ptr</code> or <code>std::auto_ptr</code>), and the unique-ownership pointer is set to null later.</li>
+<li>a control block is created when a <code>std::shared_ptr</code> is called with a raw pointer
+<ul>
+<li>this may lead to double deletion issue (creating two control blocks with the same raw pointer), so avoid passing raw pointers to a <code>std::shared_ptr</code></li>
+<li>if have to, do in this form <code>std::shared_ptr&lt;Widget&gt; spw(new Widget, loggingDel);</code> to use <code>new</code> directly</li>
+</ul>
+</li>
+<li>the same control block will be shared if a <code>std::shared_ptr</code> is constructed using another <code>std::shared_ptr</code> as initialization argument (by calling <code>std::shared_ptr</code> copy constructor)</li>
+</ul>
+<p>Even though we remember the rule to restrict the creation of <code>std::shared_ptr</code> from raw pointers, we might surprisingly create multiple control blocks through the <code>this</code> pointer, which is also a raw pointer. For example, <code>Widget</code> has a member function <code>void processing();</code>, and we use a vector to keep track of <code>Widget</code>s that have been processed. A reasonable-looking approach looks like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Widget</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&gt;</span> <span style="color:#111">processedWidgets</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#111">process</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">void</span> <span style="color:#111">Widget</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">process</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">{</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#111">processedWidgets</span><span style="color:#111">.</span><span style="color:#111">emplace_back</span><span style="color:#111">(</span><span style="color:#00a8c8">this</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// add current Widget to list of processed Widgets
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This code will compiler, but it has potential danger: <code>process()</code> passes raw pointer <code>this</code> to a container of <code>std::shared_ptr</code>, resulting to a new control block for pointed-to <code>Widget</code>(<code>*this</code>); as long as there are <code>std::shared_ptr</code>s outside the <code>process()</code> that already point to that <code>Widget</code>, undefined behavior shows up.</p>
+<p>Here, we want a class managed by <code>std::shared_ptr</code>s to be able to safely create a <code>std::shared_ptr</code> from a <code>this</code> pointer without creating multiple control blocks. The solution is to inherit from a base class template  <code>std::enable_shared_from_this</code>, which contains a member function <code>shared_from_this()</code>, which points to the same object as the <code>this</code> pointer. We can use this function to create a <code>std::shared_ptr</code> worring about creating a new control block.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">enable_shared_from_this</span><span style="color:#f92672">&lt;</span><span style="color:#111">Widget</span><span style="color:#f92672">&gt;</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#111">process</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">void</span> <span style="color:#111">Widget</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">process</span><span style="color:#111">(</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#111">processedWidgets</span><span style="color:#111">.</span><span style="color:#111">emplace_back</span><span style="color:#111">(</span><span style="color:#111">shared_from_this</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Two points worth noting:</p>
+<ol>
+<li>Here, the derived class(<code>Widget</code>) inherites from a base class templatized on the derived class. This design pattern is called <em>CRTP</em>: The Curiously Recurring Template Pattern.</li>
+<li>Internally, <code>shared_from_this()</code> looks up the control block for the current object, and it creates a new <code>std::shared_ptr</code> referring to that control block. This means there must be an existing <code>std::shared_ptr</code> that points to the current object. If no such <code>std::shared_ptr</code> exists, behavior is undefined (typically an exception will be thrown)</li>
+</ol>
+<p>To prevent invoking <code>shared_from_this()</code> before a <code>std::shared_ptr</code> points to the object, classes inheriting from <code>std::enable_shared_from_this</code> often declare their constructors <code>private</code> and provide factory functions returning  <code>std::shared_ptr</code>s to clients:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">enable_shared_from_this</span><span style="color:#f92672">&lt;</span><span style="color:#111">Widget</span><span style="color:#f92672">&gt;</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">Ts</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Widget</span><span style="color:#f92672">&gt;</span> <span style="color:#111">create</span><span style="color:#111">(</span><span style="color:#111">Ts</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">params</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#111">process</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// as before
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#75715e">// ctors
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

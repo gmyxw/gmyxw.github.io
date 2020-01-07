@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>A Brief Review of Dynamo - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>A Brief Review of Dynamo</h1>
+  </div>
+<div class="meta">
+  <div>2018-07-01 23:03</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>As a highly available and scalable distributed data store, the design principles of Dynamo features high availability for writes (via reconciliation during reads), incremental scalability (consistent hashing), symmetry, decentralization, and heterogeneity (via virtual nodes).</p>
+<h4 id="the-summary-of-techniques-used-in--dynamo--and-their-advantages">The summary of techniques used in <em>Dynamo</em> and their advantages</h4>
+<table>
+<thead>
+<tr>
+<th><strong>Problem</strong></th>
+<th><strong>Technique</strong></th>
+<th><strong>Advantage</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partitioning</td>
+<td>Consistent Hashing</td>
+<td>Incremental Scalability</td>
+</tr>
+<tr>
+<td>High Availability</td>
+<td>Vector clocks with reconciliation during reads</td>
+<td>Version size is decoupled from update rates.</td>
+</tr>
+<tr>
+<td>Handling temporary failures</td>
+<td>Sloppy Quorum and hinted handoff</td>
+<td>Provides high availability and durability guarantee when some of the replicas are not available.</td>
+</tr>
+<tr>
+<td>Recovering from permanent failures</td>
+<td>Anti-entropy using Merkle trees</td>
+<td>Synchronizes divergent replicas in the background.</td>
+</tr>
+<tr>
+<td>Membership and failure detection</td>
+<td>Gossip-based membership protocol and (local notion) failure detection</td>
+<td>Perserves symmetry and avoids having a centralized registry for storing membership and node liveness information.</td>
+</tr>
+</tbody>
+</table></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

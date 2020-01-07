@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[MECpp]Item-20 Facilitate the Return Value Optimization - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[MECpp]Item-20 Facilitate the Return Value Optimization</h1>
+  </div>
+<div class="meta">
+  <div>2018-04-16 00:00</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Take use of the <em>return value optimization</em> in compilers.</p>
+<p>Some functions (such as <code>operator*</code>) have to return objects:</p>
+<ul>
+<li>if returning pointers, the caller is responsible to delete the pointer, which usually leads to resource leaks.</li>
+<li>if returning references, then we're returning a reference to a local object, which no longer exists when the caller has it.</li>
+</ul>
+<p>Although we can't eliminate by-value returns from functions that require them, we can still reduce the cost of returning objects: by the help of compilers, we can eliminate the cost of the temporaries by returning <em>constructor arguments</em> instead of objects:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">lhs</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">Rational</span><span style="color:#111">(</span><span style="color:#111">lhs</span><span style="color:#111">.</span><span style="color:#111">numerator</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">rhs</span><span style="color:#111">.</span><span style="color:#111">numerator</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">,</span>
+                    <span style="color:#111">lhs</span><span style="color:#111">.</span><span style="color:#111">denominator</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">rhs</span><span style="color:#111">.</span><span style="color:#111">denominator</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Here we're creating an anonymous temporary <code>Rational</code> object through a constructor expression, ant it is this temporary object the function is copying for its return value. When we use this efficient version of <code>operator*</code> under the use case below:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Rational</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+<span style="color:#111">Rational</span> <span style="color:#75af00">b</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">2</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#111">Rational</span> <span style="color:#111">c</span> <span style="color:#f92672">=</span> <span style="color:#111">a</span> <span style="color:#f92672">*</span> <span style="color:#111">b</span><span style="color:#111">;</span>  <span style="color:#75715e">// operator* is called
+</span></code></pre></td></tr></table>
+</div>
+</div><p>The rules for C++ allow compilers to optimize such <em>anonymous</em> temporary objects out of existence by constructing the temporary <em>inside the memory allotted for the object</em> <code>c</code>. Thus, if compilers do this optimization, both the temporary inside <code>operator*</code> and the temporary returned by <code>operator*</code> are eliminated, and we only pay for one constructor call - the one to create <code>c</code>.</p>
+<p>Further more, we can eliminate the overhead of the call to <code>operator*</code> by declaring this function <code>inline</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// most efficient way to write a function returning an object
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">inline</span> <span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">lhs</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">Rational</span><span style="color:#111">(</span><span style="color:#111">lhs</span><span style="color:#111">.</span><span style="color:#111">numerator</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">rhs</span><span style="color:#111">.</span><span style="color:#111">numerator</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">,</span>
+                    <span style="color:#111">lhs</span><span style="color:#111">.</span><span style="color:#111">denominator</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">rhs</span><span style="color:#111">.</span><span style="color:#111">denominator</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

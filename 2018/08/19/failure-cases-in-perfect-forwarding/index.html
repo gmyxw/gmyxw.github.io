@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-30 Failure Cases in Perfect Forwarding - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-30 Failure Cases in Perfect Forwarding</h1>
+  </div>
+<div class="meta">
+  <div>2018-08-19 16:10</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Perfect forwarding fails when template type deduction fails or when it deduces the wrong type.</p>
+<p>Generally, forwarding means passing parameters that are <em>references</em> so that we can work with the originally-passed-in objects in another function, while perfect forwarding means we will use <em>universal references</em> to keep track of salient characteristics such as lvalue-ness/rvalue-ness, const-ness, volatile-ness, etc.</p>
+<p>The definition of failure is: given a target function <code>f</code>, and a forwarding function <code>fwd</code>, perfect forwarding <em>fails</em> if calling <code>f</code> with a particular argument does one thing, but calling <code>fwd</code> with the same argument does something difference:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">f</span><span style="color:#111">(</span> <span style="color:#111">expression</span> <span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">fwd</span><span style="color:#111">(</span> <span style="color:#111">expression</span> <span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#111">fwd</span><span style="color:#111">(</span><span style="color:#111">T</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">param</span><span style="color:#111">)</span>  <span style="color:#75715e">// accept any argument
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>
+    <span style="color:#111">f</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">param</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Following kinds of arguments will lead to perfect forwarding failure:</p>
+<ul>
+<li><strong>braced initializers</strong>: passing a braced initializer to a function template parameter that’s not declared to be a std::initializer_list is decreed to be a “non-deduced context,” as the Standard puts it</li>
+<li><strong>null pointers expressed as <code>0</code> or <code>NULL</code></strong>: refer to the explanation in EMCpp item 8</li>
+<li><strong>declaration-only integral <code>const static</code> data members</strong>: since compilers perform <em>const propagation</em> on such members&rsquo; values, there's no memory allocation procedure for them, no address associated with them, and thus no pointers/references, ending up with a linking error.</li>
+<li><strong>template and overloaded function names</strong>: <code>f</code>'s declaration lets compilers figure out the required vertion of overload/template instantiation to be passed, but it's impossible for compilers to determine which version should be passed to <code>fwd</code></li>
+<li><strong>bitfields</strong>: &ldquo;A non-const reference shall not be bound to a bit-field,&rdquo; as C++ standard condemns</li>
+</ul></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

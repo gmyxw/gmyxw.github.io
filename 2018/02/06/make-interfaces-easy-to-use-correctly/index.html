@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-18 Make interfaces easy to use correctly and hard to use incorrectly - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-18 Make interfaces easy to use correctly and hard to use incorrectly</h1>
+  </div>
+<div class="meta">
+  <div>2018-02-06 19:05</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Good interfaces are easy to use correctly and hard to use incorrectly.</p>
+<!-- toc -->
+<p>To design a good interface, it's always good to make the interface in consistency and behave in compatibility with built-in types. After all, clients already know how types like <code>int</code> behave, so we should strive to make our types behave the same way. A good (though not perfect) example is the interface to STL containers: every STL container has a <em>member function</em> named <code>size</code> that tells how many objects are in the container. On the contrary, in <strong>Java</strong>, we use the <code>length</code> <em>property</em> for arrays, the <code>length</code> <em>method</em> for <code>String</code>s, and the <code>size</code> <em>method</em> for <code>List</code>s; as for <strong>.Net</strong>, <code>Arrays</code> have a property named <code>Length</code>, while <code>ArrayList</code>s have a property named <code>Count</code>. No matter how convenient modern IDEs may be, inconsistency imposes mental fricition into a developer's work.</p>
+<p>A good way to think of the interface design is to consider the kinds of mistakes that clients might make, and we could try the following 4 ways:</p>
+<ol>
+<li>Creating new types</li>
+<li>Constraining object values</li>
+<li>Restricting operations on types</li>
+<li>Eliminating client resource management responsibilities</li>
+</ol>
+<h1 id="creating-new-types">Creating new types</h1>
+<p>Say we're designing the constructor for a class representing dates in time:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Date</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Date</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">month</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">day</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">year</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>There at least two possible errors that clients might easily make:</p>
+<ol>
+<li>
+<p>the parameters might be passed in the wrong order:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Date</span> <span style="color:#75af00">d</span><span style="color:#111">(</span><span style="color:#ae81ff">30</span><span style="color:#111">,</span> <span style="color:#ae81ff">3</span><span style="color:#111">,</span> <span style="color:#ae81ff">1995</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// Should be &#34;3, 30&#34;
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>the parameters might be invalid &lt;month, day&gt; pair:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Date</span> <span style="color:#75af00">d</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span> <span style="color:#ae81ff">30</span><span style="color:#111">,</span> <span style="color:#ae81ff">1995</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// In the keyboard, `2` is next to &#39;3&#39;, so this kind of silly error is not uncommon
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<p>To prevent such kind of client errors, we could introduce new types:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">struct</span> <span style="color:#75af00">Day</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">explicit</span> <span style="color:#75af00">Day</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">d</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span><span style="color:#111">val</span><span style="color:#111">(</span><span style="color:#111">d</span><span style="color:#111">)</span><span style="color:#111">{</span><span style="color:#111">}</span>
+    
+    <span style="color:#00a8c8">int</span> <span style="color:#111">val</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">struct</span> <span style="color:#75af00">Month</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">explicit</span> <span style="color:#75af00">Month</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">m</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span><span style="color:#111">val</span><span style="color:#111">(</span><span style="color:#111">m</span><span style="color:#111">)</span><span style="color:#111">{</span><span style="color:#111">}</span>
+    
+    <span style="color:#00a8c8">int</span> <span style="color:#111">val</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">struct</span> <span style="color:#75af00">Year</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">explicit</span> <span style="color:#75af00">Year</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">y</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span><span style="color:#111">val</span><span style="color:#111">(</span><span style="color:#111">y</span><span style="color:#111">)</span><span style="color:#111">{</span><span style="color:#111">}</span>
+    
+    <span style="color:#00a8c8">int</span> <span style="color:#111">val</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Date</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Date</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Month</span><span style="color:#f92672">&amp;</span> <span style="color:#111">m</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">Day</span><span style="color:#f92672">&amp;</span> <span style="color:#111">d</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">Year</span><span style="color:#f92672">&amp;</span> <span style="color:#111">y</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This will prevent some silly interface usage errors effectively:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Date</span> <span style="color:#75af00">d</span><span style="color:#111">(</span><span style="color:#ae81ff">30</span><span style="color:#111">,</span> <span style="color:#ae81ff">3</span><span style="color:#111">,</span> <span style="color:#ae81ff">1995</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// error: wrong type!
+</span><span style="color:#75715e"></span><span style="color:#111">Date</span> <span style="color:#75af00">d</span><span style="color:#111">(</span><span style="color:#111">Day</span><span style="color:#111">(</span><span style="color:#ae81ff">30</span><span style="color:#111">)</span><span style="color:#111">,</span> <span style="color:#111">Month</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">)</span><span style="color:#111">,</span> <span style="color:#111">Year</span><span style="color:#111">(</span><span style="color:#ae81ff">1995</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// error: wrong type!
+</span><span style="color:#75715e"></span><span style="color:#111">Date</span> <span style="color:#75af00">d</span><span style="color:#111">(</span><span style="color:#111">Month</span><span style="color:#111">(</span><span style="color:#ae81ff">3</span><span style="color:#111">)</span><span style="color:#111">,</span> <span style="color:#111">Day</span><span style="color:#111">(</span><span style="color:#ae81ff">30</span><span style="color:#111">)</span><span style="color:#111">,</span> <span style="color:#111">Year</span><span style="color:#111">(</span><span style="color:#ae81ff">1995</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// fine
+</span></code></pre></td></tr></table>
+</div>
+</div><h1 id="constraining-object-values">Constraining object values</h1>
+<p>Once the type is right, we may consider adding some restriction on the values of those types. The <code>Month</code> in example above only has 12 valid values, so the <code>Month</code> type should reflect this restriction. One way is to use an enum to represent the month, but considering enums can be used like <code>ints</code> (item 2), it is not as type-safe as we might like. A safer solution is to predefine the set of all valid <code>Month</code>s:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Month</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#111">Month</span> <span style="color:#111">Jan</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#75af00">Month</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">)</span><span style="color:#111">;</span><span style="color:#111">}</span>  <span style="color:#75715e">// functions returning all
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#111">Month</span> <span style="color:#75af00">Feb</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#111">Month</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">)</span><span style="color:#111">;</span><span style="color:#111">}</span>  <span style="color:#75715e">// valid Month values
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#111">Month</span> <span style="color:#111">Dec</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#00a8c8">return</span> <span style="color:#75af00">Month</span><span style="color:#111">(</span><span style="color:#ae81ff">12</span><span style="color:#111">)</span><span style="color:#111">;</span><span style="color:#111">}</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">explicit</span> <span style="color:#111">Month</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">m</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// prevent creation of new Month values
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>  <span style="color:#75715e">// month-specific data
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">Date</span> <span style="color:#75af00">d</span><span style="color:#111">(</span><span style="color:#111">Month</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">Mar</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">,</span> <span style="color:#111">Day</span><span style="color:#111">(</span><span style="color:#ae81ff">30</span><span style="color:#111">)</span><span style="color:#111">,</span> <span style="color:#111">Year</span><span style="color:#111">(</span><span style="color:#ae81ff">1995</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The reason to use functions (returning local static objects) instead of (non-local static) objects to represent specific months is explained in item 4:</p>
+<blockquote>
+<p>the relative order of initialization of non-local static objects defined in different translation units is undefined.</p>
+</blockquote>
+<h1 id="restricting-operations-on-types">Restricting operations on types</h1>
+<p>A good example for restricting operations on types is in item 3 explaining how <code>const</code> qualifying the return type from <code>operator*</code> can prevent clients from making following errors for user-defined types:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">a</span> <span style="color:#f92672">*</span> <span style="color:#111">b</span> <span style="color:#f92672">=</span> <span style="color:#111">c</span><span style="color:#111">)</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#75715e">// meant to do a comparison
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Again, it is always good to have our types behave consistently with the built-in types. Such kind of operation is illegal for <code>int</code> type, so unless there's a good reason, it should be illegal for our types, too.</p>
+<h1 id="eliminating-client-resource-management-responsibilities">Eliminating client resource management responsibilities</h1>
+<p>Any interface that requires that client remember to do something is prone to incorrect use. A bad example is function <code>createInvestment</code> in item 13, which returns pointers to dynamically allocated objeects in an <code>Investment</code> hierarchy.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Investment</span><span style="color:#f92672">*</span> <span style="color:#75af00">createInvestment</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// parameters omitted for simplicity
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Needless to say, this is prone to resource leak, for chances are that clients either forget to manually <code>delete</code> the pointer, or delete the same pointer more than once</p>
+<p>Item 13 shows that we could preempt this problem by using smart pointers. But a better solution is to let the function <code>createInvestment</code> return a smart pointer in the first place:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span> <span style="color:#111">createInvestment</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Moreover, returning a <code>tr1::shared_ptr</code> makes it possible to prevent a host of other client errors regarding resource release, for  <code>tr1::shared_ptr</code> allows a resource-release function (called a &ldquo;deleter&rdquo;) to be bound to the smart pointer when the smart pointer is created (item 14, <code>auto_ptr</code> does not support this functionality).</p>
+<p>For example, instead of using <code>delete</code> to release an <code>Investment</code> object resource, clients may expect to use a function called <code>getRidOfInvestment</code>. By binding <code>getRidOfInvestment</code> to <code>tr1::shraed_ptr</code> as its deleter, and return this smart pointer, clients will not make mistakes such as using the wrong resource-destruction mechanism (using <code>delete</code> instead of <code>getRidOfInvestment</code>).</p>
+<p>Thus, in order to bind the deleter, we could define a null <code>tr1::shared_ptr</code> with <code>getRidofInvestment</code> as its second argument (the first argument is null because we may not be sure the resource to be managed during initialization), and implement <code>createInvestment</code> like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span> <span style="color:#111">createInvestment</span><span style="color:#111">(</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span>      <span style="color:#75715e">// return a null shared_ptr
+</span><span style="color:#75715e"></span>    <span style="color:#111">retVal</span><span style="color:#111">(</span><span style="color:#00a8c8">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">*</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#ae81ff">0</span><span style="color:#111">)</span><span style="color:#111">,</span>   <span style="color:#75715e">// see item 27 for static_cast
+</span><span style="color:#75715e"></span>            <span style="color:#111">getRidOfInvestment</span><span style="color:#111">)</span><span style="color:#111">;</span>          <span style="color:#75715e">// bind a custom deleter
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>                                   <span style="color:#75715e">// make retVal point to the correct object
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#111">retVal</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Since <code>tr1::shared_ptr</code> insists on an actual pointer, we use a cast to solve the problem. Of course, it would be better to pass the raw pointer to the smart pointer's constructor if the raw pointer to be managed by <code>retVal</code> could be determined prior to creating <code>retVal</code>, rather than to initialize <code>retVal</code> to null and then making an assignment to it (item 26).</p>
+<p>What's more, another nice feature of <code>tr1::shared_ptr</code> is that it automatically uses its per-pointer deleter to release resource, which eliminates the &ldquo;cross-DLL problem&rdquo; that shows up when an object its created using <code>new</code> in one dynamically linked library (DLL) but is <code>deleted</code> in a different DLL, leading to runtime errors. For example, if <code>Stock</code> is a class derived from <code>Investment</code> and <code>createInvestment</code> is implemented like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span> <span style="color:#111">createInvestment</span><span style="color:#111">(</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Investment</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Stock</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>the returned <code>tr1::shared_ptr</code> pointing to the <code>Stock</code> keeps track of which DLL's <code>delete</code> should be used when the reference count for the <code>Stock</code> becomes zero, so there's no more concern for the cross-DLL problem.</p>
+<p>The most common implementation of <code>tr1::shared_ptr</code> comes from Boost (item 55). Since it is such an easy way to eliminate some client errors, it's worth an overview of the cost of using it: Boost's <code>shared_ptr</code> is twice the size of a raw pointer, uses dynamically allocated memory for bookkeeping and deleter_specific data, uses a virtual function call when invoking its deleter, and incurs thread synchronization overhead when modifying the reference count in an application it believes is multithreaded.</p>
+<p>Although compared to a raw pointer, the <code>tr1::shared_ptr</code> is bigger, slower, and uses auxiliary dynamic memory, the reduction in client errors will be apparent， and the additional runtime costs will be unnoticeable in many applications.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

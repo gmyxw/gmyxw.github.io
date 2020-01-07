@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-23 Understand std::Move and std::Forward - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-23 Understand std::Move and std::Forward</h1>
+  </div>
+<div class="meta">
+  <div>2018-08-07 17:57</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p><code>std::move</code> performs an unconditional cast to an rvalue, while <code>std::forward</code> casts its argument to an rvalue only if that argument is bound to an rvalue.</p>
+<!-- toc -->
+<p>Some facts:</p>
+<ul>
+<li>Neither <code>std::move</code> nor <code>std::forward</code> do anything at runtime.</li>
+<li>Move request on <code>const</code> objects are treated as copy requests.</li>
+</ul>
+<h1 id="stdmove">std::move</h1>
+<p>To make things concrete, a very basic implementation of <code>std::move</code> in C++11 looks like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">typename</span> <span style="color:#111">remove_reference</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">type</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span>
+<span style="color:#111">move</span><span style="color:#111">(</span><span style="color:#111">T</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">param</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">using</span> <span style="color:#111">ReturnType</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">typename</span> <span style="color:#111">remove_reference</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">type</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#111">ReturnType</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">param</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Or, a more elegant implementation in C++14:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">decltype</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">auto</span><span style="color:#f92672">&gt;</span> <span style="color:#111">move</span><span style="color:#111">(</span><span style="color:#111">T</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">param</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">using</span> <span style="color:#111">ReturnType</span> <span style="color:#f92672">=</span> <span style="color:#111">remove_reference_t</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#00a8c8">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#111">ReturnType</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">param</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Basically, <code>std::move</code> does nothing but cast its argument to an rvalue, and we might think it as <code>rvalue_cast</code>. Usually we want <code>move</code> operation on rvalues, so every time we see a <code>move</code> over some parameter, we know we want to perform move operation over the resulting rvalue. However, not all rvalues are candidates for moving, especailly those annotated by <code>const</code> - <em>move requests on <code>const</code> objects are silentlly transformed into copy operation</em>.</p>
+<h1 id="stdforward">std::forward</h1>
+<p><code>std::move</code> unconditionally casts its argument to an rvalue, while <code>std::forward</code> conditionally do so: it casts to an rvalue only if its argument was initialized with an rvalue.</p>
+<p>The most common scenario is a function template taking a universal reference parameter that is to be passed to another function:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#75af00">process</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">lvalArg</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">process</span><span style="color:#111">(</span><span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rvalArg</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#111">logAndProcess</span><span style="color:#111">(</span><span style="color:#111">T</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">param</span><span style="color:#111">)</span>  <span style="color:#75715e">// universal reference
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>
+    <span style="color:#00a8c8">auto</span> <span style="color:#111">now</span> <span style="color:#f92672">=</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">chrono</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">system_clock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">now</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">makeLogEntry</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Calling &#39;process&#39;</span><span style="color:#d88200">&#34;</span><span style="color:#111">,</span> <span style="color:#111">now</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">process</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">param</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Widget</span> <span style="color:#111">w</span><span style="color:#111">;</span>
+<span style="color:#111">logAndProcess</span><span style="color:#111">(</span><span style="color:#111">w</span><span style="color:#111">)</span><span style="color:#111">;</span>             <span style="color:#75715e">// call with lvalue
+</span><span style="color:#75715e"></span><span style="color:#111">logAndProcess</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">move</span><span style="color:#111">(</span><span style="color:#111">w</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// call with rvalue
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In the code above, <code>std::forward</code> is able to tell whether <code>param</code> is initialized with an lvalue or an rvalue because that information is encoded in <code>logAndProcess</code>'s template parameter <code>T</code>, which is then passed to <code>std::forward</code>, which is able to recover the encoded information. For details, refer to EMCpp item 28.</p>
+<h1 id="comparison">Comparison</h1>
+<p>Depending on the usecase scenario, we can tell when to use which:</p>
+<ul>
+<li><code>std:move</code> typically sets up a move</li>
+<li><code>std::forward</code> just passes - <em>forwards</em>- an object to another function in a way that retains its original lvalueness or rvalueness.</li>
+</ul></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

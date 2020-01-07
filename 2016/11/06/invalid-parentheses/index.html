@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Remove Invalid Parentheses - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Remove Invalid Parentheses</h1>
+  </div>
+<div class="meta">
+  <div>2016-11-06 00:00</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/algorithm/">#algorithm</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Several ways to remove invalid parentheses problem.</p>
+<!-- toc -->
+<h1 id="starter">Starter</h1>
+<blockquote>
+<p>Return only one possible result</p>
+</blockquote>
+<h2 id="method-two-pass-with-counter">Method: Two pass with <code>counter</code></h2>
+<ol>
+<li>Scanning from left to right, ending up removing extra &lsquo;)&rsquo;</li>
+<li>Scanning from right to left, ending up removing extra &lsquo;(&rsquo;</li>
+</ol>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#111">String</span> <span style="color:#75af00">removeInvalidParantheses</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">s</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">StringBuilder</span> <span style="color:#111">firstPass</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">StringBuilder</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">counter</span> <span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#111">i</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">char</span> <span style="color:#111">c</span> <span style="color:#f92672">=</span> <span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">charAt</span><span style="color:#f92672">(</span><span style="color:#111">i</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">c</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#d88200">&#39;(&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">counter</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+            <span style="color:#111">firstPass</span><span style="color:#f92672">.</span><span style="color:#75af00">append</span><span style="color:#f92672">(</span><span style="color:#d88200">&#39;(&#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">c</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#d88200">&#39;)&#39;</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">counter</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">counter</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">;</span>
+            <span style="color:#111">firstPass</span><span style="color:#f92672">.</span><span style="color:#75af00">append</span><span style="color:#f92672">(</span><span style="color:#d88200">&#39;)&#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">c</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#d88200">&#39;)&#39;</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">c</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#d88200">&#39;(&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">firstPass</span><span style="color:#f92672">.</span><span style="color:#75af00">append</span><span style="color:#f92672">(</span><span style="color:#111">c</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">counter</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#00a8c8">return</span> <span style="color:#111">firstPass</span><span style="color:#f92672">.</span><span style="color:#75af00">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#111">counter</span> <span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">;</span>
+    <span style="color:#111">StringBuilder</span> <span style="color:#111">sb</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">StringBuilder</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">for</span><span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">firstPass</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> <span style="color:#111">1</span><span style="color:#f92672">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">;</span> <span style="color:#111">i</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+        <span style="color:#00a8c8">char</span> <span style="color:#111">c</span> <span style="color:#f92672">=</span> <span style="color:#111">firstPass</span><span style="color:#f92672">.</span><span style="color:#75af00">charAt</span><span style="color:#f92672">(</span><span style="color:#111">i</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">c</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#d88200">&#39;)&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">counter</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">;</span>
+            <span style="color:#111">sb</span><span style="color:#f92672">.</span><span style="color:#75af00">append</span><span style="color:#f92672">(</span><span style="color:#d88200">&#39;)&#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">c</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#d88200">&#39;(&#39;</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">counter</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">counter</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+            <span style="color:#111">sb</span><span style="color:#f92672">.</span><span style="color:#75af00">append</span><span style="color:#f92672">(</span><span style="color:#d88200">&#39;(&#39;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">c</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#d88200">&#39;)&#39;</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">c</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#d88200">&#39;(&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#111">sb</span><span style="color:#f92672">.</span><span style="color:#75af00">append</span><span style="color:#f92672">(</span><span style="color:#111">c</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">sb</span><span style="color:#f92672">.</span><span style="color:#75af00">reverse</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">.</span><span style="color:#75af00">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>    
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="main-dish-follow-up">Main dish (follow up)</h1>
+<blockquote>
+<p>Return all the possible results</p>
+</blockquote>
+<h2 id="method-1-two-pass-with-dfs1">Method 1: Two pass with <a href="https://discuss.leetcode.com/topic/34875/easy-short-concise-and-fast-java-dfs-3-ms-solution"><strong>DFS</strong></a></h2>
+<ul>
+<li>same idea as starter question: using dfs searching for valid candidate without extra &lsquo;)', then reverse the string and search for the second pass to remove all the extra &lsquo;(&rsquo;</li>
+<li>for continuous &lsquo;)', say &ldquo;())&quot;, always remove the first &lsquo;)&rsquo; firstly, so &ldquo;(<code>)</code>)&rdquo; -&gt; &ldquo;()&quot;: for j:[prev_j ~ i], if (s[j] == par<a href="https://discuss.leetcode.com/topic/34875/easy-short-concise-and-fast-java-dfs-3-ms-solution">1</a> &amp;&amp; (j == prev_j || s[j-1] != par<a href="https://discuss.leetcode.com/topic/34875/easy-short-concise-and-fast-java-dfs-3-ms-solution">1</a>)), remove s.charAt(j)</li>
+<li>each recursive call, store previous i to <code>prev_i</code> to indicate that first half of string before i is valid, so no need to check again</li>
+<li>each recursive call, store previous j to <code>prev_j</code> in order to prevent duplicate answers. e.g.:<br>
+if no prev_j stored, it's hard to prevent the same result from two different ching branches:
+<ul>
+<li>&ldquo;()a)a)&rdquo; -&gt; &ldquo;(a)a)&rdquo; -&gt; &ldquo;(aa)&rdquo;</li>
+<li>&ldquo;()a)a)&rdquo; -&gt; &ldquo;()aa)&rdquo; -&gt; &ldquo;(aa)&rdquo;</li>
+</ul>
+</li>
+<li>Time : every path generates one valid answer, if there's k valid answer, the search  will have k leaves. Since each recursive call requires O(n) time from string atenatino. O(n*m) may be fair enough to describe the time complexity, where n is length of string and m is the total nodes (numver of all the rec calls) in the ch tree</li>
+<li>Space: O(n*k) due to stringbuilder, k is the number of valid answer, n is the length of string</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#111">List</span><span style="color:#f92672">&lt;</span><span style="color:#111">String</span><span style="color:#f92672">&gt;</span> <span style="color:#75af00">removeInvalidParentheses</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">s</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#111">List</span><span style="color:#f92672">&lt;</span><span style="color:#111">String</span><span style="color:#f92672">&gt;</span> <span style="color:#111">ans</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">ArrayList</span><span style="color:#f92672">&lt;</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#111">remove</span><span style="color:#f92672">(</span><span style="color:#111">s</span><span style="color:#f92672">,</span> <span style="color:#111">ans</span><span style="color:#f92672">,</span> <span style="color:#111">0</span><span style="color:#f92672">,</span> <span style="color:#111">0</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">new</span> <span style="color:#00a8c8">char</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">{</span><span style="color:#d88200">&#39;(&#39;</span><span style="color:#f92672">,</span> <span style="color:#d88200">&#39;)&#39;</span><span style="color:#f92672">}</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">ans</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#00a8c8">private</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">remove</span><span style="color:#f92672">(</span><span style="color:#111">String</span> <span style="color:#111">s</span><span style="color:#f92672">,</span> <span style="color:#111">List</span><span style="color:#f92672">&lt;</span><span style="color:#111">String</span><span style="color:#f92672">&gt;</span> <span style="color:#111">ans</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">prev_i</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">prev_j</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">char</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#111">par</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">count</span> <span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">,</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">prev_i</span><span style="color:#f92672">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#111">i</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">charAt</span><span style="color:#f92672">(</span><span style="color:#111">i</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">par</span><span style="color:#f92672">[</span><span style="color:#111">0</span><span style="color:#f92672">]</span><span style="color:#f92672">)</span> <span style="color:#111">count</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">charAt</span><span style="color:#f92672">(</span><span style="color:#111">i</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">par</span><span style="color:#f92672">[</span><span style="color:#111">1</span><span style="color:#f92672">]</span><span style="color:#f92672">)</span> <span style="color:#111">count</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">count</span> <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#00a8c8">continue</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">for</span> <span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">j</span> <span style="color:#f92672">=</span> <span style="color:#111">prev_j</span><span style="color:#f92672">;</span> <span style="color:#111">j</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#111">i</span><span style="color:#f92672">;</span> <span style="color:#111">j</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#75715e">// count &lt; 0, there&#39;s extra par[1] 
+</span><span style="color:#75715e"></span>            <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">charAt</span><span style="color:#f92672">(</span><span style="color:#111">j</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">par</span><span style="color:#f92672">[</span><span style="color:#111">1</span><span style="color:#f92672">]</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#f92672">(</span><span style="color:#111">j</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">prev_j</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> <span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">charAt</span><span style="color:#f92672">(</span><span style="color:#111">j</span><span style="color:#f92672">-</span><span style="color:#111">1</span><span style="color:#f92672">)</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#111">par</span><span style="color:#f92672">[</span><span style="color:#111">1</span><span style="color:#f92672">]</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#111">remove</span><span style="color:#f92672">(</span><span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">substring</span><span style="color:#f92672">(</span><span style="color:#111">0</span><span style="color:#f92672">,</span><span style="color:#111">j</span><span style="color:#f92672">)</span> <span style="color:#f92672">+</span> <span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">substring</span><span style="color:#f92672">(</span><span style="color:#111">j</span><span style="color:#f92672">+</span><span style="color:#111">1</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> <span style="color:#111">ans</span><span style="color:#f92672">,</span> <span style="color:#111">i</span><span style="color:#f92672">,</span> <span style="color:#111">j</span><span style="color:#f92672">,</span> <span style="color:#111">par</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#00a8c8">return</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#111">StringBuilder</span> <span style="color:#111">reversed</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">StringBuilder</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+    <span style="color:#00a8c8">for</span> <span style="color:#f92672">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> <span style="color:#111">1</span><span style="color:#f92672">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">;</span> <span style="color:#111">i</span><span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#111">reversed</span><span style="color:#f92672">.</span><span style="color:#75af00">append</span><span style="color:#f92672">(</span><span style="color:#111">s</span><span style="color:#f92672">.</span><span style="color:#75af00">charAt</span><span style="color:#f92672">(</span><span style="color:#111">i</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">par</span><span style="color:#f92672">[</span><span style="color:#111">0</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#d88200">&#39;(&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#111">remove</span><span style="color:#f92672">(</span><span style="color:#111">reversed</span><span style="color:#f92672">.</span><span style="color:#75af00">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">,</span> <span style="color:#111">ans</span><span style="color:#f92672">,</span> <span style="color:#111">0</span><span style="color:#f92672">,</span> <span style="color:#111">0</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">new</span> <span style="color:#00a8c8">char</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span><span style="color:#f92672">{</span><span style="color:#d88200">&#39;)&#39;</span><span style="color:#f92672">,</span> <span style="color:#d88200">&#39;(&#39;</span><span style="color:#f92672">}</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
+    <span style="color:#00a8c8">else</span> <span style="color:#f92672">{</span> <span style="color:#111">ans</span><span style="color:#f92672">.</span><span style="color:#75af00">add</span><span style="color:#f92672">(</span><span style="color:#111">reversed</span><span style="color:#f92672">.</span><span style="color:#75af00">toString</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="method-2-bfs">Method 2: BFS</h2>
+<p>Naive way of thinking:</p>
+<p>For a string with n length, each char have 2 states &ldquo;keep/remove&rdquo;, which is 2^n states, and each state requires checkValid, which runs in O(n). Together the BFS require O(n*2^n).</p>
+<p>Ideally, it should be O(C(n,k) + n), where k is the number of chars needs removal. To avoid generating duplicate strings, refer to <a href="https://discuss.leetcode.com/topic/28855/java-bfs-solution-16ms-avoid-generating-duplicate-strings">this post</a></p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Binary search basic - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Binary search basic</h1>
+  </div>
+<div class="meta">
+  <div>2016-08-05 00:00</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/algorithm/">#algorithm</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>What should be noted when doing binary search.</p>
+<h3 id="bs-search---search-for-first-or-last-targets-position">BS search - search for first or last target's position</h3>
+<p><strong>Key points</strong></p>
+<ol>
+<li><code>start + 1 &lt; end</code> -&gt; avoid never-end loop</li>
+<li><code>start + (end - start) / 2</code> -&gt; avoid stack overflow</li>
+<li><code>nums[mid]</code> judgement depends on the purpose:
+<ol>
+<li><code>start = mid;</code> for case of &ldquo;return last position&rdquo;</li>
+<li><code>end = mid;</code>  for case of &ldquo;return first position&rdquo;</li>
+<li><code>return mid;</code> for case of &ldquo;return any position&rdquo;</li>
+</ol>
+</li>
+<li>After the while loop, start + 1 = end, there may are 5 possible scenarios:
+<ol>
+<li><code>target &lt; nums[start]</code>, now start == 0</li>
+<li><code>target == nums[start]</code></li>
+<li><code>nums[start] &lt; target &lt; nums[end]</code></li>
+<li>`target == A[end]</li>
+<li><code>nums[end] &lt; target</code>, now end = nums.length - 1;</li>
+</ol>
+</li>
+</ol>
+<h3 id="binary-search-template">Binary search template:</h3>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">public</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">Solution</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e">/**
+</span><span style="color:#75715e">     * @return first occurrence position of the target
+</span><span style="color:#75715e">     */</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#75af00">findPosition</span><span style="color:#f92672">(</span><span style="color:#00a8c8">int</span><span style="color:#f92672">[</span><span style="color:#f92672">]</span> <span style="color:#111">nums</span><span style="color:#f92672">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">target</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">nums</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#00a8c8">null</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> <span style="color:#111">nums</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#00a8c8">return</span> <span style="color:#f92672">-</span><span style="color:#111">1</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>	
+        <span style="color:#00a8c8">int</span> <span style="color:#111">start</span> <span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">,</span> <span style="color:#111">end</span> <span style="color:#f92672">=</span> <span style="color:#111">nums</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span> <span style="color:#f92672">-</span> <span style="color:#111">1</span><span style="color:#f92672">;</span>
+        <span style="color:#00a8c8">while</span> <span style="color:#f92672">(</span><span style="color:#111">start</span> <span style="color:#f92672">+</span> <span style="color:#111">1</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">end</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#00a8c8">int</span> <span style="color:#111">mid</span> <span style="color:#f92672">=</span> <span style="color:#111">start</span> <span style="color:#f92672">+</span> <span style="color:#f92672">(</span><span style="color:#111">end</span> <span style="color:#f92672">-</span> <span style="color:#111">start</span><span style="color:#f92672">)</span> <span style="color:#f92672">/</span> <span style="color:#111">2</span><span style="color:#f92672">;</span>
+            <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">nums</span><span style="color:#f92672">[</span><span style="color:#111">mid</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">target</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#111">end</span> <span style="color:#f92672">=</span> <span style="color:#111">mid</span><span style="color:#f92672">;</span> <span style="color:#75715e">// for case of &#34;return first position&#34;
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//start = mid; for case of &#34;return last position&#34;
+</span><span style="color:#75715e"></span>                <span style="color:#75715e">//return mid; for case of &#34;return any position&#34;
+</span><span style="color:#75715e"></span>            <span style="color:#f92672">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">nums</span><span style="color:#f92672">[</span><span style="color:#111">mid</span><span style="color:#f92672">]</span> <span style="color:#f92672">&lt;</span> <span style="color:#111">target</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#111">start</span> <span style="color:#f92672">=</span> <span style="color:#111">mid</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span> <span style="color:#00a8c8">else</span> <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">nums</span><span style="color:#f92672">[</span><span style="color:#111">mid</span><span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">target</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#111">end</span> <span style="color:#f92672">=</span> <span style="color:#111">mid</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>	
+        <span style="color:#75715e">// exchange the position of two [if statement] if want to return last postion
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">nums</span><span style="color:#f92672">[</span><span style="color:#111">start</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">target</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#00a8c8">return</span> <span style="color:#111">start</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">nums</span><span style="color:#f92672">[</span><span style="color:#111">end</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">target</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#00a8c8">return</span> <span style="color:#111">end</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        <span style="color:#75715e">// target strictly between {A[start-1], A[start]}
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// or strictly between {A[start], A[end]}
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// or strictly between {A[end, A[end+1]}
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">return</span> <span style="color:#f92672">-</span><span style="color:#111">1</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>Note 1:</strong> It's a good habit to always to include trivial test case at first line:</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">nums</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#00a8c8">null</span> <span style="color:#f92672">|</span><span style="color:#f92672">|</span> <span style="color:#111">nums</span><span style="color:#f92672">.</span><span style="color:#75af00">length</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#111">0</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+	<span style="color:#00a8c8">return</span> <span style="color:#f92672">-</span><span style="color:#111">1</span><span style="color:#f92672">;</span> 
+<span style="color:#f92672">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>Note 2:</strong> Remember to consider all the corner case at the end:</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">target</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#111">start</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#00a8c8">return</span> <span style="color:#f92672">?</span><span style="color:#f92672">?</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
+<span style="color:#00a8c8">if</span> <span style="color:#f92672">(</span><span style="color:#111">target</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span> <span style="color:#111">end</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#00a8c8">return</span> <span style="color:#f92672">?</span><span style="color:#f92672">?</span><span style="color:#f92672">;</span> <span style="color:#f92672">}</span>
+<span style="color:#00a8c8">return</span> <span style="color:#f92672">?</span><span style="color:#f92672">?</span><span style="color:#f92672">?</span><span style="color:#f92672">;</span> <span style="color:#75715e">// corner case!
+</span></code></pre></td></tr></table>
+</div>
+</div></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

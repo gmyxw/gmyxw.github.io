@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-24 Declare non-member functions when type conversions should apply to all parameters - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-24 Declare non-member functions when type conversions should apply to all parameters</h1>
+  </div>
+<div class="meta">
+  <div>2018-02-12 22:47</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>If we need type conversions on all parameters to a function including the one pointed to by the <code>this</code> pointer, the function must be a non-member.</p>
+<p>Having classes support implicit type conversions is generally a bad idea. One good and common exception to the rule is when creating numerical types, for example, we want to allow implicit conversions from integers to user-defined rationals type:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Rational</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Rational</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">numerator</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">,</span>    <span style="color:#75715e">// ctor is deliberately not explicit, 
+</span><span style="color:#75715e"></span>             <span style="color:#00a8c8">int</span> <span style="color:#111">denominator</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// allowing implicit int-to-Rational conversion
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">int</span> <span style="color:#75af00">numerator</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>     <span style="color:#75715e">// accessor for numerator
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">int</span> <span style="color:#75af00">denominator</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>   <span style="color:#75715e">// accessor for denominator, see item 22
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>We'd like to support arithmetic operation of multiplication, and one way is to declare it as a member function of <code>Rational</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Rational</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span> <span style="color:#75715e">// return const: item 3; taking a reference-to-const as argument: item 20, 21
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This design is fine to multiply rationals with rationals:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Rational</span> <span style="color:#75af00">oneEighth</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">8</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">Rational</span> <span style="color:#75af00">oneHalf</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">2</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#111">Rational</span> <span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">oneHalf</span> <span style="color:#f92672">*</span> <span style="color:#111">oneEighth</span><span style="color:#111">;</span>  <span style="color:#75715e">// fine
+</span><span style="color:#75715e"></span><span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">result</span> <span style="color:#f92672">*</span> <span style="color:#111">oneEighth</span><span style="color:#111">;</span>   <span style="color:#75715e">// fine
+</span></code></pre></td></tr></table>
+</div>
+</div><p>However, for mixed-mode operations, where <code>Rational</code>s is multiplied with <code>int</code>s, there will be a potential error:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">oneHalf</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span>  <span style="color:#75715e">// fine
+</span><span style="color:#75715e"></span><span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#111">oneHalf</span><span style="color:#111">;</span>  <span style="color:#75715e">// error!
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This problem is clearer for analysis when we rewrite the last two examples in their equivalent functional form:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">oneHalf</span><span style="color:#111">.</span><span style="color:#00a8c8">operator</span><span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">)</span><span style="color:#111">;</span>   <span style="color:#75715e">// fine
+</span><span style="color:#75715e"></span><span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.</span><span style="color:#00a8c8">operator</span><span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#111">oneHalf</span><span style="color:#111">)</span><span style="color:#111">;</span>   <span style="color:#75715e">// error!
+</span></code></pre></td></tr></table>
+</div>
+</div><p>For the first statement:<br>
+the object oneHalf is an instance of a class that contains an <code>operator*</code> taking a <code>Rational</code> as its argument. Compilers know we're passing an <code>int</code> and that the function requires a <code>Rational</code>, and they also know they can conjure up a suitable <code>Rational</code> by implicit type conversion - calling the <code>Rational</code> constructor with the <code>int</code> we provided, so compilers will happily call that function as if it had been written like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span> <span style="color:#75af00">temp</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// create a temporary Rational object from 2
+</span><span style="color:#75715e"></span><span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">oneHalf</span> <span style="color:#f92672">*</span> <span style="color:#111">temp</span><span style="color:#111">;</span>  <span style="color:#75715e">// same as oneHalf.operator*(temp);
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Of course, compilers are allowed to do this implicit type conversion only because a non-explicit constructor is involved. If we add keyword <code>explicit</code> before the constructor above, neither of the two mixed-type multiplication statements would compile.</p>
+<p>Now for the second statement:<br>
+it turns out that parameters are eligible for implicit type conversion <em>only if they are listed in the parameter list</em>. The implicit parameter pointed to by <code>this</code>, which is also the obejct on which the member function is invoked, is <em>never</em> eligible for implicit conversions. Back to the second statement, <code>int</code> type <code>2</code> does not have associated class containing a function <code>operator*</code> taking a <code>Rational</code> type object as its argument, nor is <code>2</code> listed in the parameter list for an implicit type conversion to <code>Rational</code>. That is the cause of compilation failure.</p>
+<p>In fact, when compilers fail to find a matching member function, they will also look for non-member <code>operator*</code>s (i.e., ones at namespace or global scope) that can be called like this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#ae81ff">2</span><span style="color:#111">,</span> <span style="color:#111">oneHalf</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>And this is exactly what we want if we'd like to support mixed-mode arithmetic: make <code>opeartor*</code> a non-member function, thus allowing compilers to perform implicit type conversions on <em>all</em> arguments:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Rational</span> <span style="color:#111">{</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>     <span style="color:#75715e">// contains no operator*
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">*</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">lhs</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>  <span style="color:#75715e">// now a non-member function
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">Rational</span><span style="color:#111">(</span><span style="color:#111">lhs</span><span style="color:#111">.</span><span style="color:#111">numerator</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">rhs</span><span style="color:#111">.</span><span style="color:#111">numerator</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">,</span>
+                    <span style="color:#111">lhs</span><span style="color:#111">.</span><span style="color:#111">denominator</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#f92672">*</span> <span style="color:#111">rhs</span><span style="color:#111">.</span><span style="color:#111">denominator</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+
+<span style="color:#111">Rational</span> <span style="color:#75af00">oneForth</span><span style="color:#111">(</span><span style="color:#ae81ff">1</span><span style="color:#111">,</span> <span style="color:#ae81ff">4</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">Rational</span> <span style="color:#111">result</span><span style="color:#111">;</span>
+
+<span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">oneForth</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#111">;</span>  <span style="color:#75715e">// fine
+</span><span style="color:#75715e"></span><span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> <span style="color:#111">oneForth</span><span style="color:#111">;</span>  <span style="color:#75715e">// it works now
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Now comes anoter worry: should <code>operator*</code> be made a friend of the <code>Rational</code> class?<br>
+In this case, the answer is no, because <code>operator*</code> can be implemented entirely through <code>Rational</code>'s public interface. This leads to an important observation:</p>
+<blockquote>
+<p>The opposite of a member function is a non-member function, not a frient function.</p>
+</blockquote>
+<p>There's some misunderstanding that if a function is related to a class and should not be a member (due, for example, to type conversions on all arguments), it should be a friend. This reasoning turns out to be flawed. The basic rule is to avoid friend functions whenever we can.</p>
+<blockquote>
+<p>P.S.: This item contains the truth, but it is not the whole truth. When we cross the line from Object-Oriented C++ into Template C++ (item 1), and make <code>Rational</code> a class <em>template</em> instead of a class, refer to item 46 for some new issues to consider, new ways to solve them, and new design implications.</p>
+</blockquote></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

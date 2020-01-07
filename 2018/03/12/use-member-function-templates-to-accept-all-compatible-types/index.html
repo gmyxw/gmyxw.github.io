@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-45 Use member function templates to accept all compatible types - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-45 Use member function templates to accept all compatible types</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-12 20:14</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>In order to implicitly convert all compatible types for a template class, we neet not a constructor <em>function</em> but a constructor <em>template</em> - <em>member functoin templates</em> that generate member functions of a class.</p>
+<p>Implicit conversion is a big convenient advantage offered by pointers: derived class pointers convert into base class pointers implicitly, pointers to non-<code>const</code> objects convert into pointers to <code>const</code> implicitly, etc. For a three-level hierarchy, following code makes perfect sense:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Top</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Middle</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Top</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Bottom</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Middle</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#111">Top</span> <span style="color:#f92672">*</span><span style="color:#111">pt1</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Middle</span><span style="color:#111">;</span>  <span style="color:#75715e">// convert Middle* -&gt; Top*
+</span><span style="color:#75715e"></span><span style="color:#111">Top</span> <span style="color:#f92672">*</span><span style="color:#111">pt2</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Bottom</span><span style="color:#111">;</span>  <span style="color:#75715e">// convert Bottom* -&gt; Top*
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#111">Top</span> <span style="color:#f92672">*</span><span style="color:#111">pct</span> <span style="color:#f92672">=</span> <span style="color:#111">pt1</span><span style="color:#111">;</span>   <span style="color:#75715e">// convert Top* -&gt; const Top*
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In the world of template, we'd really like to emulate such conversions for our user-defined smart pointer classes:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">SmartPtr</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">explicit</span> <span style="color:#111">SmartPtr</span><span style="color:#111">(</span><span style="color:#111">T</span> <span style="color:#f92672">*</span><span style="color:#111">realPtr</span><span style="color:#111">)</span> <span style="color:#75715e">// initialized by built-in pointers
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">SmartPtr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Top</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pt1</span> <span style="color:#f92672">=</span> <span style="color:#111">SmartPtr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Middle</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Middle</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// convert SmartPtr&lt;Middle&gt; -&gt; SmartPtr&lt;Top&gt;
+</span><span style="color:#75715e"></span><span style="color:#111">SmartPtr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Top</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pt2</span> <span style="color:#f92672">=</span> <span style="color:#111">SmartPtr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Bottom</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#00a8c8">new</span> <span style="color:#111">Bottom</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// convert SmartPtr&lt;Bottom&gt; -&gt; SmartPtr&lt;Top&gt;
+</span><span style="color:#75715e"></span><span style="color:#111">SmartPtr</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">const</span> <span style="color:#111">Top</span><span style="color:#f92672">&gt;</span> <span style="color:#111">pct</span> <span style="color:#f92672">=</span> <span style="color:#111">pt1</span><span style="color:#111">;</span>  <span style="color:#75715e">// convert SmartPtr&lt;Top&gt; -&gt; SmartPtr&lt;const Top&gt;
+</span></code></pre></td></tr></table>
+</div>
+</div><p>However, there's no inherent relationship among different instantiations of the same template, so compilers view <code>SmartPtr&lt;Middle&gt;</code> and <code>SmartPtr&lt;Top&gt;</code> as completely different classes. We need to write smart pointer constructors that is not only able to construct <code>SmartPtr&lt;Top&gt;</code> from <code>SmartPtr&lt;Middle&gt;</code>, but also capable to convert any compatible types in the hierarchy (we may extend the hierarchy in the future and add <code>class BelowBottom: public Bottom</code>). In principle, such constructors are countless.</p>
+<p>Considering the fact that a template can be instantiated to generate an unlimited number of functions, what we need here is not a constructor <em>function</em>, but a constructor <em>template</em>, the <em>member function templates</em> (also known as <em>member templates</em>) that generate member functions of a class:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">SmartPtr</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">U</span><span style="color:#f92672">&gt;</span>  <span style="color:#75715e">// member template for a &#34;generalized copy constructor&#34;
+</span><span style="color:#75715e"></span>    <span style="color:#111">SmartPtr</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">SmartPtr</span><span style="color:#f92672">&lt;</span><span style="color:#111">U</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">other</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// not declared as &#34;explicit&#34; for implicit conversion
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Constructors like this - ones that create one object from anothe object whose type is a different instantiation of the same template (e.g., create a <code>SmartPtr&lt;T&gt;</code> from a <code>SmartPtr&lt;U&gt;</code>) - are known as <em>generalized copy constructors</em>.</p>
+<p>However, this member template will generate more member functions than we need: as declared, it is possible to create a <code>SmartPtr&lt;Bottom&gt;</code> from a <code>SmartPtr&lt;Top&gt;</code>, which is contrary to the meaning of public inheritance (item 32). We need to restrict the conversions to those we want:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">SmartPtr</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">U</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#111">SmartPtr</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">SmartPtr</span><span style="color:#f92672">&lt;</span><span style="color:#111">U</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">other</span><span style="color:#111">)</span>  <span style="color:#75715e">// initialize this held ptr with other&#39;s held ptr
+</span><span style="color:#75715e"></span>    <span style="color:#f92672">:</span> <span style="color:#111">heldPtr</span><span style="color:#111">(</span><span style="color:#111">other</span><span style="color:#111">.</span><span style="color:#111">get</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span>
+    <span style="color:#111">T</span><span style="color:#f92672">*</span> <span style="color:#75af00">get</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">heldPtr</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>         
+    <span style="color:#111">T</span> <span style="color:#f92672">*</span><span style="color:#111">heldPtr</span><span style="color:#111">;</span> <span style="color:#75715e">// built-in ptr held by the smartPtr
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Since we initialize <code>SmartPtr&lt;T&gt;</code>'s data member of type <code>T*</code> with the pointer of type <code>U*</code> held by <code>SmartPtr&lt;U&gt;</code>, the code above will compile only if there is an implicit conversion from a <code>U*</code> pointer to a <code>T*</code> pointer, and this is exactly what we want.</p>
+<p>Apart from constructors, we can also apply member function tmeplates to assignment. A good example is from TR1's <code>shared_ptr</code> (item 13):</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">T</span><span style="color:#f92672">&gt;</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">shared_ptr</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">shared_ptr</span><span style="color:#111">(</span><span style="color:#111">shared_ptr</span> <span style="color:#00a8c8">const</span><span style="color:#f92672">&amp;</span> <span style="color:#111">r</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// &#34;normal&#34; copy constructor
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">Y</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#00a8c8">explicit</span> <span style="color:#111">shared_ptr</span><span style="color:#111">(</span><span style="color:#111">Y</span> <span style="color:#f92672">*</span> <span style="color:#111">p</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// generalized copy constructor from any compatible built-in pointer
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">Y</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#111">shared_ptr</span><span style="color:#111">(</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Y</span><span style="color:#f92672">&gt;</span> <span style="color:#00a8c8">const</span><span style="color:#f92672">&amp;</span> <span style="color:#111">r</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// from compatible shared_ptr
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">Y</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#00a8c8">explicit</span> <span style="color:#111">shared_ptr</span><span style="color:#111">(</span><span style="color:#111">weak_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Y</span><span style="color:#f92672">&gt;</span> <span style="color:#00a8c8">const</span><span style="color:#f92672">&amp;</span> <span style="color:#111">r</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// from compatible weak_ptr
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">Y</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#00a8c8">explicit</span> <span style="color:#111">shared_ptr</span><span style="color:#111">(</span><span style="color:#111">auto_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Y</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">r</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// from compatible auto_ptr
+</span><span style="color:#75715e"></span>
+    <span style="color:#111">shared_ptr</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#111">shared_ptr</span> <span style="color:#00a8c8">const</span><span style="color:#f92672">&amp;</span> <span style="color:#111">r</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// &#34;normal&#34; copy assignment
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">Y</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#111">shared_ptr</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#111">shared_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Y</span><span style="color:#f92672">&gt;</span> <span style="color:#00a8c8">const</span><span style="color:#f92672">&amp;</span> <span style="color:#111">r</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// generalized copy assign from any compatible shared_ptr
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">Y</span><span style="color:#f92672">&gt;</span>
+      <span style="color:#111">shared_ptr</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#111">auto_ptr</span><span style="color:#f92672">&lt;</span><span style="color:#111">Y</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">r</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// assign from any compatible auto_ptr
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Note that</p>
+<ul>
+<li>the generalized copy constructor is not declared <code>explicit</code> in order to support implicit conversion from one type of <code>shared_ptr</code> to another.</li>
+<li>All other constructors are <code>explicit</code>, so <em>implicit</em> conversion from a built-in pointer or other smart pointer type is not permitted (explicit conversion via a cast is okey).</li>
+<li><code>auto_ptr</code> passed to <code>tr1::shared_ptr</code> constructors and assignment operators are not declared <code>const</code>, because <code>auto_ptr</code> will be modifies when they're copyed (item 13).</li>
+<li>both a generalized copy constructor (and assignment) as well as the &ldquo;normal&rdquo; copy constructor (and copy assignment) are declared, because declaring a generalized copy constructor (a member template) in a class doesn't keep compilers from generating their own copy constructor (a non-template version), so if we want to control all aspect of copy construction, we declare both.</li>
+</ul></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

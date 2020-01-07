@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-35 Prefer Task-Based Programming to Thread-Based - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-35 Prefer Task-Based Programming to Thread-Based</h1>
+  </div>
+<div class="meta">
+  <div>2018-08-28 10:19</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Thread-based programming calls for manual management of thread exhaustion, oversubscription, load balancing, and adaptation to new platforms, while task-based programming via <code>std::async</code> with the default launch policy handles most of the issues for us.</p>
+<p>In concurrent C++ software, there are three meansings for <em>threads</em>:</p>
+<ol>
+<li><em>Hardware threads</em> are threads that actually perform computation. Contemporary machine architectures offer one or more hardware threads per CPU core.</li>
+<li><em>Software threads</em> (a.k.a., OS threads or system threads) are the threads that the operating system manages across all processes and schedules for execution on hardware threads.</li>
+<li><code>std::threads</code> are objects in a C++ process that act as handles to underlying software threads.</li>
+</ol>
+<p>Since software threads are a limited resource, a <code>std::system_error</code> exception may be thrown if we try to create more of them than the system can provide, even if the function we want to run can't throw:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">int</span> <span style="color:#75af00">doAsyncWork</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">noexcept</span><span style="color:#111">;</span>
+<span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">thread</span> <span style="color:#111">t</span><span style="color:#111">(</span><span style="color:#111">doAsyncWork</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// throws if no more threads are available
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This limitation leads to follow-up problems we need to deal with:</p>
+<ol>
+<li>if no more threads are available and we run <code>doAsyncWork</code> on the current thread, there are issues of unbalanced loads, or even dead lock.</li>
+<li>even if there're still more threads available, we need to face the trouble of <em>oversubscription</em>, where there are more unblocked software threads than hardware threads, and context switches increase the overall thread management overhead of the system, especially when the hardware thread on which a software thread is scheduled is switched on a diffferent core in a new time-slice.</li>
+</ol>
+<p>Using <code>std::async</code> free us from all these problems by dumping them on somebody else who is responsible to implement the C++ Standard Library:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">auto</span> <span style="color:#111">fut</span> <span style="color:#f92672">=</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">async</span><span style="color:#111">(</span><span style="color:#111">doAsyncWork</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The implementer of C++ Statndard Library solves the &ldquo;out-of-threads&rdquo; problem by providing no guarantee that there will be a new software thread: it permits the OS scheduler to arrange for the specified function (<code>doAsyncWork</code>) to be run on the thread requesting <code>doAsyncWork</code>'s result (i.e., on the thread calling <code>get</code> or <code>wait</code> on <code>fut</code>), and reasonable schedulers take advantage of that freedom if the system is oversubscribed or is out of threads. Since runtime scheduler manages the threads from all processes, it is likely to comprehend the whole picture better and be more capable to solve the load-balancing issues than we do<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<h4 id="edge-cases">Edge Cases</h4>
+<p>There are some situations where using threads directly may be appropriate:</p>
+<ul>
+<li>We need access to the API of the underlying threading implementation via the member function <code>native_handle</code> in <code>std::thread</code> objects<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. There is no counterpart to this functionality for <code>std::future</code>s that <code>std::async</code> returns.</li>
+<li>We need to and are able to potimize thread usage for our application. E.g., developing server software with a known execution profile that will be deployed as the only significant process on a machine with fixed hardware characteristics.</li>
+<li>We need to implement threading technology beyond the C++ concurrency API. E.g., thread pools on platforms where our C++ implementations don't offer them.</li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>State-of-the-art thread schedulers employ system-wide thread pools to avoid oversubscription, while improving load balancing across hardware cores through work-stealing algorithms. It will be reasonable to expect that some vendors will take advantage of this technology in their Standard Library implementations, and anyone taking a task-based approach to concurrent programming will automatically reap the benefits. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>The C++ concurrent CPI is implemented using a lower-level platform-specifit API, usually pthreads or Windows&rsquo; Threads, which are richer than what C++ offers. For example, C++ has no notion of thread priorities or affinities. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

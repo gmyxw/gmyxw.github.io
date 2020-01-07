@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-1 Prefer consts, enums and inlines to #defines - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-1 Prefer consts, enums and inlines to #defines</h1>
+  </div>
+<div class="meta">
+  <div>2018-01-16 18:41</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>A new (hopefully) daily review on <code>C++</code>.</p>
+<!-- toc -->
+<p>This is another new series, which I plan to update daily (well, hopefully :P). It's mainly about <code>C++</code>, which is my current main development language. Each day I'll follow 1 item in the <em>Effective C++ 2nd edition</em> by <a href="https://www.aristeia.com/books.html">Scott Meyers</a> to discuss 1 tiny point of <code>C++</code>.</p>
+<p>The item 1 of the book tells us when we should prefer the compiler to the preprocessor, or more specifically, why we should prefer <code>const</code>s, <code>enum</code>s and <code>inline</code>s to <code>#define</code>. Now let's take a closer look.</p>
+<h1 id="prefer-const-to-define">Prefer <code>const</code> to <code>#define</code></h1>
+<p>There are two ways we may consider, when we want to define a constant:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// method one
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span><span style="color:#75715e">define PI_1 3.1415926</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">// method two
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">double</span> <span style="color:#111">PI_2</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.1415926</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>However, since <code>PI_1</code> may be removed by preprocessor and never be seen by compilers, making it absent in the symbol table, this can be confusing during debugging if we get an error refering to 3.1415926 rather than <code>PI_1</code> (especially when <code>PI_1</code> is defined in a header file written by somebody else). Thus, instead of using a preprocessor macro, we'd better go with <code>const</code>. Below is some tricks with <code>const</code>.</p>
+<h2 id="tricks-on-const-definition">Tricks on <code>const</code> definition</h2>
+<ol>
+<li>
+<p>When defining constant pointers, use two <code>const</code> to make sure both the pointer as well as the content pointed by the pointer are immutable:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">char</span> <span style="color:#f92672">*</span> <span style="color:#00a8c8">const</span> <span style="color:#111">blogger</span> <span style="color:#f92672">=</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Nzo</span><span style="color:#d88200">&#34;</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>For class-specific constants, of which we want to limit the scope, we declare it as a <code>static</code> member, since there's no way we may create a class-scope-specific or class-encapsulated(i.e., private) constant using a <code>#define</code> (once a macro is defined, it's in force for the rest of the compilation unless it's <code>#undefed</code> somewhere along the line). Pay attention to the difference between constant declaration and constant definition:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// game.h
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">GamePlayer</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">int</span> <span style="color:#111">NUM_TURNS</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#111">;</span>  <span style="color:#75715e">// constant declaration with initial value
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">double</span> <span style="color:#111">PI</span><span style="color:#111">;</span>          <span style="color:#75715e">// constant declaration without initial value
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">int</span> <span style="color:#111">scores</span><span style="color:#111">[</span><span style="color:#111">NUM_TURNS</span><span style="color:#111">]</span><span style="color:#111">;</span>           <span style="color:#75715e">// use of constant
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// game.cpp
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">int</span> <span style="color:#111">GamePlayer</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">NUM_TURNS</span><span style="color:#111">;</span>     <span style="color:#75715e">// constant definition in impl. file
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">double</span> <span style="color:#111">GamePlayer</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">PI</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.14</span><span style="color:#111">;</span>  <span style="color:#75715e">// provide initial value at definition
+</span></code></pre></td></tr></table>
+</div>
+</div><p>It's worth noting that older compilers (primarily those written before 1995) may complain about providing initial value for static class member at the point of <em>declaration</em>. Most of time we may solve the problem by putting the initial value at <em>definition</em> time, but in the situation where we need the integral value of NUM_TURNS during compilation time (in the example above, compilers must know the size of the array during compilation), we may use a trick affectionately known as <strong>the enum hack</strong>, which takes advantage of the fact that the value of an enumerated type can be used where <code>int</code>s are expected:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// Game.h
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">class</span> <span style="color:#75af00">GamePlayer</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">enum</span> <span style="color:#111">{</span> <span style="color:#111">NUM_TURNS</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span> <span style="color:#111">}</span><span style="color:#111">;</span>          <span style="color:#75715e">// NUM_TURNS is a symbolic name for 5        
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">int</span> <span style="color:#111">scores</span><span style="color:#111">[</span><span style="color:#111">NUM_TURNS</span><span style="color:#111">]</span><span style="color:#111">;</span>           <span style="color:#75715e">// fine with old compilers
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>There are mainly 2 reasons we may still see the enum hack today:</p>
+<ol>
+<li>It's legal to take the address of a <code>const</code>, but it's not legal to take the address of an enum, so if you don't want people to get a pointer or reference to your integral constants, an enum will enforce that constraint (and this makes the enum behave somewhat like a #define).</li>
+<li>It's purely pragmatic. Lots of code (such as template metaprogramming, item 48) still employs it.</li>
+</ol>
+<p>For modern compilers, on the other hand, rules change a bit in a more convenient way. Usually C++ requires that you provide a difinition for anything you use, but class-specific <code>constant</code>s that are <code>stitic</code> and of <code>integral type</code> (e.g., <em>integers</em>, <em>chars</em>, <em>bools</em>) are an exception. As long as you don't take thier address, you can declare and read them <strong>without</strong> providing a definition, and (good) compilers will not allocate unneccessary memory for these integral-type const objects, which will make the static const integral an lvalue.</p>
+</li>
+</ol>
+<h1 id="prefer-inline-to-define">Prefer <code>inline</code> to <code>#define</code></h1>
+<p>Another common (mis)use of the <code>#define</code> is using it to implement macros that look like functions:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#</span><span style="color:#75715e">define max(a,b) ((a) &gt; (b) ? (a) : (b))</span><span style="color:#75715e">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This macro will lead to following weird things:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">int</span> <span style="color:#111">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span><span style="color:#111">,</span> <span style="color:#111">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+<span style="color:#111">max</span><span style="color:#111">(</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">b</span><span style="color:#111">)</span><span style="color:#111">;</span>     <span style="color:#75715e">// a increments twice
+</span><span style="color:#75715e"></span><span style="color:#111">max</span><span style="color:#111">(</span><span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">b</span><span style="color:#f92672">+</span><span style="color:#ae81ff">10</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// a increments once
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Thus, we may prefer using a regular inline function that provides both predictable behavior and type-safety:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">inline</span> <span style="color:#00a8c8">int</span> <span style="color:#75af00">max</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#00a8c8">int</span> <span style="color:#111">b</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">a</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">b</span> <span style="color:#f92672">?</span> <span style="color:#111">a</span> <span style="color:#111">:</span> <span style="color:#111">b</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If you complain that the above inline function only deals with <code>int</code> type, then we may just use inline template function, which nicely fixes the problem:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span> 
+<span style="color:#00a8c8">inline</span> <span style="color:#00a8c8">const</span> <span style="color:#111">T</span><span style="color:#f92672">&amp;</span> <span style="color:#111">max</span> <span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">T</span><span style="color:#f92672">&amp;</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">T</span><span style="color:#f92672">&amp;</span> <span style="color:#111">b</span><span style="color:#111">)</span> <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">a</span> <span style="color:#f92672">&gt;</span> <span style="color:#111">b</span> <span style="color:#f92672">?</span> <span style="color:#111">a</span> <span style="color:#111">:</span> <span style="color:#111">b</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+<span style="color:#75715e">// since we don&#39;t know what T is, 
+</span><span style="color:#75715e"></span><span style="color:#75715e">// we pass by reference-to-const, see item 20
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Basically, this template generates a whole family of functions, each of which takes two objects convertible to the same type and returns a reference to the greater of the two objects in const version.</p>
+<h1 id="when-to-use-preprocessor">When to use preprocessor</h1>
+<p>However, preprocessor is never dead. We still need preprocessor for tasks such as <code>#include</code> to include libraries, as well as <code>#ifdef</code>/<code>#ifndef</code> to control compilation.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

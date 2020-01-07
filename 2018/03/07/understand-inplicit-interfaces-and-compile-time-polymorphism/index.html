@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-41 Understand inplicit interfaces and compile time polymorphism - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-41 Understand inplicit interfaces and compile time polymorphism</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-07 14:21</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Classes support explicit interfaces based on function signatures, as well as runtime polymorphism through virtual functions; templates support implicit interfaces based on valid expressions, as well as compile-time polymorphism through template instantiation and function overloading resolution.</p>
+<!-- toc -->
+<h1 id="interface-and-polymorphism-in-oop">Interface and Polymorphism in OOP</h1>
+<p>The world of object-oriented programming revolves around <em>explicit</em> interfaces and <em>runtime</em> polymorphism. For example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Widget</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#f92672">~</span><span style="color:#111">Widget</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+    <span style="color:#00a8c8">virtual</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">size_t</span> <span style="color:#111">size</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">void</span> <span style="color:#75af00">normalize</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#75af00">swap</span><span style="color:#111">(</span><span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">other</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// see item 25
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#75af00">doProcessing</span><span style="color:#111">(</span><span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">w</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">w</span><span style="color:#111">.</span><span style="color:#111">size</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">w</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#111">someNastyWidget</span><span style="color:#111">)</span><span style="color:#111">{</span>
+        <span style="color:#111">Widget</span> <span style="color:#111">temp</span><span style="color:#111">(</span><span style="color:#111">w</span><span style="color:#111">)</span><span style="color:#111">;</span>
+        <span style="color:#111">temp</span><span style="color:#111">.</span><span style="color:#111">normalize</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+        <span style="color:#111">temp</span><span style="color:#111">.</span><span style="color:#111">swap</span><span style="color:#111">(</span><span style="color:#111">w</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Regarding the <code>w</code> in <code>doProcessing</code>, we could conclude:</p>
+<ul>
+<li><em>explicit interface</em>: <code>w</code> is of type <code>Widget</code>, so it must support the <code>Widget</code> interface, which is an <em>explicit interface</em>, because it is explicitly visible in the source code (e.g., the .h file for <code>Widget</code>)</li>
+<li><em>runtime polymorphism</em>: <code>w</code>'s call to some of its virtual member functions exhibits <em>runtime polymorphism</em>, because the specific function to call will be determined at runtime based on <code>w</code>'s dynamic type (item 37)</li>
+</ul>
+<p>Specifically, the explicit interface of <code>Widget</code> consists of its function signatures: a constructor, a destructor, and the functions <code>size</code>, <code>normalize</code>, and <code>swap</code>, along with the parameter types, return types, and constnesses of these functions, as well as compilter-generated copy constructor and copy assignment operator (item 5). Potentially, it could also include typedefs, and data members.</p>
+<h1 id="interface-and-polymorphism-in-templates-and-generic-programming">Interface and Polymorphism in templates and generic programming</h1>
+<p>In the world of templates and generic programming, the explicit interfaces and runtime polymorphism continue to exist, but we also have to consider <em>implicit interfaces</em> and <em>compile-time polymorphism</em>. As a comparison, let's take a look at the template version of <code>doProcessing</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#111">doProcessing</span><span style="color:#111">(</span><span style="color:#111">T</span><span style="color:#f92672">&amp;</span> <span style="color:#111">w</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">w</span><span style="color:#111">.</span><span style="color:#111">size</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">w</span> <span style="color:#f92672">!</span><span style="color:#f92672">=</span> <span style="color:#111">someNasyWidget</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+        <span style="color:#111">T</span> <span style="color:#75af00">temp</span><span style="color:#111">(</span><span style="color:#111">w</span><span style="color:#111">)</span><span style="color:#111">;</span>
+        <span style="color:#111">temp</span><span style="color:#111">.</span><span style="color:#111">normalize</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+        <span style="color:#111">temp</span><span style="color:#111">.</span><span style="color:#111">swap</span><span style="color:#111">(</span><span style="color:#111">w</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>For <code>w</code> in the template <code>doProcessing</code>:</p>
+<ul>
+<li><em>implicit interface</em>: <code>w</code> must support all the operations performed on it, but there is no explicit function signatures to follow. Rather, there's an implicit interface consists of valid <em>expressions</em> that set constraints on <code>w</code>.</li>
+<li><em>compile-time polymorphism</em>: <code>w</code> is one of the parameters in <code>operator&gt;</code> and <code>operator!=</code>, which may involve instantiating function templates with different template parameters, leading to different functions being called during compilation. This is similar to the process to determine which of a set of overloaded functions should be called during compilation.</li>
+</ul>
+<p>Specifically, let's take a look those constrains on <code>w</code>'s type <code>T</code> in the implicit interface:</p>
+<ol>
+<li>whatever <code>w.size() &gt; 10 &amp;&amp; w != someNasyWidget</code> yields, the expression as a whole must be compatible with <code>bool</code></li>
+<li>calls to the copy constructor, to <code>normalize</code>, and to <code>swap</code> must be valid for objects of type <code>T</code></li>
+</ol>
+<p>However, inside the expression <code>w.size() &gt; 10 &amp;&amp; w != someNasyWidget</code>, constraints on compatibal type regarding the functions <code>size</code>, <code>operator&gt;</code>, <code>operator&amp;&amp;</code>, or <code>operator!=</code> are pretty flexible, thanks to the possibility of operator overloading and implicit conversion:</p>
+<ul>
+<li>there's no requirement that <code>size</code> returns an integral value - it may simply return an object of some type <code>X</code> such that there is an <code>operator&gt;</code> that can be called with an object of type <code>X</code> and an <code>int</code> (10 is of type int)</li>
+<li>there's no requirement that <code>operator&gt;</code> take a parameter of type <code>X</code> - it may take a parameter of type <code>Y</code>, as long as there were an implicit conversion from objects of type X to objects of type <code>Y</code></li>
+<li>there's no requirement that <code>T</code> support <code>operator!=</code> - it would be just as acceptable for <code>operator!=</code> to take one object of type <code>X</code> and one object of type <code>Y</code>, as long as <code>T</code> can be converted to <code>X</code> and <code>someNastyWidget</code>'s type can be converted to <code>Y</code></li>
+<li>potentially, even <code>operator&amp;&amp;</code> could be overloaded, changing the meaning of the above expression from a conjunction to something quite different</li>
+</ul>
+<p>Anyway, the implicit interfaces imposed on a template's parameters are just as real as the explicit interfaces imposed on a class's objects, and both are checked during compilation.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

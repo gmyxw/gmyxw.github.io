@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-35 Consider Alternatives to Virtual Functions - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-35 Consider Alternatives to Virtual Functions</h1>
+  </div>
+<div class="meta">
+  <div>2018-02-28 20:27</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Alternatives to virtual functions include the NVI idiom (as an example of the Template Method design pattern) and various forms of the Strategy design pattern.</p>
+<!-- toc -->
+<p>Suppose we want to implement a member function named <code>healthValue</code>, which will calculate the health value for different characters in differen ways in a video game. Declaring <code>healthValue</code> virtual seems the obvious way to design things:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">GameCharacter</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#75715e">// return character&#39;s health value rating; derived classes may redefine this
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">// impure virtual suggests there&#39;s a default impl. (item 34)
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">int</span> <span style="color:#111">healthValue</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span>  
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>                               
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Actually, except from this obvious design, there exists some alternatives. To name a few:</p>
+<ul>
+<li>Use the <strong>non-virtual interface idiom (NVI idiom)</strong>, a form of the <strong>Template Method design pattern</strong> that wraps public non-virtual member functions around less accessible virtual functoins</li>
+<li>Use the <strong>Strategy design pattern</strong>, specifically:
+<ul>
+<li>Replace virtual function with <strong>function pointer data members</strong> - a stripped-down manifestation of Strategy design pattern</li>
+<li>Replace virtual function with <strong>tr1::function data members</strong>, which allows use of any callable entity with a signature compatible with what we need - a more general form of the stripped-down representation of Strategy design pattern</li>
+<li>Replace virtual functions in one hierarchy with <strong>virtual functions in another hierarchy</strong> - the conventional implementation of the Strategy design pattern</li>
+</ul>
+</li>
+</ul>
+<p>Let's take a look at the pros and cons of these alternatives.</p>
+<h1 id="the-template-method-pattern-via-the-non-virtual-interface-idiom">The template method pattern via the non-virtual interface idiom</h1>
+<p>The <em>non-virtual interface (NVI) idiom</em> argues that clients should call private virtual functions indirectly through public non-virtual member functions, which act like a <em>wrapper</em> around the virtual functions. This is a particular manifestation of the more general design pattern known as Template Method<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">GameCharacter</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">healthValue</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>  <span style="color:#75715e">// derived classes do not redefine
+</span><span style="color:#75715e"></span>    <span style="color:#111">{</span>
+        <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>  <span style="color:#75715e">// do &#34;before&#34; stuff
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">int</span> <span style="color:#111">retVal</span> <span style="color:#f92672">=</span> <span style="color:#111">doHealthValue</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// do the real work
+</span><span style="color:#75715e"></span>        <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>  <span style="color:#75715e">// do &#34;after  stuff
+</span><span style="color:#75715e"></span>        <span style="color:#00a8c8">return</span> <span style="color:#111">retVal</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">int</span> <span style="color:#111">doHealthValue</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>  <span style="color:#75715e">// derived classes may redefine this
+</span><span style="color:#75715e"></span>    <span style="color:#111">{</span>
+        <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>  <span style="color:#75715e">// default algorithm for calculating character&#39;s health
+</span><span style="color:#75715e"></span>    <span style="color:#111">}</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The NVI idiom involves derived classes redefining private virtual functions that they can't call - this seemingly contradictory rule is allowed by C++ and actually makes perfect sense: redefining a virtual function specifies <em>how</em> something is to be done, while calling a virtual function specifies <em>when</em> it will be done, and these two concerns are independent.</p>
+<p>However, it's not strictly necessary to declare the virtual functions <code>private</code>: in the cases where the derived class implementations of a virtual function are expected to invoke their base class counterparts, we have to declare the virtuals <code>protected</code>. Sometimes a virtual function even has to be <code>public</code> (e.g., destructors in polymorphic base classes, item 7), but then the NVI idiom can't really be applied.</p>
+<p>The advantage of the NVI idiom is in the &ldquo;&ldquo;do &lsquo;before&rsquo; stuff&rdquo; and  &ldquo;do &lsquo;after&rsquo; stuff&rdquo; part in the code above, which enable the wrapper abilities to ensure that before a virtual function is called, the proper context is set up (e.g., locking a mutex, making a log entry, verifying the class invariants and function pereconditions, etc), and after the call is over, the context is cleaned up (e.g., unlocking a mutex, verifying function postconditions, etc). If letting clients call virtual functions directly, there's no good way to do these stuff.</p>
+<h1 id="the-strategy-pattern">The strategy pattern</h1>
+<p>The NVI idiom is still using virtual functions to calculate a character's health. A more dramatic design assertion, such as the strategy pattern, says that calculating a character's health is independent of the character's type - the calculation need not to be part of the character.</p>
+<p>It is worth noting that, due to its being outside the <code>GameCharacter</code> hierarchy, the calculation has no special access to the internal parts of the object whose health it's calculating, so this design pattern works only if a character's health can be calculated based purely on information available through the character's public interface. Thus it may require the class's encapsulation to be weakened (e.g., make the non-member functions to be <code>friend</code>, or offer public accessor functions for class implementation that is previously hidden).</p>
+<h2 id="the-strategy-pattern-via-function-pointers">The strategy pattern via function pointers</h2>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">GameCharacter</span><span style="color:#111">;</span> <span style="color:#75715e">// forward declaration
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// function for default health calculation algorithm
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">int</span> <span style="color:#75af00">defaultHealthCalc</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">GameCharacter</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">GameCharacter</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">typedef</span> <span style="color:#00a8c8">int</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">HealthCalcFunc</span><span style="color:#111">)</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">GameCharacter</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+    <span style="color:#00a8c8">explicit</span> <span style="color:#75af00">GameCharacter</span><span style="color:#111">(</span><span style="color:#111">HealthCalcFunc</span> <span style="color:#111">hcf</span> <span style="color:#f92672">=</span> <span style="color:#111">defaultHealthCalc</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span> <span style="color:#111">healthFunc</span><span style="color:#111">(</span><span style="color:#111">hcf</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span><span style="color:#111">}</span>
+
+    <span style="color:#00a8c8">int</span> <span style="color:#75af00">healthValue</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+    <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">healthFunc</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">HealthCalcFunc</span> <span style="color:#111">healthFunc</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The advantage of this approach is some interesting flexibility:</p>
+<ul>
+<li>different instances of the same character type can have different health calculation functions installed</li>
+<li>health calculation functions for a particular character may be changed at runtime. For example, <code>GameCharacter</code> might offer a member function <code>setHealthCalculator</code> that allowed replacement of the current health calculation function.</li>
+</ul>
+<h2 id="the-strategy-pattern-via-tr1function">The strategy pattern via <code>TR1::function</code></h2>
+<p>To generalized the approach above, we could replace the function pointer <code>healthFunc</code> with an object of type <code>tr1::function</code>. As item 54 explains, such objects may hold <em>any callable entity</em> (e.g., function pointer, function object, member function pointer) whose signature is compatible<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> with the given target signature:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">GameCharacter</span><span style="color:#111">;</span> <span style="color:#75715e">// forward declaration
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// function for default health calculation algorithm
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">int</span> <span style="color:#75af00">defaultHealthCalc</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">GameCharacter</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">GameCharacter</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+   <span style="color:#75715e">// HealthCalcFunc is any callable entity that can be called with anything 
+</span><span style="color:#75715e"></span>   <span style="color:#75715e">// compatible with a GameCharracter and that returns anything 
+</span><span style="color:#75715e"></span>   <span style="color:#75715e">// compatible with an int
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">typedef</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">function</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span> <span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">GameCharacter</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span><span style="color:#f92672">&gt;</span> <span style="color:#111">HealthCalcFunc</span><span style="color:#111">;</span>
+
+    <span style="color:#00a8c8">explicit</span> <span style="color:#75af00">GameCharacter</span><span style="color:#111">(</span><span style="color:#111">HealthCalcFunc</span> <span style="color:#111">hcf</span> <span style="color:#f92672">=</span> <span style="color:#111">defaultHealthCalc</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span> <span style="color:#111">healthFunc</span><span style="color:#111">(</span><span style="color:#111">hcf</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span><span style="color:#111">}</span>
+
+    <span style="color:#00a8c8">int</span> <span style="color:#75af00">healthValue</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+    <span style="color:#111">{</span> <span style="color:#00a8c8">return</span> <span style="color:#111">healthFunc</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#111">}</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">HealthCalcFunc</span> <span style="color:#111">healthFunc</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The advantage of this approach is that clients may have more flexibility in specifying health calculation functions with various compatible callable entities:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">short</span> <span style="color:#75af00">calcHealth</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">GameCharacter</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// function; non-int return type
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">struct</span> <span style="color:#75af00">HealthCalculator</span> <span style="color:#111">{</span> <span style="color:#75715e">// class for health calculation function objects
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">GameLevel</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">float</span> <span style="color:#111">health</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">GameCharacter</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span><span style="color:#111">;</span> <span style="color:#75715e">// member function; non-int return type
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>To use these callable entities:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">EvilBadGuy</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">GameCharacter</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">explicit</span> <span style="color:#111">EvilBadGuy</span><span style="color:#111">(</span><span style="color:#111">HealthCalcFunc</span> <span style="color:#111">hcf</span> <span style="color:#f92672">=</span> <span style="color:#111">defaultHealthCalc</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span> <span style="color:#111">GameCharacter</span><span style="color:#111">(</span><span style="color:#111">hcf</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">EyeCandyCharacter</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">GameCharacter</span> <span style="color:#111">{</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>  <span style="color:#75715e">// similar constructor as EvilBadGuy
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">EvilBadGuy</span> <span style="color:#75af00">ebg1</span><span style="color:#111">(</span><span style="color:#111">calcHealth</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// character using a health calculation function
+</span><span style="color:#75715e"></span><span style="color:#111">EyeCandyCharacter</span> <span style="color:#75af00">ecc1</span><span style="color:#111">(</span><span style="color:#111">HealthCalculator</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// character using a health calculation function object
+</span><span style="color:#75715e"></span><span style="color:#111">GameLevel</span> <span style="color:#111">currentLevel</span><span style="color:#111">;</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">EvilBadGuy</span> <span style="color:#111">ebg2</span><span style="color:#111">(</span>  <span style="color:#75715e">// character using a health calculation member function
+</span><span style="color:#75715e"></span>    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">tr1</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">bind</span><span style="color:#111">(</span><span style="color:#f92672">&amp;</span><span style="color:#111">GameLevel</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">health</span><span style="color:#111">,</span>
+                    <span style="color:#111">currentLevel</span><span style="color:#111">,</span>
+                    <span style="color:#111">_1</span><span style="color:#111">)</span>
+<span style="color:#111">)</span><span style="color:#111">;</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>Here, the purpose of calling <code>tr1::bind</code> is that:</p>
+<ul>
+<li>it adapts the <code>GameLevel::health</code> member function (which takes two parameters: an implicit <code>GameLevel</code> parameter that <code>this</code> points to, as well as another reference to a <code>GameCharacter</code> parameter) into the expected function signature (which should only take a single paramter: the <code>GameCharacter</code>)</li>
+<li>by passing <code>_1</code>, it specifies that when calling <code>GameLevel::health</code> for <code>ebg2</code>, always use <code>currentLevel</code> as the first parameter of <code>GameLevel</code> object</li>
+</ul>
+<h2 id="the-classic-strategy-pattern">The &ldquo;Classic&rdquo; strategy pattern</h2>
+<p>The conventional approach to Strategy design pattern would be to make the health-calculation function a virtual member function of a separate health-calculation hierarchy with root being <code>HealthCalcFunc</code>, so that different health calculation algorithm could be implemented in the derived classes in this inheritance hierarchy. Each object of type <code>GameCharacter</code> just contains a pointer to an object from the <code>HealthCalcFunc</code> hierarchy:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">GameCharacter</span><span style="color:#111">;</span>  <span style="color:#75715e">// forward declaration
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">HealthCalcFunc</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#00a8c8">int</span> <span style="color:#111">calc</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">GameCharacter</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span> <span style="color:#00a8c8">const</span>
+    <span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>  
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">HealthCalcFunc</span> <span style="color:#111">defaultHealthCalc</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">GameCharacter</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">explicit</span> <span style="color:#111">GameCharacter</span><span style="color:#111">(</span><span style="color:#111">HealthCalcFunc</span> <span style="color:#f92672">*</span><span style="color:#111">phcf</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">defaultHealthCalc</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span> <span style="color:#111">pHealthCalc</span><span style="color:#111">(</span><span style="color:#111">phcf</span><span style="color:#111">)</span>
+    <span style="color:#111">{</span><span style="color:#111">}</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>  
+    <span style="color:#111">HealthCalcFunc</span> <span style="color:#f92672">*</span><span style="color:#111">pHealthCalc</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Template Method design pattern has nothing to do with C++ template. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Here, the &ldquo;target signature&rdquo; is &ldquo;function taking a reference to a <code>const GameCharacter</code> and returning an <code>int</code>&rdquo;, so any callable entity whose parameter can be implicitly converted to a <code>const GameCharacter&amp;</code> and whose return type can be implicitly converted to an <code>int</code> is compatible with an object of the declared <code>tr1::function</code> type. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-17 Understand Special Member Function Generation - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-17 Understand Special Member Function Generation</h1>
+  </div>
+<div class="meta">
+  <div>2018-07-25 20:26</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>The special member functions are those ccompilers may generate on their own: default constructor, destructor, copy operations, and move operations.</p>
+<!-- toc -->
+<p>The rules in C++11:</p>
+<ul>
+<li>Default constructor: Generated only if the class contains no user-declared constructors. (Same as C++98)</li>
+<li>Destructor: Destructors are <code>noexcept</code> by default (see EMCpp item 14). Other rules are essentially the same as C++98.</li>
+<li>Copy constructor
+<ul>
+<li>Runtime behavior: same as C++98: memberwise copy construction of non-static data members</li>
+<li>Generated only if the class lacks a user-declared copy constructor.</li>
+<li>Generation is deprecated if the user declares a copy assignment operator or destructor.</li>
+<li>Deleted if the class declares a move operation.</li>
+</ul>
+</li>
+<li>Copy assignment operator
+<ul>
+<li>Runtime behavior: same as C++98: memberwise copy assignment of non-static data members.</li>
+<li>Generation is deprecated if the user declares a copy constructor or destructor.</li>
+<li>Deleted if the class declares a move operation.</li>
+</ul>
+</li>
+<li>Move constructor and Move assignment operator:
+<ul>
+<li>Runtime behavior: memberwise moving of non-static data members</li>
+<li>Generated only if the class lacks user-declared copy operations, move operations, and destrutor.</li>
+</ul>
+</li>
+</ul>
+<h1 id="use-of-default">Use of &ldquo;=default&rdquo;</h1>
+<p>The default implementation for special member functions inside a base class is correct. Since we have to explicitly declare the base destructor as <code>virtual</code> to avoid undefined or misleading results that often occurs in polymorphic inheritance, using  &ldquo;=default&rdquo; will be a good way to express the suppressed default implementation of the move and/or copy operations:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Base</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">virtual</span> <span style="color:#f92672">~</span><span style="color:#111">Base</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">default</span><span style="color:#111">;</span>   <span style="color:#75715e">// make dtor virtual
+</span><span style="color:#75715e"></span>
+    <span style="color:#111">Base</span><span style="color:#111">(</span><span style="color:#111">Base</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">default</span><span style="color:#111">;</span>   <span style="color:#75715e">// support moving
+</span><span style="color:#75715e"></span>    <span style="color:#111">Base</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#111">Base</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">default</span><span style="color:#111">;</span> 
+
+    <span style="color:#111">Base</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Base</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">default</span><span style="color:#111">;</span>  <span style="color:#75715e">// support copying
+</span><span style="color:#75715e"></span>    <span style="color:#111">Base</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Base</span><span style="color:#f92672">&amp;</span><span style="color:#111">)</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">default</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="member-function-templates">Member function templates</h1>
+<p>Note that there's nothing in the rules about the existence of a member function template preventing compilers from generating the special member functions:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span> <span style="color:#111">{</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#111">Widget</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">T</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span><span style="color:#111">;</span>   <span style="color:#75715e">// construct Widget from anything
+</span><span style="color:#75715e"></span>
+    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">T</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// assign Widget from anything
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Assuming the usual conditions governing special member functions are fulfilled, compilers will still generate copy and move operations for <code>Widget</code> even though these templates could be instantiated to produce the signatures for the copy constructor and copy assignment operator (when <code>T</code> is <code>Widget</code>). Refer to EMCpp item 26 for cases that have important consequences.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

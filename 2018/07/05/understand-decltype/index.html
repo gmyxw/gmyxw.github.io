@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-3 Understand Decltype - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-3 Understand Decltype</h1>
+  </div>
+<div class="meta">
+  <div>2018-07-05 18:59</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p><code>decltype</code> almost always yields the type of a variable or expression without any modifications. For lvalue expressions of type T other than names, <code>decltype</code> always reports a type of T&amp;.</p>
+<p>The primary use of <code>decltype</code> is declaring function templates where the function's return type depends on its parameter types. For example, the indexing operator <code>[]</code> on a containedr of objects of type <code>T</code> typically return <code>T&amp;</code>, but in the case of <code>std::vector&lt;bool&gt;</code>, <code>operator[]</code> returns a brand new object (refer to EMCpp item 6 for whys and hows). In order to let compiler deduce the return type, we can use <code>decltype</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// C++14 version
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">Container</span><span style="color:#111">,</span> <span style="color:#00a8c8">typename</span> <span style="color:#111">Index</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#00a8c8">auto</span><span style="color:#111">)</span> <span style="color:#111">authAndAccess</span><span style="color:#111">(</span><span style="color:#111">Container</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">c</span><span style="color:#111">,</span> <span style="color:#111">Index</span> <span style="color:#111">i</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">authenticateUser</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">Container</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">c</span><span style="color:#111">)</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>A few points worth noting here:</p>
+<ul>
+<li>
+<p>return type is <code>decltype(auto)</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> instead of <code>auto</code>. As EMCpp item 2 points out, compilers employ template type deduction for functions with an <code>auto</code> return type. If using <code>auto</code>, the reference-ness will be stripped off, so <code>T&amp;</code>, which is the type returned by <code>operator[]</code> in most cases, will be deduced as <code>T</code>. This is not what we want.</p>
+</li>
+<li>
+<p>universal refrences for the first parameter is used here. As EMCpp item 24 explains, this makes the reference paramter <code>c</code> be able to bind to both lvalues and rvlues<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>. Following the exmpale of the Standard Library for index values, we stick with pass-by-value for <code>i</code> though.</p>
+</li>
+<li>
+<p>the <code>std::forward</code> is applied to the universal reference in accord with EMCpp item 25's admonition.</p>
+</li>
+<li>
+<p>in C++11, <code>auto</code> is not permitted as return types for non-lambda functions, so we need the <em>trailing return type</em> syntax to tell the compiler that the function's return type will be declared following the parameter list (after the &ldquo;-&gt;&rdquo;), which give us the advantage to use the function's parameters (<code>c</code> and <code>i</code> here) in the specification of the return type:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// C++11 version
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">Container</span><span style="color:#111">,</span> <span style="color:#00a8c8">typename</span> <span style="color:#111">Index</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">auto</span> <span style="color:#111">authAndAccess</span><span style="color:#111">(</span><span style="color:#111">Container</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">c</span><span style="color:#111">,</span> <span style="color:#111">Index</span> <span style="color:#111">i</span><span style="color:#111">)</span>
+    <span style="color:#f92672">-</span><span style="color:#f92672">&gt;</span> <span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">Container</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">c</span><span style="color:#111">)</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">authenticateUser</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">Container</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">c</span><span style="color:#111">)</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="exceptions">Exceptions</h4>
+<p>As mentioned in the begining, <code>decltype</code> <em>almost</em> always produces the type we expect - it means that there are exceptions to the rule. We're unlikely to encounter these exceptions unless we're a heavy-duty library implementer.</p>
+<p>For example, <code>decltype</code> generally ensures that the type induced for lvalue expressions more complicated than names is an lvalue reference. Since the type of most lvalue expressions inherently includes an lvalue reference qualifier (for example, functions returning lvalues always return lvalue references), this property seldom has any impact. However, a seemingly trivial change in the way we write a <code>return</code> statement can affect the deduced type for a function:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#00a8c8">auto</span><span style="color:#111">)</span> <span style="color:#111">f1</span><span style="color:#111">(</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">x</span><span style="color:#111">;</span>  <span style="color:#75715e">// decltype(x) is int, so f1 returns int
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+<span style="color:#00a8c8">decltype</span><span style="color:#111">(</span><span style="color:#00a8c8">auto</span><span style="color:#111">)</span> <span style="color:#111">f2</span><span style="color:#111">(</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">int</span> <span style="color:#111">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#111">(</span><span style="color:#111">x</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// decltype((x)) is int&amp;, so f1 returns int&amp;
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>C++ defines the expression <code>(x)</code> to be an lvalue, which is also an expression more complicated than a variable name <code>x</code>, so <code>decltype((x))</code> is <code>int&amp;</code>, leading to different return types in <code>f1</code> and <code>f2</code>. Moreover, <code>f2</code> returns a reference to a local variable, which means undefined behavior that we don't want.</p>
+<h4 id="summary">Summary</h4>
+<p>The lesson we learn from the above example is to pay close attention when using <code>decltype(auto)</code>. The techniques described in EMCpp item 4 may help ensure that the deduced type is what we expect.</p>
+<p>Meanwhile, don't lose sight of the bigger picture: in most normal cases where <code>decltype</code> is applied to names, <code>decltype</code> does just what it sounds like: it reports that name's declared type.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>The use of <code>decltype(auto)</code> is not limited to function return types. We can use is for declaring variables. For example, given <code>const Widget&amp;</code> type variable <code>cw</code>, <code>auto myWidget1 = cw;</code> will employ auto type deduction and deduce <code>myWidget1</code> as type of <code>Widget</code>, while <code>decltype(auto) myWidget2 = cw;</code> uses decltype type deduction, leading to <code>myWidget2</code>'s type as <code>const Widget&amp;</code>. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Supporting the use of rvalue is basically supporting such a function that a client might simply make a copy of an element in the temporary container. Otherwise, an rvalue container (a.k.a. a temporary object) would typically be destroyed at the end of the statement containing the call to <code>authAndAccess</code>, which means that a reference to an element in that container (typically what <code>authAndAccess</code> would return in the most cases) would dangle at the end of the statement. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[MECpp]Item-4 Avoid Gratuitous Default Constructors - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[MECpp]Item-4 Avoid Gratuitous Default Constructors</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-26 11:21</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Including meaningless default constructors affects the efficiency of classes, so avoiding them in classes guarantees fully-initialized objects, with the cost of some limits on how such classes can be used.</p>
+<!-- toc -->
+<p>For many objects, there is no reasonable way to perform a complete initialization in the absence of outside information. Consider a class for company equipment in which the corporate ID number of the quipment is a mandatory constructor argument:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">EquipmentPiece</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">EquipmentPiece</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">IDNumber</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="with-default-constructor">With default constructor</h1>
+<p>Some people believe <em>all</em> classes should include a default constructors, even if a default constructor doesn't have enough information to fully initialize objects of the class. Adherents to this philosophy will modify <code>EquipmentPiece</code> as follows:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">EquipmentPiece</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">EquipmentPiece</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">IDNumber</span> <span style="color:#f92672">=</span> <span style="color:#111">UNSPECIFIED</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">static</span> <span style="color:#00a8c8">const</span> <span style="color:#00a8c8">int</span> <span style="color:#111">UNSPECIFIED</span><span style="color:#111">;</span> <span style="color:#75715e">// magic ID num. value meaning no ID was specified
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>There are two downsides after including a default constructor in a class where none was warranted:</p>
+<ol>
+<li>There's no longer any guarantee that the fields of an <code>EquipmentPiece</code> object have been meaningfully initialized, so member functions must check if each object has valid <code>IDNumber</code> before using it. If not, clients must find a solution to deal with the situation - sometimes they simply throw an exception or terminates the program, which may degrade the overall quality of the software.</li>
+<li>The meaningless default constructors affects the efficiency of classes: member functions have to include extra code to test object's validness and deal with the failure tests, and clients of those functions have to pay for the time those tests take as well as the space the extra code occupies.</li>
+</ol>
+<h1 id="without-default-constructor">Without default constructor</h1>
+<p>If a class lacks a default constructor, there are restrictions on how you can use that class. Specifically, in three constexts:</p>
+<ul>
+<li>Creation of arrays</li>
+<li>Ineligible for some template-based container classes</li>
+<li>Virtual base classes</li>
+</ul>
+<h2 id="1-creation-of-arrays">1. Creation of arrays</h2>
+<p>There is, in general, no way to specify constructor arguments for objects in arrays:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">EquipmentPiece</span> <span style="color:#111">bestPieces</span><span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]</span><span style="color:#111">;</span>  <span style="color:#75715e">// error! No way to call EquipmentPiece ctors.
+</span><span style="color:#75715e"></span><span style="color:#111">EquipmentPiece</span> <span style="color:#f92672">*</span><span style="color:#111">bestPieces</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">EquipmentPiece</span><span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]</span><span style="color:#111">;</span>  <span style="color:#75715e">// error! same problem
+</span></code></pre></td></tr></table>
+</div>
+</div><p>There are three ways to get around the restriction:</p>
+<ol>
+<li>
+<p>Provide the necessary arguments when array is defined</p>
+<p>This solution works only for non-heap arrays:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">int</span> <span style="color:#111">ID1</span><span style="color:#111">,</span> <span style="color:#111">ID2</span><span style="color:#111">,</span> <span style="color:#111">ID3</span><span style="color:#111">,</span> <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">,</span> <span style="color:#111">ID10</span><span style="color:#111">;</span>  <span style="color:#75715e">// variables to hold equipment ID numbers
+</span><span style="color:#75715e"></span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">EquipmentPiece</span> <span style="color:#111">bestPieces</span><span style="color:#111">[</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span>  <span style="color:#75715e">// fine, ctor arguments are provided
+</span><span style="color:#75715e"></span>    <span style="color:#111">EquipmentPiece</span><span style="color:#111">(</span><span style="color:#111">ID1</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">EquipmentPiece</span><span style="color:#111">(</span><span style="color:#111">ID2</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#111">EquipmentPiece</span><span style="color:#111">(</span><span style="color:#111">ID10</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Use an array of <em>pointers</em> instead of an array of objects</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">typedef</span> <span style="color:#111">EquipmentPiece</span><span style="color:#f92672">*</span> <span style="color:#111">PEP</span><span style="color:#111">;</span>     <span style="color:#75715e">// a PEP is a pointer to an EuipmentPiece
+</span><span style="color:#75715e"></span><span style="color:#111">PEP</span> <span style="color:#111">bestPieces</span><span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]</span><span style="color:#111">;</span>              <span style="color:#75715e">// fine, no ctor called
+</span><span style="color:#75715e"></span><span style="color:#111">PEP</span> <span style="color:#f92672">*</span><span style="color:#111">bestPieces</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">PEP</span><span style="color:#111">[</span><span style="color:#ae81ff">10</span><span style="color:#111">]</span><span style="color:#111">;</span>   <span style="color:#75715e">// fine, no ctor called
+</span><span style="color:#75715e"></span>
+<span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">bestPieces</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">EquipmentPiece</span><span style="color:#111">(</span> <span style="color:#111">ID</span> <span style="color:#111">Number</span> <span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The disadvantages to this approach is:</p>
+<ul>
+<li>We have to remember to delete all the objects pointed to by the array. Otherwise there's resource leak.</li>
+<li>The total amount of memory increases due to the extra space for the pointers</li>
+</ul>
+</li>
+<li>
+<p>Use &ldquo;placement <code>new</code>&rdquo; (item 8)</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// allocate enough memory for an array of 10 EuipmentPiece obj.
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#f92672">*</span><span style="color:#111">rawMemory</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">new</span><span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#f92672">*</span><span style="color:#00a8c8">sizeof</span><span style="color:#111">(</span><span style="color:#111">EquipmentPiece</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#75715e">// make bestPieces point to the memory so it can be treated as an EquipmentPiece array
+</span><span style="color:#75715e"></span><span style="color:#111">EquipmentPiece</span> <span style="color:#f92672">*</span><span style="color:#111">bestPieces</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#111">EquipmentPiece</span><span style="color:#f92672">*</span><span style="color:#f92672">&gt;</span> <span style="color:#111">(</span><span style="color:#111">rawMemory</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#75715e">// construct the EquipmentPiece objects in the memory using placement new
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span> <span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">new</span> <span style="color:#111">(</span><span style="color:#111">bestPieces</span><span style="color:#f92672">+</span><span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#111">EquipmentPiece</span><span style="color:#111">(</span> <span style="color:#111">ID</span> <span style="color:#111">Number</span> <span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This design avoids the spece penalty of extra pointers, but the downside is that we must manually call destructors on the objects in the array, then manually deallocate the raw memory by calling <code>operator delete[]</code> (item 8), which is unfamiliar by most programmers<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">// destruct the objects in bestPieces in the inverse order
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">for</span> <span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">i</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">9</span><span style="color:#111">;</span> <span style="color:#111">i</span> <span style="color:#f92672">&gt;</span><span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span><span style="color:#111">;</span> <span style="color:#f92672">-</span><span style="color:#f92672">-</span><span style="color:#111">i</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+    <span style="color:#111">bestPieces</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span><span style="color:#111">.</span><span style="color:#f92672">~</span><span style="color:#111">EquipmentPiece</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>    
+<span style="color:#111">}</span>
+<span style="color:#75715e">// deallocate the raw memory
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">operator</span> <span style="color:#00a8c8">delete</span><span style="color:#111">[</span><span style="color:#111">]</span><span style="color:#111">(</span><span style="color:#111">rawMemory</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id="2-ineligible-for-some-template-based-container-classes">2. Ineligible for some template-based container classes</h2>
+<p>Some templates requires that the type used to instantiate the template proved a default constructor for purpose such as createing an array of the template parameter type inside the template:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Array</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Array</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">size</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">T</span> <span style="color:#f92672">*</span><span style="color:#111">data</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">Template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#111">Array</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">Array</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">size</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">data</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">T</span><span style="color:#111">[</span><span style="color:#111">size</span><span style="color:#111">]</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls T::T() for each elem. of the array
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Although careful template design can eliminate the need for a default constructor (such as <code>vector</code> template), there are templates designed with that requirement. That being the case, classes without default constructors will be incompatible with such templates.</p>
+<h2 id="3-virtual-base-classes">3. Virtual base classes</h2>
+<p>Arguments for virtual base class construcctors must be provided by the most derived class of the object being constructed. As a result, a virtual base class lacking a default constructor requires that <em>all</em> classes derived from that class must know about, understand the meaning of, and provide for the virtual base class's constructors&rsquo; arguments, which is neigher expected not appreciated by authors of derived classes.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>If we forget this requirement and use the normal array-deletion syntax <code>delete[] bestPieces</code>, the program will behave unpredictably, because deleting a pointer that didn't come from the <code>new</code> operator is undefined. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

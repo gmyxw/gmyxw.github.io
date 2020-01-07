@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[MECpp]Item-1 Distinguish Between Pointers and References - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[MECpp]Item-1 Distinguish Between Pointers and References</h1>
+  </div>
+<div class="meta">
+  <div>2018-03-22 16:47</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>More effective C++: Use references when we already have something to refer to and never want to refer to anything else, or when implementing operators whose syntactic requires us to do so.</p>
+<!-- toc -->
+<p>Both pointers and references refer to other objects indirectly, and we should distinguish their differences.</p>
+<h1 id="no-null-reference">No null reference</h1>
+<p>A reference must <em>always</em> refer to some object, which implies that references must be initialized:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">string</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rs</span><span style="color:#111">;</span> <span style="color:#75715e">// error! References must be initialized
+</span><span style="color:#75715e"></span><span style="color:#111">string</span> <span style="color:#f92672">*</span><span style="color:#111">ps</span><span style="color:#111">;</span> <span style="color:#75715e">// valid but risky uninitialized pointer
+</span><span style="color:#75715e"></span><span style="color:#111">string</span> <span style="color:#75af00">s</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">abc</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">string</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rs</span> <span style="color:#f92672">=</span> <span style="color:#111">s</span><span style="color:#111">;</span> <span style="color:#75715e">// fine
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Having known this, if we have a variable whose purpose is to refer to another object, but it is possible that there might be no object to refer to, we should make the variable a pointer; on the other hand, if the design requires that the variable must always refer to a non-null object, we choose the reference.</p>
+<p>As an implication, reference's never-nullable property save us from the burden of testing the validity before using it:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">void</span> <span style="color:#75af00">printRefDouble</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">double</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rd</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">cout</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#111">rd</span><span style="color:#111">;</span> <span style="color:#75715e">// no need to test rd.
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">printPointDouble</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#00a8c8">double</span> <span style="color:#f92672">*</span><span style="color:#111">pd</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#111">pd</span><span style="color:#111">)</span> <span style="color:#111">{</span>  <span style="color:#75715e">// check for null pointer
+</span><span style="color:#75715e"></span>        <span style="color:#111">cout</span> <span style="color:#f92672">&lt;</span><span style="color:#f92672">&lt;</span> <span style="color:#f92672">*</span><span style="color:#111">p</span><span style="color:#111">;</span>
+    <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="no-reassignment-for-reference">No reassignment for reference</h1>
+<p>Another difference is that we can reassign pointers to refer to different objects, while reference <em>always</em> refers to the one it is initialized:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">string</span> <span style="color:#75af00">s1</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Nancy</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">string</span> <span style="color:#75af00">s2</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Clancy</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+
+<span style="color:#111">string</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rs</span> <span style="color:#f92672">=</span> <span style="color:#111">s1</span><span style="color:#111">;</span>  <span style="color:#75715e">// rs refers to s1
+</span><span style="color:#75715e"></span><span style="color:#111">string</span> <span style="color:#f92672">*</span><span style="color:#111">ps</span> <span style="color:#f92672">=</span> <span style="color:#111">s1</span><span style="color:#111">;</span>  <span style="color:#75715e">// ps points to s1
+</span><span style="color:#75715e"></span>
+<span style="color:#111">rs</span> <span style="color:#f92672">=</span> <span style="color:#111">s2</span><span style="color:#111">;</span>   <span style="color:#75715e">// rs  still refers to s1, but s1&#39;s value updates to &#34;Clancy&#34;, equiv. to *ps = s2
+</span><span style="color:#75715e"></span><span style="color:#111">ps</span> <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">s2</span><span style="color:#111">;</span>  <span style="color:#75715e">// ps now points to s2, s1 remains unchanged
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In general, use pointers when</p>
+<ul>
+<li>it's possible that there's nothing to refer to (set pointers to null), or</li>
+<li>it's needed to refer to different things at different times (reassign where the pointer points)</li>
+</ul>
+<p>use reference when we know there will always be an object to refer to and we will never refer to anything else other than the initial object.</p>
+<h1 id="use-reference-for-some-operators">Use reference for some operators</h1>
+<p>Another situation to prefer reference is when we're implementing certain operators such as <code>operator[]</code>, which needs to return something that can be used as the target of an assignment:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">vector</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">int</span><span style="color:#f92672">&gt;</span> <span style="color:#111">v</span><span style="color:#111">(</span><span style="color:#ae81ff">10</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">v</span><span style="color:#111">[</span><span style="color:#ae81ff">5</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>  <span style="color:#75715e">// the target of this assignment is the return value of operator[]
+</span></code></pre></td></tr></table>
+</div>
+</div><p>If <code>operator[]</code> returned a pointer, last statement would be changed to this:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#f92672">*</span><span style="color:#111">v</span><span style="color:#111">[</span><span style="color:#ae81ff">5</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This makes <code>v</code> look like a vector of pointers, which it's not. Thus we may prefer using a reference as the return type of <code>operator[]</code> (for an exception, see MECpp-item 30).</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

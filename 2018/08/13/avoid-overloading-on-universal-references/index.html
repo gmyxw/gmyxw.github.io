@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[EMCpp]Item-26 Avoid Overloading on Universal References - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[EMCpp]Item-26 Avoid Overloading on Universal References</h1>
+  </div>
+<div class="meta">
+  <div>2018-08-13 18:54</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Overloading on universal references almost always leads to the universal reference overload being called more frequently than expected.</p>
+<!-- toc -->
+<h1 id="why-universal-references">Why universal references?</h1>
+<p>We want to introduce universal references because we can eliminate some inefficiencies via it. For example,</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">multiset</span><span style="color:#f92672">&lt;</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span><span style="color:#f92672">&gt;</span> <span style="color:#111">names</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#75af00">logAndAdd</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span><span style="color:#f92672">&amp;</span> <span style="color:#111">name</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">auto</span> <span style="color:#111">now</span> <span style="color:#f92672">=</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">chrono</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">system_clock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">now</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">log</span><span style="color:#111">(</span><span style="color:#111">now</span><span style="color:#111">,</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">logAndAdd</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#111">names</span><span style="color:#111">.</span><span style="color:#111">emplace</span><span style="color:#111">(</span><span style="color:#111">name</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// add name to global data structure. See EMCpp Item 42 for info on emplace
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">petName</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Amy</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">logAndAdd</span><span style="color:#111">(</span><span style="color:#111">petName</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// passing lvalue
+</span><span style="color:#75715e"></span><span style="color:#111">logAndAdd</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Ben</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// passing rvalue
+</span><span style="color:#75715e"></span><span style="color:#111">logAndAdd</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Candice</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// passing string literal
+</span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li><code>petName</code> is lvalue, so <code>name</code> is bound to it, and then copied into <code>names</code>. Since an lvalue was passed into <code>logAndAdd</code>, the final copy operation can not be avoided.</li>
+<li>the parameter for the second call is rvalue, where a temporary of type <code>std::string</code> is explicitly created and gets bound to <code>name</code>, and then <code>name</code> get copied into <code>names</code>. In this call, we might optimize that final copy operation with a move operation since we are dealing with an rvalue</li>
+<li>similar procedure as the second call but the <code>std::string</code> is implicitly created from string literal <code>Candice</code>. We might optimize the final copy operation by creating the <code>std::string</code> object directly inside the <code>std::multiset</code> if <code>emplace</code> could use the string literal directly as argument, so there's not even a move operation.</li>
+</ol>
+<p>To achieve such optimization, we find universal reference, accompany with <code>std::forward</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">void</span> <span style="color:#111">logAndAdd</span><span style="color:#111">(</span><span style="color:#111">T</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">name</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">auto</span> <span style="color:#111">now</span> <span style="color:#f92672">=</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">chrono</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">system_clock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">now</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  
+    <span style="color:#111">log</span><span style="color:#111">(</span><span style="color:#111">now</span><span style="color:#111">,</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">logAndAdd</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>  
+    <span style="color:#111">names</span><span style="color:#111">.</span><span style="color:#111">emplace</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">name</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="what-trouble-universal-references-introduces">What trouble universal references introduces?</h1>
+<p>Functions taking universal references are the greediest functions in C++, so the usually overload more argument types than the developer generally expects. Suppose there's another function overloading for the type of <code>int</code>:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">nameFromIdx</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">idx</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// return name corresponding to idx
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">void</span> <span style="color:#75af00">logAndAdd</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">auto</span> <span style="color:#111">now</span> <span style="color:#f92672">=</span> <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">chrono</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">system_clock</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">now</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>  
+    <span style="color:#111">log</span><span style="color:#111">(</span><span style="color:#111">now</span><span style="color:#111">,</span> <span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">logAndAdd</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>  
+    <span style="color:#111">names</span><span style="color:#111">.</span><span style="color:#111">emplace</span><span style="color:#111">(</span><span style="color:#111">nameFromIdx</span><span style="color:#111">(</span><span style="color:#111">idx</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">logAndAdd</span><span style="color:#111">(</span><span style="color:#ae81ff">22</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls int overload
+</span><span style="color:#75715e"></span><span style="color:#111">logAndAdd</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">David</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// calls T&amp;&amp; overload
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">short</span> <span style="color:#111">nameIdx</span><span style="color:#111">;</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">logAndAdd</span><span style="color:#111">(</span><span style="color:#111">nameIdx</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// error!
+</span></code></pre></td></tr></table>
+</div>
+</div><p>We generally assume the last call will invoke the <code>int</code> overload, but instead it will invoke the <code>T&amp;&amp;</code> one, since the universal reference overload version exactly matches the <code>short</code> argument by deduce <code>T</code> to be <code>short&amp;</code>, while <code>int</code> version has to match <code>short</code> with a promotion. As a result, the exact match beats a match with a promotion. However, within the <code>T&amp;&amp;</code> overload, the parameter <code>name</code> with type <code>short&amp;</code> first get passed into <code>std::forward</code>, which will not get casted into a rvalue since <code>name</code> is initialized with an lvalue (refer to EMCpp item 24), and then get passed into <code>emplace</code> member function on <code>names</code>, which finally forwards it to the <code>std::string</code> constructor, and we get an error here because no constructor for <code>std::string</code> will take a short.</p>
+<h1 id="more-problematic-perfect-forwarding-consturctors">More problematic: Perfect-forwarding consturctors</h1>
+<p>Perfect-forwarding constructors are typically better matches than copy constructors for non-<code>const</code> lvalues, and they can hijack derived class calls to base class copy and move constructors, which makes them problematic. For example:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Person</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">typename</span> <span style="color:#111">T</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#00a8c8">explicit</span> <span style="color:#111">Person</span><span style="color:#111">(</span><span style="color:#111">T</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">n</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span> <span style="color:#111">name</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">forward</span><span style="color:#f92672">&lt;</span><span style="color:#111">T</span><span style="color:#f92672">&gt;</span><span style="color:#111">(</span><span style="color:#111">n</span><span style="color:#111">)</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#111">}</span>  <span style="color:#75715e">// perfect forwarding ctor;
+</span><span style="color:#75715e"></span>    
+    <span style="color:#00a8c8">explicit</span> <span style="color:#75af00">Person</span><span style="color:#111">(</span><span style="color:#00a8c8">int</span> <span style="color:#111">idx</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span> <span style="color:#111">name</span><span style="color:#111">(</span><span style="color:#111">nameFromIdx</span><span style="color:#111">(</span><span style="color:#111">idx</span><span style="color:#111">)</span><span style="color:#111">)</span> <span style="color:#111">{</span><span style="color:#111">}</span> <span style="color:#75715e">// int ctor
+</span><span style="color:#75715e"></span>    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">string</span> <span style="color:#111">name</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Remember in EMCpp item 17 we mensioned that, under appropriate conditions, the compiler will generate copy and move constructors for us, even if the class contains a templatized constructor that could be instantiated to produce the signature of the copy or move constructor. In that case, we get following two compiler-generated member functions:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Person</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Person</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// copy ctor generated by compiler
+</span><span style="color:#75715e"></span><span style="color:#111">Person</span><span style="color:#111">(</span><span style="color:#111">Person</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// move ctor generated by compiler
+</span></code></pre></td></tr></table>
+</div>
+</div><p>And now comes the problem: these two member functions will easily get shadowed by the universal reference constructor:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Person</span> <span style="color:#75af00">p1</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Edward</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">auto</span> <span style="color:#75af00">cloneOfP1</span><span style="color:#111">(</span><span style="color:#111">p1</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// create new Person from p; 
+</span><span style="color:#75715e"></span>                     <span style="color:#75715e">// T&amp;&amp; ctor get invoked: T is deduces as &#34;Person&amp;&#34;, better than copy ctor&#39;s type &#34;const Person&amp;&#34;
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">const</span> <span style="color:#111">Person</span> <span style="color:#75af00">p2</span><span style="color:#111">(</span><span style="color:#d88200"></span><span style="color:#d88200">&#34;</span><span style="color:#d88200">Fernando</span><span style="color:#d88200">&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">auto</span> <span style="color:#75af00">cloneOfP2</span><span style="color:#111">(</span><span style="color:#111">p2</span><span style="color:#111">)</span><span style="color:#111">;</span>  <span style="color:#75715e">// fine; copy ctor get invoked.
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Moreover, the inheritance makes the mess even worse:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">SpecialPerson</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">public</span> <span style="color:#111">Person</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">SpecialPerson</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">SpecialPerson</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span> <span style="color:#111">Person</span><span style="color:#111">(</span><span style="color:#111">rhs</span><span style="color:#111">)</span>  <span style="color:#75715e">// calls base class forwarding ctor
+</span><span style="color:#75715e"></span>    <span style="color:#111">{</span> <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">}</span>
+    <span style="color:#111">SpecialPerson</span><span style="color:#111">(</span><span style="color:#111">SpecialPerson</span><span style="color:#f92672">&amp;</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>
+    <span style="color:#f92672">:</span> <span style="color:#111">Person</span><span style="color:#111">(</span><span style="color:#111">std</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#111">move</span><span style="color:#111">(</span><span style="color:#111">rhs</span><span style="color:#111">)</span><span style="color:#111">)</span> <span style="color:#75715e">// calls base class forwarding ctor
+</span><span style="color:#75715e"></span>    <span style="color:#111">{</span> <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span> <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Here, the derived class will call the perfect forwarding constructor for their copy and move constructors, because they are using arguments of type <code>SpecialPerson</code> to pass to their base class, and base class's forwarding constructor will happily instantiate an exact match for this call. Since there's no <code>std::string</code> constructor taking a <code>SpecialPerson</code>, the code won't compile.</p>
+<h1 id="conclusion">Conclusion</h1>
+<p>Overloading on universal reference is something we should avoid if possible. However, if we do want a function that forwards most argument types, while still support special treatment for some special types, we can find some alternatives to achieve this goal in EMCpp item 27.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

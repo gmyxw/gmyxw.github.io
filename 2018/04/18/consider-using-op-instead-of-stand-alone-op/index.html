@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>[MECpp]Item-22 Consider Using op= Instead of Stand Alone op - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>[MECpp]Item-22 Consider Using op= Instead of Stand Alone op</h1>
+  </div>
+<div class="meta">
+  <div>2018-04-18 14:09</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Assignment versions of operators (such as <code>operator+=</code>) tend to be more efficient than stand-alone versions of those operators (e.g., <code>operator+</code>).</p>
+<!-- toc -->
+<h1 id="efficiency-difference-between-op-and-stand-alone-op">Efficiency difference between <code>op=</code> and stand-alone <code>op</code></h1>
+<ul>
+<li>In general, assignment versions of operators are more effiecient than stand-alone versions, because
+<ol>
+<li>stand-alone versions must typically return a new object, and that costs us the construction and destruction of a temporary (MECpp item 19 and 20)</li>
+<li>assignment versions of operators write to their left-hand argument, so there is no need to generate a temporary to hold the operator's return value</li>
+</ol>
+</li>
+<li>By offering assignment versions of operators as well as stand-alone versions, we allow clients of our classes to make the different trade-off between efficiency and convenience:</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Rational</span> <span style="color:#111">a</span><span style="color:#111">,</span> <span style="color:#111">b</span><span style="color:#111">,</span> <span style="color:#111">c</span><span style="color:#111">,</span> <span style="color:#111">d</span><span style="color:#111">,</span> <span style="color:#111">result</span><span style="color:#111">;</span>
+<span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">a</span> <span style="color:#f92672">+</span> <span style="color:#111">b</span> <span style="color:#f92672">+</span> <span style="color:#111">c</span> <span style="color:#f92672">+</span> <span style="color:#111">d</span><span style="color:#111">;</span>  <span style="color:#75715e">// 3 potential temporary objects, one for each call to operator+
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This version is easy to write, debug, and maintain, and it offers acceptable performance about 80% of the time (MECpp item 16).</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">result</span> <span style="color:#f92672">=</span> <span style="color:#111">a</span><span style="color:#111">;</span>    <span style="color:#75715e">// no temporary
+</span><span style="color:#75715e"></span><span style="color:#111">result</span> <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#111">b</span><span style="color:#111">;</span>   <span style="color:#75715e">// no temporary
+</span><span style="color:#75715e"></span><span style="color:#111">result</span> <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#111">c</span><span style="color:#111">;</span>   <span style="color:#75715e">// no temporary
+</span><span style="color:#75715e"></span><span style="color:#111">result</span> <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#111">d</span><span style="color:#111">;</span>   <span style="color:#75715e">// no temporary
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This version is more efficient.</p>
+<p>In summary, as a library designer, we should offer both, and as an application developer, we should consider using assignment versions of operators instead of stand-alone versions when trying to deal with the critical 20% code.</p>
+<h1 id="relationship-between-op-and-stand-alone-op">Relationship between <code>op=</code> and stand-alone <code>op</code></h1>
+<p>To ensure the natural relationship between the assignment version of an operator (e.g., <code>operator+=</code>) and the stand-alone version (e.g., <code>operator+</code>) exists, we can implement the latter in terms of the former (MECpp item 6):</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Rational</span> <span style="color:#111">{</span>
+<span style="color:#00a8c8">public</span><span style="color:#f92672">:</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">+</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">+</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">lhs</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">Rational</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">Rational</span><span style="color:#111">(</span><span style="color:#111">lhs</span><span style="color:#111">)</span> <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#111">rhs</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Further more, if we don't mind putting all stand-alone operators at global scope, we can use templates to eliminate the need to write the stand-alone functions:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">template</span><span style="color:#f92672">&lt;</span><span style="color:#00a8c8">class</span> <span style="color:#75af00">T</span><span style="color:#f92672">&gt;</span>
+<span style="color:#00a8c8">const</span> <span style="color:#111">T</span> <span style="color:#00a8c8">operator</span><span style="color:#f92672">+</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">T</span><span style="color:#f92672">&amp;</span> <span style="color:#111">lhs</span><span style="color:#111">,</span> <span style="color:#00a8c8">const</span> <span style="color:#111">T</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#75af00">T</span><span style="color:#111">(</span><span style="color:#111">lhs</span><span style="color:#111">)</span> <span style="color:#f92672">+</span><span style="color:#f92672">=</span> <span style="color:#111">rhs</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>A few points worth noting in this implementation of <code>operator+</code>:</p>
+<ul>
+<li><code>operator+=</code> is implemented (elsewhere) from scratch, and <code>operator+</code> calls it to provide its functionality, so that only the assignment versions need to be maintained.</li>
+<li>Assuming the assignment version is in the class's public interface, there is no need for the stand-alone operators to be friends of the class.</li>
+<li>Without any named object, this implementation may take use of the return value optimization (MECpp item 20) <sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Although it is possible that <code>return T(lhs) += rhs;</code> may be more complex than most compilers are willing to subject to the return value optimization. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

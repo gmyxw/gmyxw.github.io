@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Item-11 Handle self assignment in operator= - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Item-11 Handle self assignment in operator=</h1>
+  </div>
+<div class="meta">
+  <div>2018-01-30 18:34</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/technique/">#technique</a></span>
+      <span><a href="https://sy123.ml/tags/cpp/">#cpp</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>Solve self assignment situation in operator= by comparing addresses of source and target objects, careful statement ordering, and copy-and-<code>swap</code>.</p>
+<p>When operator= applies on more than one object, two or more of the objects may be the same:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">a</span><span style="color:#111">[</span><span style="color:#111">i</span><span style="color:#111">]</span> <span style="color:#f92672">=</span> <span style="color:#111">a</span><span style="color:#111">[</span><span style="color:#111">j</span><span style="color:#111">]</span>  <span style="color:#75715e">// potential assignment to self
+</span><span style="color:#75715e"></span><span style="color:#f92672">*</span><span style="color:#111">px</span> <span style="color:#f92672">=</span> <span style="color:#f92672">*</span><span style="color:#111">py</span><span style="color:#111">;</span>   <span style="color:#75715e">// potential assignment to self
+</span></code></pre></td></tr></table>
+</div>
+</div><p>This is the result of <em>aliasing</em> (having more than one way to refer to an object). In general, operations on references or pointers to multiple objects of the same type (or objects of different types derived from the same base class) need to consider that the objects might be the same.</p>
+<p>When trying to manage resources manually rather than to take advantage of resource-managing objects (item 13, item 14), it is possible to accidentally release a resource before being done using it:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Bitmap</span><span style="color:#111">{</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">}</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span><span style="color:#111">{</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+<span style="color:#00a8c8">private</span><span style="color:#f92672">:</span>
+    <span style="color:#111">Bitmap</span> <span style="color:#f92672">*</span><span style="color:#111">pb</span><span style="color:#111">;</span>  <span style="color:#75715e">// ptr to a heap-allocated object
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span>
+<span style="color:#111">Widget</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>  <span style="color:#75715e">// unsafe impl. of operator=
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>
+    <span style="color:#00a8c8">delete</span> <span style="color:#111">pb</span><span style="color:#111">;</span>                <span style="color:#75715e">// stop using cur. bitmap
+</span><span style="color:#75715e"></span>    <span style="color:#111">pb</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Bitmap</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">rhs</span><span style="color:#111">.</span><span style="color:#111">pb</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// start using a copy of rhs&#39;s bitmap
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">;</span>             <span style="color:#75715e">// item 10
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>When <code>*this</code> (the target of the assignment) and <code>rhs</code> (the source of the assignment) are the same object, <code>delete</code> destroys both of them in the begining, resulting to the fact that <code>this</code> points to a deleted object instead of being unchanged by the assignment to self. Moreover, besides self-assignment-unsafe, this implementation of operator= is also exception-unsafe.</p>
+<p>There are three possible ways to solve the problem:</p>
+<ol>
+<li>Identity test at the top (solve self-assignment-unsafe)</li>
+<li>A careful ordering of statements (solve both self-assignment-unsafe and exception-unsafe)</li>
+<li>Copy and swap. (solve both potential unsafe situation)</li>
+</ol>
+<h4 id="1-identity-test">1. Identity test</h4>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">Widget</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#00a8c8">if</span> <span style="color:#111">(</span><span style="color:#00a8c8">this</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span><span style="color:#111">rhs</span><span style="color:#111">)</span> <span style="color:#00a8c8">return</span> <span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">;</span> <span style="color:#75715e">// test: if a self-assignment, do nothing
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">delete</span> <span style="color:#111">pb</span><span style="color:#111">;</span>
+    <span style="color:#111">pb</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Bitmap</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">rhs</span><span style="color:#111">.</span><span style="color:#111">pb</span><span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The problem here is that once the <code>new Bitmap</code> expression yields an exception (due to insufficient memory or <code>Bitmap</code>'s copy constructor throwing one), <code>this</code> will end up refer to a deleted <code>Bitmap</code>, which is toxic for there's no way to safely delete them or even safely read them.</p>
+<h4 id="2-careful-reorder">2. Careful reorder</h4>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">Widget</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">Bitmap</span> <span style="color:#f92672">*</span><span style="color:#111">pOrig</span> <span style="color:#f92672">=</span> <span style="color:#111">pb</span><span style="color:#111">;</span>  <span style="color:#75715e">// remember original pb
+</span><span style="color:#75715e"></span>    <span style="color:#111">pb</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">new</span> <span style="color:#111">Bitmap</span><span style="color:#111">(</span><span style="color:#f92672">*</span><span style="color:#111">rhs</span><span style="color:#111">.</span><span style="color:#111">pb</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// point pb to a copy of rhs&#39; bitmap
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">delete</span> <span style="color:#111">pOrig</span><span style="color:#111">;</span>  <span style="color:#75715e">// delete the original pb
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Under this implementation, even it <code>new Bitmap</code> throws an exception, <code>pb</code> and <code>this</code> remain unchanged. Moreover, it does work even without the identity test.</p>
+<p>Considering efficiency, it may be sensible to put the identity test back at the top. However, considering the frequency of self-assignment situation as well as the longer codes and more branches in the flow of control, it may actually decrease runtime speed (at least the effectiveness of instruction prefetching, caching, and pipelining can be reduced).</p>
+<h4 id="3-copy-and-swap">3. Copy and swap</h4>
+<p>This is an alternative way to the above careful reordering technique, which is closely associated with exception safety (item 29).</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#00a8c8">class</span> <span style="color:#75af00">Widget</span> <span style="color:#111">{</span>
+    <span style="color:#111">.</span><span style="color:#111">.</span><span style="color:#111">.</span>
+    <span style="color:#00a8c8">void</span> <span style="color:#111">swap</span><span style="color:#111">(</span><span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span><span style="color:#111">;</span> <span style="color:#75715e">// exchange *this&#39;s and rhs&#39;s data; see item 29 for details
+</span><span style="color:#75715e"></span><span style="color:#111">}</span><span style="color:#111">;</span>
+
+<span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">Widget</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#00a8c8">const</span> <span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>
+<span style="color:#111">{</span>
+    <span style="color:#111">Widget</span> <span style="color:#75af00">temp</span><span style="color:#111">(</span><span style="color:#111">rhs</span><span style="color:#111">)</span><span style="color:#111">;</span>   <span style="color:#75715e">// make a copy
+</span><span style="color:#75715e"></span>    <span style="color:#111">swap</span><span style="color:#111">(</span><span style="color:#111">temp</span><span style="color:#111">)</span><span style="color:#111">;</span>         <span style="color:#75715e">// swap *this&#39;s data with the copy&#39;s
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>A variation taking advantage of the fact that passing by value makes a copy of it (item 20):</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#111">Widget</span><span style="color:#f92672">&amp;</span> <span style="color:#111">Widget</span><span style="color:#f92672">:</span><span style="color:#f92672">:</span><span style="color:#00a8c8">operator</span><span style="color:#f92672">=</span><span style="color:#111">(</span><span style="color:#111">Widget</span> <span style="color:#111">rhs</span><span style="color:#111">)</span>  <span style="color:#75715e">// pass by value, rhs is a copy of the object passed in
+</span><span style="color:#75715e"></span><span style="color:#111">{</span>
+    <span style="color:#111">swap</span><span style="color:#111">(</span><span style="color:#111">rhs</span><span style="color:#111">)</span><span style="color:#111">;</span>         <span style="color:#75715e">// swap *this&#39;s data with the copy&#39;s
+</span><span style="color:#75715e"></span>    <span style="color:#00a8c8">return</span> <span style="color:#f92672">*</span><span style="color:#00a8c8">this</span><span style="color:#111">;</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>This variation sacrifices the clarity but may let compilers generate more efficient code by moving the copying operation from the body of the function to construction of the parameter.</p></div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>
