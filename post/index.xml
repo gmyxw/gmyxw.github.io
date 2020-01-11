@@ -24,18 +24,14 @@
 socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或酸酸只要是通过socket通信即可,前提是满足已经能够正常代理访问.
 第二种是http代理,即通信方式为http而不是socket http://127.0.0.1:12333 详细举例:
 这里的客户端有两种方式,一个是socket通信,一个是http通信,两个方式对应的端口不同,在下文中不同代理方式设置的端口也不同. 实在不懂的记住:先把代理调试通,然后就直接打开switchyomega看看自己的设置,都是一样的
--方法一：（推荐使用） 为什么说这个方法推荐使用呢？因为他只作用于当前终端中，不会影响环境，而且命令比较简单 在终端中直接运行：
- export http_proxy=http://proxyAddress:port 如果你是SSR,并且走的http的代理端口是12333，想执行wget或者curl来下载国外的东西，可以使用如下命令：
-  export http_proxy=http://127.0.0.1:12333 如果是https那么就经过如下命令：
-  export https_proxy=http://127.0.0.1:12333
- 方法二 ： 这个办法的好处是把代理服务器永久保存了，下次就可以直接用了 把代理服务器地址写入shell配置文件.bashrc或者.zshrc 直接在.bashrc或者.zshrc添加下面内容
- export http_proxy=&amp;quot;http://localhost:port&amp;rdquo; export https_proxy=&amp;quot;http://localhost:port&amp;rdquo; 或者走socket5协议（ss,ssr）的话，代理端口是1080
-  export http_proxy=&amp;quot;socks5://127.0.0.1:1080&amp;rdquo; export https_proxy=&amp;quot;socks5://127.0.0.1:1080&amp;rdquo; 或者干脆直接设置ALL_PROXY
-  export ALL_PROXY=socks5://127.0.0.1:1080 最后在执行如下命令应用设置
-  source ~/.bashrc 或者通过设置alias简写来简化操作，每次要用的时候输入setproxy，不用了就unsetproxy。
-  alias setproxy=&amp;quot;export ALL_PROXY=socks5://127.0.0.1:1080&amp;rdquo; alias unsetproxy=&amp;quot;unset ALL_PROXY&amp;rdquo;
- 方法三: 改相应工具的配置，比如apt的配置
- sudo vim /etc/apt/apt.</description>
+方法一：（推荐使用） 为什么说这个方法推荐使用呢？因为他只作用于当前终端中，不会影响环境，而且命令比较简单 在终端中直接运行：
+1  export http_proxy=http://proxyAddress:port   如果你是SSR,并且走的http的代理端口是12333，想执行wget或者curl来下载国外的东西，可以使用如下命令：
+1  export http_proxy=http://127.0.0.1:12333   如果是https那么就经过如下命令：
+1  export https_proxy=http://127.0.0.1:12333   方法二 ： 这个办法的好处是把代理服务器永久保存了，下次就可以直接用了 把代理服务器地址写入shell配置文件.bashrc或者.zshrc 直接在.bashrc或者.zshrc添加下面内容
+1 2  export http_proxy=&amp;#34;http://localhost:port&amp;#34; export https_proxy=&amp;#34;http://localhost:port&amp;#34;   或者走socket5协议（ss,ssr）的话，代理端口是1080
+1 2  export http_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; export https_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34;   或者干脆直接设置ALL_PROXY
+1  export ALL_PROXY=socks5://127.0.0.1:1080   最后在执行如下命令应用设置
+1  source ~/.</description>
     </item>
     
     <item>
@@ -44,7 +40,7 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
       <pubDate>Fri, 10 Jan 2020 07:48:32 +0800</pubDate>
       
       <guid>https://sy123.ml/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</guid>
-      <description>百度云分享下载链接   最好是先复制到自己的网盘。
+      <description>  最好是先复制到自己的网盘。
   点击分享，生成链接。
   点击链接，进入页面。在console模式下输入如下代码：
   1 2 3 4 5 6 7 8 9  $.ajax({ type: &amp;#34;POST&amp;#34;, url: &amp;#34;/api/sharedownload?sign=&amp;#34;+yunData.SIGN+&amp;#34;&amp;amp;timestamp=&amp;#34;+yunData.TIMESTAMP, data: &amp;#34;encrypt=0&amp;amp;product=share&amp;amp;uk=&amp;#34;+yunData.SHARE_UK+&amp;#34;&amp;amp;primaryid=&amp;#34;+yunData.SHARE_ID+&amp;#34;&amp;amp;fid_list=%5B&amp;#34;+yunData.FS_ID+&amp;#34;%5D&amp;#34;, dataType: &amp;#34;json&amp;#34;, success: function(d){ window.location.href = d.list[0].dlink; } });   </description>

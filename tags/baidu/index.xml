@@ -17,7 +17,7 @@
       <pubDate>Fri, 10 Jan 2020 07:48:32 +0800</pubDate>
       
       <guid>https://sy123.ml/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</guid>
-      <description>百度云分享下载链接   最好是先复制到自己的网盘。
+      <description>  最好是先复制到自己的网盘。
   点击分享，生成链接。
   点击链接，进入页面。在console模式下输入如下代码：
   1 2 3 4 5 6 7 8 9  $.ajax({ type: &amp;#34;POST&amp;#34;, url: &amp;#34;/api/sharedownload?sign=&amp;#34;+yunData.SIGN+&amp;#34;&amp;amp;timestamp=&amp;#34;+yunData.TIMESTAMP, data: &amp;#34;encrypt=0&amp;amp;product=share&amp;amp;uk=&amp;#34;+yunData.SHARE_UK+&amp;#34;&amp;amp;primaryid=&amp;#34;+yunData.SHARE_ID+&amp;#34;&amp;amp;fid_list=%5B&amp;#34;+yunData.FS_ID+&amp;#34;%5D&amp;#34;, dataType: &amp;#34;json&amp;#34;, success: function(d){ window.location.href = d.list[0].dlink; } });   </description>
