@@ -49,12 +49,12 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">Clean  
-List  
-Select  
-Create  
-Format  
-<span style="color:#00a8c8">Exit</span>
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#75af00">Clean</span>  
+<span style="color:#75af00">List</span>  
+<span style="color:#75af00">Select</span>  
+<span style="color:#75af00">Create</span>  
+<span style="color:#75af00">Format</span>  
+<span style="color:#75af00">Exit</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这些命令的使用方法可以在 Diskpart 命令提示符下键入 Help 或者通过网络查询，如果不清楚可以查看。</p>
@@ -78,21 +78,21 @@ Format
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">List Disk：显示本机的所有磁盘，以便正确操作目标磁盘  
-Select Disk 1：选择 0 号磁盘  
-Clean ：清除 0 号磁盘上的所有分区  
-Create Partition Primary Size=512000 ：创建主分区，容量为：512000MB  
-Active：激活主分区  
-Format Quick：快速格式化当前分区  
-Create Partition Extended：创建扩展分区  
-Create Partition Logical Size=512000：创建逻辑分区一，容量为：512000MB  
-Format Quick：快速格式化当前分区  
-Create Partition Logical Size=512000：创建逻辑分区二，容量为：512000MB  
-Format Quick ：快速格式化当前分区  
-Create Partition Logical ：创建逻辑分区三，大小为剩余的容量  
-Format Quick ：快速格式化当前分区  
-<span style="color:#00a8c8">Exit</span> ：退出Diskpart命令环境  
-<span style="color:#00a8c8">Exit</span> ：退出命令窗口
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#75af00">List</span> <span style="color:#75af00">Disk：显示本机的所有磁盘，以便正确操作目标磁盘</span>  
+<span style="color:#75af00">Select</span> <span style="color:#75af00">Disk</span> <span style="color:#75af00">1：选择</span> <span style="color:#ae81ff">0</span> <span style="color:#75af00">号磁盘</span>  
+<span style="color:#75af00">Clean</span> <span style="color:#75af00">：清除</span> <span style="color:#ae81ff">0</span> <span style="color:#75af00">号磁盘上的所有分区</span>  
+<span style="color:#75af00">Create</span> <span style="color:#75af00">Partition</span> <span style="color:#75af00">Primary</span> <span style="color:#75af00">Size=512000</span> <span style="color:#75af00">：创建主分区，容量为：512000MB</span>  
+<span style="color:#75af00">Active：激活主分区</span>  
+<span style="color:#75af00">Format</span> <span style="color:#75af00">Quick：快速格式化当前分区</span>  
+<span style="color:#75af00">Create</span> <span style="color:#75af00">Partition</span> <span style="color:#75af00">Extended：创建扩展分区</span>  
+<span style="color:#75af00">Create</span> <span style="color:#75af00">Partition</span> <span style="color:#75af00">Logical</span> <span style="color:#75af00">Size=512000：创建逻辑分区一，容量为：512000MB</span>  
+<span style="color:#75af00">Format</span> <span style="color:#75af00">Quick：快速格式化当前分区</span>  
+<span style="color:#75af00">Create</span> <span style="color:#75af00">Partition</span> <span style="color:#75af00">Logical</span> <span style="color:#75af00">Size=512000：创建逻辑分区二，容量为：512000MB</span>  
+<span style="color:#75af00">Format</span> <span style="color:#75af00">Quick</span> <span style="color:#75af00">：快速格式化当前分区</span>  
+<span style="color:#75af00">Create</span> <span style="color:#75af00">Partition</span> <span style="color:#75af00">Logical</span> <span style="color:#75af00">：创建逻辑分区三，大小为剩余的容量</span>  
+<span style="color:#75af00">Format</span> <span style="color:#75af00">Quick</span> <span style="color:#75af00">：快速格式化当前分区</span>  
+<span style="color:#75af00">Exit</span> <span style="color:#75af00">：退出Diskpart命令环境</span>  
+<span style="color:#75af00">Exit</span> <span style="color:#75af00">：退出命令窗口</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这里要注意的是 <code>Diskpart</code> 分区时，一定要选对目标磁盘，当前被选中的磁盘 / 分区前面会有 * 号标志，可以用 <code>List Disk / Partition</code> 来进行查看。</p>
@@ -118,23 +118,23 @@ Format Quick ：快速格式化当前分区
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cmd" data-lang="cmd">1、在安装win7系统到分区这一步的时候，按住shift+F10调出命令行窗口
-2、输入命令：diskpart    ###启动diskpart
-3、输入命令：list disk     ###查看所有磁盘，一般情况下，都只有一个磁盘，列表里也只会列出一项 磁盘0
-4、输入命令：select disk 0   ###选择要操作的磁盘，并将该磁盘设置为当前操作磁盘，只有一块磁盘的话，选择0，如果你有多个磁盘的话，自己根据需要进行选择
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#75af00">1、在安装win7系统到分区这一步的时候，按住shift+F10调出命令行窗口</span>
+<span style="color:#75af00">2、输入命令：diskpart</span>    <span style="color:#75af00">###启动diskpart</span>
+<span style="color:#75af00">3、输入命令：list</span> <span style="color:#75af00">disk</span>     <span style="color:#75af00">###查看所有磁盘，一般情况下，都只有一个磁盘，列表里也只会列出一项</span> <span style="color:#75af00">磁盘0</span>
+<span style="color:#75af00">4、输入命令：select</span> <span style="color:#75af00">disk</span> <span style="color:#ae81ff">0</span>   <span style="color:#75af00">###选择要操作的磁盘，并将该磁盘设置为当前操作磁盘，只有一块磁盘的话，选择0，如果你有多个磁盘的话，自己根据需要进行选择</span>
  
-5、输入命令：clean        ###清除该磁盘上的所有分区
-6、输入命令：create partition primary size=20480   ###创建主分区，size默认单位MB，不加size则会将剩余的所有磁盘空间创建为一个主分区，扩展与逻辑分区类似
+<span style="color:#75af00">5、输入命令：clean</span>        <span style="color:#75af00">###清除该磁盘上的所有分区</span>
+<span style="color:#75af00">6、输入命令：create</span> <span style="color:#75af00">partition</span> <span style="color:#75af00">primary</span> <span style="color:#75af00">size=20480</span>   <span style="color:#75af00">###创建主分区，size默认单位MB，不加size则会将剩余的所有磁盘空间创建为一个主分区，扩展与逻辑分区类似</span>
  
-7、输入命令：active        ###将当前主分区标为要操作的主分区
-8、输入命令：format quick     ###快速格式化分区
-如果你准备创建多个主分区，那么重复6、7、8步骤就可以了，如果只创建一个主分区，继续下面的步骤
+<span style="color:#75af00">7、输入命令：active</span>        <span style="color:#75af00">###将当前主分区标为要操作的主分区</span>
+<span style="color:#75af00">8、输入命令：format</span> <span style="color:#75af00">quick</span>     <span style="color:#75af00">###快速格式化分区</span>
+<span style="color:#75af00">如果你准备创建多个主分区，那么重复6、7、8步骤就可以了，如果只创建一个主分区，继续下面的步骤</span>
  
-9、输入命令：create partition extended      ###将剩余空间全部创建为扩展分区
-10、输入命令：create partition logical  ###将扩展分区的全部剩余空间创建为一个逻辑分区，你也可以指定size参数，将剩余空间创建出多个逻辑分区 
-11、输入命令：format qucik   ###快速格式化该逻辑分区
-12、输入命令：exit   ###退出diskpart
-13、输入命令：exit   ###退出命令行窗口
+<span style="color:#75af00">9、输入命令：create</span> <span style="color:#75af00">partition</span> <span style="color:#75af00">extended</span>      <span style="color:#75af00">###将剩余空间全部创建为扩展分区</span>
+<span style="color:#75af00">10、输入命令：create</span> <span style="color:#75af00">partition</span> <span style="color:#75af00">logical</span>  <span style="color:#75af00">###将扩展分区的全部剩余空间创建为一个逻辑分区，你也可以指定size参数，将剩余空间创建出多个逻辑分区</span> 
+<span style="color:#75af00">11、输入命令：format</span> <span style="color:#75af00">qucik</span>   <span style="color:#75af00">###快速格式化该逻辑分区</span>
+<span style="color:#75af00">12、输入命令：exit</span>   <span style="color:#75af00">###退出diskpart</span>
+<span style="color:#75af00">13、输入命令：exit</span>   <span style="color:#75af00">###退出命令行窗口</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>回到win7安装分区步骤，点击刷新，选择你要安装的磁盘分区进行安装就可以了。
