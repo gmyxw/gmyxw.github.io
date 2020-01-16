@@ -35,7 +35,7 @@
   </div>
 <div class="content">
   <p>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置git的话可以直接在文章最后找到git的设置代理的方法。</p>
-<h1 id="heading">前期准备:</h1>
+<h1 id="前期准备">前期准备:</h1>
 <p>认识代理的方式:代理是通过客户端与服务端通信,传输服务端能够访问到的资源文件,再由服务端客户端通信返回给客户端,从而间接访问服务端能访问的资源.</p>
 <p>以socket5通信为例子,我们通过客户端(自己想一想酸酸乳)向服务端发送socket通信,服务端访问资源再由socket通信返回给客户端.但是这里面的通信设置必须通过端口来进行通信,类似switchyomega设置过程一样,我们会设定走的代理方式是127.0.0.1:1080;这个意思就是通过本地的1080端口来进行通信.具体在终端上如何使用呢?</p>
 <p>如果默认是socket5通信且端口是1080,即127.0.01:1080的方式
@@ -47,7 +47,7 @@ http://127.0.0.1:12333
 详细举例:</p>
 <p>这里的客户端有两种方式,一个是socket通信,一个是http通信,两个方式对应的端口不同,在下文中不同代理方式设置的端口也不同.
 实在不懂的记住:先把代理调试通,然后就直接打开switchyomega看看自己的设置,都是一样的</p>
-<h1 id="heading-1">方法一：（推荐使用）</h1>
+<h1 id="方法一推荐使用">方法一：（推荐使用）</h1>
 <p>为什么说这个方法推荐使用呢？因为他只作用于当前终端中，不会影响环境，而且命令比较简单
 在终端中直接运行：</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -76,7 +76,7 @@ http://127.0.0.1:12333
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#111">export</span> <span style="color:#111">https_proxy</span><span style="color:#f92672">=</span>http://127.0.0.1:12333
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="-">方法二 ：</h1>
+</div><h1 id="方法二-">方法二 ：</h1>
 <p>这个办法的好处是把代理服务器永久保存了，下次就可以直接用了
 把代理服务器地址写入shell配置文件.bashrc或者.zshrc 直接在.bashrc或者.zshrc添加下面内容</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
@@ -127,7 +127,7 @@ http://127.0.0.1:12333
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#111">alias</span> <span style="color:#111">setproxy</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;export ALL_PROXY=socks5://127.0.0.1:1080&#34;</span> <span style="color:#111">alias</span> <span style="color:#111">unsetproxy</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;unset ALL_PROXY&#34;</span>
 </code></pre></td></tr></table>
 </div>
-</div><h1 id="heading-2">方法三:</h1>
+</div><h1 id="方法三">方法三:</h1>
 <p>改相应工具的配置，比如apt的配置</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
