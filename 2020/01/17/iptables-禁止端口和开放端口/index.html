@@ -493,8 +493,84 @@ iptables -I INPUT ! -s 127.0.0.1 -j DROP
   通过配置iptables还可以在有限程度上防止CC攻击、DDOS等攻击，它可用的一些模块还有：</p>
 <p>string： 可以匹配链路中出现的特定字符；
 time： 对链路的时间规则；
-limit： 对IP的并发限制；
-这在后续博文中可能有所涉及。</p>
+limit： 对IP的并发限制；</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># At first you should always flush to be sure whats already defined… nothing</span>
+
+iptables -F
+
+<span style="color:#75715e"># Then set the default policy of the INPUT chain to DROP if the end is reached and no rule matched:</span>
+
+iptables -P INPUT DROP
+
+<span style="color:#75715e"># To ensure the loopback is not affacted you should add</span>
+
+iptables -A INPUT -i lo -p all -j ACCEPT
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+<span style="color:#75715e"># to allow all traffic on the lo-if and every incomming traffic for connections you etablished. After that add every rule you need for your services (don&#39;t forget to open ssh if you need it! else you&#39;re out):</span>
+
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">1962</span> -j ACCEPT 
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">999</span> -j ACCEPT 
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">12020</span> -j ACCEPT 
+
+<span style="color:#75715e"># A little trick I do to keep myself and others from accidentally drilling holes into the security I finally add:</span>
+
+iptables -A INPUT -j DROP
+
+<span style="color:#75715e"># This line matches everything for the INPUT chain and the policy should not get anything. advantage of this is even if you add an ACCEPT-rule sometime after initializing your ruleset it will never become checked because everything is droped before. so it ensures you have to keep everything in one place.</span>
+
+<span style="color:#75715e"># For your question the whole thing looks like this in summary:</span>
+
+iptables -F
+iptables -P INPUT DROP
+iptables -A INPUT -i lo -p all -j ACCEPT
+iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">1962</span> -j ACCEPT 
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">999</span> -j ACCEPT 
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">12020</span> -j ACCEPT 
+iptables -A INPUT -j DROP
+</code></pre></td></tr></table>
+</div>
+</div><p>这在后续博文中可能有所涉及。</p>
 </div>
 
   </article>
