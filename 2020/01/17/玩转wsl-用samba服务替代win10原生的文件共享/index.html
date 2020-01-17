@@ -74,13 +74,14 @@ netbios002
 选中“TCP/IPv4”项目，点击“属性”，打开“TCP/IPv4属性”界面：
 netbios003
 点击“高级”并选中“WINS”页签，勾选“禁用TCP/IP上的NetBIOS”：
-netbios004
+<img src="https://segmentfault.com/img/bVbeQtZ?w=931&amp;h=1249" alt="">
 点击“确定”以后生效，如果有多块网卡，每块网卡都要按照如上步骤操作，操作完毕以后，还是通过netstat命令进行查看，发现139端口已经不再监听。
 netbios005
 释放445端口
 通过“WIN+R”打开运行窗口，输入：services.msc，打开服务管理界面：
 services001
 找到Computer Browser服务，双击该服务打开属性界面，将“启动类型”修改为禁用，并且直接点击“停止”：
+<img src="https://segmentfault.com/img/bVbeQuf?w=945&amp;h=1133" alt="">
 services002
 找到Server服务：
 services003
