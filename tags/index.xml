@@ -6,10 +6,37 @@
     <description>Recent content in Tags on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Thu, 16 Jan 2020 22:27:22 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jan 2020 18:57:51 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>samba</title>
+      <link>https://sy123.ml/tags/samba/</link>
+      <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/samba/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>https://sy123.ml/tags/windows/</link>
+      <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WSL</title>
+      <link>https://sy123.ml/tags/wsl/</link>
+      <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/wsl/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>diskpart</title>
@@ -17,15 +44,6 @@
       <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/diskpart/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>windows</title>
-      <link>https://sy123.ml/tags/windows/</link>
-      <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tags/windows/</guid>
       <description></description>
     </item>
     
