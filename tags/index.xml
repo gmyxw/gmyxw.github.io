@@ -6,10 +6,37 @@
     <description>Recent content in Tags on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Sun, 19 Jan 2020 15:43:57 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jan 2020 06:12:53 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>sysprep</title>
+      <link>https://sy123.ml/tags/sysprep/</link>
+      <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/sysprep/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>https://sy123.ml/tags/windows/</link>
+      <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pagefile</title>
+      <link>https://sy123.ml/tags/pagefile/</link>
+      <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/pagefile/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>archlinux</title>
@@ -26,15 +53,6 @@
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/smaba/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>windows</title>
-      <link>https://sy123.ml/tags/windows/</link>
-      <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tags/windows/</guid>
       <description></description>
     </item>
     
