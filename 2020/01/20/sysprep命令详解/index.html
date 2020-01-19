@@ -128,7 +128,29 @@
 </table>
 <h1 id="important重要事项">Important重要事项</h1>
 <p>必须使用 Sysprep /generalize 命令对完整的 Windows 安装一般化，才可以使用该安装对新计算机进行部署，无论是使用映像、硬盘复制，还是其他方法均可。不运行 Sysprep /generalize 命令而将 Windows 映像移动或复制到其他计算机的做法不受支持。</p>
-<p>From：<a href="https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation">https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/sysprep&ndash;generalize&ndash;a-windows-installation</a></p>
+<h1 id="命令行">命令行</h1>
+<p><code>sysprep.exe /generalize /reboot /oobe</code></p>
+<h1 id="failure-occurred-while-executing-sysprep_clean_validate_opk-from-cwindowssystem32spopkdll">Failure occurred while executing &lsquo;Sysprep_Clean_Validate_Opk&rsquo; from C:\Windows\System32\spopk.dll</h1>
+<h2 id="take-ownership-of-the-file">Take ownership of the file:</h2>
+<p><code>takeown /f C:\Windows\System32\spopk.dll</code></p>
+<h2 id="grant-ability-to-modify-file">Grant ability to modify file:</h2>
+<p><code>icacls C:\Windows\System32\spopk.dll /Grant Administrators:f</code></p>
+<h1 id="预设appx删除">预设appx删除</h1>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#75af00">Get-AppxProvisionedPackage</span> <span style="color:#75af00">-online</span> <span style="color:#75af00">|</span> <span style="color:#75af00">Out-GridView</span> <span style="color:#75af00">-PassThru</span> <span style="color:#75af00">|</span> <span style="color:#75af00">Remove-AppxProvisionedPackage</span> <span style="color:#75af00">-online</span>
+
+<span style="color:#75af00">Get-AppxPackage</span> <span style="color:#75af00">-AllUsers</span> <span style="color:#75af00">|</span> <span style="color:#75af00">Out-GridView</span> <span style="color:#75af00">-PassThru</span> <span style="color:#75af00">|</span> <span style="color:#75af00">Remove-AppxPackage</span>
+</code></pre></td></tr></table>
+</div>
+</div><h1 id="from">From</h1>
+<p><a href="https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation">https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/sysprep&ndash;generalize&ndash;a-windows-installation</a></p>
+<p><a href="http://www.edugeek.net/forums/windows-10/207219-problem-sysprep-windows-10-1903-a.html">http://www.edugeek.net/forums/windows-10/207219-problem-sysprep-windows-10-1903-a.html</a></p>
 </div>
 
   </article>
