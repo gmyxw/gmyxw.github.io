@@ -531,6 +531,12 @@ limit： 对IP的并发限制；</p>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">36
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">37
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">38
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">39
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">40
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># At first you should always flush to be sure whats already defined… nothing</span>
@@ -546,7 +552,9 @@ iptables -P INPUT DROP
 iptables -A INPUT -i lo -p all -j ACCEPT
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 
-<span style="color:#75715e"># to allow all traffic on the lo-if and every incomming traffic for connections you etablished. After that add every rule you need for your services (don&#39;t forget to open ssh if you need it! else you&#39;re out):</span>
+<span style="color:#75715e"># to allow all traffic on the lo-if and every incomming traffic for connections</span> 
+<span style="color:#75715e"># you etablished. After that add every rule you need for</span> 
+<span style="color:#75715e"># your services (don&#39;t forget to open ssh if you need it! else you&#39;re out):</span>
 
 iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">1962</span> -j ACCEPT 
 iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">999</span> -j ACCEPT 
@@ -556,7 +564,11 @@ iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">12020</span>
 
 iptables -A INPUT -j DROP
 
-<span style="color:#75715e"># This line matches everything for the INPUT chain and the policy should not get anything. advantage of this is even if you add an ACCEPT-rule sometime after initializing your ruleset it will never become checked because everything is droped before. so it ensures you have to keep everything in one place.</span>
+<span style="color:#75715e"># This line matches everything for the INPUT chain and the policy should not get anything.</span> 
+<span style="color:#75715e"># advantage of this is even if you add an</span>
+<span style="color:#75715e"># ACCEPT-rule sometime after initializing your ruleset it will never become checked because</span> 
+<span style="color:#75715e"># everything is droped before. so it ensures</span> 
+<span style="color:#75715e"># you have to keep everything in one place.</span>
 
 <span style="color:#75715e"># For your question the whole thing looks like this in summary:</span>
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>smaba on sy123.ml</title>
+    <link>https://sy123.ml/tags/smaba/</link>
+    <description>Recent content in smaba on sy123.ml</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>2007-2020 Zhili.</copyright>
+    <lastBuildDate>Sun, 19 Jan 2020 15:43:57 +0800</lastBuildDate>
+    
+	<atom:link href="https://sy123.ml/tags/smaba/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ArchLinux配置Samba服务与Windows共享文件</title>
+      <link>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
+      <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
+      <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。
+Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
+下面记录一下ArchLinux中配置Samba的过程，留作备份。
+首先，是安装Samba，ArchLinux可以直接从源中获取并安装Samba：
+1  pacman -S samba   等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：
+在/etc/samba目录中，直接建立一个空的smb.conf，然后将如下内容粘贴过去：
+1 2 3 4 5 6 7 8 9 10 11  [global] workgroup = WORKGROUP security = user [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644   这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
+workgroup，这个顾名思义，计算机的工作组名称，比如我是和我的Win7来共享文件，最好把工作组和我的Win7设成通一个工作组，这样方便Win7通过网络发现来找到我的下载机。这里，我的win7工作组名字，就叫做：WORKGROUP了
+security，这是指共享目录的安全认证形式，security的值，有两种可以设置：
+第一种，是设成上面例子中的user，意思是在访问共享目录的时候，需要通过用户名和密码的方式来认证，可以给共享目录提供一定的安全性保护。
+第二种，是设成share，这样的话，网络中的任何人都可以通过共享目录的方式来访问你共享的内容了。
+在这里，我选择了用户名与密码认证的方式，所以设成了user
+下面的Movies节点，可以有多个(如果你想设置多个共享目录的话)
+[Movies] 这里设置的名字，就是能够在Windows中看到的名字，可以随意更改
+下面的path，就是你想共享的Linux目录了，我设成了我的Transmission的下载目录。
+后面的valid users，是一个用户帐号，也即通过用户名和密码来访问共享目录的那个帐号，如果你把security设成share，这一项可以去掉。
+下面是一些权限的设置，以及是否允许访问者有写入共享目录的权限，各个参数可以查看Samba文档，就不一一介绍了。
+最后，说一下security设成user后，帐号的设置问题。
+首先，你可以添加一个新的Linux帐号，专门用来访问共享目录用。比如，我就添加了一个帐号，叫做Samba</description>
+    </item>
+    
+  </channel>
+</rss>
