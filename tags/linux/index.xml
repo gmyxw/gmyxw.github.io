@@ -6,10 +6,24 @@
     <description>Recent content in linux on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Wed, 22 Jan 2020 01:12:54 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 26 Jan 2020 21:41:53 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux下格式化U盘</title>
+      <link>https://sy123.ml/2020/01/26/linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</link>
+      <pubDate>Sun, 26 Jan 2020 21:41:53 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/01/26/linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</guid>
+      <description>windows下格式化u盘很简单，要么直接右键格式化，要么进入硬盘分区去格式化。那么Linux下呢？ 其实Linux下格式化u盘也十分简单，只需要几条命令就可以了：
+查看磁盘情况 sudo fdisk -l 可以看到有一个/dev/sdb的磁盘就是我们插入的u盘了，大小为28.8GB，类型为NTFS。
+2. 删除分区 1 2 3 4 5 6  sudo fdisk /dev/sdb m # 获取帮助命令 d # 删除分区 n # 新建分区 p # 打印分区表 w # 写入分区表并退出   一定要记得最后的w命令。
+3. 格式化分区 格式化分区只需要使用mkfs.+（format）命令,例如格式化为fat格式，则在终端输入以下命令：
+1 2 3  sudo mkfs.vfat -L labelname /dev/sdb1 # -L命令是可选，为你的u盘重新命名 # 最后的/dev/sdb1一定要是设备名   在windows下，我们常用的格式是ntfs，但是Linux默认是不支持ntfs格式的，所以我们需要安装另一个包NTFS-3G：
+1 2  sudo pacman -S ntfs-3g sudo mkfs.ntfs -Q -L labelname /dev/sdb1   现在我们就将u盘格式化为ntfs格式了，可以轻松的在windows下使用了。</description>
+    </item>
     
     <item>
       <title>Set_all_Java_apps_to_use_GTK&#43;_font_&amp;_theme_settings</title>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Linux下格式化U盘 - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Linux下格式化U盘</h1>
+  </div>
+<div class="meta">
+  <div>2020-01-26 21:41</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/linux/">#linux</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p><img src="https://p6-tt.byteimg.com/large/pgc-image/6eac5d26101c4664b026cd93ee63f0e8" alt="desktop"></p>
+<p>windows下格式化u盘很简单，要么直接右键格式化，要么进入硬盘分区去格式化。那么Linux下呢？ 其实Linux下格式化u盘也十分简单，只需要几条命令就可以了：</p>
+<p>查看磁盘情况
+<code>sudo fdisk -l</code>
+可以看到有一个<code>/dev/sdb</code>的磁盘就是我们插入的u盘了，大小为28.8GB，类型为NTFS。</p>
+<p><img src="https://p9-tt.byteimg.com/large/pgc-image/0443f3b907dc4a48a984a36882415240" alt=""></p>
+<h2 id="2-删除分区">2. 删除分区</h2>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo fdisk /dev/sdb
+m <span style="color:#75715e"># 获取帮助命令</span>
+d <span style="color:#75715e"># 删除分区</span>
+n <span style="color:#75715e"># 新建分区</span>
+p <span style="color:#75715e"># 打印分区表</span>
+w <span style="color:#75715e"># 写入分区表并退出</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>一定要记得最后的w命令。</p>
+<h2 id="3-格式化分区">3. 格式化分区</h2>
+<p>格式化分区只需要使用mkfs.+（format）命令,例如格式化为fat格式，则在终端输入以下命令：</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkfs.vfat -L labelname /dev/sdb1
+<span style="color:#75715e"># -L命令是可选，为你的u盘重新命名</span>
+<span style="color:#75715e"># 最后的/dev/sdb1一定要是设备名</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在windows下，我们常用的格式是ntfs，但是Linux默认是不支持ntfs格式的，所以我们需要安装另一个包NTFS-3G：</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo pacman -S ntfs-3g
+sudo mkfs.ntfs -Q -L labelname /dev/sdb1
+</code></pre></td></tr></table>
+</div>
+</div><p>现在我们就将u盘格式化为ntfs格式了，可以轻松的在windows下使用了。</p>
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

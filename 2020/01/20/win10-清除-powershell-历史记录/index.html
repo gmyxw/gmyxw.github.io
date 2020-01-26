@@ -33,22 +33,22 @@
   </div>
 <div class="content">
   <blockquote>
-<p>PowerShell's own history mechanism (Get-History, Clear-History) is host-independent, which is why - somewhat unexpectedly - you also need to clear the hosts's command history separately.</p>
-<p>As for the console host's own history feature:</p>
+<p>PowerShell&rsquo;s own history mechanism (Get-History, Clear-History) is host-independent, which is why - somewhat unexpectedly - you also need to clear the hosts&rsquo;s command history separately.</p>
+<p>As for the console host&rsquo;s own history feature:</p>
 <p>doskey-style history feature, before module PSReadline shipped with PowerShell (see below):</p>
 <p>There is no saved history - a history is kept only for the duration of the current session.
-Alt+F7 must be used to clear the console's history, with no (obvious) programmatic way to do it (in a cmd.exe console window you could use doskey /reinstall, but that doesn't work in PS).
+Alt+F7 must be used to clear the console&rsquo;s history, with no (obvious) programmatic way to do it (in a cmd.exe console window you could use doskey /reinstall, but that doesn&rsquo;t work in PS).
 CB.&lsquo;s answer shows you how to simulate this keyboard combination; remember: this must be used in addition to Clear-History.
 The PSReadline module comes with PowerShell v5 on Windows 10 and will also ship with Windows Server 2016; it replaces the doskey-style line-editing and command-history features with more sophisticated functionality; it is also possible to retrofit older Windows editions / PS versions (&gt;= v3) versions with it, using the PowerShell Gallery (PSv3 and PSv4 must first install PowerShellGet).</p>
 <p>Command history is now saved across sessions, in file
 (Get-PSReadlineOption).HistorySavePath.
-[Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory() can be used to clear the current session's history (note that v1.2+ also supports Alt+F7 for interactive clearing of the current history.
-CAVEAT: With PSReadline's default history-saving style, SaveIncrementally, any sensitive commands have already been saved by the time to you call [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory(), and will reappear in the next session.
-The only way to handle this is remove the saved-history file, as demonstrated in JVimes's answer which, however, invariably wipes out the entire history.
-IF you set up your profile to call Set-PSReadlineOption -HistorySaveStyle SaveAtExit every time a session starts - the setting apparenly does NOT &ldquo;stick&rdquo; by itself - you should be able to get away with only calling [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory() (in addition to Clear-History) without also having to delete the saved-history file, in which case you won't lose your saved history from previous sessions. HOWEVER, AS OF v1.2, SaveAtExit is BROKEN ALTOGETHER - no history is saved at all; see <a href="https://github.com/lzybkr/PSReadLine/issues/262">https://github.com/lzybkr/PSReadLine/issues/262</a>
+[Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory() can be used to clear the current session&rsquo;s history (note that v1.2+ also supports Alt+F7 for interactive clearing of the current history.
+CAVEAT: With PSReadline&rsquo;s default history-saving style, SaveIncrementally, any sensitive commands have already been saved by the time to you call [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory(), and will reappear in the next session.
+The only way to handle this is remove the saved-history file, as demonstrated in JVimes&rsquo;s answer which, however, invariably wipes out the entire history.
+IF you set up your profile to call Set-PSReadlineOption -HistorySaveStyle SaveAtExit every time a session starts - the setting apparenly does NOT &ldquo;stick&rdquo; by itself - you should be able to get away with only calling [Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory() (in addition to Clear-History) without also having to delete the saved-history file, in which case you won&rsquo;t lose your saved history from previous sessions. HOWEVER, AS OF v1.2, SaveAtExit is BROKEN ALTOGETHER - no history is saved at all; see <a href="https://github.com/lzybkr/PSReadLine/issues/262">https://github.com/lzybkr/PSReadLine/issues/262</a>
 The following advanced function bundles all commands necessary to clear the command history (both for PowerShell itself and the console), both for doskey-style and PSReadline-module PowerShell console windows:</p>
 <p>Note:</p>
-<p>Because it's (currently) the only safe option, PSReadline's saved-history file is deleted as well, which means the entire history, including from previous sessions, is cleared.</p>
+<p>Because it&rsquo;s (currently) the only safe option, PSReadline&rsquo;s saved-history file is deleted as well, which means the entire history, including from previous sessions, is cleared.</p>
 <p>Therefore, a confirmation prompt is shown by default.</p>
 </blockquote>
 <p>偷懒的话直接运行命令 <code>Remove-Item (Get-PSReadlineOption).HistorySavePath</code> 即可。</p>
