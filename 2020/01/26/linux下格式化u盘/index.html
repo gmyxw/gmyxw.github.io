@@ -83,6 +83,29 @@ sudo mkfs.ntfs -Q -L labelname /dev/sdb1
 </code></pre></td></tr></table>
 </div>
 </div><p>现在我们就将u盘格式化为ntfs格式了，可以轻松的在windows下使用了。</p>
+<h2 id="umount-is-too-slow">umount is too slow</h2>
+<p>Are you using a 64-bit version of Linux with a lot of memory and the attached disk is a relatively slow one (any USB 2 will qualify)?</p>
+<p>In that case the problem could be that Linux can locks/delay for long time on big writes on slow devices; it depends on caching too much data during writes. It&rsquo;s a known bug that should be fixed in newer kernels.</p>
+<p>See <a href="http://lwn.net/Articles/572911/">http://lwn.net/Articles/572911/</a></p>
+<p>Workaround: enter a shell root (do that with care &mdash; you are now root for every command)</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo -i
+and issue:
+
+<span style="color:#111">echo</span> <span style="color:#00a8c8">$((</span><span style="color:#ae81ff">16</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span><span style="color:#00a8c8">))</span> &gt; /proc/sys/vm/dirty_background_bytes
+<span style="color:#111">echo</span> <span style="color:#00a8c8">$((</span><span style="color:#ae81ff">48</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span><span style="color:#f92672">*</span><span style="color:#ae81ff">1024</span><span style="color:#00a8c8">))</span> &gt; /proc/sys/vm/dirty_bytes
+</code></pre></td></tr></table>
+</div>
+</div><p>If it works, you can add the two lines above to your <code>/etc/rc.local</code> file.</p>
+<p>(This is a repost of <a href="https://unix.stackexchange.com/a/107722/52205">my answer in U&amp;L SE</a>).</p>
 </div>
 
   </article>
