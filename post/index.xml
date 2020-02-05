@@ -6,10 +6,30 @@
     <description>Recent content in Posts on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Fri, 31 Jan 2020 12:32:48 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 05 Feb 2020 13:12:53 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>win10输入法不显示候选词解决方法</title>
+      <link>https://sy123.ml/2020/02/05/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/05/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid>
+      <description>精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法 </description>
+    </item>
+    
+    <item>
+      <title>Linux yay 命令</title>
+      <link>https://sy123.ml/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
+      <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
+另见pacman。
+从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps   </description>
+    </item>
     
     <item>
       <title>Linux_disable_IPv6</title>

@@ -6,10 +6,21 @@
     <description>Recent content in linux on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Fri, 31 Jan 2020 12:32:48 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 05 Feb 2020 12:57:49 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux yay 命令</title>
+      <link>https://sy123.ml/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
+      <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
+另见pacman。
+从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps   </description>
+    </item>
     
     <item>
       <title>Linux_disable_IPv6</title>

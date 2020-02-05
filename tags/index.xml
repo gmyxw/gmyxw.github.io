@@ -6,17 +6,44 @@
     <description>Recent content in Tags on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Fri, 31 Jan 2020 12:32:48 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 05 Feb 2020 13:12:53 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>win10</title>
+      <link>https://sy123.ml/tags/win10/</link>
+      <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/win10/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>windows</title>
+      <link>https://sy123.ml/tags/windows/</link>
+      <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/windows/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>linux</title>
       <link>https://sy123.ml/tags/linux/</link>
-      <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
+      <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>yay</title>
+      <link>https://sy123.ml/tags/yay/</link>
+      <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/yay/</guid>
       <description></description>
     </item>
     
@@ -62,15 +89,6 @@
       <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/sysprep/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>windows</title>
-      <link>https://sy123.ml/tags/windows/</link>
-      <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tags/windows/</guid>
       <description></description>
     </item>
     
