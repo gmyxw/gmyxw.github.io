@@ -6,10 +6,37 @@
     <description>Recent content in Tags on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Wed, 05 Feb 2020 16:04:13 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 06 Feb 2020 18:28:50 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>js</title>
+      <link>https://sy123.ml/tags/js/</link>
+      <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>npm</title>
+      <link>https://sy123.ml/tags/npm/</link>
+      <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/npm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>yarn</title>
+      <link>https://sy123.ml/tags/yarn/</link>
+      <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/yarn/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>linux</title>
