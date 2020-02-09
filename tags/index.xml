@@ -6,7 +6,7 @@
     <description>Recent content in Tags on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Thu, 06 Feb 2020 18:28:50 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 09 Feb 2020 11:33:00 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>js</title>
       <link>https://sy123.ml/tags/js/</link>
-      <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
+      <pubDate>Sun, 09 Feb 2020 11:33:00 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>react</title>
+      <link>https://sy123.ml/tags/react/</link>
+      <pubDate>Sun, 09 Feb 2020 11:33:00 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/react/</guid>
       <description></description>
     </item>
     

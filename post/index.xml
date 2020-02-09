@@ -6,10 +6,20 @@
     <description>Recent content in Posts on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Thu, 06 Feb 2020 18:28:50 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 09 Feb 2020 11:33:00 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Programmatically_navigate_using_react_router</title>
+      <link>https://sy123.ml/2020/02/09/programmatically_navigate_using_react_router/</link>
+      <pubDate>Sun, 09 Feb 2020 11:33:00 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/09/programmatically_navigate_using_react_router/</guid>
+      <description>React Router v5.1.0 with hooks There is a new useHistory hook in React Router &amp;gt;5.1.0 if you are using React &amp;gt;16.8.0 and functional components.
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  import { useHistory } from &amp;#34;react-router-dom&amp;#34;; function HomeButton() { const history = useHistory(); function handleClick() { history.push(&amp;#34;/home&amp;#34;); } return ( &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt; Go home &amp;lt;/button&amp;gt; ); }   React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</description>
+    </item>
     
     <item>
       <title>npm和yarn如何查看源和换源</title>
