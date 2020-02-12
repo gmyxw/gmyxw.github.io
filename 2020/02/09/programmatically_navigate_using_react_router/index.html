@@ -210,7 +210,127 @@ But you probably should not</li>
 </code></pre></td></tr></table>
 </div>
 </div><p>1 and 2 are the simplest choices to implement, so for most use cases, they are your best bets.</p>
+<ul>
+<li>1、直接点击跳转页面：</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 方法一：
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">&lt;</span><span style="color:#75af00">a</span> <span style="color:#75af00">href</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;跳转路径&gt;点击跳转&lt;/a&gt;
+</span><span style="color:#d88200">
+</span><span style="color:#d88200">// 方法二：
+</span><span style="color:#d88200">
+</span><span style="color:#d88200">&lt;Link to=&#34;</span><span style="color:#75af00">跳转路径</span><span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#75af00">点击跳转</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">L</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">k</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+</code></pre></td></tr></table>
 </div>
+</div><ul>
+<li>2、点击按钮之后跳转：</li>
+</ul>
+<p>引入：</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span> <span style="color:#111">{</span> <span style="color:#75af00">hashHistory</span> <span style="color:#111">}</span> <span style="color:#75af00">from</span> <span style="color:#d88200">&#39;react-router&#39;</span><span style="color:#111">;</span>
+
+<span style="color:#75715e">// 在方法里面加入：
+</span><span style="color:#75715e"></span><span style="color:#75af00">hashHistory</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;跳转路径&#39;</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>3、browserHistory带参数跳转</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span><span style="color:#111">{</span><span style="color:#75af00">browserHistory</span><span style="color:#111">}</span><span style="color:#75af00">from</span><span style="color:#d88200">&#39;dva/router&#39;</span><span style="color:#111">;</span>
+
+<span style="color:#75af00">browserHistory</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/orders/orderdetail?oderId=&#39;</span><span style="color:#f92672">+</span><span style="color:#75af00">item</span><span style="color:#111">.</span><span style="color:#75af00">order</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在router里面设置路径的时候不需要加入参数</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">path</span><span style="color:#f92672">:</span><span style="color:#d88200">&#39;orders/orderdetail&#39;</span><span style="color:#111">,</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>4、关于路由获取参数的问题：
+| code | Description |
+| &mdash; | &mdash;|
+location.pathname | 设置或获取对象指定的文件名或路径。
+location.href | 设置或获取整个 URL 为字符串。
+location.port | 设置或获取与 URL 关联的端口号码。
+location.protocol | 设置或获取 URL 的协议部分。
+location.hash | 设置或获取 href 属性中在井号“#”后面的分段。
+location.host | 设置或获取 location 或 URL 的 hostname 和 port 号码。
+location.search | 设置或获取 href 属性中跟在问号后面的部分。</li>
+</ul>
+<h2 id="routerredux路由跳转">routerRedux路由跳转</h2>
+<ul>
+<li>1、不带参数跳转：</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">dispatch</span><span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#111">{</span>
+
+            <span style="color:#75af00">pathname</span> <span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/couponDetail&#39;</span><span style="color:#111">,</span>
+
+   <span style="color:#111">}</span><span style="color:#111">)</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>2、带参数跳转</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">dispatch</span><span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#111">{</span> <span style="color:#75af00">pathname</span> <span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/couponDetail&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">query</span><span style="color:#f92672">:</span><span style="color:#75af00">要携带的参数object</span> <span style="color:#111">}</span><span style="color:#111">)</span><span style="color:#111">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>注意：通过location.query.参数字段来获取参数值</p>
+<ul>
+<li>3、在effect里面跳转</li>
+</ul>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">yield</span> <span style="color:#75af00">put</span> <span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">replace</span><span style="color:#111">(</span><span style="color:#111">{</span> <span style="color:#75af00">pathname</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/domains/buy/pay&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">query</span><span style="color:#f92672">:</span> <span style="color:#75af00">payload</span> <span style="color:#111">}</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+</code></pre></td></tr></table>
+</div>
+</div></div>
 <div class="disqus">
   <div id="disqus_thread"></div>
 <script>

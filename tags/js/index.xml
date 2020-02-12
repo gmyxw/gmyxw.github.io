@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>Umi Ui_bug_using_react Document Title</title>
-      <link>https://sy123.ml/2020/02/10/umi-ui_bug_using_react-document-title/</link>
+      <title>umi-ui bug using react-document-title</title>
+      <link>https://sy123.ml/2020/02/10/umi-ui-bug-using-react-document-title/</link>
       <pubDate>Mon, 10 Feb 2020 15:41:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/10/umi-ui_bug_using_react-document-title/</guid>
+      <guid>https://sy123.ml/2020/02/10/umi-ui-bug-using-react-document-title/</guid>
       <description>背景 React 项目使用umi时发报：
  Uncaught Invariant Violation: React.Children.only expected to receive a single React element child. The above error occurred in the  component ui socket init CloseEvent {type: &amp;ldquo;close&amp;rdquo;, bubbles: false, cancelable: false, timeStamp: 1571127775342, wasClean: false, …}
  异常代码 1 2 3 4 5  &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt; {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt;   DocumentTitle组件内部最外层只能接受一个元素，而代码中有多个元素，所以报错。
