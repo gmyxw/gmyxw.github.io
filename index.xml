@@ -6,7 +6,7 @@
     <description>Recent content on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Sun, 16 Feb 2020 15:10:33 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 16 Feb 2020 15:20:03 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,6 +20,16 @@
       <description>Suspendisse non nisl sit amet Morbi mattis ullamcorper velit. Morbi mollis tellus ac sapien. Praesent congue erat at massa. Nullam tincidunt adipiscing enim.
 Phasellus blandit leo ut odio. Aenean imperdiet. In hac habitasse platea dictumst. Maecenas vestibulum mollis diam. Morbi ac felis.
 Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Suspendisse feugiat.</description>
+    </item>
+    
+    <item>
+      <title>linux中如何手动清零缓冲</title>
+      <link>https://sy123.ml/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</link>
+      <pubDate>Sun, 16 Feb 2020 15:20:03 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</guid>
+      <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands.
+1 2 3 4 5 6 7 8 9 10  free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248   You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
     </item>
     
     <item>
