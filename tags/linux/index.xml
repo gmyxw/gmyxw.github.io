@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>Systemd_analyze</title>
-      <link>https://sy123.ml/2020/02/16/systemd_analyze/</link>
+      <title>使用systemd-analyze优化系统启动时间</title>
+      <link>https://sy123.ml/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</link>
       <pubDate>Sun, 16 Feb 2020 14:53:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/systemd_analyze/</guid>
+      <guid>https://sy123.ml/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</guid>
       <description>systemd-analyze简介 systemd-analyze是Linux自带的分析系统启动性能的工具。
 systemd-analyze可使用的命令：
   systemd-analyze [OPTIONS…] [time]
