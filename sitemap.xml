@@ -8,17 +8,37 @@
   </url>
   
   <url>
+    <loc>https://sy123.ml/tags/linux/</loc>
+    <lastmod>2020-02-16T14:53:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/post/</loc>
+    <lastmod>2020-02-16T14:53:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/</loc>
+    <lastmod>2020-02-16T14:53:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/2020/02/16/systemd_analyze/</loc>
+    <lastmod>2020-02-16T14:53:24+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/tags/</loc>
+    <lastmod>2020-02-16T14:53:24+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sy123.ml/tags/dva/</loc>
     <lastmod>2020-02-15T22:23:37+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sy123.ml/tags/js/</loc>
-    <lastmod>2020-02-15T22:23:37+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/post/</loc>
     <lastmod>2020-02-15T22:23:37+08:00</lastmod>
   </url>
   
@@ -34,16 +54,6 @@
   
   <url>
     <loc>https://sy123.ml/2020/02/15/saga-deprecated-%E8%AD%A6%E5%91%8A/</loc>
-    <lastmod>2020-02-15T22:23:37+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/</loc>
-    <lastmod>2020-02-15T22:23:37+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/tags/</loc>
     <lastmod>2020-02-15T22:23:37+08:00</lastmod>
   </url>
   
@@ -100,11 +110,6 @@
   <url>
     <loc>https://sy123.ml/tags/yarn/</loc>
     <lastmod>2020-02-06T18:28:50+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/tags/linux/</loc>
-    <lastmod>2020-02-05T16:04:13+08:00</lastmod>
   </url>
   
   <url>
