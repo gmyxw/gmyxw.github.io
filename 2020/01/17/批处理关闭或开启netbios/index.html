@@ -56,7 +56,7 @@
    wmic nicconfig where index=&#39;<span style="color:#8045ff">%%</span>a&#39; call settcpipnetbios 2
 <span style="color:#111">)</span>
 <span style="color:#00a8c8">cd</span> /d <span style="color:#111">%~dp0</span>
-  <span style="color:#00a8c8">if</span> <span style="color:#00a8c8"></span><span style="color:#00a8c8"></span><span style="color:#00a8c8">exist</span> one_time.cmd <span style="color:#111">(</span>
+  <span style="color:#00a8c8">if</span> <span style="color:#00a8c8">exist</span> one_time.cmd <span style="color:#111">(</span>
   <span style="color:#00a8c8">del</span> /f /q <span style="color:#111">%0</span>
   <span style="color:#00a8c8">exit</span>
 <span style="color:#111">)</span>

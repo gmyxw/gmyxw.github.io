@@ -55,18 +55,18 @@
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span> <span style="color:#111">{</span> <span style="color:#75af00">useHistory</span> <span style="color:#111">}</span> <span style="color:#75af00">from</span> <span style="color:#d88200">&#34;react-router-dom&#34;</span><span style="color:#111">;</span>
 
-<span style="color:#00a8c8">function</span> <span style="color:#75af00">HomeButton</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-  <span style="color:#00a8c8">const</span> <span style="color:#75af00">history</span> <span style="color:#f92672">=</span> <span style="color:#75af00">useHistory</span><span style="color:#111">(</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#00a8c8">function</span> <span style="color:#75af00">HomeButton</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+  <span style="color:#00a8c8">const</span> <span style="color:#75af00">history</span> <span style="color:#f92672">=</span> <span style="color:#75af00">useHistory</span><span style="color:#111">();</span>
 
-  <span style="color:#00a8c8">function</span> <span style="color:#75af00">handleClick</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/home&#34;</span><span style="color:#111">)</span><span style="color:#111">;</span>
+  <span style="color:#00a8c8">function</span> <span style="color:#75af00">handleClick</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/home&#34;</span><span style="color:#111">);</span>
   <span style="color:#111">}</span>
 
   <span style="color:#00a8c8">return</span> <span style="color:#111">(</span>
     <span style="color:#f92672">&lt;</span><span style="color:#75af00">button</span> <span style="color:#75af00">type</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;button&#34;</span> <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{</span><span style="color:#75af00">handleClick</span><span style="color:#111">}</span><span style="color:#f92672">&gt;</span>
       <span style="color:#75af00">Go</span> <span style="color:#75af00">home</span>
-    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">u</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-  <span style="color:#111">)</span><span style="color:#111">;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+  <span style="color:#111">);</span>
 <span style="color:#111">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -106,14 +106,14 @@ The <code>withRouter</code> higher-order component will inject the <code>history
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span> <span style="color:#111">{</span> <span style="color:#75af00">withRouter</span> <span style="color:#111">}</span> <span style="color:#75af00">from</span> <span style="color:#d88200">&#39;react-router-dom&#39;</span>
 <span style="color:#75715e">// this also works with react-router-native
 </span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">const</span> <span style="color:#75af00">Button</span> <span style="color:#f92672">=</span> <span style="color:#75af00">withRouter</span><span style="color:#111">(</span><span style="color:#111">(</span><span style="color:#111">{</span> <span style="color:#75af00">history</span> <span style="color:#111">}</span><span style="color:#111">)</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
+<span style="color:#00a8c8">const</span> <span style="color:#75af00">Button</span> <span style="color:#f92672">=</span> <span style="color:#75af00">withRouter</span><span style="color:#111">(({</span> <span style="color:#75af00">history</span> <span style="color:#111">})</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
   <span style="color:#f92672">&lt;</span><span style="color:#75af00">button</span>
     <span style="color:#75af00">type</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;button&#39;</span>
-    <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span> <span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/new-location&#39;</span><span style="color:#111">)</span> <span style="color:#111">}</span><span style="color:#111">}</span>
+    <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{()</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span> <span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/new-location&#39;</span><span style="color:#111">)</span> <span style="color:#111">}}</span>
   <span style="color:#f92672">&gt;</span>
     <span style="color:#75af00">Click</span> <span style="color:#75af00">Me</span><span style="color:#f92672">!</span>
-  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">u</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-<span style="color:#111">)</span><span style="color:#111">)</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+<span style="color:#111">))</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -142,15 +142,15 @@ The <code>&lt;Route&gt;</code> component isn&rsquo;t just for matching locations
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span> <span style="color:#111">{</span> <span style="color:#75af00">Route</span> <span style="color:#111">}</span> <span style="color:#75af00">from</span> <span style="color:#d88200">&#39;react-router-dom&#39;</span>
 
-<span style="color:#00a8c8">const</span> <span style="color:#75af00">Button</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
-  <span style="color:#f92672">&lt;</span><span style="color:#75af00">Route</span> <span style="color:#75af00">render</span><span style="color:#f92672">=</span><span style="color:#111">{</span><span style="color:#111">(</span><span style="color:#111">{</span> <span style="color:#75af00">history</span><span style="color:#111">}</span><span style="color:#111">)</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
+<span style="color:#00a8c8">const</span> <span style="color:#75af00">Button</span> <span style="color:#f92672">=</span> <span style="color:#111">()</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#75af00">Route</span> <span style="color:#75af00">render</span><span style="color:#f92672">=</span><span style="color:#111">{({</span> <span style="color:#75af00">history</span><span style="color:#111">})</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
     <span style="color:#f92672">&lt;</span><span style="color:#75af00">button</span>
       <span style="color:#75af00">type</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;button&#39;</span>
-      <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span> <span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/new-location&#39;</span><span style="color:#111">)</span> <span style="color:#111">}</span><span style="color:#111">}</span>
+      <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{()</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span> <span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/new-location&#39;</span><span style="color:#111">)</span> <span style="color:#111">}}</span>
     <span style="color:#f92672">&gt;</span>
       <span style="color:#75af00">Click</span> <span style="color:#75af00">Me</span><span style="color:#f92672">!</span>
-    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">u</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
-  <span style="color:#111">)</span><span style="color:#111">}</span> <span style="color:#f92672">/</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
+  <span style="color:#111">)}</span> <span style="color:#f92672">/&gt;</span>
 <span style="color:#111">)</span>
 </code></pre></td></tr></table>
 </div>
@@ -190,22 +190,22 @@ But you probably should not</li>
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">const</span> <span style="color:#75af00">Button</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#75af00">props</span><span style="color:#111">,</span> <span style="color:#75af00">context</span><span style="color:#111">)</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
   <span style="color:#f92672">&lt;</span><span style="color:#75af00">button</span>
     <span style="color:#75af00">type</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;button&#39;</span>
-    <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{</span><span style="color:#111">(</span><span style="color:#111">)</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span>
+    <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{()</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span>
       <span style="color:#75715e">// context.history.push === history.push
 </span><span style="color:#75715e"></span>      <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/new-location&#39;</span><span style="color:#111">)</span>
-    <span style="color:#111">}</span><span style="color:#111">}</span>
+    <span style="color:#111">}}</span>
   <span style="color:#f92672">&gt;</span>
     <span style="color:#75af00">Click</span> <span style="color:#75af00">Me</span><span style="color:#f92672">!</span>
-  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">b</span><span style="color:#960050;background-color:#1e0010">u</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">t</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
 <span style="color:#111">)</span>
 
 
 <span style="color:#75715e">// you need to specify the context type so that it
-</span><span style="color:#75715e"></span><span style="color:#75715e">// is available within the component
+</span><span style="color:#75715e">// is available within the component
 </span><span style="color:#75715e"></span><span style="color:#75af00">Button</span><span style="color:#111">.</span><span style="color:#75af00">contextTypes</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span>
-  <span style="color:#75af00">history</span><span style="color:#f92672">:</span> <span style="color:#75af00">React</span><span style="color:#111">.</span><span style="color:#75af00">PropTypes</span><span style="color:#111">.</span><span style="color:#75af00">shape</span><span style="color:#111">(</span><span style="color:#111">{</span>
+  <span style="color:#75af00">history</span><span style="color:#f92672">:</span> <span style="color:#75af00">React</span><span style="color:#111">.</span><span style="color:#75af00">PropTypes</span><span style="color:#111">.</span><span style="color:#75af00">shape</span><span style="color:#111">({</span>
     <span style="color:#75af00">push</span><span style="color:#f92672">:</span> <span style="color:#75af00">React</span><span style="color:#111">.</span><span style="color:#75af00">PropTypes</span><span style="color:#111">.</span><span style="color:#75af00">func</span><span style="color:#111">.</span><span style="color:#75af00">isRequired</span>
-  <span style="color:#111">}</span><span style="color:#111">)</span>
+  <span style="color:#111">})</span>
 <span style="color:#111">}</span>
 </code></pre></td></tr></table>
 </div>
@@ -230,7 +230,7 @@ But you probably should not</li>
 </span><span style="color:#d88200">
 </span><span style="color:#d88200">// 方法二：
 </span><span style="color:#d88200">
-</span><span style="color:#d88200">&lt;Link to=&#34;</span><span style="color:#75af00">跳转路径</span><span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#75af00">点击跳转</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/</span><span style="color:#960050;background-color:#1e0010">L</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">k</span><span style="color:#960050;background-color:#1e0010">&gt;</span>
+</span><span style="color:#d88200">&lt;Link to=&#34;</span><span style="color:#75af00">跳转路径</span><span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#75af00">点击跳转</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Link&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -263,7 +263,7 @@ But you probably should not</li>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span><span style="color:#111">{</span><span style="color:#75af00">browserHistory</span><span style="color:#111">}</span><span style="color:#75af00">from</span><span style="color:#d88200">&#39;dva/router&#39;</span><span style="color:#111">;</span>
 
-<span style="color:#75af00">browserHistory</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/orders/orderdetail?oderId=&#39;</span><span style="color:#f92672">+</span><span style="color:#75af00">item</span><span style="color:#111">.</span><span style="color:#75af00">order</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<span style="color:#75af00">browserHistory</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/orders/orderdetail?oderId=&#39;</span><span style="color:#f92672">+</span><span style="color:#75af00">item</span><span style="color:#111">.</span><span style="color:#75af00">order</span><span style="color:#111">);</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>在router里面设置路径的时候不需要加入参数</p>
@@ -300,11 +300,11 @@ location.search | 设置或获取 href 属性中跟在问号后面的部分。</
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">dispatch</span><span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#111">{</span>
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">dispatch</span><span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">({</span>
 
             <span style="color:#75af00">pathname</span> <span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/couponDetail&#39;</span><span style="color:#111">,</span>
 
-   <span style="color:#111">}</span><span style="color:#111">)</span><span style="color:#111">)</span>
+   <span style="color:#111">}))</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -315,7 +315,7 @@ location.search | 设置或获取 href 属性中跟在问号后面的部分。</
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">dispatch</span><span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#111">{</span> <span style="color:#75af00">pathname</span> <span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/couponDetail&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">query</span><span style="color:#f92672">:</span><span style="color:#75af00">要携带的参数object</span> <span style="color:#111">}</span><span style="color:#111">)</span><span style="color:#111">)</span>
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">dispatch</span><span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">({</span> <span style="color:#75af00">pathname</span> <span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/couponDetail&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">query</span><span style="color:#f92672">:</span><span style="color:#75af00">要携带的参数object</span> <span style="color:#111">}))</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>注意：通过location.query.参数字段来获取参数值</p>
@@ -327,7 +327,7 @@ location.search | 设置或获取 href 属性中跟在问号后面的部分。</
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">yield</span> <span style="color:#75af00">put</span> <span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">replace</span><span style="color:#111">(</span><span style="color:#111">{</span> <span style="color:#75af00">pathname</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/domains/buy/pay&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">query</span><span style="color:#f92672">:</span> <span style="color:#75af00">payload</span> <span style="color:#111">}</span><span style="color:#111">)</span><span style="color:#111">)</span><span style="color:#111">;</span>
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">yield</span> <span style="color:#75af00">put</span> <span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">replace</span><span style="color:#111">({</span> <span style="color:#75af00">pathname</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/domains/buy/pay&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">query</span><span style="color:#f92672">:</span> <span style="color:#75af00">payload</span> <span style="color:#111">}));</span>
 </code></pre></td></tr></table>
 </div>
 </div></div>

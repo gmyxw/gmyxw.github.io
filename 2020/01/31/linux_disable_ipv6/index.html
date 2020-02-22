@@ -90,7 +90,7 @@ sysctl -w net.ipv6.conf.default.disable_ipv6<span style="color:#f92672">=</span>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#111">echo</span> <span style="color:#d88200">&#34; &#34;</span>&gt;&gt;/etc/sysctl.conf
-<span style="color:#111">echo</span> <span style="color:#d88200">&#34;</span><span style="color:#d88200"># made for disabled IPv6 in </span><span style="color:#00a8c8">$(</span>date +%F<span style="color:#00a8c8">)</span><span style="color:#d88200">&#34;</span>&gt;&gt;/etc/sysctl.conf
+<span style="color:#111">echo</span> <span style="color:#d88200">&#34;# made for disabled IPv6 in </span><span style="color:#00a8c8">$(</span>date +%F<span style="color:#00a8c8">)</span><span style="color:#d88200">&#34;</span>&gt;&gt;/etc/sysctl.conf
 <span style="color:#111">echo</span> <span style="color:#d88200">&#39;net.ipv6.conf.all.disable_ipv6 = 1&#39;</span>&gt;&gt;/etc/sysctl.conf
 <span style="color:#111">echo</span> <span style="color:#d88200">&#39;net.ipv6.conf.default.disable_ipv6 = 1&#39;</span>&gt;&gt;/etc/sysctl.conf
 <span style="color:#111">echo</span> <span style="color:#d88200">&#39;net.ipv6.conf.lo.disable_ipv6 = 1&#39;</span>&gt;&gt;/etc/sysctl.conf
