@@ -39,7 +39,7 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
       <pubDate>Sun, 23 Feb 2020 04:19:28 +0800</pubDate>
       
       <guid>https://sy123.ml/2020/02/23/v2ray_websocket_tls_cdn/</guid>
-      <description>V2Ray+WebSocket+TLS+CDN 发表于 2019-10-04 | 分类于 人工智能 | 没有评论 可能是由于最近墙的升级，使用SS等方式翻墙IP被墙的概率大大提升（2台小鸡GG，然后新开一台搭建SS，使用2天就GG），所以写一篇介绍全新的姿势，可以复活已经被墙的IP。在速度和稳定性上选择了后者
+      <description>可能是由于最近墙的升级，使用SS等方式翻墙IP被墙的概率大大提升（2台小鸡GG，然后新开一台搭建SS，使用2天就GG），所以写一篇介绍全新的姿势，可以复活已经被墙的IP。在速度和稳定性上选择了后者
 重要说明本文是针对VPS的IP已经被墙的情况下，如何继续翻墙，如不想这么复杂，请参看如下文章（搭建V2Ray使用特有的Vmess协议即可）：
 https://www.codercto.com/a/22204.html
 涉及如下：V2Ray+WebSocket+TLS+CDN
@@ -53,7 +53,8 @@ sudo vi /etc/nginx/sites-available/default 替换server_name：
 将_替换为zqq6666.tk www.zqq6666.tk 重新载入Nginx：
 nginx -s reload 3.2 申请证书 申请Let’s encrypt免费证书，先在域名注册商那里（freenom）修改dns，添加两个A记录，解析到VPS的IP 99.99.99.99，修改的原因是要向Let‘s encrypt要发起挑战，证明你拥有这个域名
 申请证书：
-sudo add-apt-repository ppa:certbot/certbot sudo apt update sudo apt install python-certbot-nginx</description>
+sudo add-apt-repository ppa:certbot/certbot sudo apt update sudo apt install python-certbot-nginx
+sudo certbot &amp;ndash;authenticator webroot &amp;ndash;webroot-path /var/www/html &amp;ndash;installer nginx -d zqq6666.</description>
     </item>
     
     <item>
