@@ -6,10 +6,37 @@
     <description>Recent content in Tags on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Sun, 23 Feb 2020 04:36:16 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 24 Feb 2020 01:15:09 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>linux</title>
+      <link>https://sy123.ml/tags/linux/</link>
+      <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>regex</title>
+      <link>https://sy123.ml/tags/regex/</link>
+      <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/regex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>vim</title>
+      <link>https://sy123.ml/tags/vim/</link>
+      <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/vim/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>baidu</title>
@@ -35,15 +62,6 @@
       <pubDate>Sun, 23 Feb 2020 04:36:16 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/web/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>linux</title>
-      <link>https://sy123.ml/tags/linux/</link>
-      <pubDate>Sun, 16 Feb 2020 15:20:03 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tags/linux/</guid>
       <description></description>
     </item>
     
