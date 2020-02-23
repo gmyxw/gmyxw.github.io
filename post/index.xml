@@ -6,10 +6,22 @@
     <description>Recent content in Posts on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Mon, 24 Feb 2020 01:15:09 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 24 Feb 2020 04:43:30 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android Studio emulator ugly black borders</title>
+      <link>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</link>
+      <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</guid>
+      <description>Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
+For the border, likely a compositor is needed or you can start the AVD without a device frame.
+For making it floating, add this to your config Floating all windows with &amp;ldquo;android emulator&amp;rdquo; header:
+1  for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable   </description>
+    </item>
     
     <item>
       <title>Vim_search_in_file</title>
