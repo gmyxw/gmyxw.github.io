@@ -6,10 +6,21 @@
     <description>Recent content in shell on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Sat, 11 Jan 2020 16:00:15 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 25 Feb 2020 04:36:20 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/shell/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
+      <link>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</link>
+      <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
+      <description>GNU cp(1) has a backup option:
+1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
+1 2 3 4 5 6 7  --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
+    </item>
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>

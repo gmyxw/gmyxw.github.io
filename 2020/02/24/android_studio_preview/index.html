@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Android_Studio_preview - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Android_Studio_preview</h1>
+  </div>
+<div class="meta">
+  <div>2020-02-24 07:58</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/android-studio/">#Android Studio</a></span>
+      <span><a href="https://sy123.ml/tags/android/">#android</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>更新 IDE 和 SDK 工具
+安装 Android Studio 后，您可以轻松通过自动更新和 Android SDK 管理器让 Android Studio IDE 和 Android SDK 工具保持最新状态。</p>
+<p>更新 IDE 和变更版本
+若有可用的 IDE 更新，Android Studio 将通过小气泡对话框通知您，不过您也可以依次点击 Help &gt; Check for Update（在 Mac 上，依次点击 Android Studio &gt; Check for Updates）手动检查更新。</p>
+<p>您可以通过以下发布版本获取 Android Studio 更新：</p>
+<p>Canary 版：这些是前沿版本，大约每周更新一次，可在 developer.android.com/studio/preview 下载。
+除了接收 Android Studio 的 Canary 版之外，您还将接收其他 SDK 工具的预览版，包括 Android 模拟器。</p>
+<p>虽然这些版本存在较多的错误，但它们已经过测试，我们希望为您提供这些版本，以便您尝试新功能并提供反馈。此版本不推荐用于生产开发。</p>
+<p>开发者版：这些是精心挑选的 Canary 版本，已经过全面的内部测试。
+测试版：这些是基于稳定 Canary 版的候选版本，这类版本会先收集反馈，然后再作为稳定版进行发布。
+稳定版：官方稳定版，可在 developer.android.com/studio 下载。
+如果您想要在生产 Android 项目中仍然使用稳定版的同时试用预览版（Canary 版、开发者版或测试版），可以并排安装两个版本。</p>
+<p>要更改现有安装的更新版本，请执行以下操作：</p>
+<p>依次点击 File &gt; Settings（在 Mac 上，依次点击 Android Studio &gt; Preferences）打开 Preferences 窗口。
+在左侧面板中，依次点击 Appearance &amp; Behavior &gt; System Settings &gt; Updates。
+确保已选中 Automatically check for updates，然后从下拉列表中选择一个版本（参见图 1）。
+点击 Apply 或 OK。</p>
+<p>图 1. Android Studio 中的 Updates 偏好设置</p>
+<p>删除未使用的 Android Studio 目录</p>
+<p>当您首次运行 Android Studio 的主要版本时，它会查找包含缓存、设置、索引和日志的目录，以确定找不到对应安装内容的 Android Studio 的版本。然后，Delete Unused Android Studio Directories 对话框中会显示这些未使用目录的位置、大小和最后修改时间，并提供删除它们的选项。</p>
+<p>Android Studio 考虑删除的目录如下所示：</p>
+<p>Linux：~/.AndroidStudio[Preview]<em>version</em>
+Mac：~/Library/{Preferences, Caches, Logs, Application Support}/AndroidStudio[Preview]<em>version</em>
+Windows：%USER%.AndroidStudio[Preview]<em>version</em>
+使用 SDK 管理器更新工具
+Android SDK 管理器可以帮助您下载 SDK 工具、平台和开发应用所需的其他组件。下载后，您可以在标示为 Android SDK Location 的目录中找到每个软件包，如图 2 所示。</p>
+<p>要从 Android Studio 打开 SDK 管理器，请依次点击 Tools &gt; SDK Manager 或点击工具栏中的 SDK Manager 。如果您没有使用 Android Studio，则可以使用 sdkmanager 命令行工具下载工具。</p>
+<p>已安装的软件包如有更新，其旁边的复选框中会显示短划线 。</p>
+<p>要更新某个项目或安装新项目，请点击复选框使其显示对勾。
+要卸载某个软件包，请点击以清除该复选框。
+待下载的更新在左侧列中以下载图标  表示。待执行的移除以红色叉号  表示。</p>
+<p>要更新所选的软件包，请点击 Apply 或 OK，然后同意所有许可协议。</p>
+<p>图 2. Android SDK 管理器。</p>
+<p>推荐的软件包
+您应该特别考虑 SDK Tools 标签中的以下工具：</p>
+<p>Android SDK Build-Tools
+必选。 包含编译 Android 应用的工具。请参阅 SDK 编译工具版本说明。
+Android SDK Platform-Tools
+必选。 包含 Android 平台所需的各种工具，包括 adb 工具。
+Android SDK Tools
+必选。 包括 ProGuard 等基本工具。请参阅 SDK 工具版本说明。
+Android Emulator
+推荐。基于 QEMU 的设备模拟工具，可用于在实际的 Android 运行时环境中调试和测试应用。请参阅 Android Emulator 版本说明。
+注意：以前由支持代码库软件包提供的大多数 API 库（例如 Android 支持库、约束布局、Google Play 服务和 Firebase）现在可以从 Google 的 Maven 代码库中获得。采用 Android Studio 3.0 及更高版本创建的项目将在编译配置中自动包含此代码库。如果您使用的是之前的项目，则必须手动向您的 build.gradle 文件中添加 Google 的 Maven 代码库。</p>
+<p>在 SDK Platforms 标签下，您还必须安装至少一个版本的 Android 平台。每个版本均提供多种不同的软件包。要仅下载所需版本，请点击相应版本名称旁的复选框。</p>
+<p>要查看各 Android 平台的所有可用软件包，请点击窗口底部的 Show Package Details。各版本的平台中均提供以下软件包：</p>
+<p>Android SDK Platform
+必选。 您的开发环境中必须至少有一个平台，这样您才能编译应用。为了在最新设备上提供最佳用户体验，请使用最新版本的平台作为编译目标。您的应用仍然可以在旧版系统上运行，但您必须以最新版本为目标编译应用，以便在安装最新版 Android 的设备上运行应用时能够使用新功能。
+Intel 或 ARM 系统映像
+推荐。运行 Android Emulator 需要系统映像。每个版本的平台均包含受支持的系统映像。您也可以之后在从 AVD Manager 创建 Android 虚拟设备 (AVD) 时下载系统映像。根据开发计算机的处理器选择 Intel 或 ARM。
+注意：如果您计划使用 Google Play 服务（包括 Firebase）的 API，则必须使用 Google API 系统映像或 Google Play 系统映像（后者包括 Play 商店应用）。</p>
+<p>以上列表并不详尽，您可以添加其他网站，以便从第三方网站下载更多软件包。</p>
+<p>在某些情况下，某个 SDK 软件包可能需要另一个工具的特定最低修订版。如果存在这种情况，SDK 管理器将发出警告通知您，并将依赖项添加到您的下载列表。</p>
+<p>提示：您还可以自定义 build.gradle 文件，使每个项目均使用特定的编译链和编译选项。如需了解详情，请参阅配置 Gradle 编译。</p>
+<p>修改或添加 SDK 工具网站
+要管理 Android Studio 用于检查 Android 工具和第三方工具更新的 SDK 网站，请点击 SDK Update Sites 标签。您可以添加其他提供自有工具的网站，然后从这些网站下载软件包。</p>
+<p>例如，某个移动运营商或设备制造商可能会为其自有基于 Android 系统的设备提供额外的 API 库。要使用他们的库开发应用，您可以在 SDK Update Sites 标签中将其 SDK 工具网址添加到 SDK 管理器，以安装他们的 Android SDK 软件包。</p>
+<p>如果运营商或设备制造商在其网站上提供了 SDK 附加项代码库文件，请按照以下步骤将其网站添加到 Android SDK 管理器：</p>
+<p>点击 SDK Update Sites 标签。
+点击窗口底部的 Add 。
+输入第三方网站的名称和网址，然后点击 OK。
+确保已选中 Enabled 列中相应的复选框。
+点击 Apply 或 OK。
+该网站提供的所有 SDK 软件包都将视情况显示在 SDK Platforms 或 SDK Tools 标签中。</p>
+<p>Gradle 自动下载缺失软件包
+在从命令行运行编译或者使用 Android Studio 3.3 或更高版本时，只要已经使用 SDK 管理器接受了相应的 SDK 许可协议，Gradle 就会自动下载项目依赖的缺失 SDK 软件包。</p>
+<p>在您使用 SDK 管理器接受许可协议后，Android Studio 会在 SDK 主目录内部创建 licenses 目录。此 licenses 目录是 Gradle 自动下载缺失软件包所必需的。</p>
+<p>注意：使用 android 命令行工具接受许可协议不会创建此 licenses 目录。您必须先使用 SDK 管理器接受协议才能够使用此功能。</p>
+<p>如果您已经在一个工作站上接受许可协议，但希望在另一个工作站上编译项目，则可以通过复制已接受的 licenses 目录来导出 licenses。要将 licenses 复制到另一台计算机，请按以下步骤执行操作：</p>
+<p>在安装了 Android Studio 的计算机上，依次点击 Tools &gt; Android &gt; SDK Manager。在窗口顶部，记下 Android SDK Location。
+转到该目录，并在此目录下找到 licenses/ 目录（如果您没有看到 licenses/ 目录，请返回到 Android Studio 并更新 SDK 工具，确保接受许可协议。返回到 Android SDK 主目录后，您现在应该会看到该目录）。
+复制整个 licenses/ 目录，并将其粘贴到您希望编译项目所用计算机上的 Android SDK 主目录中。
+Gradle 现在会自动下载项目依赖的缺失软件包。</p>
+<p>请注意，对于从 Android Studio 运行的编译，此功能自动处于停用状态，因为 SDK 管理器会处理 IDE 缺失软件包的下载任务。您还可以手动停用此功能，方法是在项目的 gradle.properties 文件中设置 android.builder.sdkDownload=false。</p>
+<h2 id="原文">原文</h2>
+<p><a href="https://developer.android.com/studio/intro/update">https://developer.android.com/studio/intro/update</a></p>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://sy123-ml.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>
