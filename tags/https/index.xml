@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>https on sy123.ml</title>
+    <link>https://sy123.ml/tags/https/</link>
+    <description>Recent content in https on sy123.ml</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>2007-2020 Zhili.</copyright>
+    <lastBuildDate>Sun, 23 Feb 2020 04:19:28 +0800</lastBuildDate>
+    
+	<atom:link href="https://sy123.ml/tags/https/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>V2Ray_WebSocket_TLS_CDN</title>
+      <link>https://sy123.ml/2020/02/23/v2ray_websocket_tls_cdn/</link>
+      <pubDate>Sun, 23 Feb 2020 04:19:28 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/23/v2ray_websocket_tls_cdn/</guid>
+      <description>可能是由于最近墙的升级，使用SS等方式翻墙IP被墙的概率大大提升（2台小鸡GG，然后新开一台搭建SS，使用2天就GG），所以写一篇介绍全新的姿势，可以复活已经被墙的IP。在速度和稳定性上选择了后者
+重要说明本文是针对VPS的IP已经被墙的情况下，如何继续翻墙，如不想这么复杂，请参看如下文章（搭建V2Ray使用特有的Vmess协议即可）：
+https://www.codercto.com/a/22204.html
+涉及如下：V2Ray+WebSocket+TLS+CDN
+V2Ray是一个集成了各种翻墙协议的软件，包括Socks（目前接触到的是本机到本机）、HTTP、Shadowsocks（目前接触到的是本机到远程）、VMess等，传输载体可以是TCP、mKCP、WebSocket等 使用WebSocket：因为CDN可以转发WS流量 使用https（TLS）伪装网站，请求流量数据 使用CDN转发流量，同时作为连接VPS的跳板，使VPS复活和隐藏 原理图如下：
+2 Preparations 准备工作如下：
+一台VPS（IP已经被墙，IP假设为99.99.99.99） 域名（以zqq6666.tk为例） 注册CloudFare（免费CDN） 相关知识（Linux命令，Nginx配置，域名配置等） 免费域名注册： https://my.freenom.com/clientarea.php
+CloudFare: https://www.cloudflare.com/
+3 Installations and Configurations 3.1 安装Nginx 在VPS上，安装Nginx：
+sudo apt=get update sudo apt-get install nginx 编辑配置文件：
+sudo vi /etc/nginx/sites-available/default 替换server_name：
+将_替换为zqq6666.tk www.zqq6666.tk 重新载入Nginx：
+nginx -s reload 3.2 申请证书 申请Let’s encrypt免费证书，先在域名注册商那里（freenom）修改dns，添加两个A记录，解析到VPS的IP 99.99.99.99，修改的原因是要向Let‘s encrypt要发起挑战，证明你拥有这个域名
+申请证书：
+sudo add-apt-repository ppa:certbot/certbot sudo apt update sudo apt install python-certbot-nginx
+sudo certbot &amp;ndash;authenticator webroot &amp;ndash;webroot-path /var/www/html &amp;ndash;installer nginx -d zqq6666.</description>
+    </item>
+    
+  </channel>
+</rss>

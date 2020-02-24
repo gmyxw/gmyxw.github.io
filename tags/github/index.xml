@@ -13,19 +13,19 @@
     
     <item>
       <title>git clone 指定分支拉代码</title>
-      <link>https://sy123.ml/2020/02/10/git-clone-%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF%E6%8B%89%E4%BB%A3%E7%A0%81/</link>
+      <link>https://sy123.ml/2020/02/10/git_clone_branch/</link>
       <pubDate>Mon, 10 Feb 2020 13:07:08 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/10/git-clone-%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF%E6%8B%89%E4%BB%A3%E7%A0%81/</guid>
+      <guid>https://sy123.ml/2020/02/10/git_clone_branch/</guid>
       <description>git clone 不指定分支 1  git clone http://10.1.1.11/service/tmall-service.git   git clone 指定分支 1  git clone -b dev_jk http://10.1.1.11/service/tmall-service.git   命令中：多了一个 -b dev-jk,这个dev_jk就是分支，http://10.1.1.11/service/tmall -service.git为源码的仓库地址</description>
     </item>
     
     <item>
       <title>Github Pull</title>
-      <link>https://sy123.ml/2020/01/08/github-pull/</link>
+      <link>https://sy123.ml/2020/01/08/github_pull/</link>
       <pubDate>Wed, 08 Jan 2020 06:27:26 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/08/github-pull/</guid>
+      <guid>https://sy123.ml/2020/01/08/github_pull/</guid>
       <description>github一直都是在上面拿资源。感觉有点愧对大众。是不是应该奉献自己的力量给github来推动开源的发展呢。 在两个月前第一次在github新建项目，并且push了一套比赛的源码。但。。。今天竟然忘了怎么用git了。又复习了一次。所以这次打算在这里作个笔记。给自己做个的或是给git新手做的也好吧。为互联网贡献一点力量。
 安装git和配置就不说了。
 进入到等下要push的代码的目录文件夹，打开bash 请输入图片描述

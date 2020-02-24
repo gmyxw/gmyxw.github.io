@@ -13,10 +13,10 @@
     
     <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
-      <link>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</link>
+      <link>https://sy123.ml/2020/02/25/cp_backup/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
+      <guid>https://sy123.ml/2020/02/25/cp_backup/</guid>
       <description>GNU cp(1) has a backup option:
 1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
 1 2 3 4 5 6 7  --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>https://sy123.ml/2020/01/11/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
+      <link>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/11/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
+      <guid>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</guid>
       <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置git的话可以直接在文章最后找到git的设置代理的方法。
 前期准备: 认识代理的方式:代理是通过客户端与服务端通信,传输服务端能够访问到的资源文件,再由服务端客户端通信返回给客户端,从而间接访问服务端能访问的资源.
 以socket5通信为例子,我们通过客户端(自己想一想酸酸乳)向服务端发送socket通信,服务端访问资源再由socket通信返回给客户端.但是这里面的通信设置必须通过端口来进行通信,类似switchyomega设置过程一样,我们会设定走的代理方式是127.0.0.1:1080;这个意思就是通过本地的1080端口来进行通信.具体在终端上如何使用呢?

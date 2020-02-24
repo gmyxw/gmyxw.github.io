@@ -8,7 +8,7 @@
     ">
 <meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
 <meta name="referrer" content="always">
-<title>Netbios - sy123.ml</title>
+<title>批处理关闭或开启NETBIOS - sy123.ml</title>
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
 </head>
@@ -22,7 +22,7 @@
 <main>
   <article>
     <div class="title">
-  <h1>Netbios</h1>
+  <h1>批处理关闭或开启NETBIOS</h1>
   </div>
 <div class="meta">
   <div>2020-01-17 19:23</div>
@@ -56,7 +56,7 @@
    wmic nicconfig where index=&#39;<span style="color:#8045ff">%%</span>a&#39; call settcpipnetbios 2
 <span style="color:#111">)</span>
 <span style="color:#00a8c8">cd</span> /d <span style="color:#111">%~dp0</span>
-  <span style="color:#00a8c8">if</span> <span style="color:#00a8c8"></span><span style="color:#00a8c8"></span><span style="color:#00a8c8">exist</span> one_time.cmd <span style="color:#111">(</span>
+  <span style="color:#00a8c8">if</span> <span style="color:#00a8c8">exist</span> one_time.cmd <span style="color:#111">(</span>
   <span style="color:#00a8c8">del</span> /f /q <span style="color:#111">%0</span>
   <span style="color:#00a8c8">exit</span>
 <span style="color:#111">)</span>
@@ -80,6 +80,24 @@
 在第二次运行脚本监测到有one_time.cmd文件后会自我删除。
 本脚本用for循环20次，每个网卡都尝试关闭NETBIOS,（一般系统有十多个网卡序号）如果不够（不放心）就就把第三行代码由数字20改为30或更多。如果想要查看自己的网卡序号可以在CMD里输入以下命令：<code>wmic nicconfig Get Caption,index</code></p>
 <p><a href="http://www.bathome.net/thread-38925-1-1.html">参考文档:批处理如何恢复Netbios</a></p>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://sy123-ml.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
 </div>
 
   </article>

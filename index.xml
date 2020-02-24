@@ -24,17 +24,17 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     
     <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
-      <link>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</link>
+      <link>https://sy123.ml/2020/02/25/cp_backup/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
+      <guid>https://sy123.ml/2020/02/25/cp_backup/</guid>
       <description>GNU cp(1) has a backup option:
 1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
 1 2 3 4 5 6 7  --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
     </item>
     
     <item>
-      <title>Android_Studio_preview</title>
+      <title>Android Studio preview</title>
       <link>https://sy123.ml/2020/02/24/android_studio_preview/</link>
       <pubDate>Mon, 24 Feb 2020 07:58:36 +0800</pubDate>
       
@@ -49,10 +49,10 @@ Canary 版：这些是前沿版本，大约每周更新一次，可在 developer
     
     <item>
       <title>Android Studio emulator ugly black borders</title>
-      <link>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</link>
+      <link>https://sy123.ml/2020/02/24/android_studio_emulator_ugly_black_borders/</link>
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</guid>
+      <guid>https://sy123.ml/2020/02/24/android_studio_emulator_ugly_black_borders/</guid>
       <description>Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.
 For making it floating, add this to your config Floating all windows with &amp;ldquo;android emulator&amp;rdquo; header:
@@ -92,10 +92,10 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>百度云加速NS接入流程</title>
-      <link>https://sy123.ml/2020/02/23/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8A%A0%E9%80%9Fns%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B/</link>
+      <link>https://sy123.ml/2020/02/23/baidu_cdn/</link>
       <pubDate>Sun, 23 Feb 2020 04:36:16 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/23/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8A%A0%E9%80%9Fns%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B/</guid>
+      <guid>https://sy123.ml/2020/02/23/baidu_cdn/</guid>
       <description>百度云加速NS接入是最简单的方式，不过还是很多站长管理员不大懂，今天教大家如何NS接入。
 首先点域名继续接入 添加子域名，A记录、主机名: WWW，记录值写你的服务器的IP，如果你有其它子域名的也一并添加创建。 创建完子域名后，点一步，查看云加速DNS 复制加速DNS n3060.ns.yunjiasu.com、n333.ns.yunjiasu.com 进入域名注册商管理处，修改NS记录，比如阿里云 修改完成后，等生效即可。需要注意的是，域名修改DNS一般全国生效为24小时左右，所以需要耐心等待了。
 好了以上就是百度云加速NS接入的全部教程了，希望可以帮到大家。</description>
@@ -103,20 +103,20 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>linux中如何手动清零缓冲</title>
-      <link>https://sy123.ml/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</link>
+      <link>https://sy123.ml/2020/02/16/how_do_you_empty_the_buffers_and_cache_on_linux_system/</link>
       <pubDate>Sun, 16 Feb 2020 15:20:03 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</guid>
+      <guid>https://sy123.ml/2020/02/16/how_do_you_empty_the_buffers_and_cache_on_linux_system/</guid>
       <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands.
 1 2 3 4 5 6 7 8 9 10  free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248   You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
     </item>
     
     <item>
       <title>如何清理Virtualbox虚拟机VDI镜像文件的空间大小</title>
-      <link>https://sy123.ml/2020/02/16/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BAvdi%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F/</link>
+      <link>https://sy123.ml/2020/02/16/virtualbox_vdi_shrink/</link>
       <pubDate>Sun, 16 Feb 2020 15:10:33 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BAvdi%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F/</guid>
+      <guid>https://sy123.ml/2020/02/16/virtualbox_vdi_shrink/</guid>
       <description>玩虚拟机的同学都知道，对于那些设定为动态配分的虚拟机，一开始装完系统时可能只有几个G，但是随着你不断的使用，体积空间就会越来越大，随便就是几十个G了。也就是说动态扩展的VDI文件只会大，不会小。这期间，就算你去虚拟机里面删除一些文件，整个虚拟机的镜像文件VDI文件的大小依然不会变小，使其所占用的实际硬盘空间过大，给备份和分享都带来麻烦。因此，今天我们就来研究一下如何解决这个问题，其实很简单。
 以下方法，在我自己的64位Ubuntu 14.04和64位win10虚拟机中亲测有效！
 步骤1：碎片整理 第一步要做的是碎片整理，整理过程需要一个特定的工具，win系统和linux系统各自有别：
@@ -132,10 +132,10 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>使用systemd-analyze优化系统启动时间</title>
-      <link>https://sy123.ml/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</link>
+      <link>https://sy123.ml/2020/02/16/systemd_analyze/</link>
       <pubDate>Sun, 16 Feb 2020 14:53:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</guid>
+      <guid>https://sy123.ml/2020/02/16/systemd_analyze/</guid>
       <description>systemd-analyze简介 systemd-analyze是Linux自带的分析系统启动性能的工具。
 systemd-analyze可使用的命令：
   systemd-analyze [OPTIONS…] [time]
@@ -154,20 +154,20 @@ systemd-analyze可使用的命令：
     
     <item>
       <title>Saga deprecated 警告</title>
-      <link>https://sy123.ml/2020/02/15/saga-deprecated-%E8%AD%A6%E5%91%8A/</link>
+      <link>https://sy123.ml/2020/02/15/saga_deprecated_warning/</link>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/15/saga-deprecated-%E8%AD%A6%E5%91%8A/</guid>
+      <guid>https://sy123.ml/2020/02/15/saga_deprecated_warning/</guid>
       <description>What happens? 1  [...effects] has been deprecated in favor of all([...effects]), please update your code   it does not effect dva.js, its redux saga api update, you just need to do this
 1 2 3 4 5  effects: { * query(action, {call, put, all}) { yield all([]) } }   Redux saga apis:</description>
     </item>
     
     <item>
       <title>Visual Studio Code 偏好设置</title>
-      <link>https://sy123.ml/2020/02/15/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</link>
+      <link>https://sy123.ml/2020/02/15/my_vscode_config/</link>
       <pubDate>Sat, 15 Feb 2020 17:58:47 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/15/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</guid>
+      <guid>https://sy123.ml/2020/02/15/my_vscode_config/</guid>
       <description>Visual Studio Code 提供了极大的弹性让我们自订想要的编辑器样式，端看使用者设定（User Setting）中，就超过 800 项设定可以让开发者自由调整，而且还有扩充套件能够增强 VS Code 的开发能力。
  这篇主要是我个人偏好的设定，完整 setting.json 请参考 gist。
  首先可以使用快速键 Ctrl +, 开启 settings.json 使用者设定档，或从选单列中点选档案 &amp;gt; 喜好设定 &amp;gt; 设定。
@@ -176,10 +176,10 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
     
     <item>
       <title>umi-ui bug using react-document-title</title>
-      <link>https://sy123.ml/2020/02/10/umi-ui-bug-using-react-document-title/</link>
+      <link>https://sy123.ml/2020/02/10/umi-ui_bug_using_react-document-title/</link>
       <pubDate>Mon, 10 Feb 2020 15:41:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/10/umi-ui-bug-using-react-document-title/</guid>
+      <guid>https://sy123.ml/2020/02/10/umi-ui_bug_using_react-document-title/</guid>
       <description>背景 React 项目使用umi时发报：
  Uncaught Invariant Violation: React.Children.only expected to receive a single React element child. The above error occurred in the  component ui socket init CloseEvent {type: &amp;ldquo;close&amp;rdquo;, bubbles: false, cancelable: false, timeStamp: 1571127775342, wasClean: false, …}
  异常代码 1 2 3 4 5  &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt; {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt;   DocumentTitle组件内部最外层只能接受一个元素，而代码中有多个元素，所以报错。
@@ -188,10 +188,10 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
     
     <item>
       <title>git clone 指定分支拉代码</title>
-      <link>https://sy123.ml/2020/02/10/git-clone-%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF%E6%8B%89%E4%BB%A3%E7%A0%81/</link>
+      <link>https://sy123.ml/2020/02/10/git_clone_branch/</link>
       <pubDate>Mon, 10 Feb 2020 13:07:08 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/10/git-clone-%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF%E6%8B%89%E4%BB%A3%E7%A0%81/</guid>
+      <guid>https://sy123.ml/2020/02/10/git_clone_branch/</guid>
       <description>git clone 不指定分支 1  git clone http://10.1.1.11/service/tmall-service.git   git clone 指定分支 1  git clone -b dev_jk http://10.1.1.11/service/tmall-service.git   命令中：多了一个 -b dev-jk,这个dev_jk就是分支，http://10.1.1.11/service/tmall -service.git为源码的仓库地址</description>
     </item>
     
@@ -207,37 +207,37 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
     
     <item>
       <title>npm和yarn如何查看源和换源</title>
-      <link>https://sy123.ml/2020/02/06/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</link>
+      <link>https://sy123.ml/2020/02/06/yarn_accelerate_and_modify_mirror_source_in_china/</link>
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/06/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</guid>
+      <guid>https://sy123.ml/2020/02/06/yarn_accelerate_and_modify_mirror_source_in_china/</guid>
       <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7  npm config get registry # 查看npm当前镜像源 npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像 yarn config get registry # 查看yarn当前镜像源 yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像   镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
     </item>
     
     <item>
       <title>Socket programing Permission denied</title>
-      <link>https://sy123.ml/2020/02/05/socket-programing-permission-denied/</link>
+      <link>https://sy123.ml/2020/02/05/linux_privileged_port/</link>
       <pubDate>Wed, 05 Feb 2020 16:04:13 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/socket-programing-permission-denied/</guid>
+      <guid>https://sy123.ml/2020/02/05/linux_privileged_port/</guid>
       <description>listen tcp :443: bind: permission denied If you want to bind to a privileged port (ports less than 1024). You either need to be root or have the CAP_NET_BIND_SERVICE capability.</description>
     </item>
     
     <item>
       <title>win10输入法不显示候选词解决方法</title>
-      <link>https://sy123.ml/2020/02/05/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link>
+      <link>https://sy123.ml/2020/02/05/win10_input_method_display_candidate_words/</link>
       <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid>
+      <guid>https://sy123.ml/2020/02/05/win10_input_method_display_candidate_words/</guid>
       <description>精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法 </description>
     </item>
     
     <item>
       <title>Linux yay 命令</title>
-      <link>https://sy123.ml/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</link>
+      <link>https://sy123.ml/2020/02/05/linux_yay/</link>
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://sy123.ml/2020/02/05/linux_yay/</guid>
       <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
 另见pacman。
 从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps   </description>
@@ -285,10 +285,10 @@ lsmod | grep ipv6
     
     <item>
       <title>Win10 清除 PowerShell 历史记录</title>
-      <link>https://sy123.ml/2020/01/20/win10-%E6%B8%85%E9%99%A4-powershell-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</link>
+      <link>https://sy123.ml/2020/01/20/historysavepath/</link>
       <pubDate>Mon, 20 Jan 2020 23:11:09 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/20/win10-%E6%B8%85%E9%99%A4-powershell-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</guid>
+      <guid>https://sy123.ml/2020/01/20/historysavepath/</guid>
       <description>PowerShell&amp;rsquo;s own history mechanism (Get-History, Clear-History) is host-independent, which is why - somewhat unexpectedly - you also need to clear the hosts&amp;rsquo;s command history separately.
 As for the console host&amp;rsquo;s own history feature:
 doskey-style history feature, before module PSReadline shipped with PowerShell (see below):
@@ -297,10 +297,10 @@ There is no saved history - a history is kept only for the duration of the curre
     
     <item>
       <title>Sysprep命令详解</title>
-      <link>https://sy123.ml/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://sy123.ml/2020/01/20/sysprep/</link>
       <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://sy123.ml/2020/01/20/sysprep/</guid>
       <description>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删除唯一性信息，这使得你可以在不同的计算机上重复使用映像。下次启动 Windows 映像时，将运行 specialize 配置阶段。
 Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
 1 2 3 4 5 6 7 8 9 10 11  Sysprep.exe [/oobe | /audit] [/generalize] [/mode:vm] [/reboot | /shutdown | /quit] [/quiet] [/unattend:&amp;lt;answerfile&amp;gt;]   下表列出了 Sysprep 命令行选项：
@@ -309,19 +309,19 @@ Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
     
     <item>
       <title>cmd命令行修改windows虚拟内存pagefile.sys</title>
-      <link>https://sy123.ml/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</link>
+      <link>https://sy123.ml/2020/01/20/pagefile/</link>
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</guid>
+      <guid>https://sy123.ml/2020/01/20/pagefile/</guid>
       <description>1 2 3 4 5 6 7 8 9 10 11 12  # 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False  # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t 0   </description>
     </item>
     
     <item>
       <title>ArchLinux配置Samba服务与Windows共享文件</title>
-      <link>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
+      <link>https://sy123.ml/2020/01/19/share_movie_between_archlinux_and_win7_via_samba/</link>
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
+      <guid>https://sy123.ml/2020/01/19/share_movie_between_archlinux_and_win7_via_samba/</guid>
       <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。
 Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
 下面记录一下ArchLinux中配置Samba的过程，留作备份。
@@ -345,10 +345,10 @@ security，这是指共享目录的安全认证形式，security的值，有两�
     
     <item>
       <title>iptables 禁止端口和开放端口</title>
-      <link>https://sy123.ml/2020/01/17/iptables-%E7%A6%81%E6%AD%A2%E7%AB%AF%E5%8F%A3%E5%92%8C%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3/</link>
+      <link>https://sy123.ml/2020/01/17/iptables/</link>
       <pubDate>Fri, 17 Jan 2020 22:35:49 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/17/iptables-%E7%A6%81%E6%AD%A2%E7%AB%AF%E5%8F%A3%E5%92%8C%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3/</guid>
+      <guid>https://sy123.ml/2020/01/17/iptables/</guid>
       <description>1.首先介绍一下指令和相关配置文件 启动指令:service iptables start
 重启指令:service iptables restart
 关闭指令:service iptables stop
@@ -380,10 +380,10 @@ iptables -A INPUT -p tcp &amp;ndash;dport 22 -j ACCEPT</description>
     
     <item>
       <title>批处理关闭或开启NETBIOS</title>
-      <link>https://sy123.ml/2020/01/17/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</link>
+      <link>https://sy123.ml/2020/01/17/netbios/</link>
       <pubDate>Fri, 17 Jan 2020 19:23:06 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/17/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</guid>
+      <guid>https://sy123.ml/2020/01/17/netbios/</guid>
       <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。
 以下为批处理自动关闭netbios脚本:
 1 2 3 4 5 6 7 8 9 10 11 12  @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do ( wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0 if exist one_time.cmd ( del /f /q %0 exit ) rename %0 one_time.cmd exit   功能: 一键关闭netbios，执行完第二次后自己删除自己。
@@ -396,10 +396,10 @@ iptables -A INPUT -p tcp &amp;ndash;dport 22 -j ACCEPT</description>
     
     <item>
       <title>玩转WSL-用Samba服务替代Win10原生的文件共享</title>
-      <link>https://sy123.ml/2020/01/17/%E7%8E%A9%E8%BD%ACwsl-%E7%94%A8samba%E6%9C%8D%E5%8A%A1%E6%9B%BF%E4%BB%A3win10%E5%8E%9F%E7%94%9F%E7%9A%84%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/</link>
+      <link>https://sy123.ml/2020/01/17/wsl_samba/</link>
       <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/17/%E7%8E%A9%E8%BD%ACwsl-%E7%94%A8samba%E6%9C%8D%E5%8A%A1%E6%9B%BF%E4%BB%A3win10%E5%8E%9F%E7%94%9F%E7%9A%84%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/</guid>
+      <guid>https://sy123.ml/2020/01/17/wsl_samba/</guid>
       <description>习惯了Linux系统的人们，肯定觉得Samba服务更加灵活和方便，那如何在Windows系统上搭建高效的Samba服务呢？本文介绍了通过WSL在Win10系统上，搭建Samba文件共享服务。
 背景是家里只有一个台式机，一方面家里人偶尔使用，另一方面，它是家里的数据中心，挂载了多块硬盘。所以系统用的是Windows10，但是为了方便灵活得进行文件共享，一直考虑搭建Samba服务。达到此目的的方案有多种，可以考虑用虚拟机，例如：VMWare、VirtualBox、Hyper-V，也可以考虑使用CygWin，因为Windows10提供了WSL，所以本文介绍了另一种方式，也是运行效率比较高的一种方式，使用WSL搭建Samba服务。
 背景知识 Windows文件共享服务 使用网络对外提供文件访问服务，现在广泛用于局域网内部文件的共享，例如：小米盒子、手机、PC机、包括Mac，通过139或445端口。
@@ -418,10 +418,10 @@ Samba服务 为了实现UNIX、Linux等非Windows能够访问Windows的文件共
     
     <item>
       <title>Windows 下使用 Diskpart 命令分区</title>
-      <link>https://sy123.ml/2020/01/16/windows-%E4%B8%8B%E4%BD%BF%E7%94%A8-diskpart-%E5%91%BD%E4%BB%A4%E5%88%86%E5%8C%BA/</link>
+      <link>https://sy123.ml/2020/01/16/using_diskpart_to_create/</link>
       <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/16/windows-%E4%B8%8B%E4%BD%BF%E7%94%A8-diskpart-%E5%91%BD%E4%BB%A4%E5%88%86%E5%8C%BA/</guid>
+      <guid>https://sy123.ml/2020/01/16/using_diskpart_to_create/</guid>
       <description>Diskpart 命令简介 Diskpart 命令是 Windows 环境下的一个命令，利用 Diskpart 可实现对硬盘的分区管理，包括创建分区、删除分区、合并（扩展）分区，设置分区后即刻生效，免去了重启电脑的操作。
 正常运行该命令时需要系统服务的支持，所以在纯 DOS、XP 内核的 WinPE 环境下都是不能运行的，但是在 Win7 的预安装环境下却是可以的。利用 Diskpart 命令来分区，既不用借助第三方工具，也不会产生 100MB 的“系统保留”分区，其次分区操作直接设置即刻生效，不用重新启动计算机。
 利用 Diskpart 命令分区 当安装程序运行到创建磁盘分区界面时按下 Shift+F10 启动命令窗口。
@@ -434,10 +434,10 @@ Samba服务 为了实现UNIX、Linux等非Windows能够访问Windows的文件共
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>https://sy123.ml/2020/01/11/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
+      <link>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/11/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
+      <guid>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</guid>
       <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置git的话可以直接在文章最后找到git的设置代理的方法。
 前期准备: 认识代理的方式:代理是通过客户端与服务端通信,传输服务端能够访问到的资源文件,再由服务端客户端通信返回给客户端,从而间接访问服务端能访问的资源.
 以socket5通信为例子,我们通过客户端(自己想一想酸酸乳)向服务端发送socket通信,服务端访问资源再由socket通信返回给客户端.但是这里面的通信设置必须通过端口来进行通信,类似switchyomega设置过程一样,我们会设定走的代理方式是127.0.0.1:1080;这个意思就是通过本地的1080端口来进行通信.具体在终端上如何使用呢?
@@ -457,10 +457,10 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
     
     <item>
       <title>百度云分享下载链接</title>
-      <link>https://sy123.ml/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</link>
+      <link>https://sy123.ml/2020/01/10/baiduyun_dlink/</link>
       <pubDate>Fri, 10 Jan 2020 07:48:32 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</guid>
+      <guid>https://sy123.ml/2020/01/10/baiduyun_dlink/</guid>
       <description>最好是先复制到自己的网盘。
   点击分享，生成链接。
   点击链接，进入页面。在console模式下输入如下代码：
@@ -469,10 +469,10 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
     
     <item>
       <title>Github Pull</title>
-      <link>https://sy123.ml/2020/01/08/github-pull/</link>
+      <link>https://sy123.ml/2020/01/08/github_pull/</link>
       <pubDate>Wed, 08 Jan 2020 06:27:26 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/08/github-pull/</guid>
+      <guid>https://sy123.ml/2020/01/08/github_pull/</guid>
       <description>github一直都是在上面拿资源。感觉有点愧对大众。是不是应该奉献自己的力量给github来推动开源的发展呢。 在两个月前第一次在github新建项目，并且push了一套比赛的源码。但。。。今天竟然忘了怎么用git了。又复习了一次。所以这次打算在这里作个笔记。给自己做个的或是给git新手做的也好吧。为互联网贡献一点力量。
 安装git和配置就不说了。
 进入到等下要push的代码的目录文件夹，打开bash 请输入图片描述

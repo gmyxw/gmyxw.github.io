@@ -13,10 +13,10 @@
     
     <item>
       <title>百度云加速NS接入流程</title>
-      <link>https://sy123.ml/2020/02/23/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8A%A0%E9%80%9Fns%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B/</link>
+      <link>https://sy123.ml/2020/02/23/baidu_cdn/</link>
       <pubDate>Sun, 23 Feb 2020 04:36:16 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/23/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8A%A0%E9%80%9Fns%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B/</guid>
+      <guid>https://sy123.ml/2020/02/23/baidu_cdn/</guid>
       <description>百度云加速NS接入是最简单的方式，不过还是很多站长管理员不大懂，今天教大家如何NS接入。
 首先点域名继续接入 添加子域名，A记录、主机名: WWW，记录值写你的服务器的IP，如果你有其它子域名的也一并添加创建。 创建完子域名后，点一步，查看云加速DNS 复制加速DNS n3060.ns.yunjiasu.com、n333.ns.yunjiasu.com 进入域名注册商管理处，修改NS记录，比如阿里云 修改完成后，等生效即可。需要注意的是，域名修改DNS一般全国生效为24小时左右，所以需要耐心等待了。
 好了以上就是百度云加速NS接入的全部教程了，希望可以帮到大家。</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>百度云分享下载链接</title>
-      <link>https://sy123.ml/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</link>
+      <link>https://sy123.ml/2020/01/10/baiduyun_dlink/</link>
       <pubDate>Fri, 10 Jan 2020 07:48:32 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</guid>
+      <guid>https://sy123.ml/2020/01/10/baiduyun_dlink/</guid>
       <description>最好是先复制到自己的网盘。
   点击分享，生成链接。
   点击链接，进入页面。在console模式下输入如下代码：

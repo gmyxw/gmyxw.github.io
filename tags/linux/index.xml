@@ -13,10 +13,10 @@
     
     <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
-      <link>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</link>
+      <link>https://sy123.ml/2020/02/25/cp_backup/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
+      <guid>https://sy123.ml/2020/02/25/cp_backup/</guid>
       <description>GNU cp(1) has a backup option:
 1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
 1 2 3 4 5 6 7  --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
@@ -24,10 +24,10 @@
     
     <item>
       <title>Android Studio emulator ugly black borders</title>
-      <link>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</link>
+      <link>https://sy123.ml/2020/02/24/android_studio_emulator_ugly_black_borders/</link>
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</guid>
+      <guid>https://sy123.ml/2020/02/24/android_studio_emulator_ugly_black_borders/</guid>
       <description>Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.
 For making it floating, add this to your config Floating all windows with &amp;ldquo;android emulator&amp;rdquo; header:
@@ -67,20 +67,20 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>linux中如何手动清零缓冲</title>
-      <link>https://sy123.ml/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</link>
+      <link>https://sy123.ml/2020/02/16/how_do_you_empty_the_buffers_and_cache_on_linux_system/</link>
       <pubDate>Sun, 16 Feb 2020 15:20:03 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</guid>
+      <guid>https://sy123.ml/2020/02/16/how_do_you_empty_the_buffers_and_cache_on_linux_system/</guid>
       <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands.
 1 2 3 4 5 6 7 8 9 10  free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248   You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
     </item>
     
     <item>
       <title>使用systemd-analyze优化系统启动时间</title>
-      <link>https://sy123.ml/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</link>
+      <link>https://sy123.ml/2020/02/16/systemd_analyze/</link>
       <pubDate>Sun, 16 Feb 2020 14:53:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</guid>
+      <guid>https://sy123.ml/2020/02/16/systemd_analyze/</guid>
       <description>systemd-analyze简介 systemd-analyze是Linux自带的分析系统启动性能的工具。
 systemd-analyze可使用的命令：
   systemd-analyze [OPTIONS…] [time]
@@ -99,19 +99,19 @@ systemd-analyze可使用的命令：
     
     <item>
       <title>Socket programing Permission denied</title>
-      <link>https://sy123.ml/2020/02/05/socket-programing-permission-denied/</link>
+      <link>https://sy123.ml/2020/02/05/linux_privileged_port/</link>
       <pubDate>Wed, 05 Feb 2020 16:04:13 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/socket-programing-permission-denied/</guid>
+      <guid>https://sy123.ml/2020/02/05/linux_privileged_port/</guid>
       <description>listen tcp :443: bind: permission denied If you want to bind to a privileged port (ports less than 1024). You either need to be root or have the CAP_NET_BIND_SERVICE capability.</description>
     </item>
     
     <item>
       <title>Linux yay 命令</title>
-      <link>https://sy123.ml/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</link>
+      <link>https://sy123.ml/2020/02/05/linux_yay/</link>
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://sy123.ml/2020/02/05/linux_yay/</guid>
       <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
 另见pacman。
 从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps   </description>
@@ -159,10 +159,10 @@ lsmod | grep ipv6
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>https://sy123.ml/2020/01/11/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
+      <link>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/11/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
+      <guid>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</guid>
       <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置git的话可以直接在文章最后找到git的设置代理的方法。
 前期准备: 认识代理的方式:代理是通过客户端与服务端通信,传输服务端能够访问到的资源文件,再由服务端客户端通信返回给客户端,从而间接访问服务端能访问的资源.
 以socket5通信为例子,我们通过客户端(自己想一想酸酸乳)向服务端发送socket通信,服务端访问资源再由socket通信返回给客户端.但是这里面的通信设置必须通过端口来进行通信,类似switchyomega设置过程一样,我们会设定走的代理方式是127.0.0.1:1080;这个意思就是通过本地的1080端口来进行通信.具体在终端上如何使用呢?

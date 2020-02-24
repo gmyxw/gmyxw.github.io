@@ -13,19 +13,19 @@
     
     <item>
       <title>win10输入法不显示候选词解决方法</title>
-      <link>https://sy123.ml/2020/02/05/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link>
+      <link>https://sy123.ml/2020/02/05/win10_input_method_display_candidate_words/</link>
       <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid>
+      <guid>https://sy123.ml/2020/02/05/win10_input_method_display_candidate_words/</guid>
       <description>精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法 </description>
     </item>
     
     <item>
       <title>Sysprep命令详解</title>
-      <link>https://sy123.ml/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://sy123.ml/2020/01/20/sysprep/</link>
       <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://sy123.ml/2020/01/20/sysprep/</guid>
       <description>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删除唯一性信息，这使得你可以在不同的计算机上重复使用映像。下次启动 Windows 映像时，将运行 specialize 配置阶段。
 Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
 1 2 3 4 5 6 7 8 9 10 11  Sysprep.exe [/oobe | /audit] [/generalize] [/mode:vm] [/reboot | /shutdown | /quit] [/quiet] [/unattend:&amp;lt;answerfile&amp;gt;]   下表列出了 Sysprep 命令行选项：
@@ -34,19 +34,19 @@ Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
     
     <item>
       <title>cmd命令行修改windows虚拟内存pagefile.sys</title>
-      <link>https://sy123.ml/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</link>
+      <link>https://sy123.ml/2020/01/20/pagefile/</link>
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</guid>
+      <guid>https://sy123.ml/2020/01/20/pagefile/</guid>
       <description>1 2 3 4 5 6 7 8 9 10 11 12  # 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False  # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t 0   </description>
     </item>
     
     <item>
       <title>ArchLinux配置Samba服务与Windows共享文件</title>
-      <link>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
+      <link>https://sy123.ml/2020/01/19/share_movie_between_archlinux_and_win7_via_samba/</link>
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
+      <guid>https://sy123.ml/2020/01/19/share_movie_between_archlinux_and_win7_via_samba/</guid>
       <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。
 Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
 下面记录一下ArchLinux中配置Samba的过程，留作备份。
@@ -70,10 +70,10 @@ security，这是指共享目录的安全认证形式，security的值，有两�
     
     <item>
       <title>批处理关闭或开启NETBIOS</title>
-      <link>https://sy123.ml/2020/01/17/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</link>
+      <link>https://sy123.ml/2020/01/17/netbios/</link>
       <pubDate>Fri, 17 Jan 2020 19:23:06 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/17/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</guid>
+      <guid>https://sy123.ml/2020/01/17/netbios/</guid>
       <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。
 以下为批处理自动关闭netbios脚本:
 1 2 3 4 5 6 7 8 9 10 11 12  @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do ( wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0 if exist one_time.cmd ( del /f /q %0 exit ) rename %0 one_time.cmd exit   功能: 一键关闭netbios，执行完第二次后自己删除自己。
@@ -86,10 +86,10 @@ security，这是指共享目录的安全认证形式，security的值，有两�
     
     <item>
       <title>玩转WSL-用Samba服务替代Win10原生的文件共享</title>
-      <link>https://sy123.ml/2020/01/17/%E7%8E%A9%E8%BD%ACwsl-%E7%94%A8samba%E6%9C%8D%E5%8A%A1%E6%9B%BF%E4%BB%A3win10%E5%8E%9F%E7%94%9F%E7%9A%84%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/</link>
+      <link>https://sy123.ml/2020/01/17/wsl_samba/</link>
       <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/17/%E7%8E%A9%E8%BD%ACwsl-%E7%94%A8samba%E6%9C%8D%E5%8A%A1%E6%9B%BF%E4%BB%A3win10%E5%8E%9F%E7%94%9F%E7%9A%84%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/</guid>
+      <guid>https://sy123.ml/2020/01/17/wsl_samba/</guid>
       <description>习惯了Linux系统的人们，肯定觉得Samba服务更加灵活和方便，那如何在Windows系统上搭建高效的Samba服务呢？本文介绍了通过WSL在Win10系统上，搭建Samba文件共享服务。
 背景是家里只有一个台式机，一方面家里人偶尔使用，另一方面，它是家里的数据中心，挂载了多块硬盘。所以系统用的是Windows10，但是为了方便灵活得进行文件共享，一直考虑搭建Samba服务。达到此目的的方案有多种，可以考虑用虚拟机，例如：VMWare、VirtualBox、Hyper-V，也可以考虑使用CygWin，因为Windows10提供了WSL，所以本文介绍了另一种方式，也是运行效率比较高的一种方式，使用WSL搭建Samba服务。
 背景知识 Windows文件共享服务 使用网络对外提供文件访问服务，现在广泛用于局域网内部文件的共享，例如：小米盒子、手机、PC机、包括Mac，通过139或445端口。
@@ -108,10 +108,10 @@ Samba服务 为了实现UNIX、Linux等非Windows能够访问Windows的文件共
     
     <item>
       <title>Windows 下使用 Diskpart 命令分区</title>
-      <link>https://sy123.ml/2020/01/16/windows-%E4%B8%8B%E4%BD%BF%E7%94%A8-diskpart-%E5%91%BD%E4%BB%A4%E5%88%86%E5%8C%BA/</link>
+      <link>https://sy123.ml/2020/01/16/using_diskpart_to_create/</link>
       <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/16/windows-%E4%B8%8B%E4%BD%BF%E7%94%A8-diskpart-%E5%91%BD%E4%BB%A4%E5%88%86%E5%8C%BA/</guid>
+      <guid>https://sy123.ml/2020/01/16/using_diskpart_to_create/</guid>
       <description>Diskpart 命令简介 Diskpart 命令是 Windows 环境下的一个命令，利用 Diskpart 可实现对硬盘的分区管理，包括创建分区、删除分区、合并（扩展）分区，设置分区后即刻生效，免去了重启电脑的操作。
 正常运行该命令时需要系统服务的支持，所以在纯 DOS、XP 内核的 WinPE 环境下都是不能运行的，但是在 Win7 的预安装环境下却是可以的。利用 Diskpart 命令来分区，既不用借助第三方工具，也不会产生 100MB 的“系统保留”分区，其次分区操作直接设置即刻生效，不用重新启动计算机。
 利用 Diskpart 命令分区 当安装程序运行到创建磁盘分区界面时按下 Shift+F10 启动命令窗口。
