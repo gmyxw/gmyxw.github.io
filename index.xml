@@ -23,6 +23,15 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     </item>
     
     <item>
+      <title>约定俗成的常见缩写</title>
+      <link>https://sy123.ml/2020/02/25/abbreviations/</link>
+      <pubDate>Tue, 25 Feb 2020 12:39:44 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/25/abbreviations/</guid>
+      <description>   全称 缩写     event evt   connect conn   server srv   address addr   request req   response rep   lenght len   collection col   signal sig   error of last number erron   field field   property props   defines defs   object obj   system sys   message msg   number num   directory dir   dictionory dict   protocol proto   button btn   table tbl   label lbl   Image img   Sprite sp   texture tex   tween tw   transform trans   animation anim   material mat   vecter vec   position pos   delegate del   callback cb   acc accessibility   auto automatic   eval evaluate   impl implementation   info in   num number of   min minimum   max maximum   nav navigation   regexp regular expression   util utility   req request   resp response   res resource   app application   auth authorization/authentication 这点非常不认可，同一个常见缩写居然能代表两个不同的词。   dev develop   env environment   db database   pkg package   svr server   i18n internationalization   cert certificate   msg message   addr address   tmp/temp temporary   var/def variable/define 其实 var/def 已经是很多语言的关键字了   calc calculate/calculation   src source   dest destination   min/max minimum/maximum 应该已经不算了吧。。。   doc document   dir directory    </description>
+    </item>
+    
+    <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
       <link>https://sy123.ml/2020/02/25/cp_backup/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
