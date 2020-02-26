@@ -23,6 +23,16 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     </item>
     
     <item>
+      <title>出现value.locale is not a function问题解决办法</title>
+      <link>https://sy123.ml/2020/02/26/react_datepicker/</link>
+      <pubDate>Wed, 26 Feb 2020 15:28:15 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/26/react_datepicker/</guid>
+      <description>给datepicker赋值 可以输出赋值,datepicker赋值需要moment格式的数据,如果赋值了string类型的会报错 需要进行moment格式化moment(dateString)
+给普通字符串赋值 如果赋值了moment类型的数据 可以通过moment(date).format(XXX)来解决,如果还不行的话可以使用date&amp;amp;&amp;amp; moment(date).lacale(‘en’).format(XXX)</description>
+    </item>
+    
+    <item>
       <title>百度网盘超级会员账号分享</title>
       <link>https://sy123.ml/2020/02/26/baidu_svip/</link>
       <pubDate>Wed, 26 Feb 2020 02:07:36 +0800</pubDate>
