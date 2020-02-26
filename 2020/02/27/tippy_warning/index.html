@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Tippy_warning - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Tippy_warning</h1>
+  </div>
+<div class="meta">
+  <div>2020-02-27 07:03</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/js/">#js</a></span>
+      <span><a href="https://sy123.ml/tags/react/">#react</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>I have the folowing part of code:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">private</span> <span style="color:#75af00">rootRef</span> <span style="color:#f92672">=</span> <span style="color:#75af00">React</span><span style="color:#111">.</span><span style="color:#75af00">createRef</span><span style="color:#f92672">&lt;</span><span style="color:#75af00">HTMLDivElement</span><span style="color:#f92672">&gt;</span><span style="color:#111">();</span>
+
+<span style="color:#00a8c8">const</span> <span style="color:#75af00">target</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span>  
+        <span style="color:#f92672">&lt;</span><span style="color:#75af00">div</span><span style="color:#f92672">&gt;</span>
+             <span style="color:#f92672">&lt;</span><span style="color:#75af00">Icon</span> <span style="color:#75af00">design</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;accepted&#39;</span> <span style="color:#75af00">size</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;xl&#39;</span> <span style="color:#f92672">/&gt;</span>    
+        <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/div&gt;</span>
+<span style="color:#111">);</span>
+
+<span style="color:#00a8c8">return</span> <span style="color:#111">(</span>
+            <span style="color:#f92672">&lt;</span><span style="color:#75af00">React</span><span style="color:#111">.</span><span style="color:#75af00">Fragment</span><span style="color:#f92672">&gt;</span>
+                <span style="color:#111">{</span><span style="color:#75af00">React</span><span style="color:#111">.</span><span style="color:#75af00">cloneElement</span><span style="color:#111">(</span><span style="color:#75af00">target</span><span style="color:#111">,</span> <span style="color:#111">{</span>
+                    <span style="color:#75af00">ref</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">rootRef</span><span style="color:#111">,</span>
+                    <span style="color:#75af00">onMouseOver</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">handleMouseOver</span><span style="color:#111">,</span>
+                    <span style="color:#75af00">onMouseLeave</span><span style="color:#f92672">:</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">handleMouseLeave</span><span style="color:#111">,</span>
+                <span style="color:#111">})}</span>
+                <span style="color:#111">{</span><span style="color:#75af00">open</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">renderTooltip</span><span style="color:#111">()}</span>
+            <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/React.Fragment&gt;</span>
+        <span style="color:#111">);</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>When target with div element (or any other instead of div) everything is ok, but when target is:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">const</span> <span style="color:#75af00">target</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span>  
+        
+             <span style="color:#f92672">&lt;</span><span style="color:#75af00">Icon</span> <span style="color:#75af00">design</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;accepted&#39;</span> <span style="color:#75af00">size</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;xl&#39;</span> <span style="color:#f92672">/&gt;</span>    
+       
+<span style="color:#111">);</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>I get error: Warning: Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use <code>React.forwardRef()</code>?</p>
+<p>Icon is a span element inside of which is svg.</p>
+<h2 id="getfielddecorator">getFieldDecorator</h2>
+<p>If <code>getFieldDecorator</code> receives components that are already connected by <code>@connect</code> and other components (such as<code> InputGroup</code>), it will receive a warning.</p>
+<p>A temporary solution is:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
+<span style="color:#75715e">// Item.js
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// ...
+</span><span style="color:#75715e">// export default Item;
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// eslint-disable-next-line react/no-multi-comp
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">export</span> <span style="color:#00a8c8">default</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">ItemWrapper</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">Component</span> <span style="color:#111">{</span>
+  <span style="color:#75af00">render</span><span style="color:#111">()</span> <span style="color:#111">{</span>
+    <span style="color:#00a8c8">const</span> <span style="color:#111">{</span><span style="color:#75af00">children</span><span style="color:#111">,</span> <span style="color:#111">...</span><span style="color:#75af00">props</span><span style="color:#111">}</span> <span style="color:#f92672">=</span> <span style="color:#00a8c8">this</span><span style="color:#111">.</span><span style="color:#75af00">props</span>
+    <span style="color:#00a8c8">return</span> <span style="color:#f92672">&lt;</span><span style="color:#75af00">Item</span> <span style="color:#111">{...</span><span style="color:#75af00">props</span><span style="color:#111">}</span><span style="color:#f92672">&gt;</span><span style="color:#111">{</span><span style="color:#75af00">children</span><span style="color:#111">}</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Item&gt;</span>
+  <span style="color:#111">}</span>
+<span style="color:#111">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://sy123-ml.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>
