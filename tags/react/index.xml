@@ -6,10 +6,20 @@
     <description>Recent content in react on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Thu, 27 Feb 2020 07:03:10 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 27 Feb 2020 14:19:24 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/react/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>React关于form的取部分字段数据</title>
+      <link>https://sy123.ml/2020/02/27/react_validate/</link>
+      <pubDate>Thu, 27 Feb 2020 14:19:24 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/27/react_validate/</guid>
+      <description>获取查询条件的值 validateFields form.validateFields / validateFieldsAndScroll 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件
+获取表单的所有数据 1 2 3 4 5 6 7 8 9  this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; { if(err){ return; } console.log(&amp;#39;_values&amp;#39;, values); });   获取表单的部分字段数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27  this.props.form.validateFieldsAndScroll([`timeUnit${num}`, `Time${num}`,`deviceTypeId${num}`], (err, values) =&amp;gt; { if(err){ return; } console.</description>
+    </item>
     
     <item>
       <title>Tippy_warning</title>
