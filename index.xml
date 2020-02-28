@@ -23,6 +23,26 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     </item>
     
     <item>
+      <title>Encrypt string using Openssl</title>
+      <link>https://sy123.ml/2020/02/28/encrypt_string_using-openssl/</link>
+      <pubDate>Fri, 28 Feb 2020 11:28:00 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/28/encrypt_string_using-openssl/</guid>
+      <description>Try this:
+1 2 3 4  echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt   Run
+1 2 3  openssl list-cipher-commands   to list all available ciphers.</description>
+    </item>
+    
+    <item>
+      <title>youtube视频下载</title>
+      <link>https://sy123.ml/2020/02/27/youtube_video_download/</link>
+      <pubDate>Thu, 27 Feb 2020 18:34:08 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/27/youtube_video_download/</guid>
+      <description>https://y2mate.guru/en1/</description>
+    </item>
+    
+    <item>
       <title>React关于form的取部分字段数据</title>
       <link>https://sy123.ml/2020/02/27/react_validate/</link>
       <pubDate>Thu, 27 Feb 2020 14:19:24 +0800</pubDate>
