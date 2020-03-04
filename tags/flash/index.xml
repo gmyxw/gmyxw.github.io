@@ -13,10 +13,10 @@
     
     <item>
       <title>Browser plugins</title>
-      <link>https://sy123.ml/content/post/2020/03/browser_plugins/</link>
+      <link>https://sy123.ml/2020/03/04/browser_plugins/</link>
       <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
       
-      <guid>https://sy123.ml/content/post/2020/03/browser_plugins/</guid>
+      <guid>https://sy123.ml/2020/03/04/browser_plugins/</guid>
       <description>Installation The package you will need to install depends on the browser you use.
  The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package.  </description>
     </item>

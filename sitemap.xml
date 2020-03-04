@@ -8,17 +8,12 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/content/post/2020/03/browser_plugins/</loc>
+    <loc>https://sy123.ml/2020/03/04/browser_plugins/</loc>
     <lastmod>2020-03-04T17:06:34+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sy123.ml/tags/chrome/</loc>
-    <lastmod>2020-03-04T17:06:34+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/content/</loc>
     <lastmod>2020-03-04T17:06:34+08:00</lastmod>
   </url>
   
@@ -38,6 +33,11 @@
   </url>
   
   <url>
+    <loc>https://sy123.ml/post/</loc>
+    <lastmod>2020-03-04T17:06:34+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sy123.ml/tags/</loc>
     <lastmod>2020-03-04T17:06:34+08:00</lastmod>
   </url>
@@ -49,11 +49,6 @@
   
   <url>
     <loc>https://sy123.ml/tags/js/</loc>
-    <lastmod>2020-02-28T17:09:04+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/post/</loc>
     <lastmod>2020-02-28T17:09:04+08:00</lastmod>
   </url>
   

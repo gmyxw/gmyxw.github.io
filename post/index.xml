@@ -6,10 +6,20 @@
     <description>Recent content in Posts on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Fri, 28 Feb 2020 17:09:04 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 04 Mar 2020 17:06:34 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Browser plugins</title>
+      <link>https://sy123.ml/2020/03/04/browser_plugins/</link>
+      <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/04/browser_plugins/</guid>
+      <description>Installation The package you will need to install depends on the browser you use.
+ The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package.  </description>
+    </item>
     
     <item>
       <title>javascript中的各种简写总结（不断更新）</title>
