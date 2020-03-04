@@ -6,10 +6,19 @@
     <description>Recent content in Tags on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Fri, 28 Feb 2020 11:28:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 28 Feb 2020 17:09:04 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>js</title>
+      <link>https://sy123.ml/tags/js/</link>
+      <pubDate>Fri, 28 Feb 2020 17:09:04 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/js/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>linux</title>
@@ -35,15 +44,6 @@
       <pubDate>Thu, 27 Feb 2020 18:34:08 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/youtube/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>js</title>
-      <link>https://sy123.ml/tags/js/</link>
-      <pubDate>Thu, 27 Feb 2020 14:19:24 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tags/js/</guid>
       <description></description>
     </item>
     

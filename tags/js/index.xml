@@ -6,10 +6,38 @@
     <description>Recent content in js on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Thu, 27 Feb 2020 14:19:24 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 28 Feb 2020 17:09:04 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/js/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>javascript中的各种简写总结（不断更新）</title>
+      <link>https://sy123.ml/2020/02/28/javascript_shorthand/</link>
+      <pubDate>Fri, 28 Feb 2020 17:09:04 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/02/28/javascript_shorthand/</guid>
+      <description>在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。
+这里的简写，包括比如void 0代替undefined这类值替代，
+也包括了箭头函数替代普通函数、for循环各种写法中性能最好的这类写法替代，
+还想到了以前面试的时候看到的es6面试题，数组去重，最简单的方法是用set和Array.from。
+类似的都会整理出来，以后遇到了新的也会更新上来。
+2018/12/22
+（1）取整，位运算更快。原因介绍：参考：位运算实现的原因
+位运算取整（更快）
+位运算取整：下述，都可以
+1 2 3 4  ~~a; //双非位操作符 a|0; 。。。   （2）四舍五入（0.5规定向上取整），位运算更快
+位运算的四舍五入，负数不适配
+位运算适合正数的四舍五入，但是负数只能舍，不能入。
+1 2 3 4  a+0.5|0; ~~(a+0.5); 。。。   （3）内置值 undefined
+undefined替代
+1 2 3  void 0; // 快 0[0]; // 略慢    （4）内置值 Infinity
+Infinity替代
+1/0; （5）布尔值短写法
+布尔值短写法
+!0; // true !1; //false （6）十进制指数（想当初，刚学c的时候，我一直都用pow(10,n)） 10000000000 === 1e10
+（7）三元运算符 ? : 还用于简化函数的调用。</description>
+    </item>
     
     <item>
       <title>React关于form的取部分字段数据</title>
