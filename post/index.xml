@@ -6,10 +6,20 @@
     <description>Recent content in Posts on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Wed, 04 Mar 2020 17:06:34 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 06 Mar 2020 21:36:57 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>git 出现错误Could not resolve host: github.com</title>
+      <link>https://sy123.ml/2020/03/06/git_clone_not_resolve_host/</link>
+      <pubDate>Fri, 06 Mar 2020 21:36:57 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/06/git_clone_not_resolve_host/</guid>
+      <description>1 2 3  ❯ git clone https://github.com/Zhili/GameServer Cloning into &amp;#39;GameServer&amp;#39;... fatal: unable to access &amp;#39;https://github.com/Zhili/GameServer/&amp;#39;: Couldn&amp;#39;t resolve host name   (Just a little reminder) If you want the hostname also be resolved by the proxy (that means passing everything through the proxy), especially when you are cloning a gist, you can use the following setting (the key is that it uses socks5h instead of socks5):
+1  git config --global http.</description>
+    </item>
     
     <item>
       <title>Browser plugins</title>
