@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeScript on sy123.ml</title>
+    <link>https://sy123.ml/tags/typescript/</link>
+    <description>Recent content in TypeScript on sy123.ml</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>2007-2020 Zhili.</copyright>
+    <lastBuildDate>Tue, 10 Mar 2020 14:51:20 +0800</lastBuildDate>
+    
+	<atom:link href="https://sy123.ml/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ts属性后面的感叹号有什么用处？</title>
+      <link>https://sy123.ml/2020/03/10/what_does_the_exclamation_point_behind_the_ts_attribute_mean/</link>
+      <pubDate>Tue, 10 Mar 2020 14:51:20 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/10/what_does_the_exclamation_point_behind_the_ts_attribute_mean/</guid>
+      <description>首先看一段代码
+1 2 3 4 5 6 7 8 9  import { Vue, Component, Prop } from &amp;#39;vue-property-decorator&amp;#39; @Component export default class YourComponent extends Vue { @Prop(Number) propA!: number @Prop({ default: &amp;#39;default value&amp;#39; }) propB!: string @Prop([String, Boolean]) propC: string | boolean }   这是vue组件的ts写法，仔细观察，里面有一段这样的代码@Prop(Number) propA!: number，这是什么鬼？
+查了一下ts的文档说明，原来感叹号是非null和非undefined的类型断言，所以上面的写法就是对propA这个属性进行非空断言。文档的相关说明在这里。
+官方文档上的一个例子很好的说明了这个问题
+1 2 3 4 5 6 7 8 9 10 11 12 13 14  interface Entity { name: string } // Compiled with --strictNullChecks function validateEntity(e?</description>
+    </item>
+    
+  </channel>
+</rss>

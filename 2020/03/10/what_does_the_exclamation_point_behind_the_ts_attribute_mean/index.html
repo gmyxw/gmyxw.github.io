@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>ts属性后面的感叹号有什么用处？ - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>ts属性后面的感叹号有什么用处？</h1>
+  </div>
+<div class="meta">
+  <div>2020-03-10 14:51</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/typescript/">#TypeScript</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>首先看一段代码</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span> <span style="color:#111">{</span> <span style="color:#75af00">Vue</span><span style="color:#111">,</span> <span style="color:#75af00">Component</span><span style="color:#111">,</span> <span style="color:#75af00">Prop</span> <span style="color:#111">}</span> <span style="color:#75af00">from</span> <span style="color:#d88200">&#39;vue-property-decorator&#39;</span>
+
+<span style="color:#960050;background-color:#1e0010">@</span><span style="color:#75af00">Component</span>
+<span style="color:#00a8c8">export</span> <span style="color:#00a8c8">default</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">YourComponent</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">Vue</span> <span style="color:#111">{</span>
+  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#75af00">Prop</span><span style="color:#111">(</span><span style="color:#111">Number</span><span style="color:#111">)</span> <span style="color:#75af00">propA</span><span style="color:#f92672">!:</span> <span style="color:#75af00">number</span>
+  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#75af00">Prop</span><span style="color:#111">({</span> <span style="color:#00a8c8">default</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;default value&#39;</span> <span style="color:#111">})</span> <span style="color:#75af00">propB</span><span style="color:#f92672">!:</span> <span style="color:#75af00">string</span>
+  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#75af00">Prop</span><span style="color:#111">([</span><span style="color:#111">String</span><span style="color:#111">,</span> <span style="color:#111">Boolean</span><span style="color:#111">])</span> <span style="color:#75af00">propC</span><span style="color:#f92672">:</span> <span style="color:#75af00">string</span> <span style="color:#f92672">|</span> <span style="color:#00a8c8">boolean</span>
+<span style="color:#111">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>这是vue组件的ts写法，仔细观察，里面有一段这样的代码<code>@Prop(Number) propA!: number</code>，这是什么鬼？</p>
+<p>查了一下ts的文档说明，原来感叹号是非<strong>null</strong>和非<strong>undefined</strong>的类型断言，所以上面的写法就是对<strong>propA</strong>这个属性进行非空断言。文档的相关说明在这里。</p>
+<p>官方文档上的一个例子很好的说明了这个问题</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">interface</span> <span style="color:#75af00">Entity</span> <span style="color:#111">{</span>
+  <span style="color:#75af00">name</span><span style="color:#f92672">:</span> <span style="color:#75af00">string</span>
+<span style="color:#111">}</span>
+
+<span style="color:#75715e">// Compiled with --strictNullChecks
+</span><span style="color:#75715e"></span><span style="color:#00a8c8">function</span> <span style="color:#75af00">validateEntity</span><span style="color:#111">(</span><span style="color:#75af00">e</span><span style="color:#f92672">?:</span> <span style="color:#75af00">Entity</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+  <span style="color:#75715e">// Throw exception if e is null or invalid entity
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+<span style="color:#00a8c8">function</span> <span style="color:#75af00">processEntity</span><span style="color:#111">(</span><span style="color:#75af00">e</span><span style="color:#f92672">?:</span> <span style="color:#75af00">Entity</span><span style="color:#111">)</span> <span style="color:#111">{</span>
+  <span style="color:#75af00">validateEntity</span><span style="color:#111">(</span><span style="color:#75af00">e</span><span style="color:#111">);</span>
+  <span style="color:#00a8c8">let</span> <span style="color:#75af00">s</span> <span style="color:#f92672">=</span> <span style="color:#75af00">e</span><span style="color:#f92672">!</span><span style="color:#111">.</span><span style="color:#75af00">name</span><span style="color:#111">;</span>  <span style="color:#75715e">// Assert that e is non-null and access name
+</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>如果直接使用<strong>let s = e.name</strong>;，编译器会抛出e可能不存在的错误，但是使用非空断言，则表示e肯定是存在的，从而不会产生编译问题。</p>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://sy123-ml.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>
