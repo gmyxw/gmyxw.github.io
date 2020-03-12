@@ -6,10 +6,19 @@
     <description>Recent content in Tags on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Tue, 10 Mar 2020 14:51:20 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 12 Mar 2020 17:05:52 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>vim</title>
+      <link>https://sy123.ml/tags/vim/</link>
+      <pubDate>Thu, 12 Mar 2020 17:05:52 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/vim/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>TypeScript</title>
@@ -170,15 +179,6 @@
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/regex/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>vim</title>
-      <link>https://sy123.ml/tags/vim/</link>
-      <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tags/vim/</guid>
       <description></description>
     </item>
     
