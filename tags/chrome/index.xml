@@ -6,10 +6,19 @@
     <description>Recent content in chrome on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Wed, 04 Mar 2020 17:06:34 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 13 Mar 2020 02:46:41 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Google Chrome 离线安装包的官方下载</title>
+      <link>https://sy123.ml/2020/03/13/chrome-standalone/</link>
+      <pubDate>Fri, 13 Mar 2020 02:46:41 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/13/chrome-standalone/</guid>
+      <description>在chrome首页的链接https://www.google.com/chrome后加上?system=true&amp;amp;standalone=1，一般默认下载稳定版，如果需要指定下载的版本就再加上&amp;amp;extra=[版本名称]（版本有stablechannel、betachannel、devchannel、canarychannel）。修改完链接后回车，就能下载离线包了。</description>
+    </item>
     
     <item>
       <title>Browser plugins</title>

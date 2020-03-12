@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>百度网盘扩容到100t以上 - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>百度网盘扩容到100t以上</h1>
+  </div>
+<div class="meta">
+  <div>2020-03-13 03:04</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/baidu/">#baidu</a></span>
+      </div>
+  </div>
+<div class="content">
+  <blockquote>
+<p>百度网盘无限“扩容”方法这里说的扩容是非正常途径，存在一定的风险！</p>
+</blockquote>
+<h1 id="操作步骤">操作步骤</h1>
+<ul>
+<li>新建一个文件夹111111</li>
+<li>移动或转存一些文件到该文件夹111111 （假设这个文件夹占用容量是A）</li>
+<li>删除该文件夹111111 （网盘占用容量减少A）</li>
+<li>再新建一个同名空文件夹111111，不放入文件，直接删除。（占用容量无变化）</li>
+<li>到回收站还原第一次删除的文件夹111111[里面有一些文件]
+正常结果：还原该文件夹后，网盘使用容量应该增加A
+不正常结果：网盘容量并没有增加A，也就是说，还原后的文件夹111111占用的容量A成了漏网之鱼，重复操作即可<strong>扩容</strong>
+若没有复现这个bug，重新操作以上步骤 不过需要更换文件名，比如：222222，3333，234fwef，808080</li>
+</ul>
+<h1 id="使用说明">使用说明</h1>
+<p>一个标准容量是5T的SVIP个人账号，要扩容100T，我们就提前在账号内存入100T的占位文件，此时系统显示使用空间为0，可用空间为5T。</p>
+<ul>
+<li>1)用户转入4T资源后，系统显示使用空间为4T，可用空间为1T。</li>
+<li>2)用户删除4T以上的占位文件，系统又显示使用空间为0T，可用空间为5T。</li>
+<li>3)循环1~2的操作，直到消耗完占位文件。</li>
+</ul>
+<h1 id="补充说明">补充说明</h1>
+<p>如果数据被同步，网盘占用容量正常了，就需要<strong>修复</strong>操作</p>
+<h2 id="扩容的步骤">扩容的步骤</h2>
+<ul>
+<li>新建一个文件夹123456【标记：A】， 删除之后，还原存入N个占位文件。</li>
+<li>再删除。</li>
+<li>新建一个同名文件夹123456 【标记：B】 删除后，到回收站还原文件夹123456【标记：A】。</li>
+</ul>
+<p>若提示：容量不足提示还原失败，或者还原成功后，占用容量增加了。说明“扩容”失败了!  继续上面的操作步骤，换一个文件夹名比如23456789 继续操作直至成功。有时候需要多次尝试才可以成功！“扩容”成功后：</p>
+<ul>
+<li>注意1. 不要删除或重命名这个文件夹【标记：A】 里面最多不存放入超过500个数量的（占位）文件，否则删除后就无法还原。 如果“占用容量被后台同步” 就需要不断的删除和还原文件夹【标记：A】来修复占用容量【这里要注意一下：网盘占用容量会出现“卡住”的情况，等半个小时左右就正常显示了】</li>
+<li>注意2.  必须保留回收站的同名文件夹【标记：B】，不能清空回收站。</li>
+<li>注意3. 登录客户端或者上传、转存、下载后，第二天占用容量就会被同步，当然什么都不操作也会出现容量被同步的情况。按照1中操作 重新“扩容即可”，为了修复顺利，不要删除文件夹【标记：A】 和保留一些占位文件。 若占位文件和文件夹【标记：A】 都被删除了，也可以修复，重新操作步骤1-6。区别是不能从专辑转存占位文件了，就需要用网盘里的文件替代，还原成功后，就存入一些大容量的文件，数量不能超过500.做删除和还原。这样循环下去，理论可以做到无限多的内存。</li>
+</ul>
+<blockquote>
+<p>很多人说不行，3月5日我自己试了下，用脚本去执行操作，很快扩出了<strong>100T</strong>的占位文件。
+<img src="https://pic1.zhimg.com/80/v2-329f0e5b18a82e4809f8b362c976bdf0_720w.jpg" alt=""></p>
+</blockquote>
+<video id="video" controls="" preload="none" poster="https://pic1.zhimg.com/80/v2-329f0e5b18a82e4809f8b362c976bdf0_720w.jpg">
+<source id="mp4" src="https://video.zhihu.com/video/1218958800411119616?autoplay=false&useMSE=" type="video/mp4">
+</video></div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://sy123-ml.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>
