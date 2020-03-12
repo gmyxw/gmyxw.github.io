@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>如何在vim保存时获得sudo权限 - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>如何在vim保存时获得sudo权限</h1>
+  </div>
+<div class="meta">
+  <div>2020-03-12 21:30</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/vim/">#vim</a></span>
+      </div>
+  </div>
+<div class="content">
+  <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">:w !sudo tee %
+</code></pre></td></tr></table>
+</div>
+</div><p>命令<code>:w !{cmd}</code>，让<strong>vim</strong>执行一个外部命令<code>{cmd}</code>，然后把当前缓冲区的内容从<strong>stdin</strong>传入。
+<strong>tee</strong>是一个把<strong>stdin</strong>保存到文件的小工具。
+而%，是<strong>vim</strong>当中一个只读寄存器的名字，总保存着当前编辑文件的文件路径。
+所以执行这个命令，就相当于从<strong>vim</strong>外部修改了当前编辑的文件，好完工。</p>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://sy123-ml.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

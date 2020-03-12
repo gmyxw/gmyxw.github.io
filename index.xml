@@ -23,6 +23,15 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     </item>
     
     <item>
+      <title>如何在vim保存时获得sudo权限</title>
+      <link>https://sy123.ml/2020/03/12/how-does-the-vim-write-with-sudo-trick-work/</link>
+      <pubDate>Thu, 12 Mar 2020 21:30:38 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/12/how-does-the-vim-write-with-sudo-trick-work/</guid>
+      <description>1  :w !sudo tee %   命令:w !{cmd}，让vim执行一个外部命令{cmd}，然后把当前缓冲区的内容从stdin传入。 tee是一个把stdin保存到文件的小工具。 而%，是vim当中一个只读寄存器的名字，总保存着当前编辑文件的文件路径。 所以执行这个命令，就相当于从vim外部修改了当前编辑的文件，好完工。</description>
+    </item>
+    
+    <item>
       <title>vim recording的使用方法</title>
       <link>https://sy123.ml/2020/03/12/vim_recording/</link>
       <pubDate>Thu, 12 Mar 2020 17:05:52 +0800</pubDate>
