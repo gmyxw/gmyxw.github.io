@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>linux中如何手动清零缓冲 - sy123.ml</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>linux中如何手动清零缓冲</h1>
+  </div>
+<div class="meta">
+  <div>2020-02-16 15:20</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/linux/">#linux</a></span>
+      </div>
+  </div>
+<div class="content">
+  <h2 id="emptying-the-buffers-cache">Emptying the buffers cache</h2>
+<p>If you ever want to empty it you can use this chain of commands.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">free <span style="color:#f92672">&amp;&amp;</span> sync <span style="color:#f92672">&amp;&amp;</span> <span style="color:#111">echo</span> <span style="color:#ae81ff">3</span> &gt; /proc/sys/vm/drop_caches <span style="color:#f92672">&amp;&amp;</span> free
+
+             total       used       free     shared    buffers     cached
+Mem:       <span style="color:#ae81ff">1018916</span>     <span style="color:#ae81ff">980832</span>      <span style="color:#ae81ff">38084</span>          <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">46924</span>     <span style="color:#ae81ff">355764</span>
+-/+ buffers/cache:     <span style="color:#ae81ff">578144</span>     <span style="color:#ae81ff">440772</span>
+Swap:      <span style="color:#ae81ff">2064376</span>        <span style="color:#ae81ff">128</span>    <span style="color:#ae81ff">2064248</span>
+             total       used       free     shared    buffers     cached
+Mem:       <span style="color:#ae81ff">1018916</span>     <span style="color:#ae81ff">685008</span>     <span style="color:#ae81ff">333908</span>          <span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">224</span>     <span style="color:#ae81ff">108252</span>
+-/+ buffers/cache:     <span style="color:#ae81ff">576532</span>     <span style="color:#ae81ff">442384</span>
+Swap:      <span style="color:#ae81ff">2064376</span>        <span style="color:#ae81ff">128</span>    <span style="color:#ae81ff">2064248</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</p>
+<p>To free pagecache:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#111">echo</span> <span style="color:#ae81ff">1</span> &gt; /proc/sys/vm/drop_caches
+</code></pre></td></tr></table>
+</div>
+</div><p>To free dentries and inodes:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#111">echo</span> <span style="color:#ae81ff">2</span> &gt; /proc/sys/vm/drop_caches
+</code></pre></td></tr></table>
+</div>
+</div><p>To free pagecache, dentries and inodes:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#111">echo</span> <span style="color:#ae81ff">3</span> &gt; /proc/sys/vm/drop_caches
+</code></pre></td></tr></table>
+</div>
+</div><p>The above are meant to be run as root. If you&rsquo;re trying to do them using sudo then you&rsquo;ll need to change the syntax slightly to something like these:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo sh -c <span style="color:#d88200">&#39;echo 1 &gt;/proc/sys/vm/drop_caches&#39;</span>
+$ sudo sh -c <span style="color:#d88200">&#39;echo 2 &gt;/proc/sys/vm/drop_caches&#39;</span>
+$ sudo sh -c <span style="color:#d88200">&#39;echo 3 &gt;/proc/sys/vm/drop_caches&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>NOTE: There&rsquo;s a more esoteric version of the above command if you&rsquo;re into that:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ <span style="color:#111">echo</span> <span style="color:#d88200">&#34;echo 1 &gt; /proc/sys/vm/drop_caches&#34;</span> <span style="color:#111">|</span> sudo sh
+</code></pre></td></tr></table>
+</div>
+</div><p>Why the change in syntax? The /bin/echo program is running as root, because of sudo, but the shell that&rsquo;s redirecting echo&rsquo;s output to the root-only file is still running as you. Your current shell does the redirection before sudo starts.</p>
+<p>Seeing what&rsquo;s in the buffers and cache
+Take a look at linux-ftools if you&rsquo;d like to analyze the contents of the buffers &amp; cache. Specifically if you&rsquo;d like to see what files are currently being cached.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">fincore
+<span style="color:#75715e"># With this tool you can see what files are being cached within a give directory.</span>
+fincore <span style="color:#f92672">[</span>options<span style="color:#f92672">]</span> files...
+
+  --pages<span style="color:#f92672">=</span><span style="color:#111">false</span>      Do not print pages
+  --summarize        When comparing multiple files, print a summary report
+  --only-cached      Only print stats <span style="color:#00a8c8">for</span> files that are actually in cache.
+For example, /var/lib/mysql/blogindex:
+
+root@xxxxxx:/var/lib/mysql/blogindex## fincore --pages<span style="color:#f92672">=</span><span style="color:#111">false</span> --summarize --only-cached * 
+stats <span style="color:#00a8c8">for</span> CLUSTER_LOG_2010_05_21.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">93840384</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">22910</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>4096, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>0.004365 
+stats <span style="color:#00a8c8">for</span> CLUSTER_LOG_2010_05_22.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">417792</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">102</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>4096, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>0.980392 
+stats <span style="color:#00a8c8">for</span> CLUSTER_LOG_2010_05_23.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">826368</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">201</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>4096, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>0.497512 
+stats <span style="color:#00a8c8">for</span> CLUSTER_LOG_2010_05_24.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">192512</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">47</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>4096, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>2.127660 
+stats <span style="color:#00a8c8">for</span> CLUSTER_LOG_2010_06_03.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">345088</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">84</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">43</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>176128, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>51.190476 
+stats <span style="color:#00a8c8">for</span> CLUSTER_LOG_2010_06_04.MYD: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1478552</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">360</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">97</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>397312, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>26.944444 
+stats <span style="color:#00a8c8">for</span> CLUSTER_LOG_2010_06_04.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">205824</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">50</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">29</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>118784, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>58.000000 
+stats <span style="color:#00a8c8">for</span> COMMENT_CONTENT_2010_06_03.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">100051968</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">24426</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10253</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>41996288, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>41.975764 
+stats <span style="color:#00a8c8">for</span> COMMENT_CONTENT_2010_06_04.MYD: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">716369644</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">174894</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">79821</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>326946816, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>45.639645 
+stats <span style="color:#00a8c8">for</span> COMMENT_CONTENT_2010_06_04.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">56832000</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">13875</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">5365</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>21975040, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>38.666667 
+stats <span style="color:#00a8c8">for</span> FEED_CONTENT_2010_06_03.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1001518080</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">244511</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">98975</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>405401600, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>40.478751 
+stats <span style="color:#00a8c8">for</span> FEED_CONTENT_2010_06_04.MYD: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">9206385684</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2247652</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1018661</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>4172435456, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>45.321117 
+stats <span style="color:#00a8c8">for</span> FEED_CONTENT_2010_06_04.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">638005248</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">155763</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">52912</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>216727552, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>33.969556 
+stats <span style="color:#00a8c8">for</span> FEED_CONTENT_2010_06_04.frm: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">9840</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>12288, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>150.000000 
+stats <span style="color:#00a8c8">for</span> PERMALINK_CONTENT_2010_06_03.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1035290624</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">252756</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">108563</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>444674048, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>42.951700 
+stats <span style="color:#00a8c8">for</span> PERMALINK_CONTENT_2010_06_04.MYD: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">55619712720</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">13579031</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">6590322</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>26993958912, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>48.533080 
+stats <span style="color:#00a8c8">for</span> PERMALINK_CONTENT_2010_06_04.MYI: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">659397632</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">160985</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">54304</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>222429184, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>33.732335 
+stats <span style="color:#00a8c8">for</span> PERMALINK_CONTENT_2010_06_04.frm: file <span style="color:#111">size</span><span style="color:#f92672">=</span><span style="color:#ae81ff">10156</span> , total <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> , cached <span style="color:#111">pages</span><span style="color:#f92672">=</span><span style="color:#ae81ff">3</span> , cached <span style="color:#111">size</span><span style="color:#f92672">=</span>12288, cached <span style="color:#111">perc</span><span style="color:#f92672">=</span>150.000000 
+---
+total cached size: <span style="color:#ae81ff">32847278080</span>
+With the above output you can see that there are several *.MYD, *.MYI, and *.frm files that are currently being cached.
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="swap">Swap</h2>
+<p>If you want to clear out your swap you can use the following commands.</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ free
+             total       used       free     shared    buffers     cached
+Mem:       <span style="color:#ae81ff">7987492</span>    <span style="color:#ae81ff">7298164</span>     <span style="color:#ae81ff">689328</span>          <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">30416</span>     <span style="color:#ae81ff">457936</span>
+-/+ buffers/cache:    <span style="color:#ae81ff">6809812</span>    <span style="color:#ae81ff">1177680</span>
+Swap:      <span style="color:#ae81ff">5963772</span>     <span style="color:#ae81ff">609452</span>    <span style="color:#ae81ff">5354320</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Then use this command to disable swap:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ swapoff -a
+</code></pre></td></tr></table>
+</div>
+</div><p>You can confirm that it&rsquo;s now empty:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ free
+             total       used       free     shared    buffers     cached
+Mem:       <span style="color:#ae81ff">7987492</span>    <span style="color:#ae81ff">7777912</span>     <span style="color:#ae81ff">209580</span>          <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">39332</span>     <span style="color:#ae81ff">489864</span>
+-/+ buffers/cache:    <span style="color:#ae81ff">7248716</span>     <span style="color:#ae81ff">738776</span>
+Swap:            <span style="color:#ae81ff">0</span>          <span style="color:#ae81ff">0</span>          <span style="color:#ae81ff">0</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>And to re-enable it:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ swapon -a
+</code></pre></td></tr></table>
+</div>
+</div><p>And now reconfirm with free:</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ free
+             total       used       free     shared    buffers     cached
+Mem:       <span style="color:#ae81ff">7987492</span>    <span style="color:#ae81ff">7785572</span>     <span style="color:#ae81ff">201920</span>          <span style="color:#ae81ff">0</span>      <span style="color:#ae81ff">41556</span>     <span style="color:#ae81ff">491508</span>
+-/+ buffers/cache:    <span style="color:#ae81ff">7252508</span>     <span style="color:#ae81ff">734984</span>
+Swap:      <span style="color:#ae81ff">5963772</span>          <span style="color:#ae81ff">0</span>    <span style="color:#ae81ff">5963772</span>
+</code></pre></td></tr></table>
+</div>
+</div></div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+<script>
+
+
+
+
+
+(function() { 
+var d = document, s = d.createElement('script');
+s.src = 'https://sy123-ml.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 Zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -13,10 +13,10 @@
     
     <item>
       <title>Saga deprecated 警告</title>
-      <link>https://sy123.ml/2020/02/15/saga_deprecated_warning/</link>
+      <link>https://sy123.ml/2020/02/15/saga-deprecated-warning/</link>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/15/saga_deprecated_warning/</guid>
+      <guid>https://sy123.ml/2020/02/15/saga-deprecated-warning/</guid>
       <description>What happens? 1  [...effects] has been deprecated in favor of all([...effects]), please update your code   it does not effect dva.js, its redux saga api update, you just need to do this
 1 2 3 4 5  effects: { * query(action, {call, put, all}) { yield all([]) } }   Redux saga apis:</description>
     </item>

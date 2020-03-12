@@ -13,10 +13,10 @@
     
     <item>
       <title>javascript中的各种简写总结（不断更新）</title>
-      <link>https://sy123.ml/2020/02/28/javascript_shorthand/</link>
+      <link>https://sy123.ml/2020/02/28/javascript-shorthand/</link>
       <pubDate>Fri, 28 Feb 2020 17:09:04 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/28/javascript_shorthand/</guid>
+      <guid>https://sy123.ml/2020/02/28/javascript-shorthand/</guid>
       <description>在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。
 这里的简写，包括比如void 0代替undefined这类值替代，
 也包括了箭头函数替代普通函数、for循环各种写法中性能最好的这类写法替代，
@@ -41,50 +41,50 @@ Infinity替代
     
     <item>
       <title>React关于form的取部分字段数据</title>
-      <link>https://sy123.ml/2020/02/27/react_validate/</link>
+      <link>https://sy123.ml/2020/02/27/react-validate/</link>
       <pubDate>Thu, 27 Feb 2020 14:19:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/react_validate/</guid>
+      <guid>https://sy123.ml/2020/02/27/react-validate/</guid>
       <description>获取查询条件的值 validateFields form.validateFields / validateFieldsAndScroll 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件
 获取表单的所有数据 1 2 3 4 5 6 7 8 9  this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; { if(err){ return; } console.log(&amp;#39;_values&amp;#39;, values); });   获取表单的部分字段数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27  this.props.form.validateFieldsAndScroll([`timeUnit${num}`, `Time${num}`,`deviceTypeId${num}`], (err, values) =&amp;gt; { if(err){ return; } console.</description>
     </item>
     
     <item>
       <title>Tippy_warning</title>
-      <link>https://sy123.ml/2020/02/27/tippy_warning/</link>
+      <link>https://sy123.ml/2020/02/27/tippy-warning/</link>
       <pubDate>Thu, 27 Feb 2020 07:03:10 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/tippy_warning/</guid>
+      <guid>https://sy123.ml/2020/02/27/tippy-warning/</guid>
       <description>I have the folowing part of code:
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19  private rootRef = React.createRef&amp;lt;HTMLDivElement&amp;gt;(); const target = ( &amp;lt;div&amp;gt; &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl&amp;#39; /&amp;gt; &amp;lt;/div&amp;gt; ); return ( &amp;lt;React.Fragment&amp;gt; {React.cloneElement(target, { ref: this.rootRef, onMouseOver: this.handleMouseOver, onMouseLeave: this.handleMouseLeave, })} {open &amp;amp;&amp;amp; this.renderTooltip()} &amp;lt;/React.Fragment&amp;gt; );   When target with div element (or any other instead of div) everything is ok, but when target is:</description>
     </item>
     
     <item>
       <title>出现value.locale is not a function问题解决办法</title>
-      <link>https://sy123.ml/2020/02/26/react_datepicker/</link>
+      <link>https://sy123.ml/2020/02/26/react-datepicker/</link>
       <pubDate>Wed, 26 Feb 2020 15:28:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/26/react_datepicker/</guid>
+      <guid>https://sy123.ml/2020/02/26/react-datepicker/</guid>
       <description>给datepicker赋值 可以输出赋值,datepicker赋值需要moment格式的数据,如果赋值了string类型的会报错 需要进行moment格式化moment(dateString)
 给普通字符串赋值 如果赋值了moment类型的数据 可以通过moment(date).format(XXX)来解决,如果还不行的话可以使用date&amp;amp;&amp;amp; moment(date).lacale(‘en’).format(XXX)</description>
     </item>
     
     <item>
       <title>Saga deprecated 警告</title>
-      <link>https://sy123.ml/2020/02/15/saga_deprecated_warning/</link>
+      <link>https://sy123.ml/2020/02/15/saga-deprecated-warning/</link>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/15/saga_deprecated_warning/</guid>
+      <guid>https://sy123.ml/2020/02/15/saga-deprecated-warning/</guid>
       <description>What happens? 1  [...effects] has been deprecated in favor of all([...effects]), please update your code   it does not effect dva.js, its redux saga api update, you just need to do this
 1 2 3 4 5  effects: { * query(action, {call, put, all}) { yield all([]) } }   Redux saga apis:</description>
     </item>
     
     <item>
       <title>umi-ui bug using react-document-title</title>
-      <link>https://sy123.ml/2020/02/10/umi-ui_bug_using_react-document-title/</link>
+      <link>https://sy123.ml/2020/02/10/umi-ui-bug-using-react-document-title/</link>
       <pubDate>Mon, 10 Feb 2020 15:41:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/10/umi-ui_bug_using_react-document-title/</guid>
+      <guid>https://sy123.ml/2020/02/10/umi-ui-bug-using-react-document-title/</guid>
       <description>背景 React 项目使用umi时发报：
  Uncaught Invariant Violation: React.Children.only expected to receive a single React element child. The above error occurred in the  component ui socket init CloseEvent {type: &amp;ldquo;close&amp;rdquo;, bubbles: false, cancelable: false, timeStamp: 1571127775342, wasClean: false, …}
  异常代码 1 2 3 4 5  &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt; {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt;   DocumentTitle组件内部最外层只能接受一个元素，而代码中有多个元素，所以报错。
@@ -93,20 +93,20 @@ Infinity替代
     
     <item>
       <title>Programmatically_navigate_using_react_router</title>
-      <link>https://sy123.ml/2020/02/09/programmatically_navigate_using_react_router/</link>
+      <link>https://sy123.ml/2020/02/09/programmatically-navigate-using-react-router/</link>
       <pubDate>Sun, 09 Feb 2020 11:33:00 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/09/programmatically_navigate_using_react_router/</guid>
+      <guid>https://sy123.ml/2020/02/09/programmatically-navigate-using-react-router/</guid>
       <description>React Router v5.1.0 with hooks There is a new useHistory hook in React Router &amp;gt;5.1.0 if you are using React &amp;gt;16.8.0 and functional components.
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  import { useHistory } from &amp;#34;react-router-dom&amp;#34;; function HomeButton() { const history = useHistory(); function handleClick() { history.push(&amp;#34;/home&amp;#34;); } return ( &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt; Go home &amp;lt;/button&amp;gt; ); }   React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</description>
     </item>
     
     <item>
       <title>npm和yarn如何查看源和换源</title>
-      <link>https://sy123.ml/2020/02/06/yarn_accelerate_and_modify_mirror_source_in_china/</link>
+      <link>https://sy123.ml/2020/02/06/yarn-accelerate-and-modify-mirror-source-in-china/</link>
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/06/yarn_accelerate_and_modify_mirror_source_in_china/</guid>
+      <guid>https://sy123.ml/2020/02/06/yarn-accelerate-and-modify-mirror-source-in-china/</guid>
       <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7  npm config get registry # 查看npm当前镜像源 npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像 yarn config get registry # 查看yarn当前镜像源 yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像   镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
     </item>
     

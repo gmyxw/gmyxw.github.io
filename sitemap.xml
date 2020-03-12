@@ -8,13 +8,23 @@
   </url>
   
   <url>
+    <loc>https://sy123.ml/tags/linux/</loc>
+    <lastmod>2020-03-12T22:50:06+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sy123.ml/post/</loc>
-    <lastmod>2020-03-12T21:30:38+08:00</lastmod>
+    <lastmod>2020-03-12T22:50:06+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/2020/03/12/rename-regex/</loc>
+    <lastmod>2020-03-12T22:50:06+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sy123.ml/tags/</loc>
-    <lastmod>2020-03-12T21:30:38+08:00</lastmod>
+    <lastmod>2020-03-12T22:50:06+08:00</lastmod>
   </url>
   
   <url>
@@ -28,12 +38,12 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/03/12/vim_recording/</loc>
+    <loc>https://sy123.ml/2020/03/12/vim-recording/</loc>
     <lastmod>2020-03-12T17:05:52+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/03/10/what_does_the_exclamation_point_behind_the_ts_attribute_mean/</loc>
+    <loc>https://sy123.ml/2020/03/10/what-does-the-exclamation-point-behind-the-ts-attribute-mean/</loc>
     <lastmod>2020-03-10T14:51:20+08:00</lastmod>
   </url>
   
@@ -48,12 +58,12 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/03/06/git_clone_not_resolve_host/</loc>
+    <loc>https://sy123.ml/2020/03/06/git-clone-not-resolve-host/</loc>
     <lastmod>2020-03-06T21:36:57+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/03/04/browser_plugins/</loc>
+    <loc>https://sy123.ml/2020/03/04/browser-plugins/</loc>
     <lastmod>2020-03-04T17:06:34+08:00</lastmod>
   </url>
   
@@ -73,12 +83,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/tags/linux/</loc>
-    <lastmod>2020-03-04T17:06:34+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/2020/02/28/javascript_shorthand/</loc>
+    <loc>https://sy123.ml/2020/02/28/javascript-shorthand/</loc>
     <lastmod>2020-02-28T17:09:04+08:00</lastmod>
   </url>
   
@@ -88,7 +93,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/28/encrypt_string_using-openssl/</loc>
+    <loc>https://sy123.ml/2020/02/28/encrypt-string-using-openssl/</loc>
     <lastmod>2020-02-28T11:28:00+08:00</lastmod>
   </url>
   
@@ -103,7 +108,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/27/youtube_video_download/</loc>
+    <loc>https://sy123.ml/2020/02/27/youtube-video-download/</loc>
     <lastmod>2020-02-27T18:34:08+08:00</lastmod>
   </url>
   
@@ -113,12 +118,12 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/27/react_validate/</loc>
+    <loc>https://sy123.ml/2020/02/27/react-validate/</loc>
     <lastmod>2020-02-27T14:19:24+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/27/tippy_warning/</loc>
+    <loc>https://sy123.ml/2020/02/27/tippy-warning/</loc>
     <lastmod>2020-02-27T07:03:10+08:00</lastmod>
   </url>
   
@@ -128,7 +133,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/27/baidu_svip/</loc>
+    <loc>https://sy123.ml/2020/02/27/baidu-svip/</loc>
     <lastmod>2020-02-27T02:07:36+08:00</lastmod>
   </url>
   
@@ -138,7 +143,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/26/react_datepicker/</loc>
+    <loc>https://sy123.ml/2020/02/26/react-datepicker/</loc>
     <lastmod>2020-02-26T15:28:15+08:00</lastmod>
   </url>
   
@@ -153,7 +158,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/25/cp_backup/</loc>
+    <loc>https://sy123.ml/2020/02/25/cp-backup/</loc>
     <lastmod>2020-02-25T04:36:20+08:00</lastmod>
   </url>
   
@@ -168,7 +173,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/24/android_studio_preview/</loc>
+    <loc>https://sy123.ml/2020/02/24/android-studio-preview/</loc>
     <lastmod>2020-02-24T07:58:36+08:00</lastmod>
   </url>
   
@@ -178,7 +183,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/24/android_studio_emulator_ugly_black_borders/</loc>
+    <loc>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</loc>
     <lastmod>2020-02-24T04:43:30+08:00</lastmod>
   </url>
   
@@ -193,7 +198,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/24/vim_search_in_file/</loc>
+    <loc>https://sy123.ml/2020/02/24/vim-search-in-file/</loc>
     <lastmod>2020-02-24T01:15:09+08:00</lastmod>
   </url>
   
@@ -208,12 +213,12 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/23/baidu_cdn/</loc>
+    <loc>https://sy123.ml/2020/02/23/baidu-cdn/</loc>
     <lastmod>2020-02-23T04:36:16+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/16/how_do_you_empty_the_buffers_and_cache_on_linux_system/</loc>
+    <loc>https://sy123.ml/2020/02/16/how-do-you-empty-the-buffers-and-cache-on-linux-system/</loc>
     <lastmod>2020-02-16T15:20:03+08:00</lastmod>
   </url>
   
@@ -228,12 +233,12 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/16/virtualbox_vdi_shrink/</loc>
+    <loc>https://sy123.ml/2020/02/16/virtualbox-vdi-shrink/</loc>
     <lastmod>2020-02-16T15:10:33+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/16/systemd_analyze/</loc>
+    <loc>https://sy123.ml/2020/02/16/systemd-analyze/</loc>
     <lastmod>2020-02-16T14:53:24+08:00</lastmod>
   </url>
   
@@ -248,7 +253,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/15/saga_deprecated_warning/</loc>
+    <loc>https://sy123.ml/2020/02/15/saga-deprecated-warning/</loc>
     <lastmod>2020-02-15T22:23:37+08:00</lastmod>
   </url>
   
@@ -258,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/15/my_vscode_config/</loc>
+    <loc>https://sy123.ml/2020/02/15/my-vscode-config/</loc>
     <lastmod>2020-02-15T17:58:47+08:00</lastmod>
   </url>
   
@@ -273,12 +278,12 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/10/umi-ui_bug_using_react-document-title/</loc>
+    <loc>https://sy123.ml/2020/02/10/umi-ui-bug-using-react-document-title/</loc>
     <lastmod>2020-02-10T15:41:37+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/10/git_clone_branch/</loc>
+    <loc>https://sy123.ml/2020/02/10/git-clone-branch/</loc>
     <lastmod>2020-02-10T13:07:08+08:00</lastmod>
   </url>
   
@@ -288,7 +293,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/09/programmatically_navigate_using_react_router/</loc>
+    <loc>https://sy123.ml/2020/02/09/programmatically-navigate-using-react-router/</loc>
     <lastmod>2020-02-09T11:33:00+08:00</lastmod>
   </url>
   
@@ -298,7 +303,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/06/yarn_accelerate_and_modify_mirror_source_in_china/</loc>
+    <loc>https://sy123.ml/2020/02/06/yarn-accelerate-and-modify-mirror-source-in-china/</loc>
     <lastmod>2020-02-06T18:28:50+08:00</lastmod>
   </url>
   
@@ -308,7 +313,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/05/linux_privileged_port/</loc>
+    <loc>https://sy123.ml/2020/02/05/linux-privileged-port/</loc>
     <lastmod>2020-02-05T16:04:13+08:00</lastmod>
   </url>
   
@@ -318,7 +323,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/05/win10_input_method_display_candidate_words/</loc>
+    <loc>https://sy123.ml/2020/02/05/win10-input-method-display-candidate-words/</loc>
     <lastmod>2020-02-05T13:12:53+08:00</lastmod>
   </url>
   
@@ -328,7 +333,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/02/05/linux_yay/</loc>
+    <loc>https://sy123.ml/2020/02/05/linux-yay/</loc>
     <lastmod>2020-02-05T12:57:49+08:00</lastmod>
   </url>
   
@@ -338,7 +343,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/01/31/linux_disable_ipv6/</loc>
+    <loc>https://sy123.ml/2020/01/31/linux-disable-ipv6/</loc>
     <lastmod>2020-01-31T12:32:48+08:00</lastmod>
   </url>
   
@@ -358,7 +363,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</loc>
+    <loc>https://sy123.ml/2020/01/22/set-all-java-apps-to-use-gtk-font-theme-settings/</loc>
     <lastmod>2020-01-22T01:12:54+08:00</lastmod>
   </url>
   
@@ -403,7 +408,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/01/19/share_movie_between_archlinux_and_win7_via_samba/</loc>
+    <loc>https://sy123.ml/2020/01/19/share-movie-between-archlinux-and-win7-via-samba/</loc>
     <lastmod>2020-01-19T15:43:57+08:00</lastmod>
   </url>
   
@@ -438,7 +443,7 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/01/17/wsl_samba/</loc>
+    <loc>https://sy123.ml/2020/01/17/wsl-samba/</loc>
     <lastmod>2020-01-17T18:57:51+08:00</lastmod>
   </url>
   
@@ -448,12 +453,12 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/01/16/using_diskpart_to_create/</loc>
+    <loc>https://sy123.ml/2020/01/16/using-diskpart-to-create/</loc>
     <lastmod>2020-01-16T22:27:22+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</loc>
+    <loc>https://sy123.ml/2020/01/11/set-proxy-for-terminal/</loc>
     <lastmod>2020-01-11T16:00:15+08:00</lastmod>
   </url>
   
@@ -468,12 +473,12 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/01/10/baiduyun_dlink/</loc>
+    <loc>https://sy123.ml/2020/01/10/baiduyun-dlink/</loc>
     <lastmod>2020-01-10T07:48:32+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/01/08/github_pull/</loc>
+    <loc>https://sy123.ml/2020/01/08/github-pull/</loc>
     <lastmod>2020-01-08T06:27:26+08:00</lastmod>
   </url>
   

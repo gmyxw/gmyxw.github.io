@@ -13,10 +13,10 @@
     
     <item>
       <title>如何清理Virtualbox虚拟机VDI镜像文件的空间大小</title>
-      <link>https://sy123.ml/2020/02/16/virtualbox_vdi_shrink/</link>
+      <link>https://sy123.ml/2020/02/16/virtualbox-vdi-shrink/</link>
       <pubDate>Sun, 16 Feb 2020 15:10:33 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/virtualbox_vdi_shrink/</guid>
+      <guid>https://sy123.ml/2020/02/16/virtualbox-vdi-shrink/</guid>
       <description>玩虚拟机的同学都知道，对于那些设定为动态配分的虚拟机，一开始装完系统时可能只有几个G，但是随着你不断的使用，体积空间就会越来越大，随便就是几十个G了。也就是说动态扩展的VDI文件只会大，不会小。这期间，就算你去虚拟机里面删除一些文件，整个虚拟机的镜像文件VDI文件的大小依然不会变小，使其所占用的实际硬盘空间过大，给备份和分享都带来麻烦。因此，今天我们就来研究一下如何解决这个问题，其实很简单。
 以下方法，在我自己的64位Ubuntu 14.04和64位win10虚拟机中亲测有效！
 步骤1：碎片整理 第一步要做的是碎片整理，整理过程需要一个特定的工具，win系统和linux系统各自有别：

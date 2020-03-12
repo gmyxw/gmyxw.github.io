@@ -23,6 +23,22 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     </item>
     
     <item>
+      <title>rename使用正则表达式</title>
+      <link>https://sy123.ml/2020/03/12/rename-regex/</link>
+      <pubDate>Thu, 12 Mar 2020 22:50:06 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/12/rename-regex/</guid>
+      <description>前言 以前一直用类似rename &amp;quot;s/_/-/&amp;quot; *这样的命令正则替换一些文件名，不过系统切换到Archlinux后用rename一直失败，用man看了下说明才发现并不支持正则，只能这样用，并且不能全局替换
+1  rename 123 456 *   其实几乎所有情况下, rename用不到正则表达式的. 你最多不过是通过正则确定要改名的文件列表而已. 这通过管道太容易了. 例如我在shell下, 会这样使用
+1  f &amp;#39;bak$&amp;#39; |x rename &amp;#39;.bak&amp;#39; &amp;#39;&amp;#39;   在管道之前, 可以通过各种方式搭配, 来生成所需的文件列表
+而rename也可以分多个步骤完成, man帮助中就有示例.
+原因 最近有空查了很多资料才发现很多发行版默认的rename是util-linux里很弱的那个rename，比如Archlinux
+解决方法 Archlinux可以装perl-rename这个包，命令就是perl-rename。Mac下可以用brew 安装rename。好久没用Ubuntu，记得以前Ubuntu 是prename 这个命令。
+其实不只是s命令，所有有效的perl命令都能用，文件名会作为$_ 传入，命令执行完后的$_作为新文件名。比如全部改成小写：
+1  rename &amp;#39;y/A-Z/a-z/&amp;#39; *   </description>
+    </item>
+    
+    <item>
       <title>如何在vim保存时获得sudo权限</title>
       <link>https://sy123.ml/2020/03/12/how-does-the-vim-write-with-sudo-trick-work/</link>
       <pubDate>Thu, 12 Mar 2020 21:30:38 +0800</pubDate>
@@ -33,10 +49,10 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     
     <item>
       <title>vim recording的使用方法</title>
-      <link>https://sy123.ml/2020/03/12/vim_recording/</link>
+      <link>https://sy123.ml/2020/03/12/vim-recording/</link>
       <pubDate>Thu, 12 Mar 2020 17:05:52 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/12/vim_recording/</guid>
+      <guid>https://sy123.ml/2020/03/12/vim-recording/</guid>
       <description>使用vim时无意间触碰到q键，左下角出现“recording”这个标识，觉得好奇，遂在网上查了一下，然后这是vim的一个强大功能。他可以录 制一个宏（Macro)，在开始记录后，会记录你所有的键盘输入，包括在insert模式下的输入、正常模式下使用的各种命令等。
 具体使用：
 第一步：在正常模式下（非insert模式、非visual模式）按下q键盘
@@ -52,10 +68,10 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
     
     <item>
       <title>ts属性后面的感叹号有什么用处？</title>
-      <link>https://sy123.ml/2020/03/10/what_does_the_exclamation_point_behind_the_ts_attribute_mean/</link>
+      <link>https://sy123.ml/2020/03/10/what-does-the-exclamation-point-behind-the-ts-attribute-mean/</link>
       <pubDate>Tue, 10 Mar 2020 14:51:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/10/what_does_the_exclamation_point_behind_the_ts_attribute_mean/</guid>
+      <guid>https://sy123.ml/2020/03/10/what-does-the-exclamation-point-behind-the-ts-attribute-mean/</guid>
       <description>首先看一段代码
 1 2 3 4 5 6 7 8 9  import { Vue, Component, Prop } from &amp;#39;vue-property-decorator&amp;#39; @Component export default class YourComponent extends Vue { @Prop(Number) propA!: number @Prop({ default: &amp;#39;default value&amp;#39; }) propB!: string @Prop([String, Boolean]) propC: string | boolean }   这是vue组件的ts写法，仔细观察，里面有一段这样的代码@Prop(Number) propA!: number，这是什么鬼？
 查了一下ts的文档说明，原来感叹号是非null和非undefined的类型断言，所以上面的写法就是对propA这个属性进行非空断言。文档的相关说明在这里。
@@ -65,30 +81,30 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
     
     <item>
       <title>git 出现错误Could not resolve host: github.com</title>
-      <link>https://sy123.ml/2020/03/06/git_clone_not_resolve_host/</link>
+      <link>https://sy123.ml/2020/03/06/git-clone-not-resolve-host/</link>
       <pubDate>Fri, 06 Mar 2020 21:36:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/06/git_clone_not_resolve_host/</guid>
+      <guid>https://sy123.ml/2020/03/06/git-clone-not-resolve-host/</guid>
       <description>1 2 3  ❯ git clone https://github.com/Zhili/GameServer Cloning into &amp;#39;GameServer&amp;#39;... fatal: unable to access &amp;#39;https://github.com/Zhili/GameServer/&amp;#39;: Couldn&amp;#39;t resolve host name   (Just a little reminder) If you want the hostname also be resolved by the proxy (that means passing everything through the proxy), especially when you are cloning a gist, you can use the following setting (the key is that it uses socks5h instead of socks5):
 1  git config --global http.</description>
     </item>
     
     <item>
       <title>Browser plugins</title>
-      <link>https://sy123.ml/2020/03/04/browser_plugins/</link>
+      <link>https://sy123.ml/2020/03/04/browser-plugins/</link>
       <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/04/browser_plugins/</guid>
+      <guid>https://sy123.ml/2020/03/04/browser-plugins/</guid>
       <description>Installation The package you will need to install depends on the browser you use.
  The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package.  </description>
     </item>
     
     <item>
       <title>javascript中的各种简写总结（不断更新）</title>
-      <link>https://sy123.ml/2020/02/28/javascript_shorthand/</link>
+      <link>https://sy123.ml/2020/02/28/javascript-shorthand/</link>
       <pubDate>Fri, 28 Feb 2020 17:09:04 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/28/javascript_shorthand/</guid>
+      <guid>https://sy123.ml/2020/02/28/javascript-shorthand/</guid>
       <description>在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。
 这里的简写，包括比如void 0代替undefined这类值替代，
 也包括了箭头函数替代普通函数、for循环各种写法中性能最好的这类写法替代，
@@ -113,10 +129,10 @@ Infinity替代
     
     <item>
       <title>Encrypt string using Openssl</title>
-      <link>https://sy123.ml/2020/02/28/encrypt_string_using-openssl/</link>
+      <link>https://sy123.ml/2020/02/28/encrypt-string-using-openssl/</link>
       <pubDate>Fri, 28 Feb 2020 11:28:00 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/28/encrypt_string_using-openssl/</guid>
+      <guid>https://sy123.ml/2020/02/28/encrypt-string-using-openssl/</guid>
       <description>Try this:
 1 2 3 4  echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt   Run
 1 2 3  openssl list-cipher-commands   to list all available ciphers.</description>
@@ -124,39 +140,39 @@ Infinity替代
     
     <item>
       <title>youtube视频下载</title>
-      <link>https://sy123.ml/2020/02/27/youtube_video_download/</link>
+      <link>https://sy123.ml/2020/02/27/youtube-video-download/</link>
       <pubDate>Thu, 27 Feb 2020 18:34:08 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/youtube_video_download/</guid>
+      <guid>https://sy123.ml/2020/02/27/youtube-video-download/</guid>
       <description>https://y2mate.guru/en1/</description>
     </item>
     
     <item>
       <title>React关于form的取部分字段数据</title>
-      <link>https://sy123.ml/2020/02/27/react_validate/</link>
+      <link>https://sy123.ml/2020/02/27/react-validate/</link>
       <pubDate>Thu, 27 Feb 2020 14:19:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/react_validate/</guid>
+      <guid>https://sy123.ml/2020/02/27/react-validate/</guid>
       <description>获取查询条件的值 validateFields form.validateFields / validateFieldsAndScroll 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件
 获取表单的所有数据 1 2 3 4 5 6 7 8 9  this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; { if(err){ return; } console.log(&amp;#39;_values&amp;#39;, values); });   获取表单的部分字段数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27  this.props.form.validateFieldsAndScroll([`timeUnit${num}`, `Time${num}`,`deviceTypeId${num}`], (err, values) =&amp;gt; { if(err){ return; } console.</description>
     </item>
     
     <item>
       <title>Tippy_warning</title>
-      <link>https://sy123.ml/2020/02/27/tippy_warning/</link>
+      <link>https://sy123.ml/2020/02/27/tippy-warning/</link>
       <pubDate>Thu, 27 Feb 2020 07:03:10 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/tippy_warning/</guid>
+      <guid>https://sy123.ml/2020/02/27/tippy-warning/</guid>
       <description>I have the folowing part of code:
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19  private rootRef = React.createRef&amp;lt;HTMLDivElement&amp;gt;(); const target = ( &amp;lt;div&amp;gt; &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl&amp;#39; /&amp;gt; &amp;lt;/div&amp;gt; ); return ( &amp;lt;React.Fragment&amp;gt; {React.cloneElement(target, { ref: this.rootRef, onMouseOver: this.handleMouseOver, onMouseLeave: this.handleMouseLeave, })} {open &amp;amp;&amp;amp; this.renderTooltip()} &amp;lt;/React.Fragment&amp;gt; );   When target with div element (or any other instead of div) everything is ok, but when target is:</description>
     </item>
     
     <item>
       <title>百度网盘超级会员账号分享</title>
-      <link>https://sy123.ml/2020/02/27/baidu_svip/</link>
+      <link>https://sy123.ml/2020/02/27/baidu-svip/</link>
       <pubDate>Thu, 27 Feb 2020 02:07:36 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/baidu_svip/</guid>
+      <guid>https://sy123.ml/2020/02/27/baidu-svip/</guid>
       <description>百度云 请低调使用&amp;hellip;
  都是选微博登录  选微博登录 选微博登录 选微博登录!!!   验证码全部大写填写 确认用鼠标点 登录后如遇到重试页面, 点击几次重试即可. 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!!  并不保证当你看到时账号都是可以用的, 但是分享的时候肯定都是可以的. 如果有失效账号, 麻烦告知一下, 我会及时处理.
 账号越来越难弄, 且用且珍惜.
@@ -165,10 +181,10 @@ Infinity替代
     
     <item>
       <title>出现value.locale is not a function问题解决办法</title>
-      <link>https://sy123.ml/2020/02/26/react_datepicker/</link>
+      <link>https://sy123.ml/2020/02/26/react-datepicker/</link>
       <pubDate>Wed, 26 Feb 2020 15:28:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/26/react_datepicker/</guid>
+      <guid>https://sy123.ml/2020/02/26/react-datepicker/</guid>
       <description>给datepicker赋值 可以输出赋值,datepicker赋值需要moment格式的数据,如果赋值了string类型的会报错 需要进行moment格式化moment(dateString)
 给普通字符串赋值 如果赋值了moment类型的数据 可以通过moment(date).format(XXX)来解决,如果还不行的话可以使用date&amp;amp;&amp;amp; moment(date).lacale(‘en’).format(XXX)</description>
     </item>
@@ -184,10 +200,10 @@ Infinity替代
     
     <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
-      <link>https://sy123.ml/2020/02/25/cp_backup/</link>
+      <link>https://sy123.ml/2020/02/25/cp-backup/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/25/cp_backup/</guid>
+      <guid>https://sy123.ml/2020/02/25/cp-backup/</guid>
       <description>GNU cp(1) has a backup option:
 1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
 1 2 3 4 5 6 7  --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
@@ -195,10 +211,10 @@ Infinity替代
     
     <item>
       <title>Android Studio preview</title>
-      <link>https://sy123.ml/2020/02/24/android_studio_preview/</link>
+      <link>https://sy123.ml/2020/02/24/android-studio-preview/</link>
       <pubDate>Mon, 24 Feb 2020 07:58:36 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/android_studio_preview/</guid>
+      <guid>https://sy123.ml/2020/02/24/android-studio-preview/</guid>
       <description>更新 IDE 和 SDK 工具 安装 Android Studio 后，您可以轻松通过自动更新和 Android SDK 管理器让 Android Studio IDE 和 Android SDK 工具保持最新状态。
 更新 IDE 和变更版本 若有可用的 IDE 更新，Android Studio 将通过小气泡对话框通知您，不过您也可以依次点击 Help &amp;gt; Check for Update（在 Mac 上，依次点击 Android Studio &amp;gt; Check for Updates）手动检查更新。
 您可以通过以下发布版本获取 Android Studio 更新：
@@ -209,10 +225,10 @@ Canary 版：这些是前沿版本，大约每周更新一次，可在 developer
     
     <item>
       <title>Android Studio emulator ugly black borders</title>
-      <link>https://sy123.ml/2020/02/24/android_studio_emulator_ugly_black_borders/</link>
+      <link>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</link>
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/android_studio_emulator_ugly_black_borders/</guid>
+      <guid>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</guid>
       <description>Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.
 For making it floating, add this to your config Floating all windows with &amp;ldquo;android emulator&amp;rdquo; header:
@@ -221,10 +237,10 @@ For making it floating, add this to your config Floating all windows with &amp;l
     
     <item>
       <title>Vim_search_in_file</title>
-      <link>https://sy123.ml/2020/02/24/vim_search_in_file/</link>
+      <link>https://sy123.ml/2020/02/24/vim-search-in-file/</link>
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/vim_search_in_file/</guid>
+      <guid>https://sy123.ml/2020/02/24/vim-search-in-file/</guid>
       <description>总有人问我 Vim 中能不能查找，当然能！而且是超级强的查找！ 这篇文章来详细介绍 Vim 中查找相关的设置和使用方法。 包括查找与替换、查找光标所在词、高亮前景/背景色、切换高亮状态、大小写敏感查找等。
 查找 在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。
 Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdquo;。 需要查找特殊字符需要转义，例如/vim$匹配&amp;quot;vim$&amp;rdquo;。
@@ -252,10 +268,10 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>百度云加速NS接入流程</title>
-      <link>https://sy123.ml/2020/02/23/baidu_cdn/</link>
+      <link>https://sy123.ml/2020/02/23/baidu-cdn/</link>
       <pubDate>Sun, 23 Feb 2020 04:36:16 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/23/baidu_cdn/</guid>
+      <guid>https://sy123.ml/2020/02/23/baidu-cdn/</guid>
       <description>百度云加速NS接入是最简单的方式，不过还是很多站长管理员不大懂，今天教大家如何NS接入。
 首先点域名继续接入 添加子域名，A记录、主机名: WWW，记录值写你的服务器的IP，如果你有其它子域名的也一并添加创建。 创建完子域名后，点一步，查看云加速DNS 复制加速DNS n3060.ns.yunjiasu.com、n333.ns.yunjiasu.com 进入域名注册商管理处，修改NS记录，比如阿里云 修改完成后，等生效即可。需要注意的是，域名修改DNS一般全国生效为24小时左右，所以需要耐心等待了。
 好了以上就是百度云加速NS接入的全部教程了，希望可以帮到大家。</description>
@@ -263,20 +279,20 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>linux中如何手动清零缓冲</title>
-      <link>https://sy123.ml/2020/02/16/how_do_you_empty_the_buffers_and_cache_on_linux_system/</link>
+      <link>https://sy123.ml/2020/02/16/how-do-you-empty-the-buffers-and-cache-on-linux-system/</link>
       <pubDate>Sun, 16 Feb 2020 15:20:03 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/how_do_you_empty_the_buffers_and_cache_on_linux_system/</guid>
+      <guid>https://sy123.ml/2020/02/16/how-do-you-empty-the-buffers-and-cache-on-linux-system/</guid>
       <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands.
 1 2 3 4 5 6 7 8 9 10  free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248   You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
     </item>
     
     <item>
       <title>如何清理Virtualbox虚拟机VDI镜像文件的空间大小</title>
-      <link>https://sy123.ml/2020/02/16/virtualbox_vdi_shrink/</link>
+      <link>https://sy123.ml/2020/02/16/virtualbox-vdi-shrink/</link>
       <pubDate>Sun, 16 Feb 2020 15:10:33 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/virtualbox_vdi_shrink/</guid>
+      <guid>https://sy123.ml/2020/02/16/virtualbox-vdi-shrink/</guid>
       <description>玩虚拟机的同学都知道，对于那些设定为动态配分的虚拟机，一开始装完系统时可能只有几个G，但是随着你不断的使用，体积空间就会越来越大，随便就是几十个G了。也就是说动态扩展的VDI文件只会大，不会小。这期间，就算你去虚拟机里面删除一些文件，整个虚拟机的镜像文件VDI文件的大小依然不会变小，使其所占用的实际硬盘空间过大，给备份和分享都带来麻烦。因此，今天我们就来研究一下如何解决这个问题，其实很简单。
 以下方法，在我自己的64位Ubuntu 14.04和64位win10虚拟机中亲测有效！
 步骤1：碎片整理 第一步要做的是碎片整理，整理过程需要一个特定的工具，win系统和linux系统各自有别：
@@ -292,10 +308,10 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>使用systemd-analyze优化系统启动时间</title>
-      <link>https://sy123.ml/2020/02/16/systemd_analyze/</link>
+      <link>https://sy123.ml/2020/02/16/systemd-analyze/</link>
       <pubDate>Sun, 16 Feb 2020 14:53:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/systemd_analyze/</guid>
+      <guid>https://sy123.ml/2020/02/16/systemd-analyze/</guid>
       <description>systemd-analyze简介 systemd-analyze是Linux自带的分析系统启动性能的工具。
 systemd-analyze可使用的命令：
   systemd-analyze [OPTIONS…] [time]
@@ -314,20 +330,20 @@ systemd-analyze可使用的命令：
     
     <item>
       <title>Saga deprecated 警告</title>
-      <link>https://sy123.ml/2020/02/15/saga_deprecated_warning/</link>
+      <link>https://sy123.ml/2020/02/15/saga-deprecated-warning/</link>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/15/saga_deprecated_warning/</guid>
+      <guid>https://sy123.ml/2020/02/15/saga-deprecated-warning/</guid>
       <description>What happens? 1  [...effects] has been deprecated in favor of all([...effects]), please update your code   it does not effect dva.js, its redux saga api update, you just need to do this
 1 2 3 4 5  effects: { * query(action, {call, put, all}) { yield all([]) } }   Redux saga apis:</description>
     </item>
     
     <item>
       <title>Visual Studio Code 偏好设置</title>
-      <link>https://sy123.ml/2020/02/15/my_vscode_config/</link>
+      <link>https://sy123.ml/2020/02/15/my-vscode-config/</link>
       <pubDate>Sat, 15 Feb 2020 17:58:47 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/15/my_vscode_config/</guid>
+      <guid>https://sy123.ml/2020/02/15/my-vscode-config/</guid>
       <description>Visual Studio Code 提供了极大的弹性让我们自订想要的编辑器样式，端看使用者设定（User Setting）中，就超过 800 项设定可以让开发者自由调整，而且还有扩充套件能够增强 VS Code 的开发能力。
  这篇主要是我个人偏好的设定，完整 setting.json 请参考 gist。
  首先可以使用快速键 Ctrl +, 开启 settings.json 使用者设定档，或从选单列中点选档案 &amp;gt; 喜好设定 &amp;gt; 设定。
@@ -336,10 +352,10 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
     
     <item>
       <title>umi-ui bug using react-document-title</title>
-      <link>https://sy123.ml/2020/02/10/umi-ui_bug_using_react-document-title/</link>
+      <link>https://sy123.ml/2020/02/10/umi-ui-bug-using-react-document-title/</link>
       <pubDate>Mon, 10 Feb 2020 15:41:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/10/umi-ui_bug_using_react-document-title/</guid>
+      <guid>https://sy123.ml/2020/02/10/umi-ui-bug-using-react-document-title/</guid>
       <description>背景 React 项目使用umi时发报：
  Uncaught Invariant Violation: React.Children.only expected to receive a single React element child. The above error occurred in the  component ui socket init CloseEvent {type: &amp;ldquo;close&amp;rdquo;, bubbles: false, cancelable: false, timeStamp: 1571127775342, wasClean: false, …}
  异常代码 1 2 3 4 5  &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt; {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt;   DocumentTitle组件内部最外层只能接受一个元素，而代码中有多个元素，所以报错。
@@ -348,56 +364,56 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
     
     <item>
       <title>git clone 指定分支拉代码</title>
-      <link>https://sy123.ml/2020/02/10/git_clone_branch/</link>
+      <link>https://sy123.ml/2020/02/10/git-clone-branch/</link>
       <pubDate>Mon, 10 Feb 2020 13:07:08 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/10/git_clone_branch/</guid>
+      <guid>https://sy123.ml/2020/02/10/git-clone-branch/</guid>
       <description>git clone 不指定分支 1  git clone http://10.1.1.11/service/tmall-service.git   git clone 指定分支 1  git clone -b dev_jk http://10.1.1.11/service/tmall-service.git   命令中：多了一个 -b dev-jk,这个dev_jk就是分支，http://10.1.1.11/service/tmall -service.git为源码的仓库地址</description>
     </item>
     
     <item>
       <title>Programmatically_navigate_using_react_router</title>
-      <link>https://sy123.ml/2020/02/09/programmatically_navigate_using_react_router/</link>
+      <link>https://sy123.ml/2020/02/09/programmatically-navigate-using-react-router/</link>
       <pubDate>Sun, 09 Feb 2020 11:33:00 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/09/programmatically_navigate_using_react_router/</guid>
+      <guid>https://sy123.ml/2020/02/09/programmatically-navigate-using-react-router/</guid>
       <description>React Router v5.1.0 with hooks There is a new useHistory hook in React Router &amp;gt;5.1.0 if you are using React &amp;gt;16.8.0 and functional components.
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  import { useHistory } from &amp;#34;react-router-dom&amp;#34;; function HomeButton() { const history = useHistory(); function handleClick() { history.push(&amp;#34;/home&amp;#34;); } return ( &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt; Go home &amp;lt;/button&amp;gt; ); }   React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</description>
     </item>
     
     <item>
       <title>npm和yarn如何查看源和换源</title>
-      <link>https://sy123.ml/2020/02/06/yarn_accelerate_and_modify_mirror_source_in_china/</link>
+      <link>https://sy123.ml/2020/02/06/yarn-accelerate-and-modify-mirror-source-in-china/</link>
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/06/yarn_accelerate_and_modify_mirror_source_in_china/</guid>
+      <guid>https://sy123.ml/2020/02/06/yarn-accelerate-and-modify-mirror-source-in-china/</guid>
       <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7  npm config get registry # 查看npm当前镜像源 npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像 yarn config get registry # 查看yarn当前镜像源 yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像   镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
     </item>
     
     <item>
       <title>Socket programing Permission denied</title>
-      <link>https://sy123.ml/2020/02/05/linux_privileged_port/</link>
+      <link>https://sy123.ml/2020/02/05/linux-privileged-port/</link>
       <pubDate>Wed, 05 Feb 2020 16:04:13 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/linux_privileged_port/</guid>
+      <guid>https://sy123.ml/2020/02/05/linux-privileged-port/</guid>
       <description>listen tcp :443: bind: permission denied If you want to bind to a privileged port (ports less than 1024). You either need to be root or have the CAP_NET_BIND_SERVICE capability.</description>
     </item>
     
     <item>
       <title>win10输入法不显示候选词解决方法</title>
-      <link>https://sy123.ml/2020/02/05/win10_input_method_display_candidate_words/</link>
+      <link>https://sy123.ml/2020/02/05/win10-input-method-display-candidate-words/</link>
       <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/win10_input_method_display_candidate_words/</guid>
+      <guid>https://sy123.ml/2020/02/05/win10-input-method-display-candidate-words/</guid>
       <description>精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法 </description>
     </item>
     
     <item>
       <title>Linux yay 命令</title>
-      <link>https://sy123.ml/2020/02/05/linux_yay/</link>
+      <link>https://sy123.ml/2020/02/05/linux-yay/</link>
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/linux_yay/</guid>
+      <guid>https://sy123.ml/2020/02/05/linux-yay/</guid>
       <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
 另见pacman。
 从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps   </description>
@@ -405,10 +421,10 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
     
     <item>
       <title>Linux_disable_IPv6</title>
-      <link>https://sy123.ml/2020/01/31/linux_disable_ipv6/</link>
+      <link>https://sy123.ml/2020/01/31/linux-disable-ipv6/</link>
       <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/31/linux_disable_ipv6/</guid>
+      <guid>https://sy123.ml/2020/01/31/linux-disable-ipv6/</guid>
       <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关闭IPv6。 下面是IPv6的关闭方法应该适用于所有主流的Linux发行版包括Ubuntu、Debian、CentOS。
 IPv6在CentOS6.5系统中默认是启用状态，通过以下方式可以确认IPv6的状态
 1.1.查看系统IPv6的启用状态 以下命令返回值为0表示IPv6启用，1表示禁用
@@ -434,10 +450,10 @@ lsmod | grep ipv6
     
     <item>
       <title>Set_all_Java_apps_to_use_GTK&#43;_font_&amp;_theme_settings</title>
-      <link>https://sy123.ml/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</link>
+      <link>https://sy123.ml/2020/01/22/set-all-java-apps-to-use-gtk-font-theme-settings/</link>
       <pubDate>Wed, 22 Jan 2020 01:12:54 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
+      <guid>https://sy123.ml/2020/01/22/set-all-java-apps-to-use-gtk-font-theme-settings/</guid>
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
   Java default look   Java GTK+ look   How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
 1  export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34;   First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>
@@ -478,10 +494,10 @@ Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
     
     <item>
       <title>ArchLinux配置Samba服务与Windows共享文件</title>
-      <link>https://sy123.ml/2020/01/19/share_movie_between_archlinux_and_win7_via_samba/</link>
+      <link>https://sy123.ml/2020/01/19/share-movie-between-archlinux-and-win7-via-samba/</link>
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/19/share_movie_between_archlinux_and_win7_via_samba/</guid>
+      <guid>https://sy123.ml/2020/01/19/share-movie-between-archlinux-and-win7-via-samba/</guid>
       <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。
 Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
 下面记录一下ArchLinux中配置Samba的过程，留作备份。
@@ -556,10 +572,10 @@ iptables -A INPUT -p tcp &amp;ndash;dport 22 -j ACCEPT</description>
     
     <item>
       <title>玩转WSL-用Samba服务替代Win10原生的文件共享</title>
-      <link>https://sy123.ml/2020/01/17/wsl_samba/</link>
+      <link>https://sy123.ml/2020/01/17/wsl-samba/</link>
       <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/17/wsl_samba/</guid>
+      <guid>https://sy123.ml/2020/01/17/wsl-samba/</guid>
       <description>习惯了Linux系统的人们，肯定觉得Samba服务更加灵活和方便，那如何在Windows系统上搭建高效的Samba服务呢？本文介绍了通过WSL在Win10系统上，搭建Samba文件共享服务。
 背景是家里只有一个台式机，一方面家里人偶尔使用，另一方面，它是家里的数据中心，挂载了多块硬盘。所以系统用的是Windows10，但是为了方便灵活得进行文件共享，一直考虑搭建Samba服务。达到此目的的方案有多种，可以考虑用虚拟机，例如：VMWare、VirtualBox、Hyper-V，也可以考虑使用CygWin，因为Windows10提供了WSL，所以本文介绍了另一种方式，也是运行效率比较高的一种方式，使用WSL搭建Samba服务。
 背景知识 Windows文件共享服务 使用网络对外提供文件访问服务，现在广泛用于局域网内部文件的共享，例如：小米盒子、手机、PC机、包括Mac，通过139或445端口。
@@ -578,10 +594,10 @@ Samba服务 为了实现UNIX、Linux等非Windows能够访问Windows的文件共
     
     <item>
       <title>Windows 下使用 Diskpart 命令分区</title>
-      <link>https://sy123.ml/2020/01/16/using_diskpart_to_create/</link>
+      <link>https://sy123.ml/2020/01/16/using-diskpart-to-create/</link>
       <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/16/using_diskpart_to_create/</guid>
+      <guid>https://sy123.ml/2020/01/16/using-diskpart-to-create/</guid>
       <description>Diskpart 命令简介 Diskpart 命令是 Windows 环境下的一个命令，利用 Diskpart 可实现对硬盘的分区管理，包括创建分区、删除分区、合并（扩展）分区，设置分区后即刻生效，免去了重启电脑的操作。
 正常运行该命令时需要系统服务的支持，所以在纯 DOS、XP 内核的 WinPE 环境下都是不能运行的，但是在 Win7 的预安装环境下却是可以的。利用 Diskpart 命令来分区，既不用借助第三方工具，也不会产生 100MB 的“系统保留”分区，其次分区操作直接设置即刻生效，不用重新启动计算机。
 利用 Diskpart 命令分区 当安装程序运行到创建磁盘分区界面时按下 Shift+F10 启动命令窗口。
@@ -594,10 +610,10 @@ Samba服务 为了实现UNIX、Linux等非Windows能够访问Windows的文件共
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</link>
+      <link>https://sy123.ml/2020/01/11/set-proxy-for-terminal/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</guid>
+      <guid>https://sy123.ml/2020/01/11/set-proxy-for-terminal/</guid>
       <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置git的话可以直接在文章最后找到git的设置代理的方法。
 前期准备: 认识代理的方式:代理是通过客户端与服务端通信,传输服务端能够访问到的资源文件,再由服务端客户端通信返回给客户端,从而间接访问服务端能访问的资源.
 以socket5通信为例子,我们通过客户端(自己想一想酸酸乳)向服务端发送socket通信,服务端访问资源再由socket通信返回给客户端.但是这里面的通信设置必须通过端口来进行通信,类似switchyomega设置过程一样,我们会设定走的代理方式是127.0.0.1:1080;这个意思就是通过本地的1080端口来进行通信.具体在终端上如何使用呢?
@@ -617,10 +633,10 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
     
     <item>
       <title>百度云分享下载链接</title>
-      <link>https://sy123.ml/2020/01/10/baiduyun_dlink/</link>
+      <link>https://sy123.ml/2020/01/10/baiduyun-dlink/</link>
       <pubDate>Fri, 10 Jan 2020 07:48:32 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/10/baiduyun_dlink/</guid>
+      <guid>https://sy123.ml/2020/01/10/baiduyun-dlink/</guid>
       <description>最好是先复制到自己的网盘。
   点击分享，生成链接。
   点击链接，进入页面。在console模式下输入如下代码：
@@ -629,10 +645,10 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
     
     <item>
       <title>Github Pull</title>
-      <link>https://sy123.ml/2020/01/08/github_pull/</link>
+      <link>https://sy123.ml/2020/01/08/github-pull/</link>
       <pubDate>Wed, 08 Jan 2020 06:27:26 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/08/github_pull/</guid>
+      <guid>https://sy123.ml/2020/01/08/github-pull/</guid>
       <description>github一直都是在上面拿资源。感觉有点愧对大众。是不是应该奉献自己的力量给github来推动开源的发展呢。 在两个月前第一次在github新建项目，并且push了一套比赛的源码。但。。。今天竟然忘了怎么用git了。又复习了一次。所以这次打算在这里作个笔记。给自己做个的或是给git新手做的也好吧。为互联网贡献一点力量。
 安装git和配置就不说了。
 进入到等下要push的代码的目录文件夹，打开bash 请输入图片描述

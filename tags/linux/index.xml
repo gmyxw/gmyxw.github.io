@@ -6,27 +6,43 @@
     <description>Recent content in linux on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Wed, 04 Mar 2020 17:06:34 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 12 Mar 2020 22:50:06 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>rename使用正则表达式</title>
+      <link>https://sy123.ml/2020/03/12/rename-regex/</link>
+      <pubDate>Thu, 12 Mar 2020 22:50:06 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/12/rename-regex/</guid>
+      <description>前言 以前一直用类似rename &amp;quot;s/_/-/&amp;quot; *这样的命令正则替换一些文件名，不过系统切换到Archlinux后用rename一直失败，用man看了下说明才发现并不支持正则，只能这样用，并且不能全局替换
+1  rename 123 456 *   其实几乎所有情况下, rename用不到正则表达式的. 你最多不过是通过正则确定要改名的文件列表而已. 这通过管道太容易了. 例如我在shell下, 会这样使用
+1  f &amp;#39;bak$&amp;#39; |x rename &amp;#39;.bak&amp;#39; &amp;#39;&amp;#39;   在管道之前, 可以通过各种方式搭配, 来生成所需的文件列表
+而rename也可以分多个步骤完成, man帮助中就有示例.
+原因 最近有空查了很多资料才发现很多发行版默认的rename是util-linux里很弱的那个rename，比如Archlinux
+解决方法 Archlinux可以装perl-rename这个包，命令就是perl-rename。Mac下可以用brew 安装rename。好久没用Ubuntu，记得以前Ubuntu 是prename 这个命令。
+其实不只是s命令，所有有效的perl命令都能用，文件名会作为$_ 传入，命令执行完后的$_作为新文件名。比如全部改成小写：
+1  rename &amp;#39;y/A-Z/a-z/&amp;#39; *   </description>
+    </item>
+    
+    <item>
       <title>Browser plugins</title>
-      <link>https://sy123.ml/2020/03/04/browser_plugins/</link>
+      <link>https://sy123.ml/2020/03/04/browser-plugins/</link>
       <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/04/browser_plugins/</guid>
+      <guid>https://sy123.ml/2020/03/04/browser-plugins/</guid>
       <description>Installation The package you will need to install depends on the browser you use.
  The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package.  </description>
     </item>
     
     <item>
       <title>Encrypt string using Openssl</title>
-      <link>https://sy123.ml/2020/02/28/encrypt_string_using-openssl/</link>
+      <link>https://sy123.ml/2020/02/28/encrypt-string-using-openssl/</link>
       <pubDate>Fri, 28 Feb 2020 11:28:00 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/28/encrypt_string_using-openssl/</guid>
+      <guid>https://sy123.ml/2020/02/28/encrypt-string-using-openssl/</guid>
       <description>Try this:
 1 2 3 4  echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt   Run
 1 2 3  openssl list-cipher-commands   to list all available ciphers.</description>
@@ -34,10 +50,10 @@
     
     <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
-      <link>https://sy123.ml/2020/02/25/cp_backup/</link>
+      <link>https://sy123.ml/2020/02/25/cp-backup/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/25/cp_backup/</guid>
+      <guid>https://sy123.ml/2020/02/25/cp-backup/</guid>
       <description>GNU cp(1) has a backup option:
 1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
 1 2 3 4 5 6 7  --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
@@ -45,10 +61,10 @@
     
     <item>
       <title>Android Studio emulator ugly black borders</title>
-      <link>https://sy123.ml/2020/02/24/android_studio_emulator_ugly_black_borders/</link>
+      <link>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</link>
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/android_studio_emulator_ugly_black_borders/</guid>
+      <guid>https://sy123.ml/2020/02/24/android-studio-emulator-ugly-black-borders/</guid>
       <description>Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.
 For making it floating, add this to your config Floating all windows with &amp;ldquo;android emulator&amp;rdquo; header:
@@ -57,10 +73,10 @@ For making it floating, add this to your config Floating all windows with &amp;l
     
     <item>
       <title>Vim_search_in_file</title>
-      <link>https://sy123.ml/2020/02/24/vim_search_in_file/</link>
+      <link>https://sy123.ml/2020/02/24/vim-search-in-file/</link>
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/vim_search_in_file/</guid>
+      <guid>https://sy123.ml/2020/02/24/vim-search-in-file/</guid>
       <description>总有人问我 Vim 中能不能查找，当然能！而且是超级强的查找！ 这篇文章来详细介绍 Vim 中查找相关的设置和使用方法。 包括查找与替换、查找光标所在词、高亮前景/背景色、切换高亮状态、大小写敏感查找等。
 查找 在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。
 Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdquo;。 需要查找特殊字符需要转义，例如/vim$匹配&amp;quot;vim$&amp;rdquo;。
@@ -88,20 +104,20 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>linux中如何手动清零缓冲</title>
-      <link>https://sy123.ml/2020/02/16/how_do_you_empty_the_buffers_and_cache_on_linux_system/</link>
+      <link>https://sy123.ml/2020/02/16/how-do-you-empty-the-buffers-and-cache-on-linux-system/</link>
       <pubDate>Sun, 16 Feb 2020 15:20:03 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/how_do_you_empty_the_buffers_and_cache_on_linux_system/</guid>
+      <guid>https://sy123.ml/2020/02/16/how-do-you-empty-the-buffers-and-cache-on-linux-system/</guid>
       <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands.
 1 2 3 4 5 6 7 8 9 10  free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248   You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
     </item>
     
     <item>
       <title>使用systemd-analyze优化系统启动时间</title>
-      <link>https://sy123.ml/2020/02/16/systemd_analyze/</link>
+      <link>https://sy123.ml/2020/02/16/systemd-analyze/</link>
       <pubDate>Sun, 16 Feb 2020 14:53:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/systemd_analyze/</guid>
+      <guid>https://sy123.ml/2020/02/16/systemd-analyze/</guid>
       <description>systemd-analyze简介 systemd-analyze是Linux自带的分析系统启动性能的工具。
 systemd-analyze可使用的命令：
   systemd-analyze [OPTIONS…] [time]
@@ -120,19 +136,19 @@ systemd-analyze可使用的命令：
     
     <item>
       <title>Socket programing Permission denied</title>
-      <link>https://sy123.ml/2020/02/05/linux_privileged_port/</link>
+      <link>https://sy123.ml/2020/02/05/linux-privileged-port/</link>
       <pubDate>Wed, 05 Feb 2020 16:04:13 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/linux_privileged_port/</guid>
+      <guid>https://sy123.ml/2020/02/05/linux-privileged-port/</guid>
       <description>listen tcp :443: bind: permission denied If you want to bind to a privileged port (ports less than 1024). You either need to be root or have the CAP_NET_BIND_SERVICE capability.</description>
     </item>
     
     <item>
       <title>Linux yay 命令</title>
-      <link>https://sy123.ml/2020/02/05/linux_yay/</link>
+      <link>https://sy123.ml/2020/02/05/linux-yay/</link>
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/linux_yay/</guid>
+      <guid>https://sy123.ml/2020/02/05/linux-yay/</guid>
       <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
 另见pacman。
 从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps   </description>
@@ -140,10 +156,10 @@ systemd-analyze可使用的命令：
     
     <item>
       <title>Linux_disable_IPv6</title>
-      <link>https://sy123.ml/2020/01/31/linux_disable_ipv6/</link>
+      <link>https://sy123.ml/2020/01/31/linux-disable-ipv6/</link>
       <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/31/linux_disable_ipv6/</guid>
+      <guid>https://sy123.ml/2020/01/31/linux-disable-ipv6/</guid>
       <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关闭IPv6。 下面是IPv6的关闭方法应该适用于所有主流的Linux发行版包括Ubuntu、Debian、CentOS。
 IPv6在CentOS6.5系统中默认是启用状态，通过以下方式可以确认IPv6的状态
 1.1.查看系统IPv6的启用状态 以下命令返回值为0表示IPv6启用，1表示禁用
@@ -169,10 +185,10 @@ lsmod | grep ipv6
     
     <item>
       <title>Set_all_Java_apps_to_use_GTK&#43;_font_&amp;_theme_settings</title>
-      <link>https://sy123.ml/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</link>
+      <link>https://sy123.ml/2020/01/22/set-all-java-apps-to-use-gtk-font-theme-settings/</link>
       <pubDate>Wed, 22 Jan 2020 01:12:54 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
+      <guid>https://sy123.ml/2020/01/22/set-all-java-apps-to-use-gtk-font-theme-settings/</guid>
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
   Java default look   Java GTK+ look   How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
 1  export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34;   First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>
@@ -180,10 +196,10 @@ lsmod | grep ipv6
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</link>
+      <link>https://sy123.ml/2020/01/11/set-proxy-for-terminal/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/11/set_proxy_for_terminal/</guid>
+      <guid>https://sy123.ml/2020/01/11/set-proxy-for-terminal/</guid>
       <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置git的话可以直接在文章最后找到git的设置代理的方法。
 前期准备: 认识代理的方式:代理是通过客户端与服务端通信,传输服务端能够访问到的资源文件,再由服务端客户端通信返回给客户端,从而间接访问服务端能访问的资源.
 以socket5通信为例子,我们通过客户端(自己想一想酸酸乳)向服务端发送socket通信,服务端访问资源再由socket通信返回给客户端.但是这里面的通信设置必须通过端口来进行通信,类似switchyomega设置过程一样,我们会设定走的代理方式是127.0.0.1:1080;这个意思就是通过本地的1080端口来进行通信.具体在终端上如何使用呢?

@@ -13,10 +13,10 @@
     
     <item>
       <title>Encrypt string using Openssl</title>
-      <link>https://sy123.ml/2020/02/28/encrypt_string_using-openssl/</link>
+      <link>https://sy123.ml/2020/02/28/encrypt-string-using-openssl/</link>
       <pubDate>Fri, 28 Feb 2020 11:28:00 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/28/encrypt_string_using-openssl/</guid>
+      <guid>https://sy123.ml/2020/02/28/encrypt-string-using-openssl/</guid>
       <description>Try this:
 1 2 3 4  echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt   Run
 1 2 3  openssl list-cipher-commands   to list all available ciphers.</description>

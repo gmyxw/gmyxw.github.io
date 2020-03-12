@@ -13,10 +13,10 @@
     
     <item>
       <title>Android Studio preview</title>
-      <link>https://sy123.ml/2020/02/24/android_studio_preview/</link>
+      <link>https://sy123.ml/2020/02/24/android-studio-preview/</link>
       <pubDate>Mon, 24 Feb 2020 07:58:36 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/android_studio_preview/</guid>
+      <guid>https://sy123.ml/2020/02/24/android-studio-preview/</guid>
       <description>更新 IDE 和 SDK 工具 安装 Android Studio 后，您可以轻松通过自动更新和 Android SDK 管理器让 Android Studio IDE 和 Android SDK 工具保持最新状态。
 更新 IDE 和变更版本 若有可用的 IDE 更新，Android Studio 将通过小气泡对话框通知您，不过您也可以依次点击 Help &amp;gt; Check for Update（在 Mac 上，依次点击 Android Studio &amp;gt; Check for Updates）手动检查更新。
 您可以通过以下发布版本获取 Android Studio 更新：

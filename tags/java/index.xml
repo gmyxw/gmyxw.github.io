@@ -13,10 +13,10 @@
     
     <item>
       <title>Set_all_Java_apps_to_use_GTK&#43;_font_&amp;_theme_settings</title>
-      <link>https://sy123.ml/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</link>
+      <link>https://sy123.ml/2020/01/22/set-all-java-apps-to-use-gtk-font-theme-settings/</link>
       <pubDate>Wed, 22 Jan 2020 01:12:54 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
+      <guid>https://sy123.ml/2020/01/22/set-all-java-apps-to-use-gtk-font-theme-settings/</guid>
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
   Java default look   Java GTK+ look   How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
 1  export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34;   First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>

@@ -13,10 +13,10 @@
     
     <item>
       <title>百度网盘超级会员账号分享</title>
-      <link>https://sy123.ml/2020/02/27/baidu_svip/</link>
+      <link>https://sy123.ml/2020/02/27/baidu-svip/</link>
       <pubDate>Thu, 27 Feb 2020 02:07:36 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/baidu_svip/</guid>
+      <guid>https://sy123.ml/2020/02/27/baidu-svip/</guid>
       <description>百度云 请低调使用&amp;hellip;
  都是选微博登录  选微博登录 选微博登录 选微博登录!!!   验证码全部大写填写 确认用鼠标点 登录后如遇到重试页面, 点击几次重试即可. 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!!  并不保证当你看到时账号都是可以用的, 但是分享的时候肯定都是可以的. 如果有失效账号, 麻烦告知一下, 我会及时处理.
 账号越来越难弄, 且用且珍惜.
@@ -25,10 +25,10 @@
     
     <item>
       <title>百度云加速NS接入流程</title>
-      <link>https://sy123.ml/2020/02/23/baidu_cdn/</link>
+      <link>https://sy123.ml/2020/02/23/baidu-cdn/</link>
       <pubDate>Sun, 23 Feb 2020 04:36:16 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/23/baidu_cdn/</guid>
+      <guid>https://sy123.ml/2020/02/23/baidu-cdn/</guid>
       <description>百度云加速NS接入是最简单的方式，不过还是很多站长管理员不大懂，今天教大家如何NS接入。
 首先点域名继续接入 添加子域名，A记录、主机名: WWW，记录值写你的服务器的IP，如果你有其它子域名的也一并添加创建。 创建完子域名后，点一步，查看云加速DNS 复制加速DNS n3060.ns.yunjiasu.com、n333.ns.yunjiasu.com 进入域名注册商管理处，修改NS记录，比如阿里云 修改完成后，等生效即可。需要注意的是，域名修改DNS一般全国生效为24小时左右，所以需要耐心等待了。
 好了以上就是百度云加速NS接入的全部教程了，希望可以帮到大家。</description>
@@ -36,10 +36,10 @@
     
     <item>
       <title>百度云分享下载链接</title>
-      <link>https://sy123.ml/2020/01/10/baiduyun_dlink/</link>
+      <link>https://sy123.ml/2020/01/10/baiduyun-dlink/</link>
       <pubDate>Fri, 10 Jan 2020 07:48:32 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/10/baiduyun_dlink/</guid>
+      <guid>https://sy123.ml/2020/01/10/baiduyun-dlink/</guid>
       <description>最好是先复制到自己的网盘。
   点击分享，生成链接。
   点击链接，进入页面。在console模式下输入如下代码：
