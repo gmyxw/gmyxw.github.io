@@ -6,10 +6,19 @@
     <description>Recent content in Tags on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Fri, 13 Mar 2020 03:04:22 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 18 Mar 2020 06:32:53 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>archlinux</title>
+      <link>https://sy123.ml/tags/archlinux/</link>
+      <pubDate>Wed, 18 Mar 2020 06:32:53 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/archlinux/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>baidu</title>
@@ -368,15 +377,6 @@
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/pagefile/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>archlinux</title>
-      <link>https://sy123.ml/tags/archlinux/</link>
-      <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tags/archlinux/</guid>
       <description></description>
     </item>
     
