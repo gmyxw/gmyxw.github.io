@@ -6,10 +6,24 @@
     <description>Recent content in Posts on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Wed, 18 Mar 2020 06:32:53 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 20 Mar 2020 13:57:01 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux中拷贝目录跳过指定文件的方法</title>
+      <link>https://sy123.ml/2020/03/20/linux-copy-directory-ignore-files/</link>
+      <pubDate>Fri, 20 Mar 2020 13:57:01 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/20/linux-copy-directory-ignore-files/</guid>
+      <description>近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也不好一一指定。普通的 cp 命令并没有排除某个文件或文件夹的参数，比较丑陋点可以 cp -r 拷贝完目录之后再去删除无用的，但如果做批量脚本操作就不爽了，经过实际试验之后暂时找到两个比较好的方法。
+使用 rsync 进行拷贝 rsync 本来是文件同步备份的工具，相对于普通的 cp 命令，rsync 在控制方面就强多了，而且 rsync 对遍历目录也支持，有 &amp;ndash;exclude 参数可以忽略指定的文件或文件夹。
+1 2  rsync -vaP --exclude=&amp;#34;.*&amp;#34; --exclude=&amp;#34;Makefile&amp;#34; dir1 /home/dir2   如上面演示的就可以排除掉隐藏文件和 Makefile 文件，-a 参数已经包含遍历处理参数 -r。
+使用 find 加 cpio 进行拷贝 备注：此方法来自 Advanced Bash-Scripting Guide，需要了解的童鞋自己去参考了。
+用过 find 的童鞋都知道，find 对文件的过滤那是非常强大的，配合 cpio 来进行目录的遍历拷贝就可以实现过滤指定的文件或文件夹，当然也可以做到只备份特定的文件或文件夹，你可以用 find 的各种过滤参数达到拷贝哪天的文件，拷贝近期更改的文件等特殊效果，而且 find 支持正则表达式，这种方式想比第一种使用 rsync 跳过文件的方式更加灵活，因此非常推荐使用此方式进行目录拷贝。
+1 2  cd dir1 find . -regextype posix-egrep -mindepth 1 ! -regex &amp;#39;.</description>
+    </item>
     
     <item>
       <title>archlinux升级内核后，系统挂了，修复方法</title>
