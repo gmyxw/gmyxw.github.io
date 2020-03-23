@@ -6,10 +6,20 @@
     <description>Recent content in Posts on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Fri, 20 Mar 2020 13:57:01 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 23 Mar 2020 20:14:04 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Pandavan Off LED Indicator</title>
+      <link>https://sy123.ml/2020/03/23/pandavan-off-led-indicator/</link>
+      <pubDate>Mon, 23 Mar 2020 20:14:04 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/23/pandavan-off-led-indicator/</guid>
+      <description>在自定义设置 - 按钮/LED 红灯无法关闭 有的固件有BUG只能在路由器启动后执行以下命令
+1  mtk_gpio -w 13 0 #关红灯   </description>
+    </item>
     
     <item>
       <title>Linux中拷贝目录跳过指定文件的方法</title>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>pandavan on sy123.ml</title>
+    <link>https://sy123.ml/tags/pandavan/</link>
+    <description>Recent content in pandavan on sy123.ml</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>2007-2020 Zhili.</copyright>
+    <lastBuildDate>Mon, 23 Mar 2020 20:14:04 +0800</lastBuildDate>
+    
+	<atom:link href="https://sy123.ml/tags/pandavan/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Pandavan Off LED Indicator</title>
+      <link>https://sy123.ml/2020/03/23/pandavan-off-led-indicator/</link>
+      <pubDate>Mon, 23 Mar 2020 20:14:04 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/23/pandavan-off-led-indicator/</guid>
+      <description>在自定义设置 - 按钮/LED 红灯无法关闭 有的固件有BUG只能在路由器启动后执行以下命令
+1  mtk_gpio -w 13 0 #关红灯   </description>
+    </item>
+    
+  </channel>
+</rss>
