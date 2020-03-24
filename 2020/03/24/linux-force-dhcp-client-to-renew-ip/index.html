@@ -176,6 +176,10 @@ systemctl status network.service</p>
 <td>Restart networking service and obtain a new IP address via DHCP on a CentOS/RHEL/Fedora Linux</td>
 </tr>
 <tr>
+<td>systemctl restart systemd-networkd</td>
+<td>Restart networking service and obtain a new IP address via DHCP on a Arch Linux</td>
+</tr>
+<tr>
 <td>nmcli con</td>
 <td>Use NetworkManager to obtain info about Linux IP address and interfaces</td>
 </tr>
@@ -190,10 +194,6 @@ systemctl status network.service</p>
 <tr>
 <td>dhcpcd</td>
 <td>在 SuSE distribution 里面，他仅有 dhcpcd 这支程序，他与 dhclient 是相同的命令。</td>
-</tr>
-<tr>
-<td>systemctl restart systemd-networkd</td>
-<td></td>
 </tr>
 <tr>
 <td>ifconfig enp3s0 10.6.6.6</td>
