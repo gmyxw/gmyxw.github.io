@@ -23,6 +23,16 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     </item>
     
     <item>
+      <title>Linux Force DHCP Client to Renew IP</title>
+      <link>https://sy123.ml/2020/03/24/linux-force-dhcp-client-to-renew-ip/</link>
+      <pubDate>Tue, 24 Mar 2020 07:43:59 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/03/24/linux-force-dhcp-client-to-renew-ip/</guid>
+      <description>am using Ubuntu Linux. How to force Linux to reacquire a new IP address from the DHCP server? What is the command of Linux equivalent to Windows’s “ipconfig /renew” command?
+ You need to use Dynamic Host Configuration Protocol Client i.e., dhclient command. The client normally doesn’t release the current lease as it is not required by the DHCP protocol. Some cable ISPs require their clients to notify the server if they wish to release an assigned IP address.</description>
+    </item>
+    
+    <item>
       <title>Pandavan Off LED Indicator</title>
       <link>https://sy123.ml/2020/03/23/pandavan-off-led-indicator/</link>
       <pubDate>Mon, 23 Mar 2020 20:14:04 +0800</pubDate>
