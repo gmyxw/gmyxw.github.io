@@ -80,13 +80,63 @@
 <blockquote>
 <p>ps:网上有些文章说，word-wrap:break-word 对长串英文不起作用，其实这是非常错误的，word-wrap:break-word照样能把一个长串英文或数字拆成多行。事实上，word-wrap:break-word与word-break:break-all共同点是都能把长单词强行断句，不同点是word-wrap:break-word会首先起一个新行来放置长单词，新的行还是放不下这个长单词则会对长单词进行强制断句；而word-break:break-all则不会把长单词放在一个新行里，当这一行放不下的时候就直接强制断句了。</p>
 </blockquote>
-<h1 id="以前都是废话直接运行代码就完事">以前都是废话直接运行代码就完事</h1>
+<h1 id="以上都是废话直接运行代码就完事">以上都是废话直接运行代码就完事</h1>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"> <span style="color:#75715e">&lt;!DOCTYPE html&gt;</span><span style="color:#111">&lt;</span><span style="color:#f92672">p</span> <span style="color:#75af00">style</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;background:#000; width:100px; color:#F00; word-wrap:break-word&#34;</span> <span style="color:#75af00">data-mce-style</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;background: #000; width: 100px; color: #f00; word-wrap: break-word;&#34;</span><span style="color:#111">&gt;</span>haha 555555555555555555555555555555555<span style="color:#111">&lt;/</span><span style="color:#f92672">p</span><span style="color:#111">&gt;&lt;</span><span style="color:#f92672">p</span> <span style="color:#75af00">style</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;background:#000; width:100px; color:#F00; margin-top:10px; word-break:break-all&#34;</span> <span style="color:#75af00">data-mce-style</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;background: #000; width: 100px; color: #f00; margin-top: 10px; word-break: break-all;&#34;</span><span style="color:#111">&gt;</span>haha 555555555555555555555555555555555<span style="color:#111">&lt;/</span><span style="color:#f92672">p</span><span style="color:#111">&gt;</span>
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"> <span style="color:#75715e">&lt;!DOCTYPE html&gt;</span>
+ <span style="color:#111">&lt;</span><span style="color:#f92672">p</span> <span style="color:#75af00">style</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;
+</span><span style="color:#d88200">    background:#000; 
+</span><span style="color:#d88200">    width:100px; 
+</span><span style="color:#d88200">    color:#F00; 
+</span><span style="color:#d88200">    word-wrap:break-word&#34;</span> 
+    <span style="color:#75af00">data-mce-style</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;
+</span><span style="color:#d88200">    background: #000; 
+</span><span style="color:#d88200">    width: 100px; 
+</span><span style="color:#d88200">    color: #f00; 
+</span><span style="color:#d88200">    word-wrap: break-word;&#34;</span><span style="color:#111">&gt;</span>
+    haha 555555555555555555555555555555555
+ <span style="color:#111">&lt;/</span><span style="color:#f92672">p</span><span style="color:#111">&gt;</span>
+ <span style="color:#111">&lt;</span><span style="color:#f92672">p</span> <span style="color:#75af00">style</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;
+</span><span style="color:#d88200">    background:#000; 
+</span><span style="color:#d88200">    width:100px; 
+</span><span style="color:#d88200">    color:#F00; 
+</span><span style="color:#d88200">    margin-top:10px; 
+</span><span style="color:#d88200">    word-break:break-all&#34;</span> 
+    <span style="color:#75af00">data-mce-style</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;background: #000; 
+</span><span style="color:#d88200">    width: 100px; 
+</span><span style="color:#d88200">    color: #f00; 
+</span><span style="color:#d88200">    margin-top: 10px; 
+</span><span style="color:#d88200">    word-break: break-all;&#34;</span><span style="color:#111">&gt;</span>
+    haha 555555555555555555555555555555555
+ <span style="color:#111">&lt;/</span><span style="color:#f92672">p</span><span style="color:#111">&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div></div>
