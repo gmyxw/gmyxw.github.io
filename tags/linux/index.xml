@@ -6,10 +6,32 @@
     <description>Recent content in linux on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Sat, 28 Mar 2020 20:54:33 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 01 Apr 2020 21:58:23 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Feh Open SVG</title>
+      <link>https://sy123.ml/2020/04/01/feh-open-svg/</link>
+      <pubDate>Wed, 01 Apr 2020 21:58:23 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/04/01/feh-open-svg/</guid>
+      <description>Without the &amp;ndash;conversion-timeout part, I run into this error: feh: No Imlib2 loader for that file format
+As suggested in the Arch Linux Wiki, I open SVG images like this:
+1  feh --conversion-timeout 1 file.svg   This will create a &amp;ldquo;feh&amp;rdquo; theme, which will be loaded by default and which will automatically apply the conversion-timeout option.
+1  echo &amp;#34;feh --conversion-timeout 5&amp;#34; &amp;gt; ~/.config/feh/themes   </description>
+    </item>
+    
+    <item>
+      <title>What Does Networkmanager Wait Online Service Do</title>
+      <link>https://sy123.ml/2020/04/01/what-does-networkmanager-wait-online-service-do/</link>
+      <pubDate>Wed, 01 Apr 2020 20:29:10 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/04/01/what-does-networkmanager-wait-online-service-do/</guid>
+      <description>Some code runs off the network In some multi-user environments part of the boot-up process can come from the network. For this case systemd defaults to waiting for the network to come on-line before certain steps are taken.
+It appears that this service simply waits, doing absolutely nothing, until the network is connected, and when this happens, it changes its state so that other services that depend on the network can be launched to start doing their thing.</description>
+    </item>
     
     <item>
       <title>Boot Download Background Image</title>
