@@ -41,8 +41,8 @@
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">convert <span style="color:#d88200">&#34;*.{png,jpeg}&#34;</span> -quality <span style="color:#ae81ff">100</span> outfile.pdf
 </code></pre></td></tr></table>
 </div>
-</div><p>In general case you can combine more files into one pdf file with including them inside <em>{}</em> and separate them with a single comma.</p>
-<p>adding <em>-quality VALUE</em> to keep quality after conversion(thanks to @iamcreasy)</p>
+</div><p>In general case you can combine more files into one pdf file with including them inside <strong>{}</strong> and separate them with a single comma.</p>
+<p>adding <strong>-quality VALUE</strong> to keep quality after conversion(thanks to @iamcreasy)</p>
 <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -78,7 +78,21 @@
 gs -q -dNOPAUSE -sDEVICE<span style="color:#f92672">=</span>pdfwrite -sOUTPUTFILE<span style="color:#f92672">=</span>final.pdf -dBATCH <span style="color:#111">$str</span>
 </code></pre></td></tr></table>
 </div>
-</div></div>
+</div><h1 id="合并pdf">合并PDF</h1>
+<p>有时候我们从网上下载了一个pdf格式的电子书，但这个电子书是由很多个被分割的pdf打包的，我们怎么把这些pdf合并成一个单独的文档呢？</p>
+<p><strong>ghostscript</strong>它能帮你完美地完成这个工作。</p>
+<p>首先确保系统正确安装了<strong>ghostscript</strong>。</p>
+<p>在命令行下，进入pdf文档的解压目录，然后输入：</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">gs -dNOPAUSE -sDEVICE<span style="color:#f92672">=</span>pdfwrite -sOUTPUTFILE<span style="color:#f92672">=</span>all.pdf -dBATCH *.pdf
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>all.pdf</strong>就是合并后的文档。</p>
+</div>
 <div class="disqus">
   <div id="disqus_thread"></div>
 <script>
