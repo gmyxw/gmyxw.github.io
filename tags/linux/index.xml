@@ -6,10 +6,22 @@
     <description>Recent content in linux on sy123.ml</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 Zhili.</copyright>
-    <lastBuildDate>Wed, 01 Apr 2020 21:58:23 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 13 Apr 2020 02:39:04 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux Convert Images to Pdf</title>
+      <link>https://sy123.ml/2020/04/13/linux-convert-images-to-pdf/</link>
+      <pubDate>Mon, 13 Apr 2020 02:39:04 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/04/13/linux-convert-images-to-pdf/</guid>
+      <description>ImageMagick Just use this:
+1  convert &amp;#34;*.{png,jpeg}&amp;#34; -quality 100 outfile.pdf   In general case you can combine more files into one pdf file with including them inside {} and separate them with a single comma.
+adding -quality VALUE to keep quality after conversion(thanks to @iamcreasy)
+1  convert &amp;#34;*.{ext1,ext2,ext3,...}&amp;#34; -quality 100 outfile.pdf   GhostScript 1 2 3 4 5 6 7 8 9 10  #!/bin/sh str=&amp;#34;&amp;#34;; count=0; for i in *.</description>
+    </item>
     
     <item>
       <title>Feh Open SVG</title>
