@@ -97,7 +97,7 @@
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git remote add origin master https://github.com/zhong635725959/droplook.git
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git remote add origin https://github.com/zhong635725959/droplook.git
 </code></pre></td></tr></table>
 </div>
 </div><p>origin可变，随自己喜欢</p>
@@ -108,6 +108,15 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git push origin master
+</code></pre></td></tr></table>
+</div>
+</div><p>拉取代码强制合并：</p>
+<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git pull origin master --allow-unrelated-histories
 </code></pre></td></tr></table>
 </div>
 </div><p>然后会要求输入github的帐号和密码（不可见的）
@@ -168,7 +177,9 @@ git config &ndash;global credential.helper store 操作的就是上面最后一�
 <p>之前在csdn看到一牛人的一个提升自我能力的一个建议就是写技术博客。</p>
 <p>已经想动手久了。但一直没动。这次终于动手了。希望可以坚持下去。加油</p>
 <p>—————————————华丽的分割线——————————————————————</p>
-<p>参考链接 <a href="https://help.github.com/cn/github/using-git/pushing-commits-to-a-remote-repository">https://help.github.com/cn/github/using-git/pushing-commits-to-a-remote-repository</a></p>
+<h2 id="指定私钥">指定私钥</h2>
+<pre><code>git config core.sshCommand &quot;ssh -i YOUR_ID_PATH&quot;
+</code></pre><p>参考链接 <a href="https://help.github.com/cn/github/using-git/pushing-commits-to-a-remote-repository">https://help.github.com/cn/github/using-git/pushing-commits-to-a-remote-repository</a></p>
 </div>
 <div class="disqus">
   <div id="disqus_thread"></div>

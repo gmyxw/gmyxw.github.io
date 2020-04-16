@@ -855,8 +855,9 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
 可以随时用
 1  git status   查看git的状态
 推送代码 第一次推送的时候要添加远程的代码库到配置
-1  git remote add origin master https://github.com/zhong635725959/droplook.git   origin可变，随自己喜欢
-推送代码：</description>
+1  git remote add origin https://github.com/zhong635725959/droplook.git   origin可变，随自己喜欢
+推送代码：
+1  git push origin master   拉取代码强制合并：</description>
     </item>
     
   </channel>
