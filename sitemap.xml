@@ -8,17 +8,32 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/tags/linux/</loc>
-    <lastmod>2020-04-15T07:11:46+08:00</lastmod>
+    <loc>https://sy123.ml/tags/golang/</loc>
+    <lastmod>2020-04-18T00:06:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/2020/04/18/how-can-i-simulate-interactive-console-in-vscode-debugger/</loc>
+    <lastmod>2020-04-18T00:06:48+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sy123.ml/post/</loc>
-    <lastmod>2020-04-15T07:11:46+08:00</lastmod>
+    <lastmod>2020-04-18T00:06:48+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sy123.ml/tags/</loc>
+    <lastmod>2020-04-18T00:06:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/tags/vscode/</loc>
+    <lastmod>2020-04-18T00:06:48+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/tags/linux/</loc>
     <lastmod>2020-04-15T07:11:46+08:00</lastmod>
   </url>
   
@@ -349,11 +364,6 @@
   
   <url>
     <loc>https://sy123.ml/2020/02/15/my-vscode-config/</loc>
-    <lastmod>2020-02-15T17:58:47+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/tags/vscode/</loc>
     <lastmod>2020-02-15T17:58:47+08:00</lastmod>
   </url>
   

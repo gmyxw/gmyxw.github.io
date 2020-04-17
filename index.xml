@@ -23,6 +23,20 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     </item>
     
     <item>
+      <title>How can I simulate interactive console in VSCode debugger</title>
+      <link>https://sy123.ml/2020/04/18/how-can-i-simulate-interactive-console-in-vscode-debugger/</link>
+      <pubDate>Sat, 18 Apr 2020 00:06:48 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/04/18/how-can-i-simulate-interactive-console-in-vscode-debugger/</guid>
+      <description>the VS Code debugger console doesn&amp;rsquo;t currently support piping any input through to stdin.
+FYI, you can tell the Code debugger to use an external console in the launch config:
+&amp;quot;externalConsole&amp;quot;: true It has a possible workaround, using remote debug + vscode task, but that is not trivial.
+ It has a possible workaround, using remote debug + vscode task, but that is not trivial.
+launch.json
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  { // Use IntelliSense to learn about possible attributes.</description>
+    </item>
+    
+    <item>
       <title>解决&#39;ERROR: The certificate of `github.com’ is not trusted.&#39;问题</title>
       <link>https://sy123.ml/2020/04/15/err-wget-not-trusted/</link>
       <pubDate>Wed, 15 Apr 2020 07:11:46 +0800</pubDate>
