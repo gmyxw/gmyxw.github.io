@@ -6,19 +6,10 @@
     <description>Recent content in Tags on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Tue, 21 Apr 2020 14:29:32 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 18 Apr 2020 00:06:48 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>chrome</title>
-      <link>https://sy123.ml/tags/chrome/</link>
-      <pubDate>Tue, 21 Apr 2020 14:29:32 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tags/chrome/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>golang</title>
@@ -89,6 +80,15 @@
       <pubDate>Fri, 13 Mar 2020 03:04:22 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/baidu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>chrome</title>
+      <link>https://sy123.ml/tags/chrome/</link>
+      <pubDate>Fri, 13 Mar 2020 02:46:41 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/chrome/</guid>
       <description></description>
     </item>
     
