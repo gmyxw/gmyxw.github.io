@@ -17,8 +17,8 @@
       <pubDate>Tue, 21 Apr 2020 14:29:32 +0800</pubDate>
       
       <guid>https://sy123.ml/2020/04/21/vimium-diy/</guid>
-      <description>以下内容被密码保护
- Javascript needs to be enabled to decrypt content    yy去除协议头 1 2 3 4 5 6 7 8 9 10 11 12 13  // mode_normal.js copyCurrentUrl: function() { return chrome.runtime.sendMessage({ handler: &amp;#34;getCurrentTabUrl&amp;#34; }, function(url) { var newUrl = url.replace(/\/\/|.+\/\//, &amp;#39;&amp;#39;) HUD.copyToClipboard(newUrl); if (28 &amp;lt; newUrl.length) { newUrl = newUrl.slice(0, 26) + &amp;#34;....&amp;#34;; } return HUD.showForDuration(&amp;#34;Yanked &amp;#34; + newUrl, 2000); }); }     div#encrypt-sha1sum {display: none;}    let cipher = document.</description>
+      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;抽空挖坑， 在原来的基础上增加了自己习惯的网页操作&lt;/p&gt;</description>
     </item>
     
     <item>

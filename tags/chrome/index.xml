@@ -6,10 +6,20 @@
     <description>Recent content in chrome on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Fri, 13 Mar 2020 02:46:41 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Apr 2020 14:29:32 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>vimium DIY</title>
+      <link>https://sy123.ml/2020/04/21/vimium-diy/</link>
+      <pubDate>Tue, 21 Apr 2020 14:29:32 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/04/21/vimium-diy/</guid>
+      <description>&lt;h2 id=&#34;前言&#34;&gt;前言&lt;/h2&gt;
+&lt;p&gt;抽空挖坑， 在原来的基础上增加了自己习惯的网页操作&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Google Chrome 离线安装包的官方下载</title>
