@@ -32,9 +32,9 @@
   </div>
 <div class="content">
   <p>首先看一段代码</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -45,23 +45,23 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span> <span style="color:#111">{</span> <span style="color:#75af00">Vue</span><span style="color:#111">,</span> <span style="color:#75af00">Component</span><span style="color:#111">,</span> <span style="color:#75af00">Prop</span> <span style="color:#111">}</span> <span style="color:#75af00">from</span> <span style="color:#d88200">&#39;vue-property-decorator&#39;</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">import</span> { Vue, Component, Prop } from <span style="color:#d14">&#39;vue-property-decorator&#39;</span>
 
-<span style="color:#960050;background-color:#1e0010">@</span><span style="color:#75af00">Component</span>
-<span style="color:#00a8c8">export</span> <span style="color:#00a8c8">default</span> <span style="color:#00a8c8">class</span> <span style="color:#75af00">YourComponent</span> <span style="color:#00a8c8">extends</span> <span style="color:#75af00">Vue</span> <span style="color:#111">{</span>
-  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#75af00">Prop</span><span style="color:#111">(</span><span style="color:#111">Number</span><span style="color:#111">)</span> <span style="color:#75af00">propA</span><span style="color:#f92672">!:</span> <span style="color:#75af00">number</span>
-  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#75af00">Prop</span><span style="color:#111">({</span> <span style="color:#00a8c8">default</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;default value&#39;</span> <span style="color:#111">})</span> <span style="color:#75af00">propB</span><span style="color:#f92672">!:</span> <span style="color:#75af00">string</span>
-  <span style="color:#960050;background-color:#1e0010">@</span><span style="color:#75af00">Prop</span><span style="color:#111">([</span><span style="color:#111">String</span><span style="color:#111">,</span> <span style="color:#111">Boolean</span><span style="color:#111">])</span> <span style="color:#75af00">propC</span><span style="color:#f92672">:</span> <span style="color:#75af00">string</span> <span style="color:#f92672">|</span> <span style="color:#00a8c8">boolean</span>
-<span style="color:#111">}</span>
+<span style="color:#a61717;background-color:#e3d2d2">@</span>Component
+<span style="color:#000;font-weight:bold">export</span> <span style="color:#000;font-weight:bold">default</span> <span style="color:#000;font-weight:bold">class</span> YourComponent <span style="color:#000;font-weight:bold">extends</span> Vue {
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>Prop(<span style="color:#0086b3">Number</span>) propA<span style="color:#000;font-weight:bold">!:</span> number
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>Prop({ <span style="color:#000;font-weight:bold">default</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;default value&#39;</span> }) propB<span style="color:#000;font-weight:bold">!:</span> string
+  <span style="color:#a61717;background-color:#e3d2d2">@</span>Prop([<span style="color:#0086b3">String</span>, <span style="color:#0086b3">Boolean</span>]) propC<span style="color:#000;font-weight:bold">:</span> string <span style="color:#000;font-weight:bold">|</span> <span style="color:#000;font-weight:bold">boolean</span>
+}
 
 </code></pre></td></tr></table>
 </div>
 </div><p>这是vue组件的ts写法，仔细观察，里面有一段这样的代码<code>@Prop(Number) propA!: number</code>，这是什么鬼？</p>
 <p>查了一下ts的文档说明，原来感叹号是非<strong>null</strong>和非<strong>undefined</strong>的类型断言，所以上面的写法就是对<strong>propA</strong>这个属性进行非空断言。文档的相关说明在这里。</p>
 <p>官方文档上的一个例子很好的说明了这个问题</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -77,19 +77,19 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">interface</span> <span style="color:#75af00">Entity</span> <span style="color:#111">{</span>
-  <span style="color:#75af00">name</span><span style="color:#f92672">:</span> <span style="color:#75af00">string</span>
-<span style="color:#111">}</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">interface</span> Entity {
+  name<span style="color:#000;font-weight:bold">:</span> string
+}
 
-<span style="color:#75715e">// Compiled with --strictNullChecks
-</span><span style="color:#75715e"></span><span style="color:#00a8c8">function</span> <span style="color:#75af00">validateEntity</span><span style="color:#111">(</span><span style="color:#75af00">e</span><span style="color:#f92672">?:</span> <span style="color:#75af00">Entity</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-  <span style="color:#75715e">// Throw exception if e is null or invalid entity
-</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+<span style="color:#998;font-style:italic">// Compiled with --strictNullChecks
+</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">function</span> validateEntity(e<span style="color:#000;font-weight:bold">?:</span> Entity) {
+  <span style="color:#998;font-style:italic">// Throw exception if e is null or invalid entity
+</span><span style="color:#998;font-style:italic"></span>}
 
-<span style="color:#00a8c8">function</span> <span style="color:#75af00">processEntity</span><span style="color:#111">(</span><span style="color:#75af00">e</span><span style="color:#f92672">?:</span> <span style="color:#75af00">Entity</span><span style="color:#111">)</span> <span style="color:#111">{</span>
-  <span style="color:#75af00">validateEntity</span><span style="color:#111">(</span><span style="color:#75af00">e</span><span style="color:#111">);</span>
-  <span style="color:#00a8c8">let</span> <span style="color:#75af00">s</span> <span style="color:#f92672">=</span> <span style="color:#75af00">e</span><span style="color:#f92672">!</span><span style="color:#111">.</span><span style="color:#75af00">name</span><span style="color:#111">;</span>  <span style="color:#75715e">// Assert that e is non-null and access name
-</span><span style="color:#75715e"></span><span style="color:#111">}</span>
+<span style="color:#000;font-weight:bold">function</span> processEntity(e<span style="color:#000;font-weight:bold">?:</span> Entity) {
+  validateEntity(e);
+  <span style="color:#000;font-weight:bold">let</span> s <span style="color:#000;font-weight:bold">=</span> e<span style="color:#000;font-weight:bold">!</span>.name;  <span style="color:#998;font-style:italic">// Assert that e is non-null and access name
+</span><span style="color:#998;font-style:italic"></span>}
 
 </code></pre></td></tr></table>
 </div>

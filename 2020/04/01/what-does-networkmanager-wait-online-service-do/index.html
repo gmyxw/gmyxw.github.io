@@ -40,15 +40,15 @@
 <p>Unlike some multi-user environments most Ubuntu desktop users have the Operating System and drivers on their hard disks, SSDs or Live Boot USBs.</p>
 <p>There is a glitch where some users wait an extremely long time for network to come up during boot. In this case the recommendations is to set the maximum wait time to 30 seconds. A better way is to simply disable the service at boot time.</p>
 <p>For many users 10 to 15 seconds can be sliced off the parallel boot time by using:</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo systemctl disable NetworkManager-wait-online.service
-<span style="color:#75715e"># or</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo systemctl disable NetworkManager-wait-online.service
+<span style="color:#998;font-style:italic"># or</span>
 sudo systemctl disable systemd-networkd-wait-online.service  
 </code></pre></td></tr></table>
 </div>

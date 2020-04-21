@@ -6,10 +6,20 @@
     <description>Recent content in Posts on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Sat, 18 Apr 2020 00:06:48 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 21 Apr 2020 14:29:32 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>vimium DIY</title>
+      <link>https://sy123.ml/2020/04/21/vimium-diy/</link>
+      <pubDate>Tue, 21 Apr 2020 14:29:32 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/04/21/vimium-diy/</guid>
+      <description>以下内容被密码保护
+ Javascript needs to be enabled to decrypt content    yy去除协议头 1 2 3 4 5 6 7 8 9 10 11 12 13  // mode_normal.js copyCurrentUrl: function() { return chrome.runtime.sendMessage({ handler: &amp;#34;getCurrentTabUrl&amp;#34; }, function(url) { var newUrl = url.replace(/\/\/|.+\/\//, &amp;#39;&amp;#39;) HUD.copyToClipboard(newUrl); if (28 &amp;lt; newUrl.length) { newUrl = newUrl.slice(0, 26) + &amp;#34;....&amp;#34;; } return HUD.showForDuration(&amp;#34;Yanked &amp;#34; + newUrl, 2000); }); }     div#encrypt-sha1sum {display: none;}    let cipher = document.</description>
+    </item>
     
     <item>
       <title>How can I simulate interactive console in VSCode debugger</title>
@@ -623,7 +633,10 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       <guid>https://sy123.ml/2020/02/05/linux-yay/</guid>
       <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
 另见pacman。
-从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps   </description>
+从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps    2020-04-20更新
+ curl: (33) HTTP server doesn&amp;rsquo;t seem to support byte ranges. Cannot resume. 选择清空之前下载就可以
+或者执行：
+1  rm -rf ~/.cache/yay/*   </description>
     </item>
     
     <item>

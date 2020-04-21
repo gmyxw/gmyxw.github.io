@@ -34,9 +34,9 @@
 <div class="content">
   <h2 id="react-router-v510-with-hooks">React Router v5.1.0 with hooks</h2>
 <p>There is a new <code>useHistory</code> hook in React Router &gt;5.1.0 if you are using React &gt;16.8.0 and functional components.</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -53,21 +53,21 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span> <span style="color:#111">{</span> <span style="color:#75af00">useHistory</span> <span style="color:#111">}</span> <span style="color:#75af00">from</span> <span style="color:#d88200">&#34;react-router-dom&#34;</span><span style="color:#111">;</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">import</span> { useHistory } from <span style="color:#d14">&#34;react-router-dom&#34;</span>;
 
-<span style="color:#00a8c8">function</span> <span style="color:#75af00">HomeButton</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-  <span style="color:#00a8c8">const</span> <span style="color:#75af00">history</span> <span style="color:#f92672">=</span> <span style="color:#75af00">useHistory</span><span style="color:#111">();</span>
+<span style="color:#000;font-weight:bold">function</span> HomeButton() {
+  <span style="color:#000;font-weight:bold">const</span> history <span style="color:#000;font-weight:bold">=</span> useHistory();
 
-  <span style="color:#00a8c8">function</span> <span style="color:#75af00">handleClick</span><span style="color:#111">()</span> <span style="color:#111">{</span>
-    <span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#34;/home&#34;</span><span style="color:#111">);</span>
-  <span style="color:#111">}</span>
+  <span style="color:#000;font-weight:bold">function</span> handleClick() {
+    history.push(<span style="color:#d14">&#34;/home&#34;</span>);
+  }
 
-  <span style="color:#00a8c8">return</span> <span style="color:#111">(</span>
-    <span style="color:#f92672">&lt;</span><span style="color:#75af00">button</span> <span style="color:#75af00">type</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;button&#34;</span> <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{</span><span style="color:#75af00">handleClick</span><span style="color:#111">}</span><span style="color:#f92672">&gt;</span>
-      <span style="color:#75af00">Go</span> <span style="color:#75af00">home</span>
-    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
-  <span style="color:#111">);</span>
-<span style="color:#111">}</span>
+  <span style="color:#000;font-weight:bold">return</span> (
+    <span style="color:#000;font-weight:bold">&lt;</span>button type<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;button&#34;</span> onClick<span style="color:#000;font-weight:bold">=</span>{handleClick}<span style="color:#000;font-weight:bold">&gt;</span>
+      Go home
+    <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+  );
+}
 </code></pre></td></tr></table>
 </div>
 </div><h2 id="react-router-v4">React Router v4</h2>
@@ -88,9 +88,9 @@ The <code>withRouter</code> higher-order component will inject the <code>history
 </ol>
 </li>
 </ul>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -103,17 +103,17 @@ The <code>withRouter</code> higher-order component will inject the <code>history
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span> <span style="color:#111">{</span> <span style="color:#75af00">withRouter</span> <span style="color:#111">}</span> <span style="color:#75af00">from</span> <span style="color:#d88200">&#39;react-router-dom&#39;</span>
-<span style="color:#75715e">// this also works with react-router-native
-</span><span style="color:#75715e"></span>
-<span style="color:#00a8c8">const</span> <span style="color:#75af00">Button</span> <span style="color:#f92672">=</span> <span style="color:#75af00">withRouter</span><span style="color:#111">(({</span> <span style="color:#75af00">history</span> <span style="color:#111">})</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
-  <span style="color:#f92672">&lt;</span><span style="color:#75af00">button</span>
-    <span style="color:#75af00">type</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;button&#39;</span>
-    <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{()</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span> <span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/new-location&#39;</span><span style="color:#111">)</span> <span style="color:#111">}}</span>
-  <span style="color:#f92672">&gt;</span>
-    <span style="color:#75af00">Click</span> <span style="color:#75af00">Me</span><span style="color:#f92672">!</span>
-  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
-<span style="color:#111">))</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">import</span> { withRouter } from <span style="color:#d14">&#39;react-router-dom&#39;</span>
+<span style="color:#998;font-style:italic">// this also works with react-router-native
+</span><span style="color:#998;font-style:italic"></span>
+<span style="color:#000;font-weight:bold">const</span> Button <span style="color:#000;font-weight:bold">=</span> withRouter(({ history }) =&gt; (
+  <span style="color:#000;font-weight:bold">&lt;</span>button
+    type<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;button&#39;</span>
+    onClick<span style="color:#000;font-weight:bold">=</span>{() =&gt; { history.push(<span style="color:#d14">&#39;/new-location&#39;</span>) }}
+  <span style="color:#000;font-weight:bold">&gt;</span>
+    Click Me<span style="color:#000;font-weight:bold">!</span>
+  <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+))
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -124,9 +124,9 @@ The <code>&lt;Route&gt;</code> component isn&rsquo;t just for matching locations
 </ol>
 </li>
 </ul>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -140,18 +140,18 @@ The <code>&lt;Route&gt;</code> component isn&rsquo;t just for matching locations
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span> <span style="color:#111">{</span> <span style="color:#75af00">Route</span> <span style="color:#111">}</span> <span style="color:#75af00">from</span> <span style="color:#d88200">&#39;react-router-dom&#39;</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">import</span> { Route } from <span style="color:#d14">&#39;react-router-dom&#39;</span>
 
-<span style="color:#00a8c8">const</span> <span style="color:#75af00">Button</span> <span style="color:#f92672">=</span> <span style="color:#111">()</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
-  <span style="color:#f92672">&lt;</span><span style="color:#75af00">Route</span> <span style="color:#75af00">render</span><span style="color:#f92672">=</span><span style="color:#111">{({</span> <span style="color:#75af00">history</span><span style="color:#111">})</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
-    <span style="color:#f92672">&lt;</span><span style="color:#75af00">button</span>
-      <span style="color:#75af00">type</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;button&#39;</span>
-      <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{()</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span> <span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/new-location&#39;</span><span style="color:#111">)</span> <span style="color:#111">}}</span>
-    <span style="color:#f92672">&gt;</span>
-      <span style="color:#75af00">Click</span> <span style="color:#75af00">Me</span><span style="color:#f92672">!</span>
-    <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
-  <span style="color:#111">)}</span> <span style="color:#f92672">/&gt;</span>
-<span style="color:#111">)</span>
+<span style="color:#000;font-weight:bold">const</span> Button <span style="color:#000;font-weight:bold">=</span> () =&gt; (
+  <span style="color:#000;font-weight:bold">&lt;</span>Route render<span style="color:#000;font-weight:bold">=</span>{({ history}) =&gt; (
+    <span style="color:#000;font-weight:bold">&lt;</span>button
+      type<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;button&#39;</span>
+      onClick<span style="color:#000;font-weight:bold">=</span>{() =&gt; { history.push(<span style="color:#d14">&#39;/new-location&#39;</span>) }}
+    <span style="color:#000;font-weight:bold">&gt;</span>
+      Click Me<span style="color:#000;font-weight:bold">!</span>
+    <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+  )} <span style="color:#000;font-weight:bold">/&gt;</span>
+)
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -163,9 +163,9 @@ But you probably should not</li>
 </li>
 </ul>
 <p>The last option is one that you should only use if you feel comfortable working with React&rsquo;s <a href="https://facebook.github.io/react/docs/context.html">context</a> model. Although context is an option, it should be stressed that context is an unstable API and React has a section <a href="https://facebook.github.io/react/docs/context.html#why-not-to-use-context">Why Not To Use Context</a> in their documentation. So use at your own risk!</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -187,35 +187,35 @@ But you probably should not</li>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">const</span> <span style="color:#75af00">Button</span> <span style="color:#f92672">=</span> <span style="color:#111">(</span><span style="color:#75af00">props</span><span style="color:#111">,</span> <span style="color:#75af00">context</span><span style="color:#111">)</span> <span style="color:#111">=&gt;</span> <span style="color:#111">(</span>
-  <span style="color:#f92672">&lt;</span><span style="color:#75af00">button</span>
-    <span style="color:#75af00">type</span><span style="color:#f92672">=</span><span style="color:#d88200">&#39;button&#39;</span>
-    <span style="color:#75af00">onClick</span><span style="color:#f92672">=</span><span style="color:#111">{()</span> <span style="color:#111">=&gt;</span> <span style="color:#111">{</span>
-      <span style="color:#75715e">// context.history.push === history.push
-</span><span style="color:#75715e"></span>      <span style="color:#75af00">context</span><span style="color:#111">.</span><span style="color:#75af00">history</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/new-location&#39;</span><span style="color:#111">)</span>
-    <span style="color:#111">}}</span>
-  <span style="color:#f92672">&gt;</span>
-    <span style="color:#75af00">Click</span> <span style="color:#75af00">Me</span><span style="color:#f92672">!</span>
-  <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/button&gt;</span>
-<span style="color:#111">)</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">const</span> Button <span style="color:#000;font-weight:bold">=</span> (props, context) =&gt; (
+  <span style="color:#000;font-weight:bold">&lt;</span>button
+    type<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;button&#39;</span>
+    onClick<span style="color:#000;font-weight:bold">=</span>{() =&gt; {
+      <span style="color:#998;font-style:italic">// context.history.push === history.push
+</span><span style="color:#998;font-style:italic"></span>      context.history.push(<span style="color:#d14">&#39;/new-location&#39;</span>)
+    }}
+  <span style="color:#000;font-weight:bold">&gt;</span>
+    Click Me<span style="color:#000;font-weight:bold">!</span>
+  <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+)
 
 
-<span style="color:#75715e">// you need to specify the context type so that it
-</span><span style="color:#75715e">// is available within the component
-</span><span style="color:#75715e"></span><span style="color:#75af00">Button</span><span style="color:#111">.</span><span style="color:#75af00">contextTypes</span> <span style="color:#f92672">=</span> <span style="color:#111">{</span>
-  <span style="color:#75af00">history</span><span style="color:#f92672">:</span> <span style="color:#75af00">React</span><span style="color:#111">.</span><span style="color:#75af00">PropTypes</span><span style="color:#111">.</span><span style="color:#75af00">shape</span><span style="color:#111">({</span>
-    <span style="color:#75af00">push</span><span style="color:#f92672">:</span> <span style="color:#75af00">React</span><span style="color:#111">.</span><span style="color:#75af00">PropTypes</span><span style="color:#111">.</span><span style="color:#75af00">func</span><span style="color:#111">.</span><span style="color:#75af00">isRequired</span>
-  <span style="color:#111">})</span>
-<span style="color:#111">}</span>
+<span style="color:#998;font-style:italic">// you need to specify the context type so that it
+</span><span style="color:#998;font-style:italic">// is available within the component
+</span><span style="color:#998;font-style:italic"></span>Button.contextTypes <span style="color:#000;font-weight:bold">=</span> {
+  history<span style="color:#000;font-weight:bold">:</span> React.PropTypes.shape({
+    push<span style="color:#000;font-weight:bold">:</span> React.PropTypes.func.isRequired
+  })
+}
 </code></pre></td></tr></table>
 </div>
 </div><p>1 and 2 are the simplest choices to implement, so for most use cases, they are your best bets.</p>
 <ul>
 <li>1、直接点击跳转页面：</li>
 </ul>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
@@ -224,55 +224,55 @@ But you probably should not</li>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 方法一：
-</span><span style="color:#75715e"></span>
-<span style="color:#f92672">&lt;</span><span style="color:#75af00">a</span> <span style="color:#75af00">href</span><span style="color:#f92672">=</span><span style="color:#d88200">&#34;跳转路径&gt;点击跳转&lt;/a&gt;
-</span><span style="color:#d88200">
-</span><span style="color:#d88200">// 方法二：
-</span><span style="color:#d88200">
-</span><span style="color:#d88200">&lt;Link to=&#34;</span><span style="color:#75af00">跳转路径</span><span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#75af00">点击跳转</span><span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/Link&gt;</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#998;font-style:italic">// 方法一：
+</span><span style="color:#998;font-style:italic"></span>
+<span style="color:#000;font-weight:bold">&lt;</span>a href<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;跳转路径&gt;点击跳转&lt;/a&gt;
+</span><span style="color:#d14">
+</span><span style="color:#d14">// 方法二：
+</span><span style="color:#d14">
+</span><span style="color:#d14">&lt;Link to=&#34;</span>跳转路径<span style="color:#a61717;background-color:#e3d2d2">&#34;</span><span style="color:#000;font-weight:bold">&gt;</span>点击跳转<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/Link&gt;</span>
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>2、点击按钮之后跳转：</li>
 </ul>
 <p>引入：</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span> <span style="color:#111">{</span> <span style="color:#75af00">hashHistory</span> <span style="color:#111">}</span> <span style="color:#75af00">from</span> <span style="color:#d88200">&#39;react-router&#39;</span><span style="color:#111">;</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">import</span> { hashHistory } from <span style="color:#d14">&#39;react-router&#39;</span>;
 
-<span style="color:#75715e">// 在方法里面加入：
-</span><span style="color:#75715e"></span><span style="color:#75af00">hashHistory</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;跳转路径&#39;</span><span style="color:#111">)</span>
+<span style="color:#998;font-style:italic">// 在方法里面加入：
+</span><span style="color:#998;font-style:italic"></span>hashHistory.push(<span style="color:#d14">&#39;跳转路径&#39;</span>)
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>3、browserHistory带参数跳转</li>
 </ul>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">import</span><span style="color:#111">{</span><span style="color:#75af00">browserHistory</span><span style="color:#111">}</span><span style="color:#75af00">from</span><span style="color:#d88200">&#39;dva/router&#39;</span><span style="color:#111">;</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">import</span>{browserHistory}from<span style="color:#d14">&#39;dva/router&#39;</span>;
 
-<span style="color:#75af00">browserHistory</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">(</span><span style="color:#d88200">&#39;/orders/orderdetail?oderId=&#39;</span><span style="color:#f92672">+</span><span style="color:#75af00">item</span><span style="color:#111">.</span><span style="color:#75af00">order</span><span style="color:#111">);</span>
+browserHistory.push(<span style="color:#d14">&#39;/orders/orderdetail?oderId=&#39;</span><span style="color:#000;font-weight:bold">+</span>item.order);
 </code></pre></td></tr></table>
 </div>
 </div><p>在router里面设置路径的时候不需要加入参数</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">path</span><span style="color:#f92672">:</span><span style="color:#d88200">&#39;orders/orderdetail&#39;</span><span style="color:#111">,</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">path<span style="color:#000;font-weight:bold">:</span><span style="color:#d14">&#39;orders/orderdetail&#39;</span>,
 </code></pre></td></tr></table>
 </div>
 </div><ul>
@@ -291,43 +291,43 @@ location.search | 设置或获取 href 属性中跟在问号后面的部分。</
 <ul>
 <li>1、不带参数跳转：</li>
 </ul>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">dispatch</span><span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">({</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">dispatch(routerRedux.push({
 
-            <span style="color:#75af00">pathname</span> <span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/couponDetail&#39;</span><span style="color:#111">,</span>
+            pathname <span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;/couponDetail&#39;</span>,
 
-   <span style="color:#111">}))</span>
+   }))
 </code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>2、带参数跳转</li>
 </ul>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">dispatch</span><span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">push</span><span style="color:#111">({</span> <span style="color:#75af00">pathname</span> <span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/couponDetail&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">query</span><span style="color:#f92672">:</span><span style="color:#75af00">要携带的参数object</span> <span style="color:#111">}))</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">dispatch(routerRedux.push({ pathname <span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;/couponDetail&#39;</span>, query<span style="color:#000;font-weight:bold">:</span>要携带的参数object }))
 </code></pre></td></tr></table>
 </div>
 </div><p>注意：通过location.query.参数字段来获取参数值</p>
 <ul>
 <li>3、在effect里面跳转</li>
 </ul>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#00a8c8">yield</span> <span style="color:#75af00">put</span> <span style="color:#111">(</span><span style="color:#75af00">routerRedux</span><span style="color:#111">.</span><span style="color:#75af00">replace</span><span style="color:#111">({</span> <span style="color:#75af00">pathname</span><span style="color:#f92672">:</span> <span style="color:#d88200">&#39;/domains/buy/pay&#39;</span><span style="color:#111">,</span> <span style="color:#75af00">query</span><span style="color:#f92672">:</span> <span style="color:#75af00">payload</span> <span style="color:#111">}));</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">yield</span> put (routerRedux.replace({ pathname<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;/domains/buy/pay&#39;</span>, query<span style="color:#000;font-weight:bold">:</span> payload }));
 </code></pre></td></tr></table>
 </div>
 </div></div>

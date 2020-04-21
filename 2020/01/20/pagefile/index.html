@@ -32,9 +32,9 @@
       </div>
   </div>
 <div class="content">
-  <div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+  <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -48,18 +48,18 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#75af00">#</span> <span style="color:#75af00">查看当前设置</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">查看当前设置</span>
 
-<span style="color:#75af00">wmic</span> <span style="color:#75af00">pagefile</span> <span style="color:#75af00">list</span> <span style="color:#111">/format:list</span>
+<span style="color:#900;font-weight:bold">wmic</span> <span style="color:#900;font-weight:bold">pagefile</span> <span style="color:#900;font-weight:bold">list</span> <span style="color:#008080">/format:list</span>
 
-<span style="color:#75af00">#</span> <span style="color:#75af00">取消自动管理分页文件大小</span>
-<span style="color:#75af00">wmic</span> <span style="color:#75af00">computersystem</span> <span style="color:#75af00">where</span> <span style="color:#75af00">name=&#34;</span><span style="color:#75715e">%computername%&#34; set AutomaticManagedPagefile=False
-</span><span style="color:#75715e"></span>
-<span style="color:#75af00">#</span> <span style="color:#75af00">修改页面文件大小</span> <span style="color:#75af00">最小1024MB，最大4096MB</span>
-<span style="color:#75af00">wmic</span> <span style="color:#75af00">pagefileset</span> <span style="color:#75af00">where</span> <span style="color:#75af00">name=&#34;C:\\pagefile.sys&#34;</span> <span style="color:#75af00">set</span> <span style="color:#75af00">InitialSize=1024,MaximumSize=4096</span>
+<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">取消自动管理分页文件大小</span>
+<span style="color:#900;font-weight:bold">wmic</span> <span style="color:#900;font-weight:bold">computersystem</span> <span style="color:#900;font-weight:bold">where</span> <span style="color:#900;font-weight:bold">name=&#34;</span><span style="color:#998;font-style:italic">%computername%&#34; set AutomaticManagedPagefile=False
+</span><span style="color:#998;font-style:italic"></span>
+<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">修改页面文件大小</span> <span style="color:#900;font-weight:bold">最小1024MB，最大4096MB</span>
+<span style="color:#900;font-weight:bold">wmic</span> <span style="color:#900;font-weight:bold">pagefileset</span> <span style="color:#900;font-weight:bold">where</span> <span style="color:#900;font-weight:bold">name=&#34;C:\\pagefile.sys&#34;</span> <span style="color:#900;font-weight:bold">set</span> <span style="color:#900;font-weight:bold">InitialSize=1024,MaximumSize=4096</span>
 
-<span style="color:#75af00">#</span> <span style="color:#75af00">重启生效</span>
-<span style="color:#75af00">shutdown</span> <span style="color:#75af00">-r</span> <span style="color:#75af00">-t</span> <span style="color:#ae81ff">0</span>
+<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">重启生效</span>
+<span style="color:#900;font-weight:bold">shutdown</span> <span style="color:#900;font-weight:bold">-r</span> <span style="color:#900;font-weight:bold">-t</span> <span style="color:#099">0</span>
 </code></pre></td></tr></table>
 </div>
 </div></div>

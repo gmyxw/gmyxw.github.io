@@ -34,9 +34,9 @@
 <div class="content">
   <p>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。</p>
 <p>以下为批处理自动关闭netbios脚本:</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -50,18 +50,18 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bat" data-lang="bat"><span style="color:#111">@</span><span style="color:#00a8c8">echo</span> off 
-<span style="color:#75715e">rem off_netbios_Self_Del</span>
-<span style="color:#00a8c8">for</span> <span style="color:#00a8c8">/L</span> <span style="color:#8045ff">%%</span>a <span style="color:#00a8c8">in</span> <span style="color:#111">(</span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">20</span><span style="color:#111">)</span> <span style="color:#00a8c8">do</span> <span style="color:#111">(</span>
-   wmic nicconfig where index=&#39;<span style="color:#8045ff">%%</span>a&#39; call settcpipnetbios 2
-<span style="color:#111">)</span>
-<span style="color:#00a8c8">cd</span> /d <span style="color:#111">%~dp0</span>
-  <span style="color:#00a8c8">if</span> <span style="color:#00a8c8">exist</span> one_time.cmd <span style="color:#111">(</span>
-  <span style="color:#00a8c8">del</span> /f /q <span style="color:#111">%0</span>
-  <span style="color:#00a8c8">exit</span>
-<span style="color:#111">)</span>
-<span style="color:#00a8c8">rename</span> <span style="color:#111">%0</span> one_time.cmd
-<span style="color:#00a8c8">exit</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bat" data-lang="bat">@<span style="color:#000;font-weight:bold">echo</span> off 
+<span style="color:#998;font-style:italic">rem off_netbios_Self_Del</span>
+<span style="color:#000;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">/L</span> <span style="color:#d14">%%</span>a <span style="color:#000;font-weight:bold">in</span> (<span style="color:#099">1</span>,<span style="color:#099">1</span>,<span style="color:#099">20</span>) <span style="color:#000;font-weight:bold">do</span> (
+   wmic nicconfig where index=&#39;<span style="color:#d14">%%</span>a&#39; call settcpipnetbios 2
+)
+<span style="color:#000;font-weight:bold">cd</span> /d <span style="color:#008080">%~dp0</span>
+  <span style="color:#000;font-weight:bold">if</span> <span style="color:#000;font-weight:bold">exist</span> one_time.cmd (
+  <span style="color:#000;font-weight:bold">del</span> /f /q <span style="color:#008080">%0</span>
+  <span style="color:#000;font-weight:bold">exit</span>
+)
+<span style="color:#000;font-weight:bold">rename</span> <span style="color:#008080">%0</span> one_time.cmd
+<span style="color:#000;font-weight:bold">exit</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>功能:

@@ -35,9 +35,9 @@
   <p>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 <code>/generalize</code> 选项的 <code>Sysprep</code> 命令，即使其他计算机具有相同的硬件配置。<code>Sysprep /generalize</code> 命令从 Windows 安装删除唯一性信息，这使得你可以在不同的计算机上重复使用映像。下次启动 Windows 映像时，将运行 specialize 配置阶段。</p>
 <p>Sysprep 命令行选项
 下列命令行选项可用于 Sysprep：</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -50,17 +50,17 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#75af00">Sysprep.exe</span> <span style="color:#111">[</span><span style="color:#111">/oobe</span> <span style="color:#75af00">|</span> <span style="color:#111">/audit</span><span style="color:#111">]</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">Sysprep.exe</span> [<span style="color:#008080">/oobe</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#008080">/audit</span>]
 
-<span style="color:#111">[</span><span style="color:#111">/generalize</span><span style="color:#111">]</span>
+[<span style="color:#008080">/generalize</span>]
 
-<span style="color:#111">[</span><span style="color:#111">/mode:vm</span><span style="color:#111">]</span>
+[<span style="color:#008080">/mode:vm</span>]
 
-<span style="color:#111">[</span><span style="color:#111">/reboot</span> <span style="color:#75af00">|</span> <span style="color:#111">/shutdown</span> <span style="color:#75af00">|</span> <span style="color:#111">/quit</span><span style="color:#111">]</span>
+[<span style="color:#008080">/reboot</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#008080">/shutdown</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#008080">/quit</span>]
 
-<span style="color:#111">[</span><span style="color:#111">/quiet</span><span style="color:#111">]</span>
+[<span style="color:#008080">/quiet</span>]
 
-<span style="color:#111">[</span><span style="color:#111">/unattend:</span><span style="color:#111">&lt;</span><span style="color:#75af00">answerfile</span><span style="color:#111">&gt;]</span>
+[<span style="color:#008080">/unattend:</span>&lt;<span style="color:#900;font-weight:bold">answerfile</span>&gt;]
 </code></pre></td></tr></table>
 </div>
 </div><p>下表列出了 Sysprep 命令行选项：</p>
@@ -136,16 +136,16 @@
 <h2 id="grant-ability-to-modify-file">Grant ability to modify file:</h2>
 <p><code>icacls C:\Windows\System32\spopk.dll /Grant Administrators:f</code></p>
 <h1 id="预设appx删除">预设appx删除</h1>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#75af00">Get-AppxProvisionedPackage</span> <span style="color:#75af00">-online</span> <span style="color:#75af00">|</span> <span style="color:#75af00">Out-GridView</span> <span style="color:#75af00">-PassThru</span> <span style="color:#75af00">|</span> <span style="color:#75af00">Remove-AppxProvisionedPackage</span> <span style="color:#75af00">-online</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">Get-AppxProvisionedPackage</span> <span style="color:#900;font-weight:bold">-online</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#900;font-weight:bold">Out-GridView</span> <span style="color:#900;font-weight:bold">-PassThru</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#900;font-weight:bold">Remove-AppxProvisionedPackage</span> <span style="color:#900;font-weight:bold">-online</span>
 
-<span style="color:#75af00">Get-AppxPackage</span> <span style="color:#75af00">-AllUsers</span> <span style="color:#75af00">|</span> <span style="color:#75af00">Out-GridView</span> <span style="color:#75af00">-PassThru</span> <span style="color:#75af00">|</span> <span style="color:#75af00">Remove-AppxPackage</span>
+<span style="color:#900;font-weight:bold">Get-AppxPackage</span> <span style="color:#900;font-weight:bold">-AllUsers</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#900;font-weight:bold">Out-GridView</span> <span style="color:#900;font-weight:bold">-PassThru</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#900;font-weight:bold">Remove-AppxPackage</span>
 </code></pre></td></tr></table>
 </div>
 </div><h1 id="from">From</h1>

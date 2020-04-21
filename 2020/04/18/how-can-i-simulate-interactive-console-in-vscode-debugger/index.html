@@ -40,9 +40,9 @@ It has a possible workaround, using remote debug + vscode task, but that is not 
 </blockquote>
 <p>It has a possible workaround, using remote debug + vscode task, but that is not trivial.</p>
 <p>launch.json</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -61,29 +61,29 @@ It has a possible workaround, using remote debug + vscode task, but that is not 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#111">{</span>
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">Use</span> <span style="color:#960050;background-color:#1e0010">IntelliSense</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">learn</span> <span style="color:#960050;background-color:#1e0010">about</span> <span style="color:#960050;background-color:#1e0010">possible</span> <span style="color:#960050;background-color:#1e0010">attributes.</span>
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">Hover</span> <span style="color:#960050;background-color:#1e0010">to</span> <span style="color:#960050;background-color:#1e0010">view</span> <span style="color:#960050;background-color:#1e0010">descriptions</span> <span style="color:#960050;background-color:#1e0010">of</span> <span style="color:#960050;background-color:#1e0010">existing</span> <span style="color:#960050;background-color:#1e0010">attributes.</span>
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">For</span> <span style="color:#960050;background-color:#1e0010">more</span> <span style="color:#960050;background-color:#1e0010">information,</span> <span style="color:#960050;background-color:#1e0010">visit:</span> <span style="color:#960050;background-color:#1e0010">https://go.microsoft.com/fwlink/?linkid=830387</span>
-    <span style="color:#f92672">&#34;version&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;0.2.0&#34;</span><span style="color:#111">,</span>
-    <span style="color:#f92672">&#34;configurations&#34;</span><span style="color:#111">:</span> <span style="color:#111">[</span>
-        <span style="color:#111">{</span>
-            <span style="color:#f92672">&#34;name&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;Launch&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;type&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;go&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;request&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;attach&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;mode&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;remote&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;remotePath&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;${workspaceFolder}&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;port&#34;</span><span style="color:#111">:</span> <span style="color:#ae81ff">4247</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;host&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;127.0.0.1&#34;</span><span style="color:#111">,</span>
-        <span style="color:#111">}</span>
-    <span style="color:#111">]</span>
-<span style="color:#111">}</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#a61717;background-color:#e3d2d2">Use</span> <span style="color:#a61717;background-color:#e3d2d2">IntelliSense</span> <span style="color:#a61717;background-color:#e3d2d2">to</span> <span style="color:#a61717;background-color:#e3d2d2">learn</span> <span style="color:#a61717;background-color:#e3d2d2">about</span> <span style="color:#a61717;background-color:#e3d2d2">possible</span> <span style="color:#a61717;background-color:#e3d2d2">attributes.</span>
+    <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#a61717;background-color:#e3d2d2">Hover</span> <span style="color:#a61717;background-color:#e3d2d2">to</span> <span style="color:#a61717;background-color:#e3d2d2">view</span> <span style="color:#a61717;background-color:#e3d2d2">descriptions</span> <span style="color:#a61717;background-color:#e3d2d2">of</span> <span style="color:#a61717;background-color:#e3d2d2">existing</span> <span style="color:#a61717;background-color:#e3d2d2">attributes.</span>
+    <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#a61717;background-color:#e3d2d2">For</span> <span style="color:#a61717;background-color:#e3d2d2">more</span> <span style="color:#a61717;background-color:#e3d2d2">information,</span> <span style="color:#a61717;background-color:#e3d2d2">visit:</span> <span style="color:#a61717;background-color:#e3d2d2">https://go.microsoft.com/fwlink/?linkid=830387</span>
+    <span style="color:#000080">&#34;version&#34;</span>: <span style="color:#d14">&#34;0.2.0&#34;</span>,
+    <span style="color:#000080">&#34;configurations&#34;</span>: [
+        {
+            <span style="color:#000080">&#34;name&#34;</span>: <span style="color:#d14">&#34;Launch&#34;</span>,
+            <span style="color:#000080">&#34;type&#34;</span>: <span style="color:#d14">&#34;go&#34;</span>,
+            <span style="color:#000080">&#34;request&#34;</span>: <span style="color:#d14">&#34;attach&#34;</span>,
+            <span style="color:#000080">&#34;mode&#34;</span>: <span style="color:#d14">&#34;remote&#34;</span>,
+            <span style="color:#000080">&#34;remotePath&#34;</span>: <span style="color:#d14">&#34;${workspaceFolder}&#34;</span>,
+            <span style="color:#000080">&#34;port&#34;</span>: <span style="color:#099">4247</span>,
+            <span style="color:#000080">&#34;host&#34;</span>: <span style="color:#d14">&#34;127.0.0.1&#34;</span>,
+        }
+    ]
+}
 </code></pre></td></tr></table>
 </div>
 </div><p>tasks.json</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -120,41 +120,41 @@ It has a possible workaround, using remote debug + vscode task, but that is not 
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#111">{</span>
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">See</span> <span style="color:#960050;background-color:#1e0010">https://go.microsoft.com/fwlink/?LinkId=733558</span>
-    <span style="color:#960050;background-color:#1e0010">//</span> <span style="color:#960050;background-color:#1e0010">for</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">documentation</span> <span style="color:#960050;background-color:#1e0010">about</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">tasks.json</span> <span style="color:#960050;background-color:#1e0010">format</span>
-    <span style="color:#f92672">&#34;version&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;2.0.0&#34;</span><span style="color:#111">,</span>
-    <span style="color:#f92672">&#34;tasks&#34;</span><span style="color:#111">:</span> <span style="color:#111">[</span>
-        <span style="color:#111">{</span>
-            <span style="color:#f92672">&#34;label&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;startgggbdebug&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;type&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;shell&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;command&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;cd ${workspaceFolder} &amp;&amp; dlv debug --headless --listen :4247 --api-version=2&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;group&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
-                <span style="color:#f92672">&#34;kind&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;build&#34;</span><span style="color:#111">,</span>
-                <span style="color:#f92672">&#34;isDefault&#34;</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span>
-            <span style="color:#111">},</span>
-            <span style="color:#f92672">&#34;problemMatcher&#34;</span><span style="color:#111">:</span> <span style="color:#111">[</span>
-                <span style="color:#d88200">&#34;$go&#34;</span>
-            <span style="color:#111">]</span>
-        <span style="color:#111">},</span>
-        <span style="color:#111">{</span>
-            <span style="color:#f92672">&#34;label&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;killgggbdebug&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;type&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;shell&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;command&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;pkill -f --exact \&#34;dlv debug --headless --listen :4247 --api-version=2\&#34;&#34;</span><span style="color:#111">,</span>
-            <span style="color:#f92672">&#34;presentation&#34;</span><span style="color:#111">:</span> <span style="color:#111">{</span>
-                <span style="color:#f92672">&#34;echo&#34;</span><span style="color:#111">:</span> <span style="color:#00a8c8">true</span><span style="color:#111">,</span>
-                <span style="color:#f92672">&#34;reveal&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;never&#34;</span><span style="color:#111">,</span>
-                <span style="color:#f92672">&#34;focus&#34;</span><span style="color:#111">:</span> <span style="color:#00a8c8">false</span><span style="color:#111">,</span>
-                <span style="color:#f92672">&#34;panel&#34;</span><span style="color:#111">:</span> <span style="color:#d88200">&#34;shared&#34;</span><span style="color:#111">,</span>
-                <span style="color:#f92672">&#34;showReuseMessage&#34;</span><span style="color:#111">:</span> <span style="color:#00a8c8">false</span><span style="color:#111">,</span>
-                <span style="color:#f92672">&#34;clear&#34;</span><span style="color:#111">:</span> <span style="color:#00a8c8">false</span>
-            <span style="color:#111">},</span>
-            <span style="color:#f92672">&#34;problemMatcher&#34;</span><span style="color:#111">:</span> <span style="color:#111">[</span>
-                <span style="color:#d88200">&#34;$go&#34;</span>
-            <span style="color:#111">]</span>
-        <span style="color:#111">}</span>
-    <span style="color:#111">]</span>
-<span style="color:#111">}</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#a61717;background-color:#e3d2d2">See</span> <span style="color:#a61717;background-color:#e3d2d2">https://go.microsoft.com/fwlink/?LinkId=733558</span>
+    <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#a61717;background-color:#e3d2d2">for</span> <span style="color:#a61717;background-color:#e3d2d2">the</span> <span style="color:#a61717;background-color:#e3d2d2">documentation</span> <span style="color:#a61717;background-color:#e3d2d2">about</span> <span style="color:#a61717;background-color:#e3d2d2">the</span> <span style="color:#a61717;background-color:#e3d2d2">tasks.json</span> <span style="color:#a61717;background-color:#e3d2d2">format</span>
+    <span style="color:#000080">&#34;version&#34;</span>: <span style="color:#d14">&#34;2.0.0&#34;</span>,
+    <span style="color:#000080">&#34;tasks&#34;</span>: [
+        {
+            <span style="color:#000080">&#34;label&#34;</span>: <span style="color:#d14">&#34;startgggbdebug&#34;</span>,
+            <span style="color:#000080">&#34;type&#34;</span>: <span style="color:#d14">&#34;shell&#34;</span>,
+            <span style="color:#000080">&#34;command&#34;</span>: <span style="color:#d14">&#34;cd ${workspaceFolder} &amp;&amp; dlv debug --headless --listen :4247 --api-version=2&#34;</span>,
+            <span style="color:#000080">&#34;group&#34;</span>: {
+                <span style="color:#000080">&#34;kind&#34;</span>: <span style="color:#d14">&#34;build&#34;</span>,
+                <span style="color:#000080">&#34;isDefault&#34;</span>: <span style="color:#000;font-weight:bold">true</span>
+            },
+            <span style="color:#000080">&#34;problemMatcher&#34;</span>: [
+                <span style="color:#d14">&#34;$go&#34;</span>
+            ]
+        },
+        {
+            <span style="color:#000080">&#34;label&#34;</span>: <span style="color:#d14">&#34;killgggbdebug&#34;</span>,
+            <span style="color:#000080">&#34;type&#34;</span>: <span style="color:#d14">&#34;shell&#34;</span>,
+            <span style="color:#000080">&#34;command&#34;</span>: <span style="color:#d14">&#34;pkill -f --exact \&#34;dlv debug --headless --listen :4247 --api-version=2\&#34;&#34;</span>,
+            <span style="color:#000080">&#34;presentation&#34;</span>: {
+                <span style="color:#000080">&#34;echo&#34;</span>: <span style="color:#000;font-weight:bold">true</span>,
+                <span style="color:#000080">&#34;reveal&#34;</span>: <span style="color:#d14">&#34;never&#34;</span>,
+                <span style="color:#000080">&#34;focus&#34;</span>: <span style="color:#000;font-weight:bold">false</span>,
+                <span style="color:#000080">&#34;panel&#34;</span>: <span style="color:#d14">&#34;shared&#34;</span>,
+                <span style="color:#000080">&#34;showReuseMessage&#34;</span>: <span style="color:#000;font-weight:bold">false</span>,
+                <span style="color:#000080">&#34;clear&#34;</span>: <span style="color:#000;font-weight:bold">false</span>
+            },
+            <span style="color:#000080">&#34;problemMatcher&#34;</span>: [
+                <span style="color:#d14">&#34;$go&#34;</span>
+            ]
+        }
+    ]
+}
 </code></pre></td></tr></table>
 </div>
 </div></div>
