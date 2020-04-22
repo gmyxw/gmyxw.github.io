@@ -6,10 +6,19 @@
     <description>Recent content in Tags on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Sat, 18 Apr 2020 00:06:48 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2020 00:02:33 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>linux</title>
+      <link>https://sy123.ml/tags/linux/</link>
+      <pubDate>Thu, 23 Apr 2020 00:02:33 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/linux/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>golang</title>
@@ -26,15 +35,6 @@
       <pubDate>Sat, 18 Apr 2020 00:06:48 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/vscode/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>linux</title>
-      <link>https://sy123.ml/tags/linux/</link>
-      <pubDate>Wed, 15 Apr 2020 07:11:46 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tags/linux/</guid>
       <description></description>
     </item>
     

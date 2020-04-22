@@ -6,10 +6,20 @@
     <description>Recent content in linux on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Wed, 15 Apr 2020 07:11:46 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2020 00:02:33 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Problems With Hardware Acceleration Environment Variables</title>
+      <link>https://sy123.ml/2020/04/23/problems-with-hardware-acceleration-environment-variables/</link>
+      <pubDate>Thu, 23 Apr 2020 00:02:33 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/04/23/problems-with-hardware-acceleration-environment-variables/</guid>
+      <description>问题 1 2 3 4  ~ ❯ vainfo libva error: /usr/lib/dri/iHD_drv_video.so init failed vaInitialize failed with error code 1 (operation failed),exit   解决方法 Everything works as it is supposed to by just adding:
+1 2 3 4  LIBVA_DRIVER_NAME=i965 # or if using the intel-media-driver which I prefer for newer hardware then it is: LIBVA_DRIVER_NAME=iHD   also for intel-media-driver you may want to read the readme and enable guc and huc.</description>
+    </item>
     
     <item>
       <title>解决&#39;ERROR: The certificate of `github.com’ is not trusted.&#39;问题</title>
