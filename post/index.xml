@@ -6,10 +6,19 @@
     <description>Recent content in Posts on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Thu, 23 Apr 2020 00:02:33 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 25 Apr 2020 01:15:51 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Thunar sftp.desktop</title>
+      <link>https://sy123.ml/2020/04/25/thunar-sftp.desktop/</link>
+      <pubDate>Sat, 25 Apr 2020 01:15:51 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/04/25/thunar-sftp.desktop/</guid>
+      <description>1 2 3 4 5 6  [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store   </description>
+    </item>
     
     <item>
       <title>Problems With Hardware Acceleration Environment Variables</title>
