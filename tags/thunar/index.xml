@@ -17,7 +17,7 @@
       <pubDate>Sat, 25 Apr 2020 01:15:51 +0800</pubDate>
       
       <guid>https://sy123.ml/2020/04/25/thunar-sftp.desktop/</guid>
-      <description>1 2 3 4 5 6  [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store   </description>
+      <description>1 2 3 4 5 6  [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store   1  ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -f alsa -i hw:1,1,0 -f alsa -i hw:1,1,1 -filter_complex amerge output.mkv   </description>
     </item>
     
   </channel>
