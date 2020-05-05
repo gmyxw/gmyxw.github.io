@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="Zhili">
+<meta name="author" content="zhili">
 <meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
     ">
 <meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
 <meta name="referrer" content="always">
-<title>iptables 禁止端口和开放端口 - sy123.ml</title>
+<title>iptables 禁止端口和开放端口 - zhili</title>
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <header>
   <div>
-    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+    <h1><a href="https://sy123.ml/">zhili</a></h1>
   </div>
   <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
 </header>
@@ -346,9 +346,9 @@ ACCEPT     tcp &ndash; 0.0.0.0/0            0.0.0.0/0          tcp spt:20
 ACCEPT     tcp &ndash; 0.0.0.0/0            0.0.0.0/0          tcp spts:30001:31000</p>
 <p>这是我为了演示ftp特殊端口做的简单规则，大家可以添加一些对数据包的验证
 例如 -m state &ndash;state ESTABLISHED,RELATED 等等要求更加高的验证</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -364,18 +364,18 @@ ACCEPT     tcp &ndash; 0.0.0.0/0            0.0.0.0/0          tcp spts:30001:31
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#Flush existing rules</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic">#Flush existing rules</span>
 iptables -F
-<span style="color:#75715e"># Set up default DROP rule for eth0</span>
+<span style="color:#998;font-style:italic"># Set up default DROP rule for eth0</span>
 iptables -P INPUT DROP
-<span style="color:#75715e"># Allow existing connections to continue</span>
+<span style="color:#998;font-style:italic"># Allow existing connections to continue</span>
 iptables -A INPUT -i eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
-<span style="color:#75715e"># Accept everything from the 192.168.1.x network</span>
+<span style="color:#998;font-style:italic"># Accept everything from the 192.168.1.x network</span>
 iptables -A INPUT -i eth0 -s 192.168.1.0/24 -j ACCEPT
-<span style="color:#75715e"># Allow connections from this host to 192.168.2.10</span>
+<span style="color:#998;font-style:italic"># Allow connections from this host to 192.168.2.10</span>
 iptables -A OUTPUT -o eth0 -d 192.168.2.10 -j ACCEPT
 
-<span style="color:#75715e">#(repeat this line as needed)</span>
+<span style="color:#998;font-style:italic">#(repeat this line as needed)</span>
 iptables -I INPUT -s &lt;allowed_ip&gt; -j ACCEPT 
 iptables -P INPUT DROP
 </code></pre></td></tr></table>
@@ -494,9 +494,9 @@ iptables -I INPUT ! -s 127.0.0.1 -j DROP
 <p>string： 可以匹配链路中出现的特定字符；
 time： 对链路的时间规则；
 limit： 对IP的并发限制；</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -539,46 +539,46 @@ limit： 对IP的并发限制；</p>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">41
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># At first you should always flush to be sure whats already defined… nothing</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># At first you should always flush to be sure whats already defined… nothing</span>
 
 iptables -F
 
-<span style="color:#75715e"># Then set the default policy of the INPUT chain to DROP if the end is reached and no rule matched:</span>
+<span style="color:#998;font-style:italic"># Then set the default policy of the INPUT chain to DROP if the end is reached and no rule matched:</span>
 
 iptables -P INPUT DROP
 
-<span style="color:#75715e"># To ensure the loopback is not affacted you should add</span>
+<span style="color:#998;font-style:italic"># To ensure the loopback is not affacted you should add</span>
 
 iptables -A INPUT -i lo -p all -j ACCEPT
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 
-<span style="color:#75715e"># to allow all traffic on the lo-if and every incomming traffic for connections</span> 
-<span style="color:#75715e"># you etablished. After that add every rule you need for</span> 
-<span style="color:#75715e"># your services (don&#39;t forget to open ssh if you need it! else you&#39;re out):</span>
+<span style="color:#998;font-style:italic"># to allow all traffic on the lo-if and every incomming traffic for connections</span> 
+<span style="color:#998;font-style:italic"># you etablished. After that add every rule you need for</span> 
+<span style="color:#998;font-style:italic"># your services (don&#39;t forget to open ssh if you need it! else you&#39;re out):</span>
 
-iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">1962</span> -j ACCEPT 
-iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">999</span> -j ACCEPT 
-iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">12020</span> -j ACCEPT 
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#099">1962</span> -j ACCEPT 
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#099">999</span> -j ACCEPT 
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#099">12020</span> -j ACCEPT 
 
-<span style="color:#75715e"># A little trick I do to keep myself and others from accidentally drilling holes into the security I finally add:</span>
+<span style="color:#998;font-style:italic"># A little trick I do to keep myself and others from accidentally drilling holes into the security I finally add:</span>
 
 iptables -A INPUT -j DROP
 
-<span style="color:#75715e"># This line matches everything for the INPUT chain and the policy should not get anything.</span> 
-<span style="color:#75715e"># advantage of this is even if you add an</span>
-<span style="color:#75715e"># ACCEPT-rule sometime after initializing your ruleset it will never become checked because</span> 
-<span style="color:#75715e"># everything is droped before. so it ensures</span> 
-<span style="color:#75715e"># you have to keep everything in one place.</span>
+<span style="color:#998;font-style:italic"># This line matches everything for the INPUT chain and the policy should not get anything.</span> 
+<span style="color:#998;font-style:italic"># advantage of this is even if you add an</span>
+<span style="color:#998;font-style:italic"># ACCEPT-rule sometime after initializing your ruleset it will never become checked because</span> 
+<span style="color:#998;font-style:italic"># everything is droped before. so it ensures</span> 
+<span style="color:#998;font-style:italic"># you have to keep everything in one place.</span>
 
-<span style="color:#75715e"># For your question the whole thing looks like this in summary:</span>
+<span style="color:#998;font-style:italic"># For your question the whole thing looks like this in summary:</span>
 
 iptables -F
 iptables -P INPUT DROP
 iptables -A INPUT -i lo -p all -j ACCEPT
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">1962</span> -j ACCEPT 
-iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">999</span> -j ACCEPT 
-iptables -A INPUT -p tcp -m tcp --dport <span style="color:#ae81ff">12020</span> -j ACCEPT 
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#099">1962</span> -j ACCEPT 
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#099">999</span> -j ACCEPT 
+iptables -A INPUT -p tcp -m tcp --dport <span style="color:#099">12020</span> -j ACCEPT 
 iptables -A INPUT -j DROP
 </code></pre></td></tr></table>
 </div>
@@ -586,20 +586,23 @@ iptables -A INPUT -j DROP
 </div>
 <div class="disqus">
   <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
 <script>
-
-
-
-
-
-(function() { 
-var d = document, s = d.createElement('script');
-s.src = 'https://sy123-ml.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                             
 </div>
 
@@ -608,7 +611,7 @@ s.setAttribute('data-timestamp', +new Date());
 <footer>
   <div>
     <div>
-      2007-2020 Zhili.</div>
+      2007-2020 zhili.</div>
   </div>
 </footer>
 </body>

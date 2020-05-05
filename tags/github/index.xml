@@ -13,10 +13,10 @@
     
     <item>
       <title>git clone 指定分支拉代码</title>
-      <link>https://sy123.ml/2020/02/10/git-clone-branch/</link>
+      <link>https://sy123.ml/2020/02/10/git-clone-%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF%E6%8B%89%E4%BB%A3%E7%A0%81/</link>
       <pubDate>Mon, 10 Feb 2020 13:07:08 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/10/git-clone-branch/</guid>
+      <guid>https://sy123.ml/2020/02/10/git-clone-%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF%E6%8B%89%E4%BB%A3%E7%A0%81/</guid>
       <description>git clone 不指定分支 1  git clone http://10.1.1.11/service/tmall-service.git   git clone 指定分支 1  git clone -b dev_jk http://10.1.1.11/service/tmall-service.git   命令中：多了一个 -b dev-jk,这个dev_jk就是分支，http://10.1.1.11/service/tmall -service.git为源码的仓库地址</description>
     </item>
     

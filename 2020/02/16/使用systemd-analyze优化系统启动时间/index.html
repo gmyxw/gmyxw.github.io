@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="Zhili">
+<meta name="author" content="zhili">
 <meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
     ">
 <meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
 <meta name="referrer" content="always">
-<title>使用systemd-analyze优化系统启动时间 - sy123.ml</title>
+<title>使用systemd-analyze优化系统启动时间 - zhili</title>
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <header>
   <div>
-    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+    <h1><a href="https://sy123.ml/">zhili</a></h1>
   </div>
   <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
 </header>
@@ -114,22 +114,22 @@ systemd-analyze dot 按照 GraphViz dot(1) 格式输出单元间的依赖关系�
 </li>
 </ul>
 <h3 id="systemd-analyze实战">systemd-analyze实战</h3>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">➜~ systemd-analyze
-Startup finished in 3.220s <span style="color:#f92672">(</span>kernel<span style="color:#f92672">)</span> + 23.420s <span style="color:#f92672">(</span>userspace<span style="color:#f92672">)</span> <span style="color:#f92672">=</span> 26.641s 
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">➜~ systemd-analyze
+Startup finished in 3.220s <span style="color:#000;font-weight:bold">(</span>kernel<span style="color:#000;font-weight:bold">)</span> + 23.420s <span style="color:#000;font-weight:bold">(</span>userspace<span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">=</span> 26.641s 
 graphical.target reached after 23.111s in userspace
 </code></pre></td></tr></table>
 </div>
 </div><p>可以看到开机用了23秒以上。接下来查询下这锅应该谁背：</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -151,7 +151,7 @@ graphical.target reached after 23.111s in userspace
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">➜~ systemd-analyze blame
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">➜~ systemd-analyze blame
 21.594s NetworkManager-wait-online.service
 680ms systemd-logind.service
 587ms lvm2-monitor.service
@@ -174,9 +174,9 @@ graphical.target reached after 23.111s in userspace
 </code></pre></td></tr></table>
 </div>
 </div><p>可以看到<code>NetworkManager-wait-online.service</code>耗时 最长，花了21秒。这里的记时有可能是等待其他服务器启动的，再来看看其关联服务的启动时间：</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -193,9 +193,9 @@ graphical.target reached after 23.111s in userspace
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">➜ ~ systemd-analyze critical-chain NetworkManager-wait-online.service
-The <span style="color:#111">time</span> when unit became active or started is printed after the <span style="color:#d88200">&#34;@&#34;</span> character.
-The <span style="color:#111">time</span> the unit took to start is printed after the <span style="color:#d88200">&#34;+&#34;</span> character.
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">➜ ~ systemd-analyze critical-chain NetworkManager-wait-online.service
+The <span style="color:#0086b3">time</span> when unit became active or started is printed after the <span style="color:#d14">&#34;@&#34;</span> character.
+The <span style="color:#0086b3">time</span> the unit took to start is printed after the <span style="color:#d14">&#34;+&#34;</span> character.
  
 NetworkManager-wait-online.service +21.594s
 └─NetworkManager.service @1.398s +111ms
@@ -205,35 +205,35 @@ NetworkManager-wait-online.service +21.594s
 └─dbus.socket @1.389s
 └─sysinit.target @1.384s
 └─systemd-backlight@backlight:intel_backlight.service @1.313s +71ms
-└─system-systemd<span style="color:#8045ff">\x</span>2dbacklight.slice @1.312s
+└─system-systemd<span style="color:#d14">\x</span>2dbacklight.slice @1.312s
 └─system.slice @207ms
 └─-.slice @207ms
 </code></pre></td></tr></table>
 </div>
 </div><p>可这一看到这里它在等待其他的服务，但是也没有花21秒怎么多。</p>
 <p>发现了影响启动的服务，最简单的方式是禁用此服务：</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">➜ ~ sudo systemctl disable NetworkManager-wait-online.service
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">➜ ~ sudo systemctl disable NetworkManager-wait-online.service
 </code></pre></td></tr></table>
 </div>
 </div><p>方案二：编辑<code>/lib/systemd/system/NetworkManager-wait-online.service</code>文件，将文件中的</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">[</span>Service<span style="color:#f92672">]</span> <span style="color:#111">Type</span><span style="color:#f92672">=</span>oneshot <span style="color:#111">ExecStart</span><span style="color:#f92672">=</span>/usr/bin/nm-online -s -q --timeout<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#000;font-weight:bold">[</span>Service<span style="color:#000;font-weight:bold">]</span> <span style="color:#008080">Type</span><span style="color:#000;font-weight:bold">=</span>oneshot <span style="color:#008080">ExecStart</span><span style="color:#000;font-weight:bold">=</span>/usr/bin/nm-online -s -q --timeout<span style="color:#000;font-weight:bold">=</span><span style="color:#099">30</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>超时时间由<code>30</code>改为<code>10</code></p>
 <p>另外，我们来看下还有哪些开机启动的服务可被优化：</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -260,7 +260,7 @@ NetworkManager-wait-online.service +21.594s
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">➜ ~ systemctl list-unit-files --type<span style="color:#f92672">=</span>service <span style="color:#111">|</span> grep enabled
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">➜ ~ systemctl list-unit-files --type<span style="color:#000;font-weight:bold">=</span>service | grep enabled
 autovt@.service enabled 
 avahi-daemon.service enabled 
 bluetooth.service enabled 
@@ -318,20 +318,23 @@ ufw.service enabled
 </div>
 <div class="disqus">
   <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
 <script>
-
-
-
-
-
-(function() { 
-var d = document, s = d.createElement('script');
-s.src = 'https://sy123-ml.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                             
 </div>
 
@@ -340,7 +343,7 @@ s.setAttribute('data-timestamp', +new Date());
 <footer>
   <div>
     <div>
-      2007-2020 Zhili.</div>
+      2007-2020 zhili.</div>
   </div>
 </footer>
 </body>

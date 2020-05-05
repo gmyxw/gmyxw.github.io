@@ -6,10 +6,23 @@
     <description>Recent content in Posts on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Sat, 25 Apr 2020 01:15:51 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 05 May 2020 12:14:03 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>安装Win10提示我们无法创建新的分区，也找不到现在的分区</title>
+      <link>https://sy123.ml/2020/05/05/%E5%AE%89%E8%A3%85win10%E6%8F%90%E7%A4%BA%E6%88%91%E4%BB%AC%E6%97%A0%E6%B3%95%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E5%88%86%E5%8C%BA%E4%B9%9F%E6%89%BE%E4%B8%8D%E5%88%B0%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%88%86%E5%8C%BA/</link>
+      <pubDate>Tue, 05 May 2020 12:14:03 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/05/05/%E5%AE%89%E8%A3%85win10%E6%8F%90%E7%A4%BA%E6%88%91%E4%BB%AC%E6%97%A0%E6%B3%95%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E5%88%86%E5%8C%BA%E4%B9%9F%E6%89%BE%E4%B8%8D%E5%88%B0%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%88%86%E5%8C%BA/</guid>
+      <description>前言 系统搬来linux有两年了，今天突然发现还是需要win10用ida的，虚拟机很不方便
+解决方法 google一下在知乎想起原因:
+ 原因似乎在于windows会执着地把系统分区（大概类似于/boot）放到磁盘0（类似于/dev/sda？）上面。而这个时候磁盘0是U盘……于是傻X了……windows就是傻X解决方法，拔U盘/硬盘，从而使想装系统的盘成为磁盘0……或者直接把想装系统的盘做成安装盘，这样它也是磁盘0了&amp;gt;_&amp;laquo;https://link.zhihu.com/?target=http%3A//jingyan.baidu.com/article/2c8c281df6f2d60009252a7c.html&amp;gt;
+作者：杨微粒 链接：https://www.zhihu.com/question/21117479/answer/86745809 来源：知乎 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+ 我的虚拟机之前忘记干啥也是双系统出这问题，附加win10磁盘就完事</description>
+    </item>
     
     <item>
       <title>Thunar sftp.desktop</title>
@@ -46,10 +59,10 @@ launch.json
     
     <item>
       <title>解决&#39;ERROR: The certificate of `github.com’ is not trusted.&#39;问题</title>
-      <link>https://sy123.ml/2020/04/15/err-wget-not-trusted/</link>
+      <link>https://sy123.ml/2020/04/15/%E8%A7%A3%E5%86%B3error-the-certificate-of-github.com-is-not-trusted.%E9%97%AE%E9%A2%98/</link>
       <pubDate>Wed, 15 Apr 2020 07:11:46 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/04/15/err-wget-not-trusted/</guid>
+      <guid>https://sy123.ml/2020/04/15/%E8%A7%A3%E5%86%B3error-the-certificate-of-github.com-is-not-trusted.%E9%97%AE%E9%A2%98/</guid>
       <description>今天早上有在GITHUB下载一个脚本到VPS中的时候有出现&amp;rdquo;ERROR: The certificate of `github.com’ is not trusted.&amp;ldquo;的错误提示。应该意思是这个证书可能不被信任，反正就这个提示，正式存在的，我换了其他有HTTPS网址也无法wget下载，应该是这个问题。
 解决办法 1 2 3 4 5 6  wget --no-check-certificate github.com # 或者我们可以： apt-get install ca-certificates -y #Debian/Ubuntu yum install ca-certificates -y #CentOS   安装完毕之后应该是可以不用 no-check-certificate 参数。</description>
     </item>
@@ -90,10 +103,10 @@ It appears that this service simply waits, doing absolutely nothing, until the n
     
     <item>
       <title>word-wrap和word-break的区别</title>
-      <link>https://sy123.ml/2020/04/01/difference-between-word-wrap-and-word-break/</link>
+      <link>https://sy123.ml/2020/04/01/word-wrap%E5%92%8Cword-break%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
       <pubDate>Wed, 01 Apr 2020 00:02:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/04/01/difference-between-word-wrap-and-word-break/</guid>
+      <guid>https://sy123.ml/2020/04/01/word-wrap%E5%92%8Cword-break%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
       <description>这两个东西是什么，我相信至今还有很多人搞不清，只会死记硬背的写一个word-wrap:break-word;word-break:break-all;这样的东西来强制断句，又或者是因为这两个东西实在是太拗口了，长得又差不多，导致连背都很难背下来。
 那它们到底是什么呢？我在mozilla的官网上找到如下的解释：
 word-wrap
@@ -174,10 +187,10 @@ word..d 这个我们创造出来的单词本来应该紧接在 long 后面的，
     
     <item>
       <title>Linux中拷贝目录跳过指定文件的方法</title>
-      <link>https://sy123.ml/2020/03/20/linux-copy-directory-ignore-files/</link>
+      <link>https://sy123.ml/2020/03/20/linux%E4%B8%AD%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</link>
       <pubDate>Fri, 20 Mar 2020 13:57:01 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/20/linux-copy-directory-ignore-files/</guid>
+      <guid>https://sy123.ml/2020/03/20/linux%E4%B8%AD%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</guid>
       <description>近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也不好一一指定。普通的 cp 命令并没有排除某个文件或文件夹的参数，比较丑陋点可以 cp -r 拷贝完目录之后再去删除无用的，但如果做批量脚本操作就不爽了，经过实际试验之后暂时找到两个比较好的方法。
 使用 rsync 进行拷贝 rsync 本来是文件同步备份的工具，相对于普通的 cp 命令，rsync 在控制方面就强多了，而且 rsync 对遍历目录也支持，有 &amp;ndash;exclude 参数可以忽略指定的文件或文件夹。
 1 2  rsync -vaP --exclude=&amp;#34;.*&amp;#34; --exclude=&amp;#34;Makefile&amp;#34; dir1 /home/dir2   如上面演示的就可以排除掉隐藏文件和 Makefile 文件，-a 参数已经包含遍历处理参数 -r。
@@ -188,10 +201,10 @@ word..d 这个我们创造出来的单词本来应该紧接在 long 后面的，
     
     <item>
       <title>archlinux升级内核后，系统挂了，修复方法</title>
-      <link>https://sy123.ml/2020/03/18/module-vboxdrv-not-found-in-directory/</link>
+      <link>https://sy123.ml/2020/03/18/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</link>
       <pubDate>Wed, 18 Mar 2020 06:32:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/18/module-vboxdrv-not-found-in-directory/</guid>
+      <guid>https://sy123.ml/2020/03/18/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</guid>
       <description>今天滚完系统就没网络，startx报内核模块错误，当场裂开了，开机显示加载驱动失败，先来看看加载日志吧
 1  sudo systemctl status systemd-modules-load   报错全是类似Module Vboxdrv Not Found in Directory xx这种
 再查看下内核模块相关目录发现了端倪
@@ -228,10 +241,10 @@ Flash Player ActiveX https://fpdownload.adobe.com/get/flashplayer/distyfp/curren
     
     <item>
       <title>百度网盘扩容到100t以上</title>
-      <link>https://sy123.ml/2020/03/13/baidu-wangpan-grow/</link>
+      <link>https://sy123.ml/2020/03/13/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%A9%E5%AE%B9%E5%88%B0100t%E4%BB%A5%E4%B8%8A/</link>
       <pubDate>Fri, 13 Mar 2020 03:04:22 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/13/baidu-wangpan-grow/</guid>
+      <guid>https://sy123.ml/2020/03/13/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%A9%E5%AE%B9%E5%88%B0100t%E4%BB%A5%E4%B8%8A/</guid>
       <description> 百度网盘无限“扩容”方法这里说的扩容是非正常途径，存在一定的风险！
  操作步骤  新建一个文件夹111111 移动或转存一些文件到该文件夹111111 （假设这个文件夹占用容量是A） 删除该文件夹111111 （网盘占用容量减少A） 再新建一个同名空文件夹111111，不放入文件，直接删除。（占用容量无变化） 到回收站还原第一次删除的文件夹111111[里面有一些文件] 正常结果：还原该文件夹后，网盘使用容量应该增加A 不正常结果：网盘容量并没有增加A，也就是说，还原后的文件夹111111占用的容量A成了漏网之鱼，重复操作即可扩容 若没有复现这个bug，重新操作以上步骤 不过需要更换文件名，比如：222222，3333，234fwef，808080  使用说明 一个标准容量是5T的SVIP个人账号，要扩容100T，我们就提前在账号内存入100T的占位文件，此时系统显示使用空间为0，可用空间为5T。
  1)用户转入4T资源后，系统显示使用空间为4T，可用空间为1T。 2)用户删除4T以上的占位文件，系统又显示使用空间为0T，可用空间为5T。 3)循环1~2的操作，直到消耗完占位文件。  补充说明 如果数据被同步，网盘占用容量正常了，就需要修复操作
@@ -241,19 +254,19 @@ Flash Player ActiveX https://fpdownload.adobe.com/get/flashplayer/distyfp/curren
     
     <item>
       <title>Google Chrome 离线安装包的官方下载</title>
-      <link>https://sy123.ml/2020/03/13/chrome-standalone/</link>
+      <link>https://sy123.ml/2020/03/13/google-chrome-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD/</link>
       <pubDate>Fri, 13 Mar 2020 02:46:41 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/13/chrome-standalone/</guid>
+      <guid>https://sy123.ml/2020/03/13/google-chrome-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD/</guid>
       <description>在chrome首页的链接https://www.google.com/chrome后加上?system=true&amp;amp;standalone=1，一般默认下载稳定版，如果需要指定下载的版本就再加上&amp;amp;extra=[版本名称]（版本有stablechannel、betachannel、devchannel、canarychannel）。修改完链接后回车，就能下载离线包了。</description>
     </item>
     
     <item>
       <title>rename使用正则表达式</title>
-      <link>https://sy123.ml/2020/03/12/rename-regex/</link>
+      <link>https://sy123.ml/2020/03/12/rename%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
       <pubDate>Thu, 12 Mar 2020 22:50:06 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/12/rename-regex/</guid>
+      <guid>https://sy123.ml/2020/03/12/rename%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
       <description>前言 以前一直用类似rename &amp;quot;s/_/-/&amp;quot; *这样的命令正则替换一些文件名，不过系统切换到Archlinux后用rename一直失败，用man看了下说明才发现并不支持正则，只能这样用，并且不能全局替换
 1  rename 123 456 *   其实几乎所有情况下, rename用不到正则表达式的. 你最多不过是通过正则确定要改名的文件列表而已. 这通过管道太容易了. 例如我在shell下, 会这样使用
 1  f &amp;#39;bak$&amp;#39; |x rename &amp;#39;.bak&amp;#39; &amp;#39;&amp;#39;   在管道之前, 可以通过各种方式搭配, 来生成所需的文件列表
@@ -266,19 +279,19 @@ Flash Player ActiveX https://fpdownload.adobe.com/get/flashplayer/distyfp/curren
     
     <item>
       <title>如何在vim保存时获得sudo权限</title>
-      <link>https://sy123.ml/2020/03/12/how-does-the-vim-write-with-sudo-trick-work/</link>
+      <link>https://sy123.ml/2020/03/12/%E5%A6%82%E4%BD%95%E5%9C%A8vim%E4%BF%9D%E5%AD%98%E6%97%B6%E8%8E%B7%E5%BE%97sudo%E6%9D%83%E9%99%90/</link>
       <pubDate>Thu, 12 Mar 2020 21:30:38 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/12/how-does-the-vim-write-with-sudo-trick-work/</guid>
+      <guid>https://sy123.ml/2020/03/12/%E5%A6%82%E4%BD%95%E5%9C%A8vim%E4%BF%9D%E5%AD%98%E6%97%B6%E8%8E%B7%E5%BE%97sudo%E6%9D%83%E9%99%90/</guid>
       <description>1  :w !sudo tee %   命令:w !{cmd}，让vim执行一个外部命令{cmd}，然后把当前缓冲区的内容从stdin传入。 tee是一个把stdin保存到文件的小工具。 而%，是vim当中一个只读寄存器的名字，总保存着当前编辑文件的文件路径。 所以执行这个命令，就相当于从vim外部修改了当前编辑的文件，好完工。</description>
     </item>
     
     <item>
       <title>vim recording的使用方法</title>
-      <link>https://sy123.ml/2020/03/12/vim-recording/</link>
+      <link>https://sy123.ml/2020/03/12/vim-recording%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link>
       <pubDate>Thu, 12 Mar 2020 17:05:52 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/12/vim-recording/</guid>
+      <guid>https://sy123.ml/2020/03/12/vim-recording%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid>
       <description>使用vim时无意间触碰到q键，左下角出现“recording”这个标识，觉得好奇，遂在网上查了一下，然后这是vim的一个强大功能。他可以录 制一个宏（Macro)，在开始记录后，会记录你所有的键盘输入，包括在insert模式下的输入、正常模式下使用的各种命令等。
 具体使用：
 第一步：在正常模式下（非insert模式、非visual模式）按下q键盘
@@ -294,10 +307,10 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
     
     <item>
       <title>ts属性后面的感叹号有什么用处？</title>
-      <link>https://sy123.ml/2020/03/10/what-does-the-exclamation-point-behind-the-ts-attribute-mean/</link>
+      <link>https://sy123.ml/2020/03/10/ts%E5%B1%9E%E6%80%A7%E5%90%8E%E9%9D%A2%E7%9A%84%E6%84%9F%E5%8F%B9%E5%8F%B7%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%E5%A4%84/</link>
       <pubDate>Tue, 10 Mar 2020 14:51:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/10/what-does-the-exclamation-point-behind-the-ts-attribute-mean/</guid>
+      <guid>https://sy123.ml/2020/03/10/ts%E5%B1%9E%E6%80%A7%E5%90%8E%E9%9D%A2%E7%9A%84%E6%84%9F%E5%8F%B9%E5%8F%B7%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%E5%A4%84/</guid>
       <description>首先看一段代码
 1 2 3 4 5 6 7 8 9  import { Vue, Component, Prop } from &amp;#39;vue-property-decorator&amp;#39; @Component export default class YourComponent extends Vue { @Prop(Number) propA!: number @Prop({ default: &amp;#39;default value&amp;#39; }) propB!: string @Prop([String, Boolean]) propC: string | boolean }   这是vue组件的ts写法，仔细观察，里面有一段这样的代码@Prop(Number) propA!: number，这是什么鬼？
 查了一下ts的文档说明，原来感叹号是非null和非undefined的类型断言，所以上面的写法就是对propA这个属性进行非空断言。文档的相关说明在这里。
@@ -307,10 +320,10 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
     
     <item>
       <title>git 出现错误Could not resolve host: github.com</title>
-      <link>https://sy123.ml/2020/03/06/git-clone-not-resolve-host/</link>
+      <link>https://sy123.ml/2020/03/06/git-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AFcould-not-resolve-host-github.com/</link>
       <pubDate>Fri, 06 Mar 2020 21:36:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/06/git-clone-not-resolve-host/</guid>
+      <guid>https://sy123.ml/2020/03/06/git-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AFcould-not-resolve-host-github.com/</guid>
       <description>1 2 3  ❯ git clone https://github.com/Zhili/GameServer Cloning into &amp;#39;GameServer&amp;#39;... fatal: unable to access &amp;#39;https://github.com/Zhili/GameServer/&amp;#39;: Couldn&amp;#39;t resolve host name   (Just a little reminder) If you want the hostname also be resolved by the proxy (that means passing everything through the proxy), especially when you are cloning a gist, you can use the following setting (the key is that it uses socks5h instead of socks5):
 1  git config --global http.</description>
     </item>
@@ -327,10 +340,10 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
     
     <item>
       <title>javascript中的各种简写总结（不断更新）</title>
-      <link>https://sy123.ml/2020/02/28/javascript-shorthand/</link>
+      <link>https://sy123.ml/2020/02/28/javascript%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E7%AE%80%E5%86%99%E6%80%BB%E7%BB%93%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0/</link>
       <pubDate>Fri, 28 Feb 2020 17:09:04 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/28/javascript-shorthand/</guid>
+      <guid>https://sy123.ml/2020/02/28/javascript%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E7%AE%80%E5%86%99%E6%80%BB%E7%BB%93%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0/</guid>
       <description>在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。
 这里的简写，包括比如void 0代替undefined这类值替代，
 也包括了箭头函数替代普通函数、for循环各种写法中性能最好的这类写法替代，
@@ -366,39 +379,39 @@ Infinity替代
     
     <item>
       <title>youtube视频下载</title>
-      <link>https://sy123.ml/2020/02/27/youtube-video-download/</link>
+      <link>https://sy123.ml/2020/02/27/youtube%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD/</link>
       <pubDate>Thu, 27 Feb 2020 18:34:08 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/youtube-video-download/</guid>
+      <guid>https://sy123.ml/2020/02/27/youtube%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD/</guid>
       <description>https://y2mate.guru/en1/</description>
     </item>
     
     <item>
       <title>React关于form的取部分字段数据</title>
-      <link>https://sy123.ml/2020/02/27/react-validate/</link>
+      <link>https://sy123.ml/2020/02/27/react%E5%85%B3%E4%BA%8Eform%E7%9A%84%E5%8F%96%E9%83%A8%E5%88%86%E5%AD%97%E6%AE%B5%E6%95%B0%E6%8D%AE/</link>
       <pubDate>Thu, 27 Feb 2020 14:19:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/react-validate/</guid>
+      <guid>https://sy123.ml/2020/02/27/react%E5%85%B3%E4%BA%8Eform%E7%9A%84%E5%8F%96%E9%83%A8%E5%88%86%E5%AD%97%E6%AE%B5%E6%95%B0%E6%8D%AE/</guid>
       <description>获取查询条件的值 validateFields form.validateFields / validateFieldsAndScroll 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件
 获取表单的所有数据 1 2 3 4 5 6 7 8 9  this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; { if(err){ return; } console.log(&amp;#39;_values&amp;#39;, values); });   获取表单的部分字段数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27  this.props.form.validateFieldsAndScroll([`timeUnit${num}`, `Time${num}`,`deviceTypeId${num}`], (err, values) =&amp;gt; { if(err){ return; } console.</description>
     </item>
     
     <item>
       <title>Tippy_warning</title>
-      <link>https://sy123.ml/2020/02/27/tippy-warning/</link>
+      <link>https://sy123.ml/2020/02/27/tippy_warning/</link>
       <pubDate>Thu, 27 Feb 2020 07:03:10 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/tippy-warning/</guid>
+      <guid>https://sy123.ml/2020/02/27/tippy_warning/</guid>
       <description>I have the folowing part of code:
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19  private rootRef = React.createRef&amp;lt;HTMLDivElement&amp;gt;(); const target = ( &amp;lt;div&amp;gt; &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl&amp;#39; /&amp;gt; &amp;lt;/div&amp;gt; ); return ( &amp;lt;React.Fragment&amp;gt; {React.cloneElement(target, { ref: this.rootRef, onMouseOver: this.handleMouseOver, onMouseLeave: this.handleMouseLeave, })} {open &amp;amp;&amp;amp; this.renderTooltip()} &amp;lt;/React.Fragment&amp;gt; );   When target with div element (or any other instead of div) everything is ok, but when target is:</description>
     </item>
     
     <item>
       <title>百度网盘超级会员账号分享</title>
-      <link>https://sy123.ml/2020/02/27/baidu-svip/</link>
+      <link>https://sy123.ml/2020/02/27/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E8%B6%85%E7%BA%A7%E4%BC%9A%E5%91%98%E8%B4%A6%E5%8F%B7%E5%88%86%E4%BA%AB/</link>
       <pubDate>Thu, 27 Feb 2020 02:07:36 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/27/baidu-svip/</guid>
+      <guid>https://sy123.ml/2020/02/27/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E8%B6%85%E7%BA%A7%E4%BC%9A%E5%91%98%E8%B4%A6%E5%8F%B7%E5%88%86%E4%BA%AB/</guid>
       <description>百度云 请低调使用&amp;hellip;
  都是选微博登录  选微博登录 选微博登录 选微博登录!!!   验证码全部大写填写 确认用鼠标点 登录后如遇到重试页面, 点击几次重试即可. 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!!  并不保证当你看到时账号都是可以用的, 但是分享的时候肯定都是可以的. 如果有失效账号, 麻烦告知一下, 我会及时处理.
 账号越来越难弄, 且用且珍惜.
@@ -407,29 +420,29 @@ Infinity替代
     
     <item>
       <title>出现value.locale is not a function问题解决办法</title>
-      <link>https://sy123.ml/2020/02/26/react-datepicker/</link>
+      <link>https://sy123.ml/2020/02/26/%E5%87%BA%E7%8E%B0value.locale-is-not-a-function%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</link>
       <pubDate>Wed, 26 Feb 2020 15:28:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/26/react-datepicker/</guid>
+      <guid>https://sy123.ml/2020/02/26/%E5%87%BA%E7%8E%B0value.locale-is-not-a-function%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</guid>
       <description>给datepicker赋值 可以输出赋值,datepicker赋值需要moment格式的数据,如果赋值了string类型的会报错 需要进行moment格式化moment(dateString)
 给普通字符串赋值 如果赋值了moment类型的数据 可以通过moment(date).format(XXX)来解决,如果还不行的话可以使用date&amp;amp;&amp;amp; moment(date).lacale(‘en’).format(XXX)</description>
     </item>
     
     <item>
       <title>约定俗成的常见缩写</title>
-      <link>https://sy123.ml/2020/02/25/abbreviations/</link>
+      <link>https://sy123.ml/2020/02/25/%E7%BA%A6%E5%AE%9A%E4%BF%97%E6%88%90%E7%9A%84%E5%B8%B8%E8%A7%81%E7%BC%A9%E5%86%99/</link>
       <pubDate>Tue, 25 Feb 2020 12:39:44 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/25/abbreviations/</guid>
+      <guid>https://sy123.ml/2020/02/25/%E7%BA%A6%E5%AE%9A%E4%BF%97%E6%88%90%E7%9A%84%E5%B8%B8%E8%A7%81%E7%BC%A9%E5%86%99/</guid>
       <description>   全称 缩写     event evt   connect conn   server srv   address addr   request req   response rep   lenght len   collection col   signal sig   error of last number erron   field field   property props   defines defs   object obj   system sys   message msg   number num   directory dir   dictionory dict   protocol proto   button btn   table tbl   label lbl   Image img   Sprite sp   texture tex   tween tw   transform trans   animation anim   material mat   vecter vec   position pos   delegate del   callback cb    2020/02/25 update    缩写 全称     acc accessibility   auto automatic   eval evaluate   impl implementation   info in   num number of   min minimum   max maximum   nav navigation   regexp regular expression   util utility   req request   resp response   res resource   app application   auth authorization/authentication 这点非常不认可，同一个常见缩写居然能代表两个不同的词。   dev develop   env environment   db database   pkg package   svr server   i18n internationalization   cert certificate   msg message   addr address   tmp/temp temporary   var/def variable/define 其实 var/def 已经是很多语言的关键字了   calc calculate/calculation   src source   dest destination   min/max minimum/maximum 应该已经不算了吧。。。   doc document   dir directory    </description>
     </item>
     
     <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
-      <link>https://sy123.ml/2020/02/25/cp-backup/</link>
+      <link>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/25/cp-backup/</guid>
+      <guid>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
       <description>GNU cp(1) has a backup option:
 1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
 1 2 3 4 5 6 7  --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
@@ -463,10 +476,10 @@ For making it floating, add this to your config Floating all windows with &amp;l
     
     <item>
       <title>Vim_search_in_file</title>
-      <link>https://sy123.ml/2020/02/24/vim-search-in-file/</link>
+      <link>https://sy123.ml/2020/02/24/vim_search_in_file/</link>
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/vim-search-in-file/</guid>
+      <guid>https://sy123.ml/2020/02/24/vim_search_in_file/</guid>
       <description>总有人问我 Vim 中能不能查找，当然能！而且是超级强的查找！ 这篇文章来详细介绍 Vim 中查找相关的设置和使用方法。 包括查找与替换、查找光标所在词、高亮前景/背景色、切换高亮状态、大小写敏感查找等。
 查找 在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。
 Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdquo;。 需要查找特殊字符需要转义，例如/vim$匹配&amp;quot;vim$&amp;rdquo;。
@@ -494,10 +507,10 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>百度云加速NS接入流程</title>
-      <link>https://sy123.ml/2020/02/23/baidu-cdn/</link>
+      <link>https://sy123.ml/2020/02/23/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8A%A0%E9%80%9Fns%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B/</link>
       <pubDate>Sun, 23 Feb 2020 04:36:16 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/23/baidu-cdn/</guid>
+      <guid>https://sy123.ml/2020/02/23/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8A%A0%E9%80%9Fns%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B/</guid>
       <description>百度云加速NS接入是最简单的方式，不过还是很多站长管理员不大懂，今天教大家如何NS接入。
 首先点域名继续接入 添加子域名，A记录、主机名: WWW，记录值写你的服务器的IP，如果你有其它子域名的也一并添加创建。 创建完子域名后，点一步，查看云加速DNS 复制加速DNS n3060.ns.yunjiasu.com、n333.ns.yunjiasu.com 进入域名注册商管理处，修改NS记录，比如阿里云 修改完成后，等生效即可。需要注意的是，域名修改DNS一般全国生效为24小时左右，所以需要耐心等待了。
 好了以上就是百度云加速NS接入的全部教程了，希望可以帮到大家。</description>
@@ -505,20 +518,20 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>linux中如何手动清零缓冲</title>
-      <link>https://sy123.ml/2020/02/16/how-do-you-empty-the-buffers-and-cache-on-linux-system/</link>
+      <link>https://sy123.ml/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</link>
       <pubDate>Sun, 16 Feb 2020 15:20:03 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/how-do-you-empty-the-buffers-and-cache-on-linux-system/</guid>
+      <guid>https://sy123.ml/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</guid>
       <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands.
 1 2 3 4 5 6 7 8 9 10  free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248   You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
     </item>
     
     <item>
       <title>如何清理Virtualbox虚拟机VDI镜像文件的空间大小</title>
-      <link>https://sy123.ml/2020/02/16/virtualbox-vdi-shrink/</link>
+      <link>https://sy123.ml/2020/02/16/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BAvdi%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F/</link>
       <pubDate>Sun, 16 Feb 2020 15:10:33 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/virtualbox-vdi-shrink/</guid>
+      <guid>https://sy123.ml/2020/02/16/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BAvdi%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F/</guid>
       <description>玩虚拟机的同学都知道，对于那些设定为动态配分的虚拟机，一开始装完系统时可能只有几个G，但是随着你不断的使用，体积空间就会越来越大，随便就是几十个G了。也就是说动态扩展的VDI文件只会大，不会小。这期间，就算你去虚拟机里面删除一些文件，整个虚拟机的镜像文件VDI文件的大小依然不会变小，使其所占用的实际硬盘空间过大，给备份和分享都带来麻烦。因此，今天我们就来研究一下如何解决这个问题，其实很简单。
 以下方法，在我自己的64位Ubuntu 14.04和64位win10虚拟机中亲测有效！
 步骤1：碎片整理 第一步要做的是碎片整理，整理过程需要一个特定的工具，win系统和linux系统各自有别：
@@ -534,10 +547,10 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdq
     
     <item>
       <title>使用systemd-analyze优化系统启动时间</title>
-      <link>https://sy123.ml/2020/02/16/systemd-analyze/</link>
+      <link>https://sy123.ml/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</link>
       <pubDate>Sun, 16 Feb 2020 14:53:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/systemd-analyze/</guid>
+      <guid>https://sy123.ml/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</guid>
       <description>systemd-analyze简介 systemd-analyze是Linux自带的分析系统启动性能的工具。
 systemd-analyze可使用的命令：
   systemd-analyze [OPTIONS…] [time]
@@ -556,20 +569,20 @@ systemd-analyze可使用的命令：
     
     <item>
       <title>Saga deprecated 警告</title>
-      <link>https://sy123.ml/2020/02/15/saga-deprecated-warning/</link>
+      <link>https://sy123.ml/2020/02/15/saga-deprecated-%E8%AD%A6%E5%91%8A/</link>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/15/saga-deprecated-warning/</guid>
+      <guid>https://sy123.ml/2020/02/15/saga-deprecated-%E8%AD%A6%E5%91%8A/</guid>
       <description>What happens? 1  [...effects] has been deprecated in favor of all([...effects]), please update your code   it does not effect dva.js, its redux saga api update, you just need to do this
 1 2 3 4 5  effects: { * query(action, {call, put, all}) { yield all([]) } }   Redux saga apis:</description>
     </item>
     
     <item>
       <title>Visual Studio Code 偏好设置</title>
-      <link>https://sy123.ml/2020/02/15/my-vscode-config/</link>
+      <link>https://sy123.ml/2020/02/15/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</link>
       <pubDate>Sat, 15 Feb 2020 17:58:47 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/15/my-vscode-config/</guid>
+      <guid>https://sy123.ml/2020/02/15/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</guid>
       <description>Visual Studio Code 提供了极大的弹性让我们自订想要的编辑器样式，端看使用者设定（User Setting）中，就超过 800 项设定可以让开发者自由调整，而且还有扩充套件能够增强 VS Code 的开发能力。
  这篇主要是我个人偏好的设定，完整 setting.json 请参考 gist。
  首先可以使用快速键 Ctrl +, 开启 settings.json 使用者设定档，或从选单列中点选档案 &amp;gt; 喜好设定 &amp;gt; 设定。
@@ -590,56 +603,56 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
     
     <item>
       <title>git clone 指定分支拉代码</title>
-      <link>https://sy123.ml/2020/02/10/git-clone-branch/</link>
+      <link>https://sy123.ml/2020/02/10/git-clone-%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF%E6%8B%89%E4%BB%A3%E7%A0%81/</link>
       <pubDate>Mon, 10 Feb 2020 13:07:08 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/10/git-clone-branch/</guid>
+      <guid>https://sy123.ml/2020/02/10/git-clone-%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF%E6%8B%89%E4%BB%A3%E7%A0%81/</guid>
       <description>git clone 不指定分支 1  git clone http://10.1.1.11/service/tmall-service.git   git clone 指定分支 1  git clone -b dev_jk http://10.1.1.11/service/tmall-service.git   命令中：多了一个 -b dev-jk,这个dev_jk就是分支，http://10.1.1.11/service/tmall -service.git为源码的仓库地址</description>
     </item>
     
     <item>
       <title>Programmatically_navigate_using_react_router</title>
-      <link>https://sy123.ml/2020/02/09/programmatically-navigate-using-react-router/</link>
+      <link>https://sy123.ml/2020/02/09/programmatically_navigate_using_react_router/</link>
       <pubDate>Sun, 09 Feb 2020 11:33:00 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/09/programmatically-navigate-using-react-router/</guid>
+      <guid>https://sy123.ml/2020/02/09/programmatically_navigate_using_react_router/</guid>
       <description>React Router v5.1.0 with hooks There is a new useHistory hook in React Router &amp;gt;5.1.0 if you are using React &amp;gt;16.8.0 and functional components.
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  import { useHistory } from &amp;#34;react-router-dom&amp;#34;; function HomeButton() { const history = useHistory(); function handleClick() { history.push(&amp;#34;/home&amp;#34;); } return ( &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt; Go home &amp;lt;/button&amp;gt; ); }   React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</description>
     </item>
     
     <item>
       <title>npm和yarn如何查看源和换源</title>
-      <link>https://sy123.ml/2020/02/06/yarn-accelerate-and-modify-mirror-source-in-china/</link>
+      <link>https://sy123.ml/2020/02/06/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</link>
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/06/yarn-accelerate-and-modify-mirror-source-in-china/</guid>
+      <guid>https://sy123.ml/2020/02/06/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</guid>
       <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7  npm config get registry # 查看npm当前镜像源 npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像 yarn config get registry # 查看yarn当前镜像源 yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像   镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
     </item>
     
     <item>
       <title>Socket programing Permission denied</title>
-      <link>https://sy123.ml/2020/02/05/linux-privileged-port/</link>
+      <link>https://sy123.ml/2020/02/05/socket-programing-permission-denied/</link>
       <pubDate>Wed, 05 Feb 2020 16:04:13 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/linux-privileged-port/</guid>
+      <guid>https://sy123.ml/2020/02/05/socket-programing-permission-denied/</guid>
       <description>listen tcp :443: bind: permission denied If you want to bind to a privileged port (ports less than 1024). You either need to be root or have the CAP_NET_BIND_SERVICE capability.</description>
     </item>
     
     <item>
       <title>win10输入法不显示候选词解决方法</title>
-      <link>https://sy123.ml/2020/02/05/win10-input-method-display-candidate-words/</link>
+      <link>https://sy123.ml/2020/02/05/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link>
       <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/win10-input-method-display-candidate-words/</guid>
+      <guid>https://sy123.ml/2020/02/05/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid>
       <description>精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法 </description>
     </item>
     
     <item>
       <title>Linux yay 命令</title>
-      <link>https://sy123.ml/2020/02/05/linux-yay/</link>
+      <link>https://sy123.ml/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/05/linux-yay/</guid>
+      <guid>https://sy123.ml/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
       <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
 另见pacman。
 从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps    2020-04-20更新
@@ -650,10 +663,10 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
     
     <item>
       <title>Linux_disable_IPv6</title>
-      <link>https://sy123.ml/2020/01/31/linux-disable-ipv6/</link>
+      <link>https://sy123.ml/2020/01/31/linux_disable_ipv6/</link>
       <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/31/linux-disable-ipv6/</guid>
+      <guid>https://sy123.ml/2020/01/31/linux_disable_ipv6/</guid>
       <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关闭IPv6。 下面是IPv6的关闭方法应该适用于所有主流的Linux发行版包括Ubuntu、Debian、CentOS。
 IPv6在CentOS6.5系统中默认是启用状态，通过以下方式可以确认IPv6的状态
 1.1.查看系统IPv6的启用状态 以下命令返回值为0表示IPv6启用，1表示禁用
@@ -679,10 +692,10 @@ lsmod | grep ipv6
     
     <item>
       <title>Set_all_Java_apps_to_use_GTK&#43;_font_&amp;_theme_settings</title>
-      <link>https://sy123.ml/2020/01/22/set-all-java-apps-to-use-gtk-font-theme-settings/</link>
+      <link>https://sy123.ml/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</link>
       <pubDate>Wed, 22 Jan 2020 01:12:54 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/22/set-all-java-apps-to-use-gtk-font-theme-settings/</guid>
+      <guid>https://sy123.ml/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
   Java default look   Java GTK+ look   How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
 1  export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34;   First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>
@@ -690,10 +703,10 @@ lsmod | grep ipv6
     
     <item>
       <title>Win10 清除 PowerShell 历史记录</title>
-      <link>https://sy123.ml/2020/01/20/historysavepath/</link>
+      <link>https://sy123.ml/2020/01/20/win10-%E6%B8%85%E9%99%A4-powershell-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Mon, 20 Jan 2020 23:11:09 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/20/historysavepath/</guid>
+      <guid>https://sy123.ml/2020/01/20/win10-%E6%B8%85%E9%99%A4-powershell-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</guid>
       <description>PowerShell&amp;rsquo;s own history mechanism (Get-History, Clear-History) is host-independent, which is why - somewhat unexpectedly - you also need to clear the hosts&amp;rsquo;s command history separately.
 As for the console host&amp;rsquo;s own history feature:
 doskey-style history feature, before module PSReadline shipped with PowerShell (see below):
@@ -702,10 +715,10 @@ There is no saved history - a history is kept only for the duration of the curre
     
     <item>
       <title>Sysprep命令详解</title>
-      <link>https://sy123.ml/2020/01/20/sysprep/</link>
+      <link>https://sy123.ml/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/20/sysprep/</guid>
+      <guid>https://sy123.ml/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
       <description>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删除唯一性信息，这使得你可以在不同的计算机上重复使用映像。下次启动 Windows 映像时，将运行 specialize 配置阶段。
 Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
 1 2 3 4 5 6 7 8 9 10 11  Sysprep.exe [/oobe | /audit] [/generalize] [/mode:vm] [/reboot | /shutdown | /quit] [/quiet] [/unattend:&amp;lt;answerfile&amp;gt;]   下表列出了 Sysprep 命令行选项：
@@ -714,19 +727,19 @@ Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
     
     <item>
       <title>cmd命令行修改windows虚拟内存pagefile.sys</title>
-      <link>https://sy123.ml/2020/01/20/pagefile/</link>
+      <link>https://sy123.ml/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</link>
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/20/pagefile/</guid>
+      <guid>https://sy123.ml/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</guid>
       <description>1 2 3 4 5 6 7 8 9 10 11 12  # 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False  # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t 0   </description>
     </item>
     
     <item>
       <title>ArchLinux配置Samba服务与Windows共享文件</title>
-      <link>https://sy123.ml/2020/01/19/share-movie-between-archlinux-and-win7-via-samba/</link>
+      <link>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/19/share-movie-between-archlinux-and-win7-via-samba/</guid>
+      <guid>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
       <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。
 Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
 下面记录一下ArchLinux中配置Samba的过程，留作备份。
@@ -750,10 +763,10 @@ security，这是指共享目录的安全认证形式，security的值，有两�
     
     <item>
       <title>iptables 禁止端口和开放端口</title>
-      <link>https://sy123.ml/2020/01/17/iptables/</link>
+      <link>https://sy123.ml/2020/01/17/iptables-%E7%A6%81%E6%AD%A2%E7%AB%AF%E5%8F%A3%E5%92%8C%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3/</link>
       <pubDate>Fri, 17 Jan 2020 22:35:49 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/17/iptables/</guid>
+      <guid>https://sy123.ml/2020/01/17/iptables-%E7%A6%81%E6%AD%A2%E7%AB%AF%E5%8F%A3%E5%92%8C%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3/</guid>
       <description>1.首先介绍一下指令和相关配置文件 启动指令:service iptables start
 重启指令:service iptables restart
 关闭指令:service iptables stop
@@ -785,10 +798,10 @@ iptables -A INPUT -p tcp &amp;ndash;dport 22 -j ACCEPT</description>
     
     <item>
       <title>批处理关闭或开启NETBIOS</title>
-      <link>https://sy123.ml/2020/01/17/netbios/</link>
+      <link>https://sy123.ml/2020/01/17/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</link>
       <pubDate>Fri, 17 Jan 2020 19:23:06 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/17/netbios/</guid>
+      <guid>https://sy123.ml/2020/01/17/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</guid>
       <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。
 以下为批处理自动关闭netbios脚本:
 1 2 3 4 5 6 7 8 9 10 11 12  @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do ( wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0 if exist one_time.cmd ( del /f /q %0 exit ) rename %0 one_time.cmd exit   功能: 一键关闭netbios，执行完第二次后自己删除自己。
@@ -801,10 +814,10 @@ iptables -A INPUT -p tcp &amp;ndash;dport 22 -j ACCEPT</description>
     
     <item>
       <title>玩转WSL-用Samba服务替代Win10原生的文件共享</title>
-      <link>https://sy123.ml/2020/01/17/wsl-samba/</link>
+      <link>https://sy123.ml/2020/01/17/%E7%8E%A9%E8%BD%ACwsl-%E7%94%A8samba%E6%9C%8D%E5%8A%A1%E6%9B%BF%E4%BB%A3win10%E5%8E%9F%E7%94%9F%E7%9A%84%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/</link>
       <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/17/wsl-samba/</guid>
+      <guid>https://sy123.ml/2020/01/17/%E7%8E%A9%E8%BD%ACwsl-%E7%94%A8samba%E6%9C%8D%E5%8A%A1%E6%9B%BF%E4%BB%A3win10%E5%8E%9F%E7%94%9F%E7%9A%84%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/</guid>
       <description>习惯了Linux系统的人们，肯定觉得Samba服务更加灵活和方便，那如何在Windows系统上搭建高效的Samba服务呢？本文介绍了通过WSL在Win10系统上，搭建Samba文件共享服务。
 背景是家里只有一个台式机，一方面家里人偶尔使用，另一方面，它是家里的数据中心，挂载了多块硬盘。所以系统用的是Windows10，但是为了方便灵活得进行文件共享，一直考虑搭建Samba服务。达到此目的的方案有多种，可以考虑用虚拟机，例如：VMWare、VirtualBox、Hyper-V，也可以考虑使用CygWin，因为Windows10提供了WSL，所以本文介绍了另一种方式，也是运行效率比较高的一种方式，使用WSL搭建Samba服务。
 背景知识 Windows文件共享服务 使用网络对外提供文件访问服务，现在广泛用于局域网内部文件的共享，例如：小米盒子、手机、PC机、包括Mac，通过139或445端口。
@@ -823,10 +836,10 @@ Samba服务 为了实现UNIX、Linux等非Windows能够访问Windows的文件共
     
     <item>
       <title>Windows 下使用 Diskpart 命令分区</title>
-      <link>https://sy123.ml/2020/01/16/using-diskpart-to-create/</link>
+      <link>https://sy123.ml/2020/01/16/windows-%E4%B8%8B%E4%BD%BF%E7%94%A8-diskpart-%E5%91%BD%E4%BB%A4%E5%88%86%E5%8C%BA/</link>
       <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/16/using-diskpart-to-create/</guid>
+      <guid>https://sy123.ml/2020/01/16/windows-%E4%B8%8B%E4%BD%BF%E7%94%A8-diskpart-%E5%91%BD%E4%BB%A4%E5%88%86%E5%8C%BA/</guid>
       <description>Diskpart 命令简介 Diskpart 命令是 Windows 环境下的一个命令，利用 Diskpart 可实现对硬盘的分区管理，包括创建分区、删除分区、合并（扩展）分区，设置分区后即刻生效，免去了重启电脑的操作。
 正常运行该命令时需要系统服务的支持，所以在纯 DOS、XP 内核的 WinPE 环境下都是不能运行的，但是在 Win7 的预安装环境下却是可以的。利用 Diskpart 命令来分区，既不用借助第三方工具，也不会产生 100MB 的“系统保留”分区，其次分区操作直接设置即刻生效，不用重新启动计算机。
 利用 Diskpart 命令分区 当安装程序运行到创建磁盘分区界面时按下 Shift+F10 启动命令窗口。
@@ -839,10 +852,10 @@ Samba服务 为了实现UNIX、Linux等非Windows能够访问Windows的文件共
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>https://sy123.ml/2020/01/11/set-proxy-for-terminal/</link>
+      <link>https://sy123.ml/2020/01/11/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/11/set-proxy-for-terminal/</guid>
+      <guid>https://sy123.ml/2020/01/11/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
       <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置git的话可以直接在文章最后找到git的设置代理的方法。
 前期准备: 认识代理的方式:代理是通过客户端与服务端通信,传输服务端能够访问到的资源文件,再由服务端客户端通信返回给客户端,从而间接访问服务端能访问的资源.
 以socket5通信为例子,我们通过客户端(自己想一想酸酸乳)向服务端发送socket通信,服务端访问资源再由socket通信返回给客户端.但是这里面的通信设置必须通过端口来进行通信,类似switchyomega设置过程一样,我们会设定走的代理方式是127.0.0.1:1080;这个意思就是通过本地的1080端口来进行通信.具体在终端上如何使用呢?
@@ -862,10 +875,10 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
     
     <item>
       <title>百度云分享下载链接</title>
-      <link>https://sy123.ml/2020/01/10/baiduyun-dlink/</link>
+      <link>https://sy123.ml/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</link>
       <pubDate>Fri, 10 Jan 2020 07:48:32 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/10/baiduyun-dlink/</guid>
+      <guid>https://sy123.ml/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</guid>
       <description>最好是先复制到自己的网盘。
   点击分享，生成链接。
   点击链接，进入页面。在console模式下输入如下代码：

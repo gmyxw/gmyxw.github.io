@@ -13,10 +13,10 @@
     
     <item>
       <title>archlinux升级内核后，系统挂了，修复方法</title>
-      <link>https://sy123.ml/2020/03/18/module-vboxdrv-not-found-in-directory/</link>
+      <link>https://sy123.ml/2020/03/18/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</link>
       <pubDate>Wed, 18 Mar 2020 06:32:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/18/module-vboxdrv-not-found-in-directory/</guid>
+      <guid>https://sy123.ml/2020/03/18/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</guid>
       <description>今天滚完系统就没网络，startx报内核模块错误，当场裂开了，开机显示加载驱动失败，先来看看加载日志吧
 1  sudo systemctl status systemd-modules-load   报错全是类似Module Vboxdrv Not Found in Directory xx这种
 再查看下内核模块相关目录发现了端倪
@@ -32,10 +32,10 @@
     
     <item>
       <title>ArchLinux配置Samba服务与Windows共享文件</title>
-      <link>https://sy123.ml/2020/01/19/share-movie-between-archlinux-and-win7-via-samba/</link>
+      <link>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/19/share-movie-between-archlinux-and-win7-via-samba/</guid>
+      <guid>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
       <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。
 Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
 下面记录一下ArchLinux中配置Samba的过程，留作备份。

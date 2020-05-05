@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="Zhili">
+<meta name="author" content="zhili">
 <meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
     ">
 <meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
 <meta name="referrer" content="always">
-<title>Saga deprecated 警告 - sy123.ml</title>
+<title>Saga deprecated 警告 - zhili</title>
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <header>
   <div>
-    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+    <h1><a href="https://sy123.ml/">zhili</a></h1>
   </div>
   <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
 </header>
@@ -35,49 +35,52 @@
   </div>
 <div class="content">
   <h2 id="what-happens">What happens?</h2>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#111">[...</span><span style="color:#75af00">effects</span><span style="color:#111">]</span> <span style="color:#75af00">has</span> <span style="color:#75af00">been</span> <span style="color:#75af00">deprecated</span> <span style="color:#00a8c8">in</span> <span style="color:#75af00">favor</span> <span style="color:#00a8c8">of</span> <span style="color:#75af00">all</span><span style="color:#111">([...</span><span style="color:#75af00">effects</span><span style="color:#111">]),</span> <span style="color:#75af00">please</span> <span style="color:#75af00">update</span> <span style="color:#75af00">your</span> <span style="color:#75af00">code</span> 
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">[...effects] has been deprecated <span style="color:#000;font-weight:bold">in</span> favor <span style="color:#000;font-weight:bold">of</span> all([...effects]), please update your code 
 </code></pre></td></tr></table>
 </div>
 </div><p>it does not effect dva.js, its redux saga api update, you just need to do this</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75af00">effects</span><span style="color:#f92672">:</span> <span style="color:#111">{</span>
-  <span style="color:#f92672">*</span> <span style="color:#75af00">query</span><span style="color:#111">(</span><span style="color:#75af00">action</span><span style="color:#111">,</span> <span style="color:#111">{</span><span style="color:#75af00">call</span><span style="color:#111">,</span> <span style="color:#75af00">put</span><span style="color:#111">,</span> <span style="color:#75af00">all</span><span style="color:#111">})</span> <span style="color:#111">{</span>
-      <span style="color:#00a8c8">yield</span> <span style="color:#75af00">all</span><span style="color:#111">([])</span>
-   <span style="color:#111">}</span>
-<span style="color:#111">}</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">effects<span style="color:#000;font-weight:bold">:</span> {
+  <span style="color:#000;font-weight:bold">*</span> query(action, {call, put, all}) {
+      <span style="color:#000;font-weight:bold">yield</span> all([])
+   }
+}
 </code></pre></td></tr></table>
 </div>
 </div><p>Redux saga apis:<img src="https://user-images.githubusercontent.com/17282448/58425486-e3012280-8067-11e9-9964-2b0ab83fac9f.png" alt=""></p>
 </div>
 <div class="disqus">
   <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
 <script>
-
-
-
-
-
-(function() { 
-var d = document, s = d.createElement('script');
-s.src = 'https://sy123-ml.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                             
 </div>
 
@@ -86,7 +89,7 @@ s.setAttribute('data-timestamp', +new Date());
 <footer>
   <div>
     <div>
-      2007-2020 Zhili.</div>
+      2007-2020 zhili.</div>
   </div>
 </footer>
 </body>

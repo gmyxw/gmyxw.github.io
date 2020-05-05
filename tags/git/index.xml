@@ -13,10 +13,10 @@
     
     <item>
       <title>git 出现错误Could not resolve host: github.com</title>
-      <link>https://sy123.ml/2020/03/06/git-clone-not-resolve-host/</link>
+      <link>https://sy123.ml/2020/03/06/git-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AFcould-not-resolve-host-github.com/</link>
       <pubDate>Fri, 06 Mar 2020 21:36:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/06/git-clone-not-resolve-host/</guid>
+      <guid>https://sy123.ml/2020/03/06/git-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AFcould-not-resolve-host-github.com/</guid>
       <description>1 2 3  ❯ git clone https://github.com/Zhili/GameServer Cloning into &amp;#39;GameServer&amp;#39;... fatal: unable to access &amp;#39;https://github.com/Zhili/GameServer/&amp;#39;: Couldn&amp;#39;t resolve host name   (Just a little reminder) If you want the hostname also be resolved by the proxy (that means passing everything through the proxy), especially when you are cloning a gist, you can use the following setting (the key is that it uses socks5h instead of socks5):
 1  git config --global http.</description>
     </item>

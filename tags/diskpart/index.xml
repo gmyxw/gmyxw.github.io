@@ -13,10 +13,10 @@
     
     <item>
       <title>Windows 下使用 Diskpart 命令分区</title>
-      <link>https://sy123.ml/2020/01/16/using-diskpart-to-create/</link>
+      <link>https://sy123.ml/2020/01/16/windows-%E4%B8%8B%E4%BD%BF%E7%94%A8-diskpart-%E5%91%BD%E4%BB%A4%E5%88%86%E5%8C%BA/</link>
       <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/16/using-diskpart-to-create/</guid>
+      <guid>https://sy123.ml/2020/01/16/windows-%E4%B8%8B%E4%BD%BF%E7%94%A8-diskpart-%E5%91%BD%E4%BB%A4%E5%88%86%E5%8C%BA/</guid>
       <description>Diskpart 命令简介 Diskpart 命令是 Windows 环境下的一个命令，利用 Diskpart 可实现对硬盘的分区管理，包括创建分区、删除分区、合并（扩展）分区，设置分区后即刻生效，免去了重启电脑的操作。
 正常运行该命令时需要系统服务的支持，所以在纯 DOS、XP 内核的 WinPE 环境下都是不能运行的，但是在 Win7 的预安装环境下却是可以的。利用 Diskpart 命令来分区，既不用借助第三方工具，也不会产生 100MB 的“系统保留”分区，其次分区操作直接设置即刻生效，不用重新启动计算机。
 利用 Diskpart 命令分区 当安装程序运行到创建磁盘分区界面时按下 Shift+F10 启动命令窗口。

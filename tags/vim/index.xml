@@ -13,19 +13,19 @@
     
     <item>
       <title>如何在vim保存时获得sudo权限</title>
-      <link>https://sy123.ml/2020/03/12/how-does-the-vim-write-with-sudo-trick-work/</link>
+      <link>https://sy123.ml/2020/03/12/%E5%A6%82%E4%BD%95%E5%9C%A8vim%E4%BF%9D%E5%AD%98%E6%97%B6%E8%8E%B7%E5%BE%97sudo%E6%9D%83%E9%99%90/</link>
       <pubDate>Thu, 12 Mar 2020 21:30:38 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/12/how-does-the-vim-write-with-sudo-trick-work/</guid>
+      <guid>https://sy123.ml/2020/03/12/%E5%A6%82%E4%BD%95%E5%9C%A8vim%E4%BF%9D%E5%AD%98%E6%97%B6%E8%8E%B7%E5%BE%97sudo%E6%9D%83%E9%99%90/</guid>
       <description>1  :w !sudo tee %   命令:w !{cmd}，让vim执行一个外部命令{cmd}，然后把当前缓冲区的内容从stdin传入。 tee是一个把stdin保存到文件的小工具。 而%，是vim当中一个只读寄存器的名字，总保存着当前编辑文件的文件路径。 所以执行这个命令，就相当于从vim外部修改了当前编辑的文件，好完工。</description>
     </item>
     
     <item>
       <title>vim recording的使用方法</title>
-      <link>https://sy123.ml/2020/03/12/vim-recording/</link>
+      <link>https://sy123.ml/2020/03/12/vim-recording%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link>
       <pubDate>Thu, 12 Mar 2020 17:05:52 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/12/vim-recording/</guid>
+      <guid>https://sy123.ml/2020/03/12/vim-recording%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid>
       <description>使用vim时无意间触碰到q键，左下角出现“recording”这个标识，觉得好奇，遂在网上查了一下，然后这是vim的一个强大功能。他可以录 制一个宏（Macro)，在开始记录后，会记录你所有的键盘输入，包括在insert模式下的输入、正常模式下使用的各种命令等。
 具体使用：
 第一步：在正常模式下（非insert模式、非visual模式）按下q键盘
@@ -41,10 +41,10 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
     
     <item>
       <title>Vim_search_in_file</title>
-      <link>https://sy123.ml/2020/02/24/vim-search-in-file/</link>
+      <link>https://sy123.ml/2020/02/24/vim_search_in_file/</link>
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/vim-search-in-file/</guid>
+      <guid>https://sy123.ml/2020/02/24/vim_search_in_file/</guid>
       <description>总有人问我 Vim 中能不能查找，当然能！而且是超级强的查找！ 这篇文章来详细介绍 Vim 中查找相关的设置和使用方法。 包括查找与替换、查找光标所在词、高亮前景/背景色、切换高亮状态、大小写敏感查找等。
 查找 在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。
 Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;rdquo;。 需要查找特殊字符需要转义，例如/vim$匹配&amp;quot;vim$&amp;rdquo;。

@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="Zhili">
+<meta name="author" content="zhili">
 <meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
     ">
 <meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
 <meta name="referrer" content="always">
-<title>ArchLinux配置Samba服务与Windows共享文件 - sy123.ml</title>
+<title>ArchLinux配置Samba服务与Windows共享文件 - zhili</title>
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
 </head>
 <body>
 <header>
   <div>
-    <h1><a href="https://sy123.ml/">sy123.ml</a></h1><h2><a href="https://sy123.ml/">winter is coming.</a></h2>
+    <h1><a href="https://sy123.ml/">zhili</a></h1>
   </div>
   <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
 </header>
@@ -37,19 +37,19 @@
 <p>Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……</p>
 <p>下面记录一下ArchLinux中配置Samba的过程，留作备份。</p>
 <p>首先，是安装Samba，ArchLinux可以直接从源中获取并安装Samba：</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">pacman -S samba
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">pacman -S samba
 </code></pre></td></tr></table>
 </div>
 </div><p>等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：</p>
 <p>在/etc/samba目录中，直接建立一个空的smb.conf，然后将如下内容粘贴过去：</p>
-<div class="highlight"><div style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -62,17 +62,17 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#272822;background-color:#fafafa;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#00a8c8">[global]</span>
-<span style="color:#75af00">workgroup</span> <span style="color:#f92672">=</span> <span style="color:#d88200">WORKGROUP</span>
-<span style="color:#75af00">security</span> <span style="color:#f92672">=</span> <span style="color:#d88200">user</span>
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#000;font-weight:bold">[global]</span>
+<span style="color:#008080">workgroup</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">WORKGROUP</span>
+<span style="color:#008080">security</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">user</span>
 
-<span style="color:#00a8c8">[Movies]</span>
-<span style="color:#75af00">path</span> <span style="color:#f92672">=</span> <span style="color:#d88200">/home/transmission/Downloads</span>
-<span style="color:#75af00">valid users</span> <span style="color:#f92672">=</span> <span style="color:#d88200">samba</span>
-<span style="color:#75af00">public</span> <span style="color:#f92672">=</span> <span style="color:#d88200">no</span>
-<span style="color:#75af00">writable</span> <span style="color:#f92672">=</span> <span style="color:#d88200">yes</span>
-<span style="color:#75af00">printable</span> <span style="color:#f92672">=</span> <span style="color:#d88200">no</span>
-<span style="color:#75af00">create mask</span> <span style="color:#f92672">=</span> <span style="color:#d88200">0644</span>
+<span style="color:#000;font-weight:bold">[Movies]</span>
+<span style="color:#008080">path</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">/home/transmission/Downloads</span>
+<span style="color:#008080">valid users</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">samba</span>
+<span style="color:#008080">public</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">no</span>
+<span style="color:#008080">writable</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">yes</span>
+<span style="color:#008080">printable</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">no</span>
+<span style="color:#008080">create mask</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">0644</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：</p>
@@ -101,20 +101,23 @@
 </div>
 <div class="disqus">
   <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
 <script>
-
-
-
-
-
-(function() { 
-var d = document, s = d.createElement('script');
-s.src = 'https://sy123-ml.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
                             
 </div>
 
@@ -123,7 +126,7 @@ s.setAttribute('data-timestamp', +new Date());
 <footer>
   <div>
     <div>
-      2007-2020 Zhili.</div>
+      2007-2020 zhili.</div>
   </div>
 </footer>
 </body>
