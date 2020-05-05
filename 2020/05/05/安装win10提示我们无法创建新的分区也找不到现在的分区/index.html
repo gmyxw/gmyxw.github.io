@@ -40,7 +40,30 @@
 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 </blockquote>
 <p>我的虚拟机之前忘记干啥也是双系统出这问题，附加win10磁盘就完事</p>
+<h2 id="安装过程提示help_setup_cannot_continue_due_to_a_corrupted">安装过程提示help_setup_cannot_continue_due_to_a_corrupted</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># 直接擦写一下这块硬盘</span>
+dd <span style="color:#000;font-weight:bold">if</span><span style="color:#000;font-weight:bold">=</span>/dev/zero <span style="color:#008080">of</span><span style="color:#000;font-weight:bold">=</span>/dev/vdb
+
+<span style="color:#998;font-style:italic"># fdisk 重新分区</span>
+fdisk /dev/vdb
+
+<span style="color:#998;font-style:italic"># 格式化</span>
+mkfs.ntfs /dev/vdb
+</code></pre></td></tr></table>
 </div>
+</div></div>
 <div class="disqus">
   <div id="disqus_thread"></div>
 
