@@ -33,7 +33,7 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
  原因似乎在于windows会执着地把系统分区（大概类似于/boot）放到磁盘0（类似于/dev/sda？）上面。而这个时候磁盘0是U盘……于是傻X了……windows就是傻X解决方法，拔U盘/硬盘，从而使想装系统的盘成为磁盘0……或者直接把想装系统的盘做成安装盘，这样它也是磁盘0了&amp;gt;_&amp;laquo;https://link.zhihu.com/?target=http%3A//jingyan.baidu.com/article/2c8c281df6f2d60009252a7c.html&amp;gt;
 作者：杨微粒 链接：https://www.zhihu.com/question/21117479/answer/86745809 来源：知乎 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
  我的虚拟机之前忘记干啥也是双系统出这问题，附加win10磁盘就完事
-安装过程提示help_setup_cannot_continue_due_to_a_corrupted 1 2 3 4 5 6 7 8  # 直接擦写一下这块硬盘 dd if=/dev/zero of=/dev/vdb # fdisk 重新分区 fdisk /dev/vdb # 格式化 mkfs.ntfs /dev/vdb1   </description>
+安装过程提示help setup cannot continue due to a corrupted 1 2 3 4 5 6 7 8  # 直接擦写一下这块硬盘 dd if=/dev/zero of=/dev/vdb # fdisk 重新分区 fdisk /dev/vdb # 格式化 mkfs.ntfs /dev/vdb1   </description>
     </item>
     
     <item>
