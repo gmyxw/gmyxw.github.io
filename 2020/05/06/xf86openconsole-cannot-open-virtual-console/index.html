@@ -8,7 +8,7 @@
     ">
 <meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
 <meta name="referrer" content="always">
-<title>安装Win10提示我们无法创建新的分区，也找不到现在的分区 - zhili</title>
+<title>Xf86OpenConsole Cannot Open Virtual Console - zhili</title>
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
 </head>
@@ -22,28 +22,17 @@
 <main>
   <article>
     <div class="title">
-  <h1>安装Win10提示我们无法创建新的分区，也找不到现在的分区</h1>
+  <h1>Xf86OpenConsole Cannot Open Virtual Console</h1>
   </div>
 <div class="meta">
-  <div>2020-05-05 12:14</div>
+  <div>2020-05-06 18:00</div>
   <div>
-    <span><a href="https://sy123.ml/tags/windows/">#windows</a></span>
+    <span><a href="https://sy123.ml/tags/linux/">#linux</a></span>
       </div>
   </div>
 <div class="content">
-  <h2 id="前言">前言</h2>
-<p>系统搬来linux有两年了，今天突然发现还是需要win10用ida的，虚拟机很不方便</p>
-<h2 id="解决方法">解决方法</h2>
-<p>google一下在知乎想起原因:</p>
-<blockquote>
-<p>原因似乎在于windows会执着地把系统分区（大概类似于/boot）放到磁盘0（类似于/dev/sda？）上面。而这个时候磁盘0是U盘……于是傻X了……windows就是傻X解决方法，拔U盘/硬盘，从而使想装系统的盘成为磁盘0……或者直接把想装系统的盘做成安装盘，这样它也是磁盘0了&gt;_&laquo;<a href="https://link.zhihu.com/?target=http%3A//jingyan.baidu.com/article/2c8c281df6f2d60009252a7c.html%3E">https://link.zhihu.com/?target=http%3A//jingyan.baidu.com/article/2c8c281df6f2d60009252a7c.html&gt;</a></p>
-<p>作者：杨微粒
-链接：<a href="https://www.zhihu.com/question/21117479/answer/86745809">https://www.zhihu.com/question/21117479/answer/86745809</a>
-来源：知乎
-著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-</blockquote>
-<p>我的虚拟机之前忘记干啥也是双系统出这问题，附加win10磁盘就完事</p>
-<h2 id="安装过程提示help-setup-cannot-continue-due-to-a-corrupted">安装过程提示help setup cannot continue due to a corrupted</h2>
+  <p>I can start X only by root.  If I am using <code>startx</code> using ordinary user I get the error:</p>
+<p>xf86OpenConsole: Cannot open virtual console 1 (Permission denied)</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -51,22 +40,17 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># 直接擦写一下这块硬盘</span>
-dd <span style="color:#000;font-weight:bold">if</span><span style="color:#000;font-weight:bold">=</span>/dev/zero <span style="color:#008080">of</span><span style="color:#000;font-weight:bold">=</span>/dev/vdb
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ groups
+lp wheel games video audio optical storage scanner power users
 
-<span style="color:#998;font-style:italic"># fdisk 重新分区</span>
-fdisk /dev/vdb
-
-<span style="color:#998;font-style:italic"># 格式化</span>
-mkfs.ntfs /dev/vdb1
+$ ls -l /dev/tty1
+crw-------- <span style="color:#099">1</span> root tty 4, <span style="color:#099">1</span> Jan <span style="color:#099">17</span> 10:21 /dev/tty1
 </code></pre></td></tr></table>
 </div>
-</div></div>
+</div><p>This might help someone.  So I am going to post it.  If your logged in as a different user and su to the user starting X. You will get an permission denied as tty1 is occupied by the original user.  In short reboot or completely log out the current user then issue &ldquo;<strong>startx</strong>&quot;.</p>
+</div>
 <div class="disqus">
   <div id="disqus_thread"></div>
 

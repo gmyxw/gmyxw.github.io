@@ -6,10 +6,21 @@
     <description>Recent content in Posts on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Tue, 05 May 2020 12:14:03 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 06 May 2020 18:00:36 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Xf86OpenConsole Cannot Open Virtual Console</title>
+      <link>https://sy123.ml/2020/05/06/xf86openconsole-cannot-open-virtual-console/</link>
+      <pubDate>Wed, 06 May 2020 18:00:36 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/05/06/xf86openconsole-cannot-open-virtual-console/</guid>
+      <description>I can start X only by root. If I am using startx using ordinary user I get the error:
+xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
+1 2 3 4 5  $ groups lp wheel games video audio optical storage scanner power users $ ls -l /dev/tty1 crw-------- 1 root tty 4, 1 Jan 17 10:21 /dev/tty1   This might help someone. So I am going to post it.</description>
+    </item>
     
     <item>
       <title>安装Win10提示我们无法创建新的分区，也找不到现在的分区</title>
