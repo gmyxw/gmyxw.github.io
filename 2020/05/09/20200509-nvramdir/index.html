@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>20200509 NvramDir - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">zhili</a></h1>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>20200509 NvramDir</h1>
+  </div>
+<div class="meta">
+  <div>2020-05-09 18:34</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/linux/">#linux</a></span>
+      <span><a href="https://sy123.ml/tags/libvirt/">#libvirt</a></span>
+      </div>
+  </div>
+<div class="content">
+  <h2 id="nvram-storage-in-libvirt">NVRAM storage in libvirt</h2>
+<p>Libvirt stores pflash/nvram files for privliged users in /var/lib/libvirt/qemu/nvram/ this is a copy of the template var file that is read only.
+OVMF uses these files to store information such as boot information.
+The template inforamtion was uesed to be configured in /etc/libvirt/qemu.conf but was moved to json files.
+[https://bugs.archlinux.org/task/64175]</p>
+<blockquote>
+<p>Location of master nvram file
+This configuration option is obsolete. Libvirt will follow the
+QEMU firmware metadata specification to automatically locate
+firmware images. See docs/interop/firmware.json in the QEMU
+source tree. These metadata files are distributed alongside any
+firmware images intended for use with QEMU.</p>
+</blockquote>
+<p>[https://github.com/libvirt/libvirt/blob/fda14dd7821d3e20b1416b90525242b7d4306fe9/src/qemu/qemu_conf.c#L153]</p>
+<p>and for unprivliged users in
+[https://github.com/libvirt/libvirt/blob/fda14dd7821d3e20b1416b90525242b7d4306fe9/src/qemu/qemu_conf.c#L182]
+[https://github.com/libvirt/libvirt/blob/2f7d81497b90cd901c159b9e548004b164bec983/src/util/virutil.c#L760]</p>
+<p>if (!(cfg-&gt;configBaseDir = virGetUserConfigDirectory()))
+virGetXDGDirectory(&ldquo;XDG_CONFIG_HOME&rdquo;, &ldquo;.config&rdquo;);
+cfg-&gt;nvramDir = g_strdup_printf(&quot;%s/qemu/nvram&rdquo;, cfg-&gt;configBaseDir);</p>
+<p>For privliged users the best way to change the storage location seems to be to symlink /var/lib/libvirt/qemu/nvram/
+before any vm is installed. This should theoreticly no break the package as the folder would be create programmaticly.</p>
+<p>qemu: Build nvram directory at driver startup
+[https://github.com/libvirt/libvirt/commit/19425d110b0ca2ea3588dbf880ce48d81edea89c]</p>
+<p>Some usefull links</p>
+<p>[https://lists.gnu.org/archive/html/qemu-devel/2016-01/msg02034.html]</p>
+<h3 id="as-of-20191210-on-an-arch-linux-up-to-date-installation-this-is-not-enough-error-did-not-find-any-uefi-binary-path-for-arch-x86_64">As of 2019/12/10 on an arch linux up to date installation this is not enough: <strong>ERROR Did not find any UEFI binary path for arch &lsquo;x86_64&rsquo;</strong></h3>
+<blockquote>
+<p>create <code>/usr/share/qemu/firmware/60-ovmf-x86_64.json</code> with</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">35
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#000;font-weight:bold">[</span>lukashv@hv ~<span style="color:#000;font-weight:bold">]</span>$ cat 60-ovmf-x86_64.json
+<span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#d14">&#34;description&#34;</span>: <span style="color:#d14">&#34;UEFI OVMF firmware for x86_64&#34;</span>,
+    <span style="color:#d14">&#34;interface-types&#34;</span>: <span style="color:#000;font-weight:bold">[</span>
+        <span style="color:#d14">&#34;uefi&#34;</span>
+    <span style="color:#000;font-weight:bold">]</span>,
+    <span style="color:#d14">&#34;mapping&#34;</span>: <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#d14">&#34;device&#34;</span>: <span style="color:#d14">&#34;flash&#34;</span>,
+        <span style="color:#d14">&#34;executable&#34;</span>: <span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#d14">&#34;filename&#34;</span>: <span style="color:#d14">&#34;/usr/share/ovmf/x64/OVMF_CODE.fd&#34;</span>,
+            <span style="color:#d14">&#34;format&#34;</span>: <span style="color:#d14">&#34;raw&#34;</span>
+        <span style="color:#000;font-weight:bold">}</span>,
+        <span style="color:#d14">&#34;nvram-template&#34;</span>: <span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#d14">&#34;filename&#34;</span>: <span style="color:#d14">&#34;/usr/share/ovmf/x64/OVMF_VARS.fd&#34;</span>,
+            <span style="color:#d14">&#34;format&#34;</span>: <span style="color:#d14">&#34;raw&#34;</span>
+        <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">}</span>,
+    <span style="color:#d14">&#34;targets&#34;</span>: <span style="color:#000;font-weight:bold">[</span>
+        <span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#d14">&#34;architecture&#34;</span>: <span style="color:#d14">&#34;x86_64&#34;</span>,
+            <span style="color:#d14">&#34;machines&#34;</span>: <span style="color:#000;font-weight:bold">[</span>
+                <span style="color:#d14">&#34;pc-i440fx-*&#34;</span>,
+                <span style="color:#d14">&#34;pc-q35-*&#34;</span>
+            <span style="color:#000;font-weight:bold">]</span>
+        <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">]</span>,
+    <span style="color:#d14">&#34;features&#34;</span>: <span style="color:#000;font-weight:bold">[</span>
+        <span style="color:#d14">&#34;acpi-s3&#34;</span>,
+        <span style="color:#d14">&#34;amd-sev&#34;</span>,
+        <span style="color:#d14">&#34;verbose-dynamic&#34;</span>
+    <span style="color:#000;font-weight:bold">]</span>,
+    <span style="color:#d14">&#34;tags&#34;</span>: <span style="color:#000;font-weight:bold">[</span>
+
+    <span style="color:#000;font-weight:bold">]</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="note-if-any-firmware-metadata-files-are-detected-this-setting">NOTE: if ANY firmware metadata files are detected, this setting</h2>
+<p>will be <strong>COMPLETELY IGNORED.</strong></p>
+<p>But not setting also setting nvram in qemu.conf results in (root and user) session:
+<strong>ERROR operation failed: unable to find any master var store for loader: /usr/share/ovmf/x64/OVMF_CODE.fd</strong></p>
+<p>to fix add:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#008080">/etc/libvirt/qemu.conf                                               ~/.config/libvirt/qemu.conf</span>
+<span style="color:#008080">nvram</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">[</span>
+<span style="color:#008080">&#34;/usr/share/ovmf/x64/OVMF_CODE.fd:/usr/share/ovmf/x64/OVMF_VARS.fd&#34;</span>
+<span style="color:#008080">]</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo pacman -S ovmf
+sudo systemctl restart libvirtd
+</code></pre></td></tr></table>
+</div>
+</div><p>Summary needs valid json in <em>/usr/share/qemu/firmware/60-ovmf-x86_64.json_aswell as edited_qemu.conf</em></p>
+</blockquote>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>
