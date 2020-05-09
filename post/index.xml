@@ -12,11 +12,11 @@
     
     
     <item>
-      <title>20200509 NvramDir</title>
-      <link>https://sy123.ml/2020/05/09/20200509-nvramdir/</link>
+      <title>NVRAM storage in libvirt</title>
+      <link>https://sy123.ml/2020/05/09/nvram-storage-in-libvirt/</link>
       <pubDate>Sat, 09 May 2020 18:34:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/05/09/20200509-nvramdir/</guid>
+      <guid>https://sy123.ml/2020/05/09/nvram-storage-in-libvirt/</guid>
       <description>NVRAM storage in libvirt Libvirt stores pflash/nvram files for privliged users in /var/lib/libvirt/qemu/nvram/ this is a copy of the template var file that is read only. OVMF uses these files to store information such as boot information. The template inforamtion was uesed to be configured in /etc/libvirt/qemu.conf but was moved to json files. [https://bugs.archlinux.org/task/64175]
  Location of master nvram file This configuration option is obsolete. Libvirt will follow the QEMU firmware metadata specification to automatically locate firmware images.</description>
     </item>
