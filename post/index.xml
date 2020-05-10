@@ -27,7 +27,7 @@
       
       <guid>https://sy123.ml/2020/05/10/kodbox-always-https/</guid>
       <description>很久不用kodexplorer，一堆BUG不修在搞to B商务弄出个kodbox，很久没用PHP出问题我也懒得研究，直接暴力解决问题就完事，以后再找替代品
-1 2 3 4 5 6 7 8 9 10  --- web.function.php 2020-05-10 13:20:20.472730147 +0800 +++ web.function.new.php 2020-05-10 13:20:09.862832878 +0800 @@ -59,6 +59,7 @@  } function http_type(){ + return &amp;#39;https&amp;#39;;  if( (isset($_SERVER[&amp;#39;HTTPS&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTPS&amp;#39;] !== &amp;#39;off&amp;#39;) || (isset($_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;] == &amp;#39;https&amp;#39;) || $_SERVER[&amp;#39;SERVER_PORT&amp;#39;] === 443   用了一分钟后我发现还是kodexplorer好使</description>
+1 2 3 4 5 6 7 8 9 10  --- web.function.php 2020-05-10 13:20:20.472730147 +0800 +++ web.function.new.php 2020-05-10 13:20:09.862832878 +0800 @@ -59,6 +59,7 @@  } function http_type(){ + return &amp;#39;https&amp;#39;;  if( (isset($_SERVER[&amp;#39;HTTPS&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTPS&amp;#39;] !== &amp;#39;off&amp;#39;) || (isset($_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;] == &amp;#39;https&amp;#39;) || $_SERVER[&amp;#39;SERVER_PORT&amp;#39;] === 443   用了一分钟后我发现还是kodexplorer好使，最后一个版本好像是4.40，且用且珍惜</description>
     </item>
     
     <item>
