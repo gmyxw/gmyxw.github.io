@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Kodbox Always Https - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">zhili</a></h1>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Kodbox Always Https</h1>
+  </div>
+<div class="meta">
+  <div>2020-05-10 13:27</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/php/">#php</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>很久不用kodexplorer，一堆BUG不修在搞to B商务弄出个kodbox，很久没用<strong>PHP</strong>出问题我也懒得研究，直接暴力解决问题就完事，以后再找替代品</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff"><span style="color:#000;background-color:#fdd">--- web.function.php 2020-05-10 13:20:20.472730147 +0800
+</span><span style="color:#000;background-color:#fdd"></span><span style="color:#000;background-color:#dfd">+++ web.function.new.php 2020-05-10 13:20:09.862832878 +0800
+</span><span style="color:#000;background-color:#dfd"></span><span style="color:#aaa">@@ -59,6 +59,7 @@
+</span><span style="color:#aaa"></span> }
+
+ function http_type(){
+<span style="color:#000;background-color:#dfd">+ return &#39;https&#39;;
+</span><span style="color:#000;background-color:#dfd"></span>  if( (isset($_SERVER[&#39;HTTPS&#39;]) &amp;&amp; $_SERVER[&#39;HTTPS&#39;] !== &#39;off&#39;) ||
+   (isset($_SERVER[&#39;HTTP_X_FORWARDED_PROTO&#39;]) &amp;&amp; $_SERVER[&#39;HTTP_X_FORWARDED_PROTO&#39;] == &#39;https&#39;) ||
+   $_SERVER[&#39;SERVER_PORT&#39;] === 443
+</code></pre></td></tr></table>
+</div>
+</div></div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

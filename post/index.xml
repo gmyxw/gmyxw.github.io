@@ -6,10 +6,20 @@
     <description>Recent content in Posts on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Sat, 09 May 2020 18:34:24 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 10 May 2020 13:27:00 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Kodbox Always Https</title>
+      <link>https://sy123.ml/2020/05/10/kodbox-always-https/</link>
+      <pubDate>Sun, 10 May 2020 13:27:00 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/05/10/kodbox-always-https/</guid>
+      <description>很久不用kodexplorer，一堆BUG不修在搞to B商务弄出个kodbox，很久没用PHP出问题我也懒得研究，直接暴力解决问题就完事，以后再找替代品
+1 2 3 4 5 6 7 8 9 10  --- web.function.php 2020-05-10 13:20:20.472730147 +0800 +++ web.function.new.php 2020-05-10 13:20:09.862832878 +0800 @@ -59,6 +59,7 @@  } function http_type(){ + return &amp;#39;https&amp;#39;;  if( (isset($_SERVER[&amp;#39;HTTPS&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTPS&amp;#39;] !== &amp;#39;off&amp;#39;) || (isset($_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;] == &amp;#39;https&amp;#39;) || $_SERVER[&amp;#39;SERVER_PORT&amp;#39;] === 443   </description>
+    </item>
     
     <item>
       <title>NVRAM storage in libvirt</title>
