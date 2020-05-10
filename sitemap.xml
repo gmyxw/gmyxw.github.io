@@ -8,22 +8,27 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/05/10/failed-unmounting-/run/user/1000-whenever-i-shutdown-or-reboot/</loc>
-    <lastmod>2020-05-10T16:05:28+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://sy123.ml/tags/linux/</loc>
-    <lastmod>2020-05-10T16:05:28+08:00</lastmod>
+    <lastmod>2020-05-10T17:15:52+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sy123.ml/post/</loc>
-    <lastmod>2020-05-10T16:05:28+08:00</lastmod>
+    <lastmod>2020-05-10T17:15:52+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sy123.ml/tags/</loc>
+    <lastmod>2020-05-10T17:15:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/2020/05/10/warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</loc>
+    <lastmod>2020-05-10T17:15:52+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/2020/05/10/failed-unmounting-/run/user/1000-whenever-i-shutdown-or-reboot/</loc>
     <lastmod>2020-05-10T16:05:28+08:00</lastmod>
   </url>
   

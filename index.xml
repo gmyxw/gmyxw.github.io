@@ -23,6 +23,17 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     </item>
     
     <item>
+      <title>Warning Secondary Partition Overlaps the Last Partition by X Blocks in Gdisk</title>
+      <link>https://sy123.ml/2020/05/10/warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</link>
+      <pubDate>Sun, 10 May 2020 17:15:52 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/05/10/warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</guid>
+      <description>From what I just found out, it may be unsafe. I was getting this same error
+ *************************************************************** Found invalid GPT and valid MBR; converting MBR to GPT format in memory. THIS OPERATION IS POTENTIALLY DESTRUCTIVE! Exit by typing &amp;lsquo;q&amp;rsquo; if you don&amp;rsquo;t want to convert your MBR partitions to GPT format!
+ Warning! Secondary partition table overlaps the last partition by 33 blocks! You will need to delete this partition or resize it in another utility.</description>
+    </item>
+    
+    <item>
       <title>Failed unmounting /run/user/1000 whenever i shutdown or reboot</title>
       <link>https://sy123.ml/2020/05/10/failed-unmounting-/run/user/1000-whenever-i-shutdown-or-reboot/</link>
       <pubDate>Sun, 10 May 2020 16:05:28 +0800</pubDate>
