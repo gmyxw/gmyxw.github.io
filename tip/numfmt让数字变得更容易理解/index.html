@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>numfmt:让数字变得更容易理解 - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">zhili</a></h1>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>numfmt:让数字变得更容易理解</h1>
+  </div>
+<div class="meta">
+  <div>2020-05-12 12:10</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/linux/">#linux</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>像 =ls=, =df=, =du= 这类命令都带有一个选项可以将数字直接转换成人类容易阅读的形式来展现。
+比如,直接执行 =df= 时，容量显示的是多少个块，而当用 =df -h= 时，容量会根据块的数量转换成 G/M/K 的形式。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">  <span style="color:#000;font-weight:bold">[</span>lujun9972@T520 ~<span style="color:#000;font-weight:bold">]</span>$ df
+  文件系统          1K-块     已用     可用 已用% 挂载点
+  dev             <span style="color:#099">1900280</span>        <span style="color:#099">0</span>  <span style="color:#099">1900280</span>    0% /dev
+  run             <span style="color:#099">1906932</span>      <span style="color:#099">868</span>  <span style="color:#099">1906064</span>    1% /run
+  /dev/sda2      <span style="color:#099">41022688</span> <span style="color:#099">23631300</span> <span style="color:#099">15277852</span>   61% /
+  tmpfs           <span style="color:#099">1906932</span>    <span style="color:#099">26204</span>  <span style="color:#099">1880728</span>    2% /dev/shm
+  tmpfs           <span style="color:#099">1906932</span>        <span style="color:#099">0</span>  <span style="color:#099">1906932</span>    0% /sys/fs/cgroup
+  tmpfs           <span style="color:#099">1906932</span>     <span style="color:#099">5156</span>  <span style="color:#099">1901776</span>    1% /tmp
+  /dev/sda3      <span style="color:#099">73005440</span> <span style="color:#099">61682676</span>  <span style="color:#099">7571272</span>   90% /home
+  tmpfs               <span style="color:#099">100</span>        <span style="color:#099">0</span>      <span style="color:#099">100</span>    0% /var/lib/lxd/shmounts
+  tmpfs               <span style="color:#099">100</span>        <span style="color:#099">0</span>      <span style="color:#099">100</span>    0% /var/lib/lxd/devlxd
+  tmpfs            <span style="color:#099">381384</span>        <span style="color:#099">8</span>   <span style="color:#099">381376</span>    1% /run/user/1000
+
+  <span style="color:#000;font-weight:bold">[</span>lujun9972@T520 ~<span style="color:#000;font-weight:bold">]</span>$ df -h
+  文件系统        容量  已用  可用 已用% 挂载点
+  dev             1.9G     <span style="color:#099">0</span>  1.9G    0% /dev
+  run             1.9G  868K  1.9G    1% /run
+  /dev/sda2        40G   23G   15G   61% /
+  tmpfs           1.9G   26M  1.8G    2% /dev/shm
+  tmpfs           1.9G     <span style="color:#099">0</span>  1.9G    0% /sys/fs/cgroup
+  tmpfs           1.9G  5.1M  1.9G    1% /tmp
+  /dev/sda3        70G   59G  7.3G   90% /home
+  tmpfs           100K     <span style="color:#099">0</span>  100K    0% /var/lib/lxd/shmounts
+  tmpfs           100K     <span style="color:#099">0</span>  100K    0% /var/lib/lxd/devlxd
+  tmpfs           373M  8.0K  373M    1% /run/user/1000
+</code></pre></td></tr></table>
+</div>
+</div><p>不过对于那些没有这类功能的命令该怎么办呢？有单独的一个命令来实现数字和易读形式之间的转换吗？
+答案是，还真有，这就是 =numfmt=. 而且 =numfmt= 是 coreutils 的一部分，无需另行安装，真是良心。</p>
+<ul>
+<li>1000 进制还是 1024 进制？这是个问题
+使用 =numfmt= 支持两种转换标准，一种是 1K=1000,1M=1000K&hellip;的:</li>
+</ul>
+<ul>
+<li>
+<p>numfmt &ndash;to=si 数字 :: 将数字转换成易读格式</p>
+<p>#+BEGIN_SRC shell :results org
+numfmt &ndash;to=si 100000</p>
+<pre><code>
+```sh
+100K
+</code></pre></li>
+<li>
+<p>numfmt &ndash;from=si 易读格式 :: 将易读格式转换成数字</p>
+<p>#+BEGIN_SRC shell :results org
+numfmt &ndash;from=si 100K</p>
+<pre><code>
+```sh
+100000
+</code></pre></li>
+</ul>
+<p>还有一种是 1K=1024,1M=1024K&hellip;的:</p>
+<ul>
+<li>
+<p>numfmt &ndash;to=iec 数字 :: 将数字转换成易读格式</p>
+<p>#+BEGIN_SRC shell :results org
+numfmt &ndash;to=iec 100000</p>
+<pre><code>
+```sh
+98K
+</code></pre></li>
+<li>
+<p>numfmt &ndash;from=iec 易读格式 :: 将易读格式转换成数字</p>
+<p>#+BEGIN_SRC shell :results org
+numfmt &ndash;from=iec 100K</p>
+<pre><code>
+```sh
+102400
+</code></pre></li>
+</ul>
+<p>事实上，还有一种格式是 1Ki=1024,1Mi=1024Ki&hellip;的(即在单位后面有个 i)：</p>
+<ul>
+<li>
+<p>numfmt &ndash;to=iec-i 数字 :: 将数字转换成易读格式</p>
+<p>#+BEGIN_SRC shell :results org
+numfmt &ndash;to=iec-i 100000</p>
+<pre><code>
+```sh
+98Ki
+</code></pre></li>
+</ul>
+<ul>
+<li>
+<p>numfmt &ndash;from=iec-i 易读格式 :: 将易读格式转换成数字</p>
+<p>#+BEGIN_SRC shell :results org
+numfmt &ndash;from=iec-i 100Ki</p>
+<pre><code>
+#+RESULTS:
+```sh
+102400
+</code></pre></li>
+</ul>
+<p>当将易读格式转换会数字时，可以将格式设置为 =auto=, 这样 =numfmt= 会自动判断应该是按 1000 来转换还是按 1024 来转换，其选择的规则为:</p>
+<ul>
+<li>
+<p>若格式的单位后面不带 =i= 则使用 1000 进制来转换</p>
+<p>#+BEGIN_SRC shell :results org
+numfmt &ndash;from=auto 100K</p>
+<pre><code>
+```sh
+100000
+</code></pre></li>
+<li>
+<p>若格式的单位后面不带 =i= 则使用 1024 进制来转换</p>
+<p>#+BEGIN_SRC shell :results org
+numfmt &ndash;from=auto 100Ki</p>
+<pre><code>
+```sh
+102400
+</code></pre></li>
+</ul>
+<ul>
+<li>一次进行多个转换
+=numfmt= 能够一次性进行多个转换，只需要在后面罗列数字或者易读格式就行了。
+#+BEGIN_SRC shell :results org
+numfmt &ndash;to=iec 100000 20000 40000</li>
+</ul>
+<pre><code>
+```sh
+98K
+20K
+40K
+</code></pre><p>#+BEGIN_SRC shell :results org
+numfmt &ndash;from=iec 98K 20K 40K</p>
+<pre><code>
+```sh
+100352
+20480
+40960
+</code></pre><p>从中你也可以看出，转换的结果其实并不会特别的精确</p>
+<ul>
+<li>指定数字的单位
+使用 =&ndash;from-unit= 可以指定输入数字的单位,比如：
+#+BEGIN_SRC shell :results org
+numfmt &ndash;to=si &ndash;from-unit K 1000</li>
+</ul>
+<pre><code>
+```sh
+1.0M
+</code></pre><p>你会发现，输出是 =1M= 而不是 =1K=</p>
+<p>同理，使用 =&ndash;to-unit= 可以指定输出数字的单位:
+#+BEGIN_SRC shell :results org
+numfmt &ndash;from=si &ndash;to-unit K 1M</p>
+<pre><code>
+```sh
+1000
+</code></pre><p>可以看到，输出是是 =1000= 而不是 =1000000=</p>
+<ul>
+<li>指定输出的格式</li>
+</ul>
+<p>使用 =&ndash;format= 可以指定输出的格式，其格式语法类似于 C 语言中 =printf= 的格式说明，但仅限于格式化一个浮点数。比如：</p>
+<ul>
+<li>
+<p>输出右对齐，占 10 位字符</p>
+<p>#+BEGIN_SRC shell
+[lujun9972@T520 ~]$ numfmt &ndash;to=si &ndash;format &ldquo;%10f&rdquo; 1000
+1.0K</p>
+<pre><code>
+</code></pre></li>
+<li>
+<p>输出左对齐，占 10 位字符</p>
+<p>#+BEGIN_EXAMPLE
+[lujun9972@T520 ~]$ numfmt &ndash;to=si &ndash;format &ldquo;%-10f|&rdquo; 1000
+1.0K |
+#+END_EXAMPLE</p>
+<p>为了清晰，我在字符串最后加了一个 =|=</p>
+</li>
+<li>
+<p>输出右对齐，占 10 位字符,不够的位用 0 填充</p>
+<p>#+BEGIN_EXAMPLE
+[lujun9972@T520 ~]$ numfmt &ndash;to=si &ndash;format &ldquo;%010f&rdquo; 1000
+00000001.0K
+#+END_EXAMPLE</p>
+</li>
+</ul>
+<ul>
+<li>与其他命令整合
+当 =numfmt= 没有指定数字或易读格式来转换时，它会从 stdin 中读取要转换的内容</li>
+</ul>
+<p>#+BEGIN_SRC shell :results org
+echo 1000 |numfmt &ndash;to=si
+f</p>
+<pre><code>
+```sh
+1.0K
+</code></pre><p>然而，对于像 =df= 这样的命令，除了数字外，还有其他内容怎么办呢？</p>
+<p>这个时候，我们可以使用 =&ndash;header= 来跳过命令输出前面几行的标题,使用 =field= 来指定转换某几列的内容。</p>
+<p>比如，我们可以用下列命令来让 =numfmt= 只转换 =df= 命令从第 3 行开始的 2 到 4 列数字，保持其他内容不变</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">  df -B1 | numfmt --header<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span> --field 2-4 --to<span style="color:#000;font-weight:bold">=</span>iec
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">文件系统             1B-块        已用        可用 已用% 挂载点
+dev             <span style="color:#099">1945886720</span>           <span style="color:#099">0</span>  <span style="color:#099">1945886720</span>    0% /dev
+run                   1.9G        868K        1.9G    1% /run
+/dev/sda2              40G         23G         15G   61% /
+tmpfs                 1.9G         26M        1.8G    2% /dev/shm
+tmpfs                 1.9G           <span style="color:#099">0</span>        1.9G    0% /sys/fs/cgroup
+tmpfs                 1.9G        5.1M        1.9G    1% /tmp
+/dev/sda3              70G         59G        7.3G   90% /home
+tmpfs                 100K           <span style="color:#099">0</span>        100K    0% /var/lib/lxd/shmounts
+tmpfs                 100K           <span style="color:#099">0</span>        100K    0% /var/lib/lxd/devlxd
+tmpfs                 373M        8.0K        373M    1% /run/user/1000
+</code></pre></td></tr></table>
+</div>
+</div></div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>
