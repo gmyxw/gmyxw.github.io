@@ -36,14 +36,5 @@ Examples
 1  7z a archive.</description>
     </item>
     
-    <item>
-      <title>aaa</title>
-      <link>https://sy123.ml/tip/aaa/</link>
-      <pubDate>Sun, 03 May 2020 15:28:18 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tip/aaa/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>
