@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>time on zhili</title>
+    <link>https://sy123.ml/tags/time/</link>
+    <description>Recent content in time on zhili</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>2007-2020 zhili.</copyright>
+    <lastBuildDate>Tue, 12 May 2020 14:31:58 +0800</lastBuildDate>
+    
+	<atom:link href="https://sy123.ml/tags/time/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>解决Windows与Ubuntu双系统时间同步问题</title>
+      <link>https://sy123.ml/2020/05/12/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Tue, 12 May 2020 14:31:58 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/05/12/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</guid>
+      <description>UTC in Windows To dual boot with Windows it is recommended to configure Windows to use UTC, rather than Linux to use localtime. (Windows by default uses localtime [1].)
+It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry:
+1  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal   You can do this from an Administrator Command Prompt running:</description>
+    </item>
+    
+  </channel>
+</rss>
