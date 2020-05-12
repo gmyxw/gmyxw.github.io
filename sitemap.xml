@@ -8,17 +8,37 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/tags/linux/</loc>
-    <lastmod>2020-05-10T17:15:52+08:00</lastmod>
+    <loc>https://sy123.ml/tags/kvm/</loc>
+    <lastmod>2020-05-12T11:39:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/tags/libvirt/</loc>
+    <lastmod>2020-05-12T11:39:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/tags/libvirtd/</loc>
+    <lastmod>2020-05-12T11:39:36+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sy123.ml/post/</loc>
-    <lastmod>2020-05-10T17:15:52+08:00</lastmod>
+    <lastmod>2020-05-12T11:39:36+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sy123.ml/tags/</loc>
+    <lastmod>2020-05-12T11:39:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/2020/05/12/%E5%88%A0%E9%99%A4kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%87%BA%E7%8E%B0cannot-undefine-domain-with-nvram/</loc>
+    <lastmod>2020-05-12T11:39:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/tags/linux/</loc>
     <lastmod>2020-05-10T17:15:52+08:00</lastmod>
   </url>
   
@@ -43,17 +63,17 @@
   </url>
   
   <url>
-    <loc>https://sy123.ml/tags/libvirt/</loc>
-    <lastmod>2020-05-09T18:34:24+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://sy123.ml/2020/05/09/nvram-storage-in-libvirt/</loc>
     <lastmod>2020-05-09T18:34:24+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sy123.ml/2020/05/07/7z-exclude/</loc>
+    <loc>https://sy123.ml/tip/7z-command/</loc>
+    <lastmod>2020-05-07T15:02:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/tip/</loc>
     <lastmod>2020-05-07T15:02:57+08:00</lastmod>
   </url>
   
@@ -74,11 +94,6 @@
   
   <url>
     <loc>https://sy123.ml/tip/aaa/</loc>
-    <lastmod>2020-05-03T15:28:18+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/tip/</loc>
     <lastmod>2020-05-03T15:28:18+08:00</lastmod>
   </url>
   

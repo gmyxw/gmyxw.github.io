@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>删除kvm虚拟机出现cannot undefine domain with nvram - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">zhili</a></h1>
+  </div>
+  <nav><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>删除kvm虚拟机出现cannot undefine domain with nvram</h1>
+  </div>
+<div class="meta">
+  <div>2020-05-12 11:39</div>
+  <div>
+    <span><a href="https://sy123.ml/tags/kvm/">#kvm</a></span>
+      <span><a href="https://sy123.ml/tags/libvirtd/">#libvirtd</a></span>
+      </div>
+  </div>
+<div class="content">
+  <h2 id="kvm-报错以及处理">KVM 报错以及处理</h2>
+<p>删除kvm虚拟机出现cannot undefine domain with nvram
+删除Kvm虚拟时，需要先destroy，然后在undefine某台虚拟机，但是在删除其中一台虚拟机时出现以下错误：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">me@ubuntu:~/virtual_machine$ virsh undefine ubuntu_2
+error: Failed to undefine domain ubuntu_2
+error: Requested operation is not valid: cannot undefine domain with nvram
+</code></pre></td></tr></table>
+</div>
+</div><p>这个时候可以使用**&ndash;nvram**选项删除， 搜遍全网，并没有找到解决办法，这个最好使。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">me@ubuntu:~/virtual_machine$ virsh undefine ubuntu_2 --nvram
+Domain ubuntu_2 has been undefined
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="kvm挂载硬盘容量显示不正确">KVM挂载硬盘容量显示不正确</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic">#创建了一个disk文件， 用于给7号VM添加100G的新硬盘</span>
+sudo qemu-img create -f qcow2 ubuntu_vm7_disk_100G 100G
+<span style="color:#998;font-style:italic">#挂载这个文件到sdb，sdb需要是虚机上未使用的名字</span>
+virsh attach-disk ubuntu_7 /var/lib/libvirt/images/ubuntu_vm7_disk_100G vdb --cache none
+<span style="color:#998;font-style:italic">#提示挂载成功，但是进入虚机查看硬盘设备，看到设备，但是容量明显不对，194k只是文件的大小，虚机里面应该看到100G才对</span>
+me@ubuntu7:~$ lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sr0     11:0    <span style="color:#099">1</span> 1024M  <span style="color:#099">0</span> rom
+vda    252:0    <span style="color:#099">0</span>   50G  <span style="color:#099">0</span> disk
+├─vda1 252:1    <span style="color:#099">0</span>  512M  <span style="color:#099">0</span> part /boot/efi
+└─vda2 252:2    <span style="color:#099">0</span> 49.5G  <span style="color:#099">0</span> part /
+vdb    252:16   <span style="color:#099">0</span>  194K  <span style="color:#099">0</span> disk
+<span style="color:#998;font-style:italic">#原因是当创建qcow2格式的硬盘时，挂载需要使用--subdriver 制定驱动类型</span>
+<span style="color:#998;font-style:italic">#先卸载硬盘</span>
+virsh detach-disk ubuntu_7 /var/lib/libvirt/images/ubuntu_vm7_disk_100G
+<span style="color:#998;font-style:italic">#再重新挂载</span>
+virsh attach-disk ubuntu_7 /var/lib/libvirt/images/ubuntu_vm7_disk_100G vdb --subdriver<span style="color:#000;font-weight:bold">=</span>qcow2
+<span style="color:#998;font-style:italic">#进入虚机查看</span>
+me@ubuntu7:~$ lsblk
+NAME   MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sr0     11:0    <span style="color:#099">1</span> 1024M  <span style="color:#099">0</span> rom
+vda    252:0    <span style="color:#099">0</span>   50G  <span style="color:#099">0</span> disk
+├─vda1 252:1    <span style="color:#099">0</span>  512M  <span style="color:#099">0</span> part /boot/efi
+└─vda2 252:2    <span style="color:#099">0</span> 49.5G  <span style="color:#099">0</span> part /
+vdb    252:16   <span style="color:#099">0</span>  194K  <span style="color:#099">0</span> disk
+</code></pre></td></tr></table>
+</div>
+</div></div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

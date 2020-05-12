@@ -42,12 +42,12 @@
     </item>
     
     <item>
-      <title>7z Exclude</title>
-      <link>https://sy123.ml/2020/05/07/7z-exclude/</link>
+      <title>7z command</title>
+      <link>https://sy123.ml/tip/7z-command/</link>
       <pubDate>Thu, 07 May 2020 15:02:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/05/07/7z-exclude/</guid>
-      <description>Specifies which filenames or wildcarded names must be excluded from the operation.
+      <guid>https://sy123.ml/tip/7z-command/</guid>
+      <description>exclude file Specifies which filenames or wildcarded names must be excluded from the operation.
 Multiple exclude switches are supported.
 Syntax
 1 2 3 4  -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt; &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard}   See -i (Include) switch description for information about option parameters.
