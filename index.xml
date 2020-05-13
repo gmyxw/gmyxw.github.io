@@ -23,6 +23,17 @@ Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, a
     </item>
     
     <item>
+      <title>Exception in thread &#34;main&#34; java.lang.OutOfMemoryError: Java heap space</title>
+      <link>https://sy123.ml/2020/05/14/exception-in-thread-main-java.lang.outofmemoryerror-java-heap-space/</link>
+      <pubDate>Thu, 14 May 2020 05:31:01 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/05/14/exception-in-thread-main-java.lang.outofmemoryerror-java-heap-space/</guid>
+      <description>今天用一个游戏资源批量解密程序出现错误提示：
+1  Exception in thread &amp;#34;main&amp;#34; java.lang.OutOfMemoryError: Java heap space: failed reallocation of scalar replaced objects   工具太多，直接设置一下环境变量就完事儿
+1 2  /mnt/win10/Users/zhili/Downloads 15s ❯ export _JAVA_OPTIONS=&amp;#34;-Xms512m -Xmx10G&amp;#34;   </description>
+    </item>
+    
+    <item>
       <title>解决Windows与Ubuntu双系统时间同步问题</title>
       <link>https://sy123.ml/2020/05/12/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</link>
       <pubDate>Tue, 12 May 2020 14:31:58 +0800</pubDate>

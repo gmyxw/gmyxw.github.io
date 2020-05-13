@@ -6,10 +6,19 @@
     <description>Recent content in Tags on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Tue, 12 May 2020 14:31:58 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 14 May 2020 05:31:01 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>java</title>
+      <link>https://sy123.ml/tags/java/</link>
+      <pubDate>Thu, 14 May 2020 05:31:01 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/java/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>linux</title>
@@ -422,15 +431,6 @@
       <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/network/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>java</title>
-      <link>https://sy123.ml/tags/java/</link>
-      <pubDate>Wed, 22 Jan 2020 01:12:54 +0800</pubDate>
-      
-      <guid>https://sy123.ml/tags/java/</guid>
       <description></description>
     </item>
     

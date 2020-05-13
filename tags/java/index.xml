@@ -6,10 +6,21 @@
     <description>Recent content in java on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Wed, 22 Jan 2020 01:12:54 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 14 May 2020 05:31:01 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/java/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Exception in thread &#34;main&#34; java.lang.OutOfMemoryError: Java heap space</title>
+      <link>https://sy123.ml/2020/05/14/exception-in-thread-main-java.lang.outofmemoryerror-java-heap-space/</link>
+      <pubDate>Thu, 14 May 2020 05:31:01 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/05/14/exception-in-thread-main-java.lang.outofmemoryerror-java-heap-space/</guid>
+      <description>今天用一个游戏资源批量解密程序出现错误提示：
+1  Exception in thread &amp;#34;main&amp;#34; java.lang.OutOfMemoryError: Java heap space: failed reallocation of scalar replaced objects   工具太多，直接设置一下环境变量就完事儿
+1 2  /mnt/win10/Users/zhili/Downloads 15s ❯ export _JAVA_OPTIONS=&amp;#34;-Xms512m -Xmx10G&amp;#34;   </description>
+    </item>
     
     <item>
       <title>Set_all_Java_apps_to_use_GTK&#43;_font_&amp;_theme_settings</title>
