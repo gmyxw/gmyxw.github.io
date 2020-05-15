@@ -6,10 +6,19 @@
     <description>Recent content in Posts on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Fri, 15 May 2020 04:26:04 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 16 May 2020 00:33:08 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GTK开启黑暗模式</title>
+      <link>https://sy123.ml/2020/05/16/gtk%E5%BC%80%E5%90%AF%E9%BB%91%E6%9A%97%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Sat, 16 May 2020 00:33:08 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/05/16/gtk%E5%BC%80%E5%90%AF%E9%BB%91%E6%9A%97%E6%A8%A1%E5%BC%8F/</guid>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  # 安装黑暗主题 ~ ❯ sudo pacman -S gnome-themes-extra ~ ❯ cat .gtkrc gtk-icon-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-font-name = &amp;#34;Cantarell 11&amp;#34; ~ ❯ cat .config/gtk-3.0/settings.ini [Settings] gtk-icon-theme-name = Adwaita-dark gtk-theme-name = Adwaita-dark gtk-application-prefer-dark-theme = true gtk-font-name = Cantarell 11   See also https://wiki.archlinux.org/index.php/GTK</description>
+    </item>
     
     <item>
       <title>How Do I Remove an Image System for Avd File in Android Studio</title>
