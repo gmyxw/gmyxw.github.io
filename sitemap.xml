@@ -8,22 +8,37 @@
   </url>
   
   <url>
+    <loc>https://sy123.ml/2020/05/18/20200518-vscode-go-interactive-debug-console/</loc>
+    <lastmod>2020-05-18T04:01:27+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/tags/go/</loc>
+    <lastmod>2020-05-18T04:01:27+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/post/</loc>
+    <lastmod>2020-05-18T04:01:27+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/tags/</loc>
+    <lastmod>2020-05-18T04:01:27+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sy123.ml/tags/vscode/</loc>
+    <lastmod>2020-05-18T04:01:27+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://sy123.ml/tags/android/</loc>
     <lastmod>2020-05-17T20:31:14+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://sy123.ml/2020/05/17/android-intent/</loc>
-    <lastmod>2020-05-17T20:31:14+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/post/</loc>
-    <lastmod>2020-05-17T20:31:14+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/tags/</loc>
     <lastmod>2020-05-17T20:31:14+08:00</lastmod>
   </url>
   
@@ -174,11 +189,6 @@
   
   <url>
     <loc>https://sy123.ml/2020/04/18/how-can-i-simulate-interactive-console-in-vscode-debugger/</loc>
-    <lastmod>2020-04-18T00:06:48+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://sy123.ml/tags/vscode/</loc>
     <lastmod>2020-04-18T00:06:48+08:00</lastmod>
   </url>
   
