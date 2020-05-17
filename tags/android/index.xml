@@ -6,10 +6,38 @@
     <description>Recent content in android on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Sat, 16 May 2020 19:27:02 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 17 May 2020 20:31:14 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/tags/android/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Android Intent</title>
+      <link>https://sy123.ml/2020/05/17/android-intent/</link>
+      <pubDate>Sun, 17 May 2020 20:31:14 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/05/17/android-intent/</guid>
+      <description>Intent 功能太强大了，比较常用的就是Activity （Service）之间的数据传递。举个简单例百子，在当前Activity1使用startActvity(intent)或者startActivityForResult(intent, code)方法跳转到另一个Activity2之前，如果要传递某度些String类型数据给Activity2，则会执行intent.putExtra(String str, String Key),将专String数据打包到Intent中，并给它一个Key标识。在Activity2当中，getIntent()方法获得这个intent，然后再getStringExtra(Key)，就可以获得你之前打包的那个数据了。这种机制属非常简单，也比较好用。
+对于一个要执行的操作来说，Intent算作是一个抽象描述。比如通过startActivity(Intent)启动一个Activity、sendBroadcast(Intent)发送一个广播或者通过startService bindService和后台服务进行交互。
+Intent为执行在不同应用不同组件之间代码的延时运行绑定提供了灵活的支持。最常见的用于启动activities，可以把Intent看做Activity之间的胶水。除此之外，Intent还持有一个数据结构来保存执行动作的抽象描述。
+Intent 对象 虽说Intent是一个抽象描述，但是对于具体的Intent类来说它可以被归纳为携带一组信息的信使，正是该信使在安卓组件间进行传递才能达到信息传递的效果。
+Intent 结构 一个Intent对象可以包含以下信息： Action
+可以直译为动作，它是Intent的一条‘命令’。具体action以String类型来命名，Intent类中定义了许多action常量来匹配不同的Intent对象。例如ACTION_VIEW ACTION_EDIT ACTION_MAIN等。action的存取可以通过setAction()和getAction()得到。
+Data
+data结构是要往Intent过滤器中添加的，使用data类型（mimeType属性）通常可以解释为一个规格或者说明书，它既可以是一个Uri表达式也可以是一个mimeType。使用URI表达式时，要按顺序书写Uri每一部分的属性，注意:当使用URL属性来指定时，如果不把‘schema’指定清楚的话，所有的URI属性都被忽视。如果‘host’不指定的话，则它的‘port’和‘path’属性都被忽视。
+使用setData()方法只可以设置URI属性的Data，如果设置mimeType属性的Data需要使用setType()方法。对于setDataAndType()方法既可以设置Uri也可以设置MIME，getData()和getType()分别获取URI和MIME类型。
+下面是action/data 的例子：
+ACTION_VIEW content://contacts/people/1 显示person表中标识符为1的联系人。 ACTION_DIAL content://contacts/people/1 显示电话拨号界面并且在显示框中显示person表中标识符为1联系人的电话号码 ACTION_VIEW tel:123 显示电话拨号界面并且在显示框中填入123. ACTION_DIAL tel:123 显示电话拨号界面并且在显示框中填入123. ACTION_EDIT content://contacts/people/1 编辑person表中标识符为1的联系人的信息。 ACTION_VIEW content://contacts/people/ 显示people列表 ACTION_SET_WALLPAPER 显示设置选择壁纸 Category
+category是Intent中可选部分，以String类型命名并且包含了组件如何操作Intent的额外信息。使用addCategory()方法添加category，使用removeCategory()删除之前添加的category，getCategories()方法可以获取当前设置的category。
+Extras
+以键值对形式添加的一组额外信息，它将通过Intent递交给组件进行处理。extras可以通过putExtras()和getExtras()方法进行存取操作。
+Flags
+这里的标记主要指启动Activity的方式，也是Intent可选部分。要是单独讲解Activity启动方式就要另起篇幅了（以后的任务）。
+组件名字
+这部分也是Intent可选部分，通常是指具体Activity Service和BroadcastReceiver类名。如果设置了，Intent对象将被递交给这个具体的组件进行处理，否则的话，安卓将使用其他信息寻找要启动的组件。组件名字可以通过setComponent(), setClass(), 或者setClassName()来设置，通过getComponent()来获取具体的组件名字。
+Intent类型 显式Intent Intent可以分为显式Intent和隐式Intent。平时我们用的最多就是显式Intent比如说在一个应用中经常要切换Activity就是使用的显式Intent。
+// Explicit Intent by specifying its class name Intent i = new Intent(FirstActivity.</description>
+    </item>
     
     <item>
       <title>android env</title>
