@@ -192,9 +192,41 @@ Failed to add entry for user test.</p>
 New SMB password:
 Retype new SMB password:
 Added user test.
-</code></pre><h1 id="参考">参考</h1>
+</code></pre><h2 id="samba-450之后win10显示密码错误">samba 4.5.0之后win10显示密码错误</h2>
+<p>samba 4.5.0之后ntlm auth的默认选项由yes改成了no，如果windows安全策略仍使用ntlm，就会导致密码出错。</p>
+<p>所以有两种修改方法</p>
+<ul>
+<li>
+<p>1.改Windows(我现在用的方法)
+打开windows安全策略：win+R后输入secpol.msc
+安全策略-&gt;本地策略-&gt;安全选项
+将 网络安全.Lan管理器身份验证级别 的选项改为“仅发送NTLMv2响应，拒绝LM和NTLM”</p>
+</li>
+<li>
+<p>2.改Linux(未测试)
+在/etc/samba/smb.conf配置文件的[global]组中加入
+ntlmauth = yes
+然后重启samba服务</p>
+</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">service smbd restart
+
+<span style="color:#998;font-style:italic"># systemd</span>
+systemctl restart smb nmb
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="参考">参考</h2>
 <p><a href="https://en.wikipedia.org/wiki/NetBIOS_over_TCP/IP">NetBIOS over TCP/IP</a></p>
 <p><a href="https://docs.microsoft.com/en-us/windows/wsl/about">Windows Subsystem for Linux Documentation</a></p>
+<p><a href="http://jump.bdimg.com/safecheck/index?url=rN3wPs8te/pL4AOY0zAwh4CFJgP+E1ls+c14KxJLnfOAo7EmmmL7leBV7tVTmHraopcrH4HwR0xL5gjtJAYkCRhBIG2lt/J+/cy/qt/YYUDOXOnOlsF9Yan+0+lC6uToPHNUQmXxphqpYUOeCABiUjEZgDzCsM7/8xonhLzDavA5bw84fhcZUnY9qHh6BM0y">4.5.0的详细更新在这，开头就是ntlm的默认值改动</a></p>
 </div>
 <div class="disqus">
   <div id="disqus_thread"></div>
