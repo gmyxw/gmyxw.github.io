@@ -35,7 +35,7 @@
 <div class="content">
   <p>习惯了Linux系统的人们，肯定觉得Samba服务更加灵活和方便，那如何在Windows系统上搭建高效的Samba服务呢？本文介绍了通过WSL在Win10系统上，搭建Samba文件共享服务。</p>
 <p>背景是家里只有一个台式机，一方面家里人偶尔使用，另一方面，它是家里的数据中心，挂载了多块硬盘。所以系统用的是Windows10，但是为了方便灵活得进行文件共享，一直考虑搭建Samba服务。达到此目的的方案有多种，可以考虑用虚拟机，例如：VMWare、VirtualBox、Hyper-V，也可以考虑使用CygWin，因为Windows10提供了WSL，所以本文介绍了另一种方式，也是运行效率比较高的一种方式，使用WSL搭建Samba服务。</p>
-<h1 id="背景知识">背景知识</h1>
+<h2 id="背景知识">背景知识</h2>
 <p>Windows文件共享服务
 使用网络对外提供文件访问服务，现在广泛用于局域网内部文件的共享，例如：小米盒子、手机、PC机、包括Mac，通过139或445端口。</p>
 <p>139 - 早期Windows的SMB运行于NBT（NetBIOS over TCP/IP）上，使用139端口
@@ -50,12 +50,12 @@ win7-err</p>
 <p>WindowsXP
 winxp-err</p>
 <p>winxp-pkg</p>
-<h1 id="wslwindows-subsystem-for-linux">WSL（Windows Subsystem for Linux）</h1>
+<h2 id="wslwindows-subsystem-for-linux">WSL（Windows Subsystem for Linux）</h2>
 <p>是在Windows10系统上，对Windows内核进行了封装，使其可以直接支持ELF格式的Linux可执行程序，感觉有点像GNU/Windows。
 现在基于WSL，已经有了多个Linux发行版，包括Ubuntu、Debian、Suse、Kali等，能够非常方便得在Windows里面运行Linux发行版，学习和使用各种Linux工具，同时也能够将Linux里面各种服务无缝集成到Windows环境中，例如：Samba服务、SSH服务等</p>
-<h1 id="samba服务">Samba服务</h1>
+<h2 id="samba服务">Samba服务</h2>
 <p>为了实现UNIX、Linux等非Windows能够访问Windows的文件共享资源，之前有个大牛将SMB（Server Message Block）协议进行了逆向分析，然后根据逆向分析的协议开发了一套开源软件Samba，可以让UNIX、Linux、Mac等系统能够与Windows之间进行文件共享。目前最新的Samba甚至可以提供AD、DC等服务。</p>
-<h1 id="总体方案">总体方案</h1>
+<h2 id="总体方案">总体方案</h2>
 <p>根据以上背景知识，在Windows10上通过WSL搭建Samba服务的方案如下：</p>
 <p>释放Windows占用的139，445端口
 安装WSL和Ubuntu发行版
@@ -172,7 +172,7 @@ mac003
 总结
 通过该服务配置的过程，大体了解了WSL的使用，通过该方式也可以在Windows上部署SSH等服务，对于熟悉Linux系统的人员来说是一大福音。
 同时通过一些工具，也可以将这些服务包装成Windows的Service，Windows启动的时候自动加载这些服务。</p>
-<h1 id="增加samba用户提示failed-to-add-entry-for-user">增加samba用户提示Failed to add entry for user</h1>
+<h2 id="增加samba用户提示failed-to-add-entry-for-user">增加samba用户提示Failed to add entry for user</h2>
 <p>[root@ubuntu ~]# smbpasswd -a test
 New SMB password:
 Retype new SMB password:
