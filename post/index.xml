@@ -6,10 +6,21 @@
     <description>Recent content in Posts on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Mon, 18 May 2020 04:01:27 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2020 15:13:00 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Linux显示彩色Emoji表情</title>
+      <link>https://sy123.ml/2020/05/28/linux%E6%98%BE%E7%A4%BA%E5%BD%A9%E8%89%B2emoji%E8%A1%A8%E6%83%85/</link>
+      <pubDate>Thu, 28 May 2020 15:13:00 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/05/28/linux%E6%98%BE%E7%A4%BA%E5%BD%A9%E8%89%B2emoji%E8%A1%A8%E6%83%85/</guid>
+      <description>前言 之前安装 noto-fonts-emoji 这个包后一直半彩色半黑白吊着，看着是真的不爽，实在太懒，今天在google意外看到很简单就解决了
+解决方法 &amp;lt;/file/01-emoji.conf&amp;gt; 1 2 3 4 5 6 7 8 9 10  &amp;lt;?xml version=&amp;#39;1.0&amp;#39;?&amp;gt; &amp;lt;!DOCTYPE fontconfig SYSTEM &amp;#39;fonts.dtd&amp;#39;&amp;gt; &amp;lt;fontconfig&amp;gt; &amp;lt;match target=&amp;#34;pattern&amp;#34;&amp;gt; &amp;lt;edit name=&amp;#34;family&amp;#34; mode=&amp;#34;prepend&amp;#34;&amp;gt; &amp;lt;string&amp;gt;Noto Color Emoji&amp;lt;/string&amp;gt; &amp;lt;string&amp;gt;Noto Emoji&amp;lt;/string&amp;gt; &amp;lt;/edit&amp;gt; &amp;lt;/match&amp;gt; &amp;lt;/fontconfig&amp;gt;    1 2  cp 01-emoji.conf $HOME/.config/fontconfig/conf.d/ fc-cache -f -v   重启就能显示大部分了，不过还是有一些之前没法显示，emoji还是有问题，以后再研究了
+See also  https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkval/enable_noto_color_emoji_easily/  </description>
+    </item>
     
     <item>
       <title>解决Golang在VSCode中调试时无法接收标准输入的问题</title>
