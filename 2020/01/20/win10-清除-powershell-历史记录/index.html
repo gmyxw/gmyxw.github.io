@@ -38,7 +38,7 @@
 <p>doskey-style history feature, before module PSReadline shipped with PowerShell (see below):</p>
 <p>There is no saved history - a history is kept only for the duration of the current session.
 Alt+F7 must be used to clear the console&rsquo;s history, with no (obvious) programmatic way to do it (in a cmd.exe console window you could use doskey /reinstall, but that doesn&rsquo;t work in PS).
-CB.&lsquo;s answer shows you how to simulate this keyboard combination; remember: this must be used in addition to Clear-History.
+CB.&rsquo;s answer shows you how to simulate this keyboard combination; remember: this must be used in addition to Clear-History.
 The PSReadline module comes with PowerShell v5 on Windows 10 and will also ship with Windows Server 2016; it replaces the doskey-style line-editing and command-history features with more sophisticated functionality; it is also possible to retrofit older Windows editions / PS versions (&gt;= v3) versions with it, using the PowerShell Gallery (PSv3 and PSv4 must first install PowerShellGet).</p>
 <p>Command history is now saved across sessions, in file
 (Get-PSReadlineOption).HistorySavePath.
