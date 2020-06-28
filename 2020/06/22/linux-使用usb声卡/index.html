@@ -114,12 +114,45 @@ Device
 <span style="color:#008080">speaker-mixer</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">Speaker</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="see-also">See also</h2>
+</div><h2 id="20200629更新">20200629更新</h2>
+<p>今天usb设备变动后，声音又出问题了，<code>cat /proc/asound/modules</code>查看一下后发现是顺序乱了，再读了一遍文章发现有更简单的解决方法</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># Set the default sound card</span>
+~/site/blog
+❯ cat /etc/modprobe.d/alsa-base.conf
+options snd_usb_audio <span style="color:#008080">index</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>
+options snd_hda_intel <span style="color:#008080">index</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>前面的配置文件全删了再改一下 <strong>polybar</strong> 又正常了～</p>
+<h2 id="see-also">See also</h2>
 <ul>
-<li><a href="https://wiki.sabayon.org/index.php?title=HOWTO:_Configure_ALSA_to_handle_a_USB_sound_card">https://wiki.sabayon.org/index.php?title=HOWTO:_Configure_ALSA_to_handle_a_USB_sound_card</a></li>
-<li><a href="https://raspberrypi.stackexchange.com/questions/19705/usb-card-as-my-default-audio-device">https://raspberrypi.stackexchange.com/questions/19705/usb-card-as-my-default-audio-device</a></li>
-<li><a href="https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture">https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture</a></li>
-<li><a href="https://github.com/polybar/polybar/issues/1287">https://github.com/polybar/polybar/issues/1287</a></li>
+<li>
+<p><a href="https://wiki.sabayon.org/index.php?title=HOWTO:_Configure_ALSA_to_handle_a_USB_sound_card">https://wiki.sabayon.org/index.php?title=HOWTO:_Configure_ALSA_to_handle_a_USB_sound_card</a></p>
+</li>
+<li>
+<p><a href="https://raspberrypi.stackexchange.com/questions/19705/usb-card-as-my-default-audio-device">https://raspberrypi.stackexchange.com/questions/19705/usb-card-as-my-default-audio-device</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture">https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture</a></p>
+</li>
+<li>
+<p><a href="https://github.com/polybar/polybar/issues/1287">https://github.com/polybar/polybar/issues/1287</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card">https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture#Set_the_default_sound_card</a></p>
+</li>
+<li>
+<p><a href="https://superuser.com/questions/626606/how-to-make-alsa-pick-a-preferred-sound-device-automatically">https://superuser.com/questions/626606/how-to-make-alsa-pick-a-preferred-sound-device-automatically</a></p>
+</li>
 </ul>
 </div>
 <div class="disqus">
