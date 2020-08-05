@@ -6,7 +6,7 @@
     <description>Recent content on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Mon, 27 Jul 2020 09:52:47 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2020 17:55:30 +0800</lastBuildDate>
     
 	<atom:link href="https://sy123.ml/index.xml" rel="self" type="application/rss+xml" />
     
@@ -20,6 +20,17 @@
       <description>Suspendisse non nisl sit amet Morbi mattis ullamcorper velit. Morbi mollis tellus ac sapien. Praesent congue erat at massa. Nullam tincidunt adipiscing enim.
 Phasellus blandit leo ut odio. Aenean imperdiet. In hac habitasse platea dictumst. Maecenas vestibulum mollis diam. Morbi ac felis.
 Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Suspendisse feugiat.</description>
+    </item>
+    
+    <item>
+      <title>解决linux下鼠标移动速度太快的问题(libinput)</title>
+      <link>https://sy123.ml/2020/08/05/%E8%A7%A3%E5%86%B3linux%E4%B8%8B%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E9%80%9F%E5%BA%A6%E5%A4%AA%E5%BF%AB%E7%9A%84%E9%97%AE%E9%A2%98libinput/</link>
+      <pubDate>Wed, 05 Aug 2020 17:55:30 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/08/05/%E8%A7%A3%E5%86%B3linux%E4%B8%8B%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E9%80%9F%E5%BA%A6%E5%A4%AA%E5%BF%AB%E7%9A%84%E9%97%AE%E9%A2%98libinput/</guid>
+      <description>环境：Mint Xfce 19 x64 我平时使用的鼠标移动速度比较慢，而且鼠标加速从来不开。一般1000-1200DPI最适合我。Mint下鼠标疯狂起飞，手腕一抖鼠标指针飞过半个屏幕让我很是头疼。而xfce设置里的鼠标速度似乎完全没有作用，Google后我发现这其实是历史的锅，以前X11是用xset管理输入设备的，现在变成了xinput。而xfce的设置还是去修改xset的配置文件。
+既然如此，那我们只能来手动研究一下xinput怎么改鼠标速度了。
+1 2 3 4 5 6 7 8 9  $ xinput -list # 可以查看到所有输入设备，我的部分输出如下： ⎡ Virtual core pointer id=2 [master pointer (3)] ⎜ ↳ Virtual core XTEST pointer id=4 [slave pointer (2)] ⎜ ↳ SynPS/2 Synaptics TouchPad id=15 [slave pointer (2)] ⎜ ↳ PixArt USB Optical Mouse id=11 [slave pointer (2)] ⎣ Virtual core keyboard id=3 [master keyboard (2)] ↳ Virtual core XTEST keyboard id=5 [slave keyboard (3)]   可以看到，USB鼠标id为11，接下来再去查看USB鼠标的详细信息：</description>
     </item>
     
     <item>
