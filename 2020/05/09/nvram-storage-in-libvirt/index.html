@@ -51,7 +51,7 @@ firmware images intended for use with QEMU.</p>
 [https://github.com/libvirt/libvirt/blob/2f7d81497b90cd901c159b9e548004b164bec983/src/util/virutil.c#L760]</p>
 <p>if (!(cfg-&gt;configBaseDir = virGetUserConfigDirectory()))
 virGetXDGDirectory(&ldquo;XDG_CONFIG_HOME&rdquo;, &ldquo;.config&rdquo;);
-cfg-&gt;nvramDir = g_strdup_printf(&quot;%s/qemu/nvram&rdquo;, cfg-&gt;configBaseDir);</p>
+cfg-&gt;nvramDir = g_strdup_printf(&quot;%s/qemu/nvram&quot;, cfg-&gt;configBaseDir);</p>
 <p>For privliged users the best way to change the storage location seems to be to symlink /var/lib/libvirt/qemu/nvram/
 before any vm is installed. This should theoreticly no break the package as the folder would be create programmaticly.</p>
 <p>qemu: Build nvram directory at driver startup

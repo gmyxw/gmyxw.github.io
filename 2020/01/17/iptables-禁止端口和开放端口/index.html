@@ -552,8 +552,8 @@ iptables -P INPUT DROP
 iptables -A INPUT -i lo -p all -j ACCEPT
 iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 
-<span style="color:#998;font-style:italic"># to allow all traffic on the lo-if and every incomming traffic for connections</span> 
-<span style="color:#998;font-style:italic"># you etablished. After that add every rule you need for</span> 
+<span style="color:#998;font-style:italic"># to allow all traffic on the lo-if and every incomming traffic for connections </span>
+<span style="color:#998;font-style:italic"># you etablished. After that add every rule you need for </span>
 <span style="color:#998;font-style:italic"># your services (don&#39;t forget to open ssh if you need it! else you&#39;re out):</span>
 
 iptables -A INPUT -p tcp -m tcp --dport <span style="color:#099">1962</span> -j ACCEPT 
@@ -564,10 +564,10 @@ iptables -A INPUT -p tcp -m tcp --dport <span style="color:#099">12020</span> -j
 
 iptables -A INPUT -j DROP
 
-<span style="color:#998;font-style:italic"># This line matches everything for the INPUT chain and the policy should not get anything.</span> 
+<span style="color:#998;font-style:italic"># This line matches everything for the INPUT chain and the policy should not get anything. </span>
 <span style="color:#998;font-style:italic"># advantage of this is even if you add an</span>
-<span style="color:#998;font-style:italic"># ACCEPT-rule sometime after initializing your ruleset it will never become checked because</span> 
-<span style="color:#998;font-style:italic"># everything is droped before. so it ensures</span> 
+<span style="color:#998;font-style:italic"># ACCEPT-rule sometime after initializing your ruleset it will never become checked because </span>
+<span style="color:#998;font-style:italic"># everything is droped before. so it ensures </span>
 <span style="color:#998;font-style:italic"># you have to keep everything in one place.</span>
 
 <span style="color:#998;font-style:italic"># For your question the whole thing looks like this in summary:</span>

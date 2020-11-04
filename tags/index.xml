@@ -6,17 +6,22 @@
     <description>Recent content in Tags on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Mon, 22 Jun 2020 04:38:17 +0800</lastBuildDate>
-    
-	<atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 05 Nov 2020 04:59:06 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>linux</title>
       <link>https://sy123.ml/tags/linux/</link>
-      <pubDate>Mon, 22 Jun 2020 04:38:17 +0800</pubDate>
+      <pubDate>Thu, 05 Nov 2020 04:59:06 +0800</pubDate>
       
       <guid>https://sy123.ml/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ssh</title>
+      <link>https://sy123.ml/tags/ssh/</link>
+      <pubDate>Thu, 05 Nov 2020 04:59:06 +0800</pubDate>
+      
+      <guid>https://sy123.ml/tags/ssh/</guid>
       <description></description>
     </item>
     

@@ -6,11 +6,7 @@
     <description>Recent content in powershell on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Mon, 20 Jan 2020 23:11:09 +0800</lastBuildDate>
-    
-	<atom:link href="https://sy123.ml/tags/powershell/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 20 Jan 2020 23:11:09 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/powershell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Win10 清除 PowerShell 历史记录</title>
       <link>https://sy123.ml/2020/01/20/win10-%E6%B8%85%E9%99%A4-powershell-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</link>

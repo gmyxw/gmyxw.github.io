@@ -121,7 +121,7 @@ zsh:cd:1: too many arguments、
 zsh:1: command not found: dlv
 Request type of &lsquo;launch&rsquo; with mode &lsquo;remote&rsquo; is deprecated, please use request type &lsquo;attach&rsquo; with mode &lsquo;remote&rsquo; instead.
 这些问题。</p>
-<p>在大半天的折腾之后，总结下来问题1是由于路径中含有特殊符号（如空格），需要将cd ${fileDirname}改为cd &quot;${fileDirname}&quot;；问题2是由于PATH似乎并没有被自动添加到启动的终端中。我的解决方案是在执行命令之前执行source /etc/profile命令。问题3则应该将launch.json中&quot;request&rdquo;: &ldquo;launch&quot;改为&quot;request&rdquo;: &ldquo;attach&rdquo;</p>
+<p>在大半天的折腾之后，总结下来问题1是由于路径中含有特殊符号（如空格），需要将cd ${fileDirname}改为cd &quot;${fileDirname}&quot;；问题2是由于PATH似乎并没有被自动添加到启动的终端中。我的解决方案是在执行命令之前执行source /etc/profile命令。问题3则应该将launch.json中&quot;request&quot;: &ldquo;launch&quot;改为&quot;request&rdquo;: &ldquo;attach&rdquo;</p>
 <p>以下是我现在使用的配置</p>
 <p>tasks.json</p>
 <p>{

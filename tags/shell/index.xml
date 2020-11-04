@@ -6,11 +6,7 @@
     <description>Recent content in shell on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Tue, 25 Feb 2020 04:36:20 +0800</lastBuildDate>
-    
-	<atom:link href="https://sy123.ml/tags/shell/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 25 Feb 2020 04:36:20 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/shell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
       <link>https://sy123.ml/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</link>

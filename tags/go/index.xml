@@ -6,11 +6,7 @@
     <description>Recent content in go on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Mon, 18 May 2020 04:01:27 +0800</lastBuildDate>
-    
-	<atom:link href="https://sy123.ml/tags/go/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 18 May 2020 04:01:27 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>解决Golang在VSCode中调试时无法接收标准输入的问题</title>
       <link>https://sy123.ml/2020/05/18/%E8%A7%A3%E5%86%B3golang%E5%9C%A8vscode%E4%B8%AD%E8%B0%83%E8%AF%95%E6%97%B6%E6%97%A0%E6%B3%95%E6%8E%A5%E6%94%B6%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/</link>

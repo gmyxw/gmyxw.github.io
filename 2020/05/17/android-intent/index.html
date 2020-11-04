@@ -128,11 +128,11 @@ content://com.icedcap.project:200/folder/subfolder/etc
 <a href="http://www.baidu.com">http://www.baidu.com</a>
 对于MimeType来说可以是image/jpeg、audio/mpeg4-generic等。详细的mime类型可以查看这里。</p>
 <p>对于下面的匹配规则来说</p>
-<p><intent-filter>
+<intent-filter>
 <data android:mimeType="image/*"/>
 </intent-filter>
 很明显，data需要匹配一个图片格式的数据，虽然上述代码没有对Uri进行匹配规则的设置，但是默认情况下它会匹配Uri的schema为content或者file的data。
-所以通过以下代码可以匹配该Intent</p>
+所以通过以下代码可以匹配该Intent
 <p>intent.setDataAndType(Uri.parse(&ldquo;file://ddd.png&rdquo;), &ldquo;image/png&rdquo;);
 以上就是我们Intent的匹配规则。</p>
 <p>最后，我们通过隐式Intent启动一个Activity的时候，最好做一个判断是否有可匹配的Activity可以启动，以免不存在隐式Activity而报错。其做法也非常简单，可以通过PackageManager的resolveActivity方法或者Intent的resolveActivity方法，如果它们找不到可匹配的Activity就会返回null。从而判断是否可被隐式启动。</p>
