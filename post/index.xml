@@ -8,15 +8,15 @@
     <copyright>2007-2020 zhili.</copyright>
     <lastBuildDate>Mon, 09 Nov 2020 21:19:52 +0800</lastBuildDate><atom:link href="https://sy123.ml/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>20201109 Private Key Is Missing or Invalid When Importing a Certificate in Google Chrom</title>
-      <link>https://sy123.ml/2020/11/09/20201109-private-key-is-missing-or-invalid-when-importing-a-certificate-in-google-chrom/</link>
+      <title>解决浏览器以及手机导入证书失败</title>
+      <link>https://sy123.ml/2020/11/09/%E8%A7%A3%E5%86%B3%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BB%A5%E5%8F%8A%E6%89%8B%E6%9C%BA%E5%AF%BC%E5%85%A5%E8%AF%81%E4%B9%A6%E5%A4%B1%E8%B4%A5/</link>
       <pubDate>Mon, 09 Nov 2020 21:19:52 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/11/09/20201109-private-key-is-missing-or-invalid-when-importing-a-certificate-in-google-chrom/</guid>
-      <description>I work on Ubuntu 19. I have a .crt and a key file. I want to test my web app on https localhost.
-I wanted to add crt file to Chrome (settings &amp;gt; advanced &amp;gt; manage certificates -&amp;gt; import ). So I tried to import the .crt file but I got is this:
-&amp;ldquo;Certificate Import Error : The Private Key for this Client Certificate is missing or invalid&amp;rdquo;
-I googled it, but I found nothing helpful.</description>
+      <guid>https://sy123.ml/2020/11/09/%E8%A7%A3%E5%86%B3%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BB%A5%E5%8F%8A%E6%89%8B%E6%9C%BA%E5%AF%BC%E5%85%A5%E8%AF%81%E4%B9%A6%E5%A4%B1%E8%B4%A5/</guid>
+      <description>前言 ，网上查了下现在只支持PKCS12证书
+make a p12 file 为了将.crt和.key正确导入Chrome的nssdb数据库，建议将客户端证书+私钥转换为PKCS12证书，例如：
+1  openssl pkcs12 -export -inkey ./sample.key -in ./sample.crt -out ./sample.p12   为其提供所需的任何导出密码，请写下来，因为稍后导入时将需要它。
+之后你就可以导入sample.p12。</description>
     </item>
     
     <item>
