@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>20201109 Private Key Is Missing or Invalid When Importing a Certificate in Google Chrom - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.ml/">zhili</a></h1>
+  </div>
+  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>20201109 Private Key Is Missing or Invalid When Importing a Certificate in Google Chrom</h1>
+  </div>
+<div class="meta">
+  <div>2020-11-09 21:19</div>
+  </div>
+<div class="content">
+  <p>I work on Ubuntu 19. I have a .crt and a key file. I want to test my web app on https localhost.</p>
+<p>I wanted to add crt file to Chrome (settings &gt; advanced &gt; manage certificates -&gt; import ). So I tried to import the .crt file but I got is this:</p>
+<p>&ldquo;Certificate Import Error : The Private Key for this Client Certificate is missing or invalid&rdquo;</p>
+<p>I googled it, but I found nothing helpful.</p>
+<p>I have also built the .pfx file (from .crt and key files) and imported it on chrome but I have error: &ldquo;Your connection is not private&rdquo;</p>
+<p>I have also tested it by Firefox and Opera and get the same error.</p>
+<h2 id="make-a-p12-file">make a p12 file</h2>
+<p>For properly importing the .crt and the .key into the nssdb database for Chrome I suggest you convert the client certificate + the private key into a PKCS12 certificate, for example:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">openssl pkcs12 -export -inkey ./sample.key -in ./sample.crt -out ./sample.p12
+Give it any <span style="color:#0086b3">export</span> password you want, but write it down, because you<span style="color:#a61717;background-color:#e3d2d2">&#39;</span>ll need it later when importing.
+</code></pre></td></tr></table>
+</div>
+</div><p>After this, you can import the file &ldquo;sample.p12&rdquo; in the Chrome browser, using the tab &lsquo;Your Cerificates&rsquo;.</p>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>
