@@ -6,7 +6,7 @@
     <description>Recent content on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Mon, 09 Nov 2020 21:19:52 +0800</lastBuildDate><atom:link href="https://sy123.ml/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Nov 2020 09:44:57 +0800</lastBuildDate><atom:link href="https://sy123.ml/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://sy123.ml/about/</link>
@@ -16,6 +16,16 @@
       <description>Suspendisse non nisl sit amet Morbi mattis ullamcorper velit. Morbi mollis tellus ac sapien. Praesent congue erat at massa. Nullam tincidunt adipiscing enim.
 Phasellus blandit leo ut odio. Aenean imperdiet. In hac habitasse platea dictumst. Maecenas vestibulum mollis diam. Morbi ac felis.
 Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Suspendisse feugiat.</description>
+    </item>
+    
+    <item>
+      <title>unity游戏提示 Using memoryadresses from more than 16GB of memory </title>
+      <link>https://sy123.ml/2020/11/18/unity%E6%B8%B8%E6%88%8F%E6%8F%90%E7%A4%BA-using-memoryadresses-from-more-than-16gb-of-memory/</link>
+      <pubDate>Wed, 18 Nov 2020 09:44:57 +0800</pubDate>
+      
+      <guid>https://sy123.ml/2020/11/18/unity%E6%B8%B8%E6%88%8F%E6%8F%90%E7%A4%BA-using-memoryadresses-from-more-than-16gb-of-memory/</guid>
+      <description>新游戏被用户狂喷无奈研究一下，先在官方的问题跟踪器查一下就发现很多开发者纷纷都说是android 11的问题，我当场裂开，修复完又要改代码，之前一直在模拟器调试没啥问题，我自己用pixel 11测试一下果然秒退，还好11没普及，修复不存在的，混就完事
+See also https://issuetracker.unity3d.com/issues/android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages</description>
     </item>
     
     <item>
