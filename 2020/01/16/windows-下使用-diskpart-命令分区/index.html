@@ -145,6 +145,57 @@
 </div>
 </div><p>回到win7安装分区步骤，点击刷新，选择你要安装的磁盘分区进行安装就可以了。
 注：这里不要再格式化了</p>
+<h2 id="20210106更新">20210106更新</h2>
+<p>谈笑风生又一年，最近在做一个游戏多开挂机项目，一年前的win10还是被我玩炸了，Google无解懒得研究重新开始吧，反正就一堆垃圾，吸取教训这次用uefi引导</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps">
+<span style="color:#900;font-weight:bold">diskpart</span>
+
+<span style="color:#900;font-weight:bold">select</span> <span style="color:#900;font-weight:bold">disk</span> <span style="color:#099">39</span>
+
+<span style="color:#900;font-weight:bold">select</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#099">1</span>
+
+<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">删除分区</span>
+<span style="color:#900;font-weight:bold">delete</span> <span style="color:#900;font-weight:bold">partition</span>
+
+<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">先转换成GPT</span>
+<span style="color:#900;font-weight:bold">convert</span> <span style="color:#900;font-weight:bold">gpt</span>
+
+<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">创建EFI分区</span>
+<span style="color:#900;font-weight:bold">create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">efi</span> <span style="color:#900;font-weight:bold">size=100</span>
+<span style="color:#900;font-weight:bold">format</span> <span style="color:#900;font-weight:bold">quick</span> <span style="color:#900;font-weight:bold">fs=FAT32</span>
+
+<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">创建主分区</span>
+<span style="color:#900;font-weight:bold">create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">primary</span>
+<span style="color:#900;font-weight:bold">format</span> <span style="color:#900;font-weight:bold">quick</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>收工，希望明年不要再折腾win10了。。。</p>
 </div>
 <div class="disqus">
   <div id="disqus_thread"></div>
