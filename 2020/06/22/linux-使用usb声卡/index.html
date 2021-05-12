@@ -32,7 +32,7 @@
   </div>
 <div class="content">
   <h2 id="前言">前言</h2>
-<p>新买了耳机发现没声音，上网查了一下发现耳机自带了usb驱动，又又又开始了折腾之旅～</p>
+<p>新买了耳机发现没声音，上网查了一下发现耳机自带了 usb 驱动，又又又开始了折腾之旅～</p>
 <h2 id="解决声音问题">解决声音问题</h2>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -102,8 +102,8 @@ Device
 <span style="color:#998;font-style:italic">; Name of the master, speaker and headphone mixers</span>
 <span style="color:#998;font-style:italic">; Use the following command to list available mixer controls:</span>
 <span style="color:#998;font-style:italic">; $ amixer scontrols | sed -nr &#34;s/.*&#39;([[:alnum:]]+)&#39;.*/\1/p&#34;</span>
-<span style="color:#998;font-style:italic">; If master, speaker or headphone-soundcard isn&#39;t the default, </span>
-<span style="color:#998;font-style:italic">; use `amixer -c # scontrols` instead where # is the number </span>
+<span style="color:#998;font-style:italic">; If master, speaker or headphone-soundcard isn&#39;t the default,</span>
+<span style="color:#998;font-style:italic">; use `amixer -c # scontrols` instead where # is the number</span>
 <span style="color:#998;font-style:italic">; of the master, speaker or headphone soundcard respectively</span>
 <span style="color:#998;font-style:italic">;</span>
 <span style="color:#998;font-style:italic">; Default: Master</span>
@@ -114,8 +114,8 @@ Device
 <span style="color:#008080">speaker-mixer</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">Speaker</span>
 </code></pre></td></tr></table>
 </div>
-</div><h2 id="20200629更新">20200629更新</h2>
-<p>今天usb设备变动后，声音又出问题了，<code>cat /proc/asound/modules</code>查看一下后发现是顺序乱了，再读了一遍文章发现有更简单的解决方法</p>
+</div><h2 id="20200629-更新">20200629 更新</h2>
+<p>今天 usb 设备变动后，声音又出问题了，<code>cat /proc/asound/modules</code>查看一下后发现是顺序乱了，再读了一遍文章发现有更简单的解决方法</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
@@ -133,6 +133,51 @@ options snd_hda_intel <span style="color:#008080">index</span><span style="color
 </code></pre></td></tr></table>
 </div>
 </div><p>前面的配置文件全删了再改一下 <strong>polybar</strong> 又正常了～</p>
+<h2 id="20210512">20210512</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># Good news! I found a solution</span>
+
+<span style="color:#998;font-style:italic"># It seems to be that this is issue is reported in Ubuntu kernel 5.3.0-41 and -42, you can go into details in this Bug report</span>
+
+<span style="color:#998;font-style:italic"># Anyway the easiest way to fix it is to:</span>
+
+<span style="color:#998;font-style:italic"># Edit /etc/modprobe.d/alsa-base.conf as root and add options snd-hda-intel dmic_detect=0 at the end of this file by writing this on the terminal:</span>
+
+<span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;options snd-hda-intel dmic_detect=0&#34;</span> | sudo tee -a /etc/modprobe.d/alsa-base.conf
+<span style="color:#998;font-style:italic"># Edit /etc/modprobe.d/blacklist.conf as root and add blacklist snd_soc_skl at the end of the file by writing this on the terminal:</span>
+
+<span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;blacklist snd_soc_skl&#34;</span> | sudo tee -a /etc/modprobe.d/blacklist.conf
+<span style="color:#998;font-style:italic"># Restart the computer</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="20210513">20210513</h2>
+<p>时隔很久又来折腾声音，电脑性能不足换了新设备，固态插上去直接点亮你敢信？</p>
+<p>不过有点小小瑕疵alsa禁音会禁用混音，看了下issues他们好像都说是BUG，秉承着不解决问题的原则(逃，这次决定改用更方便的<em>pulseaudio</em>控制音量</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo pacman -S pulseaudio-alsa
+</code></pre></td></tr></table>
+</div>
+</div><p>polybar模块里注释掉alsa启动pulseaudio模块</p>
 <h2 id="see-also">See also</h2>
 <ul>
 <li>
@@ -152,6 +197,9 @@ options snd_hda_intel <span style="color:#008080">index</span><span style="color
 </li>
 <li>
 <p><a href="https://superuser.com/questions/626606/how-to-make-alsa-pick-a-preferred-sound-device-automatically">https://superuser.com/questions/626606/how-to-make-alsa-pick-a-preferred-sound-device-automatically</a></p>
+</li>
+<li>
+<p><a href="https://bugs.launchpad.net/ubuntu/+source/pulseaudio/+bug/878986">https://bugs.launchpad.net/ubuntu/+source/pulseaudio/+bug/878986</a></p>
 </li>
 </ul>
 </div>
