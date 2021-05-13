@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TypeScript on zhili</title>
-    <link>https://sy123.ml/tags/typescript/</link>
+    <link>https://sy123.netlify.app/tags/typescript/</link>
     <description>Recent content in TypeScript on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Tue, 10 Mar 2020 14:51:20 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Mar 2020 14:51:20 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ts属性后面的感叹号有什么用处？</title>
-      <link>https://sy123.ml/2020/03/10/ts%E5%B1%9E%E6%80%A7%E5%90%8E%E9%9D%A2%E7%9A%84%E6%84%9F%E5%8F%B9%E5%8F%B7%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%E5%A4%84/</link>
+      <link>https://sy123.netlify.app/2020/03/10/ts%E5%B1%9E%E6%80%A7%E5%90%8E%E9%9D%A2%E7%9A%84%E6%84%9F%E5%8F%B9%E5%8F%B7%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%E5%A4%84/</link>
       <pubDate>Tue, 10 Mar 2020 14:51:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/10/ts%E5%B1%9E%E6%80%A7%E5%90%8E%E9%9D%A2%E7%9A%84%E6%84%9F%E5%8F%B9%E5%8F%B7%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%E5%A4%84/</guid>
+      <guid>https://sy123.netlify.app/2020/03/10/ts%E5%B1%9E%E6%80%A7%E5%90%8E%E9%9D%A2%E7%9A%84%E6%84%9F%E5%8F%B9%E5%8F%B7%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%E5%A4%84/</guid>
       <description>首先看一段代码
 1 2 3 4 5 6 7 8 9  import { Vue, Component, Prop } from &amp;#39;vue-property-decorator&amp;#39; @Component export default class YourComponent extends Vue { @Prop(Number) propA!: number @Prop({ default: &amp;#39;default value&amp;#39; }) propB!: string @Prop([String, Boolean]) propC: string | boolean }   这是vue组件的ts写法，仔细观察，里面有一段这样的代码@Prop(Number) propA!: number，这是什么鬼？
 查了一下ts的文档说明，原来感叹号是非null和非undefined的类型断言，所以上面的写法就是对propA这个属性进行非空断言。文档的相关说明在这里。

@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>pagefile on zhili</title>
-    <link>https://sy123.ml/tags/pagefile/</link>
+    <link>https://sy123.netlify.app/tags/pagefile/</link>
     <description>Recent content in pagefile on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Mon, 20 Jan 2020 05:36:05 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/pagefile/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jan 2020 05:36:05 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/pagefile/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>cmd命令行修改windows虚拟内存pagefile.sys</title>
-      <link>https://sy123.ml/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</link>
+      <link>https://sy123.netlify.app/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</link>
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</guid>
+      <guid>https://sy123.netlify.app/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</guid>
       <description>1 2 3 4 5 6 7 8 9 10 11 12  # 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False  # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t 0   </description>
     </item>
     

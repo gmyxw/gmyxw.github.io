@@ -2,557 +2,557 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on zhili</title>
-    <link>https://sy123.ml/tags/</link>
+    <link>https://sy123.netlify.app/tags/</link>
     <description>Recent content in Tags on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Wed, 25 Nov 2020 19:05:37 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 Nov 2020 19:05:37 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>archlinux</title>
-      <link>https://sy123.ml/tags/archlinux/</link>
+      <link>https://sy123.netlify.app/tags/archlinux/</link>
       <pubDate>Wed, 25 Nov 2020 19:05:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/archlinux/</guid>
+      <guid>https://sy123.netlify.app/tags/archlinux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>linux</title>
-      <link>https://sy123.ml/tags/linux/</link>
+      <link>https://sy123.netlify.app/tags/linux/</link>
       <pubDate>Wed, 25 Nov 2020 19:05:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/linux/</guid>
+      <guid>https://sy123.netlify.app/tags/linux/</guid>
       <description></description>
     </item>
     
     <item>
       <title>android</title>
-      <link>https://sy123.ml/tags/android/</link>
+      <link>https://sy123.netlify.app/tags/android/</link>
       <pubDate>Wed, 18 Nov 2020 09:44:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/android/</guid>
+      <guid>https://sy123.netlify.app/tags/android/</guid>
       <description></description>
     </item>
     
     <item>
       <title>unity3d</title>
-      <link>https://sy123.ml/tags/unity3d/</link>
+      <link>https://sy123.netlify.app/tags/unity3d/</link>
       <pubDate>Wed, 18 Nov 2020 09:44:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/unity3d/</guid>
+      <guid>https://sy123.netlify.app/tags/unity3d/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ssh</title>
-      <link>https://sy123.ml/tags/ssh/</link>
+      <link>https://sy123.netlify.app/tags/ssh/</link>
       <pubDate>Thu, 05 Nov 2020 04:59:06 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/ssh/</guid>
+      <guid>https://sy123.netlify.app/tags/ssh/</guid>
       <description></description>
     </item>
     
     <item>
       <title>go</title>
-      <link>https://sy123.ml/tags/go/</link>
+      <link>https://sy123.netlify.app/tags/go/</link>
       <pubDate>Mon, 18 May 2020 04:01:27 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/go/</guid>
+      <guid>https://sy123.netlify.app/tags/go/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vscode</title>
-      <link>https://sy123.ml/tags/vscode/</link>
+      <link>https://sy123.netlify.app/tags/vscode/</link>
       <pubDate>Mon, 18 May 2020 04:01:27 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/vscode/</guid>
+      <guid>https://sy123.netlify.app/tags/vscode/</guid>
       <description></description>
     </item>
     
     <item>
       <title>AndroidStudio</title>
-      <link>https://sy123.ml/tags/androidstudio/</link>
+      <link>https://sy123.netlify.app/tags/androidstudio/</link>
       <pubDate>Fri, 15 May 2020 04:26:04 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/androidstudio/</guid>
+      <guid>https://sy123.netlify.app/tags/androidstudio/</guid>
       <description></description>
     </item>
     
     <item>
       <title>java</title>
-      <link>https://sy123.ml/tags/java/</link>
+      <link>https://sy123.netlify.app/tags/java/</link>
       <pubDate>Thu, 14 May 2020 05:31:01 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/java/</guid>
+      <guid>https://sy123.netlify.app/tags/java/</guid>
       <description></description>
     </item>
     
     <item>
       <title>time</title>
-      <link>https://sy123.ml/tags/time/</link>
+      <link>https://sy123.netlify.app/tags/time/</link>
       <pubDate>Tue, 12 May 2020 14:31:58 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/time/</guid>
+      <guid>https://sy123.netlify.app/tags/time/</guid>
       <description></description>
     </item>
     
     <item>
       <title>windows</title>
-      <link>https://sy123.ml/tags/windows/</link>
+      <link>https://sy123.netlify.app/tags/windows/</link>
       <pubDate>Tue, 12 May 2020 14:31:58 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/windows/</guid>
+      <guid>https://sy123.netlify.app/tags/windows/</guid>
       <description></description>
     </item>
     
     <item>
       <title>kvm</title>
-      <link>https://sy123.ml/tags/kvm/</link>
+      <link>https://sy123.netlify.app/tags/kvm/</link>
       <pubDate>Tue, 12 May 2020 11:39:36 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/kvm/</guid>
+      <guid>https://sy123.netlify.app/tags/kvm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>libvirtd</title>
-      <link>https://sy123.ml/tags/libvirtd/</link>
+      <link>https://sy123.netlify.app/tags/libvirtd/</link>
       <pubDate>Tue, 12 May 2020 11:39:36 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/libvirtd/</guid>
+      <guid>https://sy123.netlify.app/tags/libvirtd/</guid>
       <description></description>
     </item>
     
     <item>
       <title>php</title>
-      <link>https://sy123.ml/tags/php/</link>
+      <link>https://sy123.netlify.app/tags/php/</link>
       <pubDate>Sun, 10 May 2020 13:27:00 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/php/</guid>
+      <guid>https://sy123.netlify.app/tags/php/</guid>
       <description></description>
     </item>
     
     <item>
       <title>libvirt</title>
-      <link>https://sy123.ml/tags/libvirt/</link>
+      <link>https://sy123.netlify.app/tags/libvirt/</link>
       <pubDate>Sat, 09 May 2020 18:34:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/libvirt/</guid>
+      <guid>https://sy123.netlify.app/tags/libvirt/</guid>
       <description></description>
     </item>
     
     <item>
       <title>thunar</title>
-      <link>https://sy123.ml/tags/thunar/</link>
+      <link>https://sy123.netlify.app/tags/thunar/</link>
       <pubDate>Sat, 25 Apr 2020 01:15:51 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/thunar/</guid>
+      <guid>https://sy123.netlify.app/tags/thunar/</guid>
       <description></description>
     </item>
     
     <item>
       <title>golang</title>
-      <link>https://sy123.ml/tags/golang/</link>
+      <link>https://sy123.netlify.app/tags/golang/</link>
       <pubDate>Sat, 18 Apr 2020 00:06:48 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/golang/</guid>
+      <guid>https://sy123.netlify.app/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>css</title>
-      <link>https://sy123.ml/tags/css/</link>
+      <link>https://sy123.netlify.app/tags/css/</link>
       <pubDate>Wed, 01 Apr 2020 00:02:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/css/</guid>
+      <guid>https://sy123.netlify.app/tags/css/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python</title>
-      <link>https://sy123.ml/tags/python/</link>
+      <link>https://sy123.netlify.app/tags/python/</link>
       <pubDate>Sat, 28 Mar 2020 20:54:33 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/python/</guid>
+      <guid>https://sy123.netlify.app/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>pandavan</title>
-      <link>https://sy123.ml/tags/pandavan/</link>
+      <link>https://sy123.netlify.app/tags/pandavan/</link>
       <pubDate>Mon, 23 Mar 2020 20:14:04 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/pandavan/</guid>
+      <guid>https://sy123.netlify.app/tags/pandavan/</guid>
       <description></description>
     </item>
     
     <item>
       <title>baidu</title>
-      <link>https://sy123.ml/tags/baidu/</link>
+      <link>https://sy123.netlify.app/tags/baidu/</link>
       <pubDate>Fri, 13 Mar 2020 03:04:22 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/baidu/</guid>
+      <guid>https://sy123.netlify.app/tags/baidu/</guid>
       <description></description>
     </item>
     
     <item>
       <title>chrome</title>
-      <link>https://sy123.ml/tags/chrome/</link>
+      <link>https://sy123.netlify.app/tags/chrome/</link>
       <pubDate>Fri, 13 Mar 2020 02:46:41 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/chrome/</guid>
+      <guid>https://sy123.netlify.app/tags/chrome/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vim</title>
-      <link>https://sy123.ml/tags/vim/</link>
+      <link>https://sy123.netlify.app/tags/vim/</link>
       <pubDate>Thu, 12 Mar 2020 21:30:38 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/vim/</guid>
+      <guid>https://sy123.netlify.app/tags/vim/</guid>
       <description></description>
     </item>
     
     <item>
       <title>TypeScript</title>
-      <link>https://sy123.ml/tags/typescript/</link>
+      <link>https://sy123.netlify.app/tags/typescript/</link>
       <pubDate>Tue, 10 Mar 2020 14:51:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/typescript/</guid>
+      <guid>https://sy123.netlify.app/tags/typescript/</guid>
       <description></description>
     </item>
     
     <item>
       <title>git</title>
-      <link>https://sy123.ml/tags/git/</link>
+      <link>https://sy123.netlify.app/tags/git/</link>
       <pubDate>Fri, 06 Mar 2020 21:36:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/git/</guid>
+      <guid>https://sy123.netlify.app/tags/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>firefox</title>
-      <link>https://sy123.ml/tags/firefox/</link>
+      <link>https://sy123.netlify.app/tags/firefox/</link>
       <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/firefox/</guid>
+      <guid>https://sy123.netlify.app/tags/firefox/</guid>
       <description></description>
     </item>
     
     <item>
       <title>flash</title>
-      <link>https://sy123.ml/tags/flash/</link>
+      <link>https://sy123.netlify.app/tags/flash/</link>
       <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/flash/</guid>
+      <guid>https://sy123.netlify.app/tags/flash/</guid>
       <description></description>
     </item>
     
     <item>
       <title>js</title>
-      <link>https://sy123.ml/tags/js/</link>
+      <link>https://sy123.netlify.app/tags/js/</link>
       <pubDate>Fri, 28 Feb 2020 17:09:04 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/js/</guid>
+      <guid>https://sy123.netlify.app/tags/js/</guid>
       <description></description>
     </item>
     
     <item>
       <title>openssl</title>
-      <link>https://sy123.ml/tags/openssl/</link>
+      <link>https://sy123.netlify.app/tags/openssl/</link>
       <pubDate>Fri, 28 Feb 2020 11:28:00 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/openssl/</guid>
+      <guid>https://sy123.netlify.app/tags/openssl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>youtube</title>
-      <link>https://sy123.ml/tags/youtube/</link>
+      <link>https://sy123.netlify.app/tags/youtube/</link>
       <pubDate>Thu, 27 Feb 2020 18:34:08 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/youtube/</guid>
+      <guid>https://sy123.netlify.app/tags/youtube/</guid>
       <description></description>
     </item>
     
     <item>
       <title>react</title>
-      <link>https://sy123.ml/tags/react/</link>
+      <link>https://sy123.netlify.app/tags/react/</link>
       <pubDate>Thu, 27 Feb 2020 14:19:24 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/react/</guid>
+      <guid>https://sy123.netlify.app/tags/react/</guid>
       <description></description>
     </item>
     
     <item>
       <title>antd</title>
-      <link>https://sy123.ml/tags/antd/</link>
+      <link>https://sy123.netlify.app/tags/antd/</link>
       <pubDate>Wed, 26 Feb 2020 15:28:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/antd/</guid>
+      <guid>https://sy123.netlify.app/tags/antd/</guid>
       <description></description>
     </item>
     
     <item>
       <title>code</title>
-      <link>https://sy123.ml/tags/code/</link>
+      <link>https://sy123.netlify.app/tags/code/</link>
       <pubDate>Tue, 25 Feb 2020 12:39:44 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/code/</guid>
+      <guid>https://sy123.netlify.app/tags/code/</guid>
       <description></description>
     </item>
     
     <item>
       <title>shell</title>
-      <link>https://sy123.ml/tags/shell/</link>
+      <link>https://sy123.netlify.app/tags/shell/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/shell/</guid>
+      <guid>https://sy123.netlify.app/tags/shell/</guid>
       <description></description>
     </item>
     
     <item>
       <title>i3wm</title>
-      <link>https://sy123.ml/tags/i3wm/</link>
+      <link>https://sy123.netlify.app/tags/i3wm/</link>
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/i3wm/</guid>
+      <guid>https://sy123.netlify.app/tags/i3wm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>regex</title>
-      <link>https://sy123.ml/tags/regex/</link>
+      <link>https://sy123.netlify.app/tags/regex/</link>
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/regex/</guid>
+      <guid>https://sy123.netlify.app/tags/regex/</guid>
       <description></description>
     </item>
     
     <item>
       <title>cdn</title>
-      <link>https://sy123.ml/tags/cdn/</link>
+      <link>https://sy123.netlify.app/tags/cdn/</link>
       <pubDate>Sun, 23 Feb 2020 04:36:16 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/cdn/</guid>
+      <guid>https://sy123.netlify.app/tags/cdn/</guid>
       <description></description>
     </item>
     
     <item>
       <title>web</title>
-      <link>https://sy123.ml/tags/web/</link>
+      <link>https://sy123.netlify.app/tags/web/</link>
       <pubDate>Sun, 23 Feb 2020 04:36:16 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/web/</guid>
+      <guid>https://sy123.netlify.app/tags/web/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vdi</title>
-      <link>https://sy123.ml/tags/vdi/</link>
+      <link>https://sy123.netlify.app/tags/vdi/</link>
       <pubDate>Sun, 16 Feb 2020 15:10:33 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/vdi/</guid>
+      <guid>https://sy123.netlify.app/tags/vdi/</guid>
       <description></description>
     </item>
     
     <item>
       <title>virtualbox</title>
-      <link>https://sy123.ml/tags/virtualbox/</link>
+      <link>https://sy123.netlify.app/tags/virtualbox/</link>
       <pubDate>Sun, 16 Feb 2020 15:10:33 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/virtualbox/</guid>
+      <guid>https://sy123.netlify.app/tags/virtualbox/</guid>
       <description></description>
     </item>
     
     <item>
       <title>dva</title>
-      <link>https://sy123.ml/tags/dva/</link>
+      <link>https://sy123.netlify.app/tags/dva/</link>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/dva/</guid>
+      <guid>https://sy123.netlify.app/tags/dva/</guid>
       <description></description>
     </item>
     
     <item>
       <title>saga</title>
-      <link>https://sy123.ml/tags/saga/</link>
+      <link>https://sy123.netlify.app/tags/saga/</link>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/saga/</guid>
+      <guid>https://sy123.netlify.app/tags/saga/</guid>
       <description></description>
     </item>
     
     <item>
       <title>tools</title>
-      <link>https://sy123.ml/tags/tools/</link>
+      <link>https://sy123.netlify.app/tags/tools/</link>
       <pubDate>Sat, 15 Feb 2020 17:58:47 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/tools/</guid>
+      <guid>https://sy123.netlify.app/tags/tools/</guid>
       <description></description>
     </item>
     
     <item>
       <title>umi</title>
-      <link>https://sy123.ml/tags/umi/</link>
+      <link>https://sy123.netlify.app/tags/umi/</link>
       <pubDate>Mon, 10 Feb 2020 15:41:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/umi/</guid>
+      <guid>https://sy123.netlify.app/tags/umi/</guid>
       <description></description>
     </item>
     
     <item>
       <title>github</title>
-      <link>https://sy123.ml/tags/github/</link>
+      <link>https://sy123.netlify.app/tags/github/</link>
       <pubDate>Mon, 10 Feb 2020 13:07:08 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/github/</guid>
+      <guid>https://sy123.netlify.app/tags/github/</guid>
       <description></description>
     </item>
     
     <item>
       <title>npm</title>
-      <link>https://sy123.ml/tags/npm/</link>
+      <link>https://sy123.netlify.app/tags/npm/</link>
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/npm/</guid>
+      <guid>https://sy123.netlify.app/tags/npm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>yarn</title>
-      <link>https://sy123.ml/tags/yarn/</link>
+      <link>https://sy123.netlify.app/tags/yarn/</link>
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/yarn/</guid>
+      <guid>https://sy123.netlify.app/tags/yarn/</guid>
       <description></description>
     </item>
     
     <item>
       <title>win10</title>
-      <link>https://sy123.ml/tags/win10/</link>
+      <link>https://sy123.netlify.app/tags/win10/</link>
       <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/win10/</guid>
+      <guid>https://sy123.netlify.app/tags/win10/</guid>
       <description></description>
     </item>
     
     <item>
       <title>yay</title>
-      <link>https://sy123.ml/tags/yay/</link>
+      <link>https://sy123.netlify.app/tags/yay/</link>
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/yay/</guid>
+      <guid>https://sy123.netlify.app/tags/yay/</guid>
       <description></description>
     </item>
     
     <item>
       <title>network</title>
-      <link>https://sy123.ml/tags/network/</link>
+      <link>https://sy123.netlify.app/tags/network/</link>
       <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/network/</guid>
+      <guid>https://sy123.netlify.app/tags/network/</guid>
       <description></description>
     </item>
     
     <item>
       <title>powershell</title>
-      <link>https://sy123.ml/tags/powershell/</link>
+      <link>https://sy123.netlify.app/tags/powershell/</link>
       <pubDate>Mon, 20 Jan 2020 23:11:09 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/powershell/</guid>
+      <guid>https://sy123.netlify.app/tags/powershell/</guid>
       <description></description>
     </item>
     
     <item>
       <title>windoes</title>
-      <link>https://sy123.ml/tags/windoes/</link>
+      <link>https://sy123.netlify.app/tags/windoes/</link>
       <pubDate>Mon, 20 Jan 2020 23:11:09 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/windoes/</guid>
+      <guid>https://sy123.netlify.app/tags/windoes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>sysprep</title>
-      <link>https://sy123.ml/tags/sysprep/</link>
+      <link>https://sy123.netlify.app/tags/sysprep/</link>
       <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/sysprep/</guid>
+      <guid>https://sy123.netlify.app/tags/sysprep/</guid>
       <description></description>
     </item>
     
     <item>
       <title>pagefile</title>
-      <link>https://sy123.ml/tags/pagefile/</link>
+      <link>https://sy123.netlify.app/tags/pagefile/</link>
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/pagefile/</guid>
+      <guid>https://sy123.netlify.app/tags/pagefile/</guid>
       <description></description>
     </item>
     
     <item>
       <title>smaba</title>
-      <link>https://sy123.ml/tags/smaba/</link>
+      <link>https://sy123.netlify.app/tags/smaba/</link>
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/smaba/</guid>
+      <guid>https://sy123.netlify.app/tags/smaba/</guid>
       <description></description>
     </item>
     
     <item>
       <title>netbios</title>
-      <link>https://sy123.ml/tags/netbios/</link>
+      <link>https://sy123.netlify.app/tags/netbios/</link>
       <pubDate>Fri, 17 Jan 2020 19:23:06 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/netbios/</guid>
+      <guid>https://sy123.netlify.app/tags/netbios/</guid>
       <description></description>
     </item>
     
     <item>
       <title>samba</title>
-      <link>https://sy123.ml/tags/samba/</link>
+      <link>https://sy123.netlify.app/tags/samba/</link>
       <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/samba/</guid>
+      <guid>https://sy123.netlify.app/tags/samba/</guid>
       <description></description>
     </item>
     
     <item>
       <title>WSL</title>
-      <link>https://sy123.ml/tags/wsl/</link>
+      <link>https://sy123.netlify.app/tags/wsl/</link>
       <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/wsl/</guid>
+      <guid>https://sy123.netlify.app/tags/wsl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>diskpart</title>
-      <link>https://sy123.ml/tags/diskpart/</link>
+      <link>https://sy123.netlify.app/tags/diskpart/</link>
       <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/diskpart/</guid>
+      <guid>https://sy123.netlify.app/tags/diskpart/</guid>
       <description></description>
     </item>
     
     <item>
       <title>proxy</title>
-      <link>https://sy123.ml/tags/proxy/</link>
+      <link>https://sy123.netlify.app/tags/proxy/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/proxy/</guid>
+      <guid>https://sy123.netlify.app/tags/proxy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ss</title>
-      <link>https://sy123.ml/tags/ss/</link>
+      <link>https://sy123.netlify.app/tags/ss/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://sy123.ml/tags/ss/</guid>
+      <guid>https://sy123.netlify.app/tags/ss/</guid>
       <description></description>
     </item>
     

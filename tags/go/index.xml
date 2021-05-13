@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>go on zhili</title>
-    <link>https://sy123.ml/tags/go/</link>
+    <link>https://sy123.netlify.app/tags/go/</link>
     <description>Recent content in go on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Mon, 18 May 2020 04:01:27 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 May 2020 04:01:27 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/go/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>解决Golang在VSCode中调试时无法接收标准输入的问题</title>
-      <link>https://sy123.ml/2020/05/18/%E8%A7%A3%E5%86%B3golang%E5%9C%A8vscode%E4%B8%AD%E8%B0%83%E8%AF%95%E6%97%B6%E6%97%A0%E6%B3%95%E6%8E%A5%E6%94%B6%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <link>https://sy123.netlify.app/2020/05/18/%E8%A7%A3%E5%86%B3golang%E5%9C%A8vscode%E4%B8%AD%E8%B0%83%E8%AF%95%E6%97%B6%E6%97%A0%E6%B3%95%E6%8E%A5%E6%94%B6%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/</link>
       <pubDate>Mon, 18 May 2020 04:01:27 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/05/18/%E8%A7%A3%E5%86%B3golang%E5%9C%A8vscode%E4%B8%AD%E8%B0%83%E8%AF%95%E6%97%B6%E6%97%A0%E6%B3%95%E6%8E%A5%E6%94%B6%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://sy123.netlify.app/2020/05/18/%E8%A7%A3%E5%86%B3golang%E5%9C%A8vscode%E4%B8%AD%E8%B0%83%E8%AF%95%E6%97%B6%E6%97%A0%E6%B3%95%E6%8E%A5%E6%94%B6%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
       <description>Golang 在 VSCode 中的调试配置 （解决Golang在VSCode中调试时无法接收标准输入(stdin)的问题）
 最近开始接触Go语言，但在配置VSCode的调试文件的时候发现VSCode中的官方GO插件调试时用的是调试控制台(debug console)而非终端(terminal)，找了很多设置也没有类似于terminal或者internalTerminal或者externalTerminal的配置项。最终在vscode-go仓库的issue里找到了问题所在。鉴于目前还没有国内的博客帖子总结该问题，在这里总结一下问题原因及解决方案。
 问题起因 最开始以为是vscode-go插件的锅，但在相关问题的issue里，vscode-go的开发团队给出的回复是，由于delve调试器本身在普通模式运行时就无法直接接受命令行标准输入(stdin)，导致配套的相关插件也无法正常工作。本来delve自身加上支持接受命令行输入的功能即可彻底解决这个问题，但似乎delve开发团队的人员并不对此感兴趣，不少开发者也同样也对此表示无奈,只有用目前其他开发者给出的折中的解决办法。

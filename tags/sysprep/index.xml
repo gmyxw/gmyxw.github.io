@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>sysprep on zhili</title>
-    <link>https://sy123.ml/tags/sysprep/</link>
+    <link>https://sy123.netlify.app/tags/sysprep/</link>
     <description>Recent content in sysprep on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Mon, 20 Jan 2020 06:12:53 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/sysprep/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jan 2020 06:12:53 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/sysprep/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Sysprep命令详解</title>
-      <link>https://sy123.ml/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://sy123.netlify.app/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
       <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
+      <guid>https://sy123.netlify.app/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
       <description>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删除唯一性信息，这使得你可以在不同的计算机上重复使用映像。下次启动 Windows 映像时，将运行 specialize 配置阶段。
 Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
 1 2 3 4 5 6 7 8 9 10 11  Sysprep.exe [/oobe | /audit] [/generalize] [/mode:vm] [/reboot | /shutdown | /quit] [/quiet] [/unattend:&amp;lt;answerfile&amp;gt;]   下表列出了 Sysprep 命令行选项：

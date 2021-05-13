@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>archlinux on zhili</title>
-    <link>https://sy123.ml/tags/archlinux/</link>
+    <link>https://sy123.netlify.app/tags/archlinux/</link>
     <description>Recent content in archlinux on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Wed, 25 Nov 2020 19:05:37 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/archlinux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 Nov 2020 19:05:37 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/archlinux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Archlinux Failed to Commit Transaction Conflicting File</title>
-      <link>https://sy123.ml/2020/11/25/archlinux-failed-to-commit-transaction-conflicting-file/</link>
+      <link>https://sy123.netlify.app/2020/11/25/archlinux-failed-to-commit-transaction-conflicting-file/</link>
       <pubDate>Wed, 25 Nov 2020 19:05:37 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/11/25/archlinux-failed-to-commit-transaction-conflicting-file/</guid>
+      <guid>https://sy123.netlify.app/2020/11/25/archlinux-failed-to-commit-transaction-conflicting-file/</guid>
       <description>前言 今天我试着更新我的 Arch Linux 系统，然后遇到一个错误 error：failed to commit transaction (conflicting files) stfl：/usr/lib/libstfl.so.0 exists in filesystem。看起来是 pacman 无法更新一个已经存在于文件系统上的库 (/usr/lib/libstfl.so.0)。如果你也遇到了同样的问题，下面是一个快速解决方案。
 解决 用自带的命令覆盖，wiki上是推荐这种做法
 1  sudo pacman -Syu --overwrite /usr/lib/libstfl.so.0   暴力解决，直接解决出问题的文件，或者你也可以把重复的包备份一下防止意外，不过一般没啥意外，按照经验出这个问题的方式千奇百怪，反正就是更新出错了，比如你更新的时候换源之类的操作也会导致这样，直接删掉就完事
@@ -25,10 +25,10 @@ See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transac
     
     <item>
       <title>archlinux升级内核后，系统挂了，修复方法</title>
-      <link>https://sy123.ml/2020/03/18/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</link>
+      <link>https://sy123.netlify.app/2020/03/18/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</link>
       <pubDate>Wed, 18 Mar 2020 06:32:53 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/03/18/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</guid>
+      <guid>https://sy123.netlify.app/2020/03/18/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</guid>
       <description>今天滚完系统就没网络，startx报内核模块错误，当场裂开了，开机显示加载驱动失败，先来看看加载日志吧
 1  sudo systemctl status systemd-modules-load   报错全是类似Module Vboxdrv Not Found in Directory xx这种
 再查看下内核模块相关目录发现了端倪
@@ -44,10 +44,10 @@ See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transac
     
     <item>
       <title>ArchLinux配置Samba服务与Windows共享文件</title>
-      <link>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
+      <link>https://sy123.netlify.app/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
+      <guid>https://sy123.netlify.app/2020/01/19/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
       <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。
 Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
 下面记录一下ArchLinux中配置Samba的过程，留作备份。

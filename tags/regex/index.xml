@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>regex on zhili</title>
-    <link>https://sy123.ml/tags/regex/</link>
+    <link>https://sy123.netlify.app/tags/regex/</link>
     <description>Recent content in regex on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Mon, 24 Feb 2020 01:15:09 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/regex/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Feb 2020 01:15:09 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/regex/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vim_search_in_file</title>
-      <link>https://sy123.ml/2020/02/24/vim_search_in_file/</link>
+      <link>https://sy123.netlify.app/2020/02/24/vim_search_in_file/</link>
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/24/vim_search_in_file/</guid>
+      <guid>https://sy123.netlify.app/2020/02/24/vim_search_in_file/</guid>
       <description>总有人问我 Vim 中能不能查找，当然能！而且是超级强的查找！ 这篇文章来详细介绍 Vim 中查找相关的设置和使用方法。 包括查找与替换、查找光标所在词、高亮前景/背景色、切换高亮状态、大小写敏感查找等。
 查找 在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。
 Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quot;。 需要查找特殊字符需要转义，例如/vim$匹配&amp;quot;vim$&amp;quot;。

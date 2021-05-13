@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>vdi on zhili</title>
-    <link>https://sy123.ml/tags/vdi/</link>
+    <link>https://sy123.netlify.app/tags/vdi/</link>
     <description>Recent content in vdi on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Sun, 16 Feb 2020 15:10:33 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/vdi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 Feb 2020 15:10:33 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/vdi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何清理Virtualbox虚拟机VDI镜像文件的空间大小</title>
-      <link>https://sy123.ml/2020/02/16/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BAvdi%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F/</link>
+      <link>https://sy123.netlify.app/2020/02/16/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BAvdi%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F/</link>
       <pubDate>Sun, 16 Feb 2020 15:10:33 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/02/16/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BAvdi%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F/</guid>
+      <guid>https://sy123.netlify.app/2020/02/16/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BAvdi%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F/</guid>
       <description>玩虚拟机的同学都知道，对于那些设定为动态配分的虚拟机，一开始装完系统时可能只有几个G，但是随着你不断的使用，体积空间就会越来越大，随便就是几十个G了。也就是说动态扩展的VDI文件只会大，不会小。这期间，就算你去虚拟机里面删除一些文件，整个虚拟机的镜像文件VDI文件的大小依然不会变小，使其所占用的实际硬盘空间过大，给备份和分享都带来麻烦。因此，今天我们就来研究一下如何解决这个问题，其实很简单。
 以下方法，在我自己的64位Ubuntu 14.04和64位win10虚拟机中亲测有效！
 步骤1：碎片整理 第一步要做的是碎片整理，整理过程需要一个特定的工具，win系统和linux系统各自有别：

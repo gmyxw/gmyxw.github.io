@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>golang on zhili</title>
-    <link>https://sy123.ml/tags/golang/</link>
+    <link>https://sy123.netlify.app/tags/golang/</link>
     <description>Recent content in golang on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Sat, 18 Apr 2020 00:06:48 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Apr 2020 00:06:48 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How can I simulate interactive console in VSCode debugger</title>
-      <link>https://sy123.ml/2020/04/18/how-can-i-simulate-interactive-console-in-vscode-debugger/</link>
+      <link>https://sy123.netlify.app/2020/04/18/how-can-i-simulate-interactive-console-in-vscode-debugger/</link>
       <pubDate>Sat, 18 Apr 2020 00:06:48 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/04/18/how-can-i-simulate-interactive-console-in-vscode-debugger/</guid>
+      <guid>https://sy123.netlify.app/2020/04/18/how-can-i-simulate-interactive-console-in-vscode-debugger/</guid>
       <description>the VS Code debugger console doesn&amp;rsquo;t currently support piping any input through to stdin.
 FYI, you can tell the Code debugger to use an external console in the launch config:
 &amp;quot;externalConsole&amp;quot;: true It has a possible workaround, using remote debug + vscode task, but that is not trivial.

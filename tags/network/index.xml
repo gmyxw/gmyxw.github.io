@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>network on zhili</title>
-    <link>https://sy123.ml/tags/network/</link>
+    <link>https://sy123.netlify.app/tags/network/</link>
     <description>Recent content in network on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Fri, 31 Jan 2020 12:32:48 +0800</lastBuildDate><atom:link href="https://sy123.ml/tags/network/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 31 Jan 2020 12:32:48 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/network/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux_disable_IPv6</title>
-      <link>https://sy123.ml/2020/01/31/linux_disable_ipv6/</link>
+      <link>https://sy123.netlify.app/2020/01/31/linux_disable_ipv6/</link>
       <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
       
-      <guid>https://sy123.ml/2020/01/31/linux_disable_ipv6/</guid>
+      <guid>https://sy123.netlify.app/2020/01/31/linux_disable_ipv6/</guid>
       <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关闭IPv6。 下面是IPv6的关闭方法应该适用于所有主流的Linux发行版包括Ubuntu、Debian、CentOS。
 IPv6在CentOS6.5系统中默认是启用状态，通过以下方式可以确认IPv6的状态
 1.1.查看系统IPv6的启用状态 以下命令返回值为0表示IPv6启用，1表示禁用
