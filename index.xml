@@ -6,7 +6,7 @@
     <description>Recent content on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Wed, 25 Nov 2020 19:05:37 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 May 2021 06:34:37 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://sy123.netlify.app/about/</link>
@@ -16,6 +16,18 @@
       <description>Suspendisse non nisl sit amet Morbi mattis ullamcorper velit. Morbi mollis tellus ac sapien. Praesent congue erat at massa. Nullam tincidunt adipiscing enim.
 Phasellus blandit leo ut odio. Aenean imperdiet. In hac habitasse platea dictumst. Maecenas vestibulum mollis diam. Morbi ac felis.
 Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Suspendisse feugiat.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://sy123.netlify.app/2021/05/16/</link>
+      <pubDate>Sun, 16 May 2021 06:34:37 +0800</pubDate>
+      
+      <guid>https://sy123.netlify.app/2021/05/16/</guid>
+      <description>换了新显卡这么久才发现会画面撕裂，网上搜了下在v2看到有人提到关闭渲染器的硬件加速可以解决，试了下果然有效
+1  compton --backend xrender   彻底解决 顺藤摸瓜进去wiki查下了原因是i3的BUG，这么多年至今都未修复，之后还发现compton已经被重定向到Picom，估计已经没人维护了，我也要跑路了
+1  sudo pacman -S picom   我的compton配置是直接从别人仓库里git clone的有没有垂直同步不知道，反正picom是默认开启垂直同步，一劳永逸终于可以不用看不到烦人的裂缝
+See aslo  https://wiki.archlinux.org/title/Picom  </description>
     </item>
     
     <item>
