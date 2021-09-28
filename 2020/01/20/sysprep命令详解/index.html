@@ -37,7 +37,7 @@
 下列命令行选项可用于 Sysprep：</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -50,7 +50,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">Sysprep.exe</span> [<span style="color:#008080">/oobe</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#008080">/audit</span>]
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">Sysprep.exe</span> [<span style="color:#008080">/oobe</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#008080">/audit</span>]
 
 [<span style="color:#008080">/generalize</span>]
 
@@ -138,12 +138,12 @@
 <h1 id="预设appx删除">预设appx删除</h1>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">Get-AppxProvisionedPackage</span> <span style="color:#900;font-weight:bold">-online</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#900;font-weight:bold">Out-GridView</span> <span style="color:#900;font-weight:bold">-PassThru</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#900;font-weight:bold">Remove-AppxProvisionedPackage</span> <span style="color:#900;font-weight:bold">-online</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">Get-AppxProvisionedPackage</span> <span style="color:#900;font-weight:bold">-online</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#900;font-weight:bold">Out-GridView</span> <span style="color:#900;font-weight:bold">-PassThru</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#900;font-weight:bold">Remove-AppxProvisionedPackage</span> <span style="color:#900;font-weight:bold">-online</span>
 
 <span style="color:#900;font-weight:bold">Get-AppxPackage</span> <span style="color:#900;font-weight:bold">-AllUsers</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#900;font-weight:bold">Out-GridView</span> <span style="color:#900;font-weight:bold">-PassThru</span> <span style="color:#900;font-weight:bold">|</span> <span style="color:#900;font-weight:bold">Remove-AppxPackage</span>
 </code></pre></td></tr></table>

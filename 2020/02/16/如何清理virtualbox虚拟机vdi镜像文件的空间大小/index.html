@@ -42,11 +42,11 @@
 <p>打开虚拟机，执行下面的命令：</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo dd <span style="color:#000;font-weight:bold">if</span><span style="color:#000;font-weight:bold">=</span>/dev/zero <span style="color:#008080">of</span><span style="color:#000;font-weight:bold">=</span>/free <span style="color:#008080">bs</span><span style="color:#000;font-weight:bold">=</span>1M
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo dd <span style="color:#000;font-weight:bold">if</span><span style="color:#000;font-weight:bold">=</span>/dev/zero <span style="color:#008080">of</span><span style="color:#000;font-weight:bold">=</span>/free <span style="color:#008080">bs</span><span style="color:#000;font-weight:bold">=</span>1M
 sudo rm -f /free
 </code></pre></td></tr></table>
 </div>
@@ -58,10 +58,10 @@ sudo rm -f /free
 <p>下载后解压，取出其中的<code>diskext.exe</code>（针对32位系统）或者<code>diskext64.exe</code>（针对64位系统），将其复制到虚拟机的C盘根目录下，然后以管理员身份在虚拟机中启动命令行<code>cmd</code>，输入以下命令：</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">C:\sdelete64.exe -z c:								<span style="color:#998;font-style:italic"># c表示清理c盘</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell">C:\sdelete64.exe -z c:								<span style="color:#998;font-style:italic"># c表示清理c盘</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>便会自动开始清理磁盘，大约5-10分钟左右方能清理完毕，于是便可关闭虚拟机，进入下一步。</p>
@@ -70,11 +70,11 @@ sudo rm -f /free
 <p>打开<code>cmd</code>命令窗口，并进入<code>Virtualbox</code>所安装的目录（一般是<code>C:\Program Files\Oracle\VirtualBox</code>）目录，然后启动<code>VBoxManage.exe</code>进行VDI镜像文件的压缩，并等待命令结束即可：</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#0086b3">cd </span><span style="color:#d14">&#34;C:\Program Files\Oracle\VirtualBox&#34;</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-powershell" data-lang="powershell"><span style="color:#0086b3">cd </span><span style="color:#d14">&#34;C:\Program Files\Oracle\VirtualBox&#34;</span>
 VBoxManage.exe modifyhd <span style="color:#d14">&#34;E:\V_VtSystem\A_Systems\Ubuntu 14.04.vdi&#34;</span> --compact
 </code></pre></td></tr></table>
 </div>

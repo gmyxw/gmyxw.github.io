@@ -38,19 +38,19 @@ To dual boot with Windows it is recommended to configure Windows to use UTC, rat
 <p>It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-reg" data-lang="reg"><span style="color:#a61717;background-color:#e3d2d2">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-reg" data-lang="reg"><span style="color:#a61717;background-color:#e3d2d2">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>You can do this from an Administrator Command Prompt running:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">reg</span> <span style="color:#900;font-weight:bold">add</span> <span style="color:#900;font-weight:bold">&#34;HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation&#34;</span> <span style="color:#008080">/v</span> <span style="color:#900;font-weight:bold">RealTimeIsUniversal</span> <span style="color:#008080">/d</span> <span style="color:#099">1</span> <span style="color:#008080">/t</span> <span style="color:#900;font-weight:bold">REG_QWORD</span> <span style="color:#008080">/f</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">reg</span> <span style="color:#900;font-weight:bold">add</span> <span style="color:#900;font-weight:bold">&#34;HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation&#34;</span> <span style="color:#008080">/v</span> <span style="color:#900;font-weight:bold">RealTimeIsUniversal</span> <span style="color:#008080">/d</span> <span style="color:#099">1</span> <span style="color:#008080">/t</span> <span style="color:#900;font-weight:bold">REG_QWORD</span> <span style="color:#008080">/f</span>
 </code></pre></td></tr></table>
 </div>
 </div><p>(Replace QWORD with DWORD for 32-bit Windows.)</p>
@@ -58,11 +58,11 @@ To dual boot with Windows it is recommended to configure Windows to use UTC, rat
 <p>Windows Registry Editor Version 5.00</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-reg" data-lang="reg"><span style="color:#000;font-weight:bold">[</span><span style="color:#0086b3">HKEY_LOCAL_MACHINE</span><span style="color:#000;font-weight:bold">\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]</span>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-reg" data-lang="reg"><span style="color:#000;font-weight:bold">[</span><span style="color:#0086b3">HKEY_LOCAL_MACHINE</span><span style="color:#000;font-weight:bold">\SYSTEM\CurrentControlSet\Control\TimeZoneInformation]</span>
      <span style="color:#008080">&#34;RealTimeIsUniversal&#34;</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">qword:00000001</span>
 </code></pre></td></tr></table>
 </div>
@@ -72,13 +72,13 @@ To dual boot with Windows it is recommended to configure Windows to use UTC, rat
 <p>If you are having issues with the offset of the time, try reinstalling tzdata and then setting your time zone again:</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ timedatectl set-timezone America/Los_Angeles
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ timedatectl set-timezone America/Los_Angeles
 
 <span style="color:#998;font-style:italic"># Enable the NTP service on your Linux system with the command</span>
 $ timedatectl set-ntp <span style="color:#0086b3">true</span>

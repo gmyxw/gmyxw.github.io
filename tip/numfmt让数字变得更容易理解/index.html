@@ -35,7 +35,7 @@
 比如,直接执行 =df= 时，容量显示的是多少个块，而当用 =df -h= 时，容量会根据块的数量转换成 G/M/K 的形式。</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -62,7 +62,7 @@
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">  <span style="color:#000;font-weight:bold">[</span>lujun9972@T520 ~<span style="color:#000;font-weight:bold">]</span>$ df
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">  <span style="color:#000;font-weight:bold">[</span>lujun9972@T520 ~<span style="color:#000;font-weight:bold">]</span>$ df
   文件系统          1K-块     已用     可用 已用% 挂载点
   dev             <span style="color:#099">1900280</span>        <span style="color:#099">0</span>  <span style="color:#099">1900280</span>    0% /dev
   run             <span style="color:#099">1906932</span>      <span style="color:#099">868</span>  <span style="color:#099">1906064</span>    1% /run
@@ -100,7 +100,7 @@
 <p>numfmt &ndash;to=si 数字 :: 将数字转换成易读格式</p>
 <p>#+BEGIN_SRC shell :results org
 numfmt &ndash;to=si 100000</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 100K
 </code></pre></li>
@@ -108,7 +108,7 @@ numfmt &ndash;to=si 100000</p>
 <p>numfmt &ndash;from=si 易读格式 :: 将易读格式转换成数字</p>
 <p>#+BEGIN_SRC shell :results org
 numfmt &ndash;from=si 100K</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 100000
 </code></pre></li>
@@ -119,7 +119,7 @@ numfmt &ndash;from=si 100K</p>
 <p>numfmt &ndash;to=iec 数字 :: 将数字转换成易读格式</p>
 <p>#+BEGIN_SRC shell :results org
 numfmt &ndash;to=iec 100000</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 98K
 </code></pre></li>
@@ -127,7 +127,7 @@ numfmt &ndash;to=iec 100000</p>
 <p>numfmt &ndash;from=iec 易读格式 :: 将易读格式转换成数字</p>
 <p>#+BEGIN_SRC shell :results org
 numfmt &ndash;from=iec 100K</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 102400
 </code></pre></li>
@@ -138,7 +138,7 @@ numfmt &ndash;from=iec 100K</p>
 <p>numfmt &ndash;to=iec-i 数字 :: 将数字转换成易读格式</p>
 <p>#+BEGIN_SRC shell :results org
 numfmt &ndash;to=iec-i 100000</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 98Ki
 </code></pre></li>
@@ -148,7 +148,7 @@ numfmt &ndash;to=iec-i 100000</p>
 <p>numfmt &ndash;from=iec-i 易读格式 :: 将易读格式转换成数字</p>
 <p>#+BEGIN_SRC shell :results org
 numfmt &ndash;from=iec-i 100Ki</p>
-<pre><code>
+<pre tabindex="0"><code>
 #+RESULTS:
 ```sh
 102400
@@ -160,7 +160,7 @@ numfmt &ndash;from=iec-i 100Ki</p>
 <p>若格式的单位后面不带 =i= 则使用 1000 进制来转换</p>
 <p>#+BEGIN_SRC shell :results org
 numfmt &ndash;from=auto 100K</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 100000
 </code></pre></li>
@@ -168,7 +168,7 @@ numfmt &ndash;from=auto 100K</p>
 <p>若格式的单位后面不带 =i= 则使用 1024 进制来转换</p>
 <p>#+BEGIN_SRC shell :results org
 numfmt &ndash;from=auto 100Ki</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 102400
 </code></pre></li>
@@ -179,14 +179,14 @@ numfmt &ndash;from=auto 100Ki</p>
 #+BEGIN_SRC shell :results org
 numfmt &ndash;to=iec 100000 20000 40000</li>
 </ul>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 98K
 20K
 40K
 </code></pre><p>#+BEGIN_SRC shell :results org
 numfmt &ndash;from=iec 98K 20K 40K</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 100352
 20480
@@ -198,14 +198,14 @@ numfmt &ndash;from=iec 98K 20K 40K</p>
 #+BEGIN_SRC shell :results org
 numfmt &ndash;to=si &ndash;from-unit K 1000</li>
 </ul>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 1.0M
 </code></pre><p>你会发现，输出是 =1M= 而不是 =1K=</p>
 <p>同理，使用 =&ndash;to-unit= 可以指定输出数字的单位:
 #+BEGIN_SRC shell :results org
 numfmt &ndash;from=si &ndash;to-unit K 1M</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 1000
 </code></pre><p>可以看到，输出是是 =1000= 而不是 =1000000=</p>
@@ -219,7 +219,7 @@ numfmt &ndash;from=si &ndash;to-unit K 1M</p>
 <p>#+BEGIN_SRC shell
 [lujun9972@T520 ~]$ numfmt &ndash;to=si &ndash;format &ldquo;%10f&rdquo; 1000
 1.0K</p>
-<pre><code>
+<pre tabindex="0"><code>
 </code></pre></li>
 <li>
 <p>输出左对齐，占 10 位字符</p>
@@ -244,7 +244,7 @@ numfmt &ndash;from=si &ndash;to-unit K 1M</p>
 <p>#+BEGIN_SRC shell :results org
 echo 1000 |numfmt &ndash;to=si
 f</p>
-<pre><code>
+<pre tabindex="0"><code>
 ```sh
 1.0K
 </code></pre><p>然而，对于像 =df= 这样的命令，除了数字外，还有其他内容怎么办呢？</p>
@@ -252,15 +252,15 @@ f</p>
 <p>比如，我们可以用下列命令来让 =numfmt= 只转换 =df= 命令从第 3 行开始的 2 到 4 列数字，保持其他内容不变</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">  df -B1 | numfmt --header<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span> --field 2-4 --to<span style="color:#000;font-weight:bold">=</span>iec
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">  df -B1 | numfmt --header<span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span> --field 2-4 --to<span style="color:#000;font-weight:bold">=</span>iec
 </code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
@@ -273,7 +273,7 @@ f</p>
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">文件系统             1B-块        已用        可用 已用% 挂载点
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">文件系统             1B-块        已用        可用 已用% 挂载点
 dev             <span style="color:#099">1945886720</span>           <span style="color:#099">0</span>  <span style="color:#099">1945886720</span>    0% /dev
 run                   1.9G        868K        1.9G    1% /run
 /dev/sda2              40G         23G         15G   61% /

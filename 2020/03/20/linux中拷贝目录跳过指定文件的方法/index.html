@@ -36,11 +36,11 @@
 <p><strong>rsync</strong> 本来是文件同步备份的工具，相对于普通的 <strong>cp</strong> 命令，<strong>rsync</strong> 在控制方面就强多了，而且 <strong>rsync</strong> 对遍历目录也支持，有 <strong>&ndash;exclude</strong> 参数可以忽略指定的文件或文件夹。</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rsync -vaP --exclude<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;.*&#34;</span> --exclude<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;Makefile&#34;</span> dir1 /home/dir2
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rsync -vaP --exclude<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;.*&#34;</span> --exclude<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;Makefile&#34;</span> dir1 /home/dir2
 
 </code></pre></td></tr></table>
 </div>
@@ -50,11 +50,11 @@
 <p>用过 <strong>find</strong> 的童鞋都知道，<strong>find</strong> 对文件的过滤那是非常强大的，配合 <strong>cpio</strong> 来进行目录的遍历拷贝就可以实现过滤指定的文件或文件夹，当然也可以做到只备份特定的文件或文件夹，你可以用 <strong>find</strong> 的各种过滤参数达到拷贝哪天的文件，拷贝近期更改的文件等特殊效果，而且 <strong>find</strong> 支持正则表达式，这种方式想比第一种使用 <strong>rsync</strong> 跳过文件的方式更加灵活，因此非常推荐使用此方式进行目录拷贝。</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#0086b3">cd</span> dir1
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#0086b3">cd</span> dir1
 find . -regextype posix-egrep -mindepth <span style="color:#099">1</span> ! -regex <span style="color:#d14">&#39;./(dev|tmp)($|/.*)&#39;</span> ! -name Makefile -a ! -name .svn | cpio -admvp /home/dir2
 </code></pre></td></tr></table>
 </div>
