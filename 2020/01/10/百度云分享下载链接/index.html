@@ -42,29 +42,29 @@
 <p>点击链接，进入页面。在console模式下输入如下代码：</p>
 </li>
 </ol>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">$.ajax({
-type<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;POST&#34;</span>,
-url<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;/api/sharedownload?sign=&#34;</span><span style="color:#000;font-weight:bold">+</span>yunData.SIGN<span style="color:#000;font-weight:bold">+</span><span style="color:#d14">&#34;&amp;timestamp=&#34;</span><span style="color:#000;font-weight:bold">+</span>yunData.TIMESTAMP,
-data<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;encrypt=0&amp;product=share&amp;uk=&#34;</span><span style="color:#000;font-weight:bold">+</span>yunData.SHARE_UK<span style="color:#000;font-weight:bold">+</span><span style="color:#d14">&#34;&amp;primaryid=&#34;</span><span style="color:#000;font-weight:bold">+</span>yunData.SHARE_ID<span style="color:#000;font-weight:bold">+</span><span style="color:#d14">&#34;&amp;fid_list=%5B&#34;</span><span style="color:#000;font-weight:bold">+</span>yunData.FS_ID<span style="color:#000;font-weight:bold">+</span><span style="color:#d14">&#34;%5D&#34;</span>,
-dataType<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;json&#34;</span>,
-success<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">function</span>(d){
-<span style="color:#0086b3">window</span>.location.href <span style="color:#000;font-weight:bold">=</span> d.list[<span style="color:#099">0</span>].dlink;
-}
-});
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>$.ajax({
+</span></span><span style="display:flex;"><span>type<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;POST&#34;</span>,
+</span></span><span style="display:flex;"><span>url<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;/api/sharedownload?sign=&#34;</span><span style="color:#000;font-weight:bold">+</span>yunData.SIGN<span style="color:#000;font-weight:bold">+</span><span style="color:#d14">&#34;&amp;timestamp=&#34;</span><span style="color:#000;font-weight:bold">+</span>yunData.TIMESTAMP,
+</span></span><span style="display:flex;"><span>data<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;encrypt=0&amp;product=share&amp;uk=&#34;</span><span style="color:#000;font-weight:bold">+</span>yunData.SHARE_UK<span style="color:#000;font-weight:bold">+</span><span style="color:#d14">&#34;&amp;primaryid=&#34;</span><span style="color:#000;font-weight:bold">+</span>yunData.SHARE_ID<span style="color:#000;font-weight:bold">+</span><span style="color:#d14">&#34;&amp;fid_list=%5B&#34;</span><span style="color:#000;font-weight:bold">+</span>yunData.FS_ID<span style="color:#000;font-weight:bold">+</span><span style="color:#d14">&#34;%5D&#34;</span>,
+</span></span><span style="display:flex;"><span>dataType<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#34;json&#34;</span>,
+</span></span><span style="display:flex;"><span>success<span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">function</span>(d){
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">window</span>.location.href <span style="color:#000;font-weight:bold">=</span> d.list[<span style="color:#099">0</span>].dlink;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><a href="#">客户端接口加密算法</a></p>
 </div>

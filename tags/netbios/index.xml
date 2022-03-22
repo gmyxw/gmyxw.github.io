@@ -15,12 +15,12 @@
       <guid>https://sy123.netlify.app/2020/01/17/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</guid>
       <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。
 以下为批处理自动关闭netbios脚本:
-1 2 3 4 5 6 7 8 9 10 11 12  @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do ( wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0 if exist one_time.cmd ( del /f /q %0 exit ) rename %0 one_time.cmd exit   功能: 一键关闭netbios，执行完第二次后自己删除自己。
+1 2 3 4 5 6 7 8 9 10 11 12  @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do (  wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0  if exist one_time.cmd (  del /f /q %0  exit ) rename %0 one_time.cmd exit   功能: 一键关闭netbios，执行完第二次后自己删除自己。
 适用性:， 在win7及win2008测试通过，其它系统没测。
 说明: 用法：复制上述脚本随便起个名，扩展名改为bat或者cmd。最好把文件放到开机启动目录，开机就运行。windows下自启动目录如下： C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup
 如何开启NETBIOS? 把上述代码第四行最后数字改为1即为开启，改为0即为默认设置，为2时代表关闭（上述代码已默认设为关闭NETBIOS)。
 为何要第二次才删除？ 如果是新装或者复制了系统，第一次开机是检测并安装网卡设备。如果未安装完网卡就运行完脚本，那脚本就发挥不了作用。
-运行流程： 在运行第一次的时候会自动把本脚本重命名为one_time.cmd 在第二次运行脚本监测到有one_time.cmd文件后会自我删除。 本脚本用for循环20次，每个网卡都尝试关闭NETBIOS,（一般系统有十多个网卡序号）如果不够（不放心）就就把第三行代码由数字20改为30或更多。如果想要查看自己的网卡序号可以在CMD里输入以下命令：wmic nicconfig Get Caption,index</description>
+运行流程： 在运行第一次的时候会自动把本脚本重命名为one_time.</description>
     </item>
     
   </channel>

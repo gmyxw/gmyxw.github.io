@@ -30,8 +30,8 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quo
 作用范围 作用范围分为当前行、全文、选区等等。
 当前行：
 :s/foo/bar/g 全文：
-:%s/foo/bar/g 选区，在Visual模式下选择区域后输入:，Vim即可自动补全为 :&#39;&amp;lt;,&#39;&amp;gt;。
-:&#39;&amp;lt;,&#39;&amp;gt;s/foo/bar/g 2-11行：
+:%s/foo/bar/g 选区，在Visual模式下选择区域后输入:，Vim即可自动补全为 :&amp;rsquo;&amp;lt;,&amp;rsquo;&amp;gt;。
+:&amp;rsquo;&amp;lt;,&amp;rsquo;&amp;gt;s/foo/bar/g 2-11行：
 :5,12s/foo/bar/g 当前行.与接下来两行+2：
 :.,+2s/foo/bar/g 替换标志 上文中命令结尾的g即是替换标志之一，表示全局global替换（即替换目标的所有出现）。 还有很多其他有用的替换标志：
 空替换标志表示只替换从光标位置开始，目标的第一次出现：

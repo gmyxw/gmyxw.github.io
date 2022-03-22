@@ -33,7 +33,7 @@ FYI, you can tell the Code debugger to use an external console in the launch con
 &amp;quot;externalConsole&amp;quot;: true It has a possible workaround, using remote debug + vscode task, but that is not trivial.
  It has a possible workaround, using remote debug + vscode task, but that is not trivial.
 launch.json
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  { // Use IntelliSense to learn about possible attributes.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  {  // Use IntelliSense to learn about possible attributes.</description>
     </item>
     
     <item>

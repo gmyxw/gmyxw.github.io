@@ -34,148 +34,148 @@
   <h2 id="前言">前言</h2>
 <p>新买了耳机发现没声音，上网查了一下发现耳机自带了 usb 驱动，又又又开始了折腾之旅～</p>
 <h2 id="解决声音问题">解决声音问题</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># 切换一下就完事</span>
-~/site/blog
-❯ asoundconf list
-Names of available sound cards:
-PCH
-Device
-
-~/site/blog
-❯ asoundconf set-default-card <span style="color:#099">1</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 切换一下就完事</span>
+</span></span><span style="display:flex;"><span>~/site/blog
+</span></span><span style="display:flex;"><span>❯ asoundconf list
+</span></span><span style="display:flex;"><span>Names of available sound cards:
+</span></span><span style="display:flex;"><span>PCH
+</span></span><span style="display:flex;"><span>Device
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>~/site/blog
+</span></span><span style="display:flex;"><span>❯ asoundconf set-default-card <span style="color:#099">1</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="polybar-报错-error-disabling-module-alsa-reason-could-not-connect-pulseaudio-context">Polybar 报错 &ldquo;error: Disabling module &ldquo;alsa&rdquo; (reason: Could not connect pulseaudio context.)&rdquo;</h2>
 <p>音乐嗨了没多久才发现顶部工具栏调不了音量，查了下日志发现报错了，后来在 <a href="https://github.com/polybar/polybar/issues/1287">issues</a> 上找到解决方法，搞定收工</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#998;font-style:italic">; ~/.config/polybar/config</span>
-<span style="color:#000;font-weight:bold">[module/alsa]</span>
-<span style="color:#008080">type</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">internal/alsa</span>
-
-<span style="color:#998;font-style:italic">; Soundcard to be used</span>
-<span style="color:#998;font-style:italic">; Usually in the format hw:# where # is the card number</span>
-<span style="color:#998;font-style:italic">; You can find the different card numbers in `/proc/asound/cards`</span>
-<span style="color:#008080">master-soundcard</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">hw:1</span>
-<span style="color:#008080">speaker-soundcard</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">hw:1</span>
-<span style="color:#008080">headphone-soundcard</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">hw:1</span>
-
-<span style="color:#998;font-style:italic">; Name of the master, speaker and headphone mixers</span>
-<span style="color:#998;font-style:italic">; Use the following command to list available mixer controls:</span>
-<span style="color:#998;font-style:italic">; $ amixer scontrols | sed -nr &#34;s/.*&#39;([[:alnum:]]+)&#39;.*/\1/p&#34;</span>
-<span style="color:#998;font-style:italic">; If master, speaker or headphone-soundcard isn&#39;t the default,</span>
-<span style="color:#998;font-style:italic">; use `amixer -c # scontrols` instead where # is the number</span>
-<span style="color:#998;font-style:italic">; of the master, speaker or headphone soundcard respectively</span>
-<span style="color:#998;font-style:italic">;</span>
-<span style="color:#998;font-style:italic">; Default: Master</span>
-<span style="color:#008080">master-mixer</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">Speaker</span>
-
-<span style="color:#998;font-style:italic">; Optionally define speaker and headphone mixers</span>
-<span style="color:#998;font-style:italic">; Default: none</span>
-<span style="color:#008080">speaker-mixer</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">Speaker</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#998;font-style:italic">; ~/.config/polybar/config</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[module/alsa]</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">type</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">internal/alsa</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; Soundcard to be used</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; Usually in the format hw:# where # is the card number</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; You can find the different card numbers in `/proc/asound/cards`</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">master-soundcard</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">hw:1</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">speaker-soundcard</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">hw:1</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">headphone-soundcard</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">hw:1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; Name of the master, speaker and headphone mixers</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; Use the following command to list available mixer controls:</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; $ amixer scontrols | sed -nr &#34;s/.*&#39;([[:alnum:]]+)&#39;.*/\1/p&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; If master, speaker or headphone-soundcard isn&#39;t the default,</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; use `amixer -c # scontrols` instead where # is the number</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; of the master, speaker or headphone soundcard respectively</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; Default: Master</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">master-mixer</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">Speaker</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; Optionally define speaker and headphone mixers</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">; Default: none</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">speaker-mixer</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">Speaker</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="20200629-更新">20200629 更新</h2>
 <p>今天 usb 设备变动后，声音又出问题了，<code>cat /proc/asound/modules</code>查看一下后发现是顺序乱了，再读了一遍文章发现有更简单的解决方法</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># Set the default sound card</span>
-~/site/blog
-❯ cat /etc/modprobe.d/alsa-base.conf
-options snd_usb_audio <span style="color:#008080">index</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>
-options snd_hda_intel <span style="color:#008080">index</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Set the default sound card</span>
+</span></span><span style="display:flex;"><span>~/site/blog
+</span></span><span style="display:flex;"><span>❯ cat /etc/modprobe.d/alsa-base.conf
+</span></span><span style="display:flex;"><span>options snd_usb_audio <span style="color:#008080">index</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>options snd_hda_intel <span style="color:#008080">index</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">1</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>前面的配置文件全删了再改一下 <strong>polybar</strong> 又正常了～</p>
 <h2 id="20210512">20210512</h2>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#998;font-style:italic"># Good news! I found a solution</span>
-
-<span style="color:#998;font-style:italic"># It seems to be that this is issue is reported in Ubuntu kernel 5.3.0-41 and -42, you can go into details in this Bug report</span>
-
-<span style="color:#998;font-style:italic"># Anyway the easiest way to fix it is to:</span>
-
-<span style="color:#998;font-style:italic"># Edit /etc/modprobe.d/alsa-base.conf as root and add options snd-hda-intel dmic_detect=0 at the end of this file by writing this on the terminal:</span>
-
-<span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;options snd-hda-intel dmic_detect=0&#34;</span> | sudo tee -a /etc/modprobe.d/alsa-base.conf
-<span style="color:#998;font-style:italic"># Edit /etc/modprobe.d/blacklist.conf as root and add blacklist snd_soc_skl at the end of the file by writing this on the terminal:</span>
-
-<span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;blacklist snd_soc_skl&#34;</span> | sudo tee -a /etc/modprobe.d/blacklist.conf
-<span style="color:#998;font-style:italic"># Restart the computer</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Good news! I found a solution</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># It seems to be that this is issue is reported in Ubuntu kernel 5.3.0-41 and -42, you can go into details in this Bug report</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Anyway the easiest way to fix it is to:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Edit /etc/modprobe.d/alsa-base.conf as root and add options snd-hda-intel dmic_detect=0 at the end of this file by writing this on the terminal:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;options snd-hda-intel dmic_detect=0&#34;</span> | sudo tee -a /etc/modprobe.d/alsa-base.conf
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Edit /etc/modprobe.d/blacklist.conf as root and add blacklist snd_soc_skl at the end of the file by writing this on the terminal:</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">echo</span> <span style="color:#d14">&#34;blacklist snd_soc_skl&#34;</span> | sudo tee -a /etc/modprobe.d/blacklist.conf
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># Restart the computer</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="20210513">20210513</h2>
 <p>时隔很久又来折腾声音，电脑性能不足换了新设备，固态插上去直接点亮你敢信？</p>
 <p>不过有点小小瑕疵alsa禁音会禁用混音，看了下issues他们好像都说是BUG，秉承着不解决问题的原则(逃，这次决定改用更方便的<em>pulseaudio</em>控制音量</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo pacman -S pulseaudio-alsa
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo pacman -S pulseaudio-alsa
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>polybar模块里注释掉alsa启动pulseaudio模块</p>
 <h2 id="see-also">See also</h2>

@@ -119,7 +119,7 @@ launch.json</p>
 然而，我在macOS平台尝试以以上配置启动调试时却先后遇到了
 zsh:cd:1: too many arguments、
 zsh:1: command not found: dlv
-Request type of &lsquo;launch&rsquo; with mode &lsquo;remote&rsquo; is deprecated, please use request type &lsquo;attach&rsquo; with mode &lsquo;remote&rsquo; instead.
+Request type of &rsquo;launch&rsquo; with mode &lsquo;remote&rsquo; is deprecated, please use request type &lsquo;attach&rsquo; with mode &lsquo;remote&rsquo; instead.
 这些问题。</p>
 <p>在大半天的折腾之后，总结下来问题1是由于路径中含有特殊符号（如空格），需要将cd ${fileDirname}改为cd &quot;${fileDirname}&quot;；问题2是由于PATH似乎并没有被自动添加到启动的终端中。我的解决方案是在执行命令之前执行source /etc/profile命令。问题3则应该将launch.json中&quot;request&quot;: &ldquo;launch&quot;改为&quot;request&rdquo;: &ldquo;attach&rdquo;</p>
 <p>以下是我现在使用的配置</p>
@@ -203,88 +203,88 @@ launch.json</p>
 原文链接：<a href="https://blog.csdn.net/weixin_42529589/article/details/104583672">https://blog.csdn.net/weixin_42529589/article/details/104583672</a></p>
 <h2 id="my-dotfile">my dotfile</h2>
 <p>launch.json</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#a61717;background-color:#e3d2d2">Use</span> <span style="color:#a61717;background-color:#e3d2d2">IntelliSense</span> <span style="color:#a61717;background-color:#e3d2d2">to</span> <span style="color:#a61717;background-color:#e3d2d2">learn</span> <span style="color:#a61717;background-color:#e3d2d2">about</span> <span style="color:#a61717;background-color:#e3d2d2">possible</span> <span style="color:#a61717;background-color:#e3d2d2">attributes.</span>
-    <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#a61717;background-color:#e3d2d2">Hover</span> <span style="color:#a61717;background-color:#e3d2d2">to</span> <span style="color:#a61717;background-color:#e3d2d2">view</span> <span style="color:#a61717;background-color:#e3d2d2">descriptions</span> <span style="color:#a61717;background-color:#e3d2d2">of</span> <span style="color:#a61717;background-color:#e3d2d2">existing</span> <span style="color:#a61717;background-color:#e3d2d2">attributes.</span>
-    <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#a61717;background-color:#e3d2d2">For</span> <span style="color:#a61717;background-color:#e3d2d2">more</span> <span style="color:#a61717;background-color:#e3d2d2">information,</span> <span style="color:#a61717;background-color:#e3d2d2">visit:</span> <span style="color:#a61717;background-color:#e3d2d2">https://go.microsoft.com/fwlink/?linkid=830387</span>
-    <span style="color:#000080">&#34;version&#34;</span>: <span style="color:#d14">&#34;0.2.0&#34;</span>,
-    <span style="color:#000080">&#34;configurations&#34;</span>: [
-        {
-            <span style="color:#000080">&#34;name&#34;</span>: <span style="color:#d14">&#34;Connect to server&#34;</span>,
-            <span style="color:#000080">&#34;type&#34;</span>: <span style="color:#d14">&#34;go&#34;</span>,
-            <span style="color:#000080">&#34;request&#34;</span>: <span style="color:#d14">&#34;attach&#34;</span>,
-            <span style="color:#000080">&#34;mode&#34;</span>: <span style="color:#d14">&#34;remote&#34;</span>,
-            <span style="color:#000080">&#34;remotePath&#34;</span>: <span style="color:#d14">&#34;${workspaceRoot}&#34;</span>,
-            <span style="color:#000080">&#34;port&#34;</span>: <span style="color:#099">2345</span>,
-            <span style="color:#000080">&#34;host&#34;</span>: <span style="color:#d14">&#34;127.0.0.1&#34;</span>,
-
-        }
-    ]
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">// Use IntelliSense to learn about possible attributes.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// Hover to view descriptions of existing attributes.
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>    <span style="color:#000080">&#34;version&#34;</span>: <span style="color:#d14">&#34;0.2.0&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&#34;configurations&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;name&#34;</span>: <span style="color:#d14">&#34;Connect to server&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;type&#34;</span>: <span style="color:#d14">&#34;go&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;request&#34;</span>: <span style="color:#d14">&#34;attach&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;mode&#34;</span>: <span style="color:#d14">&#34;remote&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;remotePath&#34;</span>: <span style="color:#d14">&#34;${workspaceRoot}&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;port&#34;</span>: <span style="color:#099">2345</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;host&#34;</span>: <span style="color:#d14">&#34;127.0.0.1&#34;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>tasks.json</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#a61717;background-color:#e3d2d2">See</span> <span style="color:#a61717;background-color:#e3d2d2">https://go.microsoft.com/fwlink/?LinkId=733558</span>
-    <span style="color:#a61717;background-color:#e3d2d2">//</span> <span style="color:#a61717;background-color:#e3d2d2">for</span> <span style="color:#a61717;background-color:#e3d2d2">the</span> <span style="color:#a61717;background-color:#e3d2d2">documentation</span> <span style="color:#a61717;background-color:#e3d2d2">about</span> <span style="color:#a61717;background-color:#e3d2d2">the</span> <span style="color:#a61717;background-color:#e3d2d2">tasks.json</span> <span style="color:#a61717;background-color:#e3d2d2">format</span>
-    <span style="color:#000080">&#34;version&#34;</span>: <span style="color:#d14">&#34;2.0.0&#34;</span>,
-    <span style="color:#000080">&#34;tasks&#34;</span>: [
-        {
-            <span style="color:#000080">&#34;label&#34;</span>: <span style="color:#d14">&#34;debug server&#34;</span>,
-            <span style="color:#000080">&#34;type&#34;</span>: <span style="color:#d14">&#34;shell&#34;</span>,
-            <span style="color:#000080">&#34;command&#34;</span>: <span style="color:#d14">&#34;cd ${workspaceRoot} &amp;&amp; dlv debug --headless --listen=:2345 --log --api-version=2&#34;</span>,
-            <span style="color:#000080">&#34;problemMatcher&#34;</span>: [],
-            <span style="color:#000080">&#34;group&#34;</span>: {
-                <span style="color:#000080">&#34;kind&#34;</span>: <span style="color:#d14">&#34;build&#34;</span>,
-                <span style="color:#000080">&#34;isDefault&#34;</span>: <span style="color:#000;font-weight:bold">true</span>
-            }
-        }
-    ]
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#998;font-style:italic">// See https://go.microsoft.com/fwlink/?LinkId=733558
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>    <span style="color:#998;font-style:italic">// for the documentation about the tasks.json format
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>    <span style="color:#000080">&#34;version&#34;</span>: <span style="color:#d14">&#34;2.0.0&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#000080">&#34;tasks&#34;</span>: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;label&#34;</span>: <span style="color:#d14">&#34;debug server&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;type&#34;</span>: <span style="color:#d14">&#34;shell&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;command&#34;</span>: <span style="color:#d14">&#34;cd ${workspaceRoot} &amp;&amp; dlv debug --headless --listen=:2345 --log --api-version=2&#34;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;problemMatcher&#34;</span>: [],
+</span></span><span style="display:flex;"><span>            <span style="color:#000080">&#34;group&#34;</span>: {
+</span></span><span style="display:flex;"><span>                <span style="color:#000080">&#34;kind&#34;</span>: <span style="color:#d14">&#34;build&#34;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#000080">&#34;isDefault&#34;</span>: <span style="color:#000;font-weight:bold">true</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="see-also">See also</h2>
 <ul>

@@ -40,50 +40,44 @@
 <p>（1）取整，位运算更快。原因介绍：参考：位运算实现的原因</p>
 <p>位运算取整（更快）</p>
 <p>位运算取整：下述，都可以</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">~~</span>a; <span style="color:#998;font-style:italic">//双非位操作符
-</span><span style="color:#998;font-style:italic"></span>a<span style="color:#000;font-weight:bold">|</span><span style="color:#099">0</span>;
-<span style="color:#a61717;background-color:#e3d2d2">。。。</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">~~</span>a; <span style="color:#998;font-style:italic">//双非位操作符
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>a<span style="color:#000;font-weight:bold">|</span><span style="color:#099">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2">。。。</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>（2）四舍五入（0.5规定向上取整），位运算更快</p>
 <p>位运算的四舍五入，负数不适配</p>
 <p>位运算适合正数的四舍五入，但是负数只能舍，不能入。</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">a<span style="color:#000;font-weight:bold">+</span><span style="color:#099">0.5</span><span style="color:#000;font-weight:bold">|</span><span style="color:#099">0</span>;
-<span style="color:#000;font-weight:bold">~~</span>(a<span style="color:#000;font-weight:bold">+</span><span style="color:#099">0.5</span>);
-<span style="color:#a61717;background-color:#e3d2d2">。。。</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>a<span style="color:#000;font-weight:bold">+</span><span style="color:#099">0.5</span><span style="color:#000;font-weight:bold">|</span><span style="color:#099">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">~~</span>(a<span style="color:#000;font-weight:bold">+</span><span style="color:#099">0.5</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a61717;background-color:#e3d2d2">。。。</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>（3）内置值 <code>undefined</code></p>
 <p>undefined替代</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">void</span> <span style="color:#099">0</span>; <span style="color:#998;font-style:italic">// 快
-</span><span style="color:#998;font-style:italic"></span><span style="color:#099">0</span>[<span style="color:#099">0</span>]; <span style="color:#998;font-style:italic">// 略慢
-</span><span style="color:#998;font-style:italic"></span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">void</span> <span style="color:#099">0</span>; <span style="color:#998;font-style:italic">// 快
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#099">0</span>[<span style="color:#099">0</span>]; <span style="color:#998;font-style:italic">// 略慢
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>（4）内置值 Infinity</p>
 <p>Infinity替代</p>
@@ -109,7 +103,7 @@ y();
 <p>(z==3?x:y)(); //x
 （8）短路求值 &amp;&amp; ||
 当给一个变量分配另一个值时，想确定源始值不是null，undefined或空值。可以写撰写一个多重条件的if语句。</p>
-<p>if (variable1 !== null || variable1 !== undefined || variable1 !== &lsquo;') {
+<p>if (variable1 !== null || variable1 !== undefined || variable1 !== &lsquo;&rsquo;) {
 let variable2 = variable1;
 }
 或者可以使用短路求值方法：</p>
@@ -191,13 +185,13 @@ volume(2) // 24
 JavaScript中如果没有向函数参数传递值，则参数为undefined。为了增强参数赋值，可以使用if语句来抛出异常，或使用强制参数简写方法。</p>
 <p>function foo(bar) {
 if(bar === undefined) {
-throw new Error(&lsquo;Missing parameter!');
+throw new Error(&lsquo;Missing parameter!&rsquo;);
 }
 return bar;
 }
 简写：</p>
 <p>mandatory = () =&gt; {
-throw new Error(&lsquo;Missing parameter!');
+throw new Error(&lsquo;Missing parameter!&rsquo;);
 }
 foo = (bar = mandatory()) =&gt; {
 return bar;
@@ -228,140 +222,130 @@ const { store, form, loading, errors, entity } = this.props;
 <p>const { store, form, loading, errors, entity:contact } = this.props;
 //最后一个变量名为contact
 （19）扩展运算符简写，数组，对象</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#998;font-style:italic">// joining arrays
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">const</span> odd <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">3</span>, <span style="color:#099">5</span>];
-<span style="color:#000;font-weight:bold">const</span> nums <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">2</span> ,<span style="color:#099">4</span> , <span style="color:#099">6</span>].concat(odd);
-<span style="color:#998;font-style:italic">// cloning arrays
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">const</span> arr <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">2</span>, <span style="color:#099">3</span>, <span style="color:#099">4</span>];
-<span style="color:#000;font-weight:bold">const</span> arr2 <span style="color:#000;font-weight:bold">=</span> arr.slice()
-
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// joining arrays
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">const</span> odd <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">3</span>, <span style="color:#099">5</span>];
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> nums <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">2</span> ,<span style="color:#099">4</span> , <span style="color:#099">6</span>].concat(odd);
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// cloning arrays
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">const</span> arr <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">2</span>, <span style="color:#099">3</span>, <span style="color:#099">4</span>];
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> arr2 <span style="color:#000;font-weight:bold">=</span> arr.slice()
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>简写：</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#998;font-style:italic">// joining arrays
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">const</span> odd <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">3</span>, <span style="color:#099">5</span> ];
-<span style="color:#000;font-weight:bold">const</span> nums <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">2</span> ,<span style="color:#099">4</span> , <span style="color:#099">6</span>, ...odd]; <span style="color:#998;font-style:italic">// [ 2, 4, 6, 1, 3, 5 ]
-</span><span style="color:#998;font-style:italic">// cloning arrays
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">const</span> arr <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">2</span>, <span style="color:#099">3</span>, <span style="color:#099">4</span>];
-<span style="color:#000;font-weight:bold">const</span> arr2 <span style="color:#000;font-weight:bold">=</span> [...arr]; <span style="color:#998;font-style:italic">// [1, 2, 3, 4]
-</span><span style="color:#998;font-style:italic"></span>还使用扩展运算符来在一个数组中任意处插入另一个数组<span style="color:#a61717;background-color:#e3d2d2">：</span>
-
-<span style="color:#000;font-weight:bold">const</span> odd <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">3</span>, <span style="color:#099">5</span>];
-<span style="color:#000;font-weight:bold">const</span> nums <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">2</span>, ...odd, <span style="color:#099">4</span> , <span style="color:#099">6</span>]; <span style="color:#998;font-style:italic">// [2, 1, 3, 5, 4 , 6]
-</span><span style="color:#998;font-style:italic"></span>也可以使用扩展运算符解构<span style="color:#a61717;background-color:#e3d2d2">：</span>
-
-<span style="color:#000;font-weight:bold">const</span> { a, b, ...z } <span style="color:#000;font-weight:bold">=</span> { a<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">1</span>, b<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">2</span>, c<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">3</span>, d<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">4</span> };
-console.log(a) <span style="color:#998;font-style:italic">// 1
-</span><span style="color:#998;font-style:italic"></span>console.log(b) <span style="color:#998;font-style:italic">// 2
-</span><span style="color:#998;font-style:italic"></span>console.log(z) <span style="color:#998;font-style:italic">// { c: 3, d: 4 }
-</span><span style="color:#998;font-style:italic"></span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// joining arrays
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">const</span> odd <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">3</span>, <span style="color:#099">5</span> ];
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> nums <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">2</span> ,<span style="color:#099">4</span> , <span style="color:#099">6</span>, ...odd]; <span style="color:#998;font-style:italic">// [ 2, 4, 6, 1, 3, 5 ]
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// cloning arrays
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">const</span> arr <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">2</span>, <span style="color:#099">3</span>, <span style="color:#099">4</span>];
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> arr2 <span style="color:#000;font-weight:bold">=</span> [...arr]; <span style="color:#998;font-style:italic">// [1, 2, 3, 4]
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>还使用扩展运算符来在一个数组中任意处插入另一个数组<span style="color:#a61717;background-color:#e3d2d2">：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> odd <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>, <span style="color:#099">3</span>, <span style="color:#099">5</span>];
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> nums <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">2</span>, ...odd, <span style="color:#099">4</span> , <span style="color:#099">6</span>]; <span style="color:#998;font-style:italic">// [2, 1, 3, 5, 4 , 6]
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>也可以使用扩展运算符解构<span style="color:#a61717;background-color:#e3d2d2">：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> { a, b, ...z } <span style="color:#000;font-weight:bold">=</span> { a<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">1</span>, b<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">2</span>, c<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">3</span>, d<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">4</span> };
+</span></span><span style="display:flex;"><span>console.log(a) <span style="color:#998;font-style:italic">// 1
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>console.log(b) <span style="color:#998;font-style:italic">// 2
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>console.log(z) <span style="color:#998;font-style:italic">// { c: 3, d: 4 }
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>（20）从对象数组中查找某个值
 es6数组的新方法 Array.find() ，但是只能返回一个值，找到多个返回第一个。</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">arr.find(callback[,thisArg])
-
-<span style="color:#000;font-weight:bold">function</span> callback(element, index, array){}
-
-<span style="color:#000;font-weight:bold">const</span> pets <span style="color:#000;font-weight:bold">=</span> [
-{ type<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Dog&#39;</span>, name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Max&#39;</span>},
-{ type<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Cat&#39;</span>, name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Karl&#39;</span>},
-{ type<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Dog&#39;</span>, name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Tommy&#39;</span>},
-]
-<span style="color:#000;font-weight:bold">function</span> findDog(name) {
-<span style="color:#000;font-weight:bold">for</span>(<span style="color:#000;font-weight:bold">let</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i<span style="color:#000;font-weight:bold">&lt;</span>pets.length; <span style="color:#000;font-weight:bold">++</span>i) {
-<span style="color:#000;font-weight:bold">if</span>(pets[i].type <span style="color:#000;font-weight:bold">===</span> <span style="color:#d14">&#39;Dog&#39;</span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> pets[i].name <span style="color:#000;font-weight:bold">===</span> name) {
-<span style="color:#000;font-weight:bold">return</span> pets[i];
-}
-}
-}
-
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>arr.find(callback[,thisArg])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">function</span> callback(element, index, array){}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> pets <span style="color:#000;font-weight:bold">=</span> [
+</span></span><span style="display:flex;"><span>{ type<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Dog&#39;</span>, name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Max&#39;</span>},
+</span></span><span style="display:flex;"><span>{ type<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Cat&#39;</span>, name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Karl&#39;</span>},
+</span></span><span style="display:flex;"><span>{ type<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Dog&#39;</span>, name<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;Tommy&#39;</span>},
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">function</span> findDog(name) {
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span>(<span style="color:#000;font-weight:bold">let</span> i <span style="color:#000;font-weight:bold">=</span> <span style="color:#099">0</span>; i<span style="color:#000;font-weight:bold">&lt;</span>pets.length; <span style="color:#000;font-weight:bold">++</span>i) {
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">if</span>(pets[i].type <span style="color:#000;font-weight:bold">===</span> <span style="color:#d14">&#39;Dog&#39;</span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> pets[i].name <span style="color:#000;font-weight:bold">===</span> name) {
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">return</span> pets[i];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>简写：</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">var</span> pet <span style="color:#000;font-weight:bold">=</span> pets.find(pet =&gt; pet.type <span style="color:#000;font-weight:bold">===</span><span style="color:#d14">&#39;Dog&#39;</span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> pet.name <span style="color:#000;font-weight:bold">===</span> <span style="color:#d14">&#39;Tommy&#39;</span>);
-console.log(pet); <span style="color:#998;font-style:italic">// { type: &#39;Dog&#39;, name: &#39;Tommy&#39; }
-</span><span style="color:#998;font-style:italic"></span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">var</span> pet <span style="color:#000;font-weight:bold">=</span> pets.find(pet =&gt; pet.type <span style="color:#000;font-weight:bold">===</span><span style="color:#d14">&#39;Dog&#39;</span> <span style="color:#000;font-weight:bold">&amp;&amp;</span> pet.name <span style="color:#000;font-weight:bold">===</span> <span style="color:#d14">&#39;Tommy&#39;</span>);
+</span></span><span style="display:flex;"><span>console.log(pet); <span style="color:#998;font-style:italic">// { type: &#39;Dog&#39;, name: &#39;Tommy&#39; }
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>（21）数组去重
 es6新增数据结构set，元素不重复。</p>
 <p>往常需要循环的代码在这里只有两行。</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#000;font-weight:bold">var</span> arr <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>,<span style="color:#099">2</span>,<span style="color:#099">2</span>,<span style="color:#099">3</span>,<span style="color:#099">4</span>]; <span style="color:#998;font-style:italic">// 需要去重的数组
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">var</span> set <span style="color:#000;font-weight:bold">=</span> newSet(arr); <span style="color:#998;font-style:italic">// {1,2,3,4}
-</span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">var</span> newArr <span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">Array</span>.from(set); <span style="color:#998;font-style:italic">// 再把set转变成array
-</span><span style="color:#998;font-style:italic"></span>console.log(newArr); <span style="color:#998;font-style:italic">// [1,2,3,4]
-</span><span style="color:#998;font-style:italic"></span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">var</span> arr <span style="color:#000;font-weight:bold">=</span> [<span style="color:#099">1</span>,<span style="color:#099">2</span>,<span style="color:#099">2</span>,<span style="color:#099">3</span>,<span style="color:#099">4</span>]; <span style="color:#998;font-style:italic">// 需要去重的数组
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">var</span> set <span style="color:#000;font-weight:bold">=</span> newSet(arr); <span style="color:#998;font-style:italic">// {1,2,3,4}
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span><span style="color:#000;font-weight:bold">var</span> newArr <span style="color:#000;font-weight:bold">=</span><span style="color:#0086b3">Array</span>.from(set); <span style="color:#998;font-style:italic">// 再把set转变成array
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>console.log(newArr); <span style="color:#998;font-style:italic">// [1,2,3,4]
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>参考：为什么js中要用<code>void 0</code> 代替<code>undefined</code>，还是有特别的含义呢</p>
 <p>分享19个<code>JavaScript</code> 有用的简写写法</p>
@@ -369,21 +353,21 @@ es6新增数据结构set，元素不重复。</p>
 <p>有人遇到过 <code>for ( var key in someObject ) { }</code> 导致的在循环体中 <code>someObject.key</code> 取不到值。</p>
 <p>这个for-in语句，相当于 <code>for ( var key of Object.keys( someObject ) ) { }</code>，</p>
 <p><code>Object.keys()</code>返回的是属性名字符串，for-in中的key返回的也是字符串。</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">
-<span style="color:#000;font-weight:bold">var</span> json <span style="color:#000;font-weight:bold">=</span> {a<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">1</span>};
-<span style="color:#000;font-weight:bold">for</span>(<span style="color:#000;font-weight:bold">var</span> key <span style="color:#000;font-weight:bold">in</span> json ){
-<span style="color:#000;font-weight:bold">typeof</span> key; <span style="color:#998;font-style:italic">//&#34;string&#34;
-</span><span style="color:#998;font-style:italic"></span>}
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">var</span> json <span style="color:#000;font-weight:bold">=</span> {a<span style="color:#000;font-weight:bold">:</span> <span style="color:#099">1</span>};
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span>(<span style="color:#000;font-weight:bold">var</span> key <span style="color:#000;font-weight:bold">in</span> json ){
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">typeof</span> key; <span style="color:#998;font-style:italic">//&#34;string&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>}
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
 <div class="disqus">

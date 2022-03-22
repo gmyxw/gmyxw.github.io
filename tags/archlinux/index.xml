@@ -32,7 +32,7 @@ See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transac
       <description>今天滚完系统就没网络，startx报内核模块错误，当场裂开了，开机显示加载驱动失败，先来看看加载日志吧
 1  sudo systemctl status systemd-modules-load   报错全是类似Module Vboxdrv Not Found in Directory xx这种
 再查看下内核模块相关目录发现了端倪
-1 2 3 4 5 6  ❯ uname -a Linux arch 5.5.8-arch1-1 ~/site/blog ❯ ls /lib/modules 5.5.9-arch1-2   原来是没加载新内核
+1 2 3 4 5 6  ❯ uname -a Linux arch 5.5.8-arch1-1  ~/site/blog ❯ ls /lib/modules 5.5.9-arch1-2   原来是没加载新内核
 解决方法 根据经验最好别排查原因，估计就是软件包BUG，懒得折腾再安装一次旧内核再滚就完事了
 升级内核，系统挂了，可以通过降级内核的方法来修复系统
 内核的安装包会缓存在/var/cache/pacman/pkg，文件名以 “linux-版本号”开头
@@ -54,7 +54,7 @@ Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了
 首先，是安装Samba，ArchLinux可以直接从源中获取并安装Samba：
 1  pacman -S samba   等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：
 在/etc/samba目录中，直接建立一个空的smb.conf，然后将如下内容粘贴过去：
-1 2 3 4 5 6 7 8 9 10 11  [global] workgroup = WORKGROUP security = user [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644   这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
+1 2 3 4 5 6 7 8 9 10 11  [global] workgroup = WORKGROUP security = user  [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644   这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
 workgroup，这个顾名思义，计算机的工作组名称，比如我是和我的Win7来共享文件，最好把工作组和我的Win7设成通一个工作组，这样方便Win7通过网络发现来找到我的下载机。这里，我的win7工作组名字，就叫做：WORKGROUP了
 security，这是指共享目录的安全认证形式，security的值，有两种可以设置：
 第一种，是设成上面例子中的user，意思是在访问共享目录的时候，需要通过用户名和密码的方式来认证，可以给共享目录提供一定的安全性保护。
@@ -65,8 +65,7 @@ security，这是指共享目录的安全认证形式，security的值，有两�
 下面的path，就是你想共享的Linux目录了，我设成了我的Transmission的下载目录。
 后面的valid users，是一个用户帐号，也即通过用户名和密码来访问共享目录的那个帐号，如果你把security设成share，这一项可以去掉。
 下面是一些权限的设置，以及是否允许访问者有写入共享目录的权限，各个参数可以查看Samba文档，就不一一介绍了。
-最后，说一下security设成user后，帐号的设置问题。
-首先，你可以添加一个新的Linux帐号，专门用来访问共享目录用。比如，我就添加了一个帐号，叫做Samba</description>
+最后，说一下security设成user后，帐号的设置问题。</description>
     </item>
     
   </channel>

@@ -39,161 +39,159 @@
 <p>当安装程序运行到创建磁盘分区界面时按下 <code>Shift+F10</code> 启动命令窗口。</p>
 <p>键入 <code>Diskpart</code> 进入 <code>Diskpart</code> 的命令环境，其提示符为 <code>DISKPART&gt;</code>。</p>
 <p>在此提示下键入相应命令就可以进行分区操作，具体用到的命令有：</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">Clean</span>  
-<span style="color:#900;font-weight:bold">List</span>  
-<span style="color:#900;font-weight:bold">Select</span>  
-<span style="color:#900;font-weight:bold">Create</span>  
-<span style="color:#900;font-weight:bold">Format</span>  
-<span style="color:#900;font-weight:bold">Exit</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps" data-lang="ps"><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Clean</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">List</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Select</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Create</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Format</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Exit</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这些命令的使用方法可以在 Diskpart 命令提示符下键入 Help 或者通过网络查询，如果不清楚可以查看。</p>
 <p>使用 <code>List Disk</code> 命令显示的目标磁盘若为 1 号，则建立分区的步骤如下：以下是命令顺序及操作解释：</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">List</span> <span style="color:#900;font-weight:bold">Disk：显示本机的所有磁盘，以便正确操作目标磁盘</span>  
-<span style="color:#900;font-weight:bold">Select</span> <span style="color:#900;font-weight:bold">Disk</span> <span style="color:#900;font-weight:bold">1：选择</span> <span style="color:#099">0</span> <span style="color:#900;font-weight:bold">号磁盘</span>  
-<span style="color:#900;font-weight:bold">Clean</span> <span style="color:#900;font-weight:bold">：清除</span> <span style="color:#099">0</span> <span style="color:#900;font-weight:bold">号磁盘上的所有分区</span>  
-<span style="color:#900;font-weight:bold">Create</span> <span style="color:#900;font-weight:bold">Partition</span> <span style="color:#900;font-weight:bold">Primary</span> <span style="color:#900;font-weight:bold">Size=512000</span> <span style="color:#900;font-weight:bold">：创建主分区，容量为：512000MB</span>  
-<span style="color:#900;font-weight:bold">Active：激活主分区</span>  
-<span style="color:#900;font-weight:bold">Format</span> <span style="color:#900;font-weight:bold">Quick：快速格式化当前分区</span>  
-<span style="color:#900;font-weight:bold">Create</span> <span style="color:#900;font-weight:bold">Partition</span> <span style="color:#900;font-weight:bold">Extended：创建扩展分区</span>  
-<span style="color:#900;font-weight:bold">Create</span> <span style="color:#900;font-weight:bold">Partition</span> <span style="color:#900;font-weight:bold">Logical</span> <span style="color:#900;font-weight:bold">Size=512000：创建逻辑分区一，容量为：512000MB</span>  
-<span style="color:#900;font-weight:bold">Format</span> <span style="color:#900;font-weight:bold">Quick：快速格式化当前分区</span>  
-<span style="color:#900;font-weight:bold">Create</span> <span style="color:#900;font-weight:bold">Partition</span> <span style="color:#900;font-weight:bold">Logical</span> <span style="color:#900;font-weight:bold">Size=512000：创建逻辑分区二，容量为：512000MB</span>  
-<span style="color:#900;font-weight:bold">Format</span> <span style="color:#900;font-weight:bold">Quick</span> <span style="color:#900;font-weight:bold">：快速格式化当前分区</span>  
-<span style="color:#900;font-weight:bold">Create</span> <span style="color:#900;font-weight:bold">Partition</span> <span style="color:#900;font-weight:bold">Logical</span> <span style="color:#900;font-weight:bold">：创建逻辑分区三，大小为剩余的容量</span>  
-<span style="color:#900;font-weight:bold">Format</span> <span style="color:#900;font-weight:bold">Quick</span> <span style="color:#900;font-weight:bold">：快速格式化当前分区</span>  
-<span style="color:#900;font-weight:bold">Exit</span> <span style="color:#900;font-weight:bold">：退出Diskpart命令环境</span>  
-<span style="color:#900;font-weight:bold">Exit</span> <span style="color:#900;font-weight:bold">：退出命令窗口</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps" data-lang="ps"><span style="display:flex;"><span><span style="color:#900;font-weight:bold">List</span> <span style="color:#900;font-weight:bold">Disk：显示本机的所有磁盘，以便正确操作目标磁盘</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Select</span> <span style="color:#900;font-weight:bold">Disk</span> <span style="color:#900;font-weight:bold">1：选择</span> <span style="color:#099">0</span> <span style="color:#900;font-weight:bold">号磁盘</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Clean</span> <span style="color:#900;font-weight:bold">：清除</span> <span style="color:#099">0</span> <span style="color:#900;font-weight:bold">号磁盘上的所有分区</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Create</span> <span style="color:#900;font-weight:bold">Partition</span> <span style="color:#900;font-weight:bold">Primary</span> <span style="color:#900;font-weight:bold">Size=512000</span> <span style="color:#900;font-weight:bold">：创建主分区，容量为：512000MB</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Active：激活主分区</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Format</span> <span style="color:#900;font-weight:bold">Quick：快速格式化当前分区</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Create</span> <span style="color:#900;font-weight:bold">Partition</span> <span style="color:#900;font-weight:bold">Extended：创建扩展分区</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Create</span> <span style="color:#900;font-weight:bold">Partition</span> <span style="color:#900;font-weight:bold">Logical</span> <span style="color:#900;font-weight:bold">Size=512000：创建逻辑分区一，容量为：512000MB</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Format</span> <span style="color:#900;font-weight:bold">Quick：快速格式化当前分区</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Create</span> <span style="color:#900;font-weight:bold">Partition</span> <span style="color:#900;font-weight:bold">Logical</span> <span style="color:#900;font-weight:bold">Size=512000：创建逻辑分区二，容量为：512000MB</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Format</span> <span style="color:#900;font-weight:bold">Quick</span> <span style="color:#900;font-weight:bold">：快速格式化当前分区</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Create</span> <span style="color:#900;font-weight:bold">Partition</span> <span style="color:#900;font-weight:bold">Logical</span> <span style="color:#900;font-weight:bold">：创建逻辑分区三，大小为剩余的容量</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Format</span> <span style="color:#900;font-weight:bold">Quick</span> <span style="color:#900;font-weight:bold">：快速格式化当前分区</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Exit</span> <span style="color:#900;font-weight:bold">：退出Diskpart命令环境</span>  
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">Exit</span> <span style="color:#900;font-weight:bold">：退出命令窗口</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里要注意的是 <code>Diskpart</code> 分区时，一定要选对目标磁盘，当前被选中的磁盘 / 分区前面会有 * 号标志，可以用 <code>List Disk / Partition</code> 来进行查看。</p>
 <h1 id="win7安装时使用diskpart分区">win7安装时使用diskpart分区</h1>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps"><span style="color:#900;font-weight:bold">1、在安装win7系统到分区这一步的时候，按住shift+F10调出命令行窗口</span>
-<span style="color:#900;font-weight:bold">2、输入命令：diskpart</span>    <span style="color:#900;font-weight:bold">###启动diskpart</span>
-<span style="color:#900;font-weight:bold">3、输入命令：list</span> <span style="color:#900;font-weight:bold">disk</span>     <span style="color:#900;font-weight:bold">###查看所有磁盘，一般情况下，都只有一个磁盘，列表里也只会列出一项</span> <span style="color:#900;font-weight:bold">磁盘0</span>
-<span style="color:#900;font-weight:bold">4、输入命令：select</span> <span style="color:#900;font-weight:bold">disk</span> <span style="color:#099">0</span>   <span style="color:#900;font-weight:bold">###选择要操作的磁盘，并将该磁盘设置为当前操作磁盘，只有一块磁盘的话，选择0，如果你有多个磁盘的话，自己根据需要进行选择</span>
- 
-<span style="color:#900;font-weight:bold">5、输入命令：clean</span>        <span style="color:#900;font-weight:bold">###清除该磁盘上的所有分区</span>
-<span style="color:#900;font-weight:bold">6、输入命令：create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">primary</span> <span style="color:#900;font-weight:bold">size=20480</span>   <span style="color:#900;font-weight:bold">###创建主分区，size默认单位MB，不加size则会将剩余的所有磁盘空间创建为一个主分区，扩展与逻辑分区类似</span>
- 
-<span style="color:#900;font-weight:bold">7、输入命令：active</span>        <span style="color:#900;font-weight:bold">###将当前主分区标为要操作的主分区</span>
-<span style="color:#900;font-weight:bold">8、输入命令：format</span> <span style="color:#900;font-weight:bold">quick</span>     <span style="color:#900;font-weight:bold">###快速格式化分区</span>
-<span style="color:#900;font-weight:bold">如果你准备创建多个主分区，那么重复6、7、8步骤就可以了，如果只创建一个主分区，继续下面的步骤</span>
- 
-<span style="color:#900;font-weight:bold">9、输入命令：create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">extended</span>      <span style="color:#900;font-weight:bold">###将剩余空间全部创建为扩展分区</span>
-<span style="color:#900;font-weight:bold">10、输入命令：create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">logical</span>  <span style="color:#900;font-weight:bold">###将扩展分区的全部剩余空间创建为一个逻辑分区，你也可以指定size参数，将剩余空间创建出多个逻辑分区</span> 
-<span style="color:#900;font-weight:bold">11、输入命令：format</span> <span style="color:#900;font-weight:bold">qucik</span>   <span style="color:#900;font-weight:bold">###快速格式化该逻辑分区</span>
-<span style="color:#900;font-weight:bold">12、输入命令：exit</span>   <span style="color:#900;font-weight:bold">###退出diskpart</span>
-<span style="color:#900;font-weight:bold">13、输入命令：exit</span>   <span style="color:#900;font-weight:bold">###退出命令行窗口</span>
-
-<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">分配盘符</span>
-<span style="color:#900;font-weight:bold">assign</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps" data-lang="ps"><span style="display:flex;"><span><span style="color:#900;font-weight:bold">1、在安装win7系统到分区这一步的时候，按住shift+F10调出命令行窗口</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">2、输入命令：diskpart</span>    <span style="color:#900;font-weight:bold">###启动diskpart</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">3、输入命令：list</span> <span style="color:#900;font-weight:bold">disk</span>     <span style="color:#900;font-weight:bold">###查看所有磁盘，一般情况下，都只有一个磁盘，列表里也只会列出一项</span> <span style="color:#900;font-weight:bold">磁盘0</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">4、输入命令：select</span> <span style="color:#900;font-weight:bold">disk</span> <span style="color:#099">0</span>   <span style="color:#900;font-weight:bold">###选择要操作的磁盘，并将该磁盘设置为当前操作磁盘，只有一块磁盘的话，选择0，如果你有多个磁盘的话，自己根据需要进行选择</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">5、输入命令：clean</span>        <span style="color:#900;font-weight:bold">###清除该磁盘上的所有分区</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">6、输入命令：create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">primary</span> <span style="color:#900;font-weight:bold">size=20480</span>   <span style="color:#900;font-weight:bold">###创建主分区，size默认单位MB，不加size则会将剩余的所有磁盘空间创建为一个主分区，扩展与逻辑分区类似</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">7、输入命令：active</span>        <span style="color:#900;font-weight:bold">###将当前主分区标为要操作的主分区</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">8、输入命令：format</span> <span style="color:#900;font-weight:bold">quick</span>     <span style="color:#900;font-weight:bold">###快速格式化分区</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">如果你准备创建多个主分区，那么重复6、7、8步骤就可以了，如果只创建一个主分区，继续下面的步骤</span>
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">9、输入命令：create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">extended</span>      <span style="color:#900;font-weight:bold">###将剩余空间全部创建为扩展分区</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">10、输入命令：create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">logical</span>  <span style="color:#900;font-weight:bold">###将扩展分区的全部剩余空间创建为一个逻辑分区，你也可以指定size参数，将剩余空间创建出多个逻辑分区</span> 
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">11、输入命令：format</span> <span style="color:#900;font-weight:bold">qucik</span>   <span style="color:#900;font-weight:bold">###快速格式化该逻辑分区</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">12、输入命令：exit</span>   <span style="color:#900;font-weight:bold">###退出diskpart</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">13、输入命令：exit</span>   <span style="color:#900;font-weight:bold">###退出命令行窗口</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">分配盘符</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">assign</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>回到win7安装分区步骤，点击刷新，选择你要安装的磁盘分区进行安装就可以了。
 注：这里不要再格式化了</p>
 <h2 id="20210106更新">20210106更新</h2>
 <p>谈笑风生又一年，最近在做一个游戏多开挂机项目，一年前的win10还是被我玩炸了，Google无解懒得研究重新开始吧，反正就一堆垃圾，吸取教训这次用uefi引导</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ps" data-lang="ps">
-<span style="color:#900;font-weight:bold">diskpart</span>
-
-<span style="color:#900;font-weight:bold">select</span> <span style="color:#900;font-weight:bold">disk</span> <span style="color:#099">39</span>
-
-<span style="color:#900;font-weight:bold">select</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#099">1</span>
-
-<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">删除分区</span>
-<span style="color:#900;font-weight:bold">delete</span> <span style="color:#900;font-weight:bold">partition</span>
-
-<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">先转换成GPT</span>
-<span style="color:#900;font-weight:bold">convert</span> <span style="color:#900;font-weight:bold">gpt</span>
-
-<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">创建EFI分区</span>
-<span style="color:#900;font-weight:bold">create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">efi</span> <span style="color:#900;font-weight:bold">size=100</span>
-<span style="color:#900;font-weight:bold">format</span> <span style="color:#900;font-weight:bold">quick</span> <span style="color:#900;font-weight:bold">fs=FAT32</span>
-
-<span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">创建主分区</span>
-<span style="color:#900;font-weight:bold">create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">primary</span>
-<span style="color:#900;font-weight:bold">format</span> <span style="color:#900;font-weight:bold">quick</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps" data-lang="ps"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">diskpart</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">select</span> <span style="color:#900;font-weight:bold">disk</span> <span style="color:#099">39</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">select</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">删除分区</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">delete</span> <span style="color:#900;font-weight:bold">partition</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">先转换成GPT</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">convert</span> <span style="color:#900;font-weight:bold">gpt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">创建EFI分区</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">efi</span> <span style="color:#900;font-weight:bold">size=100</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">format</span> <span style="color:#900;font-weight:bold">quick</span> <span style="color:#900;font-weight:bold">fs=FAT32</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">#</span> <span style="color:#900;font-weight:bold">创建主分区</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">create</span> <span style="color:#900;font-weight:bold">partition</span> <span style="color:#900;font-weight:bold">primary</span>
+</span></span><span style="display:flex;"><span><span style="color:#900;font-weight:bold">format</span> <span style="color:#900;font-weight:bold">quick</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>收工，希望明年不要再折腾win10了。。。</p>
 </div>

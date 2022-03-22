@@ -6,7 +6,7 @@
     <description>Recent content on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Sun, 16 May 2021 06:34:37 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 23 Mar 2022 05:29:30 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
       <link>https://sy123.netlify.app/about/</link>
@@ -16,6 +16,16 @@
       <description>Suspendisse non nisl sit amet Morbi mattis ullamcorper velit. Morbi mollis tellus ac sapien. Praesent congue erat at massa. Nullam tincidunt adipiscing enim.
 Phasellus blandit leo ut odio. Aenean imperdiet. In hac habitasse platea dictumst. Maecenas vestibulum mollis diam. Morbi ac felis.
 Cras sagittis. Fusce pharetra convallis urna. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Suspendisse feugiat.</description>
+    </item>
+    
+    <item>
+      <title>20220323 Archlinux PGP Signature</title>
+      <link>https://sy123.netlify.app/2022/03/23/20220323-archlinux-pgp-signature/</link>
+      <pubDate>Wed, 23 Mar 2022 05:29:30 +0800</pubDate>
+      
+      <guid>https://sy123.netlify.app/2022/03/23/20220323-archlinux-pgp-signature/</guid>
+      <description>pacman安装软件包出现损坏 很久没用了arch了，更新一下出现了签名过期问题，记录下
+1 2 3 4 5 6 7 8 9  File .pkg.tar.xz is corrupted (invalid or corrupted package (PGP signature)).Do you want to delete it? [Y/n]  # 更新已知的密钥 (没啥用甚至卡住) pacman-key --refresh-keys  # 签名问题其实升级下就好了 pacman -S archlinux-keyring  pacman -Syu   See aslo  http://www.mamicode.com/info-detail-1674262.html  </description>
     </item>
     
     <item>
@@ -86,7 +96,7 @@ make a p12 file 为了将.crt和.key正确导入Chrome的nssdb数据库，建议
       <guid>https://sy123.netlify.app/2020/08/05/%E8%A7%A3%E5%86%B3linux%E4%B8%8B%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E9%80%9F%E5%BA%A6%E5%A4%AA%E5%BF%AB%E7%9A%84%E9%97%AE%E9%A2%98libinput/</guid>
       <description>环境：Mint Xfce 19 x64 我平时使用的鼠标移动速度比较慢，而且鼠标加速从来不开。一般1000-1200DPI最适合我。Mint下鼠标疯狂起飞，手腕一抖鼠标指针飞过半个屏幕让我很是头疼。而xfce设置里的鼠标速度似乎完全没有作用，Google后我发现这其实是历史的锅，以前X11是用xset管理输入设备的，现在变成了xinput。而xfce的设置还是去修改xset的配置文件。
 既然如此，那我们只能来手动研究一下xinput怎么改鼠标速度了。
-1 2 3 4 5 6 7 8 9  $ xinput -list # 可以查看到所有输入设备，我的部分输出如下： ⎡ Virtual core pointer id=2 [master pointer (3)] ⎜ ↳ Virtual core XTEST pointer id=4 [slave pointer (2)] ⎜ ↳ SynPS/2 Synaptics TouchPad id=15 [slave pointer (2)] ⎜ ↳ PixArt USB Optical Mouse id=11 [slave pointer (2)] ⎣ Virtual core keyboard id=3 [master keyboard (2)] ↳ Virtual core XTEST keyboard id=5 [slave keyboard (3)]   可以看到，USB鼠标id为11，接下来再去查看USB鼠标的详细信息：</description>
+1 2 3 4 5 6 7 8 9  $ xinput -list # 可以查看到所有输入设备，我的部分输出如下：  ⎡ Virtual core pointer id=2 [master pointer (3)] ⎜ ↳ Virtual core XTEST pointer id=4 [slave pointer (2)] ⎜ ↳ SynPS/2 Synaptics TouchPad id=15 [slave pointer (2)] ⎜ ↳ PixArt USB Optical Mouse id=11 [slave pointer (2)] ⎣ Virtual core keyboard id=3 [master keyboard (2)]  ↳ Virtual core XTEST keyboard id=5 [slave keyboard (3)]   可以看到，USB鼠标id为11，接下来再去查看USB鼠标的详细信息：</description>
     </item>
     
     <item>
@@ -117,7 +127,7 @@ proxy_dns 最后添加如下行：
       
       <guid>https://sy123.netlify.app/2020/06/22/linux-%E4%BD%BF%E7%94%A8usb%E5%A3%B0%E5%8D%A1/</guid>
       <description>前言 新买了耳机发现没声音，上网查了一下发现耳机自带了 usb 驱动，又又又开始了折腾之旅～
-解决声音问题 1 2 3 4 5 6 7 8 9  # 切换一下就完事 ~/site/blog ❯ asoundconf list Names of available sound cards: PCH Device ~/site/blog ❯ asoundconf set-default-card 1   Polybar 报错 &amp;ldquo;error: Disabling module &amp;ldquo;alsa&amp;rdquo; (reason: Could not connect pulseaudio context.)&amp;rdquo; 音乐嗨了没多久才发现顶部工具栏调不了音量，查了下日志发现报错了，后来在 issues 上找到解决方法，搞定收工
+解决声音问题 1 2 3 4 5 6 7 8 9  # 切换一下就完事 ~/site/blog ❯ asoundconf list Names of available sound cards: PCH Device  ~/site/blog ❯ asoundconf set-default-card 1   Polybar 报错 &amp;ldquo;error: Disabling module &amp;ldquo;alsa&amp;rdquo; (reason: Could not connect pulseaudio context.)&amp;rdquo; 音乐嗨了没多久才发现顶部工具栏调不了音量，查了下日志发现报错了，后来在 issues 上找到解决方法，搞定收工
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  ; ~/.</description>
     </item>
     
@@ -128,7 +138,7 @@ proxy_dns 最后添加如下行：
       
       <guid>https://sy123.netlify.app/file/rc4/</guid>
       <description>rc4.js
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31  /* * RC4 symmetric cipher encryption/decryption * * @license Public Domain * @param string key - secret key for encryption/decryption * @param string str - string to be encrypted/decrypted * @return string */ function rc4(key, str) { var s = [], j = 0, x, res = &amp;#39;&amp;#39;; for (var i = 0; i &amp;lt; 256; i++) { s[i] = i; } for (i = 0; i &amp;lt; 256; i++) { j = (j + s[i] + key.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31  /* * RC4 symmetric cipher encryption/decryption * * @license Public Domain * @param string key - secret key for encryption/decryption * @param string str - string to be encrypted/decrypted * @return string */ function rc4(key, str) { 	var s = [], j = 0, x, res = &amp;#39;&amp;#39;; 	for (var i = 0; i &amp;lt; 256; i++) { 	s[i] = i; 	} 	for (i = 0; i &amp;lt; 256; i++) { 	j = (j + s[i] + key.</description>
     </item>
     
     <item>
@@ -148,7 +158,7 @@ proxy_dns 最后添加如下行：
       
       <guid>https://sy123.netlify.app/2020/05/28/linux%E6%98%BE%E7%A4%BA%E5%BD%A9%E8%89%B2emoji%E8%A1%A8%E6%83%85/</guid>
       <description>前言 之前安装 noto-fonts-emoji 这个包后一直半彩色半黑白吊着，看着是真的不爽，实在太懒，今天在google意外看到很简单就解决了
-解决方法 01-emoji.conf 1 2 3 4 5 6 7 8 9 10  &amp;lt;?xml version=&amp;#39;1.0&amp;#39;?&amp;gt; &amp;lt;!DOCTYPE fontconfig SYSTEM &amp;#39;fonts.dtd&amp;#39;&amp;gt; &amp;lt;fontconfig&amp;gt; &amp;lt;match target=&amp;#34;pattern&amp;#34;&amp;gt; &amp;lt;edit name=&amp;#34;family&amp;#34; mode=&amp;#34;prepend&amp;#34;&amp;gt; &amp;lt;string&amp;gt;Noto Color Emoji&amp;lt;/string&amp;gt; &amp;lt;string&amp;gt;Noto Emoji&amp;lt;/string&amp;gt; &amp;lt;/edit&amp;gt; &amp;lt;/match&amp;gt; &amp;lt;/fontconfig&amp;gt;    1 2  cp 01-emoji.conf $HOME/.config/fontconfig/conf.d/ fc-cache -f -v   重启就能显示大部分了，不过还是有一些之前没法显示，emoji还是有问题，以后再研究了
+解决方法 01-emoji.conf 1 2 3 4 5 6 7 8 9 10  &amp;lt;?xml version=&amp;#39;1.0&amp;#39;?&amp;gt; &amp;lt;!DOCTYPE fontconfig SYSTEM &amp;#39;fonts.dtd&amp;#39;&amp;gt; &amp;lt;fontconfig&amp;gt; 	&amp;lt;match target=&amp;#34;pattern&amp;#34;&amp;gt; 	&amp;lt;edit name=&amp;#34;family&amp;#34; mode=&amp;#34;prepend&amp;#34;&amp;gt; 	&amp;lt;string&amp;gt;Noto Color Emoji&amp;lt;/string&amp;gt; 	&amp;lt;string&amp;gt;Noto Emoji&amp;lt;/string&amp;gt; 	&amp;lt;/edit&amp;gt; 	&amp;lt;/match&amp;gt; &amp;lt;/fontconfig&amp;gt;    1 2  cp 01-emoji.conf $HOME/.config/fontconfig/conf.d/ fc-cache -f -v   重启就能显示大部分了，不过还是有一些之前没法显示，emoji还是有问题，以后再研究了
 See also  https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkval/enable_noto_color_emoji_easily/  </description>
     </item>
     
@@ -211,7 +221,7 @@ Intent类型 显式Intent Intent可以分为显式Intent和隐式Intent。平时
       <pubDate>Sat, 16 May 2020 00:33:08 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/05/16/gtk%E5%BC%80%E5%90%AF%E9%BB%91%E6%9A%97%E6%A8%A1%E5%BC%8F/</guid>
-      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  # 安装黑暗主题 ~ ❯ sudo pacman -S gnome-themes-extra ~ ❯ cat .gtkrc gtk-icon-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-font-name = &amp;#34;Cantarell 11&amp;#34; ~ ❯ cat .config/gtk-3.0/settings.ini [Settings] gtk-icon-theme-name = Adwaita-dark gtk-theme-name = Adwaita-dark gtk-application-prefer-dark-theme = true gtk-font-name = Cantarell 11   See also https://wiki.archlinux.org/index.php/GTK</description>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  # 安装黑暗主题 ~ ❯ sudo pacman -S gnome-themes-extra  ~ ❯ cat .gtkrc gtk-icon-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-font-name = &amp;#34;Cantarell 11&amp;#34;  ~ ❯ cat .config/gtk-3.0/settings.ini [Settings] gtk-icon-theme-name = Adwaita-dark gtk-theme-name = Adwaita-dark gtk-application-prefer-dark-theme = true gtk-font-name = Cantarell 11   See also https://wiki.archlinux.org/index.php/GTK</description>
     </item>
     
     <item>
@@ -256,7 +266,7 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       
       <guid>https://sy123.netlify.app/tip/numfmt%E8%AE%A9%E6%95%B0%E5%AD%97%E5%8F%98%E5%BE%97%E6%9B%B4%E5%AE%B9%E6%98%93%E7%90%86%E8%A7%A3/</guid>
       <description>像 =ls=, =df=, =du= 这类命令都带有一个选项可以将数字直接转换成人类容易阅读的形式来展现。 比如,直接执行 =df= 时，容量显示的是多少个块，而当用 =df -h= 时，容量会根据块的数量转换成 G/M/K 的形式。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25  [lujun9972@T520 ~]$ df 文件系统 1K-块 已用 可用 已用% 挂载点 dev 1900280 0 1900280 0% /dev run 1906932 868 1906064 1% /run /dev/sda2 41022688 23631300 15277852 61% / tmpfs 1906932 26204 1880728 2% /dev/shm tmpfs 1906932 0 1906932 0% /sys/fs/cgroup tmpfs 1906932 5156 1901776 1% /tmp /dev/sda3 73005440 61682676 7571272 90% /home tmpfs 100 0 100 0% /var/lib/lxd/shmounts tmpfs 100 0 100 0% /var/lib/lxd/devlxd tmpfs 381384 8 381376 1% /run/user/1000 [lujun9972@T520 ~]$ df -h 文件系统 容量 已用 可用 已用% 挂载点 dev 1.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25   [lujun9972@T520 ~]$ df  文件系统 1K-块 已用 可用 已用% 挂载点  dev 1900280 0 1900280 0% /dev  run 1906932 868 1906064 1% /run  /dev/sda2 41022688 23631300 15277852 61% /  tmpfs 1906932 26204 1880728 2% /dev/shm  tmpfs 1906932 0 1906932 0% /sys/fs/cgroup  tmpfs 1906932 5156 1901776 1% /tmp  /dev/sda3 73005440 61682676 7571272 90% /home  tmpfs 100 0 100 0% /var/lib/lxd/shmounts  tmpfs 100 0 100 0% /var/lib/lxd/devlxd  tmpfs 381384 8 381376 1% /run/user/1000   [lujun9972@T520 ~]$ df -h  文件系统 容量 已用 可用 已用% 挂载点  dev 1.</description>
     </item>
     
     <item>
@@ -297,7 +307,7 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       
       <guid>https://sy123.netlify.app/2020/05/10/kodbox-always-https/</guid>
       <description>很久不用kodexplorer，一堆BUG不修在搞to B商务弄出个kodbox，很久没用PHP出问题我也懒得研究，直接暴力解决问题就完事，以后再找替代品
-1 2 3 4 5 6 7 8 9 10  --- web.function.php 2020-05-10 13:20:20.472730147 +0800 +++ web.function.new.php 2020-05-10 13:20:09.862832878 +0800 @@ -59,6 +59,7 @@  } function http_type(){ + return &amp;#39;https&amp;#39;;  if( (isset($_SERVER[&amp;#39;HTTPS&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTPS&amp;#39;] !== &amp;#39;off&amp;#39;) || (isset($_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;] == &amp;#39;https&amp;#39;) || $_SERVER[&amp;#39;SERVER_PORT&amp;#39;] === 443   用了一分钟后我发现还是kodexplorer好使，最后一个版本好像是4.40，且用且珍惜</description>
+1 2 3 4 5 6 7 8 9 10  --- web.function.php 2020-05-10 13:20:20.472730147 +0800 +++ web.function.new.php 2020-05-10 13:20:09.862832878 +0800 @@ -59,6 +59,7 @@  }   function http_type(){ + return &amp;#39;https&amp;#39;;  if( (isset($_SERVER[&amp;#39;HTTPS&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTPS&amp;#39;] !== &amp;#39;off&amp;#39;) ||  (isset($_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;] == &amp;#39;https&amp;#39;) ||  $_SERVER[&amp;#39;SERVER_PORT&amp;#39;] === 443   用了一分钟后我发现还是kodexplorer好使，最后一个版本好像是4.40，且用且珍惜</description>
     </item>
     
     <item>
@@ -319,10 +329,9 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       <description>exclude file Specifies which filenames or wildcarded names must be excluded from the operation.
 Multiple exclude switches are supported.
 Syntax
-1 2 3 4  -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt; &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard}   See -i (Include) switch description for information about option parameters.
+1 2 3 4  -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt;  &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard}   See -i (Include) switch description for information about option parameters.
 Examples
-1  7z a -tzip archive.zip *.txt -x!temp.*   adds to the archive.zip all *.txt files, except temp.* files.
-1  7z a archive.</description>
+1  7z a -tzip archive.zip *.txt -x!temp.*   adds to the archive.zip all *.txt files, except temp.* files.</description>
     </item>
     
     <item>
@@ -333,7 +342,7 @@ Examples
       <guid>https://sy123.netlify.app/2020/05/06/xf86openconsole-cannot-open-virtual-console/</guid>
       <description>I can start X only by root. If I am using startx using ordinary user I get the error:
 xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
-1 2 3 4 5  $ groups lp wheel games video audio optical storage scanner power users $ ls -l /dev/tty1 crw-------- 1 root tty 4, 1 Jan 17 10:21 /dev/tty1   This might help someone. So I am going to post it.</description>
+1 2 3 4 5  $ groups lp wheel games video audio optical storage scanner power users  $ ls -l /dev/tty1 crw-------- 1 root tty 4, 1 Jan 17 10:21 /dev/tty1   This might help someone. So I am going to post it.</description>
     </item>
     
     <item>
@@ -352,7 +361,7 @@ xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
 软解决 在linux下直接复制安装镜像里的 boot sources bootmgr bootmgr.efi
 uefi还需要复制 EFI 文件夹到efi文件夹到efi分区，
 重启安装即可
-安装过程提示help setup cannot continue due to a corrupted 1 2 3 4 5 6 7 8  # 直接擦写一下这块硬盘 dd if=/dev/zero of=/dev/vdb # fdisk 重新分区 fdisk /dev/vdb # 格式化 mkfs.ntfs /dev/vdb1   </description>
+安装过程提示help setup cannot continue due to a corrupted 1 2 3 4 5 6 7 8  # 直接擦写一下这块硬盘 dd if=/dev/zero of=/dev/vdb  # fdisk 重新分区 fdisk /dev/vdb  # 格式化 mkfs.ntfs /dev/vdb1   </description>
     </item>
     
     <item>
@@ -371,7 +380,7 @@ uefi还需要复制 EFI 文件夹到efi文件夹到efi分区，
       
       <guid>https://sy123.netlify.app/2020/04/23/problems-with-hardware-acceleration-environment-variables/</guid>
       <description>问题 1 2 3 4  ~ ❯ vainfo libva error: /usr/lib/dri/iHD_drv_video.so init failed vaInitialize failed with error code 1 (operation failed),exit   解决方法 Everything works as it is supposed to by just adding:
-1 2 3 4  LIBVA_DRIVER_NAME=i965 # or if using the intel-media-driver which I prefer for newer hardware then it is: LIBVA_DRIVER_NAME=iHD   also for intel-media-driver you may want to read the readme and enable guc and huc.</description>
+1 2 3 4  LIBVA_DRIVER_NAME=i965  # or if using the intel-media-driver which I prefer for newer hardware then it is: LIBVA_DRIVER_NAME=iHD   also for intel-media-driver you may want to read the readme and enable guc and huc.</description>
     </item>
     
     <item>
@@ -385,7 +394,7 @@ FYI, you can tell the Code debugger to use an external console in the launch con
 &amp;quot;externalConsole&amp;quot;: true It has a possible workaround, using remote debug + vscode task, but that is not trivial.
  It has a possible workaround, using remote debug + vscode task, but that is not trivial.
 launch.json
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  { // Use IntelliSense to learn about possible attributes.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  {  // Use IntelliSense to learn about possible attributes.</description>
     </item>
     
     <item>
@@ -395,7 +404,7 @@ launch.json
       
       <guid>https://sy123.netlify.app/2020/04/15/%E8%A7%A3%E5%86%B3error-the-certificate-of-github.com-is-not-trusted.%E9%97%AE%E9%A2%98/</guid>
       <description>今天早上有在GITHUB下载一个脚本到VPS中的时候有出现&amp;quot;ERROR: The certificate of `github.com’ is not trusted.&amp;ldquo;的错误提示。应该意思是这个证书可能不被信任，反正就这个提示，正式存在的，我换了其他有HTTPS网址也无法wget下载，应该是这个问题。
-解决办法 1 2 3 4 5 6  wget --no-check-certificate github.com # 或者我们可以： apt-get install ca-certificates -y #Debian/Ubuntu yum install ca-certificates -y #CentOS   安装完毕之后应该是可以不用 no-check-certificate 参数。</description>
+解决办法 1 2 3 4 5 6  wget --no-check-certificate github.com  # 或者我们可以： apt-get install ca-certificates -y #Debian/Ubuntu  yum install ca-certificates -y #CentOS   安装完毕之后应该是可以不用 no-check-certificate 参数。</description>
     </item>
     
     <item>
@@ -525,10 +534,10 @@ word..d 这个我们创造出来的单词本来应该紧接在 long 后面的，
       <guid>https://sy123.netlify.app/2020/03/20/linux%E4%B8%AD%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</guid>
       <description>近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也不好一一指定。普通的 cp 命令并没有排除某个文件或文件夹的参数，比较丑陋点可以 cp -r 拷贝完目录之后再去删除无用的，但如果做批量脚本操作就不爽了，经过实际试验之后暂时找到两个比较好的方法。
 使用 rsync 进行拷贝 rsync 本来是文件同步备份的工具，相对于普通的 cp 命令，rsync 在控制方面就强多了，而且 rsync 对遍历目录也支持，有 &amp;ndash;exclude 参数可以忽略指定的文件或文件夹。
-1 2  rsync -vaP --exclude=&amp;#34;.*&amp;#34; --exclude=&amp;#34;Makefile&amp;#34; dir1 /home/dir2   如上面演示的就可以排除掉隐藏文件和 Makefile 文件，-a 参数已经包含遍历处理参数 -r。
+1  rsync -vaP --exclude=&amp;#34;.*&amp;#34; --exclude=&amp;#34;Makefile&amp;#34; dir1 /home/dir2   如上面演示的就可以排除掉隐藏文件和 Makefile 文件，-a 参数已经包含遍历处理参数 -r。
 使用 find 加 cpio 进行拷贝 备注：此方法来自 Advanced Bash-Scripting Guide，需要了解的童鞋自己去参考了。
 用过 find 的童鞋都知道，find 对文件的过滤那是非常强大的，配合 cpio 来进行目录的遍历拷贝就可以实现过滤指定的文件或文件夹，当然也可以做到只备份特定的文件或文件夹，你可以用 find 的各种过滤参数达到拷贝哪天的文件，拷贝近期更改的文件等特殊效果，而且 find 支持正则表达式，这种方式想比第一种使用 rsync 跳过文件的方式更加灵活，因此非常推荐使用此方式进行目录拷贝。
-1 2  cd dir1 find . -regextype posix-egrep -mindepth 1 ! -regex &amp;#39;.</description>
+1 2  cd dir1 find . -regextype posix-egrep -mindepth 1 ! -regex &amp;#39;./(dev|tmp)($|/.*)&amp;#39; !</description>
     </item>
     
     <item>
@@ -540,7 +549,7 @@ word..d 这个我们创造出来的单词本来应该紧接在 long 后面的，
       <description>今天滚完系统就没网络，startx报内核模块错误，当场裂开了，开机显示加载驱动失败，先来看看加载日志吧
 1  sudo systemctl status systemd-modules-load   报错全是类似Module Vboxdrv Not Found in Directory xx这种
 再查看下内核模块相关目录发现了端倪
-1 2 3 4 5 6  ❯ uname -a Linux arch 5.5.8-arch1-1 ~/site/blog ❯ ls /lib/modules 5.5.9-arch1-2   原来是没加载新内核
+1 2 3 4 5 6  ❯ uname -a Linux arch 5.5.8-arch1-1  ~/site/blog ❯ ls /lib/modules 5.5.9-arch1-2   原来是没加载新内核
 解决方法 根据经验最好别排查原因，估计就是软件包BUG，懒得折腾再安装一次旧内核再滚就完事了
 升级内核，系统挂了，可以通过降级内核的方法来修复系统
 内核的安装包会缓存在/var/cache/pacman/pkg，文件名以 “linux-版本号”开头
@@ -644,10 +653,10 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
       
       <guid>https://sy123.netlify.app/2020/03/10/ts%E5%B1%9E%E6%80%A7%E5%90%8E%E9%9D%A2%E7%9A%84%E6%84%9F%E5%8F%B9%E5%8F%B7%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%E5%A4%84/</guid>
       <description>首先看一段代码
-1 2 3 4 5 6 7 8 9  import { Vue, Component, Prop } from &amp;#39;vue-property-decorator&amp;#39; @Component export default class YourComponent extends Vue { @Prop(Number) propA!: number @Prop({ default: &amp;#39;default value&amp;#39; }) propB!: string @Prop([String, Boolean]) propC: string | boolean }   这是vue组件的ts写法，仔细观察，里面有一段这样的代码@Prop(Number) propA!: number，这是什么鬼？
+1 2 3 4 5 6 7 8  import { Vue, Component, Prop } from &amp;#39;vue-property-decorator&amp;#39;  @Component export default class YourComponent extends Vue {  @Prop(Number) propA!: number  @Prop({ default: &amp;#39;default value&amp;#39; }) propB!: string  @Prop([String, Boolean]) propC: string | boolean }   这是vue组件的ts写法，仔细观察，里面有一段这样的代码@Prop(Number) propA!: number，这是什么鬼？
 查了一下ts的文档说明，原来感叹号是非null和非undefined的类型断言，所以上面的写法就是对propA这个属性进行非空断言。文档的相关说明在这里。
 官方文档上的一个例子很好的说明了这个问题
-1 2 3 4 5 6 7 8 9 10 11 12 13 14  interface Entity { name: string } // Compiled with --strictNullChecks function validateEntity(e?</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13  interface Entity {  name: string }  // Compiled with --strictNullChecks function validateEntity(e?</description>
     </item>
     
     <item>
@@ -685,17 +694,18 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
 （1）取整，位运算更快。原因介绍：参考：位运算实现的原因
 位运算取整（更快）
 位运算取整：下述，都可以
-1 2 3 4  ~~a; //双非位操作符 a|0; 。。。   （2）四舍五入（0.5规定向上取整），位运算更快
+1 2 3  ~~a; //双非位操作符 a|0; 。。。   （2）四舍五入（0.5规定向上取整），位运算更快
 位运算的四舍五入，负数不适配
 位运算适合正数的四舍五入，但是负数只能舍，不能入。
-1 2 3 4  a+0.5|0; ~~(a+0.5); 。。。   （3）内置值 undefined
+1 2 3  a+0.5|0; ~~(a+0.5); 。。。   （3）内置值 undefined
 undefined替代
-1 2 3  void 0; // 快 0[0]; // 略慢    （4）内置值 Infinity
+1 2  void 0; // 快 0[0]; // 略慢   （4）内置值 Infinity
 Infinity替代
 1/0; （5）布尔值短写法
 布尔值短写法
 !0; // true !1; //false （6）十进制指数（想当初，刚学c的时候，我一直都用pow(10,n)） 10000000000 === 1e10
-（7）三元运算符 ? : 还用于简化函数的调用。</description>
+（7）三元运算符 ? : 还用于简化函数的调用。
+function x() { console.</description>
     </item>
     
     <item>
@@ -705,8 +715,8 @@ Infinity替代
       
       <guid>https://sy123.netlify.app/2020/02/28/encrypt-string-using-openssl/</guid>
       <description>Try this:
-1 2 3 4  echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt   Run
-1 2 3  openssl list-cipher-commands   to list all available ciphers.</description>
+1 2 3   echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt   Run
+1 2   openssl list-cipher-commands   to list all available ciphers.</description>
     </item>
     
     <item>
@@ -725,7 +735,7 @@ Infinity替代
       
       <guid>https://sy123.netlify.app/2020/02/27/react%E5%85%B3%E4%BA%8Eform%E7%9A%84%E5%8F%96%E9%83%A8%E5%88%86%E5%AD%97%E6%AE%B5%E6%95%B0%E6%8D%AE/</guid>
       <description>获取查询条件的值 validateFields form.validateFields / validateFieldsAndScroll 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件
-获取表单的所有数据 1 2 3 4 5 6 7 8 9  this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; { if(err){ return; } console.log(&amp;#39;_values&amp;#39;, values); });   获取表单的部分字段数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27  this.props.form.validateFieldsAndScroll([`timeUnit${num}`, `Time${num}`,`deviceTypeId${num}`], (err, values) =&amp;gt; { if(err){ return; } console.</description>
+获取表单的所有数据 1 2 3 4 5 6 7 8   this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; {   if(err){  return;  }  console.log(&amp;#39;_values&amp;#39;, values); });   获取表单的部分字段数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26   this.props.form.validateFieldsAndScroll([`timeUnit${num}`, `Time${num}`,`deviceTypeId${num}`], (err, values) =&amp;gt; {  if(err){  return;  }  console.</description>
     </item>
     
     <item>
@@ -735,7 +745,7 @@ Infinity替代
       
       <guid>https://sy123.netlify.app/2020/02/27/tippy_warning/</guid>
       <description>I have the folowing part of code:
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19  private rootRef = React.createRef&amp;lt;HTMLDivElement&amp;gt;(); const target = ( &amp;lt;div&amp;gt; &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl&amp;#39; /&amp;gt; &amp;lt;/div&amp;gt; ); return ( &amp;lt;React.Fragment&amp;gt; {React.cloneElement(target, { ref: this.rootRef, onMouseOver: this.handleMouseOver, onMouseLeave: this.handleMouseLeave, })} {open &amp;amp;&amp;amp; this.renderTooltip()} &amp;lt;/React.Fragment&amp;gt; );   When target with div element (or any other instead of div) everything is ok, but when target is:</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  private rootRef = React.createRef&amp;lt;HTMLDivElement&amp;gt;();  const target = (  &amp;lt;div&amp;gt;  &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl&amp;#39; /&amp;gt;  &amp;lt;/div&amp;gt; );  return (  &amp;lt;React.Fragment&amp;gt;  {React.cloneElement(target, {  ref: this.rootRef,  onMouseOver: this.handleMouseOver,  onMouseLeave: this.handleMouseLeave,  })}  {open &amp;amp;&amp;amp; this.renderTooltip()}  &amp;lt;/React.Fragment&amp;gt;  );   When target with div element (or any other instead of div) everything is ok, but when target is:</description>
     </item>
     
     <item>
@@ -777,7 +787,7 @@ Infinity替代
       <guid>https://sy123.netlify.app/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
       <description>GNU cp(1) has a backup option:
 1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
-1 2 3 4 5 6 7  --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
+1 2 3 4 5 6 7  --backup[=CONTROL]  make a backup of each existing destination file  -b like --backup but does not accept an argument  -S, --suffix=SUFFIX  override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
     </item>
     
     <item>
@@ -829,8 +839,8 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quo
 作用范围 作用范围分为当前行、全文、选区等等。
 当前行：
 :s/foo/bar/g 全文：
-:%s/foo/bar/g 选区，在Visual模式下选择区域后输入:，Vim即可自动补全为 :&#39;&amp;lt;,&#39;&amp;gt;。
-:&#39;&amp;lt;,&#39;&amp;gt;s/foo/bar/g 2-11行：
+:%s/foo/bar/g 选区，在Visual模式下选择区域后输入:，Vim即可自动补全为 :&amp;rsquo;&amp;lt;,&amp;rsquo;&amp;gt;。
+:&amp;rsquo;&amp;lt;,&amp;rsquo;&amp;gt;s/foo/bar/g 2-11行：
 :5,12s/foo/bar/g 当前行.与接下来两行+2：
 :.,+2s/foo/bar/g 替换标志 上文中命令结尾的g即是替换标志之一，表示全局global替换（即替换目标的所有出现）。 还有很多其他有用的替换标志：
 空替换标志表示只替换从光标位置开始，目标的第一次出现：
@@ -855,7 +865,7 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quo
       
       <guid>https://sy123.netlify.app/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</guid>
       <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands.
-1 2 3 4 5 6 7 8 9 10  free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248   You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
+1 2 3 4 5 6 7 8 9 10  free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free   total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248  total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248   You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
     </item>
     
     <item>
@@ -906,7 +916,7 @@ systemd-analyze可使用的命令：
       
       <guid>https://sy123.netlify.app/2020/02/15/saga-deprecated-%E8%AD%A6%E5%91%8A/</guid>
       <description>What happens? 1  [...effects] has been deprecated in favor of all([...effects]), please update your code   it does not effect dva.js, its redux saga api update, you just need to do this
-1 2 3 4 5  effects: { * query(action, {call, put, all}) { yield all([]) } }   Redux saga apis:</description>
+1 2 3 4 5  effects: {  * query(action, {call, put, all}) {  yield all([])  } }   Redux saga apis:</description>
     </item>
     
     <item>
@@ -929,7 +939,7 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       <guid>https://sy123.netlify.app/2020/02/10/umi-ui-bug-using-react-document-title/</guid>
       <description>背景 React 项目使用umi时发报：
  Uncaught Invariant Violation: React.Children.only expected to receive a single React element child. The above error occurred in the  component ui socket init CloseEvent {type: &amp;ldquo;close&amp;rdquo;, bubbles: false, cancelable: false, timeStamp: 1571127775342, wasClean: false, …}
- 异常代码 1 2 3 4 5  &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt; {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt;   DocumentTitle组件内部最外层只能接受一个元素，而代码中有多个元素，所以报错。
+ 异常代码 1 2 3 4 5  &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt;  {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt;   DocumentTitle组件内部最外层只能接受一个元素，而代码中有多个元素，所以报错。
 解决方案 用&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;或者&amp;lt;&amp;gt;&amp;lt;/&amp;gt;在外部包裹后就OK，不再报错，页面可正常显示。</description>
     </item>
     
@@ -949,7 +959,7 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       
       <guid>https://sy123.netlify.app/2020/02/09/programmatically_navigate_using_react_router/</guid>
       <description>React Router v5.1.0 with hooks There is a new useHistory hook in React Router &amp;gt;5.1.0 if you are using React &amp;gt;16.8.0 and functional components.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  import { useHistory } from &amp;#34;react-router-dom&amp;#34;; function HomeButton() { const history = useHistory(); function handleClick() { history.push(&amp;#34;/home&amp;#34;); } return ( &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt; Go home &amp;lt;/button&amp;gt; ); }   React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  import { useHistory } from &amp;#34;react-router-dom&amp;#34;;  function HomeButton() {  const history = useHistory();   function handleClick() {  history.push(&amp;#34;/home&amp;#34;);  }   return (  &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt;  Go home  &amp;lt;/button&amp;gt;  ); }   React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</description>
     </item>
     
     <item>
@@ -958,7 +968,7 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/06/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</guid>
-      <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7  npm config get registry # 查看npm当前镜像源 npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像 yarn config get registry # 查看yarn当前镜像源 yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像   镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
+      <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7  npm config get registry # 查看npm当前镜像源  npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像  yarn config get registry # 查看yarn当前镜像源  yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像   镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
     </item>
     
     <item>
@@ -1053,7 +1063,7 @@ There is no saved history - a history is kept only for the duration of the curre
       <guid>https://sy123.netlify.app/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
       <description>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删除唯一性信息，这使得你可以在不同的计算机上重复使用映像。下次启动 Windows 映像时，将运行 specialize 配置阶段。
 Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
-1 2 3 4 5 6 7 8 9 10 11  Sysprep.exe [/oobe | /audit] [/generalize] [/mode:vm] [/reboot | /shutdown | /quit] [/quiet] [/unattend:&amp;lt;answerfile&amp;gt;]   下表列出了 Sysprep 命令行选项：
+1 2 3 4 5 6 7 8 9 10 11  Sysprep.exe [/oobe | /audit]  [/generalize]  [/mode:vm]  [/reboot | /shutdown | /quit]  [/quiet]  [/unattend:&amp;lt;answerfile&amp;gt;]   下表列出了 Sysprep 命令行选项：
    选项 描述     /audit 重新启动计算机进入审核模式。审核模式使你可以将其他驱动程序或应用程序添加到 Windows。你还可以在将 Windows 安装发送给最终用户前对其进行测试。例如：   Sysprep /audit 如果指定了应答文件，则 Windows 安装程序的审核模式将运行 auditSystem 和 auditUser 配置阶段。   /generalize 准备要作为映像的 Windows 安装。Sysprep 工具会从 Windows 安装中删除所有唯一的系统信息。Sysprep 将重置安全 ID (SID)，清除所有系统还原点，并删除事件日志。例如：   Sysprep /generalize /shutdown 下次计算机启动时，将运行 specialize 配置阶段。该配置阶段将创建一个新安全 ID (SID)。   /oobe 重新启动计算机进入 OOBE 模式。例如：   Sysprep /generalize /shutdown /oobe OOBE 允许最终用户自定义其 Windows 操作系统、创建用户帐户、命名计算机和执行其他任务。Sysprep 在 OOBE 启动前，将处理应答文件中 oobeSystem 配置阶段的所有设置。   /mode:vm Windows(R) 8 的新增内容。一般化虚拟硬盘 (VHD)，这样可以将其部署为相同虚拟机 (VM) 或虚拟机监控程序上的 VHD。VM 重新启动后，该 VM 可以引导到 OOBE。例如：   Sysprep /generalize /oobe /mode:vm 仅有的适用于 VM 模式的额外交换机为“/reboot”、“/shutdown”和“/quit”。必须使用相同的硬件配置文件在虚拟机或虚拟机监控程序上部署 VHD。例如，如果你已在 Microsoft Hyper-V 中创建 VHD，仅可以使用匹配的硬件配置文件将 VHD 部署到 Microsoft Hyper-V VM。使用不同的硬件配置文件将 VHD 部署到不同的 VM 可能会导致意外的问题。   /reboot 重新启动计算机。可以使用该选项审核计算机并确保首次运行体验正确工作。   /shutdown 在 sysprep 命令完成运行后关闭计算机。   /quiet 运行 Sysprep 工具而不显示屏幕确认消息。如果自动运行 Sysprep 工具，则可以使用该选项。   /quit Sysprep 运行指定命令后，无需重新启动或关闭计算机即可关闭 Sysprep 工具。   /unattend: 在无人参与的安装过程中，将应答文件中的设置应用到 Windows，其中  指定要使用的应答文件的路径和文件名。例如：Sysprep /audit /reboot /unattend:F:\Unattend.</description>
     </item>
     
@@ -1063,7 +1073,7 @@ Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</guid>
-      <description>1 2 3 4 5 6 7 8 9 10 11 12  # 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False  # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t 0   </description>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12  # 查看当前设置  wmic pagefile list /format:list  # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False  # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096  # 重启生效 shutdown -r -t 0   </description>
     </item>
     
     <item>
@@ -1078,7 +1088,7 @@ Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了
 首先，是安装Samba，ArchLinux可以直接从源中获取并安装Samba：
 1  pacman -S samba   等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：
 在/etc/samba目录中，直接建立一个空的smb.conf，然后将如下内容粘贴过去：
-1 2 3 4 5 6 7 8 9 10 11  [global] workgroup = WORKGROUP security = user [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644   这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
+1 2 3 4 5 6 7 8 9 10 11  [global] workgroup = WORKGROUP security = user  [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644   这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
 workgroup，这个顾名思义，计算机的工作组名称，比如我是和我的Win7来共享文件，最好把工作组和我的Win7设成通一个工作组，这样方便Win7通过网络发现来找到我的下载机。这里，我的win7工作组名字，就叫做：WORKGROUP了
 security，这是指共享目录的安全认证形式，security的值，有两种可以设置：
 第一种，是设成上面例子中的user，意思是在访问共享目录的时候，需要通过用户名和密码的方式来认证，可以给共享目录提供一定的安全性保护。
@@ -1089,8 +1099,7 @@ security，这是指共享目录的安全认证形式，security的值，有两�
 下面的path，就是你想共享的Linux目录了，我设成了我的Transmission的下载目录。
 后面的valid users，是一个用户帐号，也即通过用户名和密码来访问共享目录的那个帐号，如果你把security设成share，这一项可以去掉。
 下面是一些权限的设置，以及是否允许访问者有写入共享目录的权限，各个参数可以查看Samba文档，就不一一介绍了。
-最后，说一下security设成user后，帐号的设置问题。
-首先，你可以添加一个新的Linux帐号，专门用来访问共享目录用。比如，我就添加了一个帐号，叫做Samba</description>
+最后，说一下security设成user后，帐号的设置问题。</description>
     </item>
     
     <item>
@@ -1136,12 +1145,12 @@ iptables -A INPUT -p tcp &amp;ndash;dport 22 -j ACCEPT</description>
       <guid>https://sy123.netlify.app/2020/01/17/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</guid>
       <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。
 以下为批处理自动关闭netbios脚本:
-1 2 3 4 5 6 7 8 9 10 11 12  @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do ( wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0 if exist one_time.cmd ( del /f /q %0 exit ) rename %0 one_time.cmd exit   功能: 一键关闭netbios，执行完第二次后自己删除自己。
+1 2 3 4 5 6 7 8 9 10 11 12  @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do (  wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0  if exist one_time.cmd (  del /f /q %0  exit ) rename %0 one_time.cmd exit   功能: 一键关闭netbios，执行完第二次后自己删除自己。
 适用性:， 在win7及win2008测试通过，其它系统没测。
 说明: 用法：复制上述脚本随便起个名，扩展名改为bat或者cmd。最好把文件放到开机启动目录，开机就运行。windows下自启动目录如下： C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup
 如何开启NETBIOS? 把上述代码第四行最后数字改为1即为开启，改为0即为默认设置，为2时代表关闭（上述代码已默认设为关闭NETBIOS)。
 为何要第二次才删除？ 如果是新装或者复制了系统，第一次开机是检测并安装网卡设备。如果未安装完网卡就运行完脚本，那脚本就发挥不了作用。
-运行流程： 在运行第一次的时候会自动把本脚本重命名为one_time.cmd 在第二次运行脚本监测到有one_time.cmd文件后会自我删除。 本脚本用for循环20次，每个网卡都尝试关闭NETBIOS,（一般系统有十多个网卡序号）如果不够（不放心）就就把第三行代码由数字20改为30或更多。如果想要查看自己的网卡序号可以在CMD里输入以下命令：wmic nicconfig Get Caption,index</description>
+运行流程： 在运行第一次的时候会自动把本脚本重命名为one_time.</description>
     </item>
     
     <item>
@@ -1227,18 +1236,16 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
 安装git和配置就不说了。
 进入到等下要push的代码的目录文件夹，打开bash 请输入图片描述
 进入到等下要push的代码的目录文件夹，打开bash 请输入图片描述
-初始化 1  git init   初始化后在本地代码库会自动创建一个.git隐藏文件，这个就是本地代码库
-加载文件 1  git add .   . 是把文件夹里面的所有文件都加载进来
+初始化 1   git init   初始化后在本地代码库会自动创建一个.git隐藏文件，这个就是本地代码库
+加载文件 1   git add .   . 是把文件夹里面的所有文件都加载进来
 还可以单个加载
-1  git add index.html,test.html   四：
-提交文件，创建时间点 1  git commit -m &amp;#34;init commit&amp;#34;   -m &amp;ldquo;这里的文件是注释&amp;rdquo;
+1   git add index.html,test.html   四：
+提交文件，创建时间点 1   git commit -m &amp;#34;init commit&amp;#34;   -m &amp;ldquo;这里的文件是注释&amp;rdquo;
 创建之后可以随时回到这个时间点，可以看到有4个文件被修改了，47个插入，51个删除 请输入图片描述
 可以随时用
 1  git status   查看git的状态
 推送代码 第一次推送的时候要添加远程的代码库到配置
-1  git remote add origin https://github.com/zhong635725959/droplook.git   origin可变，随自己喜欢
-推送代码：
-1  git push origin master   拉取代码强制合并：</description>
+1  git remote add origin https://github.com/zhong635725959/droplook.git   origin可变，随自己喜欢</description>
     </item>
     
   </channel>

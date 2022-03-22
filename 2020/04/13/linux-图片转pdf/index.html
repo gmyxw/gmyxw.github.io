@@ -33,23 +33,23 @@
 <div class="content">
   <h1 id="imagemagick">ImageMagick</h1>
 <p>Just use this:</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">convert <span style="color:#d14">&#34;*.{png,jpeg}&#34;</span> -quality <span style="color:#099">100</span> outfile.pdf
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>convert <span style="color:#d14">&#34;*.{png,jpeg}&#34;</span> -quality <span style="color:#099">100</span> outfile.pdf
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>In general case you can combine more files into one pdf file with including them inside <strong>{}</strong> and separate them with a single comma.</p>
 <p>adding <strong>-quality VALUE</strong> to keep quality after conversion(thanks to @iamcreasy)</p>
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">convert <span style="color:#d14">&#34;*.{ext1,ext2,ext3,...}&#34;</span> -quality <span style="color:#099">100</span> outfile.pdf
-</code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>convert <span style="color:#d14">&#34;*.{ext1,ext2,ext3,...}&#34;</span> -quality <span style="color:#099">100</span> outfile.pdf
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="ghostscript">GhostScript</h2>
 <p><a href="/file/gs.sh">gs</a></p>
@@ -71,34 +71,34 @@
 
 
 
-<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#999;font-weight:bold;font-style:italic">#!/bin/sh
-</span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#008080">str</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;&#34;</span>;
-<span style="color:#008080">count</span><span style="color:#000;font-weight:bold">=</span>0;
-<span style="color:#008080">imgs</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">`</span>ls *.gif | sort -n | tr <span style="color:#d14">&#34; &#34;</span> <span style="color:#d14">&#34;|&#34;</span><span style="color:#d14">`</span>;
-<span style="color:#000;font-weight:bold">for</span> i in <span style="color:#008080">$imgs</span>; <span style="color:#000;font-weight:bold">do</span>
-    <span style="color:#008080">i</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">${</span><span style="color:#008080">i</span>//<span style="color:#d14">&#39;|&#39;</span>/<span style="color:#d14">&#39; &#39;</span><span style="color:#d14">}</span>
-    <span style="color:#008080">count</span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">$((</span><span style="color:#008080">$count</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span><span style="color:#000;font-weight:bold">))</span>;
-    <span style="color:#008080">str</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;</span><span style="color:#008080">$str</span><span style="color:#d14"> </span><span style="color:#008080">$count</span><span style="color:#d14">.pdf&#34;</span>;
-    convert -background white -alpha remove -alpha off <span style="color:#d14">&#34;</span><span style="color:#008080">$i</span><span style="color:#d14">&#34;</span> <span style="color:#d14">&#34;</span><span style="color:#008080">$i</span><span style="color:#d14">&#34;</span>
-    mutool draw -F pdf -o <span style="color:#008080">$count</span>.pdf <span style="color:#d14">&#34;</span><span style="color:#008080">$i</span><span style="color:#d14">&#34;</span>;
-<span style="color:#000;font-weight:bold">done</span>
-gs -q -dNOPAUSE -sDEVICE<span style="color:#000;font-weight:bold">=</span>pdfwrite -sOUTPUTFILE<span style="color:#000;font-weight:bold">=</span>final.pdf -dBATCH <span style="color:#008080">$str</span></code></pre></td></tr></table>
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic">#!/bin/sh
+</span></span></span><span style="display:flex;"><span><span style="color:#999;font-weight:bold;font-style:italic"></span><span style="color:#008080">str</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#008080">count</span><span style="color:#000;font-weight:bold">=</span>0;
+</span></span><span style="display:flex;"><span><span style="color:#008080">imgs</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">`</span>ls *.gif | sort -n | tr <span style="color:#d14">&#34; &#34;</span> <span style="color:#d14">&#34;|&#34;</span><span style="color:#d14">`</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">for</span> i in <span style="color:#008080">$imgs</span>; <span style="color:#000;font-weight:bold">do</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">i</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">${</span><span style="color:#008080">i</span>//<span style="color:#d14">&#39;|&#39;</span>/<span style="color:#d14">&#39; &#39;</span><span style="color:#d14">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">count</span><span style="color:#000;font-weight:bold">=</span><span style="color:#000;font-weight:bold">$((</span><span style="color:#008080">$count</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#099">1</span><span style="color:#000;font-weight:bold">))</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#008080">str</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;</span><span style="color:#008080">$str</span><span style="color:#d14"> </span><span style="color:#008080">$count</span><span style="color:#d14">.pdf&#34;</span>;
+</span></span><span style="display:flex;"><span>    convert -background white -alpha remove -alpha off <span style="color:#d14">&#34;</span><span style="color:#008080">$i</span><span style="color:#d14">&#34;</span> <span style="color:#d14">&#34;</span><span style="color:#008080">$i</span><span style="color:#d14">&#34;</span>
+</span></span><span style="display:flex;"><span>    mutool draw -F pdf -o <span style="color:#008080">$count</span>.pdf <span style="color:#d14">&#34;</span><span style="color:#008080">$i</span><span style="color:#d14">&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">done</span>
+</span></span><span style="display:flex;"><span>gs -q -dNOPAUSE -sDEVICE<span style="color:#000;font-weight:bold">=</span>pdfwrite -sOUTPUTFILE<span style="color:#000;font-weight:bold">=</span>final.pdf -dBATCH <span style="color:#008080">$str</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
 
