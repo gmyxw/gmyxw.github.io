@@ -1,0 +1,13 @@
+[Unit]
+Description=clash 
+After=network.target nss-lookup.target iptables.service ip6tables.service
+Wants=network.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/bin/clash -d /home/efun/.config/clash
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
