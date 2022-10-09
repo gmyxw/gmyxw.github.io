@@ -14,9 +14,9 @@
       
       <guid>https://sy123.netlify.app/2020/02/15/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</guid>
       <description>Visual Studio Code 提供了极大的弹性让我们自订想要的编辑器样式，端看使用者设定（User Setting）中，就超过 800 项设定可以让开发者自由调整，而且还有扩充套件能够增强 VS Code 的开发能力。
- 这篇主要是我个人偏好的设定，完整 setting.json 请参考 gist。
- 首先可以使用快速键 Ctrl +, 开启 settings.json 使用者设定档，或从选单列中点选档案 &amp;gt; 喜好设定 &amp;gt; 设定。
-Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一选择 Source Code Pro 连字符号字型可选择 FiraCode 或 Hasklig 择一使用(个人偏好 FiraCode) 设定值：&amp;quot;editor.fontFamily&amp;quot;: &amp;quot;&#39;Fira Code&#39;, &#39;Source Code Pro&#39;, Consolas, &#39;Microsoft JhengHei&#39;, &#39;Courier New&#39;, monospace&amp;quot;,  1 2 3 4 5 6 7 8 9  &amp;#34;editor.</description>
+这篇主要是我个人偏好的设定，完整 setting.json 请参考 gist。
+首先可以使用快速键 Ctrl +, 开启 settings.json 使用者设定档，或从选单列中点选档案 &amp;gt; 喜好设定 &amp;gt; 设定。
+Global 常用设定 editor 1 editor.fontFamily // 设定字型偏好 唯一选择 Source Code Pro 连字符号字型可选择 FiraCode 或 Hasklig 择一使用(个人偏好 FiraCode) 设定值：&amp;quot;editor.fontFamily&amp;quot;: &amp;quot;&#39;Fira Code&#39;, &#39;Source Code Pro&#39;, Consolas, &#39;Microsoft JhengHei&#39;, &#39;Courier New&#39;, monospace&amp;quot;, 1 2 3 4 5 6 7 8 9 &amp;#34;editor.fontLigatures&amp;#34;: true // 开启连字符号 // FiraCode 字型有提供连字符号的功能，例如 =&amp;gt; 会变成箭头符号 &amp;#34;editor.</description>
     </item>
     
   </channel>

@@ -14,8 +14,8 @@
       
       <guid>https://sy123.netlify.app/2020/05/14/exception-in-thread-main-java.lang.outofmemoryerror-java-heap-space/</guid>
       <description>今天用一个游戏资源批量解密程序出现错误提示：
-1  Exception in thread &amp;#34;main&amp;#34; java.lang.OutOfMemoryError: Java heap space: failed reallocation of scalar replaced objects   工具太多，直接设置一下环境变量就完事儿
-1 2  /mnt/win10/Users/zhili/Downloads 15s ❯ export _JAVA_OPTIONS=&amp;#34;-Xms512m -Xmx10G&amp;#34;   </description>
+1 Exception in thread &amp;#34;main&amp;#34; java.lang.OutOfMemoryError: Java heap space: failed reallocation of scalar replaced objects 工具太多，直接设置一下环境变量就完事儿
+1 2 /mnt/win10/Users/zhili/Downloads 15s ❯ export _JAVA_OPTIONS=&amp;#34;-Xms512m -Xmx10G&amp;#34; </description>
     </item>
     
     <item>
@@ -25,8 +25,8 @@
       
       <guid>https://sy123.netlify.app/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
-  Java default look   Java GTK+ look   How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
-1  export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34;   First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>
+Java default look Java GTK+ look How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
+1 export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34; First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>
     </item>
     
   </channel>

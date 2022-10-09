@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>polybar不显示Awesome字体 - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <h1><a href="https://sy123.netlify.app/">zhili</a></h1>
+  </div>
+  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>polybar不显示Awesome字体</h1>
+  </div>
+<div class="meta">
+  <div>2022-10-09 20:20</div>
+  </div>
+<div class="content">
+  <p>当配置好i3窗口后，使用polybar显示状态时，如果使用命令行启动polybar时，经常会提示</p>
+<p><code>Dropping unmatched character  (U+f02b)</code></p>
+<p>这样的错误。这时候就需要注意了，可能是没有安装Awesom字体所致。</p>
+<p>在Ubuntu下安装也很简单：</p>
+<p><code>sudo apt-get fonts-font-awesome</code></p>
+<p>这时候重启polybar,应该可以正常显示状态栏上的图标。</p>
+<p>如果这时还不成，可能就需要改改polybar配置里面的字体设置。要知道怎么使用字体设置，还需要执行一个指令：</p>
+<p><code>fc-list | grep awesome</code></p>
+<p>输出如下：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>/usr/share/fonts/opentype/font-awesome/FontAwesome.otf: FontAwesome:style<span style="color:#000;font-weight:bold">=</span>Regular
+</span></span><span style="display:flex;"><span>/usr/share/fonts/woff/fork-awesome/forkawesome-webfont.woff: forkawesome:style<span style="color:#000;font-weight:bold">=</span>Regular
+</span></span><span style="display:flex;"><span>/usr/share/fonts/truetype/fork-awesome/forkawesome-webfont.ttf: forkawesome:style<span style="color:#000;font-weight:bold">=</span>Regular
+</span></span><span style="display:flex;"><span>/usr/share/fonts/woff/fork-awesome/forkawesome-webfont.woff2: forkawesome:style<span style="color:#000;font-weight:bold">=</span>Regular
+</span></span><span style="display:flex;"><span>/usr/share/fonts/truetype/font-awesome/fontawesome-webfont.ttf: FontAwesome:style<span style="color:#000;font-weight:bold">=</span>Regular
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这时候，字体路径后面的比如 FontAwesome:style=Regular，这段文字，就是需要放到配置文件中的内容。</p>
+<p>修改完成后如下：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-toml" data-lang="toml"><span style="display:flex;"><span>font-0 = ttf-liberation-sans<span style="color:#a61717;background-color:#e3d2d2">:</span>fixed<span style="color:#a61717;background-color:#e3d2d2">:</span>pixelsize=<span style="color:#099">12</span><span style="color:#a61717;background-color:#e3d2d2">;</span><span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>font-1 = source han sans cn<span style="color:#a61717;background-color:#e3d2d2">:</span>pixelsize=<span style="color:#099">12</span><span style="color:#a61717;background-color:#e3d2d2">:</span>antialias=<span style="color:#000;font-weight:bold">false</span><span style="color:#a61717;background-color:#e3d2d2">;</span><span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>font-2 = <span style="color:#d14">&#34;Font Awesome 6 Free:style=Solid:pixelsize=12;1&#34;</span>
+</span></span><span style="display:flex;"><span>font-3 = <span style="color:#d14">&#34;Font Awesome 6 Brands:style=Regular:pixelsize=12;1&#34;</span>
+</span></span><span style="display:flex;"><span>font-4 = <span style="color:#d14">&#34;material icons:pixelsize=16;3&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我这次不显示图标的原因是升级导致的，Awesome5改成6就好了</p>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2020 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

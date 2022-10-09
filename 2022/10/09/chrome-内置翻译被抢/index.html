@@ -8,7 +8,7 @@
     ">
 <meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
 <meta name="referrer" content="always">
-<title>20220323 Archlinux PGP Signature - zhili</title>
+<title>Chrome 内置翻译被抢 - zhili</title>
 <link rel="stylesheet" type="text/css" href="/css/main.css">
 <link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
 </head>
@@ -22,46 +22,26 @@
 <main>
   <article>
     <div class="title">
-  <h1>20220323 Archlinux PGP Signature</h1>
+  <h1>Chrome 内置翻译被抢</h1>
   </div>
 <div class="meta">
-  <div>2022-03-23 05:29</div>
-  <div>
-    <span><a href="https://sy123.netlify.app/tags/linux/">#linux</a></span>
-      </div>
+  <div>2022-10-09 20:21</div>
   </div>
 <div class="content">
-  <h2 id="pacman安装软件包出现损坏">pacman安装软件包出现损坏</h2>
-<p>很久没用了arch了，更新一下出现了签名过期问题，记录下</p>
+  <p>linux下的<em>chrome</em>内置翻译也只能用系统代理，不过比较好解决，懒得折腾直接改<em>hosts</em>好了</p>
 <div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
 </span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
-</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>File .pkg.tar.xz is corrupted <span style="color:#000;font-weight:bold">(</span>invalid or corrupted package <span style="color:#000;font-weight:bold">(</span>PGP signature<span style="color:#000;font-weight:bold">))</span>.Do you want to delete it? <span style="color:#000;font-weight:bold">[</span>Y/n<span style="color:#000;font-weight:bold">]</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 更新已知的密钥 (没啥用甚至卡住)</span>
-</span></span><span style="display:flex;"><span>pacman-key --refresh-keys
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 其实先更新下就好了</span>
-</span></span><span style="display:flex;"><span>pacman -S archlinux-keyring
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>pacman -Syu
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>su
+</span></span><span style="display:flex;"><span><span style="color:#0086b3">echo</span> 180.163.151.34 translate.googleapis.com &gt;&gt; /etc/hosts
+</span></span><span style="display:flex;"><span>systemctl restart systemd-networkd
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="see-aslo">See aslo</h2>
-<ul>
-<li><a href="http://www.mamicode.com/info-detail-1674262.html">http://www.mamicode.com/info-detail-1674262.html</a></li>
-</ul>
-</div>
+</div></div>
 <div class="disqus">
   <div id="disqus_thread"></div>
 

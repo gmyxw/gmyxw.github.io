@@ -14,8 +14,8 @@
       
       <guid>https://sy123.netlify.app/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
       <description>GNU cp(1) has a backup option:
-1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
-1 2 3 4 5 6 7  --backup[=CONTROL]  make a backup of each existing destination file  -b like --backup but does not accept an argument  -S, --suffix=SUFFIX  override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
+1 cp --backup SOURCE [SOURCE...] [DESTINATION] This has the following effects which can be controlled with other options as described in the manual page of cp(1):
+1 2 3 4 5 6 7 --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
     </item>
     
     <item>
@@ -32,13 +32,16 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
 第二种是http代理,即通信方式为http而不是socket http://127.0.0.1:12333 详细举例:
 这里的客户端有两种方式,一个是socket通信,一个是http通信,两个方式对应的端口不同,在下文中不同代理方式设置的端口也不同. 实在不懂的记住:先把代理调试通,然后就直接打开switchyomega看看自己的设置,都是一样的
 方法一：（推荐使用） 为什么说这个方法推荐使用呢？因为他只作用于当前终端中，不会影响环境，而且命令比较简单 在终端中直接运行：
-1  export http_proxy=http://proxyAddress:port   如果你是SSR,并且走的http的代理端口是12333，想执行wget或者curl来下载国外的东西，可以使用如下命令：
-1  export http_proxy=http://127.0.0.1:12333   如果是https那么就经过如下命令：
-1  export https_proxy=http://127.0.0.1:12333   方法二 ： 这个办法的好处是把代理服务器永久保存了，下次就可以直接用了 把代理服务器地址写入shell配置文件.bashrc或者.zshrc 直接在.bashrc或者.zshrc添加下面内容
-1 2  export http_proxy=&amp;#34;http://localhost:port&amp;#34; export https_proxy=&amp;#34;http://localhost:port&amp;#34;   或者走socket5协议（ss,ssr）的话，代理端口是1080
-1 2  export http_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; export https_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34;   或者干脆直接设置ALL_PROXY
-1  export ALL_PROXY=socks5://127.0.0.1:1080   最后在执行如下命令应用设置
-1  source ~/.</description>
+1 export http_proxy=http://proxyAddress:port 如果你是SSR,并且走的http的代理端口是12333，想执行wget或者curl来下载国外的东西，可以使用如下命令：
+1 export http_proxy=http://127.0.0.1:12333 如果是https那么就经过如下命令：
+1 export https_proxy=http://127.0.0.1:12333 方法二 ： 这个办法的好处是把代理服务器永久保存了，下次就可以直接用了 把代理服务器地址写入shell配置文件.bashrc或者.zshrc 直接在.bashrc或者.zshrc添加下面内容
+1 2 export http_proxy=&amp;#34;http://localhost:port&amp;#34; export https_proxy=&amp;#34;http://localhost:port&amp;#34; 或者走socket5协议（ss,ssr）的话，代理端口是1080
+1 2 export http_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; export https_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; 或者干脆直接设置ALL_PROXY
+1 export ALL_PROXY=socks5://127.0.0.1:1080 最后在执行如下命令应用设置
+1 source ~/.bashrc 或者通过设置alias简写来简化操作，每次要用的时候输入setproxy，不用了就unsetproxy。
+1 alias setproxy=&amp;#34;export ALL_PROXY=socks5://127.0.0.1:1080&amp;#34; alias unsetproxy=&amp;#34;unset ALL_PROXY&amp;#34; 方法三: 改相应工具的配置，比如apt的配置
+1 sudo vim /etc/apt/apt.conf 在文件末尾加入下面这行
+Acquire::http::Proxy &amp;ldquo;http://proxyAddress:port&amp;rdquo; 重点来了！！如果说经常使用git对于其他方面都不是经常使用，可以直接配置git的命令。 使用ss/ssr来加快git的速度 直接输入这个命令就好了</description>
     </item>
     
   </channel>

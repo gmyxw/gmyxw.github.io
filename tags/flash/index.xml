@@ -14,7 +14,7 @@
       
       <guid>https://sy123.netlify.app/2020/03/04/browser-plugins/</guid>
       <description>Installation The package you will need to install depends on the browser you use.
- The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package.  </description>
+The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package. </description>
     </item>
     
   </channel>

@@ -14,8 +14,8 @@
       
       <guid>https://sy123.netlify.app/2020/02/28/encrypt-string-using-openssl/</guid>
       <description>Try this:
-1 2 3   echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt   Run
-1 2   openssl list-cipher-commands   to list all available ciphers.</description>
+1 2 3 echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt Run
+1 2 openssl list-cipher-commands to list all available ciphers.</description>
     </item>
     
   </channel>

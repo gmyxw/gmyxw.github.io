@@ -18,9 +18,9 @@
 利用 Diskpart 命令分区 当安装程序运行到创建磁盘分区界面时按下 Shift+F10 启动命令窗口。
 键入 Diskpart 进入 Diskpart 的命令环境，其提示符为 DISKPART&amp;gt;。
 在此提示下键入相应命令就可以进行分区操作，具体用到的命令有：
-1 2 3 4 5 6  Clean List Select Create Format Exit   这些命令的使用方法可以在 Diskpart 命令提示符下键入 Help 或者通过网络查询，如果不清楚可以查看。
+1 2 3 4 5 6 Clean List Select Create Format Exit 这些命令的使用方法可以在 Diskpart 命令提示符下键入 Help 或者通过网络查询，如果不清楚可以查看。
 使用 List Disk 命令显示的目标磁盘若为 1 号，则建立分区的步骤如下：以下是命令顺序及操作解释：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  List Disk：显示本机的所有磁盘，以便正确操作目标磁盘 Select Disk 1：选择 0 号磁盘 Clean ：清除 0 号磁盘上的所有分区 Create Partition Primary Size=512000 ：创建主分区，容量为：512000MB Active：激活主分区 Format Quick：快速格式化当前分区 Create Partition Extended：创建扩展分区 Create Partition Logical Size=512000：创建逻辑分区一，容量为：512000MB Format Quick：快速格式化当前分区 Create Partition Logical Size=512000：创建逻辑分区二，容量为：512000MB Format Quick ：快速格式化当前分区 Create Partition Logical ：创建逻辑分区三，大小为剩余的容量 Format Quick ：快速格式化当前分区 Exit ：退出Diskpart命令环境 Exit ：退出命令窗口   这里要注意的是 Diskpart 分区时，一定要选对目标磁盘，当前被选中的磁盘 / 分区前面会有 * 号标志，可以用 List Disk / Partition 来进行查看。</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 List Disk：显示本机的所有磁盘，以便正确操作目标磁盘 Select Disk 1：选择 0 号磁盘 Clean ：清除 0 号磁盘上的所有分区 Create Partition Primary Size=512000 ：创建主分区，容量为：512000MB Active：激活主分区 Format Quick：快速格式化当前分区 Create Partition Extended：创建扩展分区 Create Partition Logical Size=512000：创建逻辑分区一，容量为：512000MB Format Quick：快速格式化当前分区 Create Partition Logical Size=512000：创建逻辑分区二，容量为：512000MB Format Quick ：快速格式化当前分区 Create Partition Logical ：创建逻辑分区三，大小为剩余的容量 Format Quick ：快速格式化当前分区 Exit ：退出Diskpart命令环境 Exit ：退出命令窗口 这里要注意的是 Diskpart 分区时，一定要选对目标磁盘，当前被选中的磁盘 / 分区前面会有 * 号标志，可以用 List Disk / Partition 来进行查看。</description>
     </item>
     
   </channel>

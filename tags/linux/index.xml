@@ -14,7 +14,7 @@
       
       <guid>https://sy123.netlify.app/2022/03/23/20220323-archlinux-pgp-signature/</guid>
       <description>pacman安装软件包出现损坏 很久没用了arch了，更新一下出现了签名过期问题，记录下
-1 2 3 4 5 6 7 8 9  File .pkg.tar.xz is corrupted (invalid or corrupted package (PGP signature)).Do you want to delete it? [Y/n]  # 更新已知的密钥 (没啥用甚至卡住) pacman-key --refresh-keys  # 签名问题其实升级下就好了 pacman -S archlinux-keyring  pacman -Syu   See aslo  http://www.mamicode.com/info-detail-1674262.html  </description>
+1 2 3 4 5 6 7 8 9 File .pkg.tar.xz is corrupted (invalid or corrupted package (PGP signature)).Do you want to delete it? [Y/n] # 更新已知的密钥 (没啥用甚至卡住) pacman-key --refresh-keys # 其实先更新下就好了 pacman -S archlinux-keyring pacman -Syu See aslo http://www.mamicode.com/info-detail-1674262.html </description>
     </item>
     
     <item>
@@ -24,9 +24,9 @@
       
       <guid>https://sy123.netlify.app/2021/05/16/linux-%E8%A7%A3%E5%86%B3i3%E7%94%BB%E9%9D%A2%E6%92%95%E8%A3%82/</guid>
       <description>换了新显卡这么久才发现会画面撕裂，网上搜了下在v2看到有人提到关闭渲染器的硬件加速可以解决，试了下果然有效
-1  compton --backend xrender   彻底解决 顺藤摸瓜进去wiki查下了原因是i3的BUG，这么多年至今都未修复，之后还发现compton已经被重定向到Picom，估计已经没人维护了，我也要跑路了
-1  sudo pacman -S picom   我的compton配置是直接从别人仓库里git clone的有没有垂直同步不知道，反正picom是默认开启垂直同步，一劳永逸终于可以不用看不到烦人的裂缝
-See aslo  https://wiki.archlinux.org/title/Picom  </description>
+1 compton --backend xrender 彻底解决 顺藤摸瓜进去wiki查下了原因是i3的BUG，这么多年至今都未修复，之后还发现compton已经被重定向到Picom，估计已经没人维护了，我也要跑路了
+1 sudo pacman -S picom 我的compton配置是直接从别人仓库里git clone的有没有垂直同步不知道，反正picom是默认开启垂直同步，一劳永逸终于可以不用看不到烦人的裂缝
+See aslo https://wiki.archlinux.org/title/Picom </description>
     </item>
     
     <item>
@@ -37,9 +37,9 @@ See aslo  https://wiki.archlinux.org/title/Picom  </description>
       <guid>https://sy123.netlify.app/2020/11/25/archlinux-failed-to-commit-transaction-conflicting-file/</guid>
       <description>前言 今天我试着更新我的 Arch Linux 系统，然后遇到一个错误 error：failed to commit transaction (conflicting files) stfl：/usr/lib/libstfl.so.0 exists in filesystem。看起来是 pacman 无法更新一个已经存在于文件系统上的库 (/usr/lib/libstfl.so.0)。如果你也遇到了同样的问题，下面是一个快速解决方案。
 解决 用自带的命令覆盖，wiki上是推荐这种做法
-1  sudo pacman -Syu --overwrite /usr/lib/libstfl.so.0   暴力解决，直接解决出问题的文件，或者你也可以把重复的包备份一下防止意外，不过一般没啥意外，按照经验出这个问题的方式千奇百怪，反正就是更新出错了，比如你更新的时候换源之类的操作也会导致这样，直接删掉就完事
-1  sudo rm /usr/lib/libstfl.so.0   最后更新就完事
-1  sudo pacman -Syu   我选择第三种方法，直接删除该文件然后升级 Arch Linux 系统。很有效！
+1 sudo pacman -Syu --overwrite /usr/lib/libstfl.so.0 暴力解决，直接解决出问题的文件，或者你也可以把重复的包备份一下防止意外，不过一般没啥意外，按照经验出这个问题的方式千奇百怪，反正就是更新出错了，比如你更新的时候换源之类的操作也会导致这样，直接删掉就完事
+1 sudo rm /usr/lib/libstfl.so.0 最后更新就完事
+1 sudo pacman -Syu 我选择第三种方法，直接删除该文件然后升级 Arch Linux 系统。很有效！
 我用linux一直秉承着能偷懒就偷懒的原则，已经折腾不动了，鬼知道我年轻的时候到底经历了什么。
 希望本文对你有所帮助。还有更多好东西。敬请期待！
 See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transaction_(conflicting_files)%22_error</description>
@@ -52,7 +52,7 @@ See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transac
       
       <guid>https://sy123.netlify.app/2020/11/05/%E8%A7%A3%E5%86%B3host-key-verification-failed/</guid>
       <description>错误提示如下
-1 2 3 4 5 6 7 8 9 10 11 12 13 14  $ ssh root@108.61.163.242 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed. The fingerprint for the ECDSA key sent by the remote host is SHA256:HDjXJvu0VYXWF+SKMZjSGn4FQmg/+w6eV9ljJvIXpx0.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 $ ssh root@108.61.163.242 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed. The fingerprint for the ECDSA key sent by the remote host is SHA256:HDjXJvu0VYXWF+SKMZjSGn4FQmg/+w6eV9ljJvIXpx0.</description>
     </item>
     
     <item>
@@ -62,8 +62,8 @@ See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transac
       
       <guid>https://sy123.netlify.app/2020/06/22/linux-%E4%BD%BF%E7%94%A8usb%E5%A3%B0%E5%8D%A1/</guid>
       <description>前言 新买了耳机发现没声音，上网查了一下发现耳机自带了 usb 驱动，又又又开始了折腾之旅～
-解决声音问题 1 2 3 4 5 6 7 8 9  # 切换一下就完事 ~/site/blog ❯ asoundconf list Names of available sound cards: PCH Device  ~/site/blog ❯ asoundconf set-default-card 1   Polybar 报错 &amp;ldquo;error: Disabling module &amp;ldquo;alsa&amp;rdquo; (reason: Could not connect pulseaudio context.)&amp;rdquo; 音乐嗨了没多久才发现顶部工具栏调不了音量，查了下日志发现报错了，后来在 issues 上找到解决方法，搞定收工
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  ; ~/.</description>
+解决声音问题 1 2 3 4 5 6 7 8 9 # 切换一下就完事 ~/site/blog ❯ asoundconf list Names of available sound cards: PCH Device ~/site/blog ❯ asoundconf set-default-card 1 Polybar 报错 &amp;ldquo;error: Disabling module &amp;ldquo;alsa&amp;rdquo; (reason: Could not connect pulseaudio context.)&amp;rdquo; 音乐嗨了没多久才发现顶部工具栏调不了音量，查了下日志发现报错了，后来在 issues 上找到解决方法，搞定收工
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 ; ~/.</description>
     </item>
     
     <item>
@@ -73,8 +73,8 @@ See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transac
       
       <guid>https://sy123.netlify.app/2020/05/28/linux%E6%98%BE%E7%A4%BA%E5%BD%A9%E8%89%B2emoji%E8%A1%A8%E6%83%85/</guid>
       <description>前言 之前安装 noto-fonts-emoji 这个包后一直半彩色半黑白吊着，看着是真的不爽，实在太懒，今天在google意外看到很简单就解决了
-解决方法 01-emoji.conf 1 2 3 4 5 6 7 8 9 10  &amp;lt;?xml version=&amp;#39;1.0&amp;#39;?&amp;gt; &amp;lt;!DOCTYPE fontconfig SYSTEM &amp;#39;fonts.dtd&amp;#39;&amp;gt; &amp;lt;fontconfig&amp;gt; 	&amp;lt;match target=&amp;#34;pattern&amp;#34;&amp;gt; 	&amp;lt;edit name=&amp;#34;family&amp;#34; mode=&amp;#34;prepend&amp;#34;&amp;gt; 	&amp;lt;string&amp;gt;Noto Color Emoji&amp;lt;/string&amp;gt; 	&amp;lt;string&amp;gt;Noto Emoji&amp;lt;/string&amp;gt; 	&amp;lt;/edit&amp;gt; 	&amp;lt;/match&amp;gt; &amp;lt;/fontconfig&amp;gt;    1 2  cp 01-emoji.conf $HOME/.config/fontconfig/conf.d/ fc-cache -f -v   重启就能显示大部分了，不过还是有一些之前没法显示，emoji还是有问题，以后再研究了
-See also  https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkval/enable_noto_color_emoji_easily/  </description>
+解决方法 01-emoji.conf 1 2 3 4 5 6 7 8 9 10 &amp;lt;?xml version=&amp;#39;1.0&amp;#39;?&amp;gt; &amp;lt;!DOCTYPE fontconfig SYSTEM &amp;#39;fonts.dtd&amp;#39;&amp;gt; &amp;lt;fontconfig&amp;gt; &amp;lt;match target=&amp;#34;pattern&amp;#34;&amp;gt; &amp;lt;edit name=&amp;#34;family&amp;#34; mode=&amp;#34;prepend&amp;#34;&amp;gt; &amp;lt;string&amp;gt;Noto Color Emoji&amp;lt;/string&amp;gt; &amp;lt;string&amp;gt;Noto Emoji&amp;lt;/string&amp;gt; &amp;lt;/edit&amp;gt; &amp;lt;/match&amp;gt; &amp;lt;/fontconfig&amp;gt; 1 2 cp 01-emoji.conf $HOME/.config/fontconfig/conf.d/ fc-cache -f -v 重启就能显示大部分了，不过还是有一些之前没法显示，emoji还是有问题，以后再研究了
+See also https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkval/enable_noto_color_emoji_easily/ </description>
     </item>
     
     <item>
@@ -84,7 +84,7 @@ See also  https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkv
       
       <guid>https://sy123.netlify.app/file/android-env/</guid>
       <description>android-env.sh
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122  #!</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 #!</description>
     </item>
     
     <item>
@@ -93,7 +93,7 @@ See also  https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkv
       <pubDate>Sat, 16 May 2020 00:33:08 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/05/16/gtk%E5%BC%80%E5%90%AF%E9%BB%91%E6%9A%97%E6%A8%A1%E5%BC%8F/</guid>
-      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  # 安装黑暗主题 ~ ❯ sudo pacman -S gnome-themes-extra  ~ ❯ cat .gtkrc gtk-icon-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-font-name = &amp;#34;Cantarell 11&amp;#34;  ~ ❯ cat .config/gtk-3.0/settings.ini [Settings] gtk-icon-theme-name = Adwaita-dark gtk-theme-name = Adwaita-dark gtk-application-prefer-dark-theme = true gtk-font-name = Cantarell 11   See also https://wiki.archlinux.org/index.php/GTK</description>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # 安装黑暗主题 ~ ❯ sudo pacman -S gnome-themes-extra ~ ❯ cat .gtkrc gtk-icon-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-font-name = &amp;#34;Cantarell 11&amp;#34; ~ ❯ cat .config/gtk-3.0/settings.ini [Settings] gtk-icon-theme-name = Adwaita-dark gtk-theme-name = Adwaita-dark gtk-application-prefer-dark-theme = true gtk-font-name = Cantarell 11 See also https://wiki.archlinux.org/index.php/GTK</description>
     </item>
     
     <item>
@@ -104,7 +104,7 @@ See also  https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkv
       <guid>https://sy123.netlify.app/2020/05/12/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</guid>
       <description>UTC in Windows To dual boot with Windows it is recommended to configure Windows to use UTC, rather than Linux to use localtime. (Windows by default uses localtime [1].)
 It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry:
-1  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal   You can do this from an Administrator Command Prompt running:</description>
+1 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal You can do this from an Administrator Command Prompt running:</description>
     </item>
     
     <item>
@@ -114,7 +114,7 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       
       <guid>https://sy123.netlify.app/tip/numfmt%E8%AE%A9%E6%95%B0%E5%AD%97%E5%8F%98%E5%BE%97%E6%9B%B4%E5%AE%B9%E6%98%93%E7%90%86%E8%A7%A3/</guid>
       <description>像 =ls=, =df=, =du= 这类命令都带有一个选项可以将数字直接转换成人类容易阅读的形式来展现。 比如,直接执行 =df= 时，容量显示的是多少个块，而当用 =df -h= 时，容量会根据块的数量转换成 G/M/K 的形式。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25   [lujun9972@T520 ~]$ df  文件系统 1K-块 已用 可用 已用% 挂载点  dev 1900280 0 1900280 0% /dev  run 1906932 868 1906064 1% /run  /dev/sda2 41022688 23631300 15277852 61% /  tmpfs 1906932 26204 1880728 2% /dev/shm  tmpfs 1906932 0 1906932 0% /sys/fs/cgroup  tmpfs 1906932 5156 1901776 1% /tmp  /dev/sda3 73005440 61682676 7571272 90% /home  tmpfs 100 0 100 0% /var/lib/lxd/shmounts  tmpfs 100 0 100 0% /var/lib/lxd/devlxd  tmpfs 381384 8 381376 1% /run/user/1000   [lujun9972@T520 ~]$ df -h  文件系统 容量 已用 可用 已用% 挂载点  dev 1.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 [lujun9972@T520 ~]$ df 文件系统 1K-块 已用 可用 已用% 挂载点 dev 1900280 0 1900280 0% /dev run 1906932 868 1906064 1% /run /dev/sda2 41022688 23631300 15277852 61% / tmpfs 1906932 26204 1880728 2% /dev/shm tmpfs 1906932 0 1906932 0% /sys/fs/cgroup tmpfs 1906932 5156 1901776 1% /tmp /dev/sda3 73005440 61682676 7571272 90% /home tmpfs 100 0 100 0% /var/lib/lxd/shmounts tmpfs 100 0 100 0% /var/lib/lxd/devlxd tmpfs 381384 8 381376 1% /run/user/1000 [lujun9972@T520 ~]$ df -h 文件系统 容量 已用 可用 已用% 挂载点 dev 1.</description>
     </item>
     
     <item>
@@ -124,8 +124,8 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       
       <guid>https://sy123.netlify.app/2020/05/10/warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</guid>
       <description>From what I just found out, it may be unsafe. I was getting this same error
- *************************************************************** Found invalid GPT and valid MBR; converting MBR to GPT format in memory. THIS OPERATION IS POTENTIALLY DESTRUCTIVE! Exit by typing &amp;lsquo;q&amp;rsquo; if you don&amp;rsquo;t want to convert your MBR partitions to GPT format!
- Warning! Secondary partition table overlaps the last partition by 33 blocks! You will need to delete this partition or resize it in another utility.</description>
+*************************************************************** Found invalid GPT and valid MBR; converting MBR to GPT format in memory. THIS OPERATION IS POTENTIALLY DESTRUCTIVE! Exit by typing &amp;lsquo;q&amp;rsquo; if you don&amp;rsquo;t want to convert your MBR partitions to GPT format!
+Warning! Secondary partition table overlaps the last partition by 33 blocks! You will need to delete this partition or resize it in another utility.</description>
     </item>
     
     <item>
@@ -144,7 +144,7 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       
       <guid>https://sy123.netlify.app/2020/05/09/nvram-storage-in-libvirt/</guid>
       <description>NVRAM storage in libvirt Libvirt stores pflash/nvram files for privliged users in /var/lib/libvirt/qemu/nvram/ this is a copy of the template var file that is read only. OVMF uses these files to store information such as boot information. The template inforamtion was uesed to be configured in /etc/libvirt/qemu.conf but was moved to json files. [https://bugs.archlinux.org/task/64175]
- Location of master nvram file This configuration option is obsolete. Libvirt will follow the QEMU firmware metadata specification to automatically locate firmware images.</description>
+Location of master nvram file This configuration option is obsolete. Libvirt will follow the QEMU firmware metadata specification to automatically locate firmware images.</description>
     </item>
     
     <item>
@@ -156,9 +156,10 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       <description>exclude file Specifies which filenames or wildcarded names must be excluded from the operation.
 Multiple exclude switches are supported.
 Syntax
-1 2 3 4  -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt;  &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard}   See -i (Include) switch description for information about option parameters.
+1 2 3 4 -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt; &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard} See -i (Include) switch description for information about option parameters.
 Examples
-1  7z a -tzip archive.zip *.txt -x!temp.*   adds to the archive.zip all *.txt files, except temp.* files.</description>
+1 7z a -tzip archive.zip *.txt -x!temp.* adds to the archive.zip all *.txt files, except temp.* files.
+1 7z a archive.7z Folder1\ -xr!*.png adds to the archive.</description>
     </item>
     
     <item>
@@ -169,7 +170,7 @@ Examples
       <guid>https://sy123.netlify.app/2020/05/06/xf86openconsole-cannot-open-virtual-console/</guid>
       <description>I can start X only by root. If I am using startx using ordinary user I get the error:
 xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
-1 2 3 4 5  $ groups lp wheel games video audio optical storage scanner power users  $ ls -l /dev/tty1 crw-------- 1 root tty 4, 1 Jan 17 10:21 /dev/tty1   This might help someone. So I am going to post it.</description>
+1 2 3 4 5 $ groups lp wheel games video audio optical storage scanner power users $ ls -l /dev/tty1 crw-------- 1 root tty 4, 1 Jan 17 10:21 /dev/tty1 This might help someone. So I am going to post it. If your logged in as a different user and su to the user starting X.</description>
     </item>
     
     <item>
@@ -178,7 +179,7 @@ xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
       <pubDate>Sat, 25 Apr 2020 01:15:51 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/04/25/thunar-sftp.desktop/</guid>
-      <description>1 2 3 4 5 6  [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store   1  ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -f alsa -i hw:1,1,0 -f alsa -i hw:1,1,1 -filter_complex amerge output.mkv   </description>
+      <description> 1 2 3 4 5 6 [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store 1 ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -f alsa -i hw:1,1,0 -f alsa -i hw:1,1,1 -filter_complex amerge output.mkv </description>
     </item>
     
     <item>
@@ -187,8 +188,8 @@ xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
       <pubDate>Thu, 23 Apr 2020 00:02:33 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/04/23/problems-with-hardware-acceleration-environment-variables/</guid>
-      <description>问题 1 2 3 4  ~ ❯ vainfo libva error: /usr/lib/dri/iHD_drv_video.so init failed vaInitialize failed with error code 1 (operation failed),exit   解决方法 Everything works as it is supposed to by just adding:
-1 2 3 4  LIBVA_DRIVER_NAME=i965  # or if using the intel-media-driver which I prefer for newer hardware then it is: LIBVA_DRIVER_NAME=iHD   also for intel-media-driver you may want to read the readme and enable guc and huc.</description>
+      <description>问题 1 2 3 4 ~ ❯ vainfo libva error: /usr/lib/dri/iHD_drv_video.so init failed vaInitialize failed with error code 1 (operation failed),exit 解决方法 Everything works as it is supposed to by just adding:
+1 2 3 4 LIBVA_DRIVER_NAME=i965 # or if using the intel-media-driver which I prefer for newer hardware then it is: LIBVA_DRIVER_NAME=iHD also for intel-media-driver you may want to read the readme and enable guc and huc. I believe it just enables huc though but it uses guc to load huc if I have read correct info.</description>
     </item>
     
     <item>
@@ -198,7 +199,7 @@ xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
       
       <guid>https://sy123.netlify.app/2020/04/15/%E8%A7%A3%E5%86%B3error-the-certificate-of-github.com-is-not-trusted.%E9%97%AE%E9%A2%98/</guid>
       <description>今天早上有在GITHUB下载一个脚本到VPS中的时候有出现&amp;quot;ERROR: The certificate of `github.com’ is not trusted.&amp;ldquo;的错误提示。应该意思是这个证书可能不被信任，反正就这个提示，正式存在的，我换了其他有HTTPS网址也无法wget下载，应该是这个问题。
-解决办法 1 2 3 4 5 6  wget --no-check-certificate github.com  # 或者我们可以： apt-get install ca-certificates -y #Debian/Ubuntu  yum install ca-certificates -y #CentOS   安装完毕之后应该是可以不用 no-check-certificate 参数。</description>
+解决办法 1 2 3 4 5 6 wget --no-check-certificate github.com # 或者我们可以： apt-get install ca-certificates -y #Debian/Ubuntu yum install ca-certificates -y #CentOS 安装完毕之后应该是可以不用 no-check-certificate 参数。</description>
     </item>
     
     <item>
@@ -208,10 +209,10 @@ xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
       
       <guid>https://sy123.netlify.app/2020/04/13/linux-%E5%9B%BE%E7%89%87%E8%BD%ACpdf/</guid>
       <description>ImageMagick Just use this:
-1  convert &amp;#34;*.{png,jpeg}&amp;#34; -quality 100 outfile.pdf   In general case you can combine more files into one pdf file with including them inside {} and separate them with a single comma.
+1 convert &amp;#34;*.{png,jpeg}&amp;#34; -quality 100 outfile.pdf In general case you can combine more files into one pdf file with including them inside {} and separate them with a single comma.
 adding -quality VALUE to keep quality after conversion(thanks to @iamcreasy)
-1  convert &amp;#34;*.{ext1,ext2,ext3,...}&amp;#34; -quality 100 outfile.pdf   GhostScript gs
-1 2 3 4 5 6 7 8 9 10 11 12  #!</description>
+1 convert &amp;#34;*.{ext1,ext2,ext3,...}&amp;#34; -quality 100 outfile.pdf GhostScript gs
+1 2 3 4 5 6 7 8 9 10 11 12 #!/bin/sh str=&amp;#34;&amp;#34;; count=0; imgs=`ls *.gif | sort -n | tr &amp;#34; &amp;#34; &amp;#34;|&amp;#34;`; for i in $imgs; do i=${i//&amp;#39;|&amp;#39;/&amp;#39; &amp;#39;} count=$(($count + 1)); str=&amp;#34;$str $count.</description>
     </item>
     
     <item>
@@ -222,8 +223,8 @@ adding -quality VALUE to keep quality after conversion(thanks to @iamcreasy)
       <guid>https://sy123.netlify.app/2020/04/01/feh-open-svg/</guid>
       <description>Without the &amp;ndash;conversion-timeout part, I run into this error: feh: No Imlib2 loader for that file format
 As suggested in the Arch Linux Wiki, I open SVG images like this:
-1  feh --conversion-timeout 1 file.svg   This will create a &amp;ldquo;feh&amp;rdquo; theme, which will be loaded by default and which will automatically apply the conversion-timeout option.
-1  echo &amp;#34;feh --conversion-timeout 5&amp;#34; &amp;gt; ~/.config/feh/themes   </description>
+1 feh --conversion-timeout 1 file.svg This will create a &amp;ldquo;feh&amp;rdquo; theme, which will be loaded by default and which will automatically apply the conversion-timeout option.
+1 echo &amp;#34;feh --conversion-timeout 5&amp;#34; &amp;gt; ~/.config/feh/themes </description>
     </item>
     
     <item>
@@ -252,7 +253,7 @@ It appears that this service simply waits, doing absolutely nothing, until the n
       
       <guid>https://sy123.netlify.app/2020/03/24/linux-force-dhcp-client-to-renew-ip/</guid>
       <description>am using Ubuntu Linux. How to force Linux to reacquire a new IP address from the DHCP server? What is the command of Linux equivalent to Windows’s “ipconfig /renew” command?
- You need to use Dynamic Host Configuration Protocol Client i.e., dhclient command. The client normally doesn’t release the current lease as it is not required by the DHCP protocol. Some cable ISPs require their clients to notify the server if they wish to release an assigned IP address.</description>
+You need to use Dynamic Host Configuration Protocol Client i.e., dhclient command. The client normally doesn’t release the current lease as it is not required by the DHCP protocol. Some cable ISPs require their clients to notify the server if they wish to release an assigned IP address.</description>
     </item>
     
     <item>
@@ -263,10 +264,10 @@ It appears that this service simply waits, doing absolutely nothing, until the n
       <guid>https://sy123.netlify.app/2020/03/20/linux%E4%B8%AD%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</guid>
       <description>近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也不好一一指定。普通的 cp 命令并没有排除某个文件或文件夹的参数，比较丑陋点可以 cp -r 拷贝完目录之后再去删除无用的，但如果做批量脚本操作就不爽了，经过实际试验之后暂时找到两个比较好的方法。
 使用 rsync 进行拷贝 rsync 本来是文件同步备份的工具，相对于普通的 cp 命令，rsync 在控制方面就强多了，而且 rsync 对遍历目录也支持，有 &amp;ndash;exclude 参数可以忽略指定的文件或文件夹。
-1  rsync -vaP --exclude=&amp;#34;.*&amp;#34; --exclude=&amp;#34;Makefile&amp;#34; dir1 /home/dir2   如上面演示的就可以排除掉隐藏文件和 Makefile 文件，-a 参数已经包含遍历处理参数 -r。
+1 rsync -vaP --exclude=&amp;#34;.*&amp;#34; --exclude=&amp;#34;Makefile&amp;#34; dir1 /home/dir2 如上面演示的就可以排除掉隐藏文件和 Makefile 文件，-a 参数已经包含遍历处理参数 -r。
 使用 find 加 cpio 进行拷贝 备注：此方法来自 Advanced Bash-Scripting Guide，需要了解的童鞋自己去参考了。
 用过 find 的童鞋都知道，find 对文件的过滤那是非常强大的，配合 cpio 来进行目录的遍历拷贝就可以实现过滤指定的文件或文件夹，当然也可以做到只备份特定的文件或文件夹，你可以用 find 的各种过滤参数达到拷贝哪天的文件，拷贝近期更改的文件等特殊效果，而且 find 支持正则表达式，这种方式想比第一种使用 rsync 跳过文件的方式更加灵活，因此非常推荐使用此方式进行目录拷贝。
-1 2  cd dir1 find . -regextype posix-egrep -mindepth 1 ! -regex &amp;#39;./(dev|tmp)($|/.*)&amp;#39; !</description>
+1 2 cd dir1 find . -regextype posix-egrep -mindepth 1 ! -regex &amp;#39;./(dev|tmp)($|/.*)&amp;#39; ! -name Makefile -a !</description>
     </item>
     
     <item>
@@ -276,13 +277,13 @@ It appears that this service simply waits, doing absolutely nothing, until the n
       
       <guid>https://sy123.netlify.app/2020/03/12/rename%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
       <description>前言 以前一直用类似rename &amp;quot;s/_/-/&amp;quot; *这样的命令正则替换一些文件名，不过系统切换到Archlinux后用rename一直失败，用man看了下说明才发现并不支持正则，只能这样用，并且不能全局替换
-1  rename 123 456 *   其实几乎所有情况下, rename用不到正则表达式的. 你最多不过是通过正则确定要改名的文件列表而已. 这通过管道太容易了. 例如我在shell下, 会这样使用
-1  f &amp;#39;bak$&amp;#39; |x rename &amp;#39;.bak&amp;#39; &amp;#39;&amp;#39;   在管道之前, 可以通过各种方式搭配, 来生成所需的文件列表
+1 rename 123 456 * 其实几乎所有情况下, rename用不到正则表达式的. 你最多不过是通过正则确定要改名的文件列表而已. 这通过管道太容易了. 例如我在shell下, 会这样使用
+1 f &amp;#39;bak$&amp;#39; |x rename &amp;#39;.bak&amp;#39; &amp;#39;&amp;#39; 在管道之前, 可以通过各种方式搭配, 来生成所需的文件列表
 而rename也可以分多个步骤完成, man帮助中就有示例.
 原因 最近有空查了很多资料才发现很多发行版默认的rename是util-linux里很弱的那个rename，比如Archlinux
 解决方法 Archlinux可以装perl-rename这个包，命令就是perl-rename。Mac下可以用brew 安装rename。好久没用Ubuntu，记得以前Ubuntu 是prename 这个命令。
 其实不只是s命令，所有有效的perl命令都能用，文件名会作为$_ 传入，命令执行完后的$_作为新文件名。比如全部改成小写：
-1  rename &amp;#39;y/A-Z/a-z/&amp;#39; *   </description>
+1 rename &amp;#39;y/A-Z/a-z/&amp;#39; * </description>
     </item>
     
     <item>
@@ -292,7 +293,7 @@ It appears that this service simply waits, doing absolutely nothing, until the n
       
       <guid>https://sy123.netlify.app/2020/03/04/browser-plugins/</guid>
       <description>Installation The package you will need to install depends on the browser you use.
- The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package.  </description>
+The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package. </description>
     </item>
     
     <item>
@@ -302,8 +303,8 @@ It appears that this service simply waits, doing absolutely nothing, until the n
       
       <guid>https://sy123.netlify.app/2020/02/28/encrypt-string-using-openssl/</guid>
       <description>Try this:
-1 2 3   echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt   Run
-1 2   openssl list-cipher-commands   to list all available ciphers.</description>
+1 2 3 echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt Run
+1 2 openssl list-cipher-commands to list all available ciphers.</description>
     </item>
     
     <item>
@@ -313,8 +314,8 @@ It appears that this service simply waits, doing absolutely nothing, until the n
       
       <guid>https://sy123.netlify.app/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
       <description>GNU cp(1) has a backup option:
-1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
-1 2 3 4 5 6 7  --backup[=CONTROL]  make a backup of each existing destination file  -b like --backup but does not accept an argument  -S, --suffix=SUFFIX  override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
+1 cp --backup SOURCE [SOURCE...] [DESTINATION] This has the following effects which can be controlled with other options as described in the manual page of cp(1):
+1 2 3 4 5 6 7 --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
     </item>
     
     <item>
@@ -323,10 +324,11 @@ It appears that this service simply waits, doing absolutely nothing, until the n
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/24/android-studio-emulator-ugly-black-borders/</guid>
-      <description>Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
+      <description>
+Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.
 For making it floating, add this to your config Floating all windows with &amp;ldquo;android emulator&amp;rdquo; header:
-1  for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable   </description>
+1 for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     </item>
     
     <item>
@@ -367,7 +369,7 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quo
       
       <guid>https://sy123.netlify.app/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</guid>
       <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands.
-1 2 3 4 5 6 7 8 9 10  free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free   total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248  total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248   You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
+1 2 3 4 5 6 7 8 9 10 free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248 You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
     </item>
     
     <item>
@@ -378,18 +380,22 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quo
       <guid>https://sy123.netlify.app/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</guid>
       <description>systemd-analyze简介 systemd-analyze是Linux自带的分析系统启动性能的工具。
 systemd-analyze可使用的命令：
-  systemd-analyze [OPTIONS…] [time]
-  systemd-analyze [OPTIONS…] blame
-  systemd-analyze [OPTIONS…] critical-chain [UNIT…]
-  systemd-analyze [OPTIONS…] plot [&amp;gt; file.svg]
-  systemd-analyze [OPTIONS…] dot [PATTERN…] [&amp;gt; file.dot]
-  systemd-analyze [OPTIONS…] dump
-  systemd-analyze [OPTIONS…] set-log-level LEVEL
-  systemd-analyze [OPTIONS…] set-log-target TARGET
-  systemd-analyze [OPTIONS…] get-log-level
-  systemd-analyze [OPTIONS…] get-log-target
-  systemd-analyze [OPTIONS…] syscall-filter [SET…]
-  systemd-analyze [OPTIONS…] verify [FILES…]</description>
+systemd-analyze [OPTIONS…] [time]
+systemd-analyze [OPTIONS…] blame
+systemd-analyze [OPTIONS…] critical-chain [UNIT…]
+systemd-analyze [OPTIONS…] plot [&amp;gt; file.svg]
+systemd-analyze [OPTIONS…] dot [PATTERN…] [&amp;gt; file.dot]
+systemd-analyze [OPTIONS…] dump
+systemd-analyze [OPTIONS…] set-log-level LEVEL
+systemd-analyze [OPTIONS…] set-log-target TARGET
+systemd-analyze [OPTIONS…] get-log-level
+systemd-analyze [OPTIONS…] get-log-target
+systemd-analyze [OPTIONS…] syscall-filter [SET…]
+systemd-analyze [OPTIONS…] verify [FILES…]
+systemd-analyze命令具体含义：
+systemd-analyze 可以显示系统启动过程中的性能统计数据、 获取 systemd 系统管理器的状态与跟踪信息、 校验单元文件的正确性。
+systemd-analyze time 可以显示如下时间： (1)在启动第一个用户态进程(init)之前，内核运行了多长时间； (2)在切换进入实际的根文件系统之前，initrd(initial RAM disk)运行了多长时间； (3)进入实际的根文件系统之后，用户空间启动完成花了多长时间。 注意，上述时间只是简单的计算了系统启动过程中到达不同标记点的时间， 并没有计入各单元实际启动完成所花费的时间以及磁盘空闲的时间。
+systemd-analyze blame 按照每个单元花费的启动时间从多到少的顺序，列出所有当前正处于活动(active)状态的单元。 这些信息有助于用户优化系统启动速度。 不过需要注意的是，这些信息也可能具有误导性， 因为花费较长时间启动的单元，有可能只是在等待另一个依赖单元完成启动。 systemd-analyze critical-chain [UNIT…] 为指定的单元(省略参数表示默认启动目标单元)以树状形式显示时间关键链(time-critical chain)。 “@”后面的时刻表示该单元的启动时刻； “+”后面的时长表示该单元总计花了多长时间才完成启动。 不过需要注意的是， 这些信息也可能具有误导性， 因为花费较长时间启动的单元， 有可能只是在等待另一个依赖单元完成启动。</description>
     </item>
     
     <item>
@@ -407,12 +413,13 @@ systemd-analyze可使用的命令：
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
-      <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
+      <description>
+又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
 另见pacman。
-从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps    2020-04-20更新
- curl: (33) HTTP server doesn&amp;rsquo;t seem to support byte ranges. Cannot resume. 选择清空之前下载就可以
+从repos和AUR交互式搜索和安装包： 1 yay {{package_name|search_term}} 同步和更新repos和AUR中的所有包： 1 yay 仅同步和更新AUR包： 1 yay -Sua 从repos和AUR安装新包： 1 yay -S {{package_name}} 在包数据库中搜索repos和AUR中的关键字： 1 yay -Ss {{keyword}} 显示已安装包和系统运行状况的统计信息： 1 yay -Ps 2020-04-20更新
+curl: (33) HTTP server doesn&amp;rsquo;t seem to support byte ranges. Cannot resume. 选择清空之前下载就可以
 或者执行：
-1  rm -rf ~/.cache/yay/*   </description>
+1 rm -rf ~/.cache/yay/* </description>
     </item>
     
     <item>
@@ -424,10 +431,10 @@ systemd-analyze可使用的命令：
       <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关闭IPv6。 下面是IPv6的关闭方法应该适用于所有主流的Linux发行版包括Ubuntu、Debian、CentOS。
 IPv6在CentOS6.5系统中默认是启用状态，通过以下方式可以确认IPv6的状态
 1.1.查看系统IPv6的启用状态 以下命令返回值为0表示IPv6启用，1表示禁用
-1 2 3 4 5  cat /proc/sys/net/ipv6/conf/all/disable_ipv6 cat /proc/sys/net/ipv6/conf/default/disable_ipv6 ifconfig ip address list netstat -anptl   1.2.查看内核模块调用 有返回结果，说明IPv6模块已启用，可以看出那些程序进行了调用，反之没有启用
+1 2 3 4 5 cat /proc/sys/net/ipv6/conf/all/disable_ipv6 cat /proc/sys/net/ipv6/conf/default/disable_ipv6 ifconfig ip address list netstat -anptl 1.2.查看内核模块调用 有返回结果，说明IPv6模块已启用，可以看出那些程序进行了调用，反之没有启用
 lsmod | grep ipv6
 2.禁用IPv6 2.1.临时禁用IPv6 命令行调整内核参数，临时禁用IPv6
-1 2 3 4 5  echo 1 &amp;gt;/proc/sys/net/ipv6/conf/all/disable_ipv6 echo 1 &amp;gt;/proc/sys/net/ipv6/conf/default/disable_ipv6 # 或着 sysctl -w net.ipv6.conf.all.disable_ipv6=1 sysctl -w net.ipv6.conf.default.disable_ipv6=1   2.2.永久禁用IPv6 1 2 3 4 5 6 7 8  echo &amp;#34; &amp;#34;&amp;gt;&amp;gt;/etc/sysctl.conf echo &amp;#34;# made for disabled IPv6 in $(date +%F)&amp;#34;&amp;gt;&amp;gt;/etc/sysctl.</description>
+1 2 3 4 5 echo 1 &amp;gt;/proc/sys/net/ipv6/conf/all/disable_ipv6 echo 1 &amp;gt;/proc/sys/net/ipv6/conf/default/disable_ipv6 # 或着 sysctl -w net.ipv6.conf.all.disable_ipv6=1 sysctl -w net.ipv6.conf.default.disable_ipv6=1 2.2.永久禁用IPv6 1 2 3 4 5 6 7 8 echo &amp;#34; &amp;#34;&amp;gt;&amp;gt;/etc/sysctl.conf echo &amp;#34;# made for disabled IPv6 in $(date +%F)&amp;#34;&amp;gt;&amp;gt;/etc/sysctl.conf echo &amp;#39;net.</description>
     </item>
     
     <item>
@@ -438,10 +445,11 @@ lsmod | grep ipv6
       <guid>https://sy123.netlify.app/2020/01/26/linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</guid>
       <description>windows下格式化u盘很简单，要么直接右键格式化，要么进入硬盘分区去格式化。那么Linux下呢？ 其实Linux下格式化u盘也十分简单，只需要几条命令就可以了：
 查看磁盘情况 sudo fdisk -l 可以看到有一个/dev/sdb的磁盘就是我们插入的u盘了，大小为28.8GB，类型为NTFS。
-2. 删除分区 1 2 3 4 5 6  sudo fdisk /dev/sdb m # 获取帮助命令 d # 删除分区 n # 新建分区 p # 打印分区表 w # 写入分区表并退出   一定要记得最后的w命令。
+2. 删除分区 1 2 3 4 5 6 sudo fdisk /dev/sdb m # 获取帮助命令 d # 删除分区 n # 新建分区 p # 打印分区表 w # 写入分区表并退出 一定要记得最后的w命令。
 3. 格式化分区 格式化分区只需要使用mkfs.+（format）命令,例如格式化为fat格式，则在终端输入以下命令：
-1 2 3  sudo mkfs.vfat -L labelname /dev/sdb1 # -L命令是可选，为你的u盘重新命名 # 最后的/dev/sdb1一定要是设备名   在windows下，我们常用的格式是ntfs，但是Linux默认是不支持ntfs格式的，所以我们需要安装另一个包NTFS-3G：
-1 2  sudo pacman -S ntfs-3g sudo mkfs.ntfs -Q -L labelname /dev/sdb1   现在我们就将u盘格式化为ntfs格式了，可以轻松的在windows下使用了。</description>
+1 2 3 sudo mkfs.vfat -L labelname /dev/sdb1 # -L命令是可选，为你的u盘重新命名 # 最后的/dev/sdb1一定要是设备名 在windows下，我们常用的格式是ntfs，但是Linux默认是不支持ntfs格式的，所以我们需要安装另一个包NTFS-3G：
+1 2 sudo pacman -S ntfs-3g sudo mkfs.ntfs -Q -L labelname /dev/sdb1 现在我们就将u盘格式化为ntfs格式了，可以轻松的在windows下使用了。
+umount is too slow Are you using a 64-bit version of Linux with a lot of memory and the attached disk is a relatively slow one (any USB 2 will qualify)?</description>
     </item>
     
     <item>
@@ -451,8 +459,8 @@ lsmod | grep ipv6
       
       <guid>https://sy123.netlify.app/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
-  Java default look   Java GTK+ look   How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
-1  export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34;   First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>
+Java default look Java GTK+ look How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
+1 export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34; First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>
     </item>
     
     <item>
@@ -469,13 +477,16 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
 第二种是http代理,即通信方式为http而不是socket http://127.0.0.1:12333 详细举例:
 这里的客户端有两种方式,一个是socket通信,一个是http通信,两个方式对应的端口不同,在下文中不同代理方式设置的端口也不同. 实在不懂的记住:先把代理调试通,然后就直接打开switchyomega看看自己的设置,都是一样的
 方法一：（推荐使用） 为什么说这个方法推荐使用呢？因为他只作用于当前终端中，不会影响环境，而且命令比较简单 在终端中直接运行：
-1  export http_proxy=http://proxyAddress:port   如果你是SSR,并且走的http的代理端口是12333，想执行wget或者curl来下载国外的东西，可以使用如下命令：
-1  export http_proxy=http://127.0.0.1:12333   如果是https那么就经过如下命令：
-1  export https_proxy=http://127.0.0.1:12333   方法二 ： 这个办法的好处是把代理服务器永久保存了，下次就可以直接用了 把代理服务器地址写入shell配置文件.bashrc或者.zshrc 直接在.bashrc或者.zshrc添加下面内容
-1 2  export http_proxy=&amp;#34;http://localhost:port&amp;#34; export https_proxy=&amp;#34;http://localhost:port&amp;#34;   或者走socket5协议（ss,ssr）的话，代理端口是1080
-1 2  export http_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; export https_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34;   或者干脆直接设置ALL_PROXY
-1  export ALL_PROXY=socks5://127.0.0.1:1080   最后在执行如下命令应用设置
-1  source ~/.</description>
+1 export http_proxy=http://proxyAddress:port 如果你是SSR,并且走的http的代理端口是12333，想执行wget或者curl来下载国外的东西，可以使用如下命令：
+1 export http_proxy=http://127.0.0.1:12333 如果是https那么就经过如下命令：
+1 export https_proxy=http://127.0.0.1:12333 方法二 ： 这个办法的好处是把代理服务器永久保存了，下次就可以直接用了 把代理服务器地址写入shell配置文件.bashrc或者.zshrc 直接在.bashrc或者.zshrc添加下面内容
+1 2 export http_proxy=&amp;#34;http://localhost:port&amp;#34; export https_proxy=&amp;#34;http://localhost:port&amp;#34; 或者走socket5协议（ss,ssr）的话，代理端口是1080
+1 2 export http_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; export https_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; 或者干脆直接设置ALL_PROXY
+1 export ALL_PROXY=socks5://127.0.0.1:1080 最后在执行如下命令应用设置
+1 source ~/.bashrc 或者通过设置alias简写来简化操作，每次要用的时候输入setproxy，不用了就unsetproxy。
+1 alias setproxy=&amp;#34;export ALL_PROXY=socks5://127.0.0.1:1080&amp;#34; alias unsetproxy=&amp;#34;unset ALL_PROXY&amp;#34; 方法三: 改相应工具的配置，比如apt的配置
+1 sudo vim /etc/apt/apt.conf 在文件末尾加入下面这行
+Acquire::http::Proxy &amp;ldquo;http://proxyAddress:port&amp;rdquo; 重点来了！！如果说经常使用git对于其他方面都不是经常使用，可以直接配置git的命令。 使用ss/ssr来加快git的速度 直接输入这个命令就好了</description>
     </item>
     
   </channel>

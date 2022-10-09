@@ -13,7 +13,7 @@
       <pubDate>Mon, 10 Feb 2020 13:07:08 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/10/git-clone-%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF%E6%8B%89%E4%BB%A3%E7%A0%81/</guid>
-      <description>git clone 不指定分支 1  git clone http://10.1.1.11/service/tmall-service.git   git clone 指定分支 1  git clone -b dev_jk http://10.1.1.11/service/tmall-service.git   命令中：多了一个 -b dev-jk,这个dev_jk就是分支，http://10.1.1.11/service/tmall -service.git为源码的仓库地址</description>
+      <description>git clone 不指定分支 1 git clone http://10.1.1.11/service/tmall-service.git git clone 指定分支 1 git clone -b dev_jk http://10.1.1.11/service/tmall-service.git 命令中：多了一个 -b dev-jk,这个dev_jk就是分支，http://10.1.1.11/service/tmall -service.git为源码的仓库地址</description>
     </item>
     
     <item>
@@ -26,16 +26,22 @@
 安装git和配置就不说了。
 进入到等下要push的代码的目录文件夹，打开bash 请输入图片描述
 进入到等下要push的代码的目录文件夹，打开bash 请输入图片描述
-初始化 1   git init   初始化后在本地代码库会自动创建一个.git隐藏文件，这个就是本地代码库
-加载文件 1   git add .   . 是把文件夹里面的所有文件都加载进来
+初始化 1 git init 初始化后在本地代码库会自动创建一个.git隐藏文件，这个就是本地代码库
+加载文件 1 git add . . 是把文件夹里面的所有文件都加载进来
 还可以单个加载
-1   git add index.html,test.html   四：
-提交文件，创建时间点 1   git commit -m &amp;#34;init commit&amp;#34;   -m &amp;ldquo;这里的文件是注释&amp;rdquo;
+1 git add index.html,test.html 四：
+提交文件，创建时间点 1 git commit -m &amp;#34;init commit&amp;#34; -m &amp;ldquo;这里的文件是注释&amp;rdquo;
 创建之后可以随时回到这个时间点，可以看到有4个文件被修改了，47个插入，51个删除 请输入图片描述
 可以随时用
-1  git status   查看git的状态
+1 git status 查看git的状态
 推送代码 第一次推送的时候要添加远程的代码库到配置
-1  git remote add origin https://github.com/zhong635725959/droplook.git   origin可变，随自己喜欢</description>
+1 git remote add origin https://github.com/zhong635725959/droplook.git origin可变，随自己喜欢
+推送代码：
+1 git push origin master 拉取代码强制合并：
+1 git pull origin master --allow-unrelated-histories 然后会要求输入github的帐号和密码（不可见的） 请输入图片描述
+OK,成功
+解决向github提交代码是老要输入用户名密码
+元亨利贞o 0.723 2016.04.20 22:08:27 字数 524 阅读 18,138 我曾经切换过一次github账号, 似乎还更改过一次github账号的密码, 然后呢?</description>
     </item>
     
   </channel>

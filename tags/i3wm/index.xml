@@ -13,10 +13,11 @@
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/24/android-studio-emulator-ugly-black-borders/</guid>
-      <description>Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
+      <description>
+Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.
 For making it floating, add this to your config Floating all windows with &amp;ldquo;android emulator&amp;rdquo; header:
-1  for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable   </description>
+1 for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     </item>
     
   </channel>

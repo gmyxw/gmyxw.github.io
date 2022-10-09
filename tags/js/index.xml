@@ -22,18 +22,18 @@
 （1）取整，位运算更快。原因介绍：参考：位运算实现的原因
 位运算取整（更快）
 位运算取整：下述，都可以
-1 2 3  ~~a; //双非位操作符 a|0; 。。。   （2）四舍五入（0.5规定向上取整），位运算更快
+1 2 3 ~~a; //双非位操作符 a|0; 。。。 （2）四舍五入（0.5规定向上取整），位运算更快
 位运算的四舍五入，负数不适配
 位运算适合正数的四舍五入，但是负数只能舍，不能入。
-1 2 3  a+0.5|0; ~~(a+0.5); 。。。   （3）内置值 undefined
+1 2 3 a+0.5|0; ~~(a+0.5); 。。。 （3）内置值 undefined
 undefined替代
-1 2  void 0; // 快 0[0]; // 略慢   （4）内置值 Infinity
+1 2 void 0; // 快 0[0]; // 略慢 （4）内置值 Infinity
 Infinity替代
 1/0; （5）布尔值短写法
 布尔值短写法
 !0; // true !1; //false （6）十进制指数（想当初，刚学c的时候，我一直都用pow(10,n)） 10000000000 === 1e10
 （7）三元运算符 ? : 还用于简化函数的调用。
-function x() { console.</description>
+function x() { console.log(&amp;lsquo;x&amp;rsquo;) }; function y() { console.log(&amp;lsquo;y&amp;rsquo;) }; let z = 3; 简化前：</description>
     </item>
     
     <item>
@@ -43,7 +43,7 @@ function x() { console.</description>
       
       <guid>https://sy123.netlify.app/2020/02/27/react%E5%85%B3%E4%BA%8Eform%E7%9A%84%E5%8F%96%E9%83%A8%E5%88%86%E5%AD%97%E6%AE%B5%E6%95%B0%E6%8D%AE/</guid>
       <description>获取查询条件的值 validateFields form.validateFields / validateFieldsAndScroll 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件
-获取表单的所有数据 1 2 3 4 5 6 7 8   this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; {   if(err){  return;  }  console.log(&amp;#39;_values&amp;#39;, values); });   获取表单的部分字段数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26   this.props.form.validateFieldsAndScroll([`timeUnit${num}`, `Time${num}`,`deviceTypeId${num}`], (err, values) =&amp;gt; {  if(err){  return;  }  console.</description>
+获取表单的所有数据 1 2 3 4 5 6 7 8 this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; { if(err){ return; } console.log(&amp;#39;_values&amp;#39;, values); }); 获取表单的部分字段数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 this.props.form.validateFieldsAndScroll([`timeUnit${num}`, `Time${num}`,`deviceTypeId${num}`], (err, values) =&amp;gt; { if(err){ return; } console.log(&amp;#39;_values&amp;#39;, values); let t1,t2; if(values[`Time${num}`] === undefined){ t1= undefined; t2= undefined; }else{ t1= values[`Time${num}`][0].</description>
     </item>
     
     <item>
@@ -53,7 +53,7 @@ function x() { console.</description>
       
       <guid>https://sy123.netlify.app/2020/02/27/tippy_warning/</guid>
       <description>I have the folowing part of code:
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  private rootRef = React.createRef&amp;lt;HTMLDivElement&amp;gt;();  const target = (  &amp;lt;div&amp;gt;  &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl&amp;#39; /&amp;gt;  &amp;lt;/div&amp;gt; );  return (  &amp;lt;React.Fragment&amp;gt;  {React.cloneElement(target, {  ref: this.rootRef,  onMouseOver: this.handleMouseOver,  onMouseLeave: this.handleMouseLeave,  })}  {open &amp;amp;&amp;amp; this.renderTooltip()}  &amp;lt;/React.Fragment&amp;gt;  );   When target with div element (or any other instead of div) everything is ok, but when target is:</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 private rootRef = React.createRef&amp;lt;HTMLDivElement&amp;gt;(); const target = ( &amp;lt;div&amp;gt; &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl&amp;#39; /&amp;gt; &amp;lt;/div&amp;gt; ); return ( &amp;lt;React.Fragment&amp;gt; {React.cloneElement(target, { ref: this.rootRef, onMouseOver: this.handleMouseOver, onMouseLeave: this.handleMouseLeave, })} {open &amp;amp;&amp;amp; this.renderTooltip()} &amp;lt;/React.Fragment&amp;gt; ); When target with div element (or any other instead of div) everything is ok, but when target is:</description>
     </item>
     
     <item>
@@ -72,8 +72,8 @@ function x() { console.</description>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/15/saga-deprecated-%E8%AD%A6%E5%91%8A/</guid>
-      <description>What happens? 1  [...effects] has been deprecated in favor of all([...effects]), please update your code   it does not effect dva.js, its redux saga api update, you just need to do this
-1 2 3 4 5  effects: {  * query(action, {call, put, all}) {  yield all([])  } }   Redux saga apis:</description>
+      <description>What happens? 1 [...effects] has been deprecated in favor of all([...effects]), please update your code it does not effect dva.js, its redux saga api update, you just need to do this
+1 2 3 4 5 effects: { * query(action, {call, put, all}) { yield all([]) } } Redux saga apis:</description>
     </item>
     
     <item>
@@ -83,8 +83,8 @@ function x() { console.</description>
       
       <guid>https://sy123.netlify.app/2020/02/10/umi-ui-bug-using-react-document-title/</guid>
       <description>背景 React 项目使用umi时发报：
- Uncaught Invariant Violation: React.Children.only expected to receive a single React element child. The above error occurred in the  component ui socket init CloseEvent {type: &amp;ldquo;close&amp;rdquo;, bubbles: false, cancelable: false, timeStamp: 1571127775342, wasClean: false, …}
- 异常代码 1 2 3 4 5  &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt;  {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt;   DocumentTitle组件内部最外层只能接受一个元素，而代码中有多个元素，所以报错。
+Uncaught Invariant Violation: React.Children.only expected to receive a single React element child. The above error occurred in the component ui socket init CloseEvent {type: &amp;ldquo;close&amp;rdquo;, bubbles: false, cancelable: false, timeStamp: 1571127775342, wasClean: false, …}
+异常代码 1 2 3 4 5 &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt; {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt; DocumentTitle组件内部最外层只能接受一个元素，而代码中有多个元素，所以报错。
 解决方案 用&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;或者&amp;lt;&amp;gt;&amp;lt;/&amp;gt;在外部包裹后就OK，不再报错，页面可正常显示。</description>
     </item>
     
@@ -95,7 +95,7 @@ function x() { console.</description>
       
       <guid>https://sy123.netlify.app/2020/02/09/programmatically_navigate_using_react_router/</guid>
       <description>React Router v5.1.0 with hooks There is a new useHistory hook in React Router &amp;gt;5.1.0 if you are using React &amp;gt;16.8.0 and functional components.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  import { useHistory } from &amp;#34;react-router-dom&amp;#34;;  function HomeButton() {  const history = useHistory();   function handleClick() {  history.push(&amp;#34;/home&amp;#34;);  }   return (  &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt;  Go home  &amp;lt;/button&amp;gt;  ); }   React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 import { useHistory } from &amp;#34;react-router-dom&amp;#34;; function HomeButton() { const history = useHistory(); function handleClick() { history.push(&amp;#34;/home&amp;#34;); } return ( &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt; Go home &amp;lt;/button&amp;gt; ); } React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</description>
     </item>
     
     <item>
@@ -104,7 +104,7 @@ function x() { console.</description>
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/06/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</guid>
-      <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7  npm config get registry # 查看npm当前镜像源  npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像  yarn config get registry # 查看yarn当前镜像源  yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像   镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
+      <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7 npm config get registry # 查看npm当前镜像源 npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像 yarn config get registry # 查看yarn当前镜像源 yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像 镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
     </item>
     
   </channel>

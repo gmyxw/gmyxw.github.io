@@ -6,7 +6,37 @@
     <description>Recent content in Posts on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
     <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Wed, 23 Mar 2022 05:29:30 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 09 Oct 2022 20:21:45 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chrome 内置翻译被抢</title>
+      <link>https://sy123.netlify.app/2022/10/09/chrome-%E5%86%85%E7%BD%AE%E7%BF%BB%E8%AF%91%E8%A2%AB%E6%8A%A2/</link>
+      <pubDate>Sun, 09 Oct 2022 20:21:45 +0800</pubDate>
+      
+      <guid>https://sy123.netlify.app/2022/10/09/chrome-%E5%86%85%E7%BD%AE%E7%BF%BB%E8%AF%91%E8%A2%AB%E6%8A%A2/</guid>
+      <description>linux下的chrome内置翻译也只能用系统代理，不过比较好解决，懒得折腾直接改hosts好了
+1 2 3 su echo 180.163.151.34 translate.googleapis.com &amp;gt;&amp;gt; /etc/hosts systemctl restart systemd-networkd </description>
+    </item>
+    
+    <item>
+      <title>polybar不显示Awesome字体</title>
+      <link>https://sy123.netlify.app/2022/10/09/polybar%E4%B8%8D%E6%98%BE%E7%A4%BAawesome%E5%AD%97%E4%BD%93/</link>
+      <pubDate>Sun, 09 Oct 2022 20:20:26 +0800</pubDate>
+      
+      <guid>https://sy123.netlify.app/2022/10/09/polybar%E4%B8%8D%E6%98%BE%E7%A4%BAawesome%E5%AD%97%E4%BD%93/</guid>
+      <description>当配置好i3窗口后，使用polybar显示状态时，如果使用命令行启动polybar时，经常会提示
+Dropping unmatched character  (U+f02b)
+这样的错误。这时候就需要注意了，可能是没有安装Awesom字体所致。
+在Ubuntu下安装也很简单：
+sudo apt-get fonts-font-awesome
+这时候重启polybar,应该可以正常显示状态栏上的图标。
+如果这时还不成，可能就需要改改polybar配置里面的字体设置。要知道怎么使用字体设置，还需要执行一个指令：
+fc-list | grep awesome
+输出如下：
+1 2 3 4 5 /usr/share/fonts/opentype/font-awesome/FontAwesome.otf: FontAwesome:style=Regular /usr/share/fonts/woff/fork-awesome/forkawesome-webfont.woff: forkawesome:style=Regular /usr/share/fonts/truetype/fork-awesome/forkawesome-webfont.ttf: forkawesome:style=Regular /usr/share/fonts/woff/fork-awesome/forkawesome-webfont.woff2: forkawesome:style=Regular /usr/share/fonts/truetype/font-awesome/fontawesome-webfont.ttf: FontAwesome:style=Regular 这时候，字体路径后面的比如 FontAwesome:style=Regular，这段文字，就是需要放到配置文件中的内容。
+修改完成后如下：
+1 2 3 4 5 font-0 = ttf-liberation-sans:fixed:pixelsize=12;1 font-1 = source han sans cn:pixelsize=12:antialias=false;1 font-2 = &amp;#34;Font Awesome 6 Free:style=Solid:pixelsize=12;1&amp;#34; font-3 = &amp;#34;Font Awesome 6 Brands:style=Regular:pixelsize=12;1&amp;#34; font-4 = &amp;#34;material icons:pixelsize=16;3&amp;#34; 我这次不显示图标的原因是升级导致的，Awesome5改成6就好了</description>
+    </item>
+    
     <item>
       <title>20220323 Archlinux PGP Signature</title>
       <link>https://sy123.netlify.app/2022/03/23/20220323-archlinux-pgp-signature/</link>
@@ -14,7 +44,7 @@
       
       <guid>https://sy123.netlify.app/2022/03/23/20220323-archlinux-pgp-signature/</guid>
       <description>pacman安装软件包出现损坏 很久没用了arch了，更新一下出现了签名过期问题，记录下
-1 2 3 4 5 6 7 8 9  File .pkg.tar.xz is corrupted (invalid or corrupted package (PGP signature)).Do you want to delete it? [Y/n]  # 更新已知的密钥 (没啥用甚至卡住) pacman-key --refresh-keys  # 签名问题其实升级下就好了 pacman -S archlinux-keyring  pacman -Syu   See aslo  http://www.mamicode.com/info-detail-1674262.html  </description>
+1 2 3 4 5 6 7 8 9 File .pkg.tar.xz is corrupted (invalid or corrupted package (PGP signature)).Do you want to delete it? [Y/n] # 更新已知的密钥 (没啥用甚至卡住) pacman-key --refresh-keys # 其实先更新下就好了 pacman -S archlinux-keyring pacman -Syu See aslo http://www.mamicode.com/info-detail-1674262.html </description>
     </item>
     
     <item>
@@ -24,9 +54,9 @@
       
       <guid>https://sy123.netlify.app/2021/05/16/linux-%E8%A7%A3%E5%86%B3i3%E7%94%BB%E9%9D%A2%E6%92%95%E8%A3%82/</guid>
       <description>换了新显卡这么久才发现会画面撕裂，网上搜了下在v2看到有人提到关闭渲染器的硬件加速可以解决，试了下果然有效
-1  compton --backend xrender   彻底解决 顺藤摸瓜进去wiki查下了原因是i3的BUG，这么多年至今都未修复，之后还发现compton已经被重定向到Picom，估计已经没人维护了，我也要跑路了
-1  sudo pacman -S picom   我的compton配置是直接从别人仓库里git clone的有没有垂直同步不知道，反正picom是默认开启垂直同步，一劳永逸终于可以不用看不到烦人的裂缝
-See aslo  https://wiki.archlinux.org/title/Picom  </description>
+1 compton --backend xrender 彻底解决 顺藤摸瓜进去wiki查下了原因是i3的BUG，这么多年至今都未修复，之后还发现compton已经被重定向到Picom，估计已经没人维护了，我也要跑路了
+1 sudo pacman -S picom 我的compton配置是直接从别人仓库里git clone的有没有垂直同步不知道，反正picom是默认开启垂直同步，一劳永逸终于可以不用看不到烦人的裂缝
+See aslo https://wiki.archlinux.org/title/Picom </description>
     </item>
     
     <item>
@@ -37,9 +67,9 @@ See aslo  https://wiki.archlinux.org/title/Picom  </description>
       <guid>https://sy123.netlify.app/2020/11/25/archlinux-failed-to-commit-transaction-conflicting-file/</guid>
       <description>前言 今天我试着更新我的 Arch Linux 系统，然后遇到一个错误 error：failed to commit transaction (conflicting files) stfl：/usr/lib/libstfl.so.0 exists in filesystem。看起来是 pacman 无法更新一个已经存在于文件系统上的库 (/usr/lib/libstfl.so.0)。如果你也遇到了同样的问题，下面是一个快速解决方案。
 解决 用自带的命令覆盖，wiki上是推荐这种做法
-1  sudo pacman -Syu --overwrite /usr/lib/libstfl.so.0   暴力解决，直接解决出问题的文件，或者你也可以把重复的包备份一下防止意外，不过一般没啥意外，按照经验出这个问题的方式千奇百怪，反正就是更新出错了，比如你更新的时候换源之类的操作也会导致这样，直接删掉就完事
-1  sudo rm /usr/lib/libstfl.so.0   最后更新就完事
-1  sudo pacman -Syu   我选择第三种方法，直接删除该文件然后升级 Arch Linux 系统。很有效！
+1 sudo pacman -Syu --overwrite /usr/lib/libstfl.so.0 暴力解决，直接解决出问题的文件，或者你也可以把重复的包备份一下防止意外，不过一般没啥意外，按照经验出这个问题的方式千奇百怪，反正就是更新出错了，比如你更新的时候换源之类的操作也会导致这样，直接删掉就完事
+1 sudo rm /usr/lib/libstfl.so.0 最后更新就完事
+1 sudo pacman -Syu 我选择第三种方法，直接删除该文件然后升级 Arch Linux 系统。很有效！
 我用linux一直秉承着能偷懒就偷懒的原则，已经折腾不动了，鬼知道我年轻的时候到底经历了什么。
 希望本文对你有所帮助。还有更多好东西。敬请期待！
 See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transaction_(conflicting_files)%22_error</description>
@@ -63,7 +93,7 @@ See also https://issuetracker.unity3d.com/issues/android-il2cpp-empty-project-cr
       <guid>https://sy123.netlify.app/2020/11/09/%E8%A7%A3%E5%86%B3%E6%B5%8F%E8%A7%88%E5%99%A8%E4%BB%A5%E5%8F%8A%E6%89%8B%E6%9C%BA%E5%AF%BC%E5%85%A5%E8%AF%81%E4%B9%A6%E5%A4%B1%E8%B4%A5/</guid>
       <description>前言 最近又在搞某游戏，懒得跟程序员斗智斗勇了，直接来抓包一劳永逸，不过chrome导入自签证书失败了，网上查了下现在只支持PKCS12证书
 make a p12 file 为了将.crt和.key正确导入Chrome的nssdb数据库，建议将客户端证书+私钥转换为PKCS12证书，例如：
-1  openssl pkcs12 -export -inkey ./sample.key -in ./sample.crt -out ./sample.p12   为其提供所需的任何导出密码，请写下来，因为稍后导入时将需要它。
+1 openssl pkcs12 -export -inkey ./sample.key -in ./sample.crt -out ./sample.p12 为其提供所需的任何导出密码，请写下来，因为稍后导入时将需要它。
 之后你就可以导入sample.p12。</description>
     </item>
     
@@ -74,7 +104,7 @@ make a p12 file 为了将.crt和.key正确导入Chrome的nssdb数据库，建议
       
       <guid>https://sy123.netlify.app/2020/11/05/%E8%A7%A3%E5%86%B3host-key-verification-failed/</guid>
       <description>错误提示如下
-1 2 3 4 5 6 7 8 9 10 11 12 13 14  $ ssh root@108.61.163.242 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed. The fingerprint for the ECDSA key sent by the remote host is SHA256:HDjXJvu0VYXWF+SKMZjSGn4FQmg/+w6eV9ljJvIXpx0.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 $ ssh root@108.61.163.242 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed. The fingerprint for the ECDSA key sent by the remote host is SHA256:HDjXJvu0VYXWF+SKMZjSGn4FQmg/+w6eV9ljJvIXpx0.</description>
     </item>
     
     <item>
@@ -85,7 +115,7 @@ make a p12 file 为了将.crt和.key正确导入Chrome的nssdb数据库，建议
       <guid>https://sy123.netlify.app/2020/08/05/%E8%A7%A3%E5%86%B3linux%E4%B8%8B%E9%BC%A0%E6%A0%87%E7%A7%BB%E5%8A%A8%E9%80%9F%E5%BA%A6%E5%A4%AA%E5%BF%AB%E7%9A%84%E9%97%AE%E9%A2%98libinput/</guid>
       <description>环境：Mint Xfce 19 x64 我平时使用的鼠标移动速度比较慢，而且鼠标加速从来不开。一般1000-1200DPI最适合我。Mint下鼠标疯狂起飞，手腕一抖鼠标指针飞过半个屏幕让我很是头疼。而xfce设置里的鼠标速度似乎完全没有作用，Google后我发现这其实是历史的锅，以前X11是用xset管理输入设备的，现在变成了xinput。而xfce的设置还是去修改xset的配置文件。
 既然如此，那我们只能来手动研究一下xinput怎么改鼠标速度了。
-1 2 3 4 5 6 7 8 9  $ xinput -list # 可以查看到所有输入设备，我的部分输出如下：  ⎡ Virtual core pointer id=2 [master pointer (3)] ⎜ ↳ Virtual core XTEST pointer id=4 [slave pointer (2)] ⎜ ↳ SynPS/2 Synaptics TouchPad id=15 [slave pointer (2)] ⎜ ↳ PixArt USB Optical Mouse id=11 [slave pointer (2)] ⎣ Virtual core keyboard id=3 [master keyboard (2)]  ↳ Virtual core XTEST keyboard id=5 [slave keyboard (3)]   可以看到，USB鼠标id为11，接下来再去查看USB鼠标的详细信息：</description>
+1 2 3 4 5 6 7 8 9 $ xinput -list # 可以查看到所有输入设备，我的部分输出如下： ⎡ Virtual core pointer id=2 [master pointer (3)] ⎜ ↳ Virtual core XTEST pointer id=4 [slave pointer (2)] ⎜ ↳ SynPS/2 Synaptics TouchPad id=15 [slave pointer (2)] ⎜ ↳ PixArt USB Optical Mouse id=11 [slave pointer (2)] ⎣ Virtual core keyboard id=3 [master keyboard (2)] ↳ Virtual core XTEST keyboard id=5 [slave keyboard (3)] 可以看到，USB鼠标id为11，接下来再去查看USB鼠标的详细信息：</description>
     </item>
     
     <item>
@@ -100,13 +130,13 @@ make a p12 file 为了将.crt和.key正确导入Chrome的nssdb数据库，建议
 于是万能的github上找到了proxychains。
 A hook preloader that allows to redirect TCP traffic of existing dynamically linked programs through one or more SOCKS or HTTP proxies 它强制给定程序发起的TCP连接通过事先配置的代理。可以涵盖所有需要代理的情景。就以git为例，没有proxychains的话，就必须为每个协议（https, git, ssh）按照git文档的要求分别设置代理，过程复杂且不稳定。有了proxychains，这些完全可以不用管，当然应用场景不限于git，任何一个需要代理的命令行程序都是一样在运行的指令前面加proxychains完事。
 Arch安装很容易：
-1  yay -S proxychains-ng   安装之后，打开/etc/proxychains.conf，注释掉下面这行（disable远程DNS解析，有DNS污染风险）。
+1 yay -S proxychains-ng 安装之后，打开/etc/proxychains.conf，注释掉下面这行（disable远程DNS解析，有DNS污染风险）。
 proxy_dns 最后添加如下行：
-1  socks5 127.0.0.1 32997   上面这个代理是我自己机器上跑了某著名软件，用于每日科学上网。
+1 socks5 127.0.0.1 32997 上面这个代理是我自己机器上跑了某著名软件，用于每日科学上网。
 我平时是同时push到Bioconductor和github上的，所以我不会跑完一个git push再跑一个，而是写在Makefile里，自动化这个过程，我只需要make push指令就OK。
 所以此处我用的指令是：
-1  proxychains make push   这样就加了代理。
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47  $ proxychains make push #### #### 实际的指令，有两条，分别push到两个服务器 #### [proxychains] config file found: /etc/proxychains.</description>
+1 proxychains make push 这样就加了代理。
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 $ proxychains make push #### #### 实际的指令，有两条，分别push到两个服务器 #### [proxychains] config file found: /etc/proxychains.</description>
     </item>
     
     <item>
@@ -116,8 +146,8 @@ proxy_dns 最后添加如下行：
       
       <guid>https://sy123.netlify.app/2020/06/22/linux-%E4%BD%BF%E7%94%A8usb%E5%A3%B0%E5%8D%A1/</guid>
       <description>前言 新买了耳机发现没声音，上网查了一下发现耳机自带了 usb 驱动，又又又开始了折腾之旅～
-解决声音问题 1 2 3 4 5 6 7 8 9  # 切换一下就完事 ~/site/blog ❯ asoundconf list Names of available sound cards: PCH Device  ~/site/blog ❯ asoundconf set-default-card 1   Polybar 报错 &amp;ldquo;error: Disabling module &amp;ldquo;alsa&amp;rdquo; (reason: Could not connect pulseaudio context.)&amp;rdquo; 音乐嗨了没多久才发现顶部工具栏调不了音量，查了下日志发现报错了，后来在 issues 上找到解决方法，搞定收工
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24  ; ~/.</description>
+解决声音问题 1 2 3 4 5 6 7 8 9 # 切换一下就完事 ~/site/blog ❯ asoundconf list Names of available sound cards: PCH Device ~/site/blog ❯ asoundconf set-default-card 1 Polybar 报错 &amp;ldquo;error: Disabling module &amp;ldquo;alsa&amp;rdquo; (reason: Could not connect pulseaudio context.)&amp;rdquo; 音乐嗨了没多久才发现顶部工具栏调不了音量，查了下日志发现报错了，后来在 issues 上找到解决方法，搞定收工
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 ; ~/.</description>
     </item>
     
     <item>
@@ -127,8 +157,8 @@ proxy_dns 最后添加如下行：
       
       <guid>https://sy123.netlify.app/2020/05/28/linux%E6%98%BE%E7%A4%BA%E5%BD%A9%E8%89%B2emoji%E8%A1%A8%E6%83%85/</guid>
       <description>前言 之前安装 noto-fonts-emoji 这个包后一直半彩色半黑白吊着，看着是真的不爽，实在太懒，今天在google意外看到很简单就解决了
-解决方法 01-emoji.conf 1 2 3 4 5 6 7 8 9 10  &amp;lt;?xml version=&amp;#39;1.0&amp;#39;?&amp;gt; &amp;lt;!DOCTYPE fontconfig SYSTEM &amp;#39;fonts.dtd&amp;#39;&amp;gt; &amp;lt;fontconfig&amp;gt; 	&amp;lt;match target=&amp;#34;pattern&amp;#34;&amp;gt; 	&amp;lt;edit name=&amp;#34;family&amp;#34; mode=&amp;#34;prepend&amp;#34;&amp;gt; 	&amp;lt;string&amp;gt;Noto Color Emoji&amp;lt;/string&amp;gt; 	&amp;lt;string&amp;gt;Noto Emoji&amp;lt;/string&amp;gt; 	&amp;lt;/edit&amp;gt; 	&amp;lt;/match&amp;gt; &amp;lt;/fontconfig&amp;gt;    1 2  cp 01-emoji.conf $HOME/.config/fontconfig/conf.d/ fc-cache -f -v   重启就能显示大部分了，不过还是有一些之前没法显示，emoji还是有问题，以后再研究了
-See also  https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkval/enable_noto_color_emoji_easily/  </description>
+解决方法 01-emoji.conf 1 2 3 4 5 6 7 8 9 10 &amp;lt;?xml version=&amp;#39;1.0&amp;#39;?&amp;gt; &amp;lt;!DOCTYPE fontconfig SYSTEM &amp;#39;fonts.dtd&amp;#39;&amp;gt; &amp;lt;fontconfig&amp;gt; &amp;lt;match target=&amp;#34;pattern&amp;#34;&amp;gt; &amp;lt;edit name=&amp;#34;family&amp;#34; mode=&amp;#34;prepend&amp;#34;&amp;gt; &amp;lt;string&amp;gt;Noto Color Emoji&amp;lt;/string&amp;gt; &amp;lt;string&amp;gt;Noto Emoji&amp;lt;/string&amp;gt; &amp;lt;/edit&amp;gt; &amp;lt;/match&amp;gt; &amp;lt;/fontconfig&amp;gt; 1 2 cp 01-emoji.conf $HOME/.config/fontconfig/conf.d/ fc-cache -f -v 重启就能显示大部分了，不过还是有一些之前没法显示，emoji还是有问题，以后再研究了
+See also https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkval/enable_noto_color_emoji_easily/ </description>
     </item>
     
     <item>
@@ -180,7 +210,7 @@ Intent类型 显式Intent Intent可以分为显式Intent和隐式Intent。平时
       <pubDate>Sat, 16 May 2020 00:33:08 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/05/16/gtk%E5%BC%80%E5%90%AF%E9%BB%91%E6%9A%97%E6%A8%A1%E5%BC%8F/</guid>
-      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  # 安装黑暗主题 ~ ❯ sudo pacman -S gnome-themes-extra  ~ ❯ cat .gtkrc gtk-icon-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-font-name = &amp;#34;Cantarell 11&amp;#34;  ~ ❯ cat .config/gtk-3.0/settings.ini [Settings] gtk-icon-theme-name = Adwaita-dark gtk-theme-name = Adwaita-dark gtk-application-prefer-dark-theme = true gtk-font-name = Cantarell 11   See also https://wiki.archlinux.org/index.php/GTK</description>
+      <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # 安装黑暗主题 ~ ❯ sudo pacman -S gnome-themes-extra ~ ❯ cat .gtkrc gtk-icon-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-font-name = &amp;#34;Cantarell 11&amp;#34; ~ ❯ cat .config/gtk-3.0/settings.ini [Settings] gtk-icon-theme-name = Adwaita-dark gtk-theme-name = Adwaita-dark gtk-application-prefer-dark-theme = true gtk-font-name = Cantarell 11 See also https://wiki.archlinux.org/index.php/GTK</description>
     </item>
     
     <item>
@@ -203,8 +233,8 @@ Android Studio 3.6.3 In version 3.6.3 File -&amp;gt; Settings -&amp;gt; Appearan
       
       <guid>https://sy123.netlify.app/2020/05/14/exception-in-thread-main-java.lang.outofmemoryerror-java-heap-space/</guid>
       <description>今天用一个游戏资源批量解密程序出现错误提示：
-1  Exception in thread &amp;#34;main&amp;#34; java.lang.OutOfMemoryError: Java heap space: failed reallocation of scalar replaced objects   工具太多，直接设置一下环境变量就完事儿
-1 2  /mnt/win10/Users/zhili/Downloads 15s ❯ export _JAVA_OPTIONS=&amp;#34;-Xms512m -Xmx10G&amp;#34;   </description>
+1 Exception in thread &amp;#34;main&amp;#34; java.lang.OutOfMemoryError: Java heap space: failed reallocation of scalar replaced objects 工具太多，直接设置一下环境变量就完事儿
+1 2 /mnt/win10/Users/zhili/Downloads 15s ❯ export _JAVA_OPTIONS=&amp;#34;-Xms512m -Xmx10G&amp;#34; </description>
     </item>
     
     <item>
@@ -215,7 +245,7 @@ Android Studio 3.6.3 In version 3.6.3 File -&amp;gt; Settings -&amp;gt; Appearan
       <guid>https://sy123.netlify.app/2020/05/12/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</guid>
       <description>UTC in Windows To dual boot with Windows it is recommended to configure Windows to use UTC, rather than Linux to use localtime. (Windows by default uses localtime [1].)
 It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry:
-1  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal   You can do this from an Administrator Command Prompt running:</description>
+1 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal You can do this from an Administrator Command Prompt running:</description>
     </item>
     
     <item>
@@ -225,8 +255,8 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       
       <guid>https://sy123.netlify.app/2020/05/12/%E5%88%A0%E9%99%A4kvm%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%87%BA%E7%8E%B0cannot-undefine-domain-with-nvram/</guid>
       <description>KVM 报错以及处理 删除kvm虚拟机出现cannot undefine domain with nvram 删除Kvm虚拟时，需要先destroy，然后在undefine某台虚拟机，但是在删除其中一台虚拟机时出现以下错误：
-1 2 3  me@ubuntu:~/virtual_machine$ virsh undefine ubuntu_2 error: Failed to undefine domain ubuntu_2 error: Requested operation is not valid: cannot undefine domain with nvram   这个时候可以使用**&amp;ndash;nvram**选项删除， 搜遍全网，并没有找到解决办法，这个最好使。
-1 2  me@ubuntu:~/virtual_machine$ virsh undefine ubuntu_2 --nvram Domain ubuntu_2 has been undefined   KVM挂载硬盘容量显示不正确 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25  #创建了一个disk文件， 用于给7号VM添加100G的新硬盘 sudo qemu-img create -f qcow2 ubuntu_vm7_disk_100G 100G #挂载这个文件到sdb，sdb需要是虚机上未使用的名字 virsh attach-disk ubuntu_7 /var/lib/libvirt/images/ubuntu_vm7_disk_100G vdb --cache none #提示挂载成功，但是进入虚机查看硬盘设备，看到设备，但是容量明显不对，194k只是文件的大小，虚机里面应该看到100G才对 me@ubuntu7:~$ lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sr0 11:0 1 1024M 0 rom vda 252:0 0 50G 0 disk ├─vda1 252:1 0 512M 0 part /boot/efi └─vda2 252:2 0 49.</description>
+1 2 3 me@ubuntu:~/virtual_machine$ virsh undefine ubuntu_2 error: Failed to undefine domain ubuntu_2 error: Requested operation is not valid: cannot undefine domain with nvram 这个时候可以使用**&amp;ndash;nvram**选项删除， 搜遍全网，并没有找到解决办法，这个最好使。
+1 2 me@ubuntu:~/virtual_machine$ virsh undefine ubuntu_2 --nvram Domain ubuntu_2 has been undefined KVM挂载硬盘容量显示不正确 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 #创建了一个disk文件， 用于给7号VM添加100G的新硬盘 sudo qemu-img create -f qcow2 ubuntu_vm7_disk_100G 100G #挂载这个文件到sdb，sdb需要是虚机上未使用的名字 virsh attach-disk ubuntu_7 /var/lib/libvirt/images/ubuntu_vm7_disk_100G vdb --cache none #提示挂载成功，但是进入虚机查看硬盘设备，看到设备，但是容量明显不对，194k只是文件的大小，虚机里面应该看到100G才对 me@ubuntu7:~$ lsblk NAME MAJ:MIN RM SIZE RO TYPE MOUNTPOINT sr0 11:0 1 1024M 0 rom vda 252:0 0 50G 0 disk ├─vda1 252:1 0 512M 0 part /boot/efi └─vda2 252:2 0 49.</description>
     </item>
     
     <item>
@@ -236,8 +266,8 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       
       <guid>https://sy123.netlify.app/2020/05/10/warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</guid>
       <description>From what I just found out, it may be unsafe. I was getting this same error
- *************************************************************** Found invalid GPT and valid MBR; converting MBR to GPT format in memory. THIS OPERATION IS POTENTIALLY DESTRUCTIVE! Exit by typing &amp;lsquo;q&amp;rsquo; if you don&amp;rsquo;t want to convert your MBR partitions to GPT format!
- Warning! Secondary partition table overlaps the last partition by 33 blocks! You will need to delete this partition or resize it in another utility.</description>
+*************************************************************** Found invalid GPT and valid MBR; converting MBR to GPT format in memory. THIS OPERATION IS POTENTIALLY DESTRUCTIVE! Exit by typing &amp;lsquo;q&amp;rsquo; if you don&amp;rsquo;t want to convert your MBR partitions to GPT format!
+Warning! Secondary partition table overlaps the last partition by 33 blocks! You will need to delete this partition or resize it in another utility.</description>
     </item>
     
     <item>
@@ -256,7 +286,7 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       
       <guid>https://sy123.netlify.app/2020/05/10/kodbox-always-https/</guid>
       <description>很久不用kodexplorer，一堆BUG不修在搞to B商务弄出个kodbox，很久没用PHP出问题我也懒得研究，直接暴力解决问题就完事，以后再找替代品
-1 2 3 4 5 6 7 8 9 10  --- web.function.php 2020-05-10 13:20:20.472730147 +0800 +++ web.function.new.php 2020-05-10 13:20:09.862832878 +0800 @@ -59,6 +59,7 @@  }   function http_type(){ + return &amp;#39;https&amp;#39;;  if( (isset($_SERVER[&amp;#39;HTTPS&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTPS&amp;#39;] !== &amp;#39;off&amp;#39;) ||  (isset($_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;] == &amp;#39;https&amp;#39;) ||  $_SERVER[&amp;#39;SERVER_PORT&amp;#39;] === 443   用了一分钟后我发现还是kodexplorer好使，最后一个版本好像是4.40，且用且珍惜</description>
+1 2 3 4 5 6 7 8 9 10 --- web.function.php 2020-05-10 13:20:20.472730147 +0800 +++ web.function.new.php 2020-05-10 13:20:09.862832878 +0800 @@ -59,6 +59,7 @@ } function http_type(){ + return &amp;#39;https&amp;#39;; if( (isset($_SERVER[&amp;#39;HTTPS&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTPS&amp;#39;] !== &amp;#39;off&amp;#39;) || (isset($_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;]) &amp;amp;&amp;amp; $_SERVER[&amp;#39;HTTP_X_FORWARDED_PROTO&amp;#39;] == &amp;#39;https&amp;#39;) || $_SERVER[&amp;#39;SERVER_PORT&amp;#39;] === 443 用了一分钟后我发现还是kodexplorer好使，最后一个版本好像是4.40，且用且珍惜</description>
     </item>
     
     <item>
@@ -266,7 +296,7 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       
       <guid>https://sy123.netlify.app/2020/05/09/nvram-storage-in-libvirt/</guid>
       <description>NVRAM storage in libvirt Libvirt stores pflash/nvram files for privliged users in /var/lib/libvirt/qemu/nvram/ this is a copy of the template var file that is read only. OVMF uses these files to store information such as boot information. The template inforamtion was uesed to be configured in /etc/libvirt/qemu.conf but was moved to json files. [https://bugs.archlinux.org/task/64175]
- Location of master nvram file This configuration option is obsolete. Libvirt will follow the QEMU firmware metadata specification to automatically locate firmware images.</description>
+Location of master nvram file This configuration option is obsolete. Libvirt will follow the QEMU firmware metadata specification to automatically locate firmware images.</description>
     </item>
     
     <item>
@@ -277,7 +307,7 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       <guid>https://sy123.netlify.app/2020/05/06/xf86openconsole-cannot-open-virtual-console/</guid>
       <description>I can start X only by root. If I am using startx using ordinary user I get the error:
 xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
-1 2 3 4 5  $ groups lp wheel games video audio optical storage scanner power users  $ ls -l /dev/tty1 crw-------- 1 root tty 4, 1 Jan 17 10:21 /dev/tty1   This might help someone. So I am going to post it.</description>
+1 2 3 4 5 $ groups lp wheel games video audio optical storage scanner power users $ ls -l /dev/tty1 crw-------- 1 root tty 4, 1 Jan 17 10:21 /dev/tty1 This might help someone. So I am going to post it. If your logged in as a different user and su to the user starting X.</description>
     </item>
     
     <item>
@@ -288,15 +318,15 @@ xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
       <guid>https://sy123.netlify.app/2020/05/05/%E5%AE%89%E8%A3%85win10%E6%8F%90%E7%A4%BA%E6%88%91%E4%BB%AC%E6%97%A0%E6%B3%95%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E5%88%86%E5%8C%BA%E4%B9%9F%E6%89%BE%E4%B8%8D%E5%88%B0%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%88%86%E5%8C%BA/</guid>
       <description>前言 系统搬来linux有两年了，今天突然发现还是需要win10用ida的，虚拟机很不方便
 虚拟机解决方法 google一下在知乎想起原因:
- 原因似乎在于windows会执着地把系统分区（大概类似于/boot）放到磁盘0（类似于/dev/sda？）上面。而这个时候磁盘0是U盘……于是傻X了……windows就是傻X解决方法，拔U盘/硬盘，从而使想装系统的盘成为磁盘0……或者直接把想装系统的盘做成安装盘，这样它也是磁盘0了&amp;gt;_&amp;laquo;https://link.zhihu.com/?target=http%3A//jingyan.baidu.com/article/2c8c281df6f2d60009252a7c.html&amp;gt;
+原因似乎在于windows会执着地把系统分区（大概类似于/boot）放到磁盘0（类似于/dev/sda？）上面。而这个时候磁盘0是U盘……于是傻X了……windows就是傻X解决方法，拔U盘/硬盘，从而使想装系统的盘成为磁盘0……或者直接把想装系统的盘做成安装盘，这样它也是磁盘0了&amp;gt;_&amp;laquo;https://link.zhihu.com/?target=http%3A//jingyan.baidu.com/article/2c8c281df6f2d60009252a7c.html&amp;gt;
 作者：杨微粒 链接：https://www.zhihu.com/question/21117479/answer/86745809 来源：知乎 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
- 所以解决方案就是我们来帮助系统找到它需要安装的分区，我的虚拟机之前忘记干啥也是双系统出这问题，附加win10磁盘就完事
+所以解决方案就是我们来帮助系统找到它需要安装的分区，我的虚拟机之前忘记干啥也是双系统出这问题，附加win10磁盘就完事
 硬解决 将多余的硬盘拆下来，只留安装的硬盘，（这里不区分机械和固态），就是只留一个硬盘安装系统即可！
 （动手能力弱的朋友请看下面！）
 软解决 在linux下直接复制安装镜像里的 boot sources bootmgr bootmgr.efi
 uefi还需要复制 EFI 文件夹到efi文件夹到efi分区，
 重启安装即可
-安装过程提示help setup cannot continue due to a corrupted 1 2 3 4 5 6 7 8  # 直接擦写一下这块硬盘 dd if=/dev/zero of=/dev/vdb  # fdisk 重新分区 fdisk /dev/vdb  # 格式化 mkfs.ntfs /dev/vdb1   </description>
+安装过程提示help setup cannot continue due to a corrupted 1 2 3 4 5 6 7 8 # 直接擦写一下这块硬盘 dd if=/dev/zero of=/dev/vdb # fdisk 重新分区 fdisk /dev/vdb # 格式化 mkfs.ntfs /dev/vdb1 </description>
     </item>
     
     <item>
@@ -305,7 +335,7 @@ uefi还需要复制 EFI 文件夹到efi文件夹到efi分区，
       <pubDate>Sat, 25 Apr 2020 01:15:51 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/04/25/thunar-sftp.desktop/</guid>
-      <description>1 2 3 4 5 6  [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store   1  ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -f alsa -i hw:1,1,0 -f alsa -i hw:1,1,1 -filter_complex amerge output.mkv   </description>
+      <description> 1 2 3 4 5 6 [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store 1 ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -f alsa -i hw:1,1,0 -f alsa -i hw:1,1,1 -filter_complex amerge output.mkv </description>
     </item>
     
     <item>
@@ -314,8 +344,8 @@ uefi还需要复制 EFI 文件夹到efi文件夹到efi分区，
       <pubDate>Thu, 23 Apr 2020 00:02:33 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/04/23/problems-with-hardware-acceleration-environment-variables/</guid>
-      <description>问题 1 2 3 4  ~ ❯ vainfo libva error: /usr/lib/dri/iHD_drv_video.so init failed vaInitialize failed with error code 1 (operation failed),exit   解决方法 Everything works as it is supposed to by just adding:
-1 2 3 4  LIBVA_DRIVER_NAME=i965  # or if using the intel-media-driver which I prefer for newer hardware then it is: LIBVA_DRIVER_NAME=iHD   also for intel-media-driver you may want to read the readme and enable guc and huc.</description>
+      <description>问题 1 2 3 4 ~ ❯ vainfo libva error: /usr/lib/dri/iHD_drv_video.so init failed vaInitialize failed with error code 1 (operation failed),exit 解决方法 Everything works as it is supposed to by just adding:
+1 2 3 4 LIBVA_DRIVER_NAME=i965 # or if using the intel-media-driver which I prefer for newer hardware then it is: LIBVA_DRIVER_NAME=iHD also for intel-media-driver you may want to read the readme and enable guc and huc. I believe it just enables huc though but it uses guc to load huc if I have read correct info.</description>
     </item>
     
     <item>
@@ -327,9 +357,9 @@ uefi还需要复制 EFI 文件夹到efi文件夹到efi分区，
       <description>the VS Code debugger console doesn&amp;rsquo;t currently support piping any input through to stdin.
 FYI, you can tell the Code debugger to use an external console in the launch config:
 &amp;quot;externalConsole&amp;quot;: true It has a possible workaround, using remote debug + vscode task, but that is not trivial.
- It has a possible workaround, using remote debug + vscode task, but that is not trivial.
+It has a possible workaround, using remote debug + vscode task, but that is not trivial.
 launch.json
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17  {  // Use IntelliSense to learn about possible attributes.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 { // Use IntelliSense to learn about possible attributes.</description>
     </item>
     
     <item>
@@ -339,7 +369,7 @@ launch.json
       
       <guid>https://sy123.netlify.app/2020/04/15/%E8%A7%A3%E5%86%B3error-the-certificate-of-github.com-is-not-trusted.%E9%97%AE%E9%A2%98/</guid>
       <description>今天早上有在GITHUB下载一个脚本到VPS中的时候有出现&amp;quot;ERROR: The certificate of `github.com’ is not trusted.&amp;ldquo;的错误提示。应该意思是这个证书可能不被信任，反正就这个提示，正式存在的，我换了其他有HTTPS网址也无法wget下载，应该是这个问题。
-解决办法 1 2 3 4 5 6  wget --no-check-certificate github.com  # 或者我们可以： apt-get install ca-certificates -y #Debian/Ubuntu  yum install ca-certificates -y #CentOS   安装完毕之后应该是可以不用 no-check-certificate 参数。</description>
+解决办法 1 2 3 4 5 6 wget --no-check-certificate github.com # 或者我们可以： apt-get install ca-certificates -y #Debian/Ubuntu yum install ca-certificates -y #CentOS 安装完毕之后应该是可以不用 no-check-certificate 参数。</description>
     </item>
     
     <item>
@@ -349,10 +379,10 @@ launch.json
       
       <guid>https://sy123.netlify.app/2020/04/13/linux-%E5%9B%BE%E7%89%87%E8%BD%ACpdf/</guid>
       <description>ImageMagick Just use this:
-1  convert &amp;#34;*.{png,jpeg}&amp;#34; -quality 100 outfile.pdf   In general case you can combine more files into one pdf file with including them inside {} and separate them with a single comma.
+1 convert &amp;#34;*.{png,jpeg}&amp;#34; -quality 100 outfile.pdf In general case you can combine more files into one pdf file with including them inside {} and separate them with a single comma.
 adding -quality VALUE to keep quality after conversion(thanks to @iamcreasy)
-1  convert &amp;#34;*.{ext1,ext2,ext3,...}&amp;#34; -quality 100 outfile.pdf   GhostScript gs
-1 2 3 4 5 6 7 8 9 10 11 12  #!</description>
+1 convert &amp;#34;*.{ext1,ext2,ext3,...}&amp;#34; -quality 100 outfile.pdf GhostScript gs
+1 2 3 4 5 6 7 8 9 10 11 12 #!/bin/sh str=&amp;#34;&amp;#34;; count=0; imgs=`ls *.gif | sort -n | tr &amp;#34; &amp;#34; &amp;#34;|&amp;#34;`; for i in $imgs; do i=${i//&amp;#39;|&amp;#39;/&amp;#39; &amp;#39;} count=$(($count + 1)); str=&amp;#34;$str $count.</description>
     </item>
     
     <item>
@@ -363,8 +393,8 @@ adding -quality VALUE to keep quality after conversion(thanks to @iamcreasy)
       <guid>https://sy123.netlify.app/2020/04/01/feh-open-svg/</guid>
       <description>Without the &amp;ndash;conversion-timeout part, I run into this error: feh: No Imlib2 loader for that file format
 As suggested in the Arch Linux Wiki, I open SVG images like this:
-1  feh --conversion-timeout 1 file.svg   This will create a &amp;ldquo;feh&amp;rdquo; theme, which will be loaded by default and which will automatically apply the conversion-timeout option.
-1  echo &amp;#34;feh --conversion-timeout 5&amp;#34; &amp;gt; ~/.config/feh/themes   </description>
+1 feh --conversion-timeout 1 file.svg This will create a &amp;ldquo;feh&amp;rdquo; theme, which will be loaded by default and which will automatically apply the conversion-timeout option.
+1 echo &amp;#34;feh --conversion-timeout 5&amp;#34; &amp;gt; ~/.config/feh/themes </description>
     </item>
     
     <item>
@@ -429,7 +459,7 @@ word..d 这个我们创造出来的单词本来应该紧接在 long 后面的，
 最开始我们说了，word-wrap 是用来决定允不允许单词内断句的，如果不允许的话长单词就会溢出。最重要的一点是它还是会首先尝试挪到下一行，看看下一行的宽度够不够，不够的话就进行单词内的断句。
 而word-break:break-all则更变态，因为它断句的方式非常粗暴，它不会尝试把长单词挪到下一行，而是直接进行单词内的断句。这也可以解释为什么说它的作用是决定用什么方式来断句的，那就是——用了word-break:break-all，就等于使用粗暴方式来断句了。总之一句话，如果您想更节省空间，那就用word-break:break-all就对了！
 但无论如何，单词内的断句都会对西文的可读性产生一定的影响，有时候这点就要注意了。
- ps:网上有些文章说，word-wrap:break-word 对长串英文不起作用，其实这是非常错误的，word-wrap:break-word照样能把一个长串英文或数字拆成多行。事实上，word-wrap:break-word与word-break:break-all共同点是都能把长单词强行断句，不同点是word-wrap:break-word会首先起一个新行来放置长单词，新的行还是放不下这个长单词则会对长单词进行强制断句；而word-break:break-all则不会把长单词放在一个新行里，当这一行放不下的时候就直接强制断句了。</description>
+ps:网上有些文章说，word-wrap:break-word 对长串英文不起作用，其实这是非常错误的，word-wrap:break-word照样能把一个长串英文或数字拆成多行。事实上，word-wrap:break-word与word-break:break-all共同点是都能把长单词强行断句，不同点是word-wrap:break-word会首先起一个新行来放置长单词，新的行还是放不下这个长单词则会对长单词进行强制断句；而word-break:break-all则不会把长单词放在一个新行里，当这一行放不下的时候就直接强制断句了。</description>
     </item>
     
     <item>
@@ -448,7 +478,7 @@ word..d 这个我们创造出来的单词本来应该紧接在 long 后面的，
       
       <guid>https://sy123.netlify.app/2020/03/24/linux-force-dhcp-client-to-renew-ip/</guid>
       <description>am using Ubuntu Linux. How to force Linux to reacquire a new IP address from the DHCP server? What is the command of Linux equivalent to Windows’s “ipconfig /renew” command?
- You need to use Dynamic Host Configuration Protocol Client i.e., dhclient command. The client normally doesn’t release the current lease as it is not required by the DHCP protocol. Some cable ISPs require their clients to notify the server if they wish to release an assigned IP address.</description>
+You need to use Dynamic Host Configuration Protocol Client i.e., dhclient command. The client normally doesn’t release the current lease as it is not required by the DHCP protocol. Some cable ISPs require their clients to notify the server if they wish to release an assigned IP address.</description>
     </item>
     
     <item>
@@ -458,7 +488,7 @@ word..d 这个我们创造出来的单词本来应该紧接在 long 后面的，
       
       <guid>https://sy123.netlify.app/2020/03/23/pandavan-off-led-indicator/</guid>
       <description>在自定义设置 - 按钮/LED 红灯无法关闭 有的固件有BUG只能在路由器启动后执行以下命令
-1  mtk_gpio -w 13 0 #关红灯   </description>
+1 mtk_gpio -w 13 0 #关红灯 </description>
     </item>
     
     <item>
@@ -469,10 +499,10 @@ word..d 这个我们创造出来的单词本来应该紧接在 long 后面的，
       <guid>https://sy123.netlify.app/2020/03/20/linux%E4%B8%AD%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</guid>
       <description>近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也不好一一指定。普通的 cp 命令并没有排除某个文件或文件夹的参数，比较丑陋点可以 cp -r 拷贝完目录之后再去删除无用的，但如果做批量脚本操作就不爽了，经过实际试验之后暂时找到两个比较好的方法。
 使用 rsync 进行拷贝 rsync 本来是文件同步备份的工具，相对于普通的 cp 命令，rsync 在控制方面就强多了，而且 rsync 对遍历目录也支持，有 &amp;ndash;exclude 参数可以忽略指定的文件或文件夹。
-1  rsync -vaP --exclude=&amp;#34;.*&amp;#34; --exclude=&amp;#34;Makefile&amp;#34; dir1 /home/dir2   如上面演示的就可以排除掉隐藏文件和 Makefile 文件，-a 参数已经包含遍历处理参数 -r。
+1 rsync -vaP --exclude=&amp;#34;.*&amp;#34; --exclude=&amp;#34;Makefile&amp;#34; dir1 /home/dir2 如上面演示的就可以排除掉隐藏文件和 Makefile 文件，-a 参数已经包含遍历处理参数 -r。
 使用 find 加 cpio 进行拷贝 备注：此方法来自 Advanced Bash-Scripting Guide，需要了解的童鞋自己去参考了。
 用过 find 的童鞋都知道，find 对文件的过滤那是非常强大的，配合 cpio 来进行目录的遍历拷贝就可以实现过滤指定的文件或文件夹，当然也可以做到只备份特定的文件或文件夹，你可以用 find 的各种过滤参数达到拷贝哪天的文件，拷贝近期更改的文件等特殊效果，而且 find 支持正则表达式，这种方式想比第一种使用 rsync 跳过文件的方式更加灵活，因此非常推荐使用此方式进行目录拷贝。
-1 2  cd dir1 find . -regextype posix-egrep -mindepth 1 ! -regex &amp;#39;./(dev|tmp)($|/.*)&amp;#39; !</description>
+1 2 cd dir1 find . -regextype posix-egrep -mindepth 1 ! -regex &amp;#39;./(dev|tmp)($|/.*)&amp;#39; ! -name Makefile -a !</description>
     </item>
     
     <item>
@@ -482,16 +512,15 @@ word..d 这个我们创造出来的单词本来应该紧接在 long 后面的，
       
       <guid>https://sy123.netlify.app/2020/03/18/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</guid>
       <description>今天滚完系统就没网络，startx报内核模块错误，当场裂开了，开机显示加载驱动失败，先来看看加载日志吧
-1  sudo systemctl status systemd-modules-load   报错全是类似Module Vboxdrv Not Found in Directory xx这种
+1 sudo systemctl status systemd-modules-load 报错全是类似Module Vboxdrv Not Found in Directory xx这种
 再查看下内核模块相关目录发现了端倪
-1 2 3 4 5 6  ❯ uname -a Linux arch 5.5.8-arch1-1  ~/site/blog ❯ ls /lib/modules 5.5.9-arch1-2   原来是没加载新内核
+1 2 3 4 5 6 ❯ uname -a Linux arch 5.5.8-arch1-1 ~/site/blog ❯ ls /lib/modules 5.5.9-arch1-2 原来是没加载新内核
 解决方法 根据经验最好别排查原因，估计就是软件包BUG，懒得折腾再安装一次旧内核再滚就完事了
 升级内核，系统挂了，可以通过降级内核的方法来修复系统
 内核的安装包会缓存在/var/cache/pacman/pkg，文件名以 “linux-版本号”开头
 使用命令pacman -Udd xxx.zst来安装
 如果提示有文件存在的错误，删除掉提示的文件，再执行上面的命令，就可以了
- 提示：要养成升级前先看wiki的习惯，如果仓库最新软件有bug，wiki会有公示
- </description>
+提示：要养成升级前先看wiki的习惯，如果仓库最新软件有bug，wiki会有公示</description>
     </item>
     
     <item>
@@ -522,10 +551,10 @@ Flash Player ActiveX https://fpdownload.adobe.com/get/flashplayer/distyfp/curren
       
       <guid>https://sy123.netlify.app/2020/03/13/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%A9%E5%AE%B9%E5%88%B0100t%E4%BB%A5%E4%B8%8A/</guid>
       <description> 百度网盘无限“扩容”方法这里说的扩容是非正常途径，存在一定的风险！
- 操作步骤  新建一个文件夹111111 移动或转存一些文件到该文件夹111111 （假设这个文件夹占用容量是A） 删除该文件夹111111 （网盘占用容量减少A） 再新建一个同名空文件夹111111，不放入文件，直接删除。（占用容量无变化） 到回收站还原第一次删除的文件夹111111[里面有一些文件] 正常结果：还原该文件夹后，网盘使用容量应该增加A 不正常结果：网盘容量并没有增加A，也就是说，还原后的文件夹111111占用的容量A成了漏网之鱼，重复操作即可扩容 若没有复现这个bug，重新操作以上步骤 不过需要更换文件名，比如：222222，3333，234fwef，808080  使用说明 一个标准容量是5T的SVIP个人账号，要扩容100T，我们就提前在账号内存入100T的占位文件，此时系统显示使用空间为0，可用空间为5T。
- 1)用户转入4T资源后，系统显示使用空间为4T，可用空间为1T。 2)用户删除4T以上的占位文件，系统又显示使用空间为0T，可用空间为5T。 3)循环1~2的操作，直到消耗完占位文件。  补充说明 如果数据被同步，网盘占用容量正常了，就需要修复操作
-扩容的步骤  新建一个文件夹123456【标记：A】， 删除之后，还原存入N个占位文件。 再删除。 新建一个同名文件夹123456 【标记：B】 删除后，到回收站还原文件夹123456【标记：A】。  若提示：容量不足提示还原失败，或者还原成功后，占用容量增加了。说明“扩容”失败了! 继续上面的操作步骤，换一个文件夹名比如23456789 继续操作直至成功。有时候需要多次尝试才可以成功！“扩容”成功后：
- 注意1. 不要删除或重命名这个文件夹【标记：A】 里面最多不存放入超过500个数量的（占位）文件，否则删除后就无法还原。 如果“占用容量被后台同步” 就需要不断的删除和还原文件夹【标记：A】来修复占用容量【这里要注意一下：网盘占用容量会出现“卡住”的情况，等半个小时左右就正常显示了】 注意2. 必须保留回收站的同名文件夹【标记：B】，不能清空回收站。 注意3. 登录客户端或者上传、转存、下载后，第二天占用容量就会被同步，当然什么都不操作也会出现容量被同步的情况。按照1中操作 重新“扩容即可”，为了修复顺利，不要删除文件夹【标记：A】 和保留一些占位文件。 若占位文件和文件夹【标记：A】 都被删除了，也可以修复，重新操作步骤1-6。区别是不能从专辑转存占位文件了，就需要用网盘里的文件替代，还原成功后，就存入一些大容量的文件，数量不能超过500.做删除和还原。这样循环下去，理论可以做到无限多的内存。   很多人说不行，3月5日我自己试了下，用脚本去执行操作，很快扩出了100T的占位文件。  </description>
+操作步骤 新建一个文件夹111111 移动或转存一些文件到该文件夹111111 （假设这个文件夹占用容量是A） 删除该文件夹111111 （网盘占用容量减少A） 再新建一个同名空文件夹111111，不放入文件，直接删除。（占用容量无变化） 到回收站还原第一次删除的文件夹111111[里面有一些文件] 正常结果：还原该文件夹后，网盘使用容量应该增加A 不正常结果：网盘容量并没有增加A，也就是说，还原后的文件夹111111占用的容量A成了漏网之鱼，重复操作即可扩容 若没有复现这个bug，重新操作以上步骤 不过需要更换文件名，比如：222222，3333，234fwef，808080 使用说明 一个标准容量是5T的SVIP个人账号，要扩容100T，我们就提前在账号内存入100T的占位文件，此时系统显示使用空间为0，可用空间为5T。
+1)用户转入4T资源后，系统显示使用空间为4T，可用空间为1T。 2)用户删除4T以上的占位文件，系统又显示使用空间为0T，可用空间为5T。 3)循环1~2的操作，直到消耗完占位文件。 补充说明 如果数据被同步，网盘占用容量正常了，就需要修复操作
+扩容的步骤 新建一个文件夹123456【标记：A】， 删除之后，还原存入N个占位文件。 再删除。 新建一个同名文件夹123456 【标记：B】 删除后，到回收站还原文件夹123456【标记：A】。 若提示：容量不足提示还原失败，或者还原成功后，占用容量增加了。说明“扩容”失败了! 继续上面的操作步骤，换一个文件夹名比如23456789 继续操作直至成功。有时候需要多次尝试才可以成功！“扩容”成功后：
+注意1. 不要删除或重命名这个文件夹【标记：A】 里面最多不存放入超过500个数量的（占位）文件，否则删除后就无法还原。 如果“占用容量被后台同步” 就需要不断的删除和还原文件夹【标记：A】来修复占用容量【这里要注意一下：网盘占用容量会出现“卡住”的情况，等半个小时左右就正常显示了】 注意2. 必须保留回收站的同名文件夹【标记：B】，不能清空回收站。 注意3. 登录客户端或者上传、转存、下载后，第二天占用容量就会被同步，当然什么都不操作也会出现容量被同步的情况。按照1中操作 重新“扩容即可”，为了修复顺利，不要删除文件夹【标记：A】 和保留一些占位文件。 若占位文件和文件夹【标记：A】 都被删除了，也可以修复，重新操作步骤1-6。区别是不能从专辑转存占位文件了，就需要用网盘里的文件替代，还原成功后，就存入一些大容量的文件，数量不能超过500.做删除和还原。这样循环下去，理论可以做到无限多的内存。 很多人说不行，3月5日我自己试了下，用脚本去执行操作，很快扩出了100T的占位文件。 </description>
     </item>
     
     <item>
@@ -544,13 +573,13 @@ Flash Player ActiveX https://fpdownload.adobe.com/get/flashplayer/distyfp/curren
       
       <guid>https://sy123.netlify.app/2020/03/12/rename%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
       <description>前言 以前一直用类似rename &amp;quot;s/_/-/&amp;quot; *这样的命令正则替换一些文件名，不过系统切换到Archlinux后用rename一直失败，用man看了下说明才发现并不支持正则，只能这样用，并且不能全局替换
-1  rename 123 456 *   其实几乎所有情况下, rename用不到正则表达式的. 你最多不过是通过正则确定要改名的文件列表而已. 这通过管道太容易了. 例如我在shell下, 会这样使用
-1  f &amp;#39;bak$&amp;#39; |x rename &amp;#39;.bak&amp;#39; &amp;#39;&amp;#39;   在管道之前, 可以通过各种方式搭配, 来生成所需的文件列表
+1 rename 123 456 * 其实几乎所有情况下, rename用不到正则表达式的. 你最多不过是通过正则确定要改名的文件列表而已. 这通过管道太容易了. 例如我在shell下, 会这样使用
+1 f &amp;#39;bak$&amp;#39; |x rename &amp;#39;.bak&amp;#39; &amp;#39;&amp;#39; 在管道之前, 可以通过各种方式搭配, 来生成所需的文件列表
 而rename也可以分多个步骤完成, man帮助中就有示例.
 原因 最近有空查了很多资料才发现很多发行版默认的rename是util-linux里很弱的那个rename，比如Archlinux
 解决方法 Archlinux可以装perl-rename这个包，命令就是perl-rename。Mac下可以用brew 安装rename。好久没用Ubuntu，记得以前Ubuntu 是prename 这个命令。
 其实不只是s命令，所有有效的perl命令都能用，文件名会作为$_ 传入，命令执行完后的$_作为新文件名。比如全部改成小写：
-1  rename &amp;#39;y/A-Z/a-z/&amp;#39; *   </description>
+1 rename &amp;#39;y/A-Z/a-z/&amp;#39; * </description>
     </item>
     
     <item>
@@ -559,7 +588,7 @@ Flash Player ActiveX https://fpdownload.adobe.com/get/flashplayer/distyfp/curren
       <pubDate>Thu, 12 Mar 2020 21:30:38 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/03/12/%E5%A6%82%E4%BD%95%E5%9C%A8vim%E4%BF%9D%E5%AD%98%E6%97%B6%E8%8E%B7%E5%BE%97sudo%E6%9D%83%E9%99%90/</guid>
-      <description>1  :w !sudo tee %   命令:w !{cmd}，让vim执行一个外部命令{cmd}，然后把当前缓冲区的内容从stdin传入。 tee是一个把stdin保存到文件的小工具。 而%，是vim当中一个只读寄存器的名字，总保存着当前编辑文件的文件路径。 所以执行这个命令，就相当于从vim外部修改了当前编辑的文件，好完工。</description>
+      <description>1 :w !sudo tee % 命令:w !{cmd}，让vim执行一个外部命令{cmd}，然后把当前缓冲区的内容从stdin传入。 tee是一个把stdin保存到文件的小工具。 而%，是vim当中一个只读寄存器的名字，总保存着当前编辑文件的文件路径。 所以执行这个命令，就相当于从vim外部修改了当前编辑的文件，好完工。</description>
     </item>
     
     <item>
@@ -576,9 +605,10 @@ Flash Player ActiveX https://fpdownload.adobe.com/get/flashplayer/distyfp/curren
 第四步：在非insert模式下输入q停止宏的录制
 第五步：使用@ + 第二步中定义的缓冲器的名字即可。
 例如想把下面的文字
-1 2 3 4 5 6 7 8  line1 line-2 line3-1 l4 line1 line-2 line3-1 l4   变成如下的文字
-1 2 3 4 5 6 7 8 9 10  System.out.println(line1); System.out.println(line1); System.out.println(line-2); System.out.println(line3-1); System.out.println(L4); System.out.println(line1); System.out.println(line1); System.out.println(line-2); System.out.println(line3-1); System.out.println(L4);   观察可以发现他们的规律，在每行文字的开头添加“System.out.println(”，结尾添加“);”就变成下面的信息了。下面简单介绍一下如何使用recording来完成这样的操作。 首先把光标移动line1上，输入qt，准备开始录制，缓冲器的名字为t，录制的动作为：shift + ^ 回到行首、按下i键进入insert模式、输入“System.out.println(”、按下esc键回到正常模式、shift + $ 回到行尾部、按下i键进入insert模式、输入“);”按下esc键回到正常模式，按下q停止录制。然后把光标移动到下面一行的任意位置输入 @ + t 即可。
-recording还可以和查询结合起来使用，例如想把一个文件中含有特定字符串的行注释，可以通过这样的宏来实现。在正常模式下输入/search string + enter、shift + ^、i、#、esc、shift + $。</description>
+1 2 3 4 5 6 7 8 line1 line-2 line3-1 l4 line1 line-2 line3-1 l4 变成如下的文字
+1 2 3 4 5 6 7 8 9 10 System.out.println(line1); System.out.println(line1); System.out.println(line-2); System.out.println(line3-1); System.out.println(L4); System.out.println(line1); System.out.println(line1); System.out.println(line-2); System.out.println(line3-1); System.out.println(L4); 观察可以发现他们的规律，在每行文字的开头添加“System.out.println(”，结尾添加“);”就变成下面的信息了。下面简单介绍一下如何使用recording来完成这样的操作。 首先把光标移动line1上，输入qt，准备开始录制，缓冲器的名字为t，录制的动作为：shift + ^ 回到行首、按下i键进入insert模式、输入“System.out.println(”、按下esc键回到正常模式、shift + $ 回到行尾部、按下i键进入insert模式、输入“);”按下esc键回到正常模式，按下q停止录制。然后把光标移动到下面一行的任意位置输入 @ + t 即可。
+recording还可以和查询结合起来使用，例如想把一个文件中含有特定字符串的行注释，可以通过这样的宏来实现。在正常模式下输入/search string + enter、shift + ^、i、#、esc、shift + $。
+让定制的宏自动执行多次的方法是先输入一个数字，然后在输入@ + 缓冲器的名字。 例如 100@t，表示执行100次。</description>
     </item>
     
     <item>
@@ -588,10 +618,10 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
       
       <guid>https://sy123.netlify.app/2020/03/10/ts%E5%B1%9E%E6%80%A7%E5%90%8E%E9%9D%A2%E7%9A%84%E6%84%9F%E5%8F%B9%E5%8F%B7%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%E5%A4%84/</guid>
       <description>首先看一段代码
-1 2 3 4 5 6 7 8  import { Vue, Component, Prop } from &amp;#39;vue-property-decorator&amp;#39;  @Component export default class YourComponent extends Vue {  @Prop(Number) propA!: number  @Prop({ default: &amp;#39;default value&amp;#39; }) propB!: string  @Prop([String, Boolean]) propC: string | boolean }   这是vue组件的ts写法，仔细观察，里面有一段这样的代码@Prop(Number) propA!: number，这是什么鬼？
+1 2 3 4 5 6 7 8 import { Vue, Component, Prop } from &amp;#39;vue-property-decorator&amp;#39; @Component export default class YourComponent extends Vue { @Prop(Number) propA!: number @Prop({ default: &amp;#39;default value&amp;#39; }) propB!: string @Prop([String, Boolean]) propC: string | boolean } 这是vue组件的ts写法，仔细观察，里面有一段这样的代码@Prop(Number) propA!: number，这是什么鬼？
 查了一下ts的文档说明，原来感叹号是非null和非undefined的类型断言，所以上面的写法就是对propA这个属性进行非空断言。文档的相关说明在这里。
 官方文档上的一个例子很好的说明了这个问题
-1 2 3 4 5 6 7 8 9 10 11 12 13  interface Entity {  name: string }  // Compiled with --strictNullChecks function validateEntity(e?</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 interface Entity { name: string } // Compiled with --strictNullChecks function validateEntity(e?</description>
     </item>
     
     <item>
@@ -600,8 +630,8 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
       <pubDate>Fri, 06 Mar 2020 21:36:57 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/03/06/git-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AFcould-not-resolve-host-github.com/</guid>
-      <description>1 2 3  ❯ git clone https://github.com/Zhili/GameServer Cloning into &amp;#39;GameServer&amp;#39;... fatal: unable to access &amp;#39;https://github.com/Zhili/GameServer/&amp;#39;: Couldn&amp;#39;t resolve host name   (Just a little reminder) If you want the hostname also be resolved by the proxy (that means passing everything through the proxy), especially when you are cloning a gist, you can use the following setting (the key is that it uses socks5h instead of socks5):
-1  git config --global http.</description>
+      <description>1 2 3 ❯ git clone https://github.com/Zhili/GameServer Cloning into &amp;#39;GameServer&amp;#39;... fatal: unable to access &amp;#39;https://github.com/Zhili/GameServer/&amp;#39;: Couldn&amp;#39;t resolve host name (Just a little reminder) If you want the hostname also be resolved by the proxy (that means passing everything through the proxy), especially when you are cloning a gist, you can use the following setting (the key is that it uses socks5h instead of socks5):
+1 git config --global http.proxy socks5h://127.</description>
     </item>
     
     <item>
@@ -611,7 +641,7 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
       
       <guid>https://sy123.netlify.app/2020/03/04/browser-plugins/</guid>
       <description>Installation The package you will need to install depends on the browser you use.
- The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package.  </description>
+The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package. </description>
     </item>
     
     <item>
@@ -629,18 +659,18 @@ recording还可以和查询结合起来使用，例如想把一个文件中含�
 （1）取整，位运算更快。原因介绍：参考：位运算实现的原因
 位运算取整（更快）
 位运算取整：下述，都可以
-1 2 3  ~~a; //双非位操作符 a|0; 。。。   （2）四舍五入（0.5规定向上取整），位运算更快
+1 2 3 ~~a; //双非位操作符 a|0; 。。。 （2）四舍五入（0.5规定向上取整），位运算更快
 位运算的四舍五入，负数不适配
 位运算适合正数的四舍五入，但是负数只能舍，不能入。
-1 2 3  a+0.5|0; ~~(a+0.5); 。。。   （3）内置值 undefined
+1 2 3 a+0.5|0; ~~(a+0.5); 。。。 （3）内置值 undefined
 undefined替代
-1 2  void 0; // 快 0[0]; // 略慢   （4）内置值 Infinity
+1 2 void 0; // 快 0[0]; // 略慢 （4）内置值 Infinity
 Infinity替代
 1/0; （5）布尔值短写法
 布尔值短写法
 !0; // true !1; //false （6）十进制指数（想当初，刚学c的时候，我一直都用pow(10,n)） 10000000000 === 1e10
 （7）三元运算符 ? : 还用于简化函数的调用。
-function x() { console.</description>
+function x() { console.log(&amp;lsquo;x&amp;rsquo;) }; function y() { console.log(&amp;lsquo;y&amp;rsquo;) }; let z = 3; 简化前：</description>
     </item>
     
     <item>
@@ -650,8 +680,8 @@ function x() { console.</description>
       
       <guid>https://sy123.netlify.app/2020/02/28/encrypt-string-using-openssl/</guid>
       <description>Try this:
-1 2 3   echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt   Run
-1 2   openssl list-cipher-commands   to list all available ciphers.</description>
+1 2 3 echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt Run
+1 2 openssl list-cipher-commands to list all available ciphers.</description>
     </item>
     
     <item>
@@ -670,7 +700,7 @@ function x() { console.</description>
       
       <guid>https://sy123.netlify.app/2020/02/27/react%E5%85%B3%E4%BA%8Eform%E7%9A%84%E5%8F%96%E9%83%A8%E5%88%86%E5%AD%97%E6%AE%B5%E6%95%B0%E6%8D%AE/</guid>
       <description>获取查询条件的值 validateFields form.validateFields / validateFieldsAndScroll 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件
-获取表单的所有数据 1 2 3 4 5 6 7 8   this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; {   if(err){  return;  }  console.log(&amp;#39;_values&amp;#39;, values); });   获取表单的部分字段数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26   this.props.form.validateFieldsAndScroll([`timeUnit${num}`, `Time${num}`,`deviceTypeId${num}`], (err, values) =&amp;gt; {  if(err){  return;  }  console.</description>
+获取表单的所有数据 1 2 3 4 5 6 7 8 this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; { if(err){ return; } console.log(&amp;#39;_values&amp;#39;, values); }); 获取表单的部分字段数据 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 this.props.form.validateFieldsAndScroll([`timeUnit${num}`, `Time${num}`,`deviceTypeId${num}`], (err, values) =&amp;gt; { if(err){ return; } console.log(&amp;#39;_values&amp;#39;, values); let t1,t2; if(values[`Time${num}`] === undefined){ t1= undefined; t2= undefined; }else{ t1= values[`Time${num}`][0].</description>
     </item>
     
     <item>
@@ -680,7 +710,7 @@ function x() { console.</description>
       
       <guid>https://sy123.netlify.app/2020/02/27/tippy_warning/</guid>
       <description>I have the folowing part of code:
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18  private rootRef = React.createRef&amp;lt;HTMLDivElement&amp;gt;();  const target = (  &amp;lt;div&amp;gt;  &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl&amp;#39; /&amp;gt;  &amp;lt;/div&amp;gt; );  return (  &amp;lt;React.Fragment&amp;gt;  {React.cloneElement(target, {  ref: this.rootRef,  onMouseOver: this.handleMouseOver,  onMouseLeave: this.handleMouseLeave,  })}  {open &amp;amp;&amp;amp; this.renderTooltip()}  &amp;lt;/React.Fragment&amp;gt;  );   When target with div element (or any other instead of div) everything is ok, but when target is:</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 private rootRef = React.createRef&amp;lt;HTMLDivElement&amp;gt;(); const target = ( &amp;lt;div&amp;gt; &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl&amp;#39; /&amp;gt; &amp;lt;/div&amp;gt; ); return ( &amp;lt;React.Fragment&amp;gt; {React.cloneElement(target, { ref: this.rootRef, onMouseOver: this.handleMouseOver, onMouseLeave: this.handleMouseLeave, })} {open &amp;amp;&amp;amp; this.renderTooltip()} &amp;lt;/React.Fragment&amp;gt; ); When target with div element (or any other instead of div) everything is ok, but when target is:</description>
     </item>
     
     <item>
@@ -690,9 +720,11 @@ function x() { console.</description>
       
       <guid>https://sy123.netlify.app/2020/02/27/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E8%B6%85%E7%BA%A7%E4%BC%9A%E5%91%98%E8%B4%A6%E5%8F%B7%E5%88%86%E4%BA%AB/</guid>
       <description>百度云 请低调使用&amp;hellip;
- 都是选微博登录  选微博登录 选微博登录 选微博登录!!!   验证码全部大写填写 确认用鼠标点 登录后如遇到重试页面, 点击几次重试即可. 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!!  并不保证当你看到时账号都是可以用的, 但是分享的时候肯定都是可以的. 如果有失效账号, 麻烦告知一下, 我会及时处理.
+都是选微博登录 选微博登录 选微博登录 选微博登录!!! 验证码全部大写填写 确认用鼠标点 登录后如遇到重试页面, 点击几次重试即可. 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!! 并不保证当你看到时账号都是可以用的, 但是分享的时候肯定都是可以的. 如果有失效账号, 麻烦告知一下, 我会及时处理.
 账号越来越难弄, 且用且珍惜.
-    Account Expire UserName     账号：jiao36662855@163.com密码：2i1dyc 2020-03-23    账号：17109223297密码：hz834931 2020-03-23    账号：bizoulong982@163.com密码：3d55qbk7 （2.22当天有效）    账号：17898611960密码：aayu805 2020-03-23    账号：15096085029密码：yqpfem278 2020-03-23    账号：16534101337密码：mianfeivip.com3 2020-03-23    账号：18857395243密码：aaaa1111 2020-03-23    账号mpbncy09@touzi580.</description>
+Account Expire UserName 账号：jiao36662855@163.com密码：2i1dyc 2020-03-23 账号：17109223297密码：hz834931 2020-03-23 账号：bizoulong982@163.com密码：3d55qbk7 （2.22当天有效） 账号：17898611960密码：aayu805 2020-03-23 账号：15096085029密码：yqpfem278 2020-03-23 账号：16534101337密码：mianfeivip.com3 2020-03-23 账号：18857395243密码：aaaa1111 2020-03-23 账号mpbncy09@touzi580.com密码1ht4esfgd6 2020-03-23 輳河yqdae 账号mw5w30u6@touzi580.com密码4bloms02sl 2020-03-13 到期 c0a52mx6 账号dym7lmrg@touzi580.com密码2omyuhw4tw 2020-03-12 到期 沾辗njpuv 微博登录账号：15088561466 密码：625006620 CH素材库4 账号13715007275密码a123456 day大陆男裱丶 再次提醒,选择微博账号登录.
+如有账号密码错误, 请告知, 以便及时删除失效账号.
+爱奇艺 Account Expire UserName 账号：ey_jc@qq.com密码：soeasy233 账号：14745975134密码：pg123456 （也是奇异果电视会员） 账号：15278573040密码：199797.xing 迅雷（一般失效快） Account Expire UserName 账号：sreqba242密码：tc111222 账号：dbq7nnj840密码：q88628 账号：ho1uagtx33密码：r85509 账号：yflon1ga9y密码：t83729 账号：pyc78ey893密码：g1j3vh 账号：ick5a48uki密码：n81403 优酷 Account Expire UserName 账号：362852914@qq.</description>
     </item>
     
     <item>
@@ -711,7 +743,7 @@ function x() { console.</description>
       <pubDate>Tue, 25 Feb 2020 12:39:44 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/25/%E7%BA%A6%E5%AE%9A%E4%BF%97%E6%88%90%E7%9A%84%E5%B8%B8%E8%A7%81%E7%BC%A9%E5%86%99/</guid>
-      <description>   全称 缩写     event evt   connect conn   server srv   address addr   request req   response rep   lenght len   collection col   signal sig   error of last number erron   field field   property props   defines defs   object obj   system sys   message msg   number num   directory dir   dictionory dict   protocol proto   button btn   table tbl   label lbl   Image img   Sprite sp   texture tex   tween tw   transform trans   animation anim   material mat   vecter vec   position pos   delegate del   callback cb    2020/02/25 update    缩写 全称     acc accessibility   auto automatic   eval evaluate   impl implementation   info in   num number of   min minimum   max maximum   nav navigation   regexp regular expression   util utility   req request   resp response   res resource   app application   auth authorization/authentication 这点非常不认可，同一个常见缩写居然能代表两个不同的词。   dev develop   env environment   db database   pkg package   svr server   i18n internationalization   cert certificate   msg message   addr address   tmp/temp temporary   var/def variable/define 其实 var/def 已经是很多语言的关键字了   calc calculate/calculation   src source   dest destination   min/max minimum/maximum 应该已经不算了吧。。。   doc document   dir directory    </description>
+      <description> 全称 缩写 event evt connect conn server srv address addr request req response rep lenght len collection col signal sig error of last number erron field field property props defines defs object obj system sys message msg number num directory dir dictionory dict protocol proto button btn table tbl label lbl Image img Sprite sp texture tex tween tw transform trans animation anim material mat vecter vec position pos delegate del callback cb 2020/02/25 update 缩写 全称 acc accessibility auto automatic eval evaluate impl implementation info in num number of min minimum max maximum nav navigation regexp regular expression util utility req request resp response res resource app application auth authorization/authentication 这点非常不认可，同一个常见缩写居然能代表两个不同的词。 dev develop env environment db database pkg package svr server i18n internationalization cert certificate msg message addr address tmp/temp temporary var/def variable/define 其实 var/def 已经是很多语言的关键字了 calc calculate/calculation src source dest destination min/max minimum/maximum 应该已经不算了吧。。。 doc document dir directory </description>
     </item>
     
     <item>
@@ -721,8 +753,8 @@ function x() { console.</description>
       
       <guid>https://sy123.netlify.app/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
       <description>GNU cp(1) has a backup option:
-1  cp --backup SOURCE [SOURCE...] [DESTINATION]   This has the following effects which can be controlled with other options as described in the manual page of cp(1):
-1 2 3 4 5 6 7  --backup[=CONTROL]  make a backup of each existing destination file  -b like --backup but does not accept an argument  -S, --suffix=SUFFIX  override the usual backup suffix   The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
+1 cp --backup SOURCE [SOURCE...] [DESTINATION] This has the following effects which can be controlled with other options as described in the manual page of cp(1):
+1 2 3 4 5 6 7 --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
     </item>
     
     <item>
@@ -745,10 +777,11 @@ Canary 版：这些是前沿版本，大约每周更新一次，可在 developer
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/24/android-studio-emulator-ugly-black-borders/</guid>
-      <description>Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
+      <description>
+Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.
 For making it floating, add this to your config Floating all windows with &amp;ldquo;android emulator&amp;rdquo; header:
-1  for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable   </description>
+1 for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     </item>
     
     <item>
@@ -800,7 +833,7 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quo
       
       <guid>https://sy123.netlify.app/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</guid>
       <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands.
-1 2 3 4 5 6 7 8 9 10  free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free   total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248  total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248   You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
+1 2 3 4 5 6 7 8 9 10 free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248 You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
     </item>
     
     <item>
@@ -812,14 +845,14 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quo
       <description>玩虚拟机的同学都知道，对于那些设定为动态配分的虚拟机，一开始装完系统时可能只有几个G，但是随着你不断的使用，体积空间就会越来越大，随便就是几十个G了。也就是说动态扩展的VDI文件只会大，不会小。这期间，就算你去虚拟机里面删除一些文件，整个虚拟机的镜像文件VDI文件的大小依然不会变小，使其所占用的实际硬盘空间过大，给备份和分享都带来麻烦。因此，今天我们就来研究一下如何解决这个问题，其实很简单。
 以下方法，在我自己的64位Ubuntu 14.04和64位win10虚拟机中亲测有效！
 步骤1：碎片整理 第一步要做的是碎片整理，整理过程需要一个特定的工具，win系统和linux系统各自有别：
- 1、linux系统下  打开虚拟机，执行下面的命令：
-1 2  sudo dd if=/dev/zero of=/free bs=1M sudo rm -f /free   一般来说，大约5-10分钟清理完毕，取决于你的系统大小和磁盘空间混乱程度。于是关闭虚拟机，进入下一步。
- 2、win系统下  需要下载一个特定的工具，点击此处进入官方下载，如果链接失效，也可以点击此处直接下载我整理好的版本。
+1、linux系统下 打开虚拟机，执行下面的命令：
+1 2 sudo dd if=/dev/zero of=/free bs=1M sudo rm -f /free 一般来说，大约5-10分钟清理完毕，取决于你的系统大小和磁盘空间混乱程度。于是关闭虚拟机，进入下一步。
+2、win系统下 需要下载一个特定的工具，点击此处进入官方下载，如果链接失效，也可以点击此处直接下载我整理好的版本。
 下载后解压，取出其中的diskext.exe（针对32位系统）或者diskext64.exe（针对64位系统），将其复制到虚拟机的C盘根目录下，然后以管理员身份在虚拟机中启动命令行cmd，输入以下命令：
-1  C:\sdelete64.exe -z c:	# c表示清理c盘   便会自动开始清理磁盘，大约5-10分钟左右方能清理完毕，于是便可关闭虚拟机，进入下一步。
+1 C:\sdelete64.exe -z c:	# c表示清理c盘 便会自动开始清理磁盘，大约5-10分钟左右方能清理完毕，于是便可关闭虚拟机，进入下一步。
 步骤2：镜像压缩 关闭虚拟机，然后通过Virtualbox自带的神器vboxmanage modifyhd中的–compact命令来进行VDI镜像文件的压缩。具体步骤是：
 打开cmd命令窗口，并进入Virtualbox所安装的目录（一般是C:\Program Files\Oracle\VirtualBox）目录，然后启动VBoxManage.exe进行VDI镜像文件的压缩，并等待命令结束即可：
-1 2  cd &amp;#34;C:\Program Files\Oracle\VirtualBox&amp;#34; VBoxManage.exe modifyhd &amp;#34;E:\V_VtSystem\A_Systems\Ubuntu 14.04.vdi&amp;#34; --compact   实际测试我ubuntu系统由35G压缩成只有20G，win10系统由40G压缩成25G，效果还是非常明显的。</description>
+1 2 cd &amp;#34;C:\Program Files\Oracle\VirtualBox&amp;#34; VBoxManage.exe modifyhd &amp;#34;E:\V_VtSystem\A_Systems\Ubuntu 14.04.vdi&amp;#34; --compact 实际测试我ubuntu系统由35G压缩成只有20G，win10系统由40G压缩成25G，效果还是非常明显的。</description>
     </item>
     
     <item>
@@ -830,18 +863,22 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quo
       <guid>https://sy123.netlify.app/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</guid>
       <description>systemd-analyze简介 systemd-analyze是Linux自带的分析系统启动性能的工具。
 systemd-analyze可使用的命令：
-  systemd-analyze [OPTIONS…] [time]
-  systemd-analyze [OPTIONS…] blame
-  systemd-analyze [OPTIONS…] critical-chain [UNIT…]
-  systemd-analyze [OPTIONS…] plot [&amp;gt; file.svg]
-  systemd-analyze [OPTIONS…] dot [PATTERN…] [&amp;gt; file.dot]
-  systemd-analyze [OPTIONS…] dump
-  systemd-analyze [OPTIONS…] set-log-level LEVEL
-  systemd-analyze [OPTIONS…] set-log-target TARGET
-  systemd-analyze [OPTIONS…] get-log-level
-  systemd-analyze [OPTIONS…] get-log-target
-  systemd-analyze [OPTIONS…] syscall-filter [SET…]
-  systemd-analyze [OPTIONS…] verify [FILES…]</description>
+systemd-analyze [OPTIONS…] [time]
+systemd-analyze [OPTIONS…] blame
+systemd-analyze [OPTIONS…] critical-chain [UNIT…]
+systemd-analyze [OPTIONS…] plot [&amp;gt; file.svg]
+systemd-analyze [OPTIONS…] dot [PATTERN…] [&amp;gt; file.dot]
+systemd-analyze [OPTIONS…] dump
+systemd-analyze [OPTIONS…] set-log-level LEVEL
+systemd-analyze [OPTIONS…] set-log-target TARGET
+systemd-analyze [OPTIONS…] get-log-level
+systemd-analyze [OPTIONS…] get-log-target
+systemd-analyze [OPTIONS…] syscall-filter [SET…]
+systemd-analyze [OPTIONS…] verify [FILES…]
+systemd-analyze命令具体含义：
+systemd-analyze 可以显示系统启动过程中的性能统计数据、 获取 systemd 系统管理器的状态与跟踪信息、 校验单元文件的正确性。
+systemd-analyze time 可以显示如下时间： (1)在启动第一个用户态进程(init)之前，内核运行了多长时间； (2)在切换进入实际的根文件系统之前，initrd(initial RAM disk)运行了多长时间； (3)进入实际的根文件系统之后，用户空间启动完成花了多长时间。 注意，上述时间只是简单的计算了系统启动过程中到达不同标记点的时间， 并没有计入各单元实际启动完成所花费的时间以及磁盘空闲的时间。
+systemd-analyze blame 按照每个单元花费的启动时间从多到少的顺序，列出所有当前正处于活动(active)状态的单元。 这些信息有助于用户优化系统启动速度。 不过需要注意的是，这些信息也可能具有误导性， 因为花费较长时间启动的单元，有可能只是在等待另一个依赖单元完成启动。 systemd-analyze critical-chain [UNIT…] 为指定的单元(省略参数表示默认启动目标单元)以树状形式显示时间关键链(time-critical chain)。 “@”后面的时刻表示该单元的启动时刻； “+”后面的时长表示该单元总计花了多长时间才完成启动。 不过需要注意的是， 这些信息也可能具有误导性， 因为花费较长时间启动的单元， 有可能只是在等待另一个依赖单元完成启动。</description>
     </item>
     
     <item>
@@ -850,8 +887,8 @@ systemd-analyze可使用的命令：
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/15/saga-deprecated-%E8%AD%A6%E5%91%8A/</guid>
-      <description>What happens? 1  [...effects] has been deprecated in favor of all([...effects]), please update your code   it does not effect dva.js, its redux saga api update, you just need to do this
-1 2 3 4 5  effects: {  * query(action, {call, put, all}) {  yield all([])  } }   Redux saga apis:</description>
+      <description>What happens? 1 [...effects] has been deprecated in favor of all([...effects]), please update your code it does not effect dva.js, its redux saga api update, you just need to do this
+1 2 3 4 5 effects: { * query(action, {call, put, all}) { yield all([]) } } Redux saga apis:</description>
     </item>
     
     <item>
@@ -861,9 +898,9 @@ systemd-analyze可使用的命令：
       
       <guid>https://sy123.netlify.app/2020/02/15/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</guid>
       <description>Visual Studio Code 提供了极大的弹性让我们自订想要的编辑器样式，端看使用者设定（User Setting）中，就超过 800 项设定可以让开发者自由调整，而且还有扩充套件能够增强 VS Code 的开发能力。
- 这篇主要是我个人偏好的设定，完整 setting.json 请参考 gist。
- 首先可以使用快速键 Ctrl +, 开启 settings.json 使用者设定档，或从选单列中点选档案 &amp;gt; 喜好设定 &amp;gt; 设定。
-Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一选择 Source Code Pro 连字符号字型可选择 FiraCode 或 Hasklig 择一使用(个人偏好 FiraCode) 设定值：&amp;quot;editor.fontFamily&amp;quot;: &amp;quot;&#39;Fira Code&#39;, &#39;Source Code Pro&#39;, Consolas, &#39;Microsoft JhengHei&#39;, &#39;Courier New&#39;, monospace&amp;quot;,  1 2 3 4 5 6 7 8 9  &amp;#34;editor.</description>
+这篇主要是我个人偏好的设定，完整 setting.json 请参考 gist。
+首先可以使用快速键 Ctrl +, 开启 settings.json 使用者设定档，或从选单列中点选档案 &amp;gt; 喜好设定 &amp;gt; 设定。
+Global 常用设定 editor 1 editor.fontFamily // 设定字型偏好 唯一选择 Source Code Pro 连字符号字型可选择 FiraCode 或 Hasklig 择一使用(个人偏好 FiraCode) 设定值：&amp;quot;editor.fontFamily&amp;quot;: &amp;quot;&#39;Fira Code&#39;, &#39;Source Code Pro&#39;, Consolas, &#39;Microsoft JhengHei&#39;, &#39;Courier New&#39;, monospace&amp;quot;, 1 2 3 4 5 6 7 8 9 &amp;#34;editor.fontLigatures&amp;#34;: true // 开启连字符号 // FiraCode 字型有提供连字符号的功能，例如 =&amp;gt; 会变成箭头符号 &amp;#34;editor.</description>
     </item>
     
     <item>
@@ -873,8 +910,8 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       
       <guid>https://sy123.netlify.app/2020/02/10/umi-ui-bug-using-react-document-title/</guid>
       <description>背景 React 项目使用umi时发报：
- Uncaught Invariant Violation: React.Children.only expected to receive a single React element child. The above error occurred in the  component ui socket init CloseEvent {type: &amp;ldquo;close&amp;rdquo;, bubbles: false, cancelable: false, timeStamp: 1571127775342, wasClean: false, …}
- 异常代码 1 2 3 4 5  &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt;  {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt;   DocumentTitle组件内部最外层只能接受一个元素，而代码中有多个元素，所以报错。
+Uncaught Invariant Violation: React.Children.only expected to receive a single React element child. The above error occurred in the component ui socket init CloseEvent {type: &amp;ldquo;close&amp;rdquo;, bubbles: false, cancelable: false, timeStamp: 1571127775342, wasClean: false, …}
+异常代码 1 2 3 4 5 &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt; {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt; DocumentTitle组件内部最外层只能接受一个元素，而代码中有多个元素，所以报错。
 解决方案 用&amp;lt;div&amp;gt;&amp;lt;/div&amp;gt;或者&amp;lt;&amp;gt;&amp;lt;/&amp;gt;在外部包裹后就OK，不再报错，页面可正常显示。</description>
     </item>
     
@@ -884,7 +921,7 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       <pubDate>Mon, 10 Feb 2020 13:07:08 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/10/git-clone-%E6%8C%87%E5%AE%9A%E5%88%86%E6%94%AF%E6%8B%89%E4%BB%A3%E7%A0%81/</guid>
-      <description>git clone 不指定分支 1  git clone http://10.1.1.11/service/tmall-service.git   git clone 指定分支 1  git clone -b dev_jk http://10.1.1.11/service/tmall-service.git   命令中：多了一个 -b dev-jk,这个dev_jk就是分支，http://10.1.1.11/service/tmall -service.git为源码的仓库地址</description>
+      <description>git clone 不指定分支 1 git clone http://10.1.1.11/service/tmall-service.git git clone 指定分支 1 git clone -b dev_jk http://10.1.1.11/service/tmall-service.git 命令中：多了一个 -b dev-jk,这个dev_jk就是分支，http://10.1.1.11/service/tmall -service.git为源码的仓库地址</description>
     </item>
     
     <item>
@@ -894,7 +931,7 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       
       <guid>https://sy123.netlify.app/2020/02/09/programmatically_navigate_using_react_router/</guid>
       <description>React Router v5.1.0 with hooks There is a new useHistory hook in React Router &amp;gt;5.1.0 if you are using React &amp;gt;16.8.0 and functional components.
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  import { useHistory } from &amp;#34;react-router-dom&amp;#34;;  function HomeButton() {  const history = useHistory();   function handleClick() {  history.push(&amp;#34;/home&amp;#34;);  }   return (  &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt;  Go home  &amp;lt;/button&amp;gt;  ); }   React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 import { useHistory } from &amp;#34;react-router-dom&amp;#34;; function HomeButton() { const history = useHistory(); function handleClick() { history.push(&amp;#34;/home&amp;#34;); } return ( &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt; Go home &amp;lt;/button&amp;gt; ); } React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</description>
     </item>
     
     <item>
@@ -903,7 +940,7 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/06/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</guid>
-      <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7  npm config get registry # 查看npm当前镜像源  npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像  yarn config get registry # 查看yarn当前镜像源  yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像   镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
+      <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7 npm config get registry # 查看npm当前镜像源 npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像 yarn config get registry # 查看yarn当前镜像源 yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像 镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
     </item>
     
     <item>
@@ -921,7 +958,8 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/05/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid>
-      <description>精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法 </description>
+      <description>
+精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法 </description>
     </item>
     
     <item>
@@ -930,12 +968,13 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
-      <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
+      <description>
+又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
 另见pacman。
-从repos和AUR交互式搜索和安装包： 1  yay {{package_name|search_term}}   同步和更新repos和AUR中的所有包： 1  yay   仅同步和更新AUR包： 1  yay -Sua   从repos和AUR安装新包： 1  yay -S {{package_name}}   在包数据库中搜索repos和AUR中的关键字： 1  yay -Ss {{keyword}}   显示已安装包和系统运行状况的统计信息： 1  yay -Ps    2020-04-20更新
- curl: (33) HTTP server doesn&amp;rsquo;t seem to support byte ranges. Cannot resume. 选择清空之前下载就可以
+从repos和AUR交互式搜索和安装包： 1 yay {{package_name|search_term}} 同步和更新repos和AUR中的所有包： 1 yay 仅同步和更新AUR包： 1 yay -Sua 从repos和AUR安装新包： 1 yay -S {{package_name}} 在包数据库中搜索repos和AUR中的关键字： 1 yay -Ss {{keyword}} 显示已安装包和系统运行状况的统计信息： 1 yay -Ps 2020-04-20更新
+curl: (33) HTTP server doesn&amp;rsquo;t seem to support byte ranges. Cannot resume. 选择清空之前下载就可以
 或者执行：
-1  rm -rf ~/.cache/yay/*   </description>
+1 rm -rf ~/.cache/yay/* </description>
     </item>
     
     <item>
@@ -947,10 +986,10 @@ Global 常用设定 editor 1  editor.fontFamily // 设定字型偏好    唯一�
       <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关闭IPv6。 下面是IPv6的关闭方法应该适用于所有主流的Linux发行版包括Ubuntu、Debian、CentOS。
 IPv6在CentOS6.5系统中默认是启用状态，通过以下方式可以确认IPv6的状态
 1.1.查看系统IPv6的启用状态 以下命令返回值为0表示IPv6启用，1表示禁用
-1 2 3 4 5  cat /proc/sys/net/ipv6/conf/all/disable_ipv6 cat /proc/sys/net/ipv6/conf/default/disable_ipv6 ifconfig ip address list netstat -anptl   1.2.查看内核模块调用 有返回结果，说明IPv6模块已启用，可以看出那些程序进行了调用，反之没有启用
+1 2 3 4 5 cat /proc/sys/net/ipv6/conf/all/disable_ipv6 cat /proc/sys/net/ipv6/conf/default/disable_ipv6 ifconfig ip address list netstat -anptl 1.2.查看内核模块调用 有返回结果，说明IPv6模块已启用，可以看出那些程序进行了调用，反之没有启用
 lsmod | grep ipv6
 2.禁用IPv6 2.1.临时禁用IPv6 命令行调整内核参数，临时禁用IPv6
-1 2 3 4 5  echo 1 &amp;gt;/proc/sys/net/ipv6/conf/all/disable_ipv6 echo 1 &amp;gt;/proc/sys/net/ipv6/conf/default/disable_ipv6 # 或着 sysctl -w net.ipv6.conf.all.disable_ipv6=1 sysctl -w net.ipv6.conf.default.disable_ipv6=1   2.2.永久禁用IPv6 1 2 3 4 5 6 7 8  echo &amp;#34; &amp;#34;&amp;gt;&amp;gt;/etc/sysctl.conf echo &amp;#34;# made for disabled IPv6 in $(date +%F)&amp;#34;&amp;gt;&amp;gt;/etc/sysctl.</description>
+1 2 3 4 5 echo 1 &amp;gt;/proc/sys/net/ipv6/conf/all/disable_ipv6 echo 1 &amp;gt;/proc/sys/net/ipv6/conf/default/disable_ipv6 # 或着 sysctl -w net.ipv6.conf.all.disable_ipv6=1 sysctl -w net.ipv6.conf.default.disable_ipv6=1 2.2.永久禁用IPv6 1 2 3 4 5 6 7 8 echo &amp;#34; &amp;#34;&amp;gt;&amp;gt;/etc/sysctl.conf echo &amp;#34;# made for disabled IPv6 in $(date +%F)&amp;#34;&amp;gt;&amp;gt;/etc/sysctl.conf echo &amp;#39;net.</description>
     </item>
     
     <item>
@@ -961,10 +1000,11 @@ lsmod | grep ipv6
       <guid>https://sy123.netlify.app/2020/01/26/linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</guid>
       <description>windows下格式化u盘很简单，要么直接右键格式化，要么进入硬盘分区去格式化。那么Linux下呢？ 其实Linux下格式化u盘也十分简单，只需要几条命令就可以了：
 查看磁盘情况 sudo fdisk -l 可以看到有一个/dev/sdb的磁盘就是我们插入的u盘了，大小为28.8GB，类型为NTFS。
-2. 删除分区 1 2 3 4 5 6  sudo fdisk /dev/sdb m # 获取帮助命令 d # 删除分区 n # 新建分区 p # 打印分区表 w # 写入分区表并退出   一定要记得最后的w命令。
+2. 删除分区 1 2 3 4 5 6 sudo fdisk /dev/sdb m # 获取帮助命令 d # 删除分区 n # 新建分区 p # 打印分区表 w # 写入分区表并退出 一定要记得最后的w命令。
 3. 格式化分区 格式化分区只需要使用mkfs.+（format）命令,例如格式化为fat格式，则在终端输入以下命令：
-1 2 3  sudo mkfs.vfat -L labelname /dev/sdb1 # -L命令是可选，为你的u盘重新命名 # 最后的/dev/sdb1一定要是设备名   在windows下，我们常用的格式是ntfs，但是Linux默认是不支持ntfs格式的，所以我们需要安装另一个包NTFS-3G：
-1 2  sudo pacman -S ntfs-3g sudo mkfs.ntfs -Q -L labelname /dev/sdb1   现在我们就将u盘格式化为ntfs格式了，可以轻松的在windows下使用了。</description>
+1 2 3 sudo mkfs.vfat -L labelname /dev/sdb1 # -L命令是可选，为你的u盘重新命名 # 最后的/dev/sdb1一定要是设备名 在windows下，我们常用的格式是ntfs，但是Linux默认是不支持ntfs格式的，所以我们需要安装另一个包NTFS-3G：
+1 2 sudo pacman -S ntfs-3g sudo mkfs.ntfs -Q -L labelname /dev/sdb1 现在我们就将u盘格式化为ntfs格式了，可以轻松的在windows下使用了。
+umount is too slow Are you using a 64-bit version of Linux with a lot of memory and the attached disk is a relatively slow one (any USB 2 will qualify)?</description>
     </item>
     
     <item>
@@ -974,8 +1014,8 @@ lsmod | grep ipv6
       
       <guid>https://sy123.netlify.app/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
-  Java default look   Java GTK+ look   How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
-1  export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34;   First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>
+Java default look Java GTK+ look How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
+1 export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34; First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>
     </item>
     
     <item>
@@ -998,8 +1038,8 @@ There is no saved history - a history is kept only for the duration of the curre
       <guid>https://sy123.netlify.app/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
       <description>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删除唯一性信息，这使得你可以在不同的计算机上重复使用映像。下次启动 Windows 映像时，将运行 specialize 配置阶段。
 Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
-1 2 3 4 5 6 7 8 9 10 11  Sysprep.exe [/oobe | /audit]  [/generalize]  [/mode:vm]  [/reboot | /shutdown | /quit]  [/quiet]  [/unattend:&amp;lt;answerfile&amp;gt;]   下表列出了 Sysprep 命令行选项：
-   选项 描述     /audit 重新启动计算机进入审核模式。审核模式使你可以将其他驱动程序或应用程序添加到 Windows。你还可以在将 Windows 安装发送给最终用户前对其进行测试。例如：   Sysprep /audit 如果指定了应答文件，则 Windows 安装程序的审核模式将运行 auditSystem 和 auditUser 配置阶段。   /generalize 准备要作为映像的 Windows 安装。Sysprep 工具会从 Windows 安装中删除所有唯一的系统信息。Sysprep 将重置安全 ID (SID)，清除所有系统还原点，并删除事件日志。例如：   Sysprep /generalize /shutdown 下次计算机启动时，将运行 specialize 配置阶段。该配置阶段将创建一个新安全 ID (SID)。   /oobe 重新启动计算机进入 OOBE 模式。例如：   Sysprep /generalize /shutdown /oobe OOBE 允许最终用户自定义其 Windows 操作系统、创建用户帐户、命名计算机和执行其他任务。Sysprep 在 OOBE 启动前，将处理应答文件中 oobeSystem 配置阶段的所有设置。   /mode:vm Windows(R) 8 的新增内容。一般化虚拟硬盘 (VHD)，这样可以将其部署为相同虚拟机 (VM) 或虚拟机监控程序上的 VHD。VM 重新启动后，该 VM 可以引导到 OOBE。例如：   Sysprep /generalize /oobe /mode:vm 仅有的适用于 VM 模式的额外交换机为“/reboot”、“/shutdown”和“/quit”。必须使用相同的硬件配置文件在虚拟机或虚拟机监控程序上部署 VHD。例如，如果你已在 Microsoft Hyper-V 中创建 VHD，仅可以使用匹配的硬件配置文件将 VHD 部署到 Microsoft Hyper-V VM。使用不同的硬件配置文件将 VHD 部署到不同的 VM 可能会导致意外的问题。   /reboot 重新启动计算机。可以使用该选项审核计算机并确保首次运行体验正确工作。   /shutdown 在 sysprep 命令完成运行后关闭计算机。   /quiet 运行 Sysprep 工具而不显示屏幕确认消息。如果自动运行 Sysprep 工具，则可以使用该选项。   /quit Sysprep 运行指定命令后，无需重新启动或关闭计算机即可关闭 Sysprep 工具。   /unattend: 在无人参与的安装过程中，将应答文件中的设置应用到 Windows，其中  指定要使用的应答文件的路径和文件名。例如：Sysprep /audit /reboot /unattend:F:\Unattend.</description>
+1 2 3 4 5 6 7 8 9 10 11 Sysprep.exe [/oobe | /audit] [/generalize] [/mode:vm] [/reboot | /shutdown | /quit] [/quiet] [/unattend:&amp;lt;answerfile&amp;gt;] 下表列出了 Sysprep 命令行选项：
+选项 描述 /audit 重新启动计算机进入审核模式。审核模式使你可以将其他驱动程序或应用程序添加到 Windows。你还可以在将 Windows 安装发送给最终用户前对其进行测试。例如： Sysprep /audit 如果指定了应答文件，则 Windows 安装程序的审核模式将运行 auditSystem 和 auditUser 配置阶段。 /generalize 准备要作为映像的 Windows 安装。Sysprep 工具会从 Windows 安装中删除所有唯一的系统信息。Sysprep 将重置安全 ID (SID)，清除所有系统还原点，并删除事件日志。例如： Sysprep /generalize /shutdown 下次计算机启动时，将运行 specialize 配置阶段。该配置阶段将创建一个新安全 ID (SID)。 /oobe 重新启动计算机进入 OOBE 模式。例如： Sysprep /generalize /shutdown /oobe OOBE 允许最终用户自定义其 Windows 操作系统、创建用户帐户、命名计算机和执行其他任务。Sysprep 在 OOBE 启动前，将处理应答文件中 oobeSystem 配置阶段的所有设置。 /mode:vm Windows(R) 8 的新增内容。一般化虚拟硬盘 (VHD)，这样可以将其部署为相同虚拟机 (VM) 或虚拟机监控程序上的 VHD。VM 重新启动后，该 VM 可以引导到 OOBE。例如： Sysprep /generalize /oobe /mode:vm 仅有的适用于 VM 模式的额外交换机为“/reboot”、“/shutdown”和“/quit”。必须使用相同的硬件配置文件在虚拟机或虚拟机监控程序上部署 VHD。例如，如果你已在 Microsoft Hyper-V 中创建 VHD，仅可以使用匹配的硬件配置文件将 VHD 部署到 Microsoft Hyper-V VM。使用不同的硬件配置文件将 VHD 部署到不同的 VM 可能会导致意外的问题。 /reboot 重新启动计算机。可以使用该选项审核计算机并确保首次运行体验正确工作。 /shutdown 在 sysprep 命令完成运行后关闭计算机。 /quiet 运行 Sysprep 工具而不显示屏幕确认消息。如果自动运行 Sysprep 工具，则可以使用该选项。 /quit Sysprep 运行指定命令后，无需重新启动或关闭计算机即可关闭 Sysprep 工具。 /unattend: 在无人参与的安装过程中，将应答文件中的设置应用到 Windows，其中 指定要使用的应答文件的路径和文件名。例如：Sysprep /audit /reboot /unattend:F:\Unattend.</description>
     </item>
     
     <item>
@@ -1008,7 +1048,7 @@ Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</guid>
-      <description>1 2 3 4 5 6 7 8 9 10 11 12  # 查看当前设置  wmic pagefile list /format:list  # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False  # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096  # 重启生效 shutdown -r -t 0   </description>
+      <description> 1 2 3 4 5 6 7 8 9 10 11 12 # 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t 0 </description>
     </item>
     
     <item>
@@ -1021,9 +1061,9 @@ Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
 Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
 下面记录一下ArchLinux中配置Samba的过程，留作备份。
 首先，是安装Samba，ArchLinux可以直接从源中获取并安装Samba：
-1  pacman -S samba   等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：
+1 pacman -S samba 等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：
 在/etc/samba目录中，直接建立一个空的smb.conf，然后将如下内容粘贴过去：
-1 2 3 4 5 6 7 8 9 10 11  [global] workgroup = WORKGROUP security = user  [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644   这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
+1 2 3 4 5 6 7 8 9 10 11 [global] workgroup = WORKGROUP security = user [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644 这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
 workgroup，这个顾名思义，计算机的工作组名称，比如我是和我的Win7来共享文件，最好把工作组和我的Win7设成通一个工作组，这样方便Win7通过网络发现来找到我的下载机。这里，我的win7工作组名字，就叫做：WORKGROUP了
 security，这是指共享目录的安全认证形式，security的值，有两种可以设置：
 第一种，是设成上面例子中的user，意思是在访问共享目录的时候，需要通过用户名和密码的方式来认证，可以给共享目录提供一定的安全性保护。
@@ -1034,7 +1074,10 @@ security，这是指共享目录的安全认证形式，security的值，有两�
 下面的path，就是你想共享的Linux目录了，我设成了我的Transmission的下载目录。
 后面的valid users，是一个用户帐号，也即通过用户名和密码来访问共享目录的那个帐号，如果你把security设成share，这一项可以去掉。
 下面是一些权限的设置，以及是否允许访问者有写入共享目录的权限，各个参数可以查看Samba文档，就不一一介绍了。
-最后，说一下security设成user后，帐号的设置问题。</description>
+最后，说一下security设成user后，帐号的设置问题。
+首先，你可以添加一个新的Linux帐号，专门用来访问共享目录用。比如，我就添加了一个帐号，叫做Samba
+然后就是给帐号设置访问共享目录的密码，这里需要注意，密码不是通过Linux命令passwd来设置的。这里的密码，是指Samba的密码，而不是Linux密码。
+所以，得用命令 pdbedit -a -u (username)来修改Samba密码。</description>
     </item>
     
     <item>
@@ -1080,12 +1123,13 @@ iptables -A INPUT -p tcp &amp;ndash;dport 22 -j ACCEPT</description>
       <guid>https://sy123.netlify.app/2020/01/17/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</guid>
       <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。
 以下为批处理自动关闭netbios脚本:
-1 2 3 4 5 6 7 8 9 10 11 12  @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do (  wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0  if exist one_time.cmd (  del /f /q %0  exit ) rename %0 one_time.cmd exit   功能: 一键关闭netbios，执行完第二次后自己删除自己。
+1 2 3 4 5 6 7 8 9 10 11 12 @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do ( wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0 if exist one_time.cmd ( del /f /q %0 exit ) rename %0 one_time.cmd exit 功能: 一键关闭netbios，执行完第二次后自己删除自己。
 适用性:， 在win7及win2008测试通过，其它系统没测。
 说明: 用法：复制上述脚本随便起个名，扩展名改为bat或者cmd。最好把文件放到开机启动目录，开机就运行。windows下自启动目录如下： C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup
 如何开启NETBIOS? 把上述代码第四行最后数字改为1即为开启，改为0即为默认设置，为2时代表关闭（上述代码已默认设为关闭NETBIOS)。
 为何要第二次才删除？ 如果是新装或者复制了系统，第一次开机是检测并安装网卡设备。如果未安装完网卡就运行完脚本，那脚本就发挥不了作用。
-运行流程： 在运行第一次的时候会自动把本脚本重命名为one_time.</description>
+运行流程： 在运行第一次的时候会自动把本脚本重命名为one_time.cmd 在第二次运行脚本监测到有one_time.cmd文件后会自我删除。 本脚本用for循环20次，每个网卡都尝试关闭NETBIOS,（一般系统有十多个网卡序号）如果不够（不放心）就就把第三行代码由数字20改为30或更多。如果想要查看自己的网卡序号可以在CMD里输入以下命令：wmic nicconfig Get Caption,index
+参考文档:批处理如何恢复Netbios</description>
     </item>
     
     <item>
@@ -1121,9 +1165,9 @@ Samba服务 为了实现UNIX、Linux等非Windows能够访问Windows的文件共
 利用 Diskpart 命令分区 当安装程序运行到创建磁盘分区界面时按下 Shift+F10 启动命令窗口。
 键入 Diskpart 进入 Diskpart 的命令环境，其提示符为 DISKPART&amp;gt;。
 在此提示下键入相应命令就可以进行分区操作，具体用到的命令有：
-1 2 3 4 5 6  Clean List Select Create Format Exit   这些命令的使用方法可以在 Diskpart 命令提示符下键入 Help 或者通过网络查询，如果不清楚可以查看。
+1 2 3 4 5 6 Clean List Select Create Format Exit 这些命令的使用方法可以在 Diskpart 命令提示符下键入 Help 或者通过网络查询，如果不清楚可以查看。
 使用 List Disk 命令显示的目标磁盘若为 1 号，则建立分区的步骤如下：以下是命令顺序及操作解释：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  List Disk：显示本机的所有磁盘，以便正确操作目标磁盘 Select Disk 1：选择 0 号磁盘 Clean ：清除 0 号磁盘上的所有分区 Create Partition Primary Size=512000 ：创建主分区，容量为：512000MB Active：激活主分区 Format Quick：快速格式化当前分区 Create Partition Extended：创建扩展分区 Create Partition Logical Size=512000：创建逻辑分区一，容量为：512000MB Format Quick：快速格式化当前分区 Create Partition Logical Size=512000：创建逻辑分区二，容量为：512000MB Format Quick ：快速格式化当前分区 Create Partition Logical ：创建逻辑分区三，大小为剩余的容量 Format Quick ：快速格式化当前分区 Exit ：退出Diskpart命令环境 Exit ：退出命令窗口   这里要注意的是 Diskpart 分区时，一定要选对目标磁盘，当前被选中的磁盘 / 分区前面会有 * 号标志，可以用 List Disk / Partition 来进行查看。</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 List Disk：显示本机的所有磁盘，以便正确操作目标磁盘 Select Disk 1：选择 0 号磁盘 Clean ：清除 0 号磁盘上的所有分区 Create Partition Primary Size=512000 ：创建主分区，容量为：512000MB Active：激活主分区 Format Quick：快速格式化当前分区 Create Partition Extended：创建扩展分区 Create Partition Logical Size=512000：创建逻辑分区一，容量为：512000MB Format Quick：快速格式化当前分区 Create Partition Logical Size=512000：创建逻辑分区二，容量为：512000MB Format Quick ：快速格式化当前分区 Create Partition Logical ：创建逻辑分区三，大小为剩余的容量 Format Quick ：快速格式化当前分区 Exit ：退出Diskpart命令环境 Exit ：退出命令窗口 这里要注意的是 Diskpart 分区时，一定要选对目标磁盘，当前被选中的磁盘 / 分区前面会有 * 号标志，可以用 List Disk / Partition 来进行查看。</description>
     </item>
     
     <item>
@@ -1140,13 +1184,16 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
 第二种是http代理,即通信方式为http而不是socket http://127.0.0.1:12333 详细举例:
 这里的客户端有两种方式,一个是socket通信,一个是http通信,两个方式对应的端口不同,在下文中不同代理方式设置的端口也不同. 实在不懂的记住:先把代理调试通,然后就直接打开switchyomega看看自己的设置,都是一样的
 方法一：（推荐使用） 为什么说这个方法推荐使用呢？因为他只作用于当前终端中，不会影响环境，而且命令比较简单 在终端中直接运行：
-1  export http_proxy=http://proxyAddress:port   如果你是SSR,并且走的http的代理端口是12333，想执行wget或者curl来下载国外的东西，可以使用如下命令：
-1  export http_proxy=http://127.0.0.1:12333   如果是https那么就经过如下命令：
-1  export https_proxy=http://127.0.0.1:12333   方法二 ： 这个办法的好处是把代理服务器永久保存了，下次就可以直接用了 把代理服务器地址写入shell配置文件.bashrc或者.zshrc 直接在.bashrc或者.zshrc添加下面内容
-1 2  export http_proxy=&amp;#34;http://localhost:port&amp;#34; export https_proxy=&amp;#34;http://localhost:port&amp;#34;   或者走socket5协议（ss,ssr）的话，代理端口是1080
-1 2  export http_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; export https_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34;   或者干脆直接设置ALL_PROXY
-1  export ALL_PROXY=socks5://127.0.0.1:1080   最后在执行如下命令应用设置
-1  source ~/.</description>
+1 export http_proxy=http://proxyAddress:port 如果你是SSR,并且走的http的代理端口是12333，想执行wget或者curl来下载国外的东西，可以使用如下命令：
+1 export http_proxy=http://127.0.0.1:12333 如果是https那么就经过如下命令：
+1 export https_proxy=http://127.0.0.1:12333 方法二 ： 这个办法的好处是把代理服务器永久保存了，下次就可以直接用了 把代理服务器地址写入shell配置文件.bashrc或者.zshrc 直接在.bashrc或者.zshrc添加下面内容
+1 2 export http_proxy=&amp;#34;http://localhost:port&amp;#34; export https_proxy=&amp;#34;http://localhost:port&amp;#34; 或者走socket5协议（ss,ssr）的话，代理端口是1080
+1 2 export http_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; export https_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; 或者干脆直接设置ALL_PROXY
+1 export ALL_PROXY=socks5://127.0.0.1:1080 最后在执行如下命令应用设置
+1 source ~/.bashrc 或者通过设置alias简写来简化操作，每次要用的时候输入setproxy，不用了就unsetproxy。
+1 alias setproxy=&amp;#34;export ALL_PROXY=socks5://127.0.0.1:1080&amp;#34; alias unsetproxy=&amp;#34;unset ALL_PROXY&amp;#34; 方法三: 改相应工具的配置，比如apt的配置
+1 sudo vim /etc/apt/apt.conf 在文件末尾加入下面这行
+Acquire::http::Proxy &amp;ldquo;http://proxyAddress:port&amp;rdquo; 重点来了！！如果说经常使用git对于其他方面都不是经常使用，可以直接配置git的命令。 使用ss/ssr来加快git的速度 直接输入这个命令就好了</description>
     </item>
     
     <item>
@@ -1156,9 +1203,9 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
       
       <guid>https://sy123.netlify.app/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</guid>
       <description>最好是先复制到自己的网盘。
-  点击分享，生成链接。
-  点击链接，进入页面。在console模式下输入如下代码：
-  1 2 3 4 5 6 7 8 9  $.ajax({ type: &amp;#34;POST&amp;#34;, url: &amp;#34;/api/sharedownload?sign=&amp;#34;+yunData.SIGN+&amp;#34;&amp;amp;timestamp=&amp;#34;+yunData.TIMESTAMP, data: &amp;#34;encrypt=0&amp;amp;product=share&amp;amp;uk=&amp;#34;+yunData.SHARE_UK+&amp;#34;&amp;amp;primaryid=&amp;#34;+yunData.SHARE_ID+&amp;#34;&amp;amp;fid_list=%5B&amp;#34;+yunData.FS_ID+&amp;#34;%5D&amp;#34;, dataType: &amp;#34;json&amp;#34;, success: function(d){ window.location.href = d.list[0].dlink; } });   客户端接口加密算法</description>
+点击分享，生成链接。
+点击链接，进入页面。在console模式下输入如下代码：
+1 2 3 4 5 6 7 8 9 $.ajax({ type: &amp;#34;POST&amp;#34;, url: &amp;#34;/api/sharedownload?sign=&amp;#34;+yunData.SIGN+&amp;#34;&amp;amp;timestamp=&amp;#34;+yunData.TIMESTAMP, data: &amp;#34;encrypt=0&amp;amp;product=share&amp;amp;uk=&amp;#34;+yunData.SHARE_UK+&amp;#34;&amp;amp;primaryid=&amp;#34;+yunData.SHARE_ID+&amp;#34;&amp;amp;fid_list=%5B&amp;#34;+yunData.FS_ID+&amp;#34;%5D&amp;#34;, dataType: &amp;#34;json&amp;#34;, success: function(d){ window.location.href = d.list[0].dlink; } }); 客户端接口加密算法</description>
     </item>
     
     <item>
@@ -1171,16 +1218,22 @@ socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或�
 安装git和配置就不说了。
 进入到等下要push的代码的目录文件夹，打开bash 请输入图片描述
 进入到等下要push的代码的目录文件夹，打开bash 请输入图片描述
-初始化 1   git init   初始化后在本地代码库会自动创建一个.git隐藏文件，这个就是本地代码库
-加载文件 1   git add .   . 是把文件夹里面的所有文件都加载进来
+初始化 1 git init 初始化后在本地代码库会自动创建一个.git隐藏文件，这个就是本地代码库
+加载文件 1 git add . . 是把文件夹里面的所有文件都加载进来
 还可以单个加载
-1   git add index.html,test.html   四：
-提交文件，创建时间点 1   git commit -m &amp;#34;init commit&amp;#34;   -m &amp;ldquo;这里的文件是注释&amp;rdquo;
+1 git add index.html,test.html 四：
+提交文件，创建时间点 1 git commit -m &amp;#34;init commit&amp;#34; -m &amp;ldquo;这里的文件是注释&amp;rdquo;
 创建之后可以随时回到这个时间点，可以看到有4个文件被修改了，47个插入，51个删除 请输入图片描述
 可以随时用
-1  git status   查看git的状态
+1 git status 查看git的状态
 推送代码 第一次推送的时候要添加远程的代码库到配置
-1  git remote add origin https://github.com/zhong635725959/droplook.git   origin可变，随自己喜欢</description>
+1 git remote add origin https://github.com/zhong635725959/droplook.git origin可变，随自己喜欢
+推送代码：
+1 git push origin master 拉取代码强制合并：
+1 git pull origin master --allow-unrelated-histories 然后会要求输入github的帐号和密码（不可见的） 请输入图片描述
+OK,成功
+解决向github提交代码是老要输入用户名密码
+元亨利贞o 0.723 2016.04.20 22:08:27 字数 524 阅读 18,138 我曾经切换过一次github账号, 似乎还更改过一次github账号的密码, 然后呢?</description>
     </item>
     
   </channel>

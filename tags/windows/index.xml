@@ -15,7 +15,7 @@
       <guid>https://sy123.netlify.app/2020/05/12/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</guid>
       <description>UTC in Windows To dual boot with Windows it is recommended to configure Windows to use UTC, rather than Linux to use localtime. (Windows by default uses localtime [1].)
 It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry:
-1  HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal   You can do this from an Administrator Command Prompt running:</description>
+1 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal You can do this from an Administrator Command Prompt running:</description>
     </item>
     
     <item>
@@ -27,9 +27,10 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
       <description>exclude file Specifies which filenames or wildcarded names must be excluded from the operation.
 Multiple exclude switches are supported.
 Syntax
-1 2 3 4  -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt;  &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard}   See -i (Include) switch description for information about option parameters.
+1 2 3 4 -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt; &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard} See -i (Include) switch description for information about option parameters.
 Examples
-1  7z a -tzip archive.zip *.txt -x!temp.*   adds to the archive.zip all *.txt files, except temp.* files.</description>
+1 7z a -tzip archive.zip *.txt -x!temp.* adds to the archive.zip all *.txt files, except temp.* files.
+1 7z a archive.7z Folder1\ -xr!*.png adds to the archive.</description>
     </item>
     
     <item>
@@ -40,15 +41,15 @@ Examples
       <guid>https://sy123.netlify.app/2020/05/05/%E5%AE%89%E8%A3%85win10%E6%8F%90%E7%A4%BA%E6%88%91%E4%BB%AC%E6%97%A0%E6%B3%95%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E5%88%86%E5%8C%BA%E4%B9%9F%E6%89%BE%E4%B8%8D%E5%88%B0%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%88%86%E5%8C%BA/</guid>
       <description>前言 系统搬来linux有两年了，今天突然发现还是需要win10用ida的，虚拟机很不方便
 虚拟机解决方法 google一下在知乎想起原因:
- 原因似乎在于windows会执着地把系统分区（大概类似于/boot）放到磁盘0（类似于/dev/sda？）上面。而这个时候磁盘0是U盘……于是傻X了……windows就是傻X解决方法，拔U盘/硬盘，从而使想装系统的盘成为磁盘0……或者直接把想装系统的盘做成安装盘，这样它也是磁盘0了&amp;gt;_&amp;laquo;https://link.zhihu.com/?target=http%3A//jingyan.baidu.com/article/2c8c281df6f2d60009252a7c.html&amp;gt;
+原因似乎在于windows会执着地把系统分区（大概类似于/boot）放到磁盘0（类似于/dev/sda？）上面。而这个时候磁盘0是U盘……于是傻X了……windows就是傻X解决方法，拔U盘/硬盘，从而使想装系统的盘成为磁盘0……或者直接把想装系统的盘做成安装盘，这样它也是磁盘0了&amp;gt;_&amp;laquo;https://link.zhihu.com/?target=http%3A//jingyan.baidu.com/article/2c8c281df6f2d60009252a7c.html&amp;gt;
 作者：杨微粒 链接：https://www.zhihu.com/question/21117479/answer/86745809 来源：知乎 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
- 所以解决方案就是我们来帮助系统找到它需要安装的分区，我的虚拟机之前忘记干啥也是双系统出这问题，附加win10磁盘就完事
+所以解决方案就是我们来帮助系统找到它需要安装的分区，我的虚拟机之前忘记干啥也是双系统出这问题，附加win10磁盘就完事
 硬解决 将多余的硬盘拆下来，只留安装的硬盘，（这里不区分机械和固态），就是只留一个硬盘安装系统即可！
 （动手能力弱的朋友请看下面！）
 软解决 在linux下直接复制安装镜像里的 boot sources bootmgr bootmgr.efi
 uefi还需要复制 EFI 文件夹到efi文件夹到efi分区，
 重启安装即可
-安装过程提示help setup cannot continue due to a corrupted 1 2 3 4 5 6 7 8  # 直接擦写一下这块硬盘 dd if=/dev/zero of=/dev/vdb  # fdisk 重新分区 fdisk /dev/vdb  # 格式化 mkfs.ntfs /dev/vdb1   </description>
+安装过程提示help setup cannot continue due to a corrupted 1 2 3 4 5 6 7 8 # 直接擦写一下这块硬盘 dd if=/dev/zero of=/dev/vdb # fdisk 重新分区 fdisk /dev/vdb # 格式化 mkfs.ntfs /dev/vdb1 </description>
     </item>
     
     <item>
@@ -57,7 +58,8 @@ uefi还需要复制 EFI 文件夹到efi文件夹到efi分区，
       <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/02/05/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid>
-      <description>精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法 </description>
+      <description>
+精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法 </description>
     </item>
     
     <item>
@@ -68,8 +70,8 @@ uefi还需要复制 EFI 文件夹到efi文件夹到efi分区，
       <guid>https://sy123.netlify.app/2020/01/20/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
       <description>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删除唯一性信息，这使得你可以在不同的计算机上重复使用映像。下次启动 Windows 映像时，将运行 specialize 配置阶段。
 Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
-1 2 3 4 5 6 7 8 9 10 11  Sysprep.exe [/oobe | /audit]  [/generalize]  [/mode:vm]  [/reboot | /shutdown | /quit]  [/quiet]  [/unattend:&amp;lt;answerfile&amp;gt;]   下表列出了 Sysprep 命令行选项：
-   选项 描述     /audit 重新启动计算机进入审核模式。审核模式使你可以将其他驱动程序或应用程序添加到 Windows。你还可以在将 Windows 安装发送给最终用户前对其进行测试。例如：   Sysprep /audit 如果指定了应答文件，则 Windows 安装程序的审核模式将运行 auditSystem 和 auditUser 配置阶段。   /generalize 准备要作为映像的 Windows 安装。Sysprep 工具会从 Windows 安装中删除所有唯一的系统信息。Sysprep 将重置安全 ID (SID)，清除所有系统还原点，并删除事件日志。例如：   Sysprep /generalize /shutdown 下次计算机启动时，将运行 specialize 配置阶段。该配置阶段将创建一个新安全 ID (SID)。   /oobe 重新启动计算机进入 OOBE 模式。例如：   Sysprep /generalize /shutdown /oobe OOBE 允许最终用户自定义其 Windows 操作系统、创建用户帐户、命名计算机和执行其他任务。Sysprep 在 OOBE 启动前，将处理应答文件中 oobeSystem 配置阶段的所有设置。   /mode:vm Windows(R) 8 的新增内容。一般化虚拟硬盘 (VHD)，这样可以将其部署为相同虚拟机 (VM) 或虚拟机监控程序上的 VHD。VM 重新启动后，该 VM 可以引导到 OOBE。例如：   Sysprep /generalize /oobe /mode:vm 仅有的适用于 VM 模式的额外交换机为“/reboot”、“/shutdown”和“/quit”。必须使用相同的硬件配置文件在虚拟机或虚拟机监控程序上部署 VHD。例如，如果你已在 Microsoft Hyper-V 中创建 VHD，仅可以使用匹配的硬件配置文件将 VHD 部署到 Microsoft Hyper-V VM。使用不同的硬件配置文件将 VHD 部署到不同的 VM 可能会导致意外的问题。   /reboot 重新启动计算机。可以使用该选项审核计算机并确保首次运行体验正确工作。   /shutdown 在 sysprep 命令完成运行后关闭计算机。   /quiet 运行 Sysprep 工具而不显示屏幕确认消息。如果自动运行 Sysprep 工具，则可以使用该选项。   /quit Sysprep 运行指定命令后，无需重新启动或关闭计算机即可关闭 Sysprep 工具。   /unattend: 在无人参与的安装过程中，将应答文件中的设置应用到 Windows，其中  指定要使用的应答文件的路径和文件名。例如：Sysprep /audit /reboot /unattend:F:\Unattend.</description>
+1 2 3 4 5 6 7 8 9 10 11 Sysprep.exe [/oobe | /audit] [/generalize] [/mode:vm] [/reboot | /shutdown | /quit] [/quiet] [/unattend:&amp;lt;answerfile&amp;gt;] 下表列出了 Sysprep 命令行选项：
+选项 描述 /audit 重新启动计算机进入审核模式。审核模式使你可以将其他驱动程序或应用程序添加到 Windows。你还可以在将 Windows 安装发送给最终用户前对其进行测试。例如： Sysprep /audit 如果指定了应答文件，则 Windows 安装程序的审核模式将运行 auditSystem 和 auditUser 配置阶段。 /generalize 准备要作为映像的 Windows 安装。Sysprep 工具会从 Windows 安装中删除所有唯一的系统信息。Sysprep 将重置安全 ID (SID)，清除所有系统还原点，并删除事件日志。例如： Sysprep /generalize /shutdown 下次计算机启动时，将运行 specialize 配置阶段。该配置阶段将创建一个新安全 ID (SID)。 /oobe 重新启动计算机进入 OOBE 模式。例如： Sysprep /generalize /shutdown /oobe OOBE 允许最终用户自定义其 Windows 操作系统、创建用户帐户、命名计算机和执行其他任务。Sysprep 在 OOBE 启动前，将处理应答文件中 oobeSystem 配置阶段的所有设置。 /mode:vm Windows(R) 8 的新增内容。一般化虚拟硬盘 (VHD)，这样可以将其部署为相同虚拟机 (VM) 或虚拟机监控程序上的 VHD。VM 重新启动后，该 VM 可以引导到 OOBE。例如： Sysprep /generalize /oobe /mode:vm 仅有的适用于 VM 模式的额外交换机为“/reboot”、“/shutdown”和“/quit”。必须使用相同的硬件配置文件在虚拟机或虚拟机监控程序上部署 VHD。例如，如果你已在 Microsoft Hyper-V 中创建 VHD，仅可以使用匹配的硬件配置文件将 VHD 部署到 Microsoft Hyper-V VM。使用不同的硬件配置文件将 VHD 部署到不同的 VM 可能会导致意外的问题。 /reboot 重新启动计算机。可以使用该选项审核计算机并确保首次运行体验正确工作。 /shutdown 在 sysprep 命令完成运行后关闭计算机。 /quiet 运行 Sysprep 工具而不显示屏幕确认消息。如果自动运行 Sysprep 工具，则可以使用该选项。 /quit Sysprep 运行指定命令后，无需重新启动或关闭计算机即可关闭 Sysprep 工具。 /unattend: 在无人参与的安装过程中，将应答文件中的设置应用到 Windows，其中 指定要使用的应答文件的路径和文件名。例如：Sysprep /audit /reboot /unattend:F:\Unattend.</description>
     </item>
     
     <item>
@@ -78,7 +80,7 @@ Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
       <guid>https://sy123.netlify.app/2020/01/20/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</guid>
-      <description>1 2 3 4 5 6 7 8 9 10 11 12  # 查看当前设置  wmic pagefile list /format:list  # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False  # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096  # 重启生效 shutdown -r -t 0   </description>
+      <description> 1 2 3 4 5 6 7 8 9 10 11 12 # 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t 0 </description>
     </item>
     
     <item>
@@ -91,9 +93,9 @@ Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
 Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
 下面记录一下ArchLinux中配置Samba的过程，留作备份。
 首先，是安装Samba，ArchLinux可以直接从源中获取并安装Samba：
-1  pacman -S samba   等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：
+1 pacman -S samba 等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：
 在/etc/samba目录中，直接建立一个空的smb.conf，然后将如下内容粘贴过去：
-1 2 3 4 5 6 7 8 9 10 11  [global] workgroup = WORKGROUP security = user  [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644   这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
+1 2 3 4 5 6 7 8 9 10 11 [global] workgroup = WORKGROUP security = user [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644 这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
 workgroup，这个顾名思义，计算机的工作组名称，比如我是和我的Win7来共享文件，最好把工作组和我的Win7设成通一个工作组，这样方便Win7通过网络发现来找到我的下载机。这里，我的win7工作组名字，就叫做：WORKGROUP了
 security，这是指共享目录的安全认证形式，security的值，有两种可以设置：
 第一种，是设成上面例子中的user，意思是在访问共享目录的时候，需要通过用户名和密码的方式来认证，可以给共享目录提供一定的安全性保护。
@@ -104,7 +106,10 @@ security，这是指共享目录的安全认证形式，security的值，有两�
 下面的path，就是你想共享的Linux目录了，我设成了我的Transmission的下载目录。
 后面的valid users，是一个用户帐号，也即通过用户名和密码来访问共享目录的那个帐号，如果你把security设成share，这一项可以去掉。
 下面是一些权限的设置，以及是否允许访问者有写入共享目录的权限，各个参数可以查看Samba文档，就不一一介绍了。
-最后，说一下security设成user后，帐号的设置问题。</description>
+最后，说一下security设成user后，帐号的设置问题。
+首先，你可以添加一个新的Linux帐号，专门用来访问共享目录用。比如，我就添加了一个帐号，叫做Samba
+然后就是给帐号设置访问共享目录的密码，这里需要注意，密码不是通过Linux命令passwd来设置的。这里的密码，是指Samba的密码，而不是Linux密码。
+所以，得用命令 pdbedit -a -u (username)来修改Samba密码。</description>
     </item>
     
     <item>
@@ -115,12 +120,13 @@ security，这是指共享目录的安全认证形式，security的值，有两�
       <guid>https://sy123.netlify.app/2020/01/17/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</guid>
       <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。
 以下为批处理自动关闭netbios脚本:
-1 2 3 4 5 6 7 8 9 10 11 12  @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do (  wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0  if exist one_time.cmd (  del /f /q %0  exit ) rename %0 one_time.cmd exit   功能: 一键关闭netbios，执行完第二次后自己删除自己。
+1 2 3 4 5 6 7 8 9 10 11 12 @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do ( wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0 if exist one_time.cmd ( del /f /q %0 exit ) rename %0 one_time.cmd exit 功能: 一键关闭netbios，执行完第二次后自己删除自己。
 适用性:， 在win7及win2008测试通过，其它系统没测。
 说明: 用法：复制上述脚本随便起个名，扩展名改为bat或者cmd。最好把文件放到开机启动目录，开机就运行。windows下自启动目录如下： C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup
 如何开启NETBIOS? 把上述代码第四行最后数字改为1即为开启，改为0即为默认设置，为2时代表关闭（上述代码已默认设为关闭NETBIOS)。
 为何要第二次才删除？ 如果是新装或者复制了系统，第一次开机是检测并安装网卡设备。如果未安装完网卡就运行完脚本，那脚本就发挥不了作用。
-运行流程： 在运行第一次的时候会自动把本脚本重命名为one_time.</description>
+运行流程： 在运行第一次的时候会自动把本脚本重命名为one_time.cmd 在第二次运行脚本监测到有one_time.cmd文件后会自我删除。 本脚本用for循环20次，每个网卡都尝试关闭NETBIOS,（一般系统有十多个网卡序号）如果不够（不放心）就就把第三行代码由数字20改为30或更多。如果想要查看自己的网卡序号可以在CMD里输入以下命令：wmic nicconfig Get Caption,index
+参考文档:批处理如何恢复Netbios</description>
     </item>
     
     <item>
@@ -156,9 +162,9 @@ Samba服务 为了实现UNIX、Linux等非Windows能够访问Windows的文件共
 利用 Diskpart 命令分区 当安装程序运行到创建磁盘分区界面时按下 Shift+F10 启动命令窗口。
 键入 Diskpart 进入 Diskpart 的命令环境，其提示符为 DISKPART&amp;gt;。
 在此提示下键入相应命令就可以进行分区操作，具体用到的命令有：
-1 2 3 4 5 6  Clean List Select Create Format Exit   这些命令的使用方法可以在 Diskpart 命令提示符下键入 Help 或者通过网络查询，如果不清楚可以查看。
+1 2 3 4 5 6 Clean List Select Create Format Exit 这些命令的使用方法可以在 Diskpart 命令提示符下键入 Help 或者通过网络查询，如果不清楚可以查看。
 使用 List Disk 命令显示的目标磁盘若为 1 号，则建立分区的步骤如下：以下是命令顺序及操作解释：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15  List Disk：显示本机的所有磁盘，以便正确操作目标磁盘 Select Disk 1：选择 0 号磁盘 Clean ：清除 0 号磁盘上的所有分区 Create Partition Primary Size=512000 ：创建主分区，容量为：512000MB Active：激活主分区 Format Quick：快速格式化当前分区 Create Partition Extended：创建扩展分区 Create Partition Logical Size=512000：创建逻辑分区一，容量为：512000MB Format Quick：快速格式化当前分区 Create Partition Logical Size=512000：创建逻辑分区二，容量为：512000MB Format Quick ：快速格式化当前分区 Create Partition Logical ：创建逻辑分区三，大小为剩余的容量 Format Quick ：快速格式化当前分区 Exit ：退出Diskpart命令环境 Exit ：退出命令窗口   这里要注意的是 Diskpart 分区时，一定要选对目标磁盘，当前被选中的磁盘 / 分区前面会有 * 号标志，可以用 List Disk / Partition 来进行查看。</description>
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 List Disk：显示本机的所有磁盘，以便正确操作目标磁盘 Select Disk 1：选择 0 号磁盘 Clean ：清除 0 号磁盘上的所有分区 Create Partition Primary Size=512000 ：创建主分区，容量为：512000MB Active：激活主分区 Format Quick：快速格式化当前分区 Create Partition Extended：创建扩展分区 Create Partition Logical Size=512000：创建逻辑分区一，容量为：512000MB Format Quick：快速格式化当前分区 Create Partition Logical Size=512000：创建逻辑分区二，容量为：512000MB Format Quick ：快速格式化当前分区 Create Partition Logical ：创建逻辑分区三，大小为剩余的容量 Format Quick ：快速格式化当前分区 Exit ：退出Diskpart命令环境 Exit ：退出命令窗口 这里要注意的是 Diskpart 分区时，一定要选对目标磁盘，当前被选中的磁盘 / 分区前面会有 * 号标志，可以用 List Disk / Partition 来进行查看。</description>
     </item>
     
   </channel>
