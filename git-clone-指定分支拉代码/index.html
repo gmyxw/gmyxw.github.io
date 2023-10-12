@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>git clone 指定分支拉代码 - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <a href="https://sy123.netlify.app/">zhili</a> ❯
+      <a href="/git-clone-%e6%8c%87%e5%ae%9a%e5%88%86%e6%94%af%e6%8b%89%e4%bb%a3%e7%a0%81">Git clone 指定分支拉代码</a>/</h1>
+  </div>
+  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>git clone 指定分支拉代码</h1>
+  </div>
+<div class="meta">
+  <div>🕓2020-02-10 13:07</div>
+  <div>
+    <span><a href="https://sy123.netlify.app/tags/github/">#github</a></span>
+      </div>
+  </div>
+<div class="content">
+  <h2 id="git-clone-不指定分支">git clone 不指定分支</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git clone  http://10.1.1.11/service/tmall-service.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git-clone-指定分支">git clone 指定分支</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git clone -b dev_jk http://10.1.1.11/service/tmall-service.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>命令中：多了一个  <code>-b dev-jk</code>,这个<code>dev_jk</code>就是分支，http://10.1.1.11/service/tmall
+-service.git为源码的仓库地址</p>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2022 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/antd/</link>
     <description>Recent content in antd on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Wed, 26 Feb 2020 15:28:15 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/antd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>出现value.locale is not a function问题解决办法</title>
-      <link>https://sy123.netlify.app/2020/02/26/%E5%87%BA%E7%8E%B0value.locale-is-not-a-function%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</link>
+      <link>https://sy123.netlify.app/%E5%87%BA%E7%8E%B0value.locale-is-not-a-function%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</link>
       <pubDate>Wed, 26 Feb 2020 15:28:15 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/26/%E5%87%BA%E7%8E%B0value.locale-is-not-a-function%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</guid>
+      <guid>https://sy123.netlify.app/%E5%87%BA%E7%8E%B0value.locale-is-not-a-function%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</guid>
       <description>给datepicker赋值 可以输出赋值,datepicker赋值需要moment格式的数据,如果赋值了string类型的会报错 需要进行moment格式化moment(dateString)
 给普通字符串赋值 如果赋值了moment类型的数据 可以通过moment(date).format(XXX)来解决,如果还不行的话可以使用date&amp;amp;&amp;amp; moment(date).lacale(‘en’).format(XXX)</description>
     </item>

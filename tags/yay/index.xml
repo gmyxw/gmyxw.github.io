@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/yay/</link>
     <description>Recent content in yay on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Wed, 05 Feb 2020 12:57:49 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/yay/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux yay 命令</title>
-      <link>https://sy123.netlify.app/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</link>
+      <link>https://sy123.netlify.app/linux-yay-%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://sy123.netlify.app/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
       <description>
 又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
 另见pacman。

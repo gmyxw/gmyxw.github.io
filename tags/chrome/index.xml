@@ -5,23 +5,34 @@
     <link>https://sy123.netlify.app/tags/chrome/</link>
     <description>Recent content in chrome on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Fri, 13 Mar 2020 02:46:41 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
+    <lastBuildDate>Sun, 09 Oct 2022 20:21:45 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Chrome内置翻译被抢</title>
+      <link>https://sy123.netlify.app/chrome-translate/</link>
+      <pubDate>Sun, 09 Oct 2022 20:21:45 +0800</pubDate>
+      
+      <guid>https://sy123.netlify.app/chrome-translate/</guid>
+      <description>linux下的chrome内置翻译也只能用系统代理，linux还是比windows好解决，不过我懒得折腾还是直接改hosts好了
+1 2 3 su echo 180.163.151.34 translate.googleapis.com &amp;gt;&amp;gt; /etc/hosts systemctl restart systemd-networkd </description>
+    </item>
+    
     <item>
       <title>Google Chrome 离线安装包的官方下载</title>
-      <link>https://sy123.netlify.app/2020/03/13/google-chrome-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD/</link>
+      <link>https://sy123.netlify.app/google-chrome-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD/</link>
       <pubDate>Fri, 13 Mar 2020 02:46:41 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/03/13/google-chrome-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD/</guid>
+      <guid>https://sy123.netlify.app/google-chrome-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD/</guid>
       <description>在chrome首页的链接https://www.google.com/chrome后加上?system=true&amp;amp;standalone=1，一般默认下载稳定版，如果需要指定下载的版本就再加上&amp;amp;extra=[版本名称]（版本有stablechannel、betachannel、devchannel、canarychannel）。修改完链接后回车，就能下载离线包了。</description>
     </item>
     
     <item>
       <title>Browser plugins</title>
-      <link>https://sy123.netlify.app/2020/03/04/browser-plugins/</link>
+      <link>https://sy123.netlify.app/browser-plugins/</link>
       <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/03/04/browser-plugins/</guid>
+      <guid>https://sy123.netlify.app/browser-plugins/</guid>
       <description>Installation The package you will need to install depends on the browser you use.
 The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package. </description>
     </item>

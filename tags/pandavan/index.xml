@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/pandavan/</link>
     <description>Recent content in pandavan on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Mon, 23 Mar 2020 20:14:04 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/pandavan/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pandavan Off LED Indicator</title>
-      <link>https://sy123.netlify.app/2020/03/23/pandavan-off-led-indicator/</link>
+      <link>https://sy123.netlify.app/pandavan-off-led-indicator/</link>
       <pubDate>Mon, 23 Mar 2020 20:14:04 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/03/23/pandavan-off-led-indicator/</guid>
+      <guid>https://sy123.netlify.app/pandavan-off-led-indicator/</guid>
       <description>在自定义设置 - 按钮/LED 红灯无法关闭 有的固件有BUG只能在路由器启动后执行以下命令
 1 mtk_gpio -w 13 0 #关红灯 </description>
     </item>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Windows update KB2919355 fails to install - Error code 800F0922 - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <a href="https://sy123.netlify.app/">zhili</a> ❯
+      <a href="/kb2919355">Kb2919355</a>/</h1>
+  </div>
+  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Windows update KB2919355 fails to install - Error code 800F0922</h1>
+  </div>
+<div class="meta">
+  <div>🕓2023-10-13 00:23</div>
+  <div>
+    <span><a href="https://sy123.netlify.app/tags/windows/">#windows</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>原因：我的系统是Windows Server 2012 R2 Standard首先我是想要安装SVN客户端，然后系统让我安装Windows Server 2012 R2 安装补丁KB2999226</p>
+<p>思路：经过网上查找资料安装补丁KB2999226之前需要安装KB2919355，安装KB2919355之前必须安装补丁KB2919442，一层一层的，当然过程显然没那么顺利，记录下安装过程</p>
+<h2 id="下载补丁kb2919442kb2919355kb2999226">下载补丁KB2919442；KB2919355；KB2999226</h2>
+<p>请百度查找相关文件上自行下载补丁，这里也有链接：</p>
+<p><a href="https://support.microsoft.com/en-us/help/2919442/march-2014-servicing-stack-update-for-windows-8-1-and-windows-server-2">https://support.microsoft.com/en-us/help/2919442/march-2014-servicing-stack-update-for-windows-8-1-and-windows-server-2</a></p>
+<p><a href="https://support.microsoft.com/en-us/help/2919355/windows-rt-8-1-windows-8-1-windows-server-2012-r2-update-april-2014">https://support.microsoft.com/en-us/help/2919355/windows-rt-8-1-windows-8-1-windows-server-2012-r2-update-april-2014</a></p>
+<p><a href="https://support.microsoft.com/en-us/help/2999226/update-for-universal-c-runtime-in-windows">https://support.microsoft.com/en-us/help/2999226/update-for-universal-c-runtime-in-windows</a></p>
+<h2 id="kb2919442">KB2919442</h2>
+<blockquote>
+<p>此更新不适用于你的计算机</p>
+</blockquote>
+<p>我记得当年刷surface贴吧就看过有老哥说过这个补丁只能第一个安装，很多更新都不能卸载，无奈只能回到初始快照，然后就顺利装上了</p>
+<h2 id="kb2919355">KB2919355</h2>
+<blockquote>
+<p>Installation Failure: Windows failed to install the following update with error 0x80070070: Update for Windows (KB2919355).</p>
+</blockquote>
+<p>看了下C盘空间还有6G，看下日志也是disk full之类的报错，我之前就帮同事处理过这类问题，很明显就是系统还原的问题，服务器完全用不到关掉就好，但是关闭系统还原后就引出本文的主题，真正的难题</p>
+<blockquote>
+<p>We couldn’t update system reserved partition, error code 0x800f0922.</p>
+</blockquote>
+<p><a href="https://answers.microsoft.com/en-us/windows/forum/all/kb2919355-windows-81-update-fails-800f0092-and/4d4d23a3-695a-4bd4-b340-d2ce9c75919d?page=40">参考了这个链接后</a>我发现这个是老疑难杂症了，众说纷纭说啥的都有，不过根据各种线索再结合我自己的情况基本可以确定是分区问题，如果是正常安装的系统无论是uefi还是legacy应该都是能正常更新，不过开csm的就很不正常了，这也是为什么当年很多人都出问题，我不想折腾切换成legacy模式来更新就完事了</p>
+<p>不用uefi固件就好，xml文件也一样</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ qemu-system-x86_64 -cdrom ubuntu-21.04-desktop-amd64.iso <span style="color:#998;font-style:italic"># -bios /usr/share/ovmf/OVMF.fd</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>果然改成legacy模式就能正常更新了，真是一波三折，最后顺利安装KB2999226，安装圆满成功了，我的SVN客户端也安装完成。</p>
+<h2 id="后记">后记</h2>
+<p>为了防止麻烦我觉得还是得集成这两个更新一劳永逸，直接把打好补丁的系统做成镜像</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 准备工作</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 首先，您需要确保系统中已经安装了 genisoimage 工具，如果没有，请使用以下命令安装：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo apt-get install genisoimage
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 创建目录</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 在根目录下创建一个空目录（例如 myiso）用于存放 ISO 镜像文件：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo mkdir /myiso
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 复制系统文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 将当前系统的所有文件复制到 myiso 目录下：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo cp -r / /myiso
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 这个命令会将整个文件系统复制到 myiso 目录下。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 创建 ISO 镜像文件</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 现在，可以使用以下命令创建 ISO 镜像文件：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo genisoimage -o /myiso.iso -r -J /myiso
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 该命令将在根目录下创建名为 myiso.iso 的 ISO 镜像文件。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">#-r 表示以 ISO9660 标准创建镜像，-J 表示使用 Joliet 扩展格式支持长文件名和中文文件名。</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 清理工作</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 最后，可以将 myiso 目录删除：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>sudo rm -rf /myiso
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 到此为止，您已经成功将当前系统制作成 ISO 镜像文件。</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 如果需要在其他计算机上安装此系统，可以将该镜像文件刻录到光盘或者使用虚拟机软件进行安装。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="see-aslo">See aslo</h2>
+<ul>
+<li><a href="https://www.microsoft.com/en-us/download/details.aspx?id=42335">https://www.microsoft.com/en-us/download/details.aspx?id=42335</a></li>
+</ul>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2022 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

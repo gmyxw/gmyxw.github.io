@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/androidstudio/</link>
     <description>Recent content in AndroidStudio on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Fri, 15 May 2020 04:26:04 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/androidstudio/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How Do I Remove an Image System for Avd File in Android Studio</title>
-      <link>https://sy123.netlify.app/2020/05/15/how-do-i-remove-an-image-system-for-avd-file-in-android-studio/</link>
+      <link>https://sy123.netlify.app/how-do-i-remove-an-image-system-for-avd-file-in-android-studio/</link>
       <pubDate>Fri, 15 May 2020 04:26:04 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/05/15/how-do-i-remove-an-image-system-for-avd-file-in-android-studio/</guid>
+      <guid>https://sy123.netlify.app/how-do-i-remove-an-image-system-for-avd-file-in-android-studio/</guid>
       <description>I want to remove the api 16 of jelly bean but there is not remove button how can I do that. image file is very big size file so I need don&amp;rsquo;t many system image file
 Go to Tools / Android / SDK Manager
 Tick Show package details in the bottom right.
@@ -22,10 +23,10 @@ Android Studio 3.6.3 In version 3.6.3 File -&amp;gt; Settings -&amp;gt; Appearan
     
     <item>
       <title>Android Studio preview</title>
-      <link>https://sy123.netlify.app/2020/02/24/android-studio-preview/</link>
+      <link>https://sy123.netlify.app/android-studio-preview/</link>
       <pubDate>Mon, 24 Feb 2020 07:58:36 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/24/android-studio-preview/</guid>
+      <guid>https://sy123.netlify.app/android-studio-preview/</guid>
       <description>更新 IDE 和 SDK 工具 安装 Android Studio 后，您可以轻松通过自动更新和 Android SDK 管理器让 Android Studio IDE 和 Android SDK 工具保持最新状态。
 更新 IDE 和变更版本 若有可用的 IDE 更新，Android Studio 将通过小气泡对话框通知您，不过您也可以依次点击 Help &amp;gt; Check for Update（在 Mac 上，依次点击 Android Studio &amp;gt; Check for Updates）手动检查更新。
 您可以通过以下发布版本获取 Android Studio 更新：
@@ -36,10 +37,10 @@ Canary 版：这些是前沿版本，大约每周更新一次，可在 developer
     
     <item>
       <title>Android Studio emulator ugly black borders</title>
-      <link>https://sy123.netlify.app/2020/02/24/android-studio-emulator-ugly-black-borders/</link>
+      <link>https://sy123.netlify.app/android-studio-emulator-ugly-black-borders/</link>
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/24/android-studio-emulator-ugly-black-borders/</guid>
+      <guid>https://sy123.netlify.app/android-studio-emulator-ugly-black-borders/</guid>
       <description>
 Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>npm和yarn如何查看源和换源 - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <a href="https://sy123.netlify.app/">zhili</a> ❯
+      <a href="/npm%e5%92%8cyarn%e5%a6%82%e4%bd%95%e6%9f%a5%e7%9c%8b%e6%ba%90%e5%92%8c%e6%8d%a2%e6%ba%90">Npm和yarn如何查看源和换源</a>/</h1>
+  </div>
+  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>npm和yarn如何查看源和换源</h1>
+  </div>
+<div class="meta">
+  <div>🕓2020-02-06 18:28</div>
+  <div>
+    <span><a href="https://sy123.netlify.app/tags/npm/">#npm</a></span>
+      <span><a href="https://sy123.netlify.app/tags/js/">#js</a></span>
+      <span><a href="https://sy123.netlify.app/tags/yarn/">#yarn</a></span>
+      </div>
+  </div>
+<div class="content">
+  <h2 id="npm和yarn查看源和换源">npm和yarn查看源和换源：</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>npm config get registry  <span style="color:#998;font-style:italic"># 查看npm当前镜像源</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>npm config <span style="color:#0086b3">set</span> registry https://registry.npm.taobao.org/  <span style="color:#998;font-style:italic"># 设置npm镜像源为淘宝镜像</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>yarn config get registry  <span style="color:#998;font-style:italic"># 查看yarn当前镜像源</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>yarn config <span style="color:#0086b3">set</span> registry https://registry.npm.taobao.org/  <span style="color:#998;font-style:italic"># 设置yarn镜像源为淘宝镜像</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="镜像源地址部分如下">镜像源地址部分如下：</h2>
+<pre tabindex="0"><code>npm --- https://registry.npmjs.org/
+
+cnpm --- https://r.cnpmjs.org/
+
+taobao --- https://registry.npm.taobao.org/
+
+nj --- https://registry.nodejitsu.com/
+
+rednpm --- https://registry.mirror.cqupt.edu.cn/
+
+npmMirror --- https://skimdb.npmjs.com/registry/
+
+deunpm --- http://registry.enpmjs.org/
+</code></pre></div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2022 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

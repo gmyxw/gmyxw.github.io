@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/thunar/</link>
     <description>Recent content in thunar on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Sat, 25 Apr 2020 01:15:51 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/thunar/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Thunar sftp.desktop</title>
-      <link>https://sy123.netlify.app/2020/04/25/thunar-sftp.desktop/</link>
+      <link>https://sy123.netlify.app/thunar-sftp.desktop/</link>
       <pubDate>Sat, 25 Apr 2020 01:15:51 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/04/25/thunar-sftp.desktop/</guid>
+      <guid>https://sy123.netlify.app/thunar-sftp.desktop/</guid>
       <description> 1 2 3 4 5 6 [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store 1 ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -f alsa -i hw:1,1,0 -f alsa -i hw:1,1,1 -filter_complex amerge output.mkv </description>
     </item>
     

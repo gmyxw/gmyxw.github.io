@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/npm/</link>
     <description>Recent content in npm on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Thu, 06 Feb 2020 18:28:50 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/npm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>npm和yarn如何查看源和换源</title>
-      <link>https://sy123.netlify.app/2020/02/06/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</link>
+      <link>https://sy123.netlify.app/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</link>
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/06/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</guid>
+      <guid>https://sy123.netlify.app/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</guid>
       <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7 npm config get registry # 查看npm当前镜像源 npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像 yarn config get registry # 查看yarn当前镜像源 yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像 镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
     </item>
     

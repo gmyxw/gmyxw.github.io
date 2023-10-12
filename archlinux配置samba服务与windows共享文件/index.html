@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>ArchLinux配置Samba服务与Windows共享文件 - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <a href="https://sy123.netlify.app/">zhili</a> ❯
+      <a href="/archlinux%e9%85%8d%e7%bd%aesamba%e6%9c%8d%e5%8a%a1%e4%b8%8ewindows%e5%85%b1%e4%ba%ab%e6%96%87%e4%bb%b6">Archlinux配置samba服务与windows共享文件</a>/</h1>
+  </div>
+  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>ArchLinux配置Samba服务与Windows共享文件</h1>
+  </div>
+<div class="meta">
+  <div>🕓2020-01-19 15:43</div>
+  <div>
+    <span><a href="https://sy123.netlify.app/tags/archlinux/">#archlinux</a></span>
+      <span><a href="https://sy123.netlify.app/tags/windows/">#windows</a></span>
+      <span><a href="https://sy123.netlify.app/tags/smaba/">#smaba</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。</p>
+<p>Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……</p>
+<p>下面记录一下ArchLinux中配置Samba的过程，留作备份。</p>
+<p>首先，是安装Samba，ArchLinux可以直接从源中获取并安装Samba：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pacman -S samba
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：</p>
+<p>在/etc/samba目录中，直接建立一个空的smb.conf，然后将如下内容粘贴过去：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[global]</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">workgroup</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">WORKGROUP</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">security</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">user</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">[Movies]</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">path</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">/home/transmission/Downloads</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">valid users</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">samba</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">public</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">no</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">writable</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">yes</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">printable</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">no</span>
+</span></span><span style="display:flex;"><span><span style="color:#008080">create mask</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#d14">0644</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：</p>
+<p>workgroup，这个顾名思义，计算机的工作组名称，比如我是和我的Win7来共享文件，最好把工作组和我的Win7设成通一个工作组，这样方便Win7通过网络发现来找到我的下载机。这里，我的win7工作组名字，就叫做：WORKGROUP了</p>
+<p>security，这是指共享目录的安全认证形式，security的值，有两种可以设置：</p>
+<p>第一种，是设成上面例子中的user，意思是在访问共享目录的时候，需要通过用户名和密码的方式来认证，可以给共享目录提供一定的安全性保护。</p>
+<p>第二种，是设成share，这样的话，网络中的任何人都可以通过共享目录的方式来访问你共享的内容了。</p>
+<p>在这里，我选择了用户名与密码认证的方式，所以设成了user</p>
+<p>下面的Movies节点，可以有多个(如果你想设置多个共享目录的话)</p>
+<p>[Movies] 这里设置的名字，就是能够在Windows中看到的名字，可以随意更改</p>
+<p>下面的path，就是你想共享的Linux目录了，我设成了我的Transmission的下载目录。</p>
+<p>后面的valid users，是一个用户帐号，也即通过用户名和密码来访问共享目录的那个帐号，如果你把security设成share，这一项可以去掉。</p>
+<p>下面是一些权限的设置，以及是否允许访问者有写入共享目录的权限，各个参数可以查看Samba文档，就不一一介绍了。</p>
+<p>最后，说一下security设成user后，帐号的设置问题。</p>
+<p>首先，你可以添加一个新的Linux帐号，专门用来访问共享目录用。比如，我就添加了一个帐号，叫做Samba</p>
+<p>然后就是给帐号设置访问共享目录的密码，这里需要注意，密码不是通过Linux命令passwd来设置的。这里的密码，是指Samba的密码，而不是Linux密码。</p>
+<p>所以，得用命令 <code>pdbedit -a -u (username)</code>来修改Samba密码。</p>
+<p>设置好后，就可以启动Samba服务了，如果需要开机自动启动Samba，记得把Samba加入到/etc/rc.conf中。</p>
+<p>最后一步，直接访问Win7的网络，如果你的设置没问题，就能一次性成功了…… 启用了Samba服务的高清下载机，能被Win7立马发现：</p>
+<p><img src="https://p1-tt.byteimg.com/large/pgc-image/5e88eca3acfa4a948d3f3970f4df25bb" alt=""></p>
+<p>双击进入，需要输入Samba用户名与密码验证，最后，高清电影就出现在眼前了：</p>
+<p><img src="https://p6-tt.byteimg.com/large/pgc-image/266d383bd7fb43558410f3e85587510a" alt=""></p>
+<p>双击电影，即可通过家里的局域网在线播放了…… 打完收工，看电影去！</p>
+<h1 id="参考">参考</h1>
+<p><a href="https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html">官方smb.conf说明</a></p>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2022 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

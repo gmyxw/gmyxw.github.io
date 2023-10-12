@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Android Studio emulator ugly black borders - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <a href="https://sy123.netlify.app/">zhili</a> ❯
+      <a href="/android-studio-emulator-ugly-black-borders">Android studio emulator ugly black borders</a>/</h1>
+  </div>
+  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Android Studio emulator ugly black borders</h1>
+  </div>
+<div class="meta">
+  <div>🕓2020-02-24 04:43</div>
+  <div>
+    <span><a href="https://sy123.netlify.app/tags/androidstudio/">#AndroidStudio</a></span>
+      <span><a href="https://sy123.netlify.app/tags/linux/">#linux</a></span>
+      <span><a href="https://sy123.netlify.app/tags/i3wm/">#i3wm</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p><img src="https://i.imgur.com/Oike8qW.png" alt=""></p>
+<h2 id="any-way-to-remove-the-black-box-behind-the-emulator">Any way to remove the black box behind the emulator?</h2>
+<p>Should run a compositor, something like compton Should try to use <code>xprop WM_CLASS</code></p>
+<p>For the border, likely a compositor is needed or you can start the AVD without a device frame.</p>
+<h2 id="for-making-it-floating-add-this-to-your-config">For making it floating, add this to your config</h2>
+<p>Floating all windows with &ldquo;android emulator&rdquo; header:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>for_window <span style="color:#000;font-weight:bold">[</span><span style="color:#008080">title</span><span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;.*Emulator.*&#34;</span><span style="color:#000;font-weight:bold">]</span> floating <span style="color:#0086b3">enable</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2022 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

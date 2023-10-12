@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/baidu/</link>
     <description>Recent content in baidu on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Fri, 13 Mar 2020 03:04:22 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/baidu/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>百度网盘扩容到100t以上</title>
-      <link>https://sy123.netlify.app/2020/03/13/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%A9%E5%AE%B9%E5%88%B0100t%E4%BB%A5%E4%B8%8A/</link>
+      <link>https://sy123.netlify.app/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%A9%E5%AE%B9%E5%88%B0100t%E4%BB%A5%E4%B8%8A/</link>
       <pubDate>Fri, 13 Mar 2020 03:04:22 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/03/13/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%A9%E5%AE%B9%E5%88%B0100t%E4%BB%A5%E4%B8%8A/</guid>
+      <guid>https://sy123.netlify.app/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%A9%E5%AE%B9%E5%88%B0100t%E4%BB%A5%E4%B8%8A/</guid>
       <description> 百度网盘无限“扩容”方法这里说的扩容是非正常途径，存在一定的风险！
 操作步骤 新建一个文件夹111111 移动或转存一些文件到该文件夹111111 （假设这个文件夹占用容量是A） 删除该文件夹111111 （网盘占用容量减少A） 再新建一个同名空文件夹111111，不放入文件，直接删除。（占用容量无变化） 到回收站还原第一次删除的文件夹111111[里面有一些文件] 正常结果：还原该文件夹后，网盘使用容量应该增加A 不正常结果：网盘容量并没有增加A，也就是说，还原后的文件夹111111占用的容量A成了漏网之鱼，重复操作即可扩容 若没有复现这个bug，重新操作以上步骤 不过需要更换文件名，比如：222222，3333，234fwef，808080 使用说明 一个标准容量是5T的SVIP个人账号，要扩容100T，我们就提前在账号内存入100T的占位文件，此时系统显示使用空间为0，可用空间为5T。
 1)用户转入4T资源后，系统显示使用空间为4T，可用空间为1T。 2)用户删除4T以上的占位文件，系统又显示使用空间为0T，可用空间为5T。 3)循环1~2的操作，直到消耗完占位文件。 补充说明 如果数据被同步，网盘占用容量正常了，就需要修复操作
@@ -22,10 +23,10 @@
     
     <item>
       <title>百度网盘超级会员账号分享</title>
-      <link>https://sy123.netlify.app/2020/02/27/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E8%B6%85%E7%BA%A7%E4%BC%9A%E5%91%98%E8%B4%A6%E5%8F%B7%E5%88%86%E4%BA%AB/</link>
+      <link>https://sy123.netlify.app/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E8%B6%85%E7%BA%A7%E4%BC%9A%E5%91%98%E8%B4%A6%E5%8F%B7%E5%88%86%E4%BA%AB/</link>
       <pubDate>Thu, 27 Feb 2020 02:07:36 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/27/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E8%B6%85%E7%BA%A7%E4%BC%9A%E5%91%98%E8%B4%A6%E5%8F%B7%E5%88%86%E4%BA%AB/</guid>
+      <guid>https://sy123.netlify.app/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E8%B6%85%E7%BA%A7%E4%BC%9A%E5%91%98%E8%B4%A6%E5%8F%B7%E5%88%86%E4%BA%AB/</guid>
       <description>百度云 请低调使用&amp;hellip;
 都是选微博登录 选微博登录 选微博登录 选微博登录!!! 验证码全部大写填写 确认用鼠标点 登录后如遇到重试页面, 点击几次重试即可. 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!! 请不要删除网盘里的文件!!! 并不保证当你看到时账号都是可以用的, 但是分享的时候肯定都是可以的. 如果有失效账号, 麻烦告知一下, 我会及时处理.
 账号越来越难弄, 且用且珍惜.
@@ -36,10 +37,10 @@ Account Expire UserName 账号：jiao36662855@163.com密码：2i1dyc 2020-03-23 
     
     <item>
       <title>百度云加速NS接入流程</title>
-      <link>https://sy123.netlify.app/2020/02/23/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8A%A0%E9%80%9Fns%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B/</link>
+      <link>https://sy123.netlify.app/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8A%A0%E9%80%9Fns%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B/</link>
       <pubDate>Sun, 23 Feb 2020 04:36:16 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/23/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8A%A0%E9%80%9Fns%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B/</guid>
+      <guid>https://sy123.netlify.app/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%8A%A0%E9%80%9Fns%E6%8E%A5%E5%85%A5%E6%B5%81%E7%A8%8B/</guid>
       <description>百度云加速NS接入是最简单的方式，不过还是很多站长管理员不大懂，今天教大家如何NS接入。
 首先点域名继续接入 添加子域名，A记录、主机名: WWW，记录值写你的服务器的IP，如果你有其它子域名的也一并添加创建。 创建完子域名后，点一步，查看云加速DNS 复制加速DNS n3060.ns.yunjiasu.com、n333.ns.yunjiasu.com 进入域名注册商管理处，修改NS记录，比如阿里云 修改完成后，等生效即可。需要注意的是，域名修改DNS一般全国生效为24小时左右，所以需要耐心等待了。
 好了以上就是百度云加速NS接入的全部教程了，希望可以帮到大家。</description>
@@ -47,10 +48,10 @@ Account Expire UserName 账号：jiao36662855@163.com密码：2i1dyc 2020-03-23 
     
     <item>
       <title>百度云分享下载链接</title>
-      <link>https://sy123.netlify.app/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</link>
+      <link>https://sy123.netlify.app/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</link>
       <pubDate>Fri, 10 Jan 2020 07:48:32 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/01/10/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</guid>
+      <guid>https://sy123.netlify.app/%E7%99%BE%E5%BA%A6%E4%BA%91%E5%88%86%E4%BA%AB%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5/</guid>
       <description>最好是先复制到自己的网盘。
 点击分享，生成链接。
 点击链接，进入页面。在console模式下输入如下代码：

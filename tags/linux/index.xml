@@ -5,24 +5,67 @@
     <link>https://sy123.netlify.app/tags/linux/</link>
     <description>Recent content in linux on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
-    <lastBuildDate>Wed, 23 Mar 2022 05:29:30 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
+    <lastBuildDate>Mon, 05 Dec 2022 02:04:31 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>20220323 Archlinux PGP Signature</title>
-      <link>https://sy123.netlify.app/2022/03/23/20220323-archlinux-pgp-signature/</link>
+      <title>无法使用 git clone/push，kex ssh 密钥错误</title>
+      <link>https://sy123.netlify.app/git-pory22/</link>
+      <pubDate>Mon, 05 Dec 2022 02:04:31 +0800</pubDate>
+      
+      <guid>https://sy123.netlify.app/git-pory22/</guid>
+      <description>git clone/push 我的 Github 私人仓库，通过ssh，命令行报错：
+1 2 3 4 5 6 7 Cloning into &amp;#39;test&amp;#39;... kex_exchange_identification: Connection closed by remote host Connection closed by 20.205.243.166 port 22 fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists. 但是关闭 clash 之后一切正常，看了下clash日志原来是机场屏蔽了22端口
+改成通过443端口git clone就没问题了 ssh配置需要进行一下修改 https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port
+1 2 3 4 5 6 7 cat ~/site/blog ❯ cat ~/.ssh/config Host github.com Hostname ssh.github.com Port 443 User git </description>
+    </item>
+    
+    <item>
+      <title>Chrome内置翻译被抢</title>
+      <link>https://sy123.netlify.app/chrome-translate/</link>
+      <pubDate>Sun, 09 Oct 2022 20:21:45 +0800</pubDate>
+      
+      <guid>https://sy123.netlify.app/chrome-translate/</guid>
+      <description>linux下的chrome内置翻译也只能用系统代理，linux还是比windows好解决，不过我懒得折腾还是直接改hosts好了
+1 2 3 su echo 180.163.151.34 translate.googleapis.com &amp;gt;&amp;gt; /etc/hosts systemctl restart systemd-networkd </description>
+    </item>
+    
+    <item>
+      <title>polybar不显示Awesome字体</title>
+      <link>https://sy123.netlify.app/polybar-awesome/</link>
+      <pubDate>Sun, 09 Oct 2022 20:20:26 +0800</pubDate>
+      
+      <guid>https://sy123.netlify.app/polybar-awesome/</guid>
+      <description>当配置好i3窗口后，使用polybar显示状态时，如果使用命令行启动polybar时，经常会提示
+Dropping unmatched character  (U+f02b)
+这样的错误。这时候就需要注意了，可能是没有安装Awesom字体所致。
+在Ubuntu下安装也很简单：
+sudo apt-get fonts-font-awesome
+这时候重启polybar,应该可以正常显示状态栏上的图标。
+如果这时还不成，可能就需要改改polybar配置里面的字体设置。要知道怎么使用字体设置，还需要执行一个指令：
+fc-list | grep awesome
+输出如下：
+1 2 3 4 5 /usr/share/fonts/opentype/font-awesome/FontAwesome.otf: FontAwesome:style=Regular /usr/share/fonts/woff/fork-awesome/forkawesome-webfont.woff: forkawesome:style=Regular /usr/share/fonts/truetype/fork-awesome/forkawesome-webfont.ttf: forkawesome:style=Regular /usr/share/fonts/woff/fork-awesome/forkawesome-webfont.woff2: forkawesome:style=Regular /usr/share/fonts/truetype/font-awesome/fontawesome-webfont.ttf: FontAwesome:style=Regular 这时候，字体路径后面的比如 FontAwesome:style=Regular，这段文字，就是需要放到配置文件中的内容。
+修改完成后如下：
+1 2 3 4 5 font-0 = ttf-liberation-sans:fixed:pixelsize=12;1 font-1 = source han sans cn:pixelsize=12:antialias=false;1 font-2 = &amp;#34;Font Awesome 6 Free:style=Solid:pixelsize=12;1&amp;#34; font-3 = &amp;#34;Font Awesome 6 Brands:style=Regular:pixelsize=12;1&amp;#34; font-4 = &amp;#34;material icons:pixelsize=16;3&amp;#34; 我这次不显示图标的原因是升级导致的，Awesome5改成6就好了</description>
+    </item>
+    
+    <item>
+      <title>Archlinux PGP Signature</title>
+      <link>https://sy123.netlify.app/archlinux-pgp-signature/</link>
       <pubDate>Wed, 23 Mar 2022 05:29:30 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2022/03/23/20220323-archlinux-pgp-signature/</guid>
+      <guid>https://sy123.netlify.app/archlinux-pgp-signature/</guid>
       <description>pacman安装软件包出现损坏 很久没用了arch了，更新一下出现了签名过期问题，记录下
 1 2 3 4 5 6 7 8 9 File .pkg.tar.xz is corrupted (invalid or corrupted package (PGP signature)).Do you want to delete it? [Y/n] # 更新已知的密钥 (没啥用甚至卡住) pacman-key --refresh-keys # 其实先更新下就好了 pacman -S archlinux-keyring pacman -Syu See aslo http://www.mamicode.com/info-detail-1674262.html </description>
     </item>
     
     <item>
       <title>linux 解决i3画面撕裂</title>
-      <link>https://sy123.netlify.app/2021/05/16/linux-%E8%A7%A3%E5%86%B3i3%E7%94%BB%E9%9D%A2%E6%92%95%E8%A3%82/</link>
+      <link>https://sy123.netlify.app/linux-%E8%A7%A3%E5%86%B3i3%E7%94%BB%E9%9D%A2%E6%92%95%E8%A3%82/</link>
       <pubDate>Sun, 16 May 2021 06:34:37 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2021/05/16/linux-%E8%A7%A3%E5%86%B3i3%E7%94%BB%E9%9D%A2%E6%92%95%E8%A3%82/</guid>
+      <guid>https://sy123.netlify.app/linux-%E8%A7%A3%E5%86%B3i3%E7%94%BB%E9%9D%A2%E6%92%95%E8%A3%82/</guid>
       <description>换了新显卡这么久才发现会画面撕裂，网上搜了下在v2看到有人提到关闭渲染器的硬件加速可以解决，试了下果然有效
 1 compton --backend xrender 彻底解决 顺藤摸瓜进去wiki查下了原因是i3的BUG，这么多年至今都未修复，之后还发现compton已经被重定向到Picom，估计已经没人维护了，我也要跑路了
 1 sudo pacman -S picom 我的compton配置是直接从别人仓库里git clone的有没有垂直同步不知道，反正picom是默认开启垂直同步，一劳永逸终于可以不用看不到烦人的裂缝
@@ -31,10 +74,10 @@ See aslo https://wiki.archlinux.org/title/Picom </description>
     
     <item>
       <title>Archlinux Failed to Commit Transaction Conflicting File</title>
-      <link>https://sy123.netlify.app/2020/11/25/archlinux-failed-to-commit-transaction-conflicting-file/</link>
+      <link>https://sy123.netlify.app/archlinux-failed-to-commit-transaction-conflicting-file/</link>
       <pubDate>Wed, 25 Nov 2020 19:05:37 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/11/25/archlinux-failed-to-commit-transaction-conflicting-file/</guid>
+      <guid>https://sy123.netlify.app/archlinux-failed-to-commit-transaction-conflicting-file/</guid>
       <description>前言 今天我试着更新我的 Arch Linux 系统，然后遇到一个错误 error：failed to commit transaction (conflicting files) stfl：/usr/lib/libstfl.so.0 exists in filesystem。看起来是 pacman 无法更新一个已经存在于文件系统上的库 (/usr/lib/libstfl.so.0)。如果你也遇到了同样的问题，下面是一个快速解决方案。
 解决 用自带的命令覆盖，wiki上是推荐这种做法
 1 sudo pacman -Syu --overwrite /usr/lib/libstfl.so.0 暴力解决，直接解决出问题的文件，或者你也可以把重复的包备份一下防止意外，不过一般没啥意外，按照经验出这个问题的方式千奇百怪，反正就是更新出错了，比如你更新的时候换源之类的操作也会导致这样，直接删掉就完事
@@ -47,20 +90,20 @@ See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transac
     
     <item>
       <title>解决Host key verification failed</title>
-      <link>https://sy123.netlify.app/2020/11/05/%E8%A7%A3%E5%86%B3host-key-verification-failed/</link>
+      <link>https://sy123.netlify.app/%E8%A7%A3%E5%86%B3host-key-verification-failed/</link>
       <pubDate>Thu, 05 Nov 2020 04:59:06 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/11/05/%E8%A7%A3%E5%86%B3host-key-verification-failed/</guid>
+      <guid>https://sy123.netlify.app/%E8%A7%A3%E5%86%B3host-key-verification-failed/</guid>
       <description>错误提示如下
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 $ ssh root@108.61.163.242 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed. The fingerprint for the ECDSA key sent by the remote host is SHA256:HDjXJvu0VYXWF+SKMZjSGn4FQmg/+w6eV9ljJvIXpx0.</description>
     </item>
     
     <item>
       <title>linux 使用usb声卡</title>
-      <link>https://sy123.netlify.app/2020/06/22/linux-%E4%BD%BF%E7%94%A8usb%E5%A3%B0%E5%8D%A1/</link>
+      <link>https://sy123.netlify.app/linux-%E4%BD%BF%E7%94%A8usb%E5%A3%B0%E5%8D%A1/</link>
       <pubDate>Mon, 22 Jun 2020 04:38:17 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/06/22/linux-%E4%BD%BF%E7%94%A8usb%E5%A3%B0%E5%8D%A1/</guid>
+      <guid>https://sy123.netlify.app/linux-%E4%BD%BF%E7%94%A8usb%E5%A3%B0%E5%8D%A1/</guid>
       <description>前言 新买了耳机发现没声音，上网查了一下发现耳机自带了 usb 驱动，又又又开始了折腾之旅～
 解决声音问题 1 2 3 4 5 6 7 8 9 # 切换一下就完事 ~/site/blog ❯ asoundconf list Names of available sound cards: PCH Device ~/site/blog ❯ asoundconf set-default-card 1 Polybar 报错 &amp;ldquo;error: Disabling module &amp;ldquo;alsa&amp;rdquo; (reason: Could not connect pulseaudio context.)&amp;rdquo; 音乐嗨了没多久才发现顶部工具栏调不了音量，查了下日志发现报错了，后来在 issues 上找到解决方法，搞定收工
 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 ; ~/.</description>
@@ -68,10 +111,10 @@ See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transac
     
     <item>
       <title>Linux显示彩色Emoji表情</title>
-      <link>https://sy123.netlify.app/2020/05/28/linux%E6%98%BE%E7%A4%BA%E5%BD%A9%E8%89%B2emoji%E8%A1%A8%E6%83%85/</link>
+      <link>https://sy123.netlify.app/linux%E6%98%BE%E7%A4%BA%E5%BD%A9%E8%89%B2emoji%E8%A1%A8%E6%83%85/</link>
       <pubDate>Thu, 28 May 2020 15:13:00 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/05/28/linux%E6%98%BE%E7%A4%BA%E5%BD%A9%E8%89%B2emoji%E8%A1%A8%E6%83%85/</guid>
+      <guid>https://sy123.netlify.app/linux%E6%98%BE%E7%A4%BA%E5%BD%A9%E8%89%B2emoji%E8%A1%A8%E6%83%85/</guid>
       <description>前言 之前安装 noto-fonts-emoji 这个包后一直半彩色半黑白吊着，看着是真的不爽，实在太懒，今天在google意外看到很简单就解决了
 解决方法 01-emoji.conf 1 2 3 4 5 6 7 8 9 10 &amp;lt;?xml version=&amp;#39;1.0&amp;#39;?&amp;gt; &amp;lt;!DOCTYPE fontconfig SYSTEM &amp;#39;fonts.dtd&amp;#39;&amp;gt; &amp;lt;fontconfig&amp;gt; &amp;lt;match target=&amp;#34;pattern&amp;#34;&amp;gt; &amp;lt;edit name=&amp;#34;family&amp;#34; mode=&amp;#34;prepend&amp;#34;&amp;gt; &amp;lt;string&amp;gt;Noto Color Emoji&amp;lt;/string&amp;gt; &amp;lt;string&amp;gt;Noto Emoji&amp;lt;/string&amp;gt; &amp;lt;/edit&amp;gt; &amp;lt;/match&amp;gt; &amp;lt;/fontconfig&amp;gt; 1 2 cp 01-emoji.conf $HOME/.config/fontconfig/conf.d/ fc-cache -f -v 重启就能显示大部分了，不过还是有一些之前没法显示，emoji还是有问题，以后再研究了
 See also https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkval/enable_noto_color_emoji_easily/ </description>
@@ -89,19 +132,19 @@ See also https://getemoji.com/ https://www.reddit.com/r/archlinux/comments/6wkva
     
     <item>
       <title>GTK开启黑暗模式</title>
-      <link>https://sy123.netlify.app/2020/05/16/gtk%E5%BC%80%E5%90%AF%E9%BB%91%E6%9A%97%E6%A8%A1%E5%BC%8F/</link>
+      <link>https://sy123.netlify.app/gtk%E5%BC%80%E5%90%AF%E9%BB%91%E6%9A%97%E6%A8%A1%E5%BC%8F/</link>
       <pubDate>Sat, 16 May 2020 00:33:08 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/05/16/gtk%E5%BC%80%E5%90%AF%E9%BB%91%E6%9A%97%E6%A8%A1%E5%BC%8F/</guid>
+      <guid>https://sy123.netlify.app/gtk%E5%BC%80%E5%90%AF%E9%BB%91%E6%9A%97%E6%A8%A1%E5%BC%8F/</guid>
       <description>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 # 安装黑暗主题 ~ ❯ sudo pacman -S gnome-themes-extra ~ ❯ cat .gtkrc gtk-icon-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-font-name = &amp;#34;Cantarell 11&amp;#34; ~ ❯ cat .config/gtk-3.0/settings.ini [Settings] gtk-icon-theme-name = Adwaita-dark gtk-theme-name = Adwaita-dark gtk-application-prefer-dark-theme = true gtk-font-name = Cantarell 11 See also https://wiki.archlinux.org/index.php/GTK</description>
     </item>
     
     <item>
       <title>解决Windows与Ubuntu双系统时间同步问题</title>
-      <link>https://sy123.netlify.app/2020/05/12/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</link>
+      <link>https://sy123.netlify.app/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</link>
       <pubDate>Tue, 12 May 2020 14:31:58 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/05/12/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://sy123.netlify.app/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</guid>
       <description>UTC in Windows To dual boot with Windows it is recommended to configure Windows to use UTC, rather than Linux to use localtime. (Windows by default uses localtime [1].)
 It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry:
 1 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal You can do this from an Administrator Command Prompt running:</description>
@@ -119,10 +162,10 @@ It can be done by a simple registry fix: Open regedit and add a DWORD value for 
     
     <item>
       <title>Warning Secondary Partition Overlaps the Last Partition by X Blocks in Gdisk</title>
-      <link>https://sy123.netlify.app/2020/05/10/warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</link>
+      <link>https://sy123.netlify.app/warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</link>
       <pubDate>Sun, 10 May 2020 17:15:52 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/05/10/warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</guid>
+      <guid>https://sy123.netlify.app/warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</guid>
       <description>From what I just found out, it may be unsafe. I was getting this same error
 *************************************************************** Found invalid GPT and valid MBR; converting MBR to GPT format in memory. THIS OPERATION IS POTENTIALLY DESTRUCTIVE! Exit by typing &amp;lsquo;q&amp;rsquo; if you don&amp;rsquo;t want to convert your MBR partitions to GPT format!
 Warning! Secondary partition table overlaps the last partition by 33 blocks! You will need to delete this partition or resize it in another utility.</description>
@@ -130,19 +173,19 @@ Warning! Secondary partition table overlaps the last partition by 33 blocks! You
     
     <item>
       <title>Failed unmounting /run/user/1000 whenever i shutdown or reboot</title>
-      <link>https://sy123.netlify.app/2020/05/10/failed-unmounting-/run/user/1000-whenever-i-shutdown-or-reboot/</link>
+      <link>https://sy123.netlify.app/failed-unmounting-/run/user/1000-whenever-i-shutdown-or-reboot/</link>
       <pubDate>Sun, 10 May 2020 16:05:28 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/05/10/failed-unmounting-/run/user/1000-whenever-i-shutdown-or-reboot/</guid>
+      <guid>https://sy123.netlify.app/failed-unmounting-/run/user/1000-whenever-i-shutdown-or-reboot/</guid>
       <description>今天虚拟机关机发现出现了Failed unmounting /run/user/1000的红字提示，加上登录注销卡顿等异常，一看就不太正常，cat /etc/fstab 后发现是安装的时候挂载efi分区写错格式导致的，修正一下fstab的挂载信息重启就正常了～</description>
     </item>
     
     <item>
       <title>NVRAM storage in libvirt</title>
-      <link>https://sy123.netlify.app/2020/05/09/nvram-storage-in-libvirt/</link>
+      <link>https://sy123.netlify.app/nvram-storage-in-libvirt/</link>
       <pubDate>Sat, 09 May 2020 18:34:24 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/05/09/nvram-storage-in-libvirt/</guid>
+      <guid>https://sy123.netlify.app/nvram-storage-in-libvirt/</guid>
       <description>NVRAM storage in libvirt Libvirt stores pflash/nvram files for privliged users in /var/lib/libvirt/qemu/nvram/ this is a copy of the template var file that is read only. OVMF uses these files to store information such as boot information. The template inforamtion was uesed to be configured in /etc/libvirt/qemu.conf but was moved to json files. [https://bugs.archlinux.org/task/64175]
 Location of master nvram file This configuration option is obsolete. Libvirt will follow the QEMU firmware metadata specification to automatically locate firmware images.</description>
     </item>
@@ -164,10 +207,10 @@ Examples
     
     <item>
       <title>Xf86OpenConsole Cannot Open Virtual Console</title>
-      <link>https://sy123.netlify.app/2020/05/06/xf86openconsole-cannot-open-virtual-console/</link>
+      <link>https://sy123.netlify.app/xf86openconsole-cannot-open-virtual-console/</link>
       <pubDate>Wed, 06 May 2020 18:00:36 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/05/06/xf86openconsole-cannot-open-virtual-console/</guid>
+      <guid>https://sy123.netlify.app/xf86openconsole-cannot-open-virtual-console/</guid>
       <description>I can start X only by root. If I am using startx using ordinary user I get the error:
 xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
 1 2 3 4 5 $ groups lp wheel games video audio optical storage scanner power users $ ls -l /dev/tty1 crw-------- 1 root tty 4, 1 Jan 17 10:21 /dev/tty1 This might help someone. So I am going to post it. If your logged in as a different user and su to the user starting X.</description>
@@ -175,39 +218,39 @@ xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
     
     <item>
       <title>Thunar sftp.desktop</title>
-      <link>https://sy123.netlify.app/2020/04/25/thunar-sftp.desktop/</link>
+      <link>https://sy123.netlify.app/thunar-sftp.desktop/</link>
       <pubDate>Sat, 25 Apr 2020 01:15:51 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/04/25/thunar-sftp.desktop/</guid>
+      <guid>https://sy123.netlify.app/thunar-sftp.desktop/</guid>
       <description> 1 2 3 4 5 6 [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store 1 ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -f alsa -i hw:1,1,0 -f alsa -i hw:1,1,1 -filter_complex amerge output.mkv </description>
     </item>
     
     <item>
       <title>Problems With Hardware Acceleration Environment Variables</title>
-      <link>https://sy123.netlify.app/2020/04/23/problems-with-hardware-acceleration-environment-variables/</link>
+      <link>https://sy123.netlify.app/problems-with-hardware-acceleration-environment-variables/</link>
       <pubDate>Thu, 23 Apr 2020 00:02:33 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/04/23/problems-with-hardware-acceleration-environment-variables/</guid>
+      <guid>https://sy123.netlify.app/problems-with-hardware-acceleration-environment-variables/</guid>
       <description>问题 1 2 3 4 ~ ❯ vainfo libva error: /usr/lib/dri/iHD_drv_video.so init failed vaInitialize failed with error code 1 (operation failed),exit 解决方法 Everything works as it is supposed to by just adding:
 1 2 3 4 LIBVA_DRIVER_NAME=i965 # or if using the intel-media-driver which I prefer for newer hardware then it is: LIBVA_DRIVER_NAME=iHD also for intel-media-driver you may want to read the readme and enable guc and huc. I believe it just enables huc though but it uses guc to load huc if I have read correct info.</description>
     </item>
     
     <item>
       <title>解决&#39;ERROR: The certificate of `github.com’ is not trusted.&#39;问题</title>
-      <link>https://sy123.netlify.app/2020/04/15/%E8%A7%A3%E5%86%B3error-the-certificate-of-github.com-is-not-trusted.%E9%97%AE%E9%A2%98/</link>
+      <link>https://sy123.netlify.app/%E8%A7%A3%E5%86%B3error-the-certificate-of-github.com-is-not-trusted.%E9%97%AE%E9%A2%98/</link>
       <pubDate>Wed, 15 Apr 2020 07:11:46 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/04/15/%E8%A7%A3%E5%86%B3error-the-certificate-of-github.com-is-not-trusted.%E9%97%AE%E9%A2%98/</guid>
+      <guid>https://sy123.netlify.app/%E8%A7%A3%E5%86%B3error-the-certificate-of-github.com-is-not-trusted.%E9%97%AE%E9%A2%98/</guid>
       <description>今天早上有在GITHUB下载一个脚本到VPS中的时候有出现&amp;quot;ERROR: The certificate of `github.com’ is not trusted.&amp;ldquo;的错误提示。应该意思是这个证书可能不被信任，反正就这个提示，正式存在的，我换了其他有HTTPS网址也无法wget下载，应该是这个问题。
 解决办法 1 2 3 4 5 6 wget --no-check-certificate github.com # 或者我们可以： apt-get install ca-certificates -y #Debian/Ubuntu yum install ca-certificates -y #CentOS 安装完毕之后应该是可以不用 no-check-certificate 参数。</description>
     </item>
     
     <item>
       <title>Linux 图片转pdf</title>
-      <link>https://sy123.netlify.app/2020/04/13/linux-%E5%9B%BE%E7%89%87%E8%BD%ACpdf/</link>
+      <link>https://sy123.netlify.app/linux-%E5%9B%BE%E7%89%87%E8%BD%ACpdf/</link>
       <pubDate>Mon, 13 Apr 2020 02:39:04 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/04/13/linux-%E5%9B%BE%E7%89%87%E8%BD%ACpdf/</guid>
+      <guid>https://sy123.netlify.app/linux-%E5%9B%BE%E7%89%87%E8%BD%ACpdf/</guid>
       <description>ImageMagick Just use this:
 1 convert &amp;#34;*.{png,jpeg}&amp;#34; -quality 100 outfile.pdf In general case you can combine more files into one pdf file with including them inside {} and separate them with a single comma.
 adding -quality VALUE to keep quality after conversion(thanks to @iamcreasy)
@@ -217,10 +260,10 @@ adding -quality VALUE to keep quality after conversion(thanks to @iamcreasy)
     
     <item>
       <title>Feh Open SVG</title>
-      <link>https://sy123.netlify.app/2020/04/01/feh-open-svg/</link>
+      <link>https://sy123.netlify.app/feh-open-svg/</link>
       <pubDate>Wed, 01 Apr 2020 21:58:23 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/04/01/feh-open-svg/</guid>
+      <guid>https://sy123.netlify.app/feh-open-svg/</guid>
       <description>Without the &amp;ndash;conversion-timeout part, I run into this error: feh: No Imlib2 loader for that file format
 As suggested in the Arch Linux Wiki, I open SVG images like this:
 1 feh --conversion-timeout 1 file.svg This will create a &amp;ldquo;feh&amp;rdquo; theme, which will be loaded by default and which will automatically apply the conversion-timeout option.
@@ -229,39 +272,39 @@ As suggested in the Arch Linux Wiki, I open SVG images like this:
     
     <item>
       <title>What Does Networkmanager Wait Online Service Do</title>
-      <link>https://sy123.netlify.app/2020/04/01/what-does-networkmanager-wait-online-service-do/</link>
+      <link>https://sy123.netlify.app/what-does-networkmanager-wait-online-service-do/</link>
       <pubDate>Wed, 01 Apr 2020 20:29:10 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/04/01/what-does-networkmanager-wait-online-service-do/</guid>
+      <guid>https://sy123.netlify.app/what-does-networkmanager-wait-online-service-do/</guid>
       <description>Some code runs off the network In some multi-user environments part of the boot-up process can come from the network. For this case systemd defaults to waiting for the network to come on-line before certain steps are taken.
 It appears that this service simply waits, doing absolutely nothing, until the network is connected, and when this happens, it changes its state so that other services that depend on the network can be launched to start doing their thing.</description>
     </item>
     
     <item>
       <title>Boot Download Background Image</title>
-      <link>https://sy123.netlify.app/2020/03/28/boot-download-background-image/</link>
+      <link>https://sy123.netlify.app/boot-download-background-image/</link>
       <pubDate>Sat, 28 Mar 2020 20:54:33 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/03/28/boot-download-background-image/</guid>
+      <guid>https://sy123.netlify.app/boot-download-background-image/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Linux Force DHCP Client to Renew IP</title>
-      <link>https://sy123.netlify.app/2020/03/24/linux-force-dhcp-client-to-renew-ip/</link>
+      <link>https://sy123.netlify.app/linux-force-dhcp-client-to-renew-ip/</link>
       <pubDate>Tue, 24 Mar 2020 07:43:59 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/03/24/linux-force-dhcp-client-to-renew-ip/</guid>
+      <guid>https://sy123.netlify.app/linux-force-dhcp-client-to-renew-ip/</guid>
       <description>am using Ubuntu Linux. How to force Linux to reacquire a new IP address from the DHCP server? What is the command of Linux equivalent to Windows’s “ipconfig /renew” command?
 You need to use Dynamic Host Configuration Protocol Client i.e., dhclient command. The client normally doesn’t release the current lease as it is not required by the DHCP protocol. Some cable ISPs require their clients to notify the server if they wish to release an assigned IP address.</description>
     </item>
     
     <item>
       <title>Linux中拷贝目录跳过指定文件的方法</title>
-      <link>https://sy123.netlify.app/2020/03/20/linux%E4%B8%AD%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</link>
+      <link>https://sy123.netlify.app/linux%E4%B8%AD%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</link>
       <pubDate>Fri, 20 Mar 2020 13:57:01 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/03/20/linux%E4%B8%AD%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</guid>
+      <guid>https://sy123.netlify.app/linux%E4%B8%AD%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/</guid>
       <description>近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也不好一一指定。普通的 cp 命令并没有排除某个文件或文件夹的参数，比较丑陋点可以 cp -r 拷贝完目录之后再去删除无用的，但如果做批量脚本操作就不爽了，经过实际试验之后暂时找到两个比较好的方法。
 使用 rsync 进行拷贝 rsync 本来是文件同步备份的工具，相对于普通的 cp 命令，rsync 在控制方面就强多了，而且 rsync 对遍历目录也支持，有 &amp;ndash;exclude 参数可以忽略指定的文件或文件夹。
 1 rsync -vaP --exclude=&amp;#34;.*&amp;#34; --exclude=&amp;#34;Makefile&amp;#34; dir1 /home/dir2 如上面演示的就可以排除掉隐藏文件和 Makefile 文件，-a 参数已经包含遍历处理参数 -r。
@@ -272,10 +315,10 @@ You need to use Dynamic Host Configuration Protocol Client i.e., dhclient comman
     
     <item>
       <title>rename使用正则表达式</title>
-      <link>https://sy123.netlify.app/2020/03/12/rename%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <link>https://sy123.netlify.app/rename%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
       <pubDate>Thu, 12 Mar 2020 22:50:06 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/03/12/rename%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <guid>https://sy123.netlify.app/rename%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
       <description>前言 以前一直用类似rename &amp;quot;s/_/-/&amp;quot; *这样的命令正则替换一些文件名，不过系统切换到Archlinux后用rename一直失败，用man看了下说明才发现并不支持正则，只能这样用，并且不能全局替换
 1 rename 123 456 * 其实几乎所有情况下, rename用不到正则表达式的. 你最多不过是通过正则确定要改名的文件列表而已. 这通过管道太容易了. 例如我在shell下, 会这样使用
 1 f &amp;#39;bak$&amp;#39; |x rename &amp;#39;.bak&amp;#39; &amp;#39;&amp;#39; 在管道之前, 可以通过各种方式搭配, 来生成所需的文件列表
@@ -288,20 +331,20 @@ You need to use Dynamic Host Configuration Protocol Client i.e., dhclient comman
     
     <item>
       <title>Browser plugins</title>
-      <link>https://sy123.netlify.app/2020/03/04/browser-plugins/</link>
+      <link>https://sy123.netlify.app/browser-plugins/</link>
       <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/03/04/browser-plugins/</guid>
+      <guid>https://sy123.netlify.app/browser-plugins/</guid>
       <description>Installation The package you will need to install depends on the browser you use.
 The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package. </description>
     </item>
     
     <item>
       <title>Encrypt string using Openssl</title>
-      <link>https://sy123.netlify.app/2020/02/28/encrypt-string-using-openssl/</link>
+      <link>https://sy123.netlify.app/encrypt-string-using-openssl/</link>
       <pubDate>Fri, 28 Feb 2020 11:28:00 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/28/encrypt-string-using-openssl/</guid>
+      <guid>https://sy123.netlify.app/encrypt-string-using-openssl/</guid>
       <description>Try this:
 1 2 3 echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt Run
 1 2 openssl list-cipher-commands to list all available ciphers.</description>
@@ -309,10 +352,10 @@ The NPAPI version can be installed with the flashplugin package. The PPAPI versi
     
     <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
-      <link>https://sy123.netlify.app/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</link>
+      <link>https://sy123.netlify.app/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/25/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
+      <guid>https://sy123.netlify.app/copying-all-files-inside-subdirectories-and-renaming-instead-of-overwriting/</guid>
       <description>GNU cp(1) has a backup option:
 1 cp --backup SOURCE [SOURCE...] [DESTINATION] This has the following effects which can be controlled with other options as described in the manual page of cp(1):
 1 2 3 4 5 6 7 --backup[=CONTROL] make a backup of each existing destination file -b like --backup but does not accept an argument -S, --suffix=SUFFIX override the usual backup suffix The backup suffix is ~, unless set with --suffix or SIMPLE_BACKUP_SUFFIX.</description>
@@ -320,10 +363,10 @@ The NPAPI version can be installed with the flashplugin package. The PPAPI versi
     
     <item>
       <title>Android Studio emulator ugly black borders</title>
-      <link>https://sy123.netlify.app/2020/02/24/android-studio-emulator-ugly-black-borders/</link>
+      <link>https://sy123.netlify.app/android-studio-emulator-ugly-black-borders/</link>
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/24/android-studio-emulator-ugly-black-borders/</guid>
+      <guid>https://sy123.netlify.app/android-studio-emulator-ugly-black-borders/</guid>
       <description>
 Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.
@@ -333,10 +376,10 @@ For making it floating, add this to your config Floating all windows with &amp;l
     
     <item>
       <title>Vim_search_in_file</title>
-      <link>https://sy123.netlify.app/2020/02/24/vim_search_in_file/</link>
+      <link>https://sy123.netlify.app/vim_search_in_file/</link>
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/24/vim_search_in_file/</guid>
+      <guid>https://sy123.netlify.app/vim_search_in_file/</guid>
       <description>总有人问我 Vim 中能不能查找，当然能！而且是超级强的查找！ 这篇文章来详细介绍 Vim 中查找相关的设置和使用方法。 包括查找与替换、查找光标所在词、高亮前景/背景色、切换高亮状态、大小写敏感查找等。
 查找 在normal模式下按下/即可进入查找模式，输入要查找的字符串并按下回车。 Vim会跳转到第一个匹配。按下n查找下一个，按下N查找上一个。
 Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quot;。 需要查找特殊字符需要转义，例如/vim$匹配&amp;quot;vim$&amp;quot;。
@@ -364,20 +407,20 @@ Vim查找支持正则表达式，例如/vim$匹配行尾的&amp;quot;vim&amp;quo
     
     <item>
       <title>linux中如何手动清零缓冲</title>
-      <link>https://sy123.netlify.app/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</link>
+      <link>https://sy123.netlify.app/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</link>
       <pubDate>Sun, 16 Feb 2020 15:20:03 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/16/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</guid>
+      <guid>https://sy123.netlify.app/linux%E4%B8%AD%E5%A6%82%E4%BD%95%E6%89%8B%E5%8A%A8%E6%B8%85%E9%9B%B6%E7%BC%93%E5%86%B2/</guid>
       <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands.
 1 2 3 4 5 6 7 8 9 10 free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248 You can signal the Linux Kernel to drop various aspects of cached items by changing the numeric argument to the above command.</description>
     </item>
     
     <item>
       <title>使用systemd-analyze优化系统启动时间</title>
-      <link>https://sy123.netlify.app/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</link>
+      <link>https://sy123.netlify.app/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</link>
       <pubDate>Sun, 16 Feb 2020 14:53:24 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/16/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</guid>
+      <guid>https://sy123.netlify.app/%E4%BD%BF%E7%94%A8systemd-analyze%E4%BC%98%E5%8C%96%E7%B3%BB%E7%BB%9F%E5%90%AF%E5%8A%A8%E6%97%B6%E9%97%B4/</guid>
       <description>systemd-analyze简介 systemd-analyze是Linux自带的分析系统启动性能的工具。
 systemd-analyze可使用的命令：
 systemd-analyze [OPTIONS…] [time]
@@ -400,19 +443,19 @@ systemd-analyze blame 按照每个单元花费的启动时间从多到少的顺�
     
     <item>
       <title>Socket programing Permission denied</title>
-      <link>https://sy123.netlify.app/2020/02/05/socket-programing-permission-denied/</link>
+      <link>https://sy123.netlify.app/socket-programing-permission-denied/</link>
       <pubDate>Wed, 05 Feb 2020 16:04:13 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/05/socket-programing-permission-denied/</guid>
+      <guid>https://sy123.netlify.app/socket-programing-permission-denied/</guid>
       <description>listen tcp :443: bind: permission denied If you want to bind to a privileged port (ports less than 1024). You either need to be root or have the CAP_NET_BIND_SERVICE capability.</description>
     </item>
     
     <item>
       <title>Linux yay 命令</title>
-      <link>https://sy123.netlify.app/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</link>
+      <link>https://sy123.netlify.app/linux-yay-%E5%91%BD%E4%BB%A4/</link>
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/05/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
+      <guid>https://sy123.netlify.app/linux-yay-%E5%91%BD%E4%BB%A4/</guid>
       <description>
 又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。
 另见pacman。
@@ -424,10 +467,10 @@ curl: (33) HTTP server doesn&amp;rsquo;t seem to support byte ranges. Cannot res
     
     <item>
       <title>Linux_disable_IPv6</title>
-      <link>https://sy123.netlify.app/2020/01/31/linux_disable_ipv6/</link>
+      <link>https://sy123.netlify.app/linux_disable_ipv6/</link>
       <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/01/31/linux_disable_ipv6/</guid>
+      <guid>https://sy123.netlify.app/linux_disable_ipv6/</guid>
       <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关闭IPv6。 下面是IPv6的关闭方法应该适用于所有主流的Linux发行版包括Ubuntu、Debian、CentOS。
 IPv6在CentOS6.5系统中默认是启用状态，通过以下方式可以确认IPv6的状态
 1.1.查看系统IPv6的启用状态 以下命令返回值为0表示IPv6启用，1表示禁用
@@ -439,10 +482,10 @@ lsmod | grep ipv6
     
     <item>
       <title>Linux下格式化U盘</title>
-      <link>https://sy123.netlify.app/2020/01/26/linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</link>
+      <link>https://sy123.netlify.app/linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</link>
       <pubDate>Sun, 26 Jan 2020 21:41:53 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/01/26/linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</guid>
+      <guid>https://sy123.netlify.app/linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</guid>
       <description>windows下格式化u盘很简单，要么直接右键格式化，要么进入硬盘分区去格式化。那么Linux下呢？ 其实Linux下格式化u盘也十分简单，只需要几条命令就可以了：
 查看磁盘情况 sudo fdisk -l 可以看到有一个/dev/sdb的磁盘就是我们插入的u盘了，大小为28.8GB，类型为NTFS。
 2. 删除分区 1 2 3 4 5 6 sudo fdisk /dev/sdb m # 获取帮助命令 d # 删除分区 n # 新建分区 p # 打印分区表 w # 写入分区表并退出 一定要记得最后的w命令。
@@ -454,10 +497,10 @@ umount is too slow Are you using a 64-bit version of Linux with a lot of memory 
     
     <item>
       <title>Set_all_Java_apps_to_use_GTK&#43;_font_&amp;_theme_settings</title>
-      <link>https://sy123.netlify.app/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</link>
+      <link>https://sy123.netlify.app/set_all_java_apps_to_use_gtk-_font__theme_settings/</link>
       <pubDate>Wed, 22 Jan 2020 01:12:54 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
+      <guid>https://sy123.netlify.app/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
 Java default look Java GTK+ look How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
 1 export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34; First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>
@@ -465,10 +508,10 @@ Java default look Java GTK+ look How do you do it? Set the variable _JAVA_OPTION
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>https://sy123.netlify.app/2020/01/11/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
+      <link>https://sy123.netlify.app/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/01/11/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
+      <guid>https://sy123.netlify.app/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
       <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置git的话可以直接在文章最后找到git的设置代理的方法。
 前期准备: 认识代理的方式:代理是通过客户端与服务端通信,传输服务端能够访问到的资源文件,再由服务端客户端通信返回给客户端,从而间接访问服务端能访问的资源.
 以socket5通信为例子,我们通过客户端(自己想一想酸酸乳)向服务端发送socket通信,服务端访问资源再由socket通信返回给客户端.但是这里面的通信设置必须通过端口来进行通信,类似switchyomega设置过程一样,我们会设定走的代理方式是127.0.0.1:1080;这个意思就是通过本地的1080端口来进行通信.具体在终端上如何使用呢?

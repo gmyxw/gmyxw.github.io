@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/dva/</link>
     <description>Recent content in dva on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Sat, 15 Feb 2020 22:23:37 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/dva/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Saga deprecated 警告</title>
-      <link>https://sy123.netlify.app/2020/02/15/saga-deprecated-%E8%AD%A6%E5%91%8A/</link>
+      <link>https://sy123.netlify.app/saga-deprecated-%E8%AD%A6%E5%91%8A/</link>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/15/saga-deprecated-%E8%AD%A6%E5%91%8A/</guid>
+      <guid>https://sy123.netlify.app/saga-deprecated-%E8%AD%A6%E5%91%8A/</guid>
       <description>What happens? 1 [...effects] has been deprecated in favor of all([...effects]), please update your code it does not effect dva.js, its redux saga api update, you just need to do this
 1 2 3 4 5 effects: { * query(action, {call, put, all}) { yield all([]) } } Redux saga apis:</description>
     </item>

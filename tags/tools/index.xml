@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/tools/</link>
     <description>Recent content in tools on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Sat, 15 Feb 2020 17:58:47 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Visual Studio Code 偏好设置</title>
-      <link>https://sy123.netlify.app/2020/02/15/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</link>
+      <link>https://sy123.netlify.app/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</link>
       <pubDate>Sat, 15 Feb 2020 17:58:47 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/15/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</guid>
+      <guid>https://sy123.netlify.app/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</guid>
       <description>Visual Studio Code 提供了极大的弹性让我们自订想要的编辑器样式，端看使用者设定（User Setting）中，就超过 800 项设定可以让开发者自由调整，而且还有扩充套件能够增强 VS Code 的开发能力。
 这篇主要是我个人偏好的设定，完整 setting.json 请参考 gist。
 首先可以使用快速键 Ctrl +, 开启 settings.json 使用者设定档，或从选单列中点选档案 &amp;gt; 喜好设定 &amp;gt; 设定。

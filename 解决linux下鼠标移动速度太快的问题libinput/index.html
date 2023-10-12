@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>解决linux下鼠标移动速度太快的问题(libinput) - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <a href="https://sy123.netlify.app/">zhili</a> ❯
+      <a href="/%e8%a7%a3%e5%86%b3linux%e4%b8%8b%e9%bc%a0%e6%a0%87%e7%a7%bb%e5%8a%a8%e9%80%9f%e5%ba%a6%e5%a4%aa%e5%bf%ab%e7%9a%84%e9%97%ae%e9%a2%98libinput">解决linux下鼠标移动速度太快的问题libinput</a>/</h1>
+  </div>
+  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>解决linux下鼠标移动速度太快的问题(libinput)</h1>
+  </div>
+<div class="meta">
+  <div>🕓2020-08-05 17:55</div>
+  </div>
+<div class="content">
+  <p>环境：Mint Xfce 19 x64
+我平时使用的鼠标移动速度比较慢，而且鼠标加速从来不开。一般1000-1200DPI最适合我。Mint下鼠标疯狂起飞，手腕一抖鼠标指针飞过半个屏幕让我很是头疼。而xfce设置里的鼠标速度似乎完全没有作用，Google后我发现这其实是历史的锅，以前X11是用xset管理输入设备的，现在变成了xinput。而xfce的设置还是去修改xset的配置文件。</p>
+<p>既然如此，那我们只能来手动研究一下xinput怎么改鼠标速度了。</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xinput -list
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"># 可以查看到所有输入设备，我的部分输出如下：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>⎡ Virtual core pointer                        <span style="color:#008080">id</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">2</span>    <span style="color:#000;font-weight:bold">[</span>master pointer  <span style="color:#000;font-weight:bold">(</span>3<span style="color:#000;font-weight:bold">)]</span>
+</span></span><span style="display:flex;"><span>⎜   ↳ Virtual core XTEST pointer                  <span style="color:#008080">id</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">4</span>    <span style="color:#000;font-weight:bold">[</span>slave  pointer  <span style="color:#000;font-weight:bold">(</span>2<span style="color:#000;font-weight:bold">)]</span>
+</span></span><span style="display:flex;"><span>⎜   ↳ SynPS/2 Synaptics TouchPad                  <span style="color:#008080">id</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">15</span>    <span style="color:#000;font-weight:bold">[</span>slave  pointer  <span style="color:#000;font-weight:bold">(</span>2<span style="color:#000;font-weight:bold">)]</span>
+</span></span><span style="display:flex;"><span>⎜   ↳ PixArt USB Optical Mouse                    <span style="color:#008080">id</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">11</span>    <span style="color:#000;font-weight:bold">[</span>slave  pointer  <span style="color:#000;font-weight:bold">(</span>2<span style="color:#000;font-weight:bold">)]</span>
+</span></span><span style="display:flex;"><span>⎣ Virtual core keyboard                       <span style="color:#008080">id</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">3</span>    <span style="color:#000;font-weight:bold">[</span>master keyboard <span style="color:#000;font-weight:bold">(</span>2<span style="color:#000;font-weight:bold">)]</span>
+</span></span><span style="display:flex;"><span>    ↳ Virtual core XTEST keyboard                 <span style="color:#008080">id</span><span style="color:#000;font-weight:bold">=</span><span style="color:#099">5</span>    <span style="color:#000;font-weight:bold">[</span>slave  keyboard <span style="color:#000;font-weight:bold">(</span>3<span style="color:#000;font-weight:bold">)]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以看到，USB鼠标id为11，接下来再去查看USB鼠标的详细信息：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ xinput -list-props <span style="color:#099">11</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Device <span style="color:#d14">&#39;PixArt USB Optical Mouse&#39;</span>:
+</span></span><span style="display:flex;"><span>    Device Enabled <span style="color:#000;font-weight:bold">(</span>145<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>    Coordinate Transformation Matrix <span style="color:#000;font-weight:bold">(</span>147<span style="color:#000;font-weight:bold">)</span>:    1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+</span></span><span style="display:flex;"><span>    libinput Natural Scrolling Enabled <span style="color:#000;font-weight:bold">(</span>280<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Natural Scrolling Enabled Default <span style="color:#000;font-weight:bold">(</span>281<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Scroll Methods Available <span style="color:#000;font-weight:bold">(</span>282<span style="color:#000;font-weight:bold">)</span>:    0, 0, <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>    libinput Scroll Method Enabled <span style="color:#000;font-weight:bold">(</span>283<span style="color:#000;font-weight:bold">)</span>:    0, 0, <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Scroll Method Enabled Default <span style="color:#000;font-weight:bold">(</span>284<span style="color:#000;font-weight:bold">)</span>:    0, 0, <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Button Scrolling Button <span style="color:#000;font-weight:bold">(</span>285<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>    libinput Button Scrolling Button Default <span style="color:#000;font-weight:bold">(</span>286<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#099">2</span>
+</span></span><span style="display:flex;"><span>    libinput Middle Emulation Enabled <span style="color:#000;font-weight:bold">(</span>287<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Middle Emulation Enabled Default <span style="color:#000;font-weight:bold">(</span>288<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Accel Speed <span style="color:#000;font-weight:bold">(</span>289<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#000;font-weight:bold">]</span>0.000000
+</span></span><span style="display:flex;"><span>    libinput Accel Speed Default <span style="color:#000;font-weight:bold">(</span>290<span style="color:#000;font-weight:bold">)</span>:    0.000000
+</span></span><span style="display:flex;"><span>    libinput Accel Profiles Available <span style="color:#000;font-weight:bold">(</span>291<span style="color:#000;font-weight:bold">)</span>:    1, <span style="color:#099">1</span>
+</span></span><span style="display:flex;"><span>    libinput Accel Profile Enabled <span style="color:#000;font-weight:bold">(</span>292<span style="color:#000;font-weight:bold">)</span>:    1, <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Accel Profile Enabled Default <span style="color:#000;font-weight:bold">(</span>293<span style="color:#000;font-weight:bold">)</span>:    1, <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Left Handed Enabled <span style="color:#000;font-weight:bold">(</span>294<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Left Handed Enabled Default <span style="color:#000;font-weight:bold">(</span>295<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Send Events Modes Available <span style="color:#000;font-weight:bold">(</span>265<span style="color:#000;font-weight:bold">)</span>:    1, <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Send Events Mode Enabled <span style="color:#000;font-weight:bold">(</span>266<span style="color:#000;font-weight:bold">)</span>:    0, <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    libinput Send Events Mode Enabled Default <span style="color:#000;font-weight:bold">(</span>267<span style="color:#000;font-weight:bold">)</span>:    0, <span style="color:#099">0</span>
+</span></span><span style="display:flex;"><span>    Device Node <span style="color:#000;font-weight:bold">(</span>268<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#d14">&#34;/dev/input/event5&#34;</span>
+</span></span><span style="display:flex;"><span>    Device Product ID <span style="color:#000;font-weight:bold">(</span>269<span style="color:#000;font-weight:bold">)</span>:    2362, <span style="color:#099">9488</span>
+</span></span><span style="display:flex;"><span>    libinput Drag Lock Buttons <span style="color:#000;font-weight:bold">(</span>296<span style="color:#000;font-weight:bold">)</span>:    &lt;no items&gt;
+</span></span><span style="display:flex;"><span>    libinput Horizontal Scroll Enabled <span style="color:#000;font-weight:bold">(</span>297<span style="color:#000;font-weight:bold">)</span>:    <span style="color:#099">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>根据libinput官网文档所述：<a href="https://wayland.freedesktop.org/libinput/doc/latest/scrolling.html">https://wayland.freedesktop.org/libinput/doc/latest/scrolling.html</a>
+前面一堆Scroll的都是触摸板的参数，不管他，下面一个Accel Speed就是我想要的，找到文档对应部分：
+<a href="https://wayland.freedesktop.org/libinput/doc/latest/configuration.html#pointer-acceleration">https://wayland.freedesktop.org/libinput/doc/latest/configuration.html#pointer-acceleration</a>
+可以看到，设置区间为[-1,1]，默认是0，那么我现在嫌它快了，直接设置为-0.5，可用看到这个属性的id是289，所以执行</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>xinput set-prop <span style="color:#099">11</span> <span style="color:#099">289</span> -0.5
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>完美解决</p>
+<p>当然，我还需要搞个开机启动，考虑到图形界面下才会有鼠标，这个设置放在systemd的multi-user节点或者直接扔xprofile/.xinitrc里比较合适，图懒省事，我直接扔<code>~/.xinitrc</code>里了。</p>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2022 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/code/</link>
     <description>Recent content in code on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Tue, 25 Feb 2020 12:39:44 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/code/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>约定俗成的常见缩写</title>
-      <link>https://sy123.netlify.app/2020/02/25/%E7%BA%A6%E5%AE%9A%E4%BF%97%E6%88%90%E7%9A%84%E5%B8%B8%E8%A7%81%E7%BC%A9%E5%86%99/</link>
+      <link>https://sy123.netlify.app/%E7%BA%A6%E5%AE%9A%E4%BF%97%E6%88%90%E7%9A%84%E5%B8%B8%E8%A7%81%E7%BC%A9%E5%86%99/</link>
       <pubDate>Tue, 25 Feb 2020 12:39:44 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/02/25/%E7%BA%A6%E5%AE%9A%E4%BF%97%E6%88%90%E7%9A%84%E5%B8%B8%E8%A7%81%E7%BC%A9%E5%86%99/</guid>
+      <guid>https://sy123.netlify.app/%E7%BA%A6%E5%AE%9A%E4%BF%97%E6%88%90%E7%9A%84%E5%B8%B8%E8%A7%81%E7%BC%A9%E5%86%99/</guid>
       <description> 全称 缩写 event evt connect conn server srv address addr request req response rep lenght len collection col signal sig error of last number erron field field property props defines defs object obj system sys message msg number num directory dir dictionory dict protocol proto button btn table tbl label lbl Image img Sprite sp texture tex tween tw transform trans animation anim material mat vecter vec position pos delegate del callback cb 2020/02/25 update 缩写 全称 acc accessibility auto automatic eval evaluate impl implementation info in num number of min minimum max maximum nav navigation regexp regular expression util utility req request resp response res resource app application auth authorization/authentication 这点非常不认可，同一个常见缩写居然能代表两个不同的词。 dev develop env environment db database pkg package svr server i18n internationalization cert certificate msg message addr address tmp/temp temporary var/def variable/define 其实 var/def 已经是很多语言的关键字了 calc calculate/calculation src source dest destination min/max minimum/maximum 应该已经不算了吧。。。 doc document dir directory </description>
     </item>
     

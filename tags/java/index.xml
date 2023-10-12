@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/java/</link>
     <description>Recent content in java on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Thu, 14 May 2020 05:31:01 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Exception in thread &#34;main&#34; java.lang.OutOfMemoryError: Java heap space</title>
-      <link>https://sy123.netlify.app/2020/05/14/exception-in-thread-main-java.lang.outofmemoryerror-java-heap-space/</link>
+      <link>https://sy123.netlify.app/exception-in-thread-main-java.lang.outofmemoryerror-java-heap-space/</link>
       <pubDate>Thu, 14 May 2020 05:31:01 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/05/14/exception-in-thread-main-java.lang.outofmemoryerror-java-heap-space/</guid>
+      <guid>https://sy123.netlify.app/exception-in-thread-main-java.lang.outofmemoryerror-java-heap-space/</guid>
       <description>今天用一个游戏资源批量解密程序出现错误提示：
 1 Exception in thread &amp;#34;main&amp;#34; java.lang.OutOfMemoryError: Java heap space: failed reallocation of scalar replaced objects 工具太多，直接设置一下环境变量就完事儿
 1 2 /mnt/win10/Users/zhili/Downloads 15s ❯ export _JAVA_OPTIONS=&amp;#34;-Xms512m -Xmx10G&amp;#34; </description>
@@ -20,10 +21,10 @@
     
     <item>
       <title>Set_all_Java_apps_to_use_GTK&#43;_font_&amp;_theme_settings</title>
-      <link>https://sy123.netlify.app/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</link>
+      <link>https://sy123.netlify.app/set_all_java_apps_to_use_gtk-_font__theme_settings/</link>
       <pubDate>Wed, 22 Jan 2020 01:12:54 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/01/22/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
+      <guid>https://sy123.netlify.app/set_all_java_apps_to_use_gtk-_font__theme_settings/</guid>
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
 Java default look Java GTK+ look How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
 1 export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel ${_JAVA_OPTIONS}&amp;#34; First test to see if the outcome is what you expect by running your Java app from the same terminal window.</description>

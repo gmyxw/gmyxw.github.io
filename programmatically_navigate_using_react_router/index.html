@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>Programmatically_navigate_using_react_router - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <a href="https://sy123.netlify.app/">zhili</a> ❯
+      <a href="/programmatically_navigate_using_react_router">Programmatically navigate using react router</a>/</h1>
+  </div>
+  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>Programmatically_navigate_using_react_router</h1>
+  </div>
+<div class="meta">
+  <div>🕓2020-02-09 11:33</div>
+  <div>
+    <span><a href="https://sy123.netlify.app/tags/js/">#js</a></span>
+      <span><a href="https://sy123.netlify.app/tags/react/">#react</a></span>
+      </div>
+  </div>
+<div class="content">
+  <h2 id="react-router-v510-with-hooks">React Router v5.1.0 with hooks</h2>
+<p>There is a new <code>useHistory</code> hook in React Router &gt;5.1.0 if you are using React &gt;16.8.0 and functional components.</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> { useHistory } from <span style="color:#d14">&#34;react-router-dom&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">function</span> HomeButton() {
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">const</span> history <span style="color:#000;font-weight:bold">=</span> useHistory();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">function</span> handleClick() {
+</span></span><span style="display:flex;"><span>    history.push(<span style="color:#d14">&#34;/home&#34;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">return</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">&lt;</span>button type<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;button&#34;</span> onClick<span style="color:#000;font-weight:bold">=</span>{handleClick}<span style="color:#000;font-weight:bold">&gt;</span>
+</span></span><span style="display:flex;"><span>      Go home
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="react-router-v4">React Router v4</h2>
+<p>With v4 of React Router, there are three approaches that you can take to programmatic routing within components.</p>
+<ul>
+<li>Use the <code>withRouter</code> higher-order component.</li>
+<li>Use composition and render a <code>&lt;Route&gt;</code></li>
+<li>Use the <code>context</code>.</li>
+</ul>
+<p>React Router is mostly a wrapper around the <a href="https://github.com/ReactTraining/history">history</a> library. <code>history</code> handles interaction with the browser&rsquo;s <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/history">window.history</a> for you with its browser and hash histories. It also provides a memory history which is useful for environments that don&rsquo;t have a global history. This is particularly useful in mobile app development (<code>react-native</code>) and unit testing with Node.</p>
+<p>A <code>history</code> instance has two methods for navigating: <code>push</code> and <code>replace</code>. If you think of the <code>history</code> as an array of visited locations, <code>push</code> will add a new location to the array and <code>replace</code> will replace the current location in the array with the new one. Typically you will want to use the <code>push</code> method when you are navigating.</p>
+<p>In earlier versions of React Router, you had to create your own history instance, but in v4 the <code>&lt;BrowserRouter&gt;</code>, <code>&lt;HashRouter&gt;</code>, and <code>&lt;MemoryRouter&gt;</code> components will create a browser, hash, and memory instances for you. React Router makes the properties and methods of the <code>history</code> instance associated with your router available through the context, under the <code>router</code> object.</p>
+<ul>
+<li>
+<ol>
+<li>Use the withRouter higher-order component
+The <code>withRouter</code> higher-order component will inject the <code>history</code> object as a prop of the component. This allows you to access the <code>push</code>and <code>replace</code> methods without having to deal with the <code>context</code>.</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> { withRouter } from <span style="color:#d14">&#39;react-router-dom&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// this also works with react-router-native
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> Button <span style="color:#000;font-weight:bold">=</span> withRouter(({ history }) =&gt; (
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">&lt;</span>button
+</span></span><span style="display:flex;"><span>    type<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;button&#39;</span>
+</span></span><span style="display:flex;"><span>    onClick<span style="color:#000;font-weight:bold">=</span>{() =&gt; { history.push(<span style="color:#d14">&#39;/new-location&#39;</span>) }}
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">&gt;</span>
+</span></span><span style="display:flex;"><span>    Click Me<span style="color:#000;font-weight:bold">!</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+</span></span><span style="display:flex;"><span>))
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<ol start="2">
+<li>Use composition and render a <code>&lt;Route&gt;</code>
+The <code>&lt;Route&gt;</code> component isn&rsquo;t just for matching locations. You can render a pathless route and it will always match the current location. The <code>&lt;Route&gt;</code> component passes the same props as <code>withRouter</code>, so you will be able to access the <code>history</code> methods through the <code>history</code> prop.</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> { Route } from <span style="color:#d14">&#39;react-router-dom&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> Button <span style="color:#000;font-weight:bold">=</span> () =&gt; (
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">&lt;</span>Route render<span style="color:#000;font-weight:bold">=</span>{({ history}) =&gt; (
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">&lt;</span>button
+</span></span><span style="display:flex;"><span>      type<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;button&#39;</span>
+</span></span><span style="display:flex;"><span>      onClick<span style="color:#000;font-weight:bold">=</span>{() =&gt; { history.push(<span style="color:#d14">&#39;/new-location&#39;</span>) }}
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">&gt;</span>
+</span></span><span style="display:flex;"><span>      Click Me<span style="color:#000;font-weight:bold">!</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+</span></span><span style="display:flex;"><span>  )} <span style="color:#000;font-weight:bold">/&gt;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<ol start="3">
+<li>Use the context*
+But you probably should not</li>
+</ol>
+</li>
+</ul>
+<p>The last option is one that you should only use if you feel comfortable working with React&rsquo;s <a href="https://facebook.github.io/react/docs/context.html">context</a> model. Although context is an option, it should be stressed that context is an unstable API and React has a section <a href="https://facebook.github.io/react/docs/context.html#why-not-to-use-context">Why Not To Use Context</a> in their documentation. So use at your own risk!</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">const</span> Button <span style="color:#000;font-weight:bold">=</span> (props, context) =&gt; (
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">&lt;</span>button
+</span></span><span style="display:flex;"><span>    type<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#39;button&#39;</span>
+</span></span><span style="display:flex;"><span>    onClick<span style="color:#000;font-weight:bold">=</span>{() =&gt; {
+</span></span><span style="display:flex;"><span>      <span style="color:#998;font-style:italic">// context.history.push === history.push
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>      context.history.push(<span style="color:#d14">&#39;/new-location&#39;</span>)
+</span></span><span style="display:flex;"><span>    }}
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">&gt;</span>
+</span></span><span style="display:flex;"><span>    Click Me<span style="color:#000;font-weight:bold">!</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/button&gt;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// you need to specify the context type so that it
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// is available within the component
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>Button.contextTypes <span style="color:#000;font-weight:bold">=</span> {
+</span></span><span style="display:flex;"><span>  history<span style="color:#000;font-weight:bold">:</span> React.PropTypes.shape({
+</span></span><span style="display:flex;"><span>    push<span style="color:#000;font-weight:bold">:</span> React.PropTypes.func.isRequired
+</span></span><span style="display:flex;"><span>  })
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>1 and 2 are the simplest choices to implement, so for most use cases, they are your best bets.</p>
+<ul>
+<li>1、直接点击跳转页面：</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#998;font-style:italic">// 方法一：
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">&lt;</span>a href<span style="color:#000;font-weight:bold">=</span><span style="color:#d14">&#34;跳转路径&gt;点击跳转&lt;/a&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">// 方法二：
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">
+</span></span></span><span style="display:flex;"><span><span style="color:#d14">&lt;Link to=&#34;</span>跳转路径<span style="color:#a61717;background-color:#e3d2d2">&#34;</span><span style="color:#000;font-weight:bold">&gt;</span>点击跳转<span style="color:#000;font-weight:bold">&lt;</span><span style="color:#a61717;background-color:#e3d2d2">/Link&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>2、点击按钮之后跳转：</li>
+</ul>
+<p>引入：</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span> { hashHistory } from <span style="color:#d14">&#39;react-router&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic">// 在方法里面加入：
+</span></span></span><span style="display:flex;"><span><span style="color:#998;font-style:italic"></span>hashHistory.push(<span style="color:#d14">&#39;跳转路径&#39;</span>)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>3、browserHistory带参数跳转</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">import</span>{browserHistory}from<span style="color:#d14">&#39;dva/router&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>browserHistory.push(<span style="color:#d14">&#39;/orders/orderdetail?oderId=&#39;</span><span style="color:#000;font-weight:bold">+</span>item.order);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在router里面设置路径的时候不需要加入参数</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>path<span style="color:#000;font-weight:bold">:</span><span style="color:#d14">&#39;orders/orderdetail&#39;</span>,
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>4、关于路由获取参数的问题：
+<table>
+<thead>
+<tr>
+<th>code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>location.pathname </td>
+<td>设置或获取对象指定的文件名或路径。</td>
+</tr>
+<tr>
+<td>location.href </td>
+<td>设置或获取整个 URL 为字符串。</td>
+</tr>
+<tr>
+<td>location.port</td>
+<td>设置或获取与 URL 关联的端口号码。</td>
+</tr>
+<tr>
+<td>location.protocol</td>
+<td>设置或获取 URL 的协议部分。</td>
+</tr>
+<tr>
+<td>location.hash</td>
+<td>设置或获取 href 属性中在井号“#”后面的分段。</td>
+</tr>
+<tr>
+<td>location.host</td>
+<td>设置或获取 location 或 URL 的 hostname 和 port 号码。</td>
+</tr>
+<tr>
+<td>location.search</td>
+<td>设置或获取 href 属性中跟在问号后面的部分。</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2 id="routerredux路由跳转">routerRedux路由跳转</h2>
+<ul>
+<li>1、不带参数跳转：</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>dispatch(routerRedux.push({
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            pathname <span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;/couponDetail&#39;</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>   }))
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>2、带参数跳转</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>dispatch(routerRedux.push({ pathname <span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;/couponDetail&#39;</span>, query<span style="color:#000;font-weight:bold">:</span>要携带的参数object }))
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意：通过location.query.参数字段来获取参数值</p>
+<ul>
+<li>3、在effect里面跳转</li>
+</ul>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#000;font-weight:bold">yield</span> put (routerRedux.replace({ pathname<span style="color:#000;font-weight:bold">:</span> <span style="color:#d14">&#39;/domains/buy/pay&#39;</span>, query<span style="color:#000;font-weight:bold">:</span> payload }));
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2022 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

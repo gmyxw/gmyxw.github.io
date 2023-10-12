@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="zhili">
+<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
+    ">
+<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
+<meta name="referrer" content="always">
+<title>vim recording的使用方法 - zhili</title>
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<header>
+  <div>
+    <a href="https://sy123.netlify.app/">zhili</a> ❯
+      <a href="/vim-recording%e7%9a%84%e4%bd%bf%e7%94%a8%e6%96%b9%e6%b3%95">Vim recording的使用方法</a>/</h1>
+  </div>
+  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
+</header>
+<main>
+  <article>
+    <div class="title">
+  <h1>vim recording的使用方法</h1>
+  </div>
+<div class="meta">
+  <div>🕓2020-03-12 17:05</div>
+  <div>
+    <span><a href="https://sy123.netlify.app/tags/vim/">#vim</a></span>
+      </div>
+  </div>
+<div class="content">
+  <p>使用vim时无意间触碰到q键，左下角出现“recording”这个标识，觉得好奇，遂在网上查了一下，然后这是vim的一个强大功能。他可以录 制一个宏（Macro)，在开始记录后，会记录你所有的键盘输入，包括在insert模式下的输入、正常模式下使用的各种命令等。</p>
+<p>具体使用：</p>
+<p>第一步：在正常模式下（非insert模式、非visual模式）按下q键盘</p>
+<p>第二步：选择a-z或0-9中任意一个作为缓冲器的名字，准备开始录制宏</p>
+<p>第三步：正常的操作，此次所有的操作都会被记录在上一步中定义的缓冲器中</p>
+<p>第四步：在非insert模式下输入q停止宏的录制</p>
+<p>第五步：使用@ + 第二步中定义的缓冲器的名字即可。</p>
+<p>例如想把下面的文字</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>line1
+</span></span><span style="display:flex;"><span>line-2
+</span></span><span style="display:flex;"><span>line3-1
+</span></span><span style="display:flex;"><span>l4
+</span></span><span style="display:flex;"><span>line1
+</span></span><span style="display:flex;"><span>line-2
+</span></span><span style="display:flex;"><span>line3-1
+</span></span><span style="display:flex;"><span>l4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>变成如下的文字</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>System.out.println<span style="color:#000;font-weight:bold">(</span>line1<span style="color:#000;font-weight:bold">)</span>;
+</span></span><span style="display:flex;"><span>System.out.println<span style="color:#000;font-weight:bold">(</span>line1<span style="color:#000;font-weight:bold">)</span>;
+</span></span><span style="display:flex;"><span>System.out.println<span style="color:#000;font-weight:bold">(</span>line-2<span style="color:#000;font-weight:bold">)</span>;
+</span></span><span style="display:flex;"><span>System.out.println<span style="color:#000;font-weight:bold">(</span>line3-1<span style="color:#000;font-weight:bold">)</span>;
+</span></span><span style="display:flex;"><span>System.out.println<span style="color:#000;font-weight:bold">(</span>L4<span style="color:#000;font-weight:bold">)</span>;
+</span></span><span style="display:flex;"><span>System.out.println<span style="color:#000;font-weight:bold">(</span>line1<span style="color:#000;font-weight:bold">)</span>;
+</span></span><span style="display:flex;"><span>System.out.println<span style="color:#000;font-weight:bold">(</span>line1<span style="color:#000;font-weight:bold">)</span>;
+</span></span><span style="display:flex;"><span>System.out.println<span style="color:#000;font-weight:bold">(</span>line-2<span style="color:#000;font-weight:bold">)</span>;
+</span></span><span style="display:flex;"><span>System.out.println<span style="color:#000;font-weight:bold">(</span>line3-1<span style="color:#000;font-weight:bold">)</span>;
+</span></span><span style="display:flex;"><span>System.out.println<span style="color:#000;font-weight:bold">(</span>L4<span style="color:#000;font-weight:bold">)</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>观察可以发现他们的规律，在每行文字的开头添加“System.out.println(”，结尾添加“);”就变成下面的信息了。下面简单介绍一下如何使用recording来完成这样的操作。
+首先把光标移动line1上，输入qt，准备开始录制，缓冲器的名字为t，录制的动作为：shift + ^ 回到行首、按下i键进入insert模式、输入“System.out.println(”、按下esc键回到正常模式、shift + $ 回到行尾部、按下i键进入insert模式、输入“);”按下esc键回到正常模式，按下q停止录制。然后把光标移动到下面一行的任意位置输入 @ + t 即可。</p>
+<p>recording还可以和查询结合起来使用，例如想把一个文件中含有特定字符串的行注释，可以通过这样的宏来实现。在正常模式下输入/search string + enter、shift + ^、i、#、esc、shift + $。</p>
+<p>让定制的宏自动执行多次的方法是先输入一个数字，然后在输入@ + 缓冲器的名字。 例如 <code>100@t</code>，表示执行100次。</p>
+</div>
+<div class="disqus">
+  <div id="disqus_thread"></div>
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/disqusjs@1.2/dist/disqusjs.css">
+<script src="https://cdn.jsdelivr.net/gh/sy123s/blog@master/js/disqus.js"></script>
+<script>
+var dsqjs = new DisqusJS({
+    shortname: 'sy123-ml',
+    siteName: 'zhili',
+    identifier: '',
+    url: '',
+    title: '',
+    api: 'https://disqus.gd2.workers.dev/api/',
+    apikey: 'gZw0N3utfdxezjRheJwLz3xkiUcRWno3ruWSIROPHRcYNGmwBosRpnyb8MmiknVg',
+    admin: 'disqus_wvCW9l8bmG',
+    adminLabel: 'zhili'
+});
+</script>
+                            
+</div>
+
+  </article>
+</main>
+<footer>
+  <div>
+    <div>
+      2007-2022 zhili.</div>
+  </div>
+</footer>
+</body>
+</html>

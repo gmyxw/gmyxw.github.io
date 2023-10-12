@@ -5,14 +5,15 @@
     <link>https://sy123.netlify.app/tags/windoes/</link>
     <description>Recent content in windoes on zhili</description>
     <generator>Hugo -- gohugo.io</generator>
-    <copyright>2007-2020 zhili.</copyright>
+    <language>zh-cn</language>
+    <copyright>2007-2022 zhili.</copyright>
     <lastBuildDate>Mon, 20 Jan 2020 23:11:09 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/windoes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Win10 清除 PowerShell 历史记录</title>
-      <link>https://sy123.netlify.app/2020/01/20/win10-%E6%B8%85%E9%99%A4-powershell-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</link>
+      <link>https://sy123.netlify.app/win10-%E6%B8%85%E9%99%A4-powershell-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</link>
       <pubDate>Mon, 20 Jan 2020 23:11:09 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/2020/01/20/win10-%E6%B8%85%E9%99%A4-powershell-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</guid>
+      <guid>https://sy123.netlify.app/win10-%E6%B8%85%E9%99%A4-powershell-%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95/</guid>
       <description>PowerShell&amp;rsquo;s own history mechanism (Get-History, Clear-History) is host-independent, which is why - somewhat unexpectedly - you also need to clear the hosts&amp;rsquo;s command history separately.
 As for the console host&amp;rsquo;s own history feature:
 doskey-style history feature, before module PSReadline shipped with PowerShell (see below):
