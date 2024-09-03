@@ -1,73 +1,56 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>android on zhili</title>
-    <link>https://sy123.netlify.app/tags/android/</link>
-    <description>Recent content in android on zhili</description>
+    <title>Android on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/android/</link>
+    <description>Recent content in Android on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Wed, 18 Nov 2020 09:44:57 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Wed, 18 Nov 2020 09:44:57 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>unity游戏提示 Using memoryadresses from more than 16GB of memory </title>
-      <link>https://sy123.netlify.app/unity%E6%B8%B8%E6%88%8F%E6%8F%90%E7%A4%BA-using-memoryadresses-from-more-than-16gb-of-memory/</link>
+      <link>https://gmyxw.github.io/posts/20201118-android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages/</link>
       <pubDate>Wed, 18 Nov 2020 09:44:57 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/unity%E6%B8%B8%E6%88%8F%E6%8F%90%E7%A4%BA-using-memoryadresses-from-more-than-16gb-of-memory/</guid>
-      <description>新游戏被用户狂喷无奈研究一下，先在官方的问题跟踪器查一下就发现很多开发者纷纷都说是android 11的问题，我当场裂开，修复完又要改代码，之前一直在模拟器调试没啥问题，我自己用pixel 11测试一下果然秒退，还好11没普及，修复不存在的，混就完事
-See also https://issuetracker.unity3d.com/issues/android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages</description>
+      <guid>https://gmyxw.github.io/posts/20201118-android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages/</guid>
+      
+      <description>新游戏被用户狂喷无奈研究一下，先在官方的问题跟踪器查一下就发现很多开发者纷纷都说是android 11的问题，我当场裂开，修复完又要改代码，之</description>
+      
     </item>
     
     <item>
       <title>Android Intent</title>
-      <link>https://sy123.netlify.app/android-intent/</link>
+      <link>https://gmyxw.github.io/posts/20200517-android-intent/</link>
       <pubDate>Sun, 17 May 2020 20:31:14 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/android-intent/</guid>
-      <description>Intent 功能太强大了，比较常用的就是Activity （Service）之间的数据传递。举个简单例百子，在当前Activity1使用startActvity(intent)或者startActivityForResult(intent, code)方法跳转到另一个Activity2之前，如果要传递某度些String类型数据给Activity2，则会执行intent.putExtra(String str, String Key),将专String数据打包到Intent中，并给它一个Key标识。在Activity2当中，getIntent()方法获得这个intent，然后再getStringExtra(Key)，就可以获得你之前打包的那个数据了。这种机制属非常简单，也比较好用。
-对于一个要执行的操作来说，Intent算作是一个抽象描述。比如通过startActivity(Intent)启动一个Activity、sendBroadcast(Intent)发送一个广播或者通过startService bindService和后台服务进行交互。
-Intent为执行在不同应用不同组件之间代码的延时运行绑定提供了灵活的支持。最常见的用于启动activities，可以把Intent看做Activity之间的胶水。除此之外，Intent还持有一个数据结构来保存执行动作的抽象描述。
-Intent 对象 虽说Intent是一个抽象描述，但是对于具体的Intent类来说它可以被归纳为携带一组信息的信使，正是该信使在安卓组件间进行传递才能达到信息传递的效果。
-Intent 结构 一个Intent对象可以包含以下信息： Action
-可以直译为动作，它是Intent的一条‘命令’。具体action以String类型来命名，Intent类中定义了许多action常量来匹配不同的Intent对象。例如ACTION_VIEW ACTION_EDIT ACTION_MAIN等。action的存取可以通过setAction()和getAction()得到。
-Data
-data结构是要往Intent过滤器中添加的，使用data类型（mimeType属性）通常可以解释为一个规格或者说明书，它既可以是一个Uri表达式也可以是一个mimeType。使用URI表达式时，要按顺序书写Uri每一部分的属性，注意:当使用URL属性来指定时，如果不把‘schema’指定清楚的话，所有的URI属性都被忽视。如果‘host’不指定的话，则它的‘port’和‘path’属性都被忽视。
-使用setData()方法只可以设置URI属性的Data，如果设置mimeType属性的Data需要使用setType()方法。对于setDataAndType()方法既可以设置Uri也可以设置MIME，getData()和getType()分别获取URI和MIME类型。
-下面是action/data 的例子：
-ACTION_VIEW content://contacts/people/1 显示person表中标识符为1的联系人。 ACTION_DIAL content://contacts/people/1 显示电话拨号界面并且在显示框中显示person表中标识符为1联系人的电话号码 ACTION_VIEW tel:123 显示电话拨号界面并且在显示框中填入123. ACTION_DIAL tel:123 显示电话拨号界面并且在显示框中填入123. ACTION_EDIT content://contacts/people/1 编辑person表中标识符为1的联系人的信息。 ACTION_VIEW content://contacts/people/ 显示people列表 ACTION_SET_WALLPAPER 显示设置选择壁纸 Category
-category是Intent中可选部分，以String类型命名并且包含了组件如何操作Intent的额外信息。使用addCategory()方法添加category，使用removeCategory()删除之前添加的category，getCategories()方法可以获取当前设置的category。
-Extras
-以键值对形式添加的一组额外信息，它将通过Intent递交给组件进行处理。extras可以通过putExtras()和getExtras()方法进行存取操作。
-Flags
-这里的标记主要指启动Activity的方式，也是Intent可选部分。要是单独讲解Activity启动方式就要另起篇幅了（以后的任务）。
-组件名字
-这部分也是Intent可选部分，通常是指具体Activity Service和BroadcastReceiver类名。如果设置了，Intent对象将被递交给这个具体的组件进行处理，否则的话，安卓将使用其他信息寻找要启动的组件。组件名字可以通过setComponent(), setClass(), 或者setClassName()来设置，通过getComponent()来获取具体的组件名字。
-Intent类型 显式Intent Intent可以分为显式Intent和隐式Intent。平时我们用的最多就是显式Intent比如说在一个应用中经常要切换Activity就是使用的显式Intent。
-// Explicit Intent by specifying its class name Intent i = new Intent(FirstActivity.</description>
+      <guid>https://gmyxw.github.io/posts/20200517-android-intent/</guid>
+      
+      <description>Intent 功能太强大了，比较常用的就是Activity （Service）之间的数据传递。举个简单例百子，在当前Activity1使用startAct</description>
+      
     </item>
     
     <item>
       <title>android env</title>
-      <link>https://sy123.netlify.app/file/android-env/</link>
+      <link>https://gmyxw.github.io/files/20200516-android-env/</link>
       <pubDate>Sat, 16 May 2020 19:27:02 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/file/android-env/</guid>
+      <guid>https://gmyxw.github.io/files/20200516-android-env/</guid>
+      
       <description>android-env.sh
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 #!</description>
+#!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &amp;#34;${_android_arch}&amp;#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &amp;#34;${ANDROID_MINIMUM_PLATFORM}&amp;#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &amp;#34;${ANDROID_HOME}&amp;#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &amp;#34;${ANDROID_NDK_HOME}&amp;#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &amp;#34;${ANDROID_BUILD_TOOLS_REVISION}&amp;#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &amp;#34;${ANDROID_API_VERSION}&amp;#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &amp;#34;${ANDROID_NDK_PLATFORM}&amp;#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &amp;#34;$_android_arch&amp;#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang++ export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &amp;#39;Pkg.</description>
+      
     </item>
     
     <item>
       <title>Android Studio preview</title>
-      <link>https://sy123.netlify.app/android-studio-preview/</link>
+      <link>https://gmyxw.github.io/posts/20200224-android-studio-preview/</link>
       <pubDate>Mon, 24 Feb 2020 07:58:36 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/android-studio-preview/</guid>
-      <description>更新 IDE 和 SDK 工具 安装 Android Studio 后，您可以轻松通过自动更新和 Android SDK 管理器让 Android Studio IDE 和 Android SDK 工具保持最新状态。
-更新 IDE 和变更版本 若有可用的 IDE 更新，Android Studio 将通过小气泡对话框通知您，不过您也可以依次点击 Help &amp;gt; Check for Update（在 Mac 上，依次点击 Android Studio &amp;gt; Check for Updates）手动检查更新。
-您可以通过以下发布版本获取 Android Studio 更新：
-Canary 版：这些是前沿版本，大约每周更新一次，可在 developer.android.com/studio/preview 下载。 除了接收 Android Studio 的 Canary 版之外，您还将接收其他 SDK 工具的预览版，包括 Android 模拟器。
-虽然这些版本存在较多的错误，但它们已经过测试，我们希望为您提供这些版本，以便您尝试新功能并提供反馈。此版本不推荐用于生产开发。
-开发者版：这些是精心挑选的 Canary 版本，已经过全面的内部测试。 测试版：这些是基于稳定 Canary 版的候选版本，这类版本会先收集反馈，然后再作为稳定版进行发布。 稳定版：官方稳定版，可在 developer.android.com/studio 下载。 如果您想要在生产 Android 项目中仍然使用稳定版的同时试用预览版（Canary 版、开发者版或测试版），可以并排安装两个版本。</description>
+      <guid>https://gmyxw.github.io/posts/20200224-android-studio-preview/</guid>
+      
+      <description>更新 IDE 和 SDK 工具 安装 Android Studio 后，您可以轻松通过自动更新和 Android SDK 管理器让 Android Studio IDE 和 Android SDK 工具保持最新状态。 更新 IDE 和变更版本 若有可用的 IDE 更新，Android</description>
+      
     </item>
     
   </channel>

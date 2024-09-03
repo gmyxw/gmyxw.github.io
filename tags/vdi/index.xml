@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>vdi on zhili</title>
-    <link>https://sy123.netlify.app/tags/vdi/</link>
-    <description>Recent content in vdi on zhili</description>
+    <title>Vdi on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/vdi/</link>
+    <description>Recent content in Vdi on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Sun, 16 Feb 2020 15:10:33 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/vdi/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Sun, 16 Feb 2020 15:10:33 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/vdi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何清理Virtualbox虚拟机VDI镜像文件的空间大小</title>
-      <link>https://sy123.netlify.app/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BAvdi%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F/</link>
+      <link>https://gmyxw.github.io/posts/20200216-virtualbox-vdi-shrink/</link>
       <pubDate>Sun, 16 Feb 2020 15:10:33 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/%E5%A6%82%E4%BD%95%E6%B8%85%E7%90%86virtualbox%E8%99%9A%E6%8B%9F%E6%9C%BAvdi%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E7%9A%84%E7%A9%BA%E9%97%B4%E5%A4%A7%E5%B0%8F/</guid>
-      <description>玩虚拟机的同学都知道，对于那些设定为动态配分的虚拟机，一开始装完系统时可能只有几个G，但是随着你不断的使用，体积空间就会越来越大，随便就是几十个G了。也就是说动态扩展的VDI文件只会大，不会小。这期间，就算你去虚拟机里面删除一些文件，整个虚拟机的镜像文件VDI文件的大小依然不会变小，使其所占用的实际硬盘空间过大，给备份和分享都带来麻烦。因此，今天我们就来研究一下如何解决这个问题，其实很简单。
-以下方法，在我自己的64位Ubuntu 14.04和64位win10虚拟机中亲测有效！
-步骤1：碎片整理 第一步要做的是碎片整理，整理过程需要一个特定的工具，win系统和linux系统各自有别：
-1、linux系统下 打开虚拟机，执行下面的命令：
-1 2 sudo dd if=/dev/zero of=/free bs=1M sudo rm -f /free 一般来说，大约5-10分钟清理完毕，取决于你的系统大小和磁盘空间混乱程度。于是关闭虚拟机，进入下一步。
-2、win系统下 需要下载一个特定的工具，点击此处进入官方下载，如果链接失效，也可以点击此处直接下载我整理好的版本。
-下载后解压，取出其中的diskext.exe（针对32位系统）或者diskext64.exe（针对64位系统），将其复制到虚拟机的C盘根目录下，然后以管理员身份在虚拟机中启动命令行cmd，输入以下命令：
-1 C:\sdelete64.exe -z c:	# c表示清理c盘 便会自动开始清理磁盘，大约5-10分钟左右方能清理完毕，于是便可关闭虚拟机，进入下一步。
-步骤2：镜像压缩 关闭虚拟机，然后通过Virtualbox自带的神器vboxmanage modifyhd中的–compact命令来进行VDI镜像文件的压缩。具体步骤是：
-打开cmd命令窗口，并进入Virtualbox所安装的目录（一般是C:\Program Files\Oracle\VirtualBox）目录，然后启动VBoxManage.exe进行VDI镜像文件的压缩，并等待命令结束即可：
-1 2 cd &amp;#34;C:\Program Files\Oracle\VirtualBox&amp;#34; VBoxManage.exe modifyhd &amp;#34;E:\V_VtSystem\A_Systems\Ubuntu 14.04.vdi&amp;#34; --compact 实际测试我ubuntu系统由35G压缩成只有20G，win10系统由40G压缩成25G，效果还是非常明显的。</description>
+      <guid>https://gmyxw.github.io/posts/20200216-virtualbox-vdi-shrink/</guid>
+      
+      <description>玩虚拟机的同学都知道，对于那些设定为动态配分的虚拟机，一开始装完系统时可能只有几个G，但是随着你不断的使用，体积空间就会越来越大，随便就是几</description>
+      
     </item>
     
   </channel>

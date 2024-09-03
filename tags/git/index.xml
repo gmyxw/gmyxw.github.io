@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>git on zhili</title>
-    <link>https://sy123.netlify.app/tags/git/</link>
-    <description>Recent content in git on zhili</description>
+    <title>Git on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/git/</link>
+    <description>Recent content in Git on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Mon, 05 Dec 2022 02:04:31 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Mon, 05 Dec 2022 02:04:31 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>无法使用 git clone/push，kex ssh 密钥错误</title>
-      <link>https://sy123.netlify.app/git-pory22/</link>
+      <link>https://gmyxw.github.io/posts/git-pory22/</link>
       <pubDate>Mon, 05 Dec 2022 02:04:31 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/git-pory22/</guid>
-      <description>git clone/push 我的 Github 私人仓库，通过ssh，命令行报错：
-1 2 3 4 5 6 7 Cloning into &amp;#39;test&amp;#39;... kex_exchange_identification: Connection closed by remote host Connection closed by 20.205.243.166 port 22 fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists. 但是关闭 clash 之后一切正常，看了下clash日志原来是机场屏蔽了22端口
-改成通过443端口git clone就没问题了 ssh配置需要进行一下修改 https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port
-1 2 3 4 5 6 7 cat ~/site/blog ❯ cat ~/.ssh/config Host github.com Hostname ssh.github.com Port 443 User git </description>
+      <guid>https://gmyxw.github.io/posts/git-pory22/</guid>
+      
+      <description>git clone/push 我的 Github 私人仓库，通过ssh，命令行报错： Cloning into &amp;#39;test&amp;#39;... kex_exchange_identification: Connection closed by remote host Connection closed by 20.205.243.166 port 22 fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists. 但是关闭 clash 之后一切正常，看</description>
+      
     </item>
     
     <item>
       <title>git 出现错误Could not resolve host: github.com</title>
-      <link>https://sy123.netlify.app/git-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AFcould-not-resolve-host-github.com/</link>
+      <link>https://gmyxw.github.io/posts/20200306-git-clone-not-resolve-host/</link>
       <pubDate>Fri, 06 Mar 2020 21:36:57 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/git-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AFcould-not-resolve-host-github.com/</guid>
-      <description>1 2 3 ❯ git clone https://github.com/Zhili/GameServer Cloning into &amp;#39;GameServer&amp;#39;... fatal: unable to access &amp;#39;https://github.com/Zhili/GameServer/&amp;#39;: Couldn&amp;#39;t resolve host name (Just a little reminder) If you want the hostname also be resolved by the proxy (that means passing everything through the proxy), especially when you are cloning a gist, you can use the following setting (the key is that it uses socks5h instead of socks5):
-1 git config --global http.proxy socks5h://127.</description>
+      <guid>https://gmyxw.github.io/posts/20200306-git-clone-not-resolve-host/</guid>
+      
+      <description>❯ git clone https://github.com/Zhili/GameServer Cloning into &amp;#39;GameServer&amp;#39;... fatal: unable to access &amp;#39;https://github.com/Zhili/GameServer/&amp;#39;: Couldn&amp;#39;t resolve host name (Just a little reminder) If you want the hostname also be resolved by the proxy (that means passing everything through the proxy), especially when you are cloning a gist, you can use the following setting (the key is that it uses socks5h instead of socks5): git config --global http.proxy socks5h://127.0.0.1:1080</description>
+      
     </item>
     
   </channel>

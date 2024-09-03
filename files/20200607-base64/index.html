@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Base64 - GM游戏网</title>
+<meta property="og:title" content="Base64 - GM游戏网" />
+<meta name="twitter:title" content="Base64 - GM游戏网" />
+<meta itemprop="name" content="Base64 - GM游戏网" />
+<meta name="application-name" content="Base64 - GM游戏网" />
+<meta property="og:site_name" content="GM游戏网" />
+<meta name="keywords" content="c,file," />
+
+
+<meta name="description" content="base64.c
+#include &amp;lt;stdint.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; static char encoding_table[] = {&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;, &amp;#39;C&amp;#39;, &amp;#39;D&amp;#39;, &amp;#39;E&amp;#39;, &amp;#39;F&amp;#39;, &amp;#39;G&amp;#39;, &amp;#39;H&amp;#39;, &amp;#39;I&amp;#39;, &amp;#39;J&amp;#39;, &amp;#39;K&amp;#39;, &amp;#39;L&amp;#39;, &amp;#39;M&amp;#39;, &amp;#39;N&amp;#39;, &amp;#39;O&amp;#39;, &amp;#39;P&amp;#39;, &amp;#39;Q&amp;#39;, &amp;#39;R&amp;#39;, &amp;#39;S&amp;#39;, &amp;#39;T&amp;#39;, &amp;#39;U&amp;#39;, &amp;#39;V&amp;#39;, &amp;#39;W&amp;#39;, &amp;#39;X&amp;#39;, &amp;#39;Y&amp;#39;, &amp;#39;Z&amp;#39;, &amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;, &amp;#39;e&amp;#39;, &amp;#39;f&amp;#39;, &amp;#39;g&amp;#39;, &amp;#39;h&amp;#39;, &amp;#39;i&amp;#39;, &amp;#39;j&amp;#39;, &amp;#39;k&amp;#39;, &amp;#39;l&amp;#39;, &amp;#39;m&amp;#39;, &amp;#39;n&amp;#39;, &amp;#39;o&amp;#39;, &amp;#39;p&amp;#39;, &amp;#39;q&amp;#39;, &amp;#39;r&amp;#39;, &amp;#39;s&amp;#39;, &amp;#39;t&amp;#39;, &amp;#39;u&amp;#39;, &amp;#39;v&amp;#39;, &amp;#39;w&amp;#39;, &amp;#39;x&amp;#39;, &amp;#39;y&amp;#39;, &amp;#39;z&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;4&amp;#39;, &amp;#39;5&amp;#39;, &amp;#39;6&amp;#39;, &amp;#39;7&amp;#39;, &amp;#39;8&amp;#39;, &amp;#39;9&amp;#39;, &amp;#39;&#43;&amp;#39;, &amp;#39;/&amp;#39;}; static char *decoding_table = NULL; static int mod_table[] = {0, 2, 1}; char *base64_encode(const unsigned char *data, size_t input_length, size_t *output_length) { *output_length = 4 * ((input_length &#43; 2) / 3); char *encoded_data = malloc(*output_length); if (encoded_data == NULL) return NULL; for (int i = 0, j = 0; i &amp;lt; input_length;) { uint32_t octet_a = i &amp;lt; input_length ?">
+<meta itemprop="description" content="base64.c
+#include &amp;lt;stdint.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; static char encoding_table[] = {&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;, &amp;#39;C&amp;#39;, &amp;#39;D&amp;#39;, &amp;#39;E&amp;#39;, &amp;#39;F&amp;#39;, &amp;#39;G&amp;#39;, &amp;#39;H&amp;#39;, &amp;#39;I&amp;#39;, &amp;#39;J&amp;#39;, &amp;#39;K&amp;#39;, &amp;#39;L&amp;#39;, &amp;#39;M&amp;#39;, &amp;#39;N&amp;#39;, &amp;#39;O&amp;#39;, &amp;#39;P&amp;#39;, &amp;#39;Q&amp;#39;, &amp;#39;R&amp;#39;, &amp;#39;S&amp;#39;, &amp;#39;T&amp;#39;, &amp;#39;U&amp;#39;, &amp;#39;V&amp;#39;, &amp;#39;W&amp;#39;, &amp;#39;X&amp;#39;, &amp;#39;Y&amp;#39;, &amp;#39;Z&amp;#39;, &amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;, &amp;#39;e&amp;#39;, &amp;#39;f&amp;#39;, &amp;#39;g&amp;#39;, &amp;#39;h&amp;#39;, &amp;#39;i&amp;#39;, &amp;#39;j&amp;#39;, &amp;#39;k&amp;#39;, &amp;#39;l&amp;#39;, &amp;#39;m&amp;#39;, &amp;#39;n&amp;#39;, &amp;#39;o&amp;#39;, &amp;#39;p&amp;#39;, &amp;#39;q&amp;#39;, &amp;#39;r&amp;#39;, &amp;#39;s&amp;#39;, &amp;#39;t&amp;#39;, &amp;#39;u&amp;#39;, &amp;#39;v&amp;#39;, &amp;#39;w&amp;#39;, &amp;#39;x&amp;#39;, &amp;#39;y&amp;#39;, &amp;#39;z&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;4&amp;#39;, &amp;#39;5&amp;#39;, &amp;#39;6&amp;#39;, &amp;#39;7&amp;#39;, &amp;#39;8&amp;#39;, &amp;#39;9&amp;#39;, &amp;#39;&#43;&amp;#39;, &amp;#39;/&amp;#39;}; static char *decoding_table = NULL; static int mod_table[] = {0, 2, 1}; char *base64_encode(const unsigned char *data, size_t input_length, size_t *output_length) { *output_length = 4 * ((input_length &#43; 2) / 3); char *encoded_data = malloc(*output_length); if (encoded_data == NULL) return NULL; for (int i = 0, j = 0; i &amp;lt; input_length;) { uint32_t octet_a = i &amp;lt; input_length ?" />
+<meta property="og:description" content="base64.c
+#include &amp;lt;stdint.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; static char encoding_table[] = {&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;, &amp;#39;C&amp;#39;, &amp;#39;D&amp;#39;, &amp;#39;E&amp;#39;, &amp;#39;F&amp;#39;, &amp;#39;G&amp;#39;, &amp;#39;H&amp;#39;, &amp;#39;I&amp;#39;, &amp;#39;J&amp;#39;, &amp;#39;K&amp;#39;, &amp;#39;L&amp;#39;, &amp;#39;M&amp;#39;, &amp;#39;N&amp;#39;, &amp;#39;O&amp;#39;, &amp;#39;P&amp;#39;, &amp;#39;Q&amp;#39;, &amp;#39;R&amp;#39;, &amp;#39;S&amp;#39;, &amp;#39;T&amp;#39;, &amp;#39;U&amp;#39;, &amp;#39;V&amp;#39;, &amp;#39;W&amp;#39;, &amp;#39;X&amp;#39;, &amp;#39;Y&amp;#39;, &amp;#39;Z&amp;#39;, &amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;, &amp;#39;e&amp;#39;, &amp;#39;f&amp;#39;, &amp;#39;g&amp;#39;, &amp;#39;h&amp;#39;, &amp;#39;i&amp;#39;, &amp;#39;j&amp;#39;, &amp;#39;k&amp;#39;, &amp;#39;l&amp;#39;, &amp;#39;m&amp;#39;, &amp;#39;n&amp;#39;, &amp;#39;o&amp;#39;, &amp;#39;p&amp;#39;, &amp;#39;q&amp;#39;, &amp;#39;r&amp;#39;, &amp;#39;s&amp;#39;, &amp;#39;t&amp;#39;, &amp;#39;u&amp;#39;, &amp;#39;v&amp;#39;, &amp;#39;w&amp;#39;, &amp;#39;x&amp;#39;, &amp;#39;y&amp;#39;, &amp;#39;z&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;4&amp;#39;, &amp;#39;5&amp;#39;, &amp;#39;6&amp;#39;, &amp;#39;7&amp;#39;, &amp;#39;8&amp;#39;, &amp;#39;9&amp;#39;, &amp;#39;&#43;&amp;#39;, &amp;#39;/&amp;#39;}; static char *decoding_table = NULL; static int mod_table[] = {0, 2, 1}; char *base64_encode(const unsigned char *data, size_t input_length, size_t *output_length) { *output_length = 4 * ((input_length &#43; 2) / 3); char *encoded_data = malloc(*output_length); if (encoded_data == NULL) return NULL; for (int i = 0, j = 0; i &amp;lt; input_length;) { uint32_t octet_a = i &amp;lt; input_length ?" />
+<meta name="twitter:description" content="base64.c
+#include &amp;lt;stdint.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; static char encoding_table[] = {&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;, &amp;#39;C&amp;#39;, &amp;#39;D&amp;#39;, &amp;#39;E&amp;#39;, &amp;#39;F&amp;#39;, &amp;#39;G&amp;#39;, &amp;#39;H&amp;#39;, &amp;#39;I&amp;#39;, &amp;#39;J&amp;#39;, &amp;#39;K&amp;#39;, &amp;#39;L&amp;#39;, &amp;#39;M&amp;#39;, &amp;#39;N&amp;#39;, &amp;#39;O&amp;#39;, &amp;#39;P&amp;#39;, &amp;#39;Q&amp;#39;, &amp;#39;R&amp;#39;, &amp;#39;S&amp;#39;, &amp;#39;T&amp;#39;, &amp;#39;U&amp;#39;, &amp;#39;V&amp;#39;, &amp;#39;W&amp;#39;, &amp;#39;X&amp;#39;, &amp;#39;Y&amp;#39;, &amp;#39;Z&amp;#39;, &amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;, &amp;#39;e&amp;#39;, &amp;#39;f&amp;#39;, &amp;#39;g&amp;#39;, &amp;#39;h&amp;#39;, &amp;#39;i&amp;#39;, &amp;#39;j&amp;#39;, &amp;#39;k&amp;#39;, &amp;#39;l&amp;#39;, &amp;#39;m&amp;#39;, &amp;#39;n&amp;#39;, &amp;#39;o&amp;#39;, &amp;#39;p&amp;#39;, &amp;#39;q&amp;#39;, &amp;#39;r&amp;#39;, &amp;#39;s&amp;#39;, &amp;#39;t&amp;#39;, &amp;#39;u&amp;#39;, &amp;#39;v&amp;#39;, &amp;#39;w&amp;#39;, &amp;#39;x&amp;#39;, &amp;#39;y&amp;#39;, &amp;#39;z&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;4&amp;#39;, &amp;#39;5&amp;#39;, &amp;#39;6&amp;#39;, &amp;#39;7&amp;#39;, &amp;#39;8&amp;#39;, &amp;#39;9&amp;#39;, &amp;#39;&#43;&amp;#39;, &amp;#39;/&amp;#39;}; static char *decoding_table = NULL; static int mod_table[] = {0, 2, 1}; char *base64_encode(const unsigned char *data, size_t input_length, size_t *output_length) { *output_length = 4 * ((input_length &#43; 2) / 3); char *encoded_data = malloc(*output_length); if (encoded_data == NULL) return NULL; for (int i = 0, j = 0; i &amp;lt; input_length;) { uint32_t octet_a = i &amp;lt; input_length ?" />
+
+<meta name="author" content="gmyxw" />
+
+<meta name="referrer" content="always">
+<meta property="og:locale" content="zh-CN" />
+<meta name="language" content="zh-CN" />
+
+
+<meta property="og:url" content="https://gmyxw.github.io/files/20200607-base64/">
+  <meta property="og:site_name" content="GM游戏网">
+  <meta property="og:title" content="Base64">
+  <meta property="og:description" content="base64.c
+#include &lt;stdint.h&gt; #include &lt;stdlib.h&gt; static char encoding_table[] = {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;J&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;, &#39;N&#39;, &#39;O&#39;, &#39;P&#39;, &#39;Q&#39;, &#39;R&#39;, &#39;S&#39;, &#39;T&#39;, &#39;U&#39;, &#39;V&#39;, &#39;W&#39;, &#39;X&#39;, &#39;Y&#39;, &#39;Z&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;, &#39;m&#39;, &#39;n&#39;, &#39;o&#39;, &#39;p&#39;, &#39;q&#39;, &#39;r&#39;, &#39;s&#39;, &#39;t&#39;, &#39;u&#39;, &#39;v&#39;, &#39;w&#39;, &#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;&#43;&#39;, &#39;/&#39;}; static char *decoding_table = NULL; static int mod_table[] = {0, 2, 1}; char *base64_encode(const unsigned char *data, size_t input_length, size_t *output_length) { *output_length = 4 * ((input_length &#43; 2) / 3); char *encoded_data = malloc(*output_length); if (encoded_data == NULL) return NULL; for (int i = 0, j = 0; i &lt; input_length;) { uint32_t octet_a = i &lt; input_length ?">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="files">
+    <meta property="article:published_time" content="2020-06-07T19:23:22+08:00">
+    <meta property="article:modified_time" content="2020-06-07T19:23:22+08:00">
+    <meta property="article:tag" content="C">
+    <meta property="article:tag" content="File">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Base64">
+  <meta name="twitter:description" content="base64.c
+#include &lt;stdint.h&gt; #include &lt;stdlib.h&gt; static char encoding_table[] = {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;J&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;, &#39;N&#39;, &#39;O&#39;, &#39;P&#39;, &#39;Q&#39;, &#39;R&#39;, &#39;S&#39;, &#39;T&#39;, &#39;U&#39;, &#39;V&#39;, &#39;W&#39;, &#39;X&#39;, &#39;Y&#39;, &#39;Z&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;, &#39;m&#39;, &#39;n&#39;, &#39;o&#39;, &#39;p&#39;, &#39;q&#39;, &#39;r&#39;, &#39;s&#39;, &#39;t&#39;, &#39;u&#39;, &#39;v&#39;, &#39;w&#39;, &#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;&#43;&#39;, &#39;/&#39;}; static char *decoding_table = NULL; static int mod_table[] = {0, 2, 1}; char *base64_encode(const unsigned char *data, size_t input_length, size_t *output_length) { *output_length = 4 * ((input_length &#43; 2) / 3); char *encoded_data = malloc(*output_length); if (encoded_data == NULL) return NULL; for (int i = 0, j = 0; i &lt; input_length;) { uint32_t octet_a = i &lt; input_length ?">
+
+
+
+  <meta itemprop="name" content="Base64">
+  <meta itemprop="description" content="base64.c
+#include &lt;stdint.h&gt; #include &lt;stdlib.h&gt; static char encoding_table[] = {&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;, &#39;H&#39;, &#39;I&#39;, &#39;J&#39;, &#39;K&#39;, &#39;L&#39;, &#39;M&#39;, &#39;N&#39;, &#39;O&#39;, &#39;P&#39;, &#39;Q&#39;, &#39;R&#39;, &#39;S&#39;, &#39;T&#39;, &#39;U&#39;, &#39;V&#39;, &#39;W&#39;, &#39;X&#39;, &#39;Y&#39;, &#39;Z&#39;, &#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;, &#39;i&#39;, &#39;j&#39;, &#39;k&#39;, &#39;l&#39;, &#39;m&#39;, &#39;n&#39;, &#39;o&#39;, &#39;p&#39;, &#39;q&#39;, &#39;r&#39;, &#39;s&#39;, &#39;t&#39;, &#39;u&#39;, &#39;v&#39;, &#39;w&#39;, &#39;x&#39;, &#39;y&#39;, &#39;z&#39;, &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;&#43;&#39;, &#39;/&#39;}; static char *decoding_table = NULL; static int mod_table[] = {0, 2, 1}; char *base64_encode(const unsigned char *data, size_t input_length, size_t *output_length) { *output_length = 4 * ((input_length &#43; 2) / 3); char *encoded_data = malloc(*output_length); if (encoded_data == NULL) return NULL; for (int i = 0, j = 0; i &lt; input_length;) { uint32_t octet_a = i &lt; input_length ?">
+  <meta itemprop="datePublished" content="2020-06-07T19:23:22+08:00">
+  <meta itemprop="dateModified" content="2020-06-07T19:23:22+08:00">
+  <meta itemprop="wordCount" content="434">
+  <meta itemprop="keywords" content="C,File">
+
+
+
+
+    
+
+    
+
+    <link rel="canonical" href="https://gmyxw.github.io/files/20200607-base64/">
+    <link href="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/css/style.min.420aeabb9726dc288e29445663aa98d0cf7ba0607556bf5b2c88ce38e5bf01a8.css" rel="stylesheet">
+    
+    
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://gmyxw.github.io/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+
+    
+
+    
+    
+  
+
+</head>
+<body data-theme="auto" class="notransition">
+
+<script src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/theme.min.40385e5b43397f4f7b187a8ef005de90f45408b7824f604ff29f318c5ede4c8f.js" integrity="sha256-QDheW0M5f097GHqO8AXekPRUCLeCT2BP8p8xjF7eTI8="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <div>
+            
+            
+            <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"></li><a href="https://gmyxw.github.io/">GM游戏网</a> ❯ </li>
+      
+      
+      
+      
+        <li class="breadcrumb-item"><a href="https://gmyxw.github.io/files/">Files</a> /</li>
+      
+      
+      <li class="breadcrumb-item active" aria-current="page">Base64</li>
+    </ol>
+  </nav>
+  
+          </div>
+
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                
+                    
+                    
+                    <li>
+                        <a id="post" class="menu-link" href="https://gmyxw.github.io/posts">
+                            归档
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="category" class="menu-link" href="https://gmyxw.github.io/categories">
+                            分类
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="tag" class="menu-link" href="https://gmyxw.github.io/tags">
+                            标签
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="about" class="menu-link" href="https://gmyxw.github.io/about">
+                            关于
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="search" class="menu-link" href="https://gmyxw.github.io/search">
+                            搜索
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="mode" class="menu-link" href="#">
+                            关灯
+                        </a>
+                    
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <aside class="l-sidebar mcol c3">
+    
+    
+    
+    
+<section class="sidebar">
+    <header>快捷链接</header>
+    <ul class="terms ads">
+      
+        <li>
+            <a href="https://emn178.github.io/online-tools/url_decode.html" title="常用编码转换工具" target="_blank">
+                
+                    常用编码转换工具
+                
+            </a>
+        </li>
+      
+        <li>
+            <a href="https://api.mumuglobal.com/api/ip" title="每日壁纸" target="_blank">
+                
+                <img src="https://bing.img.run/1920x1080.php" title="每日壁纸">
+                
+            </a>
+        </li>
+      
+    </ul>
+  </section>
+
+</aside>
+    <div class="mcol c6">
+        <main class="page-content" aria-label="Content">
+            <article>
+                <header class="header">
+                    <h1 class="header-title">Base64</h1>
+                    <div class="post-meta">
+                        
+                        
+                        <time datetime="2020-06-07T19:23:22&#43;08:00" itemprop="datePublished"> 🕓
+                            2020-06-07 19:23</time>
+                        
+                        
+                        
+                            <p class="meta-tags">
+                                
+                                <a href="https://gmyxw.github.io/tags/c/">#c</a>
+                                
+                                <a href="https://gmyxw.github.io/tags/file/">#file</a>
+                                
+                            </p>
+                        
+                    </div>
+                </header>
+                
+                <div class="page-content">
+                    <p><a href="/file/base64.c">base64.c</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#8b949e;font-weight:bold;font-style:italic">#include</span> <span style="color:#8b949e;font-weight:bold;font-style:italic">&lt;stdint.h&gt;</span><span style="color:#8b949e;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-weight:bold;font-style:italic">#include</span> <span style="color:#8b949e;font-weight:bold;font-style:italic">&lt;stdlib.h&gt;</span><span style="color:#8b949e;font-weight:bold;font-style:italic">
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-weight:bold;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">static</span> <span style="color:#ff7b72">char</span> encoding_table[] <span style="color:#ff7b72;font-weight:bold">=</span> {<span style="color:#a5d6ff">&#39;A&#39;</span>, <span style="color:#a5d6ff">&#39;B&#39;</span>, <span style="color:#a5d6ff">&#39;C&#39;</span>, <span style="color:#a5d6ff">&#39;D&#39;</span>, <span style="color:#a5d6ff">&#39;E&#39;</span>, <span style="color:#a5d6ff">&#39;F&#39;</span>, <span style="color:#a5d6ff">&#39;G&#39;</span>, <span style="color:#a5d6ff">&#39;H&#39;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#a5d6ff">&#39;I&#39;</span>, <span style="color:#a5d6ff">&#39;J&#39;</span>, <span style="color:#a5d6ff">&#39;K&#39;</span>, <span style="color:#a5d6ff">&#39;L&#39;</span>, <span style="color:#a5d6ff">&#39;M&#39;</span>, <span style="color:#a5d6ff">&#39;N&#39;</span>, <span style="color:#a5d6ff">&#39;O&#39;</span>, <span style="color:#a5d6ff">&#39;P&#39;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#a5d6ff">&#39;Q&#39;</span>, <span style="color:#a5d6ff">&#39;R&#39;</span>, <span style="color:#a5d6ff">&#39;S&#39;</span>, <span style="color:#a5d6ff">&#39;T&#39;</span>, <span style="color:#a5d6ff">&#39;U&#39;</span>, <span style="color:#a5d6ff">&#39;V&#39;</span>, <span style="color:#a5d6ff">&#39;W&#39;</span>, <span style="color:#a5d6ff">&#39;X&#39;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#a5d6ff">&#39;Y&#39;</span>, <span style="color:#a5d6ff">&#39;Z&#39;</span>, <span style="color:#a5d6ff">&#39;a&#39;</span>, <span style="color:#a5d6ff">&#39;b&#39;</span>, <span style="color:#a5d6ff">&#39;c&#39;</span>, <span style="color:#a5d6ff">&#39;d&#39;</span>, <span style="color:#a5d6ff">&#39;e&#39;</span>, <span style="color:#a5d6ff">&#39;f&#39;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#a5d6ff">&#39;g&#39;</span>, <span style="color:#a5d6ff">&#39;h&#39;</span>, <span style="color:#a5d6ff">&#39;i&#39;</span>, <span style="color:#a5d6ff">&#39;j&#39;</span>, <span style="color:#a5d6ff">&#39;k&#39;</span>, <span style="color:#a5d6ff">&#39;l&#39;</span>, <span style="color:#a5d6ff">&#39;m&#39;</span>, <span style="color:#a5d6ff">&#39;n&#39;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#a5d6ff">&#39;o&#39;</span>, <span style="color:#a5d6ff">&#39;p&#39;</span>, <span style="color:#a5d6ff">&#39;q&#39;</span>, <span style="color:#a5d6ff">&#39;r&#39;</span>, <span style="color:#a5d6ff">&#39;s&#39;</span>, <span style="color:#a5d6ff">&#39;t&#39;</span>, <span style="color:#a5d6ff">&#39;u&#39;</span>, <span style="color:#a5d6ff">&#39;v&#39;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#a5d6ff">&#39;w&#39;</span>, <span style="color:#a5d6ff">&#39;x&#39;</span>, <span style="color:#a5d6ff">&#39;y&#39;</span>, <span style="color:#a5d6ff">&#39;z&#39;</span>, <span style="color:#a5d6ff">&#39;0&#39;</span>, <span style="color:#a5d6ff">&#39;1&#39;</span>, <span style="color:#a5d6ff">&#39;2&#39;</span>, <span style="color:#a5d6ff">&#39;3&#39;</span>,
+</span></span><span style="display:flex;"><span>                                <span style="color:#a5d6ff">&#39;4&#39;</span>, <span style="color:#a5d6ff">&#39;5&#39;</span>, <span style="color:#a5d6ff">&#39;6&#39;</span>, <span style="color:#a5d6ff">&#39;7&#39;</span>, <span style="color:#a5d6ff">&#39;8&#39;</span>, <span style="color:#a5d6ff">&#39;9&#39;</span>, <span style="color:#a5d6ff">&#39;+&#39;</span>, <span style="color:#a5d6ff">&#39;/&#39;</span>};
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">static</span> <span style="color:#ff7b72">char</span> <span style="color:#ff7b72;font-weight:bold">*</span>decoding_table <span style="color:#ff7b72;font-weight:bold">=</span> NULL;
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">static</span> <span style="color:#ff7b72">int</span> mod_table[] <span style="color:#ff7b72;font-weight:bold">=</span> {<span style="color:#a5d6ff">0</span>, <span style="color:#a5d6ff">2</span>, <span style="color:#a5d6ff">1</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">char</span> <span style="color:#ff7b72;font-weight:bold">*</span><span style="color:#d2a8ff;font-weight:bold">base64_encode</span>(<span style="color:#ff7b72">const</span> <span style="color:#ff7b72">unsigned</span> <span style="color:#ff7b72">char</span> <span style="color:#ff7b72;font-weight:bold">*</span>data,
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff7b72">size_t</span> input_length,
+</span></span><span style="display:flex;"><span>                    <span style="color:#ff7b72">size_t</span> <span style="color:#ff7b72;font-weight:bold">*</span>output_length) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72;font-weight:bold">*</span>output_length <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">4</span> <span style="color:#ff7b72;font-weight:bold">*</span> ((input_length <span style="color:#ff7b72;font-weight:bold">+</span> <span style="color:#a5d6ff">2</span>) <span style="color:#ff7b72;font-weight:bold">/</span> <span style="color:#a5d6ff">3</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">char</span> <span style="color:#ff7b72;font-weight:bold">*</span>encoded_data <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#d2a8ff;font-weight:bold">malloc</span>(<span style="color:#ff7b72;font-weight:bold">*</span>output_length);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (encoded_data <span style="color:#ff7b72;font-weight:bold">==</span> NULL) <span style="color:#ff7b72">return</span> NULL;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">for</span> (<span style="color:#ff7b72">int</span> i <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">0</span>, j <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">0</span>; i <span style="color:#ff7b72;font-weight:bold">&lt;</span> input_length;) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">uint32_t</span> octet_a <span style="color:#ff7b72;font-weight:bold">=</span> i <span style="color:#ff7b72;font-weight:bold">&lt;</span> input_length <span style="color:#ff7b72;font-weight:bold">?</span> (<span style="color:#ff7b72">unsigned</span> <span style="color:#ff7b72">char</span>)data[i<span style="color:#ff7b72;font-weight:bold">++</span>] <span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">uint32_t</span> octet_b <span style="color:#ff7b72;font-weight:bold">=</span> i <span style="color:#ff7b72;font-weight:bold">&lt;</span> input_length <span style="color:#ff7b72;font-weight:bold">?</span> (<span style="color:#ff7b72">unsigned</span> <span style="color:#ff7b72">char</span>)data[i<span style="color:#ff7b72;font-weight:bold">++</span>] <span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">uint32_t</span> octet_c <span style="color:#ff7b72;font-weight:bold">=</span> i <span style="color:#ff7b72;font-weight:bold">&lt;</span> input_length <span style="color:#ff7b72;font-weight:bold">?</span> (<span style="color:#ff7b72">unsigned</span> <span style="color:#ff7b72">char</span>)data[i<span style="color:#ff7b72;font-weight:bold">++</span>] <span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">uint32_t</span> triple <span style="color:#ff7b72;font-weight:bold">=</span> (octet_a <span style="color:#ff7b72;font-weight:bold">&lt;&lt;</span> <span style="color:#a5d6ff">0x10</span>) <span style="color:#ff7b72;font-weight:bold">+</span> (octet_b <span style="color:#ff7b72;font-weight:bold">&lt;&lt;</span> <span style="color:#a5d6ff">0x08</span>) <span style="color:#ff7b72;font-weight:bold">+</span> octet_c;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        encoded_data[j<span style="color:#ff7b72;font-weight:bold">++</span>] <span style="color:#ff7b72;font-weight:bold">=</span> encoding_table[(triple <span style="color:#ff7b72;font-weight:bold">&gt;&gt;</span> <span style="color:#a5d6ff">3</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">6</span>) <span style="color:#ff7b72;font-weight:bold">&amp;</span> <span style="color:#a5d6ff">0x3F</span>];
+</span></span><span style="display:flex;"><span>        encoded_data[j<span style="color:#ff7b72;font-weight:bold">++</span>] <span style="color:#ff7b72;font-weight:bold">=</span> encoding_table[(triple <span style="color:#ff7b72;font-weight:bold">&gt;&gt;</span> <span style="color:#a5d6ff">2</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">6</span>) <span style="color:#ff7b72;font-weight:bold">&amp;</span> <span style="color:#a5d6ff">0x3F</span>];
+</span></span><span style="display:flex;"><span>        encoded_data[j<span style="color:#ff7b72;font-weight:bold">++</span>] <span style="color:#ff7b72;font-weight:bold">=</span> encoding_table[(triple <span style="color:#ff7b72;font-weight:bold">&gt;&gt;</span> <span style="color:#a5d6ff">1</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">6</span>) <span style="color:#ff7b72;font-weight:bold">&amp;</span> <span style="color:#a5d6ff">0x3F</span>];
+</span></span><span style="display:flex;"><span>        encoded_data[j<span style="color:#ff7b72;font-weight:bold">++</span>] <span style="color:#ff7b72;font-weight:bold">=</span> encoding_table[(triple <span style="color:#ff7b72;font-weight:bold">&gt;&gt;</span> <span style="color:#a5d6ff">0</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">6</span>) <span style="color:#ff7b72;font-weight:bold">&amp;</span> <span style="color:#a5d6ff">0x3F</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">for</span> (<span style="color:#ff7b72">int</span> i <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">0</span>; i <span style="color:#ff7b72;font-weight:bold">&lt;</span> mod_table[input_length <span style="color:#ff7b72;font-weight:bold">%</span> <span style="color:#a5d6ff">3</span>]; i<span style="color:#ff7b72;font-weight:bold">++</span>)
+</span></span><span style="display:flex;"><span>        encoded_data[<span style="color:#ff7b72;font-weight:bold">*</span>output_length <span style="color:#ff7b72;font-weight:bold">-</span> <span style="color:#a5d6ff">1</span> <span style="color:#ff7b72;font-weight:bold">-</span> i] <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">&#39;=&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">return</span> encoded_data;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">unsigned</span> <span style="color:#ff7b72">char</span> <span style="color:#ff7b72;font-weight:bold">*</span><span style="color:#d2a8ff;font-weight:bold">base64_decode</span>(<span style="color:#ff7b72">const</span> <span style="color:#ff7b72">char</span> <span style="color:#ff7b72;font-weight:bold">*</span>data,
+</span></span><span style="display:flex;"><span>                             <span style="color:#ff7b72">size_t</span> input_length,
+</span></span><span style="display:flex;"><span>                             <span style="color:#ff7b72">size_t</span> <span style="color:#ff7b72;font-weight:bold">*</span>output_length) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (decoding_table <span style="color:#ff7b72;font-weight:bold">==</span> NULL) <span style="color:#d2a8ff;font-weight:bold">build_decoding_table</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (input_length <span style="color:#ff7b72;font-weight:bold">%</span> <span style="color:#a5d6ff">4</span> <span style="color:#ff7b72;font-weight:bold">!=</span> <span style="color:#a5d6ff">0</span>) <span style="color:#ff7b72">return</span> NULL;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72;font-weight:bold">*</span>output_length <span style="color:#ff7b72;font-weight:bold">=</span> input_length <span style="color:#ff7b72;font-weight:bold">/</span> <span style="color:#a5d6ff">4</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">3</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (data[input_length <span style="color:#ff7b72;font-weight:bold">-</span> <span style="color:#a5d6ff">1</span>] <span style="color:#ff7b72;font-weight:bold">==</span> <span style="color:#a5d6ff">&#39;=&#39;</span>) (<span style="color:#ff7b72;font-weight:bold">*</span>output_length)<span style="color:#ff7b72;font-weight:bold">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (data[input_length <span style="color:#ff7b72;font-weight:bold">-</span> <span style="color:#a5d6ff">2</span>] <span style="color:#ff7b72;font-weight:bold">==</span> <span style="color:#a5d6ff">&#39;=&#39;</span>) (<span style="color:#ff7b72;font-weight:bold">*</span>output_length)<span style="color:#ff7b72;font-weight:bold">--</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">unsigned</span> <span style="color:#ff7b72">char</span> <span style="color:#ff7b72;font-weight:bold">*</span>decoded_data <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#d2a8ff;font-weight:bold">malloc</span>(<span style="color:#ff7b72;font-weight:bold">*</span>output_length);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> (decoded_data <span style="color:#ff7b72;font-weight:bold">==</span> NULL) <span style="color:#ff7b72">return</span> NULL;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">for</span> (<span style="color:#ff7b72">int</span> i <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">0</span>, j <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">0</span>; i <span style="color:#ff7b72;font-weight:bold">&lt;</span> input_length;) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">uint32_t</span> sextet_a <span style="color:#ff7b72;font-weight:bold">=</span> data[i] <span style="color:#ff7b72;font-weight:bold">==</span> <span style="color:#a5d6ff">&#39;=&#39;</span> <span style="color:#ff7b72;font-weight:bold">?</span> <span style="color:#a5d6ff">0</span> <span style="color:#ff7b72;font-weight:bold">&amp;</span> i<span style="color:#ff7b72;font-weight:bold">++</span> <span style="color:#ff7b72;font-weight:bold">:</span> decoding_table[data[i<span style="color:#ff7b72;font-weight:bold">++</span>]];
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">uint32_t</span> sextet_b <span style="color:#ff7b72;font-weight:bold">=</span> data[i] <span style="color:#ff7b72;font-weight:bold">==</span> <span style="color:#a5d6ff">&#39;=&#39;</span> <span style="color:#ff7b72;font-weight:bold">?</span> <span style="color:#a5d6ff">0</span> <span style="color:#ff7b72;font-weight:bold">&amp;</span> i<span style="color:#ff7b72;font-weight:bold">++</span> <span style="color:#ff7b72;font-weight:bold">:</span> decoding_table[data[i<span style="color:#ff7b72;font-weight:bold">++</span>]];
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">uint32_t</span> sextet_c <span style="color:#ff7b72;font-weight:bold">=</span> data[i] <span style="color:#ff7b72;font-weight:bold">==</span> <span style="color:#a5d6ff">&#39;=&#39;</span> <span style="color:#ff7b72;font-weight:bold">?</span> <span style="color:#a5d6ff">0</span> <span style="color:#ff7b72;font-weight:bold">&amp;</span> i<span style="color:#ff7b72;font-weight:bold">++</span> <span style="color:#ff7b72;font-weight:bold">:</span> decoding_table[data[i<span style="color:#ff7b72;font-weight:bold">++</span>]];
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">uint32_t</span> sextet_d <span style="color:#ff7b72;font-weight:bold">=</span> data[i] <span style="color:#ff7b72;font-weight:bold">==</span> <span style="color:#a5d6ff">&#39;=&#39;</span> <span style="color:#ff7b72;font-weight:bold">?</span> <span style="color:#a5d6ff">0</span> <span style="color:#ff7b72;font-weight:bold">&amp;</span> i<span style="color:#ff7b72;font-weight:bold">++</span> <span style="color:#ff7b72;font-weight:bold">:</span> decoding_table[data[i<span style="color:#ff7b72;font-weight:bold">++</span>]];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">uint32_t</span> triple <span style="color:#ff7b72;font-weight:bold">=</span> (sextet_a <span style="color:#ff7b72;font-weight:bold">&lt;&lt;</span> <span style="color:#a5d6ff">3</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">6</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72;font-weight:bold">+</span> (sextet_b <span style="color:#ff7b72;font-weight:bold">&lt;&lt;</span> <span style="color:#a5d6ff">2</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">6</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72;font-weight:bold">+</span> (sextet_c <span style="color:#ff7b72;font-weight:bold">&lt;&lt;</span> <span style="color:#a5d6ff">1</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">6</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72;font-weight:bold">+</span> (sextet_d <span style="color:#ff7b72;font-weight:bold">&lt;&lt;</span> <span style="color:#a5d6ff">0</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">6</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">if</span> (j <span style="color:#ff7b72;font-weight:bold">&lt;</span> <span style="color:#ff7b72;font-weight:bold">*</span>output_length) decoded_data[j<span style="color:#ff7b72;font-weight:bold">++</span>] <span style="color:#ff7b72;font-weight:bold">=</span> (triple <span style="color:#ff7b72;font-weight:bold">&gt;&gt;</span> <span style="color:#a5d6ff">2</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">8</span>) <span style="color:#ff7b72;font-weight:bold">&amp;</span> <span style="color:#a5d6ff">0xFF</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">if</span> (j <span style="color:#ff7b72;font-weight:bold">&lt;</span> <span style="color:#ff7b72;font-weight:bold">*</span>output_length) decoded_data[j<span style="color:#ff7b72;font-weight:bold">++</span>] <span style="color:#ff7b72;font-weight:bold">=</span> (triple <span style="color:#ff7b72;font-weight:bold">&gt;&gt;</span> <span style="color:#a5d6ff">1</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">8</span>) <span style="color:#ff7b72;font-weight:bold">&amp;</span> <span style="color:#a5d6ff">0xFF</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">if</span> (j <span style="color:#ff7b72;font-weight:bold">&lt;</span> <span style="color:#ff7b72;font-weight:bold">*</span>output_length) decoded_data[j<span style="color:#ff7b72;font-weight:bold">++</span>] <span style="color:#ff7b72;font-weight:bold">=</span> (triple <span style="color:#ff7b72;font-weight:bold">&gt;&gt;</span> <span style="color:#a5d6ff">0</span> <span style="color:#ff7b72;font-weight:bold">*</span> <span style="color:#a5d6ff">8</span>) <span style="color:#ff7b72;font-weight:bold">&amp;</span> <span style="color:#a5d6ff">0xFF</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">return</span> decoded_data;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">void</span> <span style="color:#d2a8ff;font-weight:bold">build_decoding_table</span>() {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    decoding_table <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#d2a8ff;font-weight:bold">malloc</span>(<span style="color:#a5d6ff">256</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">for</span> (<span style="color:#ff7b72">int</span> i <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">0</span>; i <span style="color:#ff7b72;font-weight:bold">&lt;</span> <span style="color:#a5d6ff">64</span>; i<span style="color:#ff7b72;font-weight:bold">++</span>)
+</span></span><span style="display:flex;"><span>        decoding_table[(<span style="color:#ff7b72">unsigned</span> <span style="color:#ff7b72">char</span>) encoding_table[i]] <span style="color:#ff7b72;font-weight:bold">=</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span></code></pre></div>
+
+
+
+
+
+
+                </div>
+                
+            </article>
+        </main></div>
+    <aside class="l-sidebar mcol c3">
+    
+<section class="sidebar">
+  <header>相关内容</header>
+  
+  
+  
+  
+  
+  
+  
+  
+  <article><a href="https://gmyxw.github.io/files/20200516-android-env/">android env</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722768240/">深入理解DOMContentLoaded的触发时机</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722679457/">解决Noto字体数字和空格使用emoji符号数字</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722231351/">chrome 全局代理</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/mihomo/">Mihomo</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/kvmnonet/">libvirt升级后虚拟机没网络</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/kb2919351/">Incoming changes in JDK / JRE 21 packages may require manual intervention</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/kb2919355/">Windows update KB2919355 fails to install - Error code 800F0922</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/git-pory22/">无法使用 git clone/push，kex ssh 密钥错误</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/chrome-translate/">Chrome内置翻译被抢</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/files/20200516-android-env/">android env</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/files/20200607-rc4/">Rc4</a></article>
+  
+</section>
+
+
+    
+<section class="sidebar">
+  <header>分类</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/categories/linux/">linux <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/file/">file <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/tool/">tool <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+    
+<section class="sidebar">
+  <header>标签</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/tags/linux/">linux <span class="count">(44)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/windows/">windows <span class="count">(11)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/js/">js <span class="count">(9)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/react/">react <span class="count">(6)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/android/">android <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/baidu/">baidu <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/chrome/">chrome <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/androidstudio/">androidstudio <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/archlinux/">archlinux <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/file/">file <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/java/">java <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/proxy/">proxy <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tool/">tool <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vim/">vim <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vscode/">vscode <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/git/">git <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/github/">github <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/kvm/">kvm <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/libvirt/">libvirt <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/shell/">shell <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tip/">tip <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/7z/">7z <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/antd/">antd <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/c/">c <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/cdn/">cdn <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/code/">code <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/css/">css <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/diskpart/">diskpart <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/dva/">dva <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/firefox/">firefox <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/flash/">flash <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/go/">go <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/golang/">golang <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/gpu/">gpu <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/html/">html <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/i3wm/">i3wm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/mihomo/">mihomo <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/netbios/">netbios <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/network/">network <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/npm/">npm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/openssl/">openssl <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pagefile/">pagefile <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pandavan/">pandavan <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/php/">php <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/powershell/">powershell <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/python/">python <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/regex/">regex <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/saga/">saga <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/samba/">samba <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/smaba/">smaba <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+</aside>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    
+    <small class="footer_copyright">
+        © 2024 gmyxw.
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+    </small><a href="#" id="totop">top</a></footer>
+
+
+
+
+
+
+    
+    <script aysnc src="https://cdn.staticfile.net/clipboard.js/2.0.11/clipboard.min.js"></script>
+    
+     
+  
+
+
+
+
+
+    
+    <script defer src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/main.min.2fab7d03474408371fe7ecce7dc22fba4986ab9061f4de72f40e6087782c7561.js" integrity="sha256-L6t9A0dECDcf5&#43;zOfcIvukmGq5Bh9N5y9A5gh3gsdWE="></script>
+
+    
+
+</body>
+</html>

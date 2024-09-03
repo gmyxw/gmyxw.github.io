@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>saga on zhili</title>
-    <link>https://sy123.netlify.app/tags/saga/</link>
-    <description>Recent content in saga on zhili</description>
+    <title>Saga on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/saga/</link>
+    <description>Recent content in Saga on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Sat, 15 Feb 2020 22:23:37 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/saga/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Sat, 15 Feb 2020 22:23:37 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/saga/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Saga deprecated 警告</title>
-      <link>https://sy123.netlify.app/saga-deprecated-%E8%AD%A6%E5%91%8A/</link>
+      <link>https://gmyxw.github.io/posts/20200215-saga-deprecated-warning/</link>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/saga-deprecated-%E8%AD%A6%E5%91%8A/</guid>
-      <description>What happens? 1 [...effects] has been deprecated in favor of all([...effects]), please update your code it does not effect dva.js, its redux saga api update, you just need to do this
-1 2 3 4 5 effects: { * query(action, {call, put, all}) { yield all([]) } } Redux saga apis:</description>
+      <guid>https://gmyxw.github.io/posts/20200215-saga-deprecated-warning/</guid>
+      
+      <description>What happens? [...effects] has been deprecated in favor of all([...effects]), please update your code it does not effect dva.js, its redux saga api update, you just need to do this effects: { * query(action, {call, put, all}) { yield all([]) } } Redux saga apis:</description>
+      
     </item>
     
   </channel>

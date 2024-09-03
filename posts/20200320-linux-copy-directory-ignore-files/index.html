@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Linux中拷贝目录跳过指定文件的方法 - GM游戏网</title>
+<meta property="og:title" content="Linux中拷贝目录跳过指定文件的方法 - GM游戏网" />
+<meta name="twitter:title" content="Linux中拷贝目录跳过指定文件的方法 - GM游戏网" />
+<meta itemprop="name" content="Linux中拷贝目录跳过指定文件的方法 - GM游戏网" />
+<meta name="application-name" content="Linux中拷贝目录跳过指定文件的方法 - GM游戏网" />
+<meta property="og:site_name" content="GM游戏网" />
+<meta name="keywords" content="linux," />
+
+
+<meta name="description" content="近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也">
+<meta itemprop="description" content="近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也" />
+<meta property="og:description" content="近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也" />
+<meta name="twitter:description" content="近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也" />
+
+<meta name="author" content="gmyxw" />
+
+<meta name="referrer" content="always">
+<meta property="og:locale" content="zh-CN" />
+<meta name="language" content="zh-CN" />
+
+
+<meta property="og:url" content="https://gmyxw.github.io/posts/20200320-linux-copy-directory-ignore-files/">
+  <meta property="og:site_name" content="GM游戏网">
+  <meta property="og:title" content="Linux中拷贝目录跳过指定文件的方法">
+  <meta property="og:description" content="近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-03-20T13:57:01+08:00">
+    <meta property="article:modified_time" content="2020-03-20T13:57:01+08:00">
+    <meta property="article:tag" content="Linux">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Linux中拷贝目录跳过指定文件的方法">
+  <meta name="twitter:description" content="近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也">
+
+
+
+  <meta itemprop="name" content="Linux中拷贝目录跳过指定文件的方法">
+  <meta itemprop="description" content="近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也">
+  <meta itemprop="datePublished" content="2020-03-20T13:57:01+08:00">
+  <meta itemprop="dateModified" content="2020-03-20T13:57:01+08:00">
+  <meta itemprop="wordCount" content="827">
+  <meta itemprop="keywords" content="Linux">
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2020-03-20T13:57:01&#43;0800 />
+    <meta property="article:published_time" content=2020-03-20T13:57:01&#43;0800 />
+    <meta property="og:url" content="https://gmyxw.github.io/posts/20200320-linux-copy-directory-ignore-files/" />
+
+    
+    <meta property="og:article:author" content="gmyxw" />
+    <meta property="article:author" content="gmyxw" />
+    <meta name="author" content="gmyxw" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Linux中拷贝目录跳过指定文件的方法",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2020-03-20",
+        "description": "",
+        "wordCount":  827 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2020-03-20",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "GM游戏网"
+        }
+    }
+    </script>
+
+
+
+    
+
+    
+
+    <link rel="canonical" href="https://gmyxw.github.io/posts/20200320-linux-copy-directory-ignore-files/">
+    <link href="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/css/style.min.420aeabb9726dc288e29445663aa98d0cf7ba0607556bf5b2c88ce38e5bf01a8.css" rel="stylesheet">
+    
+    
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://gmyxw.github.io/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+
+    
+
+    
+    
+  
+
+</head>
+<body data-theme="auto" class="notransition">
+
+<script src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/theme.min.40385e5b43397f4f7b187a8ef005de90f45408b7824f604ff29f318c5ede4c8f.js" integrity="sha256-QDheW0M5f097GHqO8AXekPRUCLeCT2BP8p8xjF7eTI8="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <div>
+            
+            
+            <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"></li><a href="https://gmyxw.github.io/">GM游戏网</a> ❯ </li>
+      
+      
+      
+      
+        <li class="breadcrumb-item"><a href="https://gmyxw.github.io/posts/">归档</a> /</li>
+      
+      
+      <li class="breadcrumb-item active" aria-current="page">Linux中拷贝目录跳过指定文件的方法</li>
+    </ol>
+  </nav>
+  
+          </div>
+
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                
+                    
+                    
+                    <li>
+                        <a id="post" class="menu-link active" href="https://gmyxw.github.io/posts">
+                            归档
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="category" class="menu-link" href="https://gmyxw.github.io/categories">
+                            分类
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="tag" class="menu-link" href="https://gmyxw.github.io/tags">
+                            标签
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="about" class="menu-link" href="https://gmyxw.github.io/about">
+                            关于
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="search" class="menu-link" href="https://gmyxw.github.io/search">
+                            搜索
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="mode" class="menu-link" href="#">
+                            关灯
+                        </a>
+                    
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <aside class="l-sidebar mcol c3">
+    
+    
+    
+    
+<section class="sidebar">
+    <header>快捷链接</header>
+    <ul class="terms ads">
+      
+        <li>
+            <a href="https://emn178.github.io/online-tools/url_decode.html" title="常用编码转换工具" target="_blank">
+                
+                    常用编码转换工具
+                
+            </a>
+        </li>
+      
+        <li>
+            <a href="https://api.mumuglobal.com/api/ip" title="每日壁纸" target="_blank">
+                
+                <img src="https://bing.img.run/1920x1080.php" title="每日壁纸">
+                
+            </a>
+        </li>
+      
+    </ul>
+  </section>
+
+</aside>
+    <div class="mcol c6">
+        <main class="page-content" aria-label="Content">
+            <article>
+                <header class="header">
+                    <h1 class="header-title">Linux中拷贝目录跳过指定文件的方法</h1>
+                    <div class="post-meta">
+                        
+                        
+                        <time datetime="2020-03-20T13:57:01&#43;08:00" itemprop="datePublished"> 🕓
+                            2020-03-20 13:57</time>
+                        
+                        
+                        
+                            <p class="meta-tags">
+                                
+                                <a href="https://gmyxw.github.io/tags/linux/">#linux</a>
+                                
+                            </p>
+                        
+                    </div>
+                </header>
+                
+                <div class="page-content">
+                    <p>近日在 <strong>Linux</strong> 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也不好一一指定。普通的 <strong>cp</strong> 命令并没有排除某个文件或文件夹的参数，比较丑陋点可以 <strong>cp -r</strong> 拷贝完目录之后再去删除无用的，但如果做批量脚本操作就不爽了，经过实际试验之后暂时找到两个比较好的方法。</p>
+<h1 id="使用-rsync-进行拷贝">使用 rsync 进行拷贝</h1>
+<p><strong>rsync</strong> 本来是文件同步备份的工具，相对于普通的 <strong>cp</strong> 命令，<strong>rsync</strong> 在控制方面就强多了，而且 <strong>rsync</strong> 对遍历目录也支持，有 <strong>&ndash;exclude</strong> 参数可以忽略指定的文件或文件夹。</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>rsync -vaP --exclude<span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">&#34;.*&#34;</span> --exclude<span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">&#34;Makefile&#34;</span> dir1 /home/dir2</span></span></code></pre></div>
+</div>
+<p>如上面演示的就可以排除掉隐藏文件和 <strong>Makefile</strong> 文件，<strong>-a</strong> 参数已经包含遍历处理参数 <strong>-r</strong>。</p>
+<h1 id="使用-find-加-cpio-进行拷贝">使用 find 加 cpio 进行拷贝</h1>
+<p>备注：此方法来自 <a href="https://google.com">Advanced Bash-Scripting Guide</a>，需要了解的童鞋自己去参考了。</p>
+<p>用过 <strong>find</strong> 的童鞋都知道，<strong>find</strong> 对文件的过滤那是非常强大的，配合 <strong>cpio</strong> 来进行目录的遍历拷贝就可以实现过滤指定的文件或文件夹，当然也可以做到只备份特定的文件或文件夹，你可以用 <strong>find</strong> 的各种过滤参数达到拷贝哪天的文件，拷贝近期更改的文件等特殊效果，而且 <strong>find</strong> 支持正则表达式，这种方式想比第一种使用 <strong>rsync</strong> 跳过文件的方式更加灵活，因此非常推荐使用此方式进行目录拷贝。</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd dir1
+</span></span><span style="display:flex;"><span>find . -regextype posix-egrep -mindepth <span style="color:#a5d6ff">1</span> ! -regex <span style="color:#a5d6ff">&#39;./(dev|tmp)($|/.*)&#39;</span> ! -name Makefile -a ! -name .svn | cpio -admvp /home/dir2</span></span></code></pre></div>
+</div>
+<p>小解释下：</p>
+<p><strong>find</strong> 的 <strong>-regextype</strong> 参数指定正则表达式类型，<strong>posix-egrep</strong> 为 <strong>egrep</strong> 用的扩展正则表达式，<strong>-mindepth</strong> 使 <strong>find</strong> 的输出中不包括目录本身，<strong>-regex</strong> 参数指定过滤的文件的正则表达式，<strong>-regex</strong> 前面的感叹号表示跳过，<code>'./(dev|tmp)($|/.*)'</code> 这个正则表达式即表示跳过目录中的第一层 <strong>dev</strong> 和 <strong>tmp</strong> 目录以及下面所有的文件和文件夹，最后两个 <strong>-name</strong> 指定要跳过文件名为 <strong>Makefile</strong> 和 <strong>.svn</strong> 的文件，这样在备份版本库的时候非常有用。</p>
+<p><strong>cpio</strong> 命令将 <strong>find</strong> 的输出文件列表依次拷贝到 <code>/home/dir2</code> 目标目录中，<strong>-a</strong> 表示不更新文件的访问时间，<strong>-d</strong> 指定自动创建目录，<strong>-m</strong> 指定保留文件的修改时间，<strong>-p</strong> 指定 <strong>cpio</strong> 工作在 <strong>Copy-pass</strong> 模式，这是专门用来拷贝目录树的一种模式。</p>
+<blockquote>
+<p>PS：如果有更加简单的方法，欢迎提出指正哦~~~ ^_^</p>
+</blockquote>
+
+                </div>
+                
+            </article>
+        </main></div>
+    <aside class="l-sidebar mcol c3">
+    
+<section class="sidebar">
+  <header>相关内容</header>
+  
+  
+  
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200312-rename-regex/">rename使用正则表达式</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200304-browser-plugins/">Browser plugins</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200228-encrypt-string-using-openssl/">Encrypt string using Openssl</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200225-cp-backup/">Copying all files inside subdirectories and renaming instead of overwriting</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200224-android-studio-emulator-ugly-black-borders/">Android Studio emulator ugly black borders</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200224-vim-search-in-file/">Vim_search_in_file</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200216-how-do-you-empty-the-buffers-and-cache-on-linux-system/">linux中如何手动清零缓冲</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200216-systemd-analyze/">使用systemd-analyze优化系统启动时间</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200205-linux-privileged-port/">Socket programing Permission denied</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200205-linux-yay/">Linux yay 命令</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200318-module-vboxdrv-not-found-in-directory/">archlinux升级内核后，系统挂了，修复方法</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200323-pandavan-off-led-indicator/">Pandavan Off LED Indicator</a></article>
+  
+</section>
+
+
+    
+<section class="sidebar">
+  <header>分类</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/categories/linux/">linux <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/file/">file <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/tool/">tool <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+    
+<section class="sidebar">
+  <header>标签</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/tags/linux/">linux <span class="count">(44)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/windows/">windows <span class="count">(11)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/js/">js <span class="count">(9)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/react/">react <span class="count">(6)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/android/">android <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/baidu/">baidu <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/chrome/">chrome <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/androidstudio/">androidstudio <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/archlinux/">archlinux <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/file/">file <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/java/">java <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/proxy/">proxy <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tool/">tool <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vim/">vim <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vscode/">vscode <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/git/">git <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/github/">github <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/kvm/">kvm <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/libvirt/">libvirt <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/shell/">shell <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tip/">tip <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/7z/">7z <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/antd/">antd <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/c/">c <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/cdn/">cdn <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/code/">code <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/css/">css <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/diskpart/">diskpart <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/dva/">dva <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/firefox/">firefox <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/flash/">flash <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/go/">go <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/golang/">golang <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/gpu/">gpu <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/html/">html <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/i3wm/">i3wm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/mihomo/">mihomo <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/netbios/">netbios <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/network/">network <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/npm/">npm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/openssl/">openssl <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pagefile/">pagefile <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pandavan/">pandavan <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/php/">php <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/powershell/">powershell <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/python/">python <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/regex/">regex <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/saga/">saga <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/samba/">samba <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/smaba/">smaba <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+</aside>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    
+    <small class="footer_copyright">
+        © 2024 gmyxw.
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+    </small><a href="#" id="totop">top</a></footer>
+
+
+
+
+
+
+    
+    <script aysnc src="https://cdn.staticfile.net/clipboard.js/2.0.11/clipboard.min.js"></script>
+    
+     
+  
+
+
+
+
+
+    
+    <script defer src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/main.min.2fab7d03474408371fe7ecce7dc22fba4986ab9061f4de72f40e6087782c7561.js" integrity="sha256-L6t9A0dECDcf5&#43;zOfcIvukmGq5Bh9N5y9A5gh3gsdWE="></script>
+
+    
+
+</body>
+</html>

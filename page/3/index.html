@@ -1,52 +1,470 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="zhili">
-<meta name="description" content="Sed magna purus, fermentum eu, tincidunt eu, varius ut, felis. Morbi mollis tellus ac sapien. Vestibulum ullamcorper mauris at ligula. In hac habitasse platea dictumst. Vivamus in erat ut urna cursus vestibulum.
-    ">
-<meta name="keywords" content="博客, 技术, 生物信息，精准医疗, 遗传咨询, 高通量技术, 算法, 学习, 作品, 写作, C&#43;&#43;, Perl">
-<meta name="referrer" content="always">
-<title>zhili</title>
-<link rel="stylesheet" type="text/css" href="/css/main.css">
-<link rel="icon" href="/logo/favicon.ico" type="image/x-icon">
-</head>
-<body>
-<header>
-  <div>
-    <a href="https://sy123.netlify.app/">zhili</a> ❯
-      </h1>
-  </div>
-  <nav><a href="/file/">Files</a><a href="/tags/">Tags</a><a href="/about/">About</a></nav>
-</header>
-<main>
-  <article>
-    <div>
-  </div>
-<ul>
-  <li><a href="/boot-download-background-image/">Boot Download Background Image</a></li>
-  <li><a href="/linux-force-dhcp-client-to-renew-ip/">Linux Force DHCP Client to Renew IP</a></li>
-  <li><a href="/pandavan-off-led-indicator/">Pandavan Off LED Indicator</a></li>
-  <li><a href="/linux%E4%B8%AD%E6%8B%B7%E8%B4%9D%E7%9B%AE%E5%BD%95%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95/">Linux中拷贝目录跳过指定文件的方法</a></li>
-  <li><a href="/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/">archlinux升级内核后，系统挂了，修复方法</a></li>
-  <li><a href="/flash-download/">Flash Download</a></li>
-  <li><a href="/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%A9%E5%AE%B9%E5%88%B0100t%E4%BB%A5%E4%B8%8A/">百度网盘扩容到100t以上</a></li>
-  <li><a href="/google-chrome-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD/">Google Chrome 离线安装包的官方下载</a></li>
-  <li><a href="/rename%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">rename使用正则表达式</a></li>
-  <li><a href="/%E5%A6%82%E4%BD%95%E5%9C%A8vim%E4%BF%9D%E5%AD%98%E6%97%B6%E8%8E%B7%E5%BE%97sudo%E6%9D%83%E9%99%90/">如何在vim保存时获得sudo权限</a></li>
-  <li><a href="/vim-recording%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">vim recording的使用方法</a></li>
-  <li><a href="/ts%E5%B1%9E%E6%80%A7%E5%90%8E%E9%9D%A2%E7%9A%84%E6%84%9F%E5%8F%B9%E5%8F%B7%E6%9C%89%E4%BB%80%E4%B9%88%E7%94%A8%E5%A4%84/">ts属性后面的感叹号有什么用处？</a></li>
-  <li><a href="/git-%E5%87%BA%E7%8E%B0%E9%94%99%E8%AF%AFcould-not-resolve-host-github.com/">git 出现错误Could not resolve host: github.com</a></li>
-  <li><a href="/browser-plugins/">Browser plugins</a></li>
-  <li><a href="/javascript%E4%B8%AD%E7%9A%84%E5%90%84%E7%A7%8D%E7%AE%80%E5%86%99%E6%80%BB%E7%BB%93%E4%B8%8D%E6%96%AD%E6%9B%B4%E6%96%B0/">javascript中的各种简写总结（不断更新）</a></li>
-  <li><a href="/encrypt-string-using-openssl/">Encrypt string using Openssl</a></li>
-  <li><a href="/youtube%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD/">youtube视频下载</a></li>
-  <li><a href="/react%E5%85%B3%E4%BA%8Eform%E7%9A%84%E5%8F%96%E9%83%A8%E5%88%86%E5%AD%97%E6%AE%B5%E6%95%B0%E6%8D%AE/">React关于form的取部分字段数据</a></li>
-  <li><a href="/tippy_warning/">Tippy_warning</a></li>
-  <li><a href="/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E8%B6%85%E7%BA%A7%E4%BC%9A%E5%91%98%E8%B4%A6%E5%8F%B7%E5%88%86%E4%BA%AB/">百度网盘超级会员账号分享</a></li>
-  </ul>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>GM游戏网</title>
+<meta property="og:title" content="GM游戏网" />
+<meta name="twitter:title" content="GM游戏网" />
+<meta itemprop="name" content="GM游戏网" />
+<meta name="application-name" content="GM游戏网" />
+<meta property="og:site_name" content="GM游戏网" />
+<meta name="keywords" content="GM游戏,一键端,网游单机,软件资源,IT技术" />
+
+
+<meta name="description" content="GM游戏网是一个包含GM游戏、一键端、网游单机、IT技术、软件资源网站">
+<meta itemprop="description" content="GM游戏网是一个包含GM游戏、一键端、网游单机、IT技术、软件资源网站" />
+<meta property="og:description" content="GM游戏网是一个包含GM游戏、一键端、网游单机、IT技术、软件资源网站" />
+<meta name="twitter:description" content="GM游戏网是一个包含GM游戏、一键端、网游单机、IT技术、软件资源网站" />
+
+<meta name="author" content="gmyxw" />
+
+<meta name="referrer" content="always">
+<meta property="og:locale" content="zh-CN" />
+<meta name="language" content="zh-CN" />
+
+
+<meta property="og:url" content="https://gmyxw.github.io/">
+  <meta property="og:site_name" content="GM游戏网">
+  <meta property="og:title" content="GM游戏网">
+  <meta property="og:description" content="GM游戏网是一个包含GM游戏、一键端、网游单机、IT技术、软件资源网站">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="website">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="GM游戏网">
+  <meta name="twitter:description" content="GM游戏网是一个包含GM游戏、一键端、网游单机、IT技术、软件资源网站">
+
+
+
+  <meta itemprop="name" content="GM游戏网">
+  <meta itemprop="description" content="GM游戏网是一个包含GM游戏、一键端、网游单机、IT技术、软件资源网站">
+  <meta itemprop="datePublished" content="2024-08-04T18:44:00+08:00">
+  <meta itemprop="dateModified" content="2024-08-04T18:44:00+08:00">
+  <meta itemprop="wordCount" content="35">
+
+
+
+
+    
+
+    
+
+    <link rel="canonical" href="https://gmyxw.github.io/">
+    <link href="/index.xml" rel="alternate" type="application/rss+xml" title="GM游戏网">
+    <link href="/index.xml" rel="feed" type="application/rss+xml" title="GM游戏网">
+    <link href="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/css/style.min.420aeabb9726dc288e29445663aa98d0cf7ba0607556bf5b2c88ce38e5bf01a8.css" rel="stylesheet">
+    
+    
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://gmyxw.github.io/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+
+    
+
+    
+    
+  
+
+</head>
+<body data-theme="auto" class="notransition">
+
+<script src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/theme.min.40385e5b43397f4f7b187a8ef005de90f45408b7824f604ff29f318c5ede4c8f.js" integrity="sha256-QDheW0M5f097GHqO8AXekPRUCLeCT2BP8p8xjF7eTI8="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <div>
+            
+            
+            <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"></li><a href="https://gmyxw.github.io/">GM游戏网</a> ❯ </li>
+      
+      <li class="breadcrumb-item active" aria-current="page"></li>
+    </ol>
+  </nav>
+  
+          </div>
+
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                
+                    
+                    
+                    <li>
+                        <a id="post" class="menu-link" href="https://gmyxw.github.io/posts">
+                            归档
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="category" class="menu-link" href="https://gmyxw.github.io/categories">
+                            分类
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="tag" class="menu-link" href="https://gmyxw.github.io/tags">
+                            标签
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="about" class="menu-link" href="https://gmyxw.github.io/about">
+                            关于
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="search" class="menu-link" href="https://gmyxw.github.io/search">
+                            搜索
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="mode" class="menu-link" href="#">
+                            关灯
+                        </a>
+                    
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="wrapper">
+        <aside class="l-sidebar mcol c3">
+    
+    
+<section class="sidebar">
+    <header>快捷链接</header>
+    <ul class="terms ads">
+      
+        <li>
+            <a href="https://emn178.github.io/online-tools/url_decode.html" title="常用编码转换工具" target="_blank">
+                
+                    常用编码转换工具
+                
+            </a>
+        </li>
+      
+        <li>
+            <a href="https://api.mumuglobal.com/api/ip" title="每日壁纸" target="_blank">
+                
+                <img src="https://bing.img.run/1920x1080.php" title="每日壁纸">
+                
+            </a>
+        </li>
+      
+    </ul>
+  </section>
+
+</aside>
+        <main class="page-content mcol c6" aria-label="Content">
+            
+            <div class="author">
+                <h1 id="gm游戏网是一个包含gm游戏一键端网游单机it技术软件资源网站">GM游戏网是一个包含GM游戏、一键端、网游单机、IT技术、软件资源网站</h1>
+</div>
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/">How can I simulate interactive console in VSCode debugger</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-04-18T00:06:48&#43;0800">
+        2020-04-18
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200415-err-wget-not-trusted/">解决&#39;ERROR: The certificate of `github.com’ is not trusted.&#39;问题</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-04-15T07:11:46&#43;0800">
+        2020-04-15
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200413-linux-convert-images-to-pdf/">Linux 图片转pdf</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-04-13T02:39:04&#43;0800">
+        2020-04-13
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200401-feh-open-svg/">Feh Open SVG</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-04-01T21:58:23&#43;0800">
+        2020-04-01
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200401-what-does-networkmanager-wait-online-service-do/">What Does Networkmanager Wait Online Service Do</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-04-01T20:29:10&#43;0800">
+        2020-04-01
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200401-difference-between-word-wrap-and-word-break/">word-wrap和word-break的区别</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-04-01T00:02:15&#43;0800">
+        2020-04-01
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200328-boot-download-background-image/">Boot Download Background Image</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-28T20:54:33&#43;0800">
+        2020-03-28
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200324-linux-force-dhcp-client-to-renew-ip/">Linux Force DHCP Client to Renew IP</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-24T07:43:59&#43;0800">
+        2020-03-24
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200323-pandavan-off-led-indicator/">Pandavan Off LED Indicator</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-23T20:14:04&#43;0800">
+        2020-03-23
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200320-linux-copy-directory-ignore-files/">Linux中拷贝目录跳过指定文件的方法</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-20T13:57:01&#43;0800">
+        2020-03-20
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200318-module-vboxdrv-not-found-in-directory/">archlinux升级内核后，系统挂了，修复方法</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-18T06:32:53&#43;0800">
+        2020-03-18
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200313-flash-download/">Flash Download</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-13T03:47:20&#43;0800">
+        2020-03-13
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200313-baidu-wangpan-grow/">百度网盘扩容到100t以上</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-13T03:04:22&#43;0800">
+        2020-03-13
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200313-chrome-standalone/">Google Chrome 离线安装包的官方下载</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-13T02:46:41&#43;0800">
+        2020-03-13
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200312-rename-regex/">rename使用正则表达式</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-12T22:50:06&#43;0800">
+        2020-03-12
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200312-how-does-the-vim-write-with-sudo-trick-work/">如何在vim保存时获得sudo权限</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-12T21:30:38&#43;0800">
+        2020-03-12
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200312-vim-recording/">vim recording的使用方法</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-12T17:05:52&#43;0800">
+        2020-03-12
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200310-what-does-the-exclamation-point-behind-the-ts-attribute-mean/">ts属性后面的感叹号有什么用处？</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-10T14:51:20&#43;0800">
+        2020-03-10
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200306-git-clone-not-resolve-host/">git 出现错误Could not resolve host: github.com</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-06T21:36:57&#43;0800">
+        2020-03-06
+        
+    </time>
+</article>
+
+            <article class="post-item">
+    <h4 class="post-item-title">
+        <a href="https://gmyxw.github.io/posts/20200304-browser-plugins/">Browser plugins</a>
+    </h4>
+    
+    
+    
+    <time class="post-item-meta" datetime="2020-03-04T17:06:34&#43;0800">
+        2020-03-04
+        
+    </time>
+</article>
+
+            
     <ul class="pagination pagination-default">
       <li class="page-item">
         <a href="/" aria-label="First" class="page-link" role="button"><span aria-hidden="true">&laquo;&laquo;</span></a>
@@ -75,15 +493,166 @@
       <li class="page-item">
         <a href="/page/5/" aria-label="Last" class="page-link" role="button"><span aria-hidden="true">&raquo;&raquo;</span></a>
       </li>
-    </ul>
-  </article>
-</main>
-<footer>
-  <div>
-    <div>
-      2007-2022 zhili. <a href="https://sy123.netlify.app/index.xml">RSS</a>
-        </div>
-  </div>
-</footer>
+    </ul></main>
+        <aside class="l-sidebar mcol c3">
+    
+
+    
+<section class="sidebar">
+  <header>分类</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/categories/linux/">linux <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/file/">file <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/tool/">tool <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+    
+<section class="sidebar">
+  <header>标签</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/tags/linux/">linux <span class="count">(44)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/windows/">windows <span class="count">(11)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/js/">js <span class="count">(9)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/react/">react <span class="count">(6)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/android/">android <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/baidu/">baidu <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/chrome/">chrome <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/androidstudio/">androidstudio <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/archlinux/">archlinux <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/file/">file <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/java/">java <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/proxy/">proxy <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tool/">tool <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vim/">vim <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vscode/">vscode <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/git/">git <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/github/">github <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/kvm/">kvm <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/libvirt/">libvirt <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/shell/">shell <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tip/">tip <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/7z/">7z <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/antd/">antd <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/c/">c <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/cdn/">cdn <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/code/">code <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/css/">css <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/diskpart/">diskpart <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/dva/">dva <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/firefox/">firefox <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/flash/">flash <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/go/">go <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/golang/">golang <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/gpu/">gpu <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/html/">html <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/i3wm/">i3wm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/mihomo/">mihomo <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/netbios/">netbios <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/network/">network <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/npm/">npm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/openssl/">openssl <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pagefile/">pagefile <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pandavan/">pandavan <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/php/">php <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/powershell/">powershell <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/python/">python <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/regex/">regex <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/saga/">saga <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/samba/">samba <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/smaba/">smaba <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+</aside>
+    </div><footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    
+    <small class="footer_copyright">
+        © 2024 gmyxw.
+         <a href="https://gmyxw.github.io/index.xml">RSS</a>
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+    </small><a href="#" id="totop">top</a></footer>
+
+
+
+
+
+
+    
+     
+  
+
+
+
+
+
+    
+    <script defer src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/main.min.2fab7d03474408371fe7ecce7dc22fba4986ab9061f4de72f40e6087782c7561.js" integrity="sha256-L6t9A0dECDcf5&#43;zOfcIvukmGq5Bh9N5y9A5gh3gsdWE="></script>
+
+    
+
 </body>
+
 </html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sysprep命令详解 - GM游戏网</title>
+<meta property="og:title" content="Sysprep命令详解 - GM游戏网" />
+<meta name="twitter:title" content="Sysprep命令详解 - GM游戏网" />
+<meta itemprop="name" content="Sysprep命令详解 - GM游戏网" />
+<meta name="application-name" content="Sysprep命令详解 - GM游戏网" />
+<meta property="og:site_name" content="GM游戏网" />
+<meta name="keywords" content="windows,sysprep," />
+
+
+<meta name="description" content="如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删">
+<meta itemprop="description" content="如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删" />
+<meta property="og:description" content="如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删" />
+<meta name="twitter:description" content="如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删" />
+
+<meta name="author" content="gmyxw" />
+
+<meta name="referrer" content="always">
+<meta property="og:locale" content="zh-CN" />
+<meta name="language" content="zh-CN" />
+
+
+<meta property="og:url" content="https://gmyxw.github.io/posts/20200120-sysprep/">
+  <meta property="og:site_name" content="GM游戏网">
+  <meta property="og:title" content="Sysprep命令详解">
+  <meta property="og:description" content="如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-01-20T06:12:53+08:00">
+    <meta property="article:modified_time" content="2020-01-20T06:12:53+08:00">
+    <meta property="article:tag" content="Windows">
+    <meta property="article:tag" content="Sysprep">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sysprep命令详解">
+  <meta name="twitter:description" content="如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删">
+
+
+
+  <meta itemprop="name" content="Sysprep命令详解">
+  <meta itemprop="description" content="如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删">
+  <meta itemprop="datePublished" content="2020-01-20T06:12:53+08:00">
+  <meta itemprop="dateModified" content="2020-01-20T06:12:53+08:00">
+  <meta itemprop="wordCount" content="1082">
+  <meta itemprop="keywords" content="Windows,Sysprep">
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2020-01-20T06:12:53&#43;0800 />
+    <meta property="article:published_time" content=2020-01-20T06:12:53&#43;0800 />
+    <meta property="og:url" content="https://gmyxw.github.io/posts/20200120-sysprep/" />
+
+    
+    <meta property="og:article:author" content="gmyxw" />
+    <meta property="article:author" content="gmyxw" />
+    <meta name="author" content="gmyxw" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Sysprep命令详解",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2020-01-20",
+        "description": "",
+        "wordCount":  1082 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2020-01-20",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "GM游戏网"
+        }
+    }
+    </script>
+
+
+
+    
+
+    
+
+    <link rel="canonical" href="https://gmyxw.github.io/posts/20200120-sysprep/">
+    <link href="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/css/style.min.420aeabb9726dc288e29445663aa98d0cf7ba0607556bf5b2c88ce38e5bf01a8.css" rel="stylesheet">
+    
+    
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://gmyxw.github.io/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+
+    
+
+    
+    
+  
+
+</head>
+<body data-theme="auto" class="notransition">
+
+<script src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/theme.min.40385e5b43397f4f7b187a8ef005de90f45408b7824f604ff29f318c5ede4c8f.js" integrity="sha256-QDheW0M5f097GHqO8AXekPRUCLeCT2BP8p8xjF7eTI8="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <div>
+            
+            
+            <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"></li><a href="https://gmyxw.github.io/">GM游戏网</a> ❯ </li>
+      
+      
+      
+      
+        <li class="breadcrumb-item"><a href="https://gmyxw.github.io/posts/">归档</a> /</li>
+      
+      
+      <li class="breadcrumb-item active" aria-current="page">Sysprep命令详解</li>
+    </ol>
+  </nav>
+  
+          </div>
+
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                
+                    
+                    
+                    <li>
+                        <a id="post" class="menu-link active" href="https://gmyxw.github.io/posts">
+                            归档
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="category" class="menu-link" href="https://gmyxw.github.io/categories">
+                            分类
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="tag" class="menu-link" href="https://gmyxw.github.io/tags">
+                            标签
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="about" class="menu-link" href="https://gmyxw.github.io/about">
+                            关于
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="search" class="menu-link" href="https://gmyxw.github.io/search">
+                            搜索
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="mode" class="menu-link" href="#">
+                            关灯
+                        </a>
+                    
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <aside class="l-sidebar mcol c3">
+    
+    
+    
+    
+<section class="sidebar">
+    <header>快捷链接</header>
+    <ul class="terms ads">
+      
+        <li>
+            <a href="https://emn178.github.io/online-tools/url_decode.html" title="常用编码转换工具" target="_blank">
+                
+                    常用编码转换工具
+                
+            </a>
+        </li>
+      
+        <li>
+            <a href="https://api.mumuglobal.com/api/ip" title="每日壁纸" target="_blank">
+                
+                <img src="https://bing.img.run/1920x1080.php" title="每日壁纸">
+                
+            </a>
+        </li>
+      
+    </ul>
+  </section>
+
+</aside>
+    <div class="mcol c6">
+        <main class="page-content" aria-label="Content">
+            <article>
+                <header class="header">
+                    <h1 class="header-title">Sysprep命令详解</h1>
+                    <div class="post-meta">
+                        
+                        
+                        <time datetime="2020-01-20T06:12:53&#43;08:00" itemprop="datePublished"> 🕓
+                            2020-01-20 06:12</time>
+                        
+                        
+                        
+                            <p class="meta-tags">
+                                
+                                <a href="https://gmyxw.github.io/tags/windows/">#windows</a>
+                                
+                                <a href="https://gmyxw.github.io/tags/sysprep/">#sysprep</a>
+                                
+                            </p>
+                        
+                    </div>
+                </header>
+                
+                <div class="page-content">
+                    <p>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 <code>/generalize</code> 选项的 <code>Sysprep</code> 命令，即使其他计算机具有相同的硬件配置。<code>Sysprep /generalize</code> 命令从 Windows 安装删除唯一性信息，这使得你可以在不同的计算机上重复使用映像。下次启动 Windows 映像时，将运行 specialize 配置阶段。</p>
+<p>Sysprep 命令行选项
+下列命令行选项可用于 Sysprep：</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps" data-lang="ps"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Sysprep.exe</span> [<span style="color:#79c0ff">/oobe</span> <span style="color:#d2a8ff;font-weight:bold">|</span> <span style="color:#79c0ff">/audit</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#79c0ff">/generalize</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#79c0ff">/mode:vm</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#79c0ff">/reboot</span> <span style="color:#d2a8ff;font-weight:bold">|</span> <span style="color:#79c0ff">/shutdown</span> <span style="color:#d2a8ff;font-weight:bold">|</span> <span style="color:#79c0ff">/quit</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#79c0ff">/quiet</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>[<span style="color:#79c0ff">/unattend:</span>&lt;<span style="color:#d2a8ff;font-weight:bold">answerfile</span>&gt;]</span></span></code></pre></div>
+</div>
+<p>下表列出了 Sysprep 命令行选项：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/audit</td>
+<td>重新启动计算机进入审核模式。审核模式使你可以将其他驱动程序或应用程序添加到 Windows。你还可以在将 Windows 安装发送给最终用户前对其进行测试。例如：</td>
+</tr>
+<tr>
+<td>Sysprep /audit</td>
+<td>如果指定了应答文件，则 Windows 安装程序的审核模式将运行 auditSystem 和 auditUser 配置阶段。</td>
+</tr>
+<tr>
+<td>/generalize</td>
+<td>准备要作为映像的 Windows 安装。Sysprep 工具会从 Windows 安装中删除所有唯一的系统信息。Sysprep 将重置安全 ID (SID)，清除所有系统还原点，并删除事件日志。例如：</td>
+</tr>
+<tr>
+<td>Sysprep /generalize /shutdown</td>
+<td>下次计算机启动时，将运行 specialize 配置阶段。该配置阶段将创建一个新安全 ID (SID)。</td>
+</tr>
+<tr>
+<td>/oobe</td>
+<td>重新启动计算机进入 OOBE 模式。例如：</td>
+</tr>
+<tr>
+<td>Sysprep /generalize /shutdown /oobe</td>
+<td>OOBE 允许最终用户自定义其 Windows 操作系统、创建用户帐户、命名计算机和执行其他任务。Sysprep 在 OOBE 启动前，将处理应答文件中 oobeSystem 配置阶段的所有设置。</td>
+</tr>
+<tr>
+<td>/mode:vm</td>
+<td>Windows(R) 8 的新增内容。一般化虚拟硬盘 (VHD)，这样可以将其部署为相同虚拟机 (VM) 或虚拟机监控程序上的 VHD。VM 重新启动后，该 VM 可以引导到 OOBE。例如：</td>
+</tr>
+<tr>
+<td>Sysprep /generalize /oobe /mode:vm</td>
+<td>仅有的适用于 VM 模式的额外交换机为“/reboot”、“/shutdown”和“/quit”。必须使用相同的硬件配置文件在虚拟机或虚拟机监控程序上部署 VHD。例如，如果你已在 Microsoft Hyper-V 中创建 VHD，仅可以使用匹配的硬件配置文件将 VHD 部署到 Microsoft Hyper-V VM。使用不同的硬件配置文件将 VHD 部署到不同的 VM 可能会导致意外的问题。</td>
+</tr>
+<tr>
+<td>/reboot</td>
+<td>重新启动计算机。可以使用该选项审核计算机并确保首次运行体验正确工作。</td>
+</tr>
+<tr>
+<td>/shutdown</td>
+<td>在 sysprep 命令完成运行后关闭计算机。</td>
+</tr>
+<tr>
+<td>/quiet</td>
+<td>运行 Sysprep 工具而不显示屏幕确认消息。如果自动运行 Sysprep 工具，则可以使用该选项。</td>
+</tr>
+<tr>
+<td>/quit</td>
+<td>Sysprep 运行指定命令后，无需重新启动或关闭计算机即可关闭 Sysprep 工具。</td>
+</tr>
+<tr>
+<td>/unattend:<answerfile></td>
+<td>在无人参与的安装过程中，将应答文件中的设置应用到 Windows，其中 <answerfile> 指定要使用的应答文件的路径和文件名。例如：Sysprep /audit /reboot /unattend:F:\Unattend.xml 其中 F 是应答文件 (Unattend.xml) 所在的便携存储设备的驱动器号。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="important重要事项">Important重要事项</h1>
+<p>必须使用 Sysprep /generalize 命令对完整的 Windows 安装一般化，才可以使用该安装对新计算机进行部署，无论是使用映像、硬盘复制，还是其他方法均可。不运行 Sysprep /generalize 命令而将 Windows 映像移动或复制到其他计算机的做法不受支持。</p>
+<h1 id="命令行">命令行</h1>
+<p><code>sysprep.exe /generalize /reboot /oobe</code></p>
+<h1 id="failure-occurred-while-executing-sysprep_clean_validate_opk-from-cwindowssystem32spopkdll">Failure occurred while executing &lsquo;Sysprep_Clean_Validate_Opk&rsquo; from C:\Windows\System32\spopk.dll</h1>
+<h2 id="take-ownership-of-the-file">Take ownership of the file:</h2>
+<p><code>takeown /f C:\Windows\System32\spopk.dll</code></p>
+<h2 id="grant-ability-to-modify-file">Grant ability to modify file:</h2>
+<p><code>icacls C:\Windows\System32\spopk.dll /Grant Administrators:f</code></p>
+<h1 id="预设appx删除">预设appx删除</h1>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ps" data-lang="ps"><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Get-AppxProvisionedPackage</span> <span style="color:#d2a8ff;font-weight:bold">-online</span> <span style="color:#d2a8ff;font-weight:bold">|</span> <span style="color:#d2a8ff;font-weight:bold">Out-GridView</span> <span style="color:#d2a8ff;font-weight:bold">-PassThru</span> <span style="color:#d2a8ff;font-weight:bold">|</span> <span style="color:#d2a8ff;font-weight:bold">Remove-AppxProvisionedPackage</span> <span style="color:#d2a8ff;font-weight:bold">-online</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#d2a8ff;font-weight:bold">Get-AppxPackage</span> <span style="color:#d2a8ff;font-weight:bold">-AllUsers</span> <span style="color:#d2a8ff;font-weight:bold">|</span> <span style="color:#d2a8ff;font-weight:bold">Out-GridView</span> <span style="color:#d2a8ff;font-weight:bold">-PassThru</span> <span style="color:#d2a8ff;font-weight:bold">|</span> <span style="color:#f85149">Remove-AppxPackage</span></span></span></code></pre></div>
+</div>
+<h1 id="from">From</h1>
+<p><a href="https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/sysprep--generalize--a-windows-installation">https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/sysprep&ndash;generalize&ndash;a-windows-installation</a></p>
+<p><a href="http://www.edugeek.net/forums/windows-10/207219-problem-sysprep-windows-10-1903-a.html">http://www.edugeek.net/forums/windows-10/207219-problem-sysprep-windows-10-1903-a.html</a></p>
+
+                </div>
+                
+            </article>
+        </main></div>
+    <aside class="l-sidebar mcol c3">
+    
+<section class="sidebar">
+  <header>相关内容</header>
+  
+  
+  
+  
+  
+  
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200120-pagefile/">cmd命令行修改windows虚拟内存pagefile.sys</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/">ArchLinux配置Samba服务与Windows共享文件</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200117-netbios/">批处理关闭或开启NETBIOS</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200117-wsl-samba/">玩转WSL-用Samba服务替代Win10原生的文件共享</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200116-using-diskpart-to-create/">Windows 下使用 Diskpart 命令分区</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722768240/">深入理解DOMContentLoaded的触发时机</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722679457/">解决Noto字体数字和空格使用emoji符号数字</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722231351/">chrome 全局代理</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/mihomo/">Mihomo</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/kvmnonet/">libvirt升级后虚拟机没网络</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200120-pagefile/">cmd命令行修改windows虚拟内存pagefile.sys</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200120-historysavepath/">Win10 清除 PowerShell 历史记录</a></article>
+  
+</section>
+
+
+    
+<section class="sidebar">
+  <header>分类</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/categories/linux/">linux <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/file/">file <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/tool/">tool <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+    
+<section class="sidebar">
+  <header>标签</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/tags/linux/">linux <span class="count">(44)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/windows/">windows <span class="count">(11)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/js/">js <span class="count">(9)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/react/">react <span class="count">(6)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/android/">android <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/baidu/">baidu <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/chrome/">chrome <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/androidstudio/">androidstudio <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/archlinux/">archlinux <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/file/">file <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/java/">java <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/proxy/">proxy <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tool/">tool <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vim/">vim <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vscode/">vscode <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/git/">git <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/github/">github <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/kvm/">kvm <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/libvirt/">libvirt <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/shell/">shell <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tip/">tip <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/7z/">7z <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/antd/">antd <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/c/">c <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/cdn/">cdn <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/code/">code <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/css/">css <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/diskpart/">diskpart <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/dva/">dva <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/firefox/">firefox <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/flash/">flash <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/go/">go <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/golang/">golang <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/gpu/">gpu <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/html/">html <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/i3wm/">i3wm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/mihomo/">mihomo <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/netbios/">netbios <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/network/">network <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/npm/">npm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/openssl/">openssl <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pagefile/">pagefile <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pandavan/">pandavan <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/php/">php <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/powershell/">powershell <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/python/">python <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/regex/">regex <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/saga/">saga <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/samba/">samba <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/smaba/">smaba <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+</aside>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    
+    <small class="footer_copyright">
+        © 2024 gmyxw.
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+    </small><a href="#" id="totop">top</a></footer>
+
+
+
+
+
+
+    
+    <script aysnc src="https://cdn.staticfile.net/clipboard.js/2.0.11/clipboard.min.js"></script>
+    
+     
+  
+
+
+
+
+
+    
+    <script defer src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/main.min.2fab7d03474408371fe7ecce7dc22fba4986ab9061f4de72f40e6087782c7561.js" integrity="sha256-L6t9A0dECDcf5&#43;zOfcIvukmGq5Bh9N5y9A5gh3gsdWE="></script>
+
+    
+
+</body>
+</html>

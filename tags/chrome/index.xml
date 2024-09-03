@@ -1,40 +1,56 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>chrome on zhili</title>
-    <link>https://sy123.netlify.app/tags/chrome/</link>
-    <description>Recent content in chrome on zhili</description>
+    <title>Chrome on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/chrome/</link>
+    <description>Recent content in Chrome on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Sun, 09 Oct 2022 20:21:45 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Mon, 29 Jul 2024 13:35:51 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>chrome 全局代理</title>
+      <link>https://gmyxw.github.io/posts/1722231351/</link>
+      <pubDate>Mon, 29 Jul 2024 13:35:51 +0800</pubDate>
+      
+      <guid>https://gmyxw.github.io/posts/1722231351/</guid>
+      
+      <description>用了这么多年SwitchyOmega才发现这玩意是多余的，有了clash后除了调试切代理方便真没啥用，旧时代的残党该死死了🤔 Copy &amp;#34;C:\Program Files\Google\Chrome\Application\chrome.exe&amp;#34; --proxy-server=&amp;#34;socks://127.0.0.1:1080&amp;#34; Copy google-chrome-stable --proxy-server=&amp;#34;socks://127.0.0.1:1080&amp;#34;</description>
+      
+    </item>
+    
     <item>
       <title>Chrome内置翻译被抢</title>
-      <link>https://sy123.netlify.app/chrome-translate/</link>
+      <link>https://gmyxw.github.io/posts/chrome-translate/</link>
       <pubDate>Sun, 09 Oct 2022 20:21:45 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/chrome-translate/</guid>
-      <description>linux下的chrome内置翻译也只能用系统代理，linux还是比windows好解决，不过我懒得折腾还是直接改hosts好了
-1 2 3 su echo 180.163.151.34 translate.googleapis.com &amp;gt;&amp;gt; /etc/hosts systemctl restart systemd-networkd </description>
+      <guid>https://gmyxw.github.io/posts/chrome-translate/</guid>
+      
+      <description>linux下的chrome内置翻译也只能用系统代理，linux还是比windows好解决，不过我懒得折腾还是直接改hosts好了 su echo 180.163.151.34 translate.googleapis.com &amp;gt;&amp;gt; /etc/hosts</description>
+      
     </item>
     
     <item>
       <title>Google Chrome 离线安装包的官方下载</title>
-      <link>https://sy123.netlify.app/google-chrome-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD/</link>
+      <link>https://gmyxw.github.io/posts/20200313-chrome-standalone/</link>
       <pubDate>Fri, 13 Mar 2020 02:46:41 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/google-chrome-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E5%8C%85%E7%9A%84%E5%AE%98%E6%96%B9%E4%B8%8B%E8%BD%BD/</guid>
-      <description>在chrome首页的链接https://www.google.com/chrome后加上?system=true&amp;amp;standalone=1，一般默认下载稳定版，如果需要指定下载的版本就再加上&amp;amp;extra=[版本名称]（版本有stablechannel、betachannel、devchannel、canarychannel）。修改完链接后回车，就能下载离线包了。</description>
+      <guid>https://gmyxw.github.io/posts/20200313-chrome-standalone/</guid>
+      
+      <description>在chrome首页的链接https://www.google.com/chrome后加上?system=true&amp;amp;standalon</description>
+      
     </item>
     
     <item>
       <title>Browser plugins</title>
-      <link>https://sy123.netlify.app/browser-plugins/</link>
+      <link>https://gmyxw.github.io/posts/20200304-browser-plugins/</link>
       <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/browser-plugins/</guid>
+      <guid>https://gmyxw.github.io/posts/20200304-browser-plugins/</guid>
+      
       <description>Installation The package you will need to install depends on the browser you use.
 The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package. </description>
+      
     </item>
     
   </channel>

@@ -1,195 +1,132 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>windows on zhili</title>
-    <link>https://sy123.netlify.app/tags/windows/</link>
-    <description>Recent content in windows on zhili</description>
+    <title>Windows on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/windows/</link>
+    <description>Recent content in Windows on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Fri, 13 Oct 2023 00:23:48 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Fri, 13 Oct 2023 00:23:48 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows update KB2919355 fails to install - Error code 800F0922</title>
-      <link>https://sy123.netlify.app/kb2919355/</link>
+      <link>https://gmyxw.github.io/posts/kb2919355/</link>
       <pubDate>Fri, 13 Oct 2023 00:23:48 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/kb2919355/</guid>
-      <description>原因：我的系统是Windows Server 2012 R2 Standard首先我是想要安装SVN客户端，然后系统让我安装Windows Server 2012 R2 安装补丁KB2999226
-思路：经过网上查找资料安装补丁KB2999226之前需要安装KB2919355，安装KB2919355之前必须安装补丁KB2919442，一层一层的，当然过程显然没那么顺利，记录下安装过程
-下载补丁KB2919442；KB2919355；KB2999226 请百度查找相关文件上自行下载补丁，这里也有链接：
-https://support.microsoft.com/en-us/help/2919442/march-2014-servicing-stack-update-for-windows-8-1-and-windows-server-2
-https://support.microsoft.com/en-us/help/2919355/windows-rt-8-1-windows-8-1-windows-server-2012-r2-update-april-2014
-https://support.microsoft.com/en-us/help/2999226/update-for-universal-c-runtime-in-windows
-KB2919442 此更新不适用于你的计算机
-我记得当年刷surface贴吧就看过有老哥说过这个补丁只能第一个安装，很多更新都不能卸载，无奈只能回到初始快照，然后就顺利装上了
-KB2919355 Installation Failure: Windows failed to install the following update with error 0x80070070: Update for Windows (KB2919355).
-看了下C盘空间还有6G，看下日志也是disk full之类的报错，我之前就帮同事处理过这类问题，很明显就是系统还原的问题，服务器完全用不到关掉就好，但是关闭系统还原后就引出本文的主题，真正的难题
-We couldn’t update system reserved partition, error code 0x800f0922.
-参考了这个链接后我发现这个是老疑难杂症了，众说纷纭说啥的都有，不过根据各种线索再结合我自己的情况基本可以确定是分区问题，如果是正常安装的系统无论是uefi还是legacy应该都是能正常更新，不过开csm的就很不正常了，这也是为什么当年很多人都出问题，我不想折腾切换成legacy模式来更新就完事了
-不用uefi固件就好，xml文件也一样
-1 $ qemu-system-x86_64 -cdrom ubuntu-21.04-desktop-amd64.iso # -bios /usr/share/ovmf/OVMF.fd 果然改成legacy模式就能正常更新了，真是一波三折，最后顺利安装KB2999226，安装圆满成功了，我的SVN客户端也安装完成。
-后记 为了防止麻烦我觉得还是得集成这两个更新一劳永逸，直接把打好补丁的系统做成镜像
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 # 准备工作 # 首先，您需要确保系统中已经安装了 genisoimage 工具，如果没有，请使用以下命令安装： sudo apt-get install genisoimage # 创建目录 # 在根目录下创建一个空目录（例如 myiso）用于存放 ISO 镜像文件： sudo mkdir /myiso # 复制系统文件 # 将当前系统的所有文件复制到 myiso 目录下： sudo cp -r / /myiso # 这个命令会将整个文件系统复制到 myiso 目录下。 # 创建 ISO 镜像文件 # 现在，可以使用以下命令创建 ISO 镜像文件： sudo genisoimage -o /myiso.</description>
+      <guid>https://gmyxw.github.io/posts/kb2919355/</guid>
+      
+      <description>原因：我的系统是Windows Server 2012 R2 Standard首先我是想要安装SVN客户端，然后系统让我安装Windows Server 2012 R2 安装补丁KB29992</description>
+      
     </item>
     
     <item>
       <title>解决Windows与Ubuntu双系统时间同步问题</title>
-      <link>https://sy123.netlify.app/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</link>
+      <link>https://gmyxw.github.io/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</link>
       <pubDate>Tue, 12 May 2020 14:31:58 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/%E8%A7%A3%E5%86%B3windows%E4%B8%8Eubuntu%E5%8F%8C%E7%B3%BB%E7%BB%9F%E6%97%B6%E9%97%B4%E5%90%8C%E6%AD%A5%E9%97%AE%E9%A2%98/</guid>
-      <description>UTC in Windows To dual boot with Windows it is recommended to configure Windows to use UTC, rather than Linux to use localtime. (Windows by default uses localtime [1].)
-It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry:
-1 HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal You can do this from an Administrator Command Prompt running:</description>
+      <guid>https://gmyxw.github.io/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</guid>
+      
+      <description>UTC in Windows To dual boot with Windows it is recommended to configure Windows to use UTC, rather than Linux to use localtime. (Windows by default uses localtime [1].) It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal You can do this from an Administrator Command Prompt</description>
+      
     </item>
     
     <item>
       <title>7z command</title>
-      <link>https://sy123.netlify.app/tip/7z-command/</link>
+      <link>https://gmyxw.github.io/tips/20200507-7z-command/</link>
       <pubDate>Thu, 07 May 2020 15:02:57 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/tip/7z-command/</guid>
-      <description>exclude file Specifies which filenames or wildcarded names must be excluded from the operation.
-Multiple exclude switches are supported.
-Syntax
-1 2 3 4 -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt; &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard} See -i (Include) switch description for information about option parameters.
-Examples
-1 7z a -tzip archive.zip *.txt -x!temp.* adds to the archive.zip all *.txt files, except temp.* files.
-1 7z a archive.7z Folder1\ -xr!*.png adds to the archive.</description>
+      <guid>https://gmyxw.github.io/tips/20200507-7z-command/</guid>
+      
+      <description>exclude file Specifies which filenames or wildcarded names must be excluded from the operation. Multiple exclude switches are supported. Syntax -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt; &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard} See -i (Include) switch description for information about option parameters. Examples 7z a -tzip archive.zip *.txt -x!temp.* adds to the archive.zip all *.txt files, except temp.* files. 7z a archive.7z Folder1\ -xr!*.png adds to the archive.7z all files from</description>
+      
     </item>
     
     <item>
       <title>安装Win10提示我们无法创建新的分区，也找不到现在的分区</title>
-      <link>https://sy123.netlify.app/%E5%AE%89%E8%A3%85win10%E6%8F%90%E7%A4%BA%E6%88%91%E4%BB%AC%E6%97%A0%E6%B3%95%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E5%88%86%E5%8C%BA%E4%B9%9F%E6%89%BE%E4%B8%8D%E5%88%B0%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%88%86%E5%8C%BA/</link>
+      <link>https://gmyxw.github.io/posts/20200505-we-were-unable-to-create-a-new-partition-now-can-not-find-the-partition/</link>
       <pubDate>Tue, 05 May 2020 12:14:03 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/%E5%AE%89%E8%A3%85win10%E6%8F%90%E7%A4%BA%E6%88%91%E4%BB%AC%E6%97%A0%E6%B3%95%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E5%88%86%E5%8C%BA%E4%B9%9F%E6%89%BE%E4%B8%8D%E5%88%B0%E7%8E%B0%E5%9C%A8%E7%9A%84%E5%88%86%E5%8C%BA/</guid>
-      <description>前言 系统搬来linux有两年了，今天突然发现还是需要win10用ida的，虚拟机很不方便
-虚拟机解决方法 google一下在知乎想起原因:
-原因似乎在于windows会执着地把系统分区（大概类似于/boot）放到磁盘0（类似于/dev/sda？）上面。而这个时候磁盘0是U盘……于是傻X了……windows就是傻X解决方法，拔U盘/硬盘，从而使想装系统的盘成为磁盘0……或者直接把想装系统的盘做成安装盘，这样它也是磁盘0了&amp;gt;_&amp;laquo;https://link.zhihu.com/?target=http%3A//jingyan.baidu.com/article/2c8c281df6f2d60009252a7c.html&amp;gt;
-作者：杨微粒 链接：https://www.zhihu.com/question/21117479/answer/86745809 来源：知乎 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-所以解决方案就是我们来帮助系统找到它需要安装的分区，我的虚拟机之前忘记干啥也是双系统出这问题，附加win10磁盘就完事
-硬解决 将多余的硬盘拆下来，只留安装的硬盘，（这里不区分机械和固态），就是只留一个硬盘安装系统即可！
-（动手能力弱的朋友请看下面！）
-软解决 在linux下直接复制安装镜像里的 boot sources bootmgr bootmgr.efi
-uefi还需要复制 EFI 文件夹到efi文件夹到efi分区，
-重启安装即可
-安装过程提示help setup cannot continue due to a corrupted 1 2 3 4 5 6 7 8 # 直接擦写一下这块硬盘 dd if=/dev/zero of=/dev/vdb # fdisk 重新分区 fdisk /dev/vdb # 格式化 mkfs.ntfs /dev/vdb1 </description>
+      <guid>https://gmyxw.github.io/posts/20200505-we-were-unable-to-create-a-new-partition-now-can-not-find-the-partition/</guid>
+      
+      <description>前言 系统搬来linux有两年了，今天突然发现还是需要win10用ida的，虚拟机很不方便 虚拟机解决方法 google一下在知乎想起原因: 原因似</description>
+      
     </item>
     
     <item>
       <title>win10输入法不显示候选词解决方法</title>
-      <link>https://sy123.netlify.app/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link>
+      <link>https://gmyxw.github.io/posts/20200205-win10-input-method-display-candidate-words/</link>
       <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/win10%E8%BE%93%E5%85%A5%E6%B3%95%E4%B8%8D%E6%98%BE%E7%A4%BA%E5%80%99%E9%80%89%E8%AF%8D%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid>
-      <description>
-精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法 </description>
+      <guid>https://gmyxw.github.io/posts/20200205-win10-input-method-display-candidate-words/</guid>
+      
+      <description>精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法</description>
+      
     </item>
     
     <item>
       <title>Sysprep命令详解</title>
-      <link>https://sy123.netlify.app/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</link>
+      <link>https://gmyxw.github.io/posts/20200120-sysprep/</link>
       <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/sysprep%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/</guid>
-      <description>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删除唯一性信息，这使得你可以在不同的计算机上重复使用映像。下次启动 Windows 映像时，将运行 specialize 配置阶段。
-Sysprep 命令行选项 下列命令行选项可用于 Sysprep：
-1 2 3 4 5 6 7 8 9 10 11 Sysprep.exe [/oobe | /audit] [/generalize] [/mode:vm] [/reboot | /shutdown | /quit] [/quiet] [/unattend:&amp;lt;answerfile&amp;gt;] 下表列出了 Sysprep 命令行选项：
-选项 描述 /audit 重新启动计算机进入审核模式。审核模式使你可以将其他驱动程序或应用程序添加到 Windows。你还可以在将 Windows 安装发送给最终用户前对其进行测试。例如： Sysprep /audit 如果指定了应答文件，则 Windows 安装程序的审核模式将运行 auditSystem 和 auditUser 配置阶段。 /generalize 准备要作为映像的 Windows 安装。Sysprep 工具会从 Windows 安装中删除所有唯一的系统信息。Sysprep 将重置安全 ID (SID)，清除所有系统还原点，并删除事件日志。例如： Sysprep /generalize /shutdown 下次计算机启动时，将运行 specialize 配置阶段。该配置阶段将创建一个新安全 ID (SID)。 /oobe 重新启动计算机进入 OOBE 模式。例如： Sysprep /generalize /shutdown /oobe OOBE 允许最终用户自定义其 Windows 操作系统、创建用户帐户、命名计算机和执行其他任务。Sysprep 在 OOBE 启动前，将处理应答文件中 oobeSystem 配置阶段的所有设置。 /mode:vm Windows(R) 8 的新增内容。一般化虚拟硬盘 (VHD)，这样可以将其部署为相同虚拟机 (VM) 或虚拟机监控程序上的 VHD。VM 重新启动后，该 VM 可以引导到 OOBE。例如： Sysprep /generalize /oobe /mode:vm 仅有的适用于 VM 模式的额外交换机为“/reboot”、“/shutdown”和“/quit”。必须使用相同的硬件配置文件在虚拟机或虚拟机监控程序上部署 VHD。例如，如果你已在 Microsoft Hyper-V 中创建 VHD，仅可以使用匹配的硬件配置文件将 VHD 部署到 Microsoft Hyper-V VM。使用不同的硬件配置文件将 VHD 部署到不同的 VM 可能会导致意外的问题。 /reboot 重新启动计算机。可以使用该选项审核计算机并确保首次运行体验正确工作。 /shutdown 在 sysprep 命令完成运行后关闭计算机。 /quiet 运行 Sysprep 工具而不显示屏幕确认消息。如果自动运行 Sysprep 工具，则可以使用该选项。 /quit Sysprep 运行指定命令后，无需重新启动或关闭计算机即可关闭 Sysprep 工具。 /unattend: 在无人参与的安装过程中，将应答文件中的设置应用到 Windows，其中 指定要使用的应答文件的路径和文件名。例如：Sysprep /audit /reboot /unattend:F:\Unattend.</description>
+      <guid>https://gmyxw.github.io/posts/20200120-sysprep/</guid>
+      
+      <description>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删</description>
+      
     </item>
     
     <item>
       <title>cmd命令行修改windows虚拟内存pagefile.sys</title>
-      <link>https://sy123.netlify.app/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</link>
+      <link>https://gmyxw.github.io/posts/20200120-pagefile/</link>
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/cmd%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BF%AE%E6%94%B9windows%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98pagefile.sys/</guid>
-      <description> 1 2 3 4 5 6 7 8 9 10 11 12 # 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t 0 </description>
+      <guid>https://gmyxw.github.io/posts/20200120-pagefile/</guid>
+      
+      <description># 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t</description>
+      
     </item>
     
     <item>
       <title>ArchLinux配置Samba服务与Windows共享文件</title>
-      <link>https://sy123.netlify.app/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
+      <link>https://gmyxw.github.io/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/</link>
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
-      <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。
-Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
-下面记录一下ArchLinux中配置Samba的过程，留作备份。
-首先，是安装Samba，ArchLinux可以直接从源中获取并安装Samba：
-1 pacman -S samba 等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：
-在/etc/samba目录中，直接建立一个空的smb.conf，然后将如下内容粘贴过去：
-1 2 3 4 5 6 7 8 9 10 11 [global] workgroup = WORKGROUP security = user [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644 这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
-workgroup，这个顾名思义，计算机的工作组名称，比如我是和我的Win7来共享文件，最好把工作组和我的Win7设成通一个工作组，这样方便Win7通过网络发现来找到我的下载机。这里，我的win7工作组名字，就叫做：WORKGROUP了
-security，这是指共享目录的安全认证形式，security的值，有两种可以设置：
-第一种，是设成上面例子中的user，意思是在访问共享目录的时候，需要通过用户名和密码的方式来认证，可以给共享目录提供一定的安全性保护。
-第二种，是设成share，这样的话，网络中的任何人都可以通过共享目录的方式来访问你共享的内容了。
-在这里，我选择了用户名与密码认证的方式，所以设成了user
-下面的Movies节点，可以有多个(如果你想设置多个共享目录的话)
-[Movies] 这里设置的名字，就是能够在Windows中看到的名字，可以随意更改
-下面的path，就是你想共享的Linux目录了，我设成了我的Transmission的下载目录。
-后面的valid users，是一个用户帐号，也即通过用户名和密码来访问共享目录的那个帐号，如果你把security设成share，这一项可以去掉。
-下面是一些权限的设置，以及是否允许访问者有写入共享目录的权限，各个参数可以查看Samba文档，就不一一介绍了。
-最后，说一下security设成user后，帐号的设置问题。
-首先，你可以添加一个新的Linux帐号，专门用来访问共享目录用。比如，我就添加了一个帐号，叫做Samba
-然后就是给帐号设置访问共享目录的密码，这里需要注意，密码不是通过Linux命令passwd来设置的。这里的密码，是指Samba的密码，而不是Linux密码。
-所以，得用命令 pdbedit -a -u (username)来修改Samba密码。</description>
+      <guid>https://gmyxw.github.io/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/</guid>
+      
+      <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，</description>
+      
     </item>
     
     <item>
       <title>批处理关闭或开启NETBIOS</title>
-      <link>https://sy123.netlify.app/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</link>
+      <link>https://gmyxw.github.io/posts/20200117-netbios/</link>
       <pubDate>Fri, 17 Jan 2020 19:23:06 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/%E6%89%B9%E5%A4%84%E7%90%86%E5%85%B3%E9%97%AD%E6%88%96%E5%BC%80%E5%90%AFnetbios/</guid>
-      <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。
-以下为批处理自动关闭netbios脚本:
-1 2 3 4 5 6 7 8 9 10 11 12 @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do ( wmic nicconfig where index=&amp;#39;%%a&amp;#39; call settcpipnetbios 2 ) cd /d %~dp0 if exist one_time.cmd ( del /f /q %0 exit ) rename %0 one_time.cmd exit 功能: 一键关闭netbios，执行完第二次后自己删除自己。
-适用性:， 在win7及win2008测试通过，其它系统没测。
-说明: 用法：复制上述脚本随便起个名，扩展名改为bat或者cmd。最好把文件放到开机启动目录，开机就运行。windows下自启动目录如下： C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup
-如何开启NETBIOS? 把上述代码第四行最后数字改为1即为开启，改为0即为默认设置，为2时代表关闭（上述代码已默认设为关闭NETBIOS)。
-为何要第二次才删除？ 如果是新装或者复制了系统，第一次开机是检测并安装网卡设备。如果未安装完网卡就运行完脚本，那脚本就发挥不了作用。
-运行流程： 在运行第一次的时候会自动把本脚本重命名为one_time.cmd 在第二次运行脚本监测到有one_time.cmd文件后会自我删除。 本脚本用for循环20次，每个网卡都尝试关闭NETBIOS,（一般系统有十多个网卡序号）如果不够（不放心）就就把第三行代码由数字20改为30或更多。如果想要查看自己的网卡序号可以在CMD里输入以下命令：wmic nicconfig Get Caption,index
-参考文档:批处理如何恢复Netbios</description>
+      <guid>https://gmyxw.github.io/posts/20200117-netbios/</guid>
+      
+      <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。 以下为批处理自动关闭netbios脚本: @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do</description>
+      
     </item>
     
     <item>
       <title>玩转WSL-用Samba服务替代Win10原生的文件共享</title>
-      <link>https://sy123.netlify.app/%E7%8E%A9%E8%BD%ACwsl-%E7%94%A8samba%E6%9C%8D%E5%8A%A1%E6%9B%BF%E4%BB%A3win10%E5%8E%9F%E7%94%9F%E7%9A%84%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/</link>
+      <link>https://gmyxw.github.io/posts/20200117-wsl-samba/</link>
       <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/%E7%8E%A9%E8%BD%ACwsl-%E7%94%A8samba%E6%9C%8D%E5%8A%A1%E6%9B%BF%E4%BB%A3win10%E5%8E%9F%E7%94%9F%E7%9A%84%E6%96%87%E4%BB%B6%E5%85%B1%E4%BA%AB/</guid>
-      <description>习惯了Linux系统的人们，肯定觉得Samba服务更加灵活和方便，那如何在Windows系统上搭建高效的Samba服务呢？本文介绍了通过WSL在Win10系统上，搭建Samba文件共享服务。
-背景是家里只有一个台式机，一方面家里人偶尔使用，另一方面，它是家里的数据中心，挂载了多块硬盘。所以系统用的是Windows10，但是为了方便灵活得进行文件共享，一直考虑搭建Samba服务。达到此目的的方案有多种，可以考虑用虚拟机，例如：VMWare、VirtualBox、Hyper-V，也可以考虑使用CygWin，因为Windows10提供了WSL，所以本文介绍了另一种方式，也是运行效率比较高的一种方式，使用WSL搭建Samba服务。
-背景知识 Windows文件共享服务 使用网络对外提供文件访问服务，现在广泛用于局域网内部文件的共享，例如：小米盒子、手机、PC机、包括Mac，通过139或445端口。
-139 - 早期Windows的SMB运行于NBT（NetBIOS over TCP/IP）上，使用139端口 445 - Windows2000及以上版本，SMB可以直接运行与TCP/IP上，使用445端口，效率更高 对不同版本的Windows做了抓包测试，发现WinXP只访问139端口，Win7同时访问139与445端口，Win10只访问445端口，测试结果如下：
-Windows10 win10-err
-win10-pkg
-Windows7 win7-err
-win7-pkg
-WindowsXP winxp-err
-winxp-pkg
-WSL（Windows Subsystem for Linux） 是在Windows10系统上，对Windows内核进行了封装，使其可以直接支持ELF格式的Linux可执行程序，感觉有点像GNU/Windows。 现在基于WSL，已经有了多个Linux发行版，包括Ubuntu、Debian、Suse、Kali等，能够非常方便得在Windows里面运行Linux发行版，学习和使用各种Linux工具，同时也能够将Linux里面各种服务无缝集成到Windows环境中，例如：Samba服务、SSH服务等
-Samba服务 为了实现UNIX、Linux等非Windows能够访问Windows的文件共享资源，之前有个大牛将SMB（Server Message Block）协议进行了逆向分析，然后根据逆向分析的协议开发了一套开源软件Samba，可以让UNIX、Linux、Mac等系统能够与Windows之间进行文件共享。目前最新的Samba甚至可以提供AD、DC等服务。
-总体方案 根据以上背景知识，在Windows10上通过WSL搭建Samba服务的方案如下：
-释放Windows占用的139，445端口 安装WSL和Ubuntu发行版 安装Samba服务，并且配置 更改防火墙配置 最后测试 实施步骤 释放Windows占用的139，445端口 释放139端口 安装完毕的Windows10系统，默认情况下会监听139与445端口，通过netstat -a|findstr LISTENING可以查看： cmd001 禁用NetBIOS over TCP/IP，通过如下操作禁用，在“更改适配器设置”界面，双击对应网卡，打开“以太网状态”界面： netbios001 点击“属性”打开“以太网属性”界面： netbios002 选中“TCP/IPv4”项目，点击“属性”，打开“TCP/IPv4属性”界面： netbios003 点击“高级”并选中“WINS”页签，勾选“禁用TCP/IP上的NetBIOS”： 点击“确定”以后生效，如果有多块网卡，每块网卡都要按照如上步骤操作，操作完毕以后，还是通过netstat命令进行查看，发现139端口已经不再监听。 netbios005 释放445端口 通过“WIN+R”打开运行窗口，输入：services.msc，打开服务管理界面： services001 找到Computer Browser服务，双击该服务打开属性界面，将“启动类型”修改为禁用，并且直接点击“停止”： services002 找到Server服务： services003 双击Server服务，打开属性界面，将“启动类型”修改为禁用，并且直接点击“停止”： services004 设置完毕以后重启系统。 重启完毕以后，再通过netstat -a|findstr LISTENING命令检查端口使用情况，发现445端口已经释放成功。 cmd002 安装WSL和Ubuntu发行版 在“程序和功能”管理界面，点击“启用或关闭Windows功能”，在“Windows功能”列表中，勾选“适用于Linux的Windows子系统”（注意：不同的Windows版本可能名字有所差别，我试验的是17134.</description>
+      <guid>https://gmyxw.github.io/posts/20200117-wsl-samba/</guid>
+      
+      <description>习惯了Linux系统的人们，肯定觉得Samba服务更加灵活和方便，那如何在Windows系统上搭建高效的Samba服务呢？本文介绍了通过WS</description>
+      
     </item>
     
     <item>
       <title>Windows 下使用 Diskpart 命令分区</title>
-      <link>https://sy123.netlify.app/windows-%E4%B8%8B%E4%BD%BF%E7%94%A8-diskpart-%E5%91%BD%E4%BB%A4%E5%88%86%E5%8C%BA/</link>
+      <link>https://gmyxw.github.io/posts/20200116-using-diskpart-to-create/</link>
       <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/windows-%E4%B8%8B%E4%BD%BF%E7%94%A8-diskpart-%E5%91%BD%E4%BB%A4%E5%88%86%E5%8C%BA/</guid>
-      <description>Diskpart 命令简介 Diskpart 命令是 Windows 环境下的一个命令，利用 Diskpart 可实现对硬盘的分区管理，包括创建分区、删除分区、合并（扩展）分区，设置分区后即刻生效，免去了重启电脑的操作。
-正常运行该命令时需要系统服务的支持，所以在纯 DOS、XP 内核的 WinPE 环境下都是不能运行的，但是在 Win7 的预安装环境下却是可以的。利用 Diskpart 命令来分区，既不用借助第三方工具，也不会产生 100MB 的“系统保留”分区，其次分区操作直接设置即刻生效，不用重新启动计算机。
-利用 Diskpart 命令分区 当安装程序运行到创建磁盘分区界面时按下 Shift+F10 启动命令窗口。
-键入 Diskpart 进入 Diskpart 的命令环境，其提示符为 DISKPART&amp;gt;。
-在此提示下键入相应命令就可以进行分区操作，具体用到的命令有：
-1 2 3 4 5 6 Clean List Select Create Format Exit 这些命令的使用方法可以在 Diskpart 命令提示符下键入 Help 或者通过网络查询，如果不清楚可以查看。
-使用 List Disk 命令显示的目标磁盘若为 1 号，则建立分区的步骤如下：以下是命令顺序及操作解释：
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 List Disk：显示本机的所有磁盘，以便正确操作目标磁盘 Select Disk 1：选择 0 号磁盘 Clean ：清除 0 号磁盘上的所有分区 Create Partition Primary Size=512000 ：创建主分区，容量为：512000MB Active：激活主分区 Format Quick：快速格式化当前分区 Create Partition Extended：创建扩展分区 Create Partition Logical Size=512000：创建逻辑分区一，容量为：512000MB Format Quick：快速格式化当前分区 Create Partition Logical Size=512000：创建逻辑分区二，容量为：512000MB Format Quick ：快速格式化当前分区 Create Partition Logical ：创建逻辑分区三，大小为剩余的容量 Format Quick ：快速格式化当前分区 Exit ：退出Diskpart命令环境 Exit ：退出命令窗口 这里要注意的是 Diskpart 分区时，一定要选对目标磁盘，当前被选中的磁盘 / 分区前面会有 * 号标志，可以用 List Disk / Partition 来进行查看。</description>
+      <guid>https://gmyxw.github.io/posts/20200116-using-diskpart-to-create/</guid>
+      
+      <description>Diskpart 命令简介 Diskpart 命令是 Windows 环境下的一个命令，利用 Diskpart 可实现对硬盘的分区管理，包括创建分区、删除分区、合并（扩展）分区，设置分区后即刻生效，免去了重启</description>
+      
     </item>
     
   </channel>

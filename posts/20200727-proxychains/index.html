@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Proxychains - GM游戏网</title>
+<meta property="og:title" content="Proxychains - GM游戏网" />
+<meta name="twitter:title" content="Proxychains - GM游戏网" />
+<meta itemprop="name" content="Proxychains - GM游戏网" />
+<meta name="application-name" content="Proxychains - GM游戏网" />
+<meta property="og:site_name" content="GM游戏网" />
+<meta name="keywords" content="" />
+
+
+<meta name="description" content="做为Bioconductor包作者，而git push传代码到Bioconductor上是被封的。这很是恼火，随着10月份将迎来新一版本的Bi">
+<meta itemprop="description" content="做为Bioconductor包作者，而git push传代码到Bioconductor上是被封的。这很是恼火，随着10月份将迎来新一版本的Bi" />
+<meta property="og:description" content="做为Bioconductor包作者，而git push传代码到Bioconductor上是被封的。这很是恼火，随着10月份将迎来新一版本的Bi" />
+<meta name="twitter:description" content="做为Bioconductor包作者，而git push传代码到Bioconductor上是被封的。这很是恼火，随着10月份将迎来新一版本的Bi" />
+
+<meta name="author" content="gmyxw" />
+
+<meta name="referrer" content="always">
+<meta property="og:locale" content="zh-CN" />
+<meta name="language" content="zh-CN" />
+
+
+<meta property="og:url" content="https://gmyxw.github.io/posts/20200727-proxychains/">
+  <meta property="og:site_name" content="GM游戏网">
+  <meta property="og:title" content="Proxychains">
+  <meta property="og:description" content="做为Bioconductor包作者，而git push传代码到Bioconductor上是被封的。这很是恼火，随着10月份将迎来新一版本的Bi">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-07-27T09:52:47+08:00">
+    <meta property="article:modified_time" content="2020-07-27T09:52:47+08:00">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Proxychains">
+  <meta name="twitter:description" content="做为Bioconductor包作者，而git push传代码到Bioconductor上是被封的。这很是恼火，随着10月份将迎来新一版本的Bi">
+
+
+
+  <meta itemprop="name" content="Proxychains">
+  <meta itemprop="description" content="做为Bioconductor包作者，而git push传代码到Bioconductor上是被封的。这很是恼火，随着10月份将迎来新一版本的Bi">
+  <meta itemprop="datePublished" content="2020-07-27T09:52:47+08:00">
+  <meta itemprop="dateModified" content="2020-07-27T09:52:47+08:00">
+  <meta itemprop="wordCount" content="1069">
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2020-07-27T09:52:47&#43;0800 />
+    <meta property="article:published_time" content=2020-07-27T09:52:47&#43;0800 />
+    <meta property="og:url" content="https://gmyxw.github.io/posts/20200727-proxychains/" />
+
+    
+    <meta property="og:article:author" content="gmyxw" />
+    <meta property="article:author" content="gmyxw" />
+    <meta name="author" content="gmyxw" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Proxychains",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2020-07-27",
+        "description": "",
+        "wordCount":  1069 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2020-07-27",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "GM游戏网"
+        }
+    }
+    </script>
+
+
+
+    
+
+    
+
+    <link rel="canonical" href="https://gmyxw.github.io/posts/20200727-proxychains/">
+    <link href="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/css/style.min.420aeabb9726dc288e29445663aa98d0cf7ba0607556bf5b2c88ce38e5bf01a8.css" rel="stylesheet">
+    
+    
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://gmyxw.github.io/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+
+    
+
+    
+    
+  
+
+</head>
+<body data-theme="auto" class="notransition">
+
+<script src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/theme.min.40385e5b43397f4f7b187a8ef005de90f45408b7824f604ff29f318c5ede4c8f.js" integrity="sha256-QDheW0M5f097GHqO8AXekPRUCLeCT2BP8p8xjF7eTI8="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <div>
+            
+            
+            <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"></li><a href="https://gmyxw.github.io/">GM游戏网</a> ❯ </li>
+      
+      
+      
+      
+        <li class="breadcrumb-item"><a href="https://gmyxw.github.io/posts/">归档</a> /</li>
+      
+      
+      <li class="breadcrumb-item active" aria-current="page">Proxychains</li>
+    </ol>
+  </nav>
+  
+          </div>
+
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                
+                    
+                    
+                    <li>
+                        <a id="post" class="menu-link active" href="https://gmyxw.github.io/posts">
+                            归档
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="category" class="menu-link" href="https://gmyxw.github.io/categories">
+                            分类
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="tag" class="menu-link" href="https://gmyxw.github.io/tags">
+                            标签
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="about" class="menu-link" href="https://gmyxw.github.io/about">
+                            关于
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="search" class="menu-link" href="https://gmyxw.github.io/search">
+                            搜索
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="mode" class="menu-link" href="#">
+                            关灯
+                        </a>
+                    
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <aside class="l-sidebar mcol c3">
+    
+    
+    
+    
+<section class="sidebar">
+    <header>快捷链接</header>
+    <ul class="terms ads">
+      
+        <li>
+            <a href="https://emn178.github.io/online-tools/url_decode.html" title="常用编码转换工具" target="_blank">
+                
+                    常用编码转换工具
+                
+            </a>
+        </li>
+      
+        <li>
+            <a href="https://api.mumuglobal.com/api/ip" title="每日壁纸" target="_blank">
+                
+                <img src="https://bing.img.run/1920x1080.php" title="每日壁纸">
+                
+            </a>
+        </li>
+      
+    </ul>
+  </section>
+
+</aside>
+    <div class="mcol c6">
+        <main class="page-content" aria-label="Content">
+            <article>
+                <header class="header">
+                    <h1 class="header-title">Proxychains</h1>
+                    <div class="post-meta">
+                        
+                        
+                        <time datetime="2020-07-27T09:52:47&#43;08:00" itemprop="datePublished"> 🕓
+                            2020-07-27 09:52</time>
+                        
+                        
+                        
+                    </div>
+                </header>
+                
+                <div class="page-content">
+                    <p>做为Bioconductor包作者，而git push传代码到Bioconductor上是被封的。这很是恼火，随着10月份将迎来新一版本的Bioconductor发布，不能够push代码是多么惨的一件事。</p>
+<p>代理其实也挺恼火的，因为各种协议啊，你要各种设置啊，http/https/ssh/git都是各种配置，其实我只要有一个socks5的代理，然后你们所有需要走代理的程序都通过它就好了。</p>
+<p>谁特么有空天天在琢磨怎么配置各种不同协议的代理！只要我们想得到的，一般都有人做了。</p>
+<p>于是万能的github上找到了<strong>proxychains</strong>。</p>
+<div class="highlight-container">
+  
+  
+  <pre tabindex="0"><code class="language-git" data-lang="git">A hook preloader that allows to redirect TCP traffic of existing
+dynamically linked programs through one or more SOCKS or HTTP
+proxies</code></pre>
+</div>
+<p>它强制给定程序发起的TCP连接通过事先配置的代理。可以涵盖所有需要代理的情景。就以git为例，没有<strong>proxychains</strong>的话，就必须为每个协议（https, git, ssh）按照git文档的要求分别设置代理，过程复杂且不稳定。有了<strong>proxychains</strong>，这些完全可以不用管，当然应用场景不限于git，任何一个需要代理的命令行程序都是一样在运行的指令前面加<strong>proxychains</strong>完事。</p>
+<p>Arch安装很容易：</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>yay -S proxychains-ng</span></span></code></pre></div>
+</div>
+<p>安装之后，打开<code>/etc/proxychains.conf</code>，注释掉下面这行（disable远程DNS解析，有DNS污染风险）。</p>
+<p>proxy_dns
+最后添加如下行：</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>socks5 127.0.0.1 <span style="color:#a5d6ff">32997</span></span></span></code></pre></div>
+</div>
+<p>上面这个代理是我自己机器上跑了某著名软件，用于每日科学上网。</p>
+<p>我平时是同时push到Bioconductor和github上的，所以我不会跑完一个git push再跑一个，而是写在Makefile里，自动化这个过程，我只需要make push指令就OK。</p>
+<p>所以此处我用的指令是：</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>proxychains make push</span></span></code></pre></div>
+</div>
+<p>这样就加了代理。</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ proxychains make push
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">####</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">#### 实际的指令，有两条，分别push到两个服务器</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">####</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> config file found: /etc/proxychains.conf
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> preloading /usr/lib/libproxychains4.so
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span>git push upstream master;<span style="color:#79c0ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#79c0ff"></span>git push origin master
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">####</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">#### 第一条指令，push到Bioconductor</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">####</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> Strict chain  ...  127.0.0.1:32997  ...  34.192.48.227:22  ...  OK
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span>Enumerating objects: 56, <span style="color:#ff7b72">done</span>.
+</span></span><span style="display:flex;"><span>Counting objects: 100% <span style="color:#ff7b72;font-weight:bold">(</span>56/56<span style="color:#ff7b72;font-weight:bold">)</span>, <span style="color:#ff7b72">done</span>.
+</span></span><span style="display:flex;"><span>Delta compression using up to <span style="color:#a5d6ff">4</span> threads
+</span></span><span style="display:flex;"><span>Compressing objects: 100% <span style="color:#ff7b72;font-weight:bold">(</span>34/34<span style="color:#ff7b72;font-weight:bold">)</span>, <span style="color:#ff7b72">done</span>.
+</span></span><span style="display:flex;"><span>Writing objects: 100% <span style="color:#ff7b72;font-weight:bold">(</span>41/41<span style="color:#ff7b72;font-weight:bold">)</span>, 4.87 KiB | 4.87 MiB/s, <span style="color:#ff7b72">done</span>.
+</span></span><span style="display:flex;"><span>Total <span style="color:#a5d6ff">41</span> <span style="color:#ff7b72;font-weight:bold">(</span>delta 32<span style="color:#ff7b72;font-weight:bold">)</span>, reused <span style="color:#a5d6ff">11</span> <span style="color:#ff7b72;font-weight:bold">(</span>delta 7<span style="color:#ff7b72;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>To git.bioconductor.org:packages/ggtree.git
+</span></span><span style="display:flex;"><span>   c372741..e84c1f7  master -&gt; master
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">####</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">#### 第二条指令，push到github</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">####</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> Strict chain  ...  127.0.0.1:32997  ...  192.30.253.112:22  ...  OK
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">[</span>proxychains<span style="color:#ff7b72;font-weight:bold">]</span> DLL init: proxychains-ng 4.13
+</span></span><span style="display:flex;"><span>Enumerating objects: 11, <span style="color:#ff7b72">done</span>.
+</span></span><span style="display:flex;"><span>Counting objects: 100% <span style="color:#ff7b72;font-weight:bold">(</span>11/11<span style="color:#ff7b72;font-weight:bold">)</span>, <span style="color:#ff7b72">done</span>.
+</span></span><span style="display:flex;"><span>Delta compression using up to <span style="color:#a5d6ff">4</span> threads
+</span></span><span style="display:flex;"><span>Compressing objects: 100% <span style="color:#ff7b72;font-weight:bold">(</span>6/6<span style="color:#ff7b72;font-weight:bold">)</span>, <span style="color:#ff7b72">done</span>.
+</span></span><span style="display:flex;"><span>Writing objects: 100% <span style="color:#ff7b72;font-weight:bold">(</span>6/6<span style="color:#ff7b72;font-weight:bold">)</span>, <span style="color:#a5d6ff">843</span> bytes | 843.00 KiB/s, <span style="color:#ff7b72">done</span>.
+</span></span><span style="display:flex;"><span>Total <span style="color:#a5d6ff">6</span> <span style="color:#ff7b72;font-weight:bold">(</span>delta 5<span style="color:#ff7b72;font-weight:bold">)</span>, reused <span style="color:#a5d6ff">0</span> <span style="color:#ff7b72;font-weight:bold">(</span>delta 0<span style="color:#ff7b72;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>remote: Resolving deltas: 100% <span style="color:#ff7b72;font-weight:bold">(</span>5/5<span style="color:#ff7b72;font-weight:bold">)</span>, completed with <span style="color:#a5d6ff">5</span> local objects.
+</span></span><span style="display:flex;"><span>To github.com:GuangchuangYu/ggtree.git
+</span></span><span style="display:flex;"><span>   92847e8..e84c1f7  master -&gt; master</span></span></code></pre></div>
+</div>
+<p>整个世界清静了，没法push到Bioconductor困扰我多时。而且经过了这个事件，以后打命令，只要需要代理的，都可以直接加<strong>proxychains</strong>搞定了，没有各种配置的烦恼。</p>
+
+                </div>
+                
+            </article>
+        </main></div>
+    <aside class="l-sidebar mcol c3">
+    
+<section class="sidebar">
+  <header>相关内容</header>
+  
+  
+  
+  
+  
+  
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/1722768240/">深入理解DOMContentLoaded的触发时机</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722679457/">解决Noto字体数字和空格使用emoji符号数字</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722231351/">chrome 全局代理</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/mihomo/">Mihomo</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/kvmnonet/">libvirt升级后虚拟机没网络</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/kb2919351/">Incoming changes in JDK / JRE 21 packages may require manual intervention</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/kb2919355/">Windows update KB2919355 fails to install - Error code 800F0922</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/git-pory22/">无法使用 git clone/push，kex ssh 密钥错误</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/chrome-translate/">Chrome内置翻译被抢</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/polybar-awesome/">polybar不显示Awesome字体</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200622-usb-card-as-my-default-audio-device/">linux 使用usb声卡</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200805-linux-set-mouse-speed/">解决linux下鼠标移动速度太快的问题(libinput)</a></article>
+  
+</section>
+
+
+    
+<section class="sidebar">
+  <header>分类</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/categories/linux/">linux <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/file/">file <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/tool/">tool <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+    
+<section class="sidebar">
+  <header>标签</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/tags/linux/">linux <span class="count">(44)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/windows/">windows <span class="count">(11)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/js/">js <span class="count">(9)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/react/">react <span class="count">(6)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/android/">android <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/baidu/">baidu <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/chrome/">chrome <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/androidstudio/">androidstudio <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/archlinux/">archlinux <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/file/">file <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/java/">java <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/proxy/">proxy <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tool/">tool <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vim/">vim <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vscode/">vscode <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/git/">git <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/github/">github <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/kvm/">kvm <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/libvirt/">libvirt <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/shell/">shell <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tip/">tip <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/7z/">7z <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/antd/">antd <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/c/">c <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/cdn/">cdn <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/code/">code <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/css/">css <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/diskpart/">diskpart <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/dva/">dva <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/firefox/">firefox <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/flash/">flash <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/go/">go <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/golang/">golang <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/gpu/">gpu <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/html/">html <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/i3wm/">i3wm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/mihomo/">mihomo <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/netbios/">netbios <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/network/">network <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/npm/">npm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/openssl/">openssl <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pagefile/">pagefile <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pandavan/">pandavan <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/php/">php <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/powershell/">powershell <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/python/">python <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/regex/">regex <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/saga/">saga <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/samba/">samba <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/smaba/">smaba <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+</aside>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    
+    <small class="footer_copyright">
+        © 2024 gmyxw.
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+    </small><a href="#" id="totop">top</a></footer>
+
+
+
+
+
+
+    
+    <script aysnc src="https://cdn.staticfile.net/clipboard.js/2.0.11/clipboard.min.js"></script>
+    
+     
+  
+
+
+
+
+
+    
+    <script defer src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/main.min.2fab7d03474408371fe7ecce7dc22fba4986ab9061f4de72f40e6087782c7561.js" integrity="sha256-L6t9A0dECDcf5&#43;zOfcIvukmGq5Bh9N5y9A5gh3gsdWE="></script>
+
+    
+
+</body>
+</html>

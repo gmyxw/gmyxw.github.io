@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>android env - GM游戏网</title>
+<meta property="og:title" content="android env - GM游戏网" />
+<meta name="twitter:title" content="android env - GM游戏网" />
+<meta itemprop="name" content="android env - GM游戏网" />
+<meta name="application-name" content="android env - GM游戏网" />
+<meta property="og:site_name" content="GM游戏网" />
+<meta name="keywords" content="linux,android,file," />
+
+
+<meta name="description" content="android-env.sh
+#!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &amp;#34;${_android_arch}&amp;#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &amp;#34;${ANDROID_MINIMUM_PLATFORM}&amp;#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &amp;#34;${ANDROID_HOME}&amp;#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &amp;#34;${ANDROID_NDK_HOME}&amp;#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &amp;#34;${ANDROID_BUILD_TOOLS_REVISION}&amp;#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &amp;#34;${ANDROID_API_VERSION}&amp;#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &amp;#34;${ANDROID_NDK_PLATFORM}&amp;#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &amp;#34;$_android_arch&amp;#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang&#43;&#43; export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &amp;#39;Pkg.">
+<meta itemprop="description" content="android-env.sh
+#!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &amp;#34;${_android_arch}&amp;#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &amp;#34;${ANDROID_MINIMUM_PLATFORM}&amp;#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &amp;#34;${ANDROID_HOME}&amp;#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &amp;#34;${ANDROID_NDK_HOME}&amp;#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &amp;#34;${ANDROID_BUILD_TOOLS_REVISION}&amp;#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &amp;#34;${ANDROID_API_VERSION}&amp;#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &amp;#34;${ANDROID_NDK_PLATFORM}&amp;#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &amp;#34;$_android_arch&amp;#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang&#43;&#43; export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &amp;#39;Pkg." />
+<meta property="og:description" content="android-env.sh
+#!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &amp;#34;${_android_arch}&amp;#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &amp;#34;${ANDROID_MINIMUM_PLATFORM}&amp;#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &amp;#34;${ANDROID_HOME}&amp;#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &amp;#34;${ANDROID_NDK_HOME}&amp;#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &amp;#34;${ANDROID_BUILD_TOOLS_REVISION}&amp;#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &amp;#34;${ANDROID_API_VERSION}&amp;#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &amp;#34;${ANDROID_NDK_PLATFORM}&amp;#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &amp;#34;$_android_arch&amp;#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang&#43;&#43; export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &amp;#39;Pkg." />
+<meta name="twitter:description" content="android-env.sh
+#!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &amp;#34;${_android_arch}&amp;#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &amp;#34;${ANDROID_MINIMUM_PLATFORM}&amp;#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &amp;#34;${ANDROID_HOME}&amp;#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &amp;#34;${ANDROID_NDK_HOME}&amp;#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &amp;#34;${ANDROID_BUILD_TOOLS_REVISION}&amp;#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &amp;#34;${ANDROID_API_VERSION}&amp;#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &amp;#34;${ANDROID_NDK_PLATFORM}&amp;#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &amp;#34;$_android_arch&amp;#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang&#43;&#43; export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &amp;#39;Pkg." />
+
+<meta name="author" content="gmyxw" />
+
+<meta name="referrer" content="always">
+<meta property="og:locale" content="zh-CN" />
+<meta name="language" content="zh-CN" />
+
+
+<meta property="og:url" content="https://gmyxw.github.io/files/20200516-android-env/">
+  <meta property="og:site_name" content="GM游戏网">
+  <meta property="og:title" content="android env">
+  <meta property="og:description" content="android-env.sh
+#!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &#34;${_android_arch}&#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &#34;${ANDROID_MINIMUM_PLATFORM}&#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &#34;${ANDROID_HOME}&#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &#34;${ANDROID_NDK_HOME}&#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &#34;${ANDROID_BUILD_TOOLS_REVISION}&#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &#34;${ANDROID_API_VERSION}&#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &#34;${ANDROID_NDK_PLATFORM}&#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &#34;$_android_arch&#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang&#43;&#43; export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &#39;Pkg.">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="files">
+    <meta property="article:published_time" content="2020-05-16T19:27:02+08:00">
+    <meta property="article:modified_time" content="2020-05-16T19:27:02+08:00">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Android">
+    <meta property="article:tag" content="File">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="android env">
+  <meta name="twitter:description" content="android-env.sh
+#!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &#34;${_android_arch}&#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &#34;${ANDROID_MINIMUM_PLATFORM}&#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &#34;${ANDROID_HOME}&#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &#34;${ANDROID_NDK_HOME}&#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &#34;${ANDROID_BUILD_TOOLS_REVISION}&#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &#34;${ANDROID_API_VERSION}&#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &#34;${ANDROID_NDK_PLATFORM}&#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &#34;$_android_arch&#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang&#43;&#43; export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &#39;Pkg.">
+
+
+
+  <meta itemprop="name" content="android env">
+  <meta itemprop="description" content="android-env.sh
+#!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &#34;${_android_arch}&#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &#34;${ANDROID_MINIMUM_PLATFORM}&#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &#34;${ANDROID_HOME}&#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &#34;${ANDROID_NDK_HOME}&#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &#34;${ANDROID_BUILD_TOOLS_REVISION}&#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &#34;${ANDROID_API_VERSION}&#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &#34;${ANDROID_NDK_PLATFORM}&#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &#34;$_android_arch&#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang&#43;&#43; export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &#39;Pkg.">
+  <meta itemprop="datePublished" content="2020-05-16T19:27:02+08:00">
+  <meta itemprop="dateModified" content="2020-05-16T19:27:02+08:00">
+  <meta itemprop="wordCount" content="253">
+  <meta itemprop="keywords" content="Linux,Android,File">
+
+
+
+
+    
+
+    
+
+    <link rel="canonical" href="https://gmyxw.github.io/files/20200516-android-env/">
+    <link href="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/css/style.min.420aeabb9726dc288e29445663aa98d0cf7ba0607556bf5b2c88ce38e5bf01a8.css" rel="stylesheet">
+    
+    
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://gmyxw.github.io/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+
+    
+
+    
+    
+  
+
+</head>
+<body data-theme="auto" class="notransition">
+
+<script src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/theme.min.40385e5b43397f4f7b187a8ef005de90f45408b7824f604ff29f318c5ede4c8f.js" integrity="sha256-QDheW0M5f097GHqO8AXekPRUCLeCT2BP8p8xjF7eTI8="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <div>
+            
+            
+            <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"></li><a href="https://gmyxw.github.io/">GM游戏网</a> ❯ </li>
+      
+      
+      
+      
+        <li class="breadcrumb-item"><a href="https://gmyxw.github.io/files/">Files</a> /</li>
+      
+      
+      <li class="breadcrumb-item active" aria-current="page">android env</li>
+    </ol>
+  </nav>
+  
+          </div>
+
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                
+                    
+                    
+                    <li>
+                        <a id="post" class="menu-link" href="https://gmyxw.github.io/posts">
+                            归档
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="category" class="menu-link" href="https://gmyxw.github.io/categories">
+                            分类
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="tag" class="menu-link" href="https://gmyxw.github.io/tags">
+                            标签
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="about" class="menu-link" href="https://gmyxw.github.io/about">
+                            关于
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="search" class="menu-link" href="https://gmyxw.github.io/search">
+                            搜索
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="mode" class="menu-link" href="#">
+                            关灯
+                        </a>
+                    
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <aside class="l-sidebar mcol c3">
+    
+    
+    
+    
+<section class="sidebar">
+    <header>快捷链接</header>
+    <ul class="terms ads">
+      
+        <li>
+            <a href="https://emn178.github.io/online-tools/url_decode.html" title="常用编码转换工具" target="_blank">
+                
+                    常用编码转换工具
+                
+            </a>
+        </li>
+      
+        <li>
+            <a href="https://api.mumuglobal.com/api/ip" title="每日壁纸" target="_blank">
+                
+                <img src="https://bing.img.run/1920x1080.php" title="每日壁纸">
+                
+            </a>
+        </li>
+      
+    </ul>
+  </section>
+
+</aside>
+    <div class="mcol c6">
+        <main class="page-content" aria-label="Content">
+            <article>
+                <header class="header">
+                    <h1 class="header-title">android env</h1>
+                    <div class="post-meta">
+                        
+                        
+                        <time datetime="2020-05-16T19:27:02&#43;08:00" itemprop="datePublished"> 🕓
+                            2020-05-16 19:27</time>
+                        
+                        
+                        
+                            <p class="meta-tags">
+                                
+                                <a href="https://gmyxw.github.io/tags/linux/">#linux</a>
+                                
+                                <a href="https://gmyxw.github.io/tags/android/">#android</a>
+                                
+                                <a href="https://gmyxw.github.io/tags/file/">#file</a>
+                                
+                            </p>
+                        
+                    </div>
+                </header>
+                
+                <div class="page-content">
+                    <p><a href="/file/android-env.sh">android-env.sh</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#8b949e;font-weight:bold;font-style:italic">#!/bin/sh
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-weight:bold;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"># Useful link to keep track of latest API changes:</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"># https://developer.android.com/ndk/downloads/revision_history</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#79c0ff">_android_arch</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#79c0ff">$1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">if</span> <span style="color:#ff7b72;font-weight:bold">[</span> -z <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">_android_arch</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">]</span>; <span style="color:#ff7b72">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#79c0ff">_android_arch</span><span style="color:#ff7b72;font-weight:bold">=</span>armv7a-eabi
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"># Minimum Android platform based on:</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"># http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">if</span> <span style="color:#ff7b72;font-weight:bold">[</span> -z <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_MINIMUM_PLATFORM</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">]</span>; <span style="color:#ff7b72">then</span>
+</span></span><span style="display:flex;"><span>    export <span style="color:#79c0ff">ANDROID_MINIMUM_PLATFORM</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">24</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">if</span> <span style="color:#ff7b72;font-weight:bold">[</span> -z <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_HOME</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">]</span>; <span style="color:#ff7b72">then</span>
+</span></span><span style="display:flex;"><span>    export <span style="color:#79c0ff">ANDROID_HOME</span><span style="color:#ff7b72;font-weight:bold">=</span>/opt/android-sdk
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">if</span> <span style="color:#ff7b72;font-weight:bold">[</span> -z <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_NDK_HOME</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">]</span>; <span style="color:#ff7b72">then</span>
+</span></span><span style="display:flex;"><span>    export <span style="color:#79c0ff">ANDROID_NDK_HOME</span><span style="color:#ff7b72;font-weight:bold">=</span>/opt/android-ndk
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>get_last<span style="color:#ff7b72;font-weight:bold">()</span> <span style="color:#ff7b72;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    ls <span style="color:#79c0ff">$1</span> | sort -V | tail -n <span style="color:#a5d6ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">if</span> <span style="color:#ff7b72;font-weight:bold">[</span> -z <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_BUILD_TOOLS_REVISION</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">]</span>; <span style="color:#ff7b72">then</span>
+</span></span><span style="display:flex;"><span>    export <span style="color:#79c0ff">ANDROID_BUILD_TOOLS_REVISION</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#ff7b72">$(</span>get_last <span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_HOME</span><span style="color:#a5d6ff">}</span>/build-tools<span style="color:#ff7b72">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">if</span> <span style="color:#ff7b72;font-weight:bold">[</span> -z <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_API_VERSION</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">]</span>; <span style="color:#ff7b72">then</span>
+</span></span><span style="display:flex;"><span>    export <span style="color:#79c0ff">ANDROID_API_VERSION</span><span style="color:#ff7b72;font-weight:bold">=</span>android-<span style="color:#79c0ff">$ANDROID_MINIMUM_PLATFORM</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">if</span> <span style="color:#ff7b72;font-weight:bold">[</span> -z <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_NDK_PLATFORM</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">]</span>; <span style="color:#ff7b72">then</span>
+</span></span><span style="display:flex;"><span>    export <span style="color:#79c0ff">ANDROID_NDK_PLATFORM</span><span style="color:#ff7b72;font-weight:bold">=</span>android-<span style="color:#79c0ff">$ANDROID_MINIMUM_PLATFORM</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_SDK_PLATFORM</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_HOME</span><span style="color:#a5d6ff">}</span>/platforms/<span style="color:#79c0ff">$ANDROID_API_VERSION</span>
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_PLATFORM</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_NDK_HOME</span><span style="color:#a5d6ff">}</span>/platforms/<span style="color:#79c0ff">$ANDROID_NDK_PLATFORM</span>
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_TOOLCHAIN</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_NDK_HOME</span><span style="color:#a5d6ff">}</span>/toolchains/llvm/prebuilt/linux-x86_64
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_SYSROOT</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_TOOLCHAIN</span><span style="color:#a5d6ff">}</span>/sysroot
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_CROSS_PREFIX</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#79c0ff">$ANDROID_TOOLCHAIN</span>/bin
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_PKGCONFIG</span><span style="color:#ff7b72;font-weight:bold">=</span>android-<span style="color:#a5d6ff">${</span><span style="color:#79c0ff">_android_arch</span><span style="color:#a5d6ff">}</span>-pkg-config
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">case</span> <span style="color:#a5d6ff">&#34;</span><span style="color:#79c0ff">$_android_arch</span><span style="color:#a5d6ff">&#34;</span> in
+</span></span><span style="display:flex;"><span>    aarch64<span style="color:#ff7b72;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_TOOLS_COMPILER_PREFIX</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_CROSS_PREFIX</span><span style="color:#a5d6ff">}</span>/aarch64-linux-android<span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_MINIMUM_PLATFORM</span><span style="color:#a5d6ff">}</span>-
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_TOOLS_PREFIX</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_CROSS_PREFIX</span><span style="color:#a5d6ff">}</span>/aarch64-linux-android-
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_ABI</span><span style="color:#ff7b72;font-weight:bold">=</span>arm64-v8a
+</span></span><span style="display:flex;"><span>        ;;
+</span></span><span style="display:flex;"><span>    armv7a-eabi<span style="color:#ff7b72;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_TOOLS_COMPILER_PREFIX</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_CROSS_PREFIX</span><span style="color:#a5d6ff">}</span>/armv7a-linux-androideabi<span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_MINIMUM_PLATFORM</span><span style="color:#a5d6ff">}</span>-
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_TOOLS_PREFIX</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_CROSS_PREFIX</span><span style="color:#a5d6ff">}</span>/arm-linux-androideabi-
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_ABI</span><span style="color:#ff7b72;font-weight:bold">=</span>armeabi-v7a
+</span></span><span style="display:flex;"><span>        ;;
+</span></span><span style="display:flex;"><span>    x86<span style="color:#ff7b72;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_TOOLS_COMPILER_PREFIX</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_CROSS_PREFIX</span><span style="color:#a5d6ff">}</span>/i686-linux-android<span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_MINIMUM_PLATFORM</span><span style="color:#a5d6ff">}</span>-
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_TOOLS_PREFIX</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_CROSS_PREFIX</span><span style="color:#a5d6ff">}</span>/i686-linux-android-
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_ABI</span><span style="color:#ff7b72;font-weight:bold">=</span>x86
+</span></span><span style="display:flex;"><span>        ;;
+</span></span><span style="display:flex;"><span>    x86-64<span style="color:#ff7b72;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_TOOLS_COMPILER_PREFIX</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_CROSS_PREFIX</span><span style="color:#a5d6ff">}</span>/x86_64-linux-android<span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_MINIMUM_PLATFORM</span><span style="color:#a5d6ff">}</span>-
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_TOOLS_PREFIX</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_CROSS_PREFIX</span><span style="color:#a5d6ff">}</span>/x86_64-linux-android-
+</span></span><span style="display:flex;"><span>        export <span style="color:#79c0ff">ANDROID_ABI</span><span style="color:#ff7b72;font-weight:bold">=</span>x86_64
+</span></span><span style="display:flex;"><span>        ;;
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">esac</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_CC</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_TOOLS_COMPILER_PREFIX</span><span style="color:#a5d6ff">}</span>clang
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_CXX</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_TOOLS_COMPILER_PREFIX</span><span style="color:#a5d6ff">}</span>clang++
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_AR</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_TOOLS_PREFIX</span><span style="color:#a5d6ff">}</span>ar
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_AS</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_TOOLS_PREFIX</span><span style="color:#a5d6ff">}</span>as
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_NM</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_TOOLS_PREFIX</span><span style="color:#a5d6ff">}</span>nm
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_RANLIB</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_TOOLS_PREFIX</span><span style="color:#a5d6ff">}</span>ranlib
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_STRIP</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_TOOLS_PREFIX</span><span style="color:#a5d6ff">}</span>strip
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_PREFIX</span><span style="color:#ff7b72;font-weight:bold">=</span>/opt/android-libs/<span style="color:#a5d6ff">${</span><span style="color:#79c0ff">_android_arch</span><span style="color:#a5d6ff">}</span>
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_PREFIX_USR</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_PREFIX</span><span style="color:#a5d6ff">}</span>/usr
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_PREFIX_BIN</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_PREFIX</span><span style="color:#a5d6ff">}</span>/bin
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_PREFIX_INCLUDE</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_PREFIX</span><span style="color:#a5d6ff">}</span>/include
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_PREFIX_LIB</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_PREFIX</span><span style="color:#a5d6ff">}</span>/lib
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_PREFIX_ETC</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_PREFIX</span><span style="color:#a5d6ff">}</span>/etc
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">ANDROID_PREFIX_SHARE</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_PREFIX</span><span style="color:#a5d6ff">}</span>/share
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">PKG_CONFIG_SYSROOT_DIR</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_PREFIX</span><span style="color:#a5d6ff">}</span>
+</span></span><span style="display:flex;"><span>export <span style="color:#79c0ff">PKG_CONFIG_LIBDIR</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_PREFIX_LIB</span><span style="color:#a5d6ff">}</span>/pkgconfig:<span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_PREFIX_SHARE</span><span style="color:#a5d6ff">}</span>/pkgconfig
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ndk_version<span style="color:#ff7b72;font-weight:bold">()</span> <span style="color:#ff7b72;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    grep <span style="color:#a5d6ff">&#39;Pkg.Revision&#39;</span> <span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_NDK_HOME</span><span style="color:#a5d6ff">}</span>/source.properties | awk <span style="color:#a5d6ff">&#39;{print $3}&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>check_ndk_version_ge_than<span style="color:#ff7b72;font-weight:bold">()</span> <span style="color:#ff7b72;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#79c0ff">version</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#79c0ff">$1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#79c0ff">ndk_ver</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#ff7b72">$(</span>ndk_version<span style="color:#ff7b72">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> <span style="color:#ff7b72;font-weight:bold">[</span> <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">version</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ndk_ver</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">]</span>; <span style="color:#ff7b72">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">return</span> <span style="color:#a5d6ff">0</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#79c0ff">older_ver</span><span style="color:#ff7b72;font-weight:bold">=</span><span style="color:#ff7b72">$(</span>printf <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">version</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">\n</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ndk_ver</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> | sort -V | head -n 1<span style="color:#ff7b72">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> <span style="color:#ff7b72;font-weight:bold">[</span> <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">older_ver</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ndk_ver</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">&#34;</span> <span style="color:#ff7b72;font-weight:bold">]</span>; <span style="color:#ff7b72">then</span>
+</span></span><span style="display:flex;"><span>        echo <span style="color:#a5d6ff">&#34;ERROR: NDK version &gt;= </span><span style="color:#79c0ff">$version</span><span style="color:#a5d6ff"> required.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">return</span> -1
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">return</span> <span style="color:#a5d6ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>check_android_platform<span style="color:#ff7b72;font-weight:bold">()</span> <span style="color:#ff7b72;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">if</span> <span style="color:#ff7b72;font-weight:bold">[</span> ! -e <span style="color:#a5d6ff">&#34;</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_SDK_PLATFORM</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">/source.properties&#34;</span> <span style="color:#ff7b72;font-weight:bold">]</span>; <span style="color:#ff7b72">then</span>
+</span></span><span style="display:flex;"><span>        echo <span style="color:#a5d6ff">&#34;ERROR: Please, install android-platform-</span><span style="color:#a5d6ff">${</span><span style="color:#79c0ff">ANDROID_MINIMUM_PLATFORM</span><span style="color:#a5d6ff">}</span><span style="color:#a5d6ff">.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#ff7b72">return</span> -1
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff7b72">return</span> <span style="color:#a5d6ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">}</span>
+</span></span></code></pre></div>
+
+
+
+
+
+
+                </div>
+                
+            </article>
+        </main></div>
+    <aside class="l-sidebar mcol c3">
+    
+<section class="sidebar">
+  <header>相关内容</header>
+  
+  
+  
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200516-enable-dark-mode-in-gtk2/">GTK开启黑暗模式</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/">解决Windows与Ubuntu双系统时间同步问题</a></article>
+  
+  <article><a href="https://gmyxw.github.io/tips/20200507a-numfmt/">numfmt:让数字变得更容易理解</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200510b-warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/">Warning Secondary Partition Overlaps the Last Partition by X Blocks in Gdisk</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200510a-failed-unmounting-xxx/">Failed unmounting /run/user/1000 whenever i shutdown or reboot</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200509-nvramdir/">NVRAM storage in libvirt</a></article>
+  
+  <article><a href="https://gmyxw.github.io/tips/20200507-7z-command/">7z command</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200506-xf86openconsole-cannot-open-virtual-console/">Xf86OpenConsole Cannot Open Virtual Console</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200425-thunar-sftp.desktop/">Thunar sftp.desktop</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200423-problems-with-hardware-acceleration-environment-variables/">Problems With Hardware Acceleration Environment Variables</a></article>
+  
+  
+  
+  <article><a href="https://gmyxw.github.io/files/20200607-base64/">Base64</a></article>
+  
+</section>
+
+
+    
+<section class="sidebar">
+  <header>分类</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/categories/linux/">linux <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/file/">file <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/tool/">tool <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+    
+<section class="sidebar">
+  <header>标签</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/tags/linux/">linux <span class="count">(44)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/windows/">windows <span class="count">(11)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/js/">js <span class="count">(9)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/react/">react <span class="count">(6)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/android/">android <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/baidu/">baidu <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/chrome/">chrome <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/androidstudio/">androidstudio <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/archlinux/">archlinux <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/file/">file <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/java/">java <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/proxy/">proxy <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tool/">tool <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vim/">vim <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vscode/">vscode <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/git/">git <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/github/">github <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/kvm/">kvm <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/libvirt/">libvirt <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/shell/">shell <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tip/">tip <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/7z/">7z <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/antd/">antd <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/c/">c <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/cdn/">cdn <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/code/">code <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/css/">css <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/diskpart/">diskpart <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/dva/">dva <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/firefox/">firefox <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/flash/">flash <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/go/">go <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/golang/">golang <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/gpu/">gpu <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/html/">html <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/i3wm/">i3wm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/mihomo/">mihomo <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/netbios/">netbios <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/network/">network <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/npm/">npm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/openssl/">openssl <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pagefile/">pagefile <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pandavan/">pandavan <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/php/">php <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/powershell/">powershell <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/python/">python <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/regex/">regex <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/saga/">saga <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/samba/">samba <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/smaba/">smaba <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+</aside>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    
+    <small class="footer_copyright">
+        © 2024 gmyxw.
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+    </small><a href="#" id="totop">top</a></footer>
+
+
+
+
+
+
+    
+    <script aysnc src="https://cdn.staticfile.net/clipboard.js/2.0.11/clipboard.min.js"></script>
+    
+     
+  
+
+
+
+
+
+    
+    <script defer src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/main.min.2fab7d03474408371fe7ecce7dc22fba4986ab9061f4de72f40e6087782c7561.js" integrity="sha256-L6t9A0dECDcf5&#43;zOfcIvukmGq5Bh9N5y9A5gh3gsdWE="></script>
+
+    
+
+</body>
+</html>

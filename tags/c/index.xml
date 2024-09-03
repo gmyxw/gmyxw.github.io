@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/c/</link>
+    <description>Recent content in C on GM游戏网</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Sun, 07 Jun 2020 19:23:22 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/c/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Base64</title>
+      <link>https://gmyxw.github.io/files/20200607-base64/</link>
+      <pubDate>Sun, 07 Jun 2020 19:23:22 +0800</pubDate>
+      
+      <guid>https://gmyxw.github.io/files/20200607-base64/</guid>
+      
+      <description>base64.c
+#include &amp;lt;stdint.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; static char encoding_table[] = {&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;, &amp;#39;C&amp;#39;, &amp;#39;D&amp;#39;, &amp;#39;E&amp;#39;, &amp;#39;F&amp;#39;, &amp;#39;G&amp;#39;, &amp;#39;H&amp;#39;, &amp;#39;I&amp;#39;, &amp;#39;J&amp;#39;, &amp;#39;K&amp;#39;, &amp;#39;L&amp;#39;, &amp;#39;M&amp;#39;, &amp;#39;N&amp;#39;, &amp;#39;O&amp;#39;, &amp;#39;P&amp;#39;, &amp;#39;Q&amp;#39;, &amp;#39;R&amp;#39;, &amp;#39;S&amp;#39;, &amp;#39;T&amp;#39;, &amp;#39;U&amp;#39;, &amp;#39;V&amp;#39;, &amp;#39;W&amp;#39;, &amp;#39;X&amp;#39;, &amp;#39;Y&amp;#39;, &amp;#39;Z&amp;#39;, &amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;, &amp;#39;e&amp;#39;, &amp;#39;f&amp;#39;, &amp;#39;g&amp;#39;, &amp;#39;h&amp;#39;, &amp;#39;i&amp;#39;, &amp;#39;j&amp;#39;, &amp;#39;k&amp;#39;, &amp;#39;l&amp;#39;, &amp;#39;m&amp;#39;, &amp;#39;n&amp;#39;, &amp;#39;o&amp;#39;, &amp;#39;p&amp;#39;, &amp;#39;q&amp;#39;, &amp;#39;r&amp;#39;, &amp;#39;s&amp;#39;, &amp;#39;t&amp;#39;, &amp;#39;u&amp;#39;, &amp;#39;v&amp;#39;, &amp;#39;w&amp;#39;, &amp;#39;x&amp;#39;, &amp;#39;y&amp;#39;, &amp;#39;z&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;4&amp;#39;, &amp;#39;5&amp;#39;, &amp;#39;6&amp;#39;, &amp;#39;7&amp;#39;, &amp;#39;8&amp;#39;, &amp;#39;9&amp;#39;, &amp;#39;+&amp;#39;, &amp;#39;/&amp;#39;}; static char *decoding_table = NULL; static int mod_table[] = {0, 2, 1}; char *base64_encode(const unsigned char *data, size_t input_length, size_t *output_length) { *output_length = 4 * ((input_length + 2) / 3); char *encoded_data = malloc(*output_length); if (encoded_data == NULL) return NULL; for (int i = 0, j = 0; i &amp;lt; input_length;) { uint32_t octet_a = i &amp;lt; input_length ?</description>
+      
+    </item>
+    
+  </channel>
+</rss>

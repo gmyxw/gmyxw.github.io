@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>proxy on zhili</title>
-    <link>https://sy123.netlify.app/tags/proxy/</link>
-    <description>Recent content in proxy on zhili</description>
+    <title>Proxy on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/proxy/</link>
+    <description>Recent content in Proxy on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Sat, 11 Jan 2020 16:00:15 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/proxy/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Mon, 29 Jul 2024 13:35:51 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/proxy/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>chrome 全局代理</title>
+      <link>https://gmyxw.github.io/posts/1722231351/</link>
+      <pubDate>Mon, 29 Jul 2024 13:35:51 +0800</pubDate>
+      
+      <guid>https://gmyxw.github.io/posts/1722231351/</guid>
+      
+      <description>用了这么多年SwitchyOmega才发现这玩意是多余的，有了clash后除了调试切代理方便真没啥用，旧时代的残党该死死了🤔 Copy &amp;#34;C:\Program Files\Google\Chrome\Application\chrome.exe&amp;#34; --proxy-server=&amp;#34;socks://127.0.0.1:1080&amp;#34; Copy google-chrome-stable --proxy-server=&amp;#34;socks://127.0.0.1:1080&amp;#34;</description>
+      
+    </item>
+    
+    <item>
+      <title>Mihomo</title>
+      <link>https://gmyxw.github.io/posts/mihomo/</link>
+      <pubDate>Sun, 28 Jul 2024 01:12:04 +0800</pubDate>
+      
+      <guid>https://gmyxw.github.io/posts/mihomo/</guid>
+      
+      <description>订阅转换 https://subweb.sbe.us.kg https://acl4ssr-sub.github.io 面板 https://yacd.metacubex.one/#/proxies https://yacd.haishan.me/ https://yacd-meta.vercel.app/ https://clash.dejavu.moe/ 其他 https://emn178.github.io/online-tools/url_decode.html https://emn178.github.io/online-tools/base64_decode.html https://pb.sbf.us.kg/ 命令 使用以下命令检查 mihomo 的运行日志： Copy journalctl -u mihomo -o cat -e Phasellus nec sem in justo pellentesque facilisis. In consectetuer turpis ut velit. Cras dapibus. Proin magna. Donec sodales sagittis magna.s ante.</description>
+      
+    </item>
+    
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>https://sy123.netlify.app/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</link>
+      <link>https://gmyxw.github.io/posts/20200111-set-proxy-for-terminal/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/linux-%E8%AE%A9%E7%BB%88%E7%AB%AF%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E6%B3%95/</guid>
-      <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置git的话可以直接在文章最后找到git的设置代理的方法。
-前期准备: 认识代理的方式:代理是通过客户端与服务端通信,传输服务端能够访问到的资源文件,再由服务端客户端通信返回给客户端,从而间接访问服务端能访问的资源.
-以socket5通信为例子,我们通过客户端(自己想一想酸酸乳)向服务端发送socket通信,服务端访问资源再由socket通信返回给客户端.但是这里面的通信设置必须通过端口来进行通信,类似switchyomega设置过程一样,我们会设定走的代理方式是127.0.0.1:1080;这个意思就是通过本地的1080端口来进行通信.具体在终端上如何使用呢?
-如果默认是socket5通信且端口是1080,即127.0.01:1080的方式 使用如下两种方式
-socks5://127.0.0.1:1080 这里无关自己代理客户端是不是酸酸乳或酸酸只要是通过socket通信即可,前提是满足已经能够正常代理访问.
-第二种是http代理,即通信方式为http而不是socket http://127.0.0.1:12333 详细举例:
-这里的客户端有两种方式,一个是socket通信,一个是http通信,两个方式对应的端口不同,在下文中不同代理方式设置的端口也不同. 实在不懂的记住:先把代理调试通,然后就直接打开switchyomega看看自己的设置,都是一样的
-方法一：（推荐使用） 为什么说这个方法推荐使用呢？因为他只作用于当前终端中，不会影响环境，而且命令比较简单 在终端中直接运行：
-1 export http_proxy=http://proxyAddress:port 如果你是SSR,并且走的http的代理端口是12333，想执行wget或者curl来下载国外的东西，可以使用如下命令：
-1 export http_proxy=http://127.0.0.1:12333 如果是https那么就经过如下命令：
-1 export https_proxy=http://127.0.0.1:12333 方法二 ： 这个办法的好处是把代理服务器永久保存了，下次就可以直接用了 把代理服务器地址写入shell配置文件.bashrc或者.zshrc 直接在.bashrc或者.zshrc添加下面内容
-1 2 export http_proxy=&amp;#34;http://localhost:port&amp;#34; export https_proxy=&amp;#34;http://localhost:port&amp;#34; 或者走socket5协议（ss,ssr）的话，代理端口是1080
-1 2 export http_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; export https_proxy=&amp;#34;socks5://127.0.0.1:1080&amp;#34; 或者干脆直接设置ALL_PROXY
-1 export ALL_PROXY=socks5://127.0.0.1:1080 最后在执行如下命令应用设置
-1 source ~/.bashrc 或者通过设置alias简写来简化操作，每次要用的时候输入setproxy，不用了就unsetproxy。
-1 alias setproxy=&amp;#34;export ALL_PROXY=socks5://127.0.0.1:1080&amp;#34; alias unsetproxy=&amp;#34;unset ALL_PROXY&amp;#34; 方法三: 改相应工具的配置，比如apt的配置
-1 sudo vim /etc/apt/apt.conf 在文件末尾加入下面这行
-Acquire::http::Proxy &amp;ldquo;http://proxyAddress:port&amp;rdquo; 重点来了！！如果说经常使用git对于其他方面都不是经常使用，可以直接配置git的命令。 使用ss/ssr来加快git的速度 直接输入这个命令就好了</description>
+      <guid>https://gmyxw.github.io/posts/20200111-set-proxy-for-terminal/</guid>
+      
+      <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置gi</description>
+      
     </item>
     
   </channel>

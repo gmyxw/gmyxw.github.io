@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>network on zhili</title>
-    <link>https://sy123.netlify.app/tags/network/</link>
-    <description>Recent content in network on zhili</description>
+    <title>Network on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/network/</link>
+    <description>Recent content in Network on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Fri, 31 Jan 2020 12:32:48 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/network/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Fri, 31 Jan 2020 12:32:48 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/network/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux_disable_IPv6</title>
-      <link>https://sy123.netlify.app/linux_disable_ipv6/</link>
+      <link>https://gmyxw.github.io/posts/20200131-linux-disable-ipv6/</link>
       <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/linux_disable_ipv6/</guid>
-      <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关闭IPv6。 下面是IPv6的关闭方法应该适用于所有主流的Linux发行版包括Ubuntu、Debian、CentOS。
-IPv6在CentOS6.5系统中默认是启用状态，通过以下方式可以确认IPv6的状态
-1.1.查看系统IPv6的启用状态 以下命令返回值为0表示IPv6启用，1表示禁用
-1 2 3 4 5 cat /proc/sys/net/ipv6/conf/all/disable_ipv6 cat /proc/sys/net/ipv6/conf/default/disable_ipv6 ifconfig ip address list netstat -anptl 1.2.查看内核模块调用 有返回结果，说明IPv6模块已启用，可以看出那些程序进行了调用，反之没有启用
-lsmod | grep ipv6
-2.禁用IPv6 2.1.临时禁用IPv6 命令行调整内核参数，临时禁用IPv6
-1 2 3 4 5 echo 1 &amp;gt;/proc/sys/net/ipv6/conf/all/disable_ipv6 echo 1 &amp;gt;/proc/sys/net/ipv6/conf/default/disable_ipv6 # 或着 sysctl -w net.ipv6.conf.all.disable_ipv6=1 sysctl -w net.ipv6.conf.default.disable_ipv6=1 2.2.永久禁用IPv6 1 2 3 4 5 6 7 8 echo &amp;#34; &amp;#34;&amp;gt;&amp;gt;/etc/sysctl.conf echo &amp;#34;# made for disabled IPv6 in $(date +%F)&amp;#34;&amp;gt;&amp;gt;/etc/sysctl.conf echo &amp;#39;net.</description>
+      <guid>https://gmyxw.github.io/posts/20200131-linux-disable-ipv6/</guid>
+      
+      <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关</description>
+      
     </item>
     
   </channel>

@@ -1,74 +1,44 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>archlinux on zhili</title>
-    <link>https://sy123.netlify.app/tags/archlinux/</link>
-    <description>Recent content in archlinux on zhili</description>
+    <title>Archlinux on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/archlinux/</link>
+    <description>Recent content in Archlinux on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Wed, 25 Nov 2020 19:05:37 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/archlinux/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Wed, 25 Nov 2020 19:05:37 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/archlinux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Archlinux Failed to Commit Transaction Conflicting File</title>
-      <link>https://sy123.netlify.app/archlinux-failed-to-commit-transaction-conflicting-file/</link>
+      <link>https://gmyxw.github.io/posts/20201125-archlinux-failed-to-commit-transaction-conflicting-file/</link>
       <pubDate>Wed, 25 Nov 2020 19:05:37 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/archlinux-failed-to-commit-transaction-conflicting-file/</guid>
-      <description>前言 今天我试着更新我的 Arch Linux 系统，然后遇到一个错误 error：failed to commit transaction (conflicting files) stfl：/usr/lib/libstfl.so.0 exists in filesystem。看起来是 pacman 无法更新一个已经存在于文件系统上的库 (/usr/lib/libstfl.so.0)。如果你也遇到了同样的问题，下面是一个快速解决方案。
-解决 用自带的命令覆盖，wiki上是推荐这种做法
-1 sudo pacman -Syu --overwrite /usr/lib/libstfl.so.0 暴力解决，直接解决出问题的文件，或者你也可以把重复的包备份一下防止意外，不过一般没啥意外，按照经验出这个问题的方式千奇百怪，反正就是更新出错了，比如你更新的时候换源之类的操作也会导致这样，直接删掉就完事
-1 sudo rm /usr/lib/libstfl.so.0 最后更新就完事
-1 sudo pacman -Syu 我选择第三种方法，直接删除该文件然后升级 Arch Linux 系统。很有效！
-我用linux一直秉承着能偷懒就偷懒的原则，已经折腾不动了，鬼知道我年轻的时候到底经历了什么。
-希望本文对你有所帮助。还有更多好东西。敬请期待！
-See aslo https://wiki.archlinux.org/index.php/pacman#%22Failed_to_commit_transaction_(conflicting_files)%22_error</description>
+      <guid>https://gmyxw.github.io/posts/20201125-archlinux-failed-to-commit-transaction-conflicting-file/</guid>
+      
+      <description>前言 今天我试着更新我的 Arch Linux 系统，然后遇到一个错误 error：failed to commit transaction (conflicting files) stfl：/usr/lib/libstfl.so.0 exists in f</description>
+      
     </item>
     
     <item>
       <title>archlinux升级内核后，系统挂了，修复方法</title>
-      <link>https://sy123.netlify.app/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</link>
+      <link>https://gmyxw.github.io/posts/20200318-module-vboxdrv-not-found-in-directory/</link>
       <pubDate>Wed, 18 Mar 2020 06:32:53 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/archlinux%E5%8D%87%E7%BA%A7%E5%86%85%E6%A0%B8%E5%90%8E%E7%B3%BB%E7%BB%9F%E6%8C%82%E4%BA%86%E4%BF%AE%E5%A4%8D%E6%96%B9%E6%B3%95/</guid>
-      <description>今天滚完系统就没网络，startx报内核模块错误，当场裂开了，开机显示加载驱动失败，先来看看加载日志吧
-1 sudo systemctl status systemd-modules-load 报错全是类似Module Vboxdrv Not Found in Directory xx这种
-再查看下内核模块相关目录发现了端倪
-1 2 3 4 5 6 ❯ uname -a Linux arch 5.5.8-arch1-1 ~/site/blog ❯ ls /lib/modules 5.5.9-arch1-2 原来是没加载新内核
-解决方法 根据经验最好别排查原因，估计就是软件包BUG，懒得折腾再安装一次旧内核再滚就完事了
-升级内核，系统挂了，可以通过降级内核的方法来修复系统
-内核的安装包会缓存在/var/cache/pacman/pkg，文件名以 “linux-版本号”开头
-使用命令pacman -Udd xxx.zst来安装
-如果提示有文件存在的错误，删除掉提示的文件，再执行上面的命令，就可以了
-提示：要养成升级前先看wiki的习惯，如果仓库最新软件有bug，wiki会有公示</description>
+      <guid>https://gmyxw.github.io/posts/20200318-module-vboxdrv-not-found-in-directory/</guid>
+      
+      <description>今天滚完系统就没网络，startx报内核模块错误，当场裂开了，开机显示加载驱动失败，先来看看加载日志吧 sudo systemctl status systemd-modules-load 报错全是类似Module Vboxdrv Not Found</description>
+      
     </item>
     
     <item>
       <title>ArchLinux配置Samba服务与Windows共享文件</title>
-      <link>https://sy123.netlify.app/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</link>
+      <link>https://gmyxw.github.io/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/</link>
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/archlinux%E9%85%8D%E7%BD%AEsamba%E6%9C%8D%E5%8A%A1%E4%B8%8Ewindows%E5%85%B1%E4%BA%AB%E6%96%87%E4%BB%B6/</guid>
-      <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。
-Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……
-下面记录一下ArchLinux中配置Samba的过程，留作备份。
-首先，是安装Samba，ArchLinux可以直接从源中获取并安装Samba：
-1 pacman -S samba 等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：
-在/etc/samba目录中，直接建立一个空的smb.conf，然后将如下内容粘贴过去：
-1 2 3 4 5 6 7 8 9 10 11 [global] workgroup = WORKGROUP security = user [Movies] path = /home/transmission/Downloads valid users = samba public = no writable = yes printable = no create mask = 0644 这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：
-workgroup，这个顾名思义，计算机的工作组名称，比如我是和我的Win7来共享文件，最好把工作组和我的Win7设成通一个工作组，这样方便Win7通过网络发现来找到我的下载机。这里，我的win7工作组名字，就叫做：WORKGROUP了
-security，这是指共享目录的安全认证形式，security的值，有两种可以设置：
-第一种，是设成上面例子中的user，意思是在访问共享目录的时候，需要通过用户名和密码的方式来认证，可以给共享目录提供一定的安全性保护。
-第二种，是设成share，这样的话，网络中的任何人都可以通过共享目录的方式来访问你共享的内容了。
-在这里，我选择了用户名与密码认证的方式，所以设成了user
-下面的Movies节点，可以有多个(如果你想设置多个共享目录的话)
-[Movies] 这里设置的名字，就是能够在Windows中看到的名字，可以随意更改
-下面的path，就是你想共享的Linux目录了，我设成了我的Transmission的下载目录。
-后面的valid users，是一个用户帐号，也即通过用户名和密码来访问共享目录的那个帐号，如果你把security设成share，这一项可以去掉。
-下面是一些权限的设置，以及是否允许访问者有写入共享目录的权限，各个参数可以查看Samba文档，就不一一介绍了。
-最后，说一下security设成user后，帐号的设置问题。
-首先，你可以添加一个新的Linux帐号，专门用来访问共享目录用。比如，我就添加了一个帐号，叫做Samba
-然后就是给帐号设置访问共享目录的密码，这里需要注意，密码不是通过Linux命令passwd来设置的。这里的密码，是指Samba的密码，而不是Linux密码。
-所以，得用命令 pdbedit -a -u (username)来修改Samba密码。</description>
+      <guid>https://gmyxw.github.io/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/</guid>
+      
+      <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，</description>
+      
     </item>
     
   </channel>

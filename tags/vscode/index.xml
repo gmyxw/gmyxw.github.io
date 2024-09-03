@@ -1,52 +1,49 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>vscode on zhili</title>
-    <link>https://sy123.netlify.app/tags/vscode/</link>
-    <description>Recent content in vscode on zhili</description>
+    <title>Vscode on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/vscode/</link>
+    <description>Recent content in Vscode on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Mon, 18 May 2020 04:01:27 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Mon, 18 May 2020 04:01:27 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>解决Golang在VSCode中调试时无法接收标准输入的问题</title>
-      <link>https://sy123.netlify.app/%E8%A7%A3%E5%86%B3golang%E5%9C%A8vscode%E4%B8%AD%E8%B0%83%E8%AF%95%E6%97%B6%E6%97%A0%E6%B3%95%E6%8E%A5%E6%94%B6%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/</link>
+      <link>https://gmyxw.github.io/posts/20200518-vscode-go-interactive-debug-console/</link>
       <pubDate>Mon, 18 May 2020 04:01:27 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/%E8%A7%A3%E5%86%B3golang%E5%9C%A8vscode%E4%B8%AD%E8%B0%83%E8%AF%95%E6%97%B6%E6%97%A0%E6%B3%95%E6%8E%A5%E6%94%B6%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5%E7%9A%84%E9%97%AE%E9%A2%98/</guid>
-      <description>Golang 在 VSCode 中的调试配置 （解决Golang在VSCode中调试时无法接收标准输入(stdin)的问题）
-最近开始接触Go语言，但在配置VSCode的调试文件的时候发现VSCode中的官方GO插件调试时用的是调试控制台(debug console)而非终端(terminal)，找了很多设置也没有类似于terminal或者internalTerminal或者externalTerminal的配置项。最终在vscode-go仓库的issue里找到了问题所在。鉴于目前还没有国内的博客帖子总结该问题，在这里总结一下问题原因及解决方案。
-问题起因 最开始以为是vscode-go插件的锅，但在相关问题的issue里，vscode-go的开发团队给出的回复是，由于delve调试器本身在普通模式运行时就无法直接接受命令行标准输入(stdin)，导致配套的相关插件也无法正常工作。本来delve自身加上支持接受命令行输入的功能即可彻底解决这个问题，但似乎delve开发团队的人员并不对此感兴趣，不少开发者也同样也对此表示无奈,只有用目前其他开发者给出的折中的解决办法。
-解决方案 虽然delve在普通模式下不能接受标准输入(stdin)，但其在headless模式下是可以接受标准输入的。在VSCode中我们也可以借助这个特性来实现Golang的调试时输入功能。
-以下是开发者HowieLiuX给出的参考配置：
-tasks.json
-{ // See https://go.microsoft.com/fwlink/?LinkId=733558 // for the documentation about the tasks.json format &amp;ldquo;version&amp;rdquo;: &amp;ldquo;2.0.0&amp;rdquo;, &amp;ldquo;tasks&amp;rdquo;: [ { &amp;ldquo;label&amp;rdquo;: &amp;ldquo;echo&amp;rdquo;, &amp;ldquo;type&amp;rdquo;: &amp;ldquo;shell&amp;rdquo;, &amp;ldquo;command&amp;rdquo;: &amp;ldquo;cd ${fileDirname} &amp;amp;&amp;amp; dlv debug &amp;ndash;headless &amp;ndash;listen=:2345 &amp;ndash;log &amp;ndash;api-version=2&amp;rdquo;, &amp;ldquo;problemMatcher&amp;rdquo;: [], &amp;ldquo;group&amp;rdquo;: { &amp;ldquo;kind&amp;rdquo;: &amp;ldquo;build&amp;rdquo;, &amp;ldquo;isDefault&amp;rdquo;: true } } ] } 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 launch.</description>
+      <guid>https://gmyxw.github.io/posts/20200518-vscode-go-interactive-debug-console/</guid>
+      
+      <description>Golang 在 VSCode 中的调试配置 （解决Golang在VSCode中调试时无法接收标准输入(stdin)的问题） 最近开始接触Go语言，但在配置VSCode的</description>
+      
     </item>
     
     <item>
       <title>How can I simulate interactive console in VSCode debugger</title>
-      <link>https://sy123.netlify.app/how-can-i-simulate-interactive-console-in-vscode-debugger/</link>
+      <link>https://gmyxw.github.io/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/</link>
       <pubDate>Sat, 18 Apr 2020 00:06:48 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/how-can-i-simulate-interactive-console-in-vscode-debugger/</guid>
+      <guid>https://gmyxw.github.io/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/</guid>
+      
       <description>the VS Code debugger console doesn&amp;rsquo;t currently support piping any input through to stdin.
 FYI, you can tell the Code debugger to use an external console in the launch config:
 &amp;quot;externalConsole&amp;quot;: true It has a possible workaround, using remote debug + vscode task, but that is not trivial.
 It has a possible workaround, using remote debug + vscode task, but that is not trivial.
 launch.json
-1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 { // Use IntelliSense to learn about possible attributes.</description>
+{ // Use IntelliSense to learn about possible attributes.</description>
+      
     </item>
     
     <item>
       <title>Visual Studio Code 偏好设置</title>
-      <link>https://sy123.netlify.app/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</link>
+      <link>https://gmyxw.github.io/posts/20200215-my-vscode-config/</link>
       <pubDate>Sat, 15 Feb 2020 17:58:47 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/visual-studio-code-%E5%81%8F%E5%A5%BD%E8%AE%BE%E7%BD%AE/</guid>
-      <description>Visual Studio Code 提供了极大的弹性让我们自订想要的编辑器样式，端看使用者设定（User Setting）中，就超过 800 项设定可以让开发者自由调整，而且还有扩充套件能够增强 VS Code 的开发能力。
-这篇主要是我个人偏好的设定，完整 setting.json 请参考 gist。
-首先可以使用快速键 Ctrl +, 开启 settings.json 使用者设定档，或从选单列中点选档案 &amp;gt; 喜好设定 &amp;gt; 设定。
-Global 常用设定 editor 1 editor.fontFamily // 设定字型偏好 唯一选择 Source Code Pro 连字符号字型可选择 FiraCode 或 Hasklig 择一使用(个人偏好 FiraCode) 设定值：&amp;quot;editor.fontFamily&amp;quot;: &amp;quot;&#39;Fira Code&#39;, &#39;Source Code Pro&#39;, Consolas, &#39;Microsoft JhengHei&#39;, &#39;Courier New&#39;, monospace&amp;quot;, 1 2 3 4 5 6 7 8 9 &amp;#34;editor.fontLigatures&amp;#34;: true // 开启连字符号 // FiraCode 字型有提供连字符号的功能，例如 =&amp;gt; 会变成箭头符号 &amp;#34;editor.</description>
+      <guid>https://gmyxw.github.io/posts/20200215-my-vscode-config/</guid>
+      
+      <description>Visual Studio Code 提供了极大的弹性让我们自订想要的编辑器样式，端看使用者设定（User Setting）中，就超过 800 项设定可以让开发者自由调整，而且还有扩</description>
+      
     </item>
     
   </channel>

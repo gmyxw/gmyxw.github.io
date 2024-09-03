@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>yarn on zhili</title>
-    <link>https://sy123.netlify.app/tags/yarn/</link>
-    <description>Recent content in yarn on zhili</description>
+    <title>Yarn on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/yarn/</link>
+    <description>Recent content in Yarn on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Thu, 06 Feb 2020 18:28:50 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/yarn/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Thu, 06 Feb 2020 18:28:50 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/yarn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>npm和yarn如何查看源和换源</title>
-      <link>https://sy123.netlify.app/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</link>
+      <link>https://gmyxw.github.io/posts/20200206-yarn-accelerate-and-modify-mirror-source-in-china/</link>
       <pubDate>Thu, 06 Feb 2020 18:28:50 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/npm%E5%92%8Cyarn%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%BA%90%E5%92%8C%E6%8D%A2%E6%BA%90/</guid>
-      <description>npm和yarn查看源和换源： 1 2 3 4 5 6 7 npm config get registry # 查看npm当前镜像源 npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像 yarn config get registry # 查看yarn当前镜像源 yarn config set registry https://registry.npm.taobao.org/ # 设置yarn镜像源为淘宝镜像 镜像源地址部分如下： npm --- https://registry.npmjs.org/ cnpm --- https://r.cnpmjs.org/ taobao --- https://registry.npm.taobao.org/ nj --- https://registry.nodejitsu.com/ rednpm --- https://registry.mirror.cqupt.edu.cn/ npmMirror --- https://skimdb.npmjs.com/registry/ deunpm --- http://registry.enpmjs.org/ </description>
+      <guid>https://gmyxw.github.io/posts/20200206-yarn-accelerate-and-modify-mirror-source-in-china/</guid>
+      
+      <description>npm和yarn查看源和换源： npm config get registry # 查看npm当前镜像源 npm config set registry https://registry.npm.taobao.org/ # 设置npm镜像源为淘宝镜像 yarn config get registry # 查看yarn当前镜像源 yarn config set registry https://registry.npm.taobao.org/</description>
+      
     </item>
     
   </channel>

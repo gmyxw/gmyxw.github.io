@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>youtube on zhili</title>
-    <link>https://sy123.netlify.app/tags/youtube/</link>
-    <description>Recent content in youtube on zhili</description>
+    <title>Youtube on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/youtube/</link>
+    <description>Recent content in Youtube on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Thu, 27 Feb 2020 18:34:08 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/youtube/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Thu, 27 Feb 2020 18:34:08 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/youtube/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>youtube视频下载</title>
-      <link>https://sy123.netlify.app/youtube%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD/</link>
+      <link>https://gmyxw.github.io/posts/20200227-youtube-video-download/</link>
       <pubDate>Thu, 27 Feb 2020 18:34:08 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/youtube%E8%A7%86%E9%A2%91%E4%B8%8B%E8%BD%BD/</guid>
+      <guid>https://gmyxw.github.io/posts/20200227-youtube-video-download/</guid>
+      
       <description>https://y2mate.guru/en1/</description>
+      
     </item>
     
   </channel>

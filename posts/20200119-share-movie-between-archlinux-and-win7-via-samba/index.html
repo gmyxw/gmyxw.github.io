@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ArchLinux配置Samba服务与Windows共享文件 - GM游戏网</title>
+<meta property="og:title" content="ArchLinux配置Samba服务与Windows共享文件 - GM游戏网" />
+<meta name="twitter:title" content="ArchLinux配置Samba服务与Windows共享文件 - GM游戏网" />
+<meta itemprop="name" content="ArchLinux配置Samba服务与Windows共享文件 - GM游戏网" />
+<meta name="application-name" content="ArchLinux配置Samba服务与Windows共享文件 - GM游戏网" />
+<meta property="og:site_name" content="GM游戏网" />
+<meta name="keywords" content="archlinux,windows,smaba," />
+
+
+<meta name="description" content="由于最近加班，俺的高清下载机中，已经累积了200G&#43;的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，">
+<meta itemprop="description" content="由于最近加班，俺的高清下载机中，已经累积了200G&#43;的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，" />
+<meta property="og:description" content="由于最近加班，俺的高清下载机中，已经累积了200G&#43;的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，" />
+<meta name="twitter:description" content="由于最近加班，俺的高清下载机中，已经累积了200G&#43;的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，" />
+
+<meta name="author" content="gmyxw" />
+
+<meta name="referrer" content="always">
+<meta property="og:locale" content="zh-CN" />
+<meta name="language" content="zh-CN" />
+
+
+<meta property="og:url" content="https://gmyxw.github.io/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/">
+  <meta property="og:site_name" content="GM游戏网">
+  <meta property="og:title" content="ArchLinux配置Samba服务与Windows共享文件">
+  <meta property="og:description" content="由于最近加班，俺的高清下载机中，已经累积了200G&#43;的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-01-19T15:43:57+08:00">
+    <meta property="article:modified_time" content="2020-01-19T15:43:57+08:00">
+    <meta property="article:tag" content="Archlinux">
+    <meta property="article:tag" content="Windows">
+    <meta property="article:tag" content="Smaba">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ArchLinux配置Samba服务与Windows共享文件">
+  <meta name="twitter:description" content="由于最近加班，俺的高清下载机中，已经累积了200G&#43;的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，">
+
+
+
+  <meta itemprop="name" content="ArchLinux配置Samba服务与Windows共享文件">
+  <meta itemprop="description" content="由于最近加班，俺的高清下载机中，已经累积了200G&#43;的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，">
+  <meta itemprop="datePublished" content="2020-01-19T15:43:57+08:00">
+  <meta itemprop="dateModified" content="2020-01-19T15:43:57+08:00">
+  <meta itemprop="wordCount" content="1590">
+  <meta itemprop="keywords" content="Archlinux,Windows,Smaba">
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2020-01-19T15:43:57&#43;0800 />
+    <meta property="article:published_time" content=2020-01-19T15:43:57&#43;0800 />
+    <meta property="og:url" content="https://gmyxw.github.io/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/" />
+
+    
+    <meta property="og:article:author" content="gmyxw" />
+    <meta property="article:author" content="gmyxw" />
+    <meta name="author" content="gmyxw" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "ArchLinux配置Samba服务与Windows共享文件",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2020-01-19",
+        "description": "",
+        "wordCount":  1590 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2020-01-19",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "GM游戏网"
+        }
+    }
+    </script>
+
+
+
+    
+
+    
+
+    <link rel="canonical" href="https://gmyxw.github.io/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/">
+    <link href="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/css/style.min.420aeabb9726dc288e29445663aa98d0cf7ba0607556bf5b2c88ce38e5bf01a8.css" rel="stylesheet">
+    
+    
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://gmyxw.github.io/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+
+    
+
+    
+    
+  
+
+</head>
+<body data-theme="auto" class="notransition">
+
+<script src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/theme.min.40385e5b43397f4f7b187a8ef005de90f45408b7824f604ff29f318c5ede4c8f.js" integrity="sha256-QDheW0M5f097GHqO8AXekPRUCLeCT2BP8p8xjF7eTI8="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <div>
+            
+            
+            <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"></li><a href="https://gmyxw.github.io/">GM游戏网</a> ❯ </li>
+      
+      
+      
+      
+        <li class="breadcrumb-item"><a href="https://gmyxw.github.io/posts/">归档</a> /</li>
+      
+      
+      <li class="breadcrumb-item active" aria-current="page">ArchLinux配置Samba服务与Windows共享文件</li>
+    </ol>
+  </nav>
+  
+          </div>
+
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                
+                    
+                    
+                    <li>
+                        <a id="post" class="menu-link active" href="https://gmyxw.github.io/posts">
+                            归档
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="category" class="menu-link" href="https://gmyxw.github.io/categories">
+                            分类
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="tag" class="menu-link" href="https://gmyxw.github.io/tags">
+                            标签
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="about" class="menu-link" href="https://gmyxw.github.io/about">
+                            关于
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="search" class="menu-link" href="https://gmyxw.github.io/search">
+                            搜索
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="mode" class="menu-link" href="#">
+                            关灯
+                        </a>
+                    
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <aside class="l-sidebar mcol c3">
+    
+    
+    
+    
+<section class="sidebar">
+    <header>快捷链接</header>
+    <ul class="terms ads">
+      
+        <li>
+            <a href="https://emn178.github.io/online-tools/url_decode.html" title="常用编码转换工具" target="_blank">
+                
+                    常用编码转换工具
+                
+            </a>
+        </li>
+      
+        <li>
+            <a href="https://api.mumuglobal.com/api/ip" title="每日壁纸" target="_blank">
+                
+                <img src="https://bing.img.run/1920x1080.php" title="每日壁纸">
+                
+            </a>
+        </li>
+      
+    </ul>
+  </section>
+
+</aside>
+    <div class="mcol c6">
+        <main class="page-content" aria-label="Content">
+            <article>
+                <header class="header">
+                    <h1 class="header-title">ArchLinux配置Samba服务与Windows共享文件</h1>
+                    <div class="post-meta">
+                        
+                        
+                        <time datetime="2020-01-19T15:43:57&#43;08:00" itemprop="datePublished"> 🕓
+                            2020-01-19 15:43</time>
+                        
+                        
+                        
+                            <p class="meta-tags">
+                                
+                                <a href="https://gmyxw.github.io/tags/archlinux/">#archlinux</a>
+                                
+                                <a href="https://gmyxw.github.io/tags/windows/">#windows</a>
+                                
+                                <a href="https://gmyxw.github.io/tags/smaba/">#smaba</a>
+                                
+                            </p>
+                        
+                    </div>
+                </header>
+                
+                <div class="page-content">
+                    <p>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，我都是偷懒，用的SFTP，通过Linux帐号来登录下载机，然后把要看的电影，一个一个的用SFTP的方式，给拖到我的电脑上，再欣赏。其实这样的效率挺低的，而且又浪费硬盘，又浪费时间。</p>
+<p>Linux的Samba，为Linux与Linux之间，还有Linux与Windows之间，提供了一种很好的文件共享的方式。周末了，抽了点时间，把Samba给配置好了。这样，就可以直接在我的电脑上，通过共享目录的方式，来访问高清下载机中的高清电影了，还可以直接播放，方便多了……</p>
+<p>下面记录一下ArchLinux中配置Samba的过程，留作备份。</p>
+<p>首先，是安装Samba，ArchLinux可以直接从源中获取并安装Samba：</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pacman -S samba</span></span></code></pre></div>
+</div>
+<p>等待数秒，安装成功后，你会在/etc中找到一个叫samba的目录，进入这个目录，有一个默认的配置文件样本，叫做smb.conf.default。这是官方的范本配置文件，里面有详细的注释，和每一个配置项的解释。不过这文件挺长，建议你有空的时候，可以详细看看每个参数的含义。这里俺就不累述了，还是来个简洁点的配置吧：</p>
+<p>在/etc/samba目录中，直接建立一个空的smb.conf，然后将如下内容粘贴过去：</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#ff7b72">[global]</span>
+</span></span><span style="display:flex;"><span>workgroup <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">WORKGROUP</span>
+</span></span><span style="display:flex;"><span>security <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">user</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">[Movies]</span>
+</span></span><span style="display:flex;"><span>path <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">/home/transmission/Downloads</span>
+</span></span><span style="display:flex;"><span>valid users <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">samba</span>
+</span></span><span style="display:flex;"><span>public <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">no</span>
+</span></span><span style="display:flex;"><span>writable <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">yes</span>
+</span></span><span style="display:flex;"><span>printable <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">no</span>
+</span></span><span style="display:flex;"><span>create mask <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">0644</span></span></span></code></pre></div>
+</div>
+<p>这个够简洁了吧？简单说明一下，global配置节，是一个全局配置节，里面配置了两项：</p>
+<p>workgroup，这个顾名思义，计算机的工作组名称，比如我是和我的Win7来共享文件，最好把工作组和我的Win7设成通一个工作组，这样方便Win7通过网络发现来找到我的下载机。这里，我的win7工作组名字，就叫做：WORKGROUP了</p>
+<p>security，这是指共享目录的安全认证形式，security的值，有两种可以设置：</p>
+<p>第一种，是设成上面例子中的user，意思是在访问共享目录的时候，需要通过用户名和密码的方式来认证，可以给共享目录提供一定的安全性保护。</p>
+<p>第二种，是设成share，这样的话，网络中的任何人都可以通过共享目录的方式来访问你共享的内容了。</p>
+<p>在这里，我选择了用户名与密码认证的方式，所以设成了user</p>
+<p>下面的Movies节点，可以有多个(如果你想设置多个共享目录的话)</p>
+<p>[Movies] 这里设置的名字，就是能够在Windows中看到的名字，可以随意更改</p>
+<p>下面的path，就是你想共享的Linux目录了，我设成了我的Transmission的下载目录。</p>
+<p>后面的valid users，是一个用户帐号，也即通过用户名和密码来访问共享目录的那个帐号，如果你把security设成share，这一项可以去掉。</p>
+<p>下面是一些权限的设置，以及是否允许访问者有写入共享目录的权限，各个参数可以查看Samba文档，就不一一介绍了。</p>
+<p>最后，说一下security设成user后，帐号的设置问题。</p>
+<p>首先，你可以添加一个新的Linux帐号，专门用来访问共享目录用。比如，我就添加了一个帐号，叫做Samba</p>
+<p>然后就是给帐号设置访问共享目录的密码，这里需要注意，密码不是通过Linux命令passwd来设置的。这里的密码，是指Samba的密码，而不是Linux密码。</p>
+<p>所以，得用命令 <code>pdbedit -a -u (username)</code>来修改Samba密码。</p>
+<p>设置好后，就可以启动Samba服务了，如果需要开机自动启动Samba，记得把Samba加入到/etc/rc.conf中。</p>
+<p>最后一步，直接访问Win7的网络，如果你的设置没问题，就能一次性成功了…… 启用了Samba服务的高清下载机，能被Win7立马发现：</p>
+<p>
+<img src="https://p1-tt.byteimg.com/large/pgc-image/5e88eca3acfa4a948d3f3970f4df25bb"></p>
+<p>双击进入，需要输入Samba用户名与密码验证，最后，高清电影就出现在眼前了：</p>
+<p>
+<img src="https://p6-tt.byteimg.com/large/pgc-image/266d383bd7fb43558410f3e85587510a"></p>
+<p>双击电影，即可通过家里的局域网在线播放了…… 打完收工，看电影去！</p>
+<h1 id="参考">参考</h1>
+<p><a href="https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html">官方smb.conf说明</a></p>
+
+                </div>
+                
+            </article>
+        </main></div>
+    <aside class="l-sidebar mcol c3">
+    
+<section class="sidebar">
+  <header>相关内容</header>
+  
+  
+  
+  
+  
+  
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200117-netbios/">批处理关闭或开启NETBIOS</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200117-wsl-samba/">玩转WSL-用Samba服务替代Win10原生的文件共享</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200116-using-diskpart-to-create/">Windows 下使用 Diskpart 命令分区</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722768240/">深入理解DOMContentLoaded的触发时机</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722679457/">解决Noto字体数字和空格使用emoji符号数字</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722231351/">chrome 全局代理</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/mihomo/">Mihomo</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/kvmnonet/">libvirt升级后虚拟机没网络</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/kb2919351/">Incoming changes in JDK / JRE 21 packages may require manual intervention</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/kb2919355/">Windows update KB2919355 fails to install - Error code 800F0922</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200117-iptables/">iptables 禁止端口和开放端口</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200120-pagefile/">cmd命令行修改windows虚拟内存pagefile.sys</a></article>
+  
+</section>
+
+
+    
+<section class="sidebar">
+  <header>分类</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/categories/linux/">linux <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/file/">file <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/tool/">tool <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+    
+<section class="sidebar">
+  <header>标签</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/tags/linux/">linux <span class="count">(44)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/windows/">windows <span class="count">(11)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/js/">js <span class="count">(9)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/react/">react <span class="count">(6)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/android/">android <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/baidu/">baidu <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/chrome/">chrome <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/androidstudio/">androidstudio <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/archlinux/">archlinux <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/file/">file <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/java/">java <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/proxy/">proxy <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tool/">tool <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vim/">vim <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vscode/">vscode <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/git/">git <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/github/">github <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/kvm/">kvm <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/libvirt/">libvirt <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/shell/">shell <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tip/">tip <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/7z/">7z <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/antd/">antd <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/c/">c <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/cdn/">cdn <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/code/">code <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/css/">css <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/diskpart/">diskpart <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/dva/">dva <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/firefox/">firefox <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/flash/">flash <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/go/">go <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/golang/">golang <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/gpu/">gpu <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/html/">html <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/i3wm/">i3wm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/mihomo/">mihomo <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/netbios/">netbios <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/network/">network <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/npm/">npm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/openssl/">openssl <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pagefile/">pagefile <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pandavan/">pandavan <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/php/">php <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/powershell/">powershell <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/python/">python <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/regex/">regex <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/saga/">saga <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/samba/">samba <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/smaba/">smaba <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+</aside>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    
+    <small class="footer_copyright">
+        © 2024 gmyxw.
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+    </small><a href="#" id="totop">top</a></footer>
+
+
+
+
+
+
+    
+    <script aysnc src="https://cdn.staticfile.net/clipboard.js/2.0.11/clipboard.min.js"></script>
+    
+     
+  
+
+
+
+
+
+    
+    <script defer src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/main.min.2fab7d03474408371fe7ecce7dc22fba4986ab9061f4de72f40e6087782c7561.js" integrity="sha256-L6t9A0dECDcf5&#43;zOfcIvukmGq5Bh9N5y9A5gh3gsdWE="></script>
+
+    
+
+</body>
+</html>

@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>openssl on zhili</title>
-    <link>https://sy123.netlify.app/tags/openssl/</link>
-    <description>Recent content in openssl on zhili</description>
+    <title>Openssl on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/openssl/</link>
+    <description>Recent content in Openssl on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Fri, 28 Feb 2020 11:28:00 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/openssl/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Fri, 28 Feb 2020 11:28:00 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/openssl/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Encrypt string using Openssl</title>
-      <link>https://sy123.netlify.app/encrypt-string-using-openssl/</link>
+      <link>https://gmyxw.github.io/posts/20200228-encrypt-string-using-openssl/</link>
       <pubDate>Fri, 28 Feb 2020 11:28:00 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/encrypt-string-using-openssl/</guid>
+      <guid>https://gmyxw.github.io/posts/20200228-encrypt-string-using-openssl/</guid>
+      
       <description>Try this:
-1 2 3 echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt Run
-1 2 openssl list-cipher-commands to list all available ciphers.</description>
+echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt Run
+openssl list-cipher-commands to list all available ciphers.</description>
+      
     </item>
     
   </channel>

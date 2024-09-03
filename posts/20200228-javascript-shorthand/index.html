@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>javascript中的各种简写总结（不断更新） - GM游戏网</title>
+<meta property="og:title" content="javascript中的各种简写总结（不断更新） - GM游戏网" />
+<meta name="twitter:title" content="javascript中的各种简写总结（不断更新） - GM游戏网" />
+<meta itemprop="name" content="javascript中的各种简写总结（不断更新） - GM游戏网" />
+<meta name="application-name" content="javascript中的各种简写总结（不断更新） - GM游戏网" />
+<meta property="og:site_name" content="GM游戏网" />
+<meta name="keywords" content="js," />
+
+
+<meta name="description" content="在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。 这里的简写，包括比如void 0代替undef">
+<meta itemprop="description" content="在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。 这里的简写，包括比如void 0代替undef" />
+<meta property="og:description" content="在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。 这里的简写，包括比如void 0代替undef" />
+<meta name="twitter:description" content="在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。 这里的简写，包括比如void 0代替undef" />
+
+<meta name="author" content="gmyxw" />
+
+<meta name="referrer" content="always">
+<meta property="og:locale" content="zh-CN" />
+<meta name="language" content="zh-CN" />
+
+
+<meta property="og:url" content="https://gmyxw.github.io/posts/20200228-javascript-shorthand/">
+  <meta property="og:site_name" content="GM游戏网">
+  <meta property="og:title" content="javascript中的各种简写总结（不断更新）">
+  <meta property="og:description" content="在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。 这里的简写，包括比如void 0代替undef">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2020-02-28T17:09:04+08:00">
+    <meta property="article:modified_time" content="2020-02-28T17:09:04+08:00">
+    <meta property="article:tag" content="Js">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="javascript中的各种简写总结（不断更新）">
+  <meta name="twitter:description" content="在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。 这里的简写，包括比如void 0代替undef">
+
+
+
+  <meta itemprop="name" content="javascript中的各种简写总结（不断更新）">
+  <meta itemprop="description" content="在看书的时候，搜void 0时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。 这里的简写，包括比如void 0代替undef">
+  <meta itemprop="datePublished" content="2020-02-28T17:09:04+08:00">
+  <meta itemprop="dateModified" content="2020-02-28T17:09:04+08:00">
+  <meta itemprop="wordCount" content="2353">
+  <meta itemprop="keywords" content="Js">
+
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2020-02-28T17:09:04&#43;0800 />
+    <meta property="article:published_time" content=2020-02-28T17:09:04&#43;0800 />
+    <meta property="og:url" content="https://gmyxw.github.io/posts/20200228-javascript-shorthand/" />
+
+    
+    <meta property="og:article:author" content="gmyxw" />
+    <meta property="article:author" content="gmyxw" />
+    <meta name="author" content="gmyxw" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "javascript中的各种简写总结（不断更新）",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2020-02-28",
+        "description": "",
+        "wordCount":  2353 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2020-02-28",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "GM游戏网"
+        }
+    }
+    </script>
+
+
+
+    
+
+    
+
+    <link rel="canonical" href="https://gmyxw.github.io/posts/20200228-javascript-shorthand/">
+    <link href="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/css/style.min.420aeabb9726dc288e29445663aa98d0cf7ba0607556bf5b2c88ce38e5bf01a8.css" rel="stylesheet">
+    
+    
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://gmyxw.github.io/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    
+
+    
+
+    
+    
+  
+
+</head>
+<body data-theme="auto" class="notransition">
+
+<script src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/theme.min.40385e5b43397f4f7b187a8ef005de90f45408b7824f604ff29f318c5ede4c8f.js" integrity="sha256-QDheW0M5f097GHqO8AXekPRUCLeCT2BP8p8xjF7eTI8="></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <div>
+            
+            
+            <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"></li><a href="https://gmyxw.github.io/">GM游戏网</a> ❯ </li>
+      
+      
+      
+      
+        <li class="breadcrumb-item"><a href="https://gmyxw.github.io/posts/">归档</a> /</li>
+      
+      
+      <li class="breadcrumb-item active" aria-current="page">javascript中的各种简写总结（不断更新）</li>
+    </ol>
+  </nav>
+  
+          </div>
+
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                
+                    
+                    
+                    <li>
+                        <a id="post" class="menu-link active" href="https://gmyxw.github.io/posts">
+                            归档
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="category" class="menu-link" href="https://gmyxw.github.io/categories">
+                            分类
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="tag" class="menu-link" href="https://gmyxw.github.io/tags">
+                            标签
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="about" class="menu-link" href="https://gmyxw.github.io/about">
+                            关于
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="search" class="menu-link" href="https://gmyxw.github.io/search">
+                            搜索
+                        </a>
+                    
+                </li>
+                
+                    
+                    
+                    <li>
+                        <a id="mode" class="menu-link" href="#">
+                            关灯
+                        </a>
+                    
+                </li>
+                
+                
+                
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <aside class="l-sidebar mcol c3">
+    
+    
+    
+    
+<section class="sidebar">
+    <header>快捷链接</header>
+    <ul class="terms ads">
+      
+        <li>
+            <a href="https://emn178.github.io/online-tools/url_decode.html" title="常用编码转换工具" target="_blank">
+                
+                    常用编码转换工具
+                
+            </a>
+        </li>
+      
+        <li>
+            <a href="https://api.mumuglobal.com/api/ip" title="每日壁纸" target="_blank">
+                
+                <img src="https://bing.img.run/1920x1080.php" title="每日壁纸">
+                
+            </a>
+        </li>
+      
+    </ul>
+  </section>
+
+</aside>
+    <div class="mcol c6">
+        <main class="page-content" aria-label="Content">
+            <article>
+                <header class="header">
+                    <h1 class="header-title">javascript中的各种简写总结（不断更新）</h1>
+                    <div class="post-meta">
+                        
+                        
+                        <time datetime="2020-02-28T17:09:04&#43;08:00" itemprop="datePublished"> 🕓
+                            2020-02-28 17:09</time>
+                        
+                        
+                        
+                            <p class="meta-tags">
+                                
+                                <a href="https://gmyxw.github.io/tags/js/">#js</a>
+                                
+                            </p>
+                        
+                    </div>
+                </header>
+                
+                <div class="page-content">
+                    <p>在看书的时候，搜<code>void 0</code>时，看到有人列出过类似的例子，所以延伸着搜索了一堆简写的例子整理出来。</p>
+<p>这里的简写，包括比如<code>void 0</code>代替<code>undefined</code>这类值替代，</p>
+<p>也包括了箭头函数替代普通函数、<code>for</code>循环各种写法中性能最好的这类写法替代，</p>
+<p>还想到了以前面试的时候看到的<code>es6</code>面试题，数组去重，最简单的方法是用<code>set</code>和<code>Array.from</code>。</p>
+<p>类似的都会整理出来，以后遇到了新的也会更新上来。</p>
+<p>2018/12/22</p>
+<p>（1）取整，位运算更快。原因介绍：参考：位运算实现的原因</p>
+<p>位运算取整（更快）</p>
+<p>位运算取整：下述，都可以</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">~~</span>a; <span style="color:#8b949e;font-style:italic">//双非位操作符
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>a<span style="color:#ff7b72;font-weight:bold">|</span><span style="color:#a5d6ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f85149">。。。</span></span></span></code></pre></div>
+</div>
+<p>（2）四舍五入（0.5规定向上取整），位运算更快</p>
+<p>位运算的四舍五入，负数不适配</p>
+<p>位运算适合正数的四舍五入，但是负数只能舍，不能入。</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>a<span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#a5d6ff">0.5</span><span style="color:#ff7b72;font-weight:bold">|</span><span style="color:#a5d6ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72;font-weight:bold">~~</span>(a<span style="color:#ff7b72;font-weight:bold">+</span><span style="color:#a5d6ff">0.5</span>);
+</span></span><span style="display:flex;"><span><span style="color:#f85149">。。。</span></span></span></code></pre></div>
+</div>
+<p>（3）内置值 <code>undefined</code></p>
+<p>undefined替代</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#ff7b72">void</span> <span style="color:#a5d6ff">0</span>; <span style="color:#8b949e;font-style:italic">// 快
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#a5d6ff">0</span>[<span style="color:#a5d6ff">0</span>]; <span style="color:#8b949e;font-style:italic">// 略慢
+</span></span></span></code></pre></div>
+</div>
+<p>（4）内置值 Infinity</p>
+<p>Infinity替代</p>
+<p>1/0;
+（5）布尔值短写法</p>
+<p>布尔值短写法</p>
+<p>!0; // true
+!1; //false
+（6）十进制指数（想当初，刚学c的时候，我一直都用pow(10,n)）
+10000000000 === 1e10</p>
+<p>（7）三元运算符 ? :
+还用于简化函数的调用。</p>
+<p>function x() { console.log(&lsquo;x&rsquo;) };
+function y() { console.log(&lsquo;y&rsquo;) };
+let z = 3;
+简化前：</p>
+<p>if (z == 3) {
+x();
+} else {
+y();
+}
+简化后：</p>
+<p>(z==3?x:y)(); //x
+（8）短路求值 &amp;&amp; ||
+当给一个变量分配另一个值时，想确定源始值不是null，undefined或空值。可以写撰写一个多重条件的if语句。</p>
+<p>if (variable1 !== null || variable1 !== undefined || variable1 !== &lsquo;&rsquo;) {
+let variable2 = variable1;
+}
+或者可以使用短路求值方法：</p>
+<p>const variable2 = variable1 || &lsquo;backupValue&rsquo;;
+（9）声明变量简写
+let x;
+let y;
+let z = 3;
+简写方法：</p>
+<p>let x, y, z=3;
+（10）if存在条件简写
+if ( a ) { }
+if ( !a ) { }
+（11）js循环简写
+虽说，有for (variable in object) {} 用于遍历对象属性名，</p>
+<p>for (variable of iterable) {} 用于遍历对象属性值（但不适用于普通自定义对象），</p>
+<p>for ( var key of Object.keys( someObject ) ) { } for-of结合Object.keys可以遍历普通对象属性值，</p>
+<p>Array.prototype.forEach遍历数组和类数组对象，</p>
+<p>但是，从性能上来讲还是最原始的for( ; ; )运行最快，所以非必要的时候还是使用原始for循环。</p>
+<p>//性能最优化，但是可读性低
+var i; //优化变量声明
+var divs = document.getElementsByTagName(&ldquo;div&rdquo;);
+for( i = divs.length-1; i &gt;= 0; i -= 1 ){
+//优化循环中动态集合读取、减值迭代、用i-=1 代替 i&ndash;
+}
+//合理的循环优化，以优化性能的前提下兼顾可读性
+var i,len;
+var divs = document.getElementsByTagName(&ldquo;div&rdquo;);
+for( i = 0, len = divs.length; i &lt; len; i++ ){
+}
+参考：各种循环遍历对比</p>
+<p>（12）对象属性简写
+如果属性名与key名相同，则可以采用ES6的方法：</p>
+<p>const obj = { x: x, y: y };
+简写：</p>
+<p>const obj = { x, y };
+（13）箭头函数简写
+要注意箭头函数的特性：</p>
+<p>1）this指向定义时的环境。2）不可new实例化。3）this不可变。4）没有arguments对象。</p>
+<p>常用于内部函数，增强可读性。</p>
+<p>function sayHello(name) {
+console.log(&lsquo;Hello&rsquo;, name);
+}
+setTimeout(function() {
+console.log(&lsquo;Loaded&rsquo;);
+}, 2000);
+list.forEach(function(item) {
+console.log(item);
+});
+简写：</p>
+<p>sayHello = name =&gt; console.log(&lsquo;Hello&rsquo;, name);
+setTimeout(() =&gt; console.log(&lsquo;Loaded&rsquo;), 2000);
+list.forEach(item =&gt; console.log(item));
+（14）箭头函数中的省略return写法
+(参数1,参数2,…,参数N) =&gt; 表达式（单一）</p>
+<p>// 相当于：(参数1, 参数2, …, 参数N) =&gt; { return 表达式; }</p>
+<p>function calcCircumference(diameter) {
+return Math.PI * diameter
+}
+var func = function func() {
+return { foo: 1 };
+};
+简写：</p>
+<p>calcCircumference = diameter =&gt; (Math.PI * diameter);
+var func = () =&gt; ({ foo: 1 });
+（15）默认参数值
+为了给函数中参数传递默认值，通常使用if语句来编写，但是使用ES6定义默认值，则会很简洁：</p>
+<p>function volume(l, w, h) {
+if (w === undefined)
+w = 3;
+if (h === undefined)
+h = 4;
+return l * w * h;
+}
+简写：</p>
+<p>volume = (l, w = 3, h = 4 ) =&gt; (l * w * h);
+volume(2) // 24
+（16）强制参数简写
+JavaScript中如果没有向函数参数传递值，则参数为undefined。为了增强参数赋值，可以使用if语句来抛出异常，或使用强制参数简写方法。</p>
+<p>function foo(bar) {
+if(bar === undefined) {
+throw new Error(&lsquo;Missing parameter!&rsquo;);
+}
+return bar;
+}
+简写：</p>
+<p>mandatory = () =&gt; {
+throw new Error(&lsquo;Missing parameter!&rsquo;);
+}
+foo = (bar = mandatory()) =&gt; {
+return bar;
+}
+（17）模板字符串简写
+es6中的模板字符串可以保留空白符（换行、空格、制表符）和传参。</p>
+<p>模板字符串中的传参、换行、空格</p>
+<p>const db = &lsquo;Our database is\n\t&rsquo;</p>
+<ul>
+<li>&lsquo;http://&rsquo; + host + &lsquo;:&rsquo; + port + &lsquo;/&rsquo; + database;
+简写：</li>
+</ul>
+<p>const db = <code>Our database is http://${host}:${port}/${database}</code>;
+（18）解构赋值简写
+在web框架中，经常需要从组件和API之间来回传递数组或对象字面形式的数据，然后需要解构它</p>
+<p>const observable = require(&lsquo;mobx/observable&rsquo;);
+const action = require(&lsquo;mobx/action&rsquo;);
+const runInAction = require(&lsquo;mobx/runInAction&rsquo;);</p>
+<p>const store = this.props.store;
+const form = this.props.form;
+const loading = this.props.loading;
+const errors = this.props.errors;
+const entity = this.props.entity;
+简写：</p>
+<p>import { observable, action, runInAction } from &lsquo;mobx&rsquo;;
+const { store, form, loading, errors, entity } = this.props;
+也可以分配变量名：</p>
+<p>const { store, form, loading, errors, entity:contact } = this.props;
+//最后一个变量名为contact
+（19）扩展运算符简写，数组，对象</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">// joining arrays
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#ff7b72">const</span> odd <span style="color:#ff7b72;font-weight:bold">=</span> [<span style="color:#a5d6ff">1</span>, <span style="color:#a5d6ff">3</span>, <span style="color:#a5d6ff">5</span>];
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">const</span> nums <span style="color:#ff7b72;font-weight:bold">=</span> [<span style="color:#a5d6ff">2</span> ,<span style="color:#a5d6ff">4</span> , <span style="color:#a5d6ff">6</span>].concat(odd);
+</span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">// cloning arrays
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#ff7b72">const</span> arr <span style="color:#ff7b72;font-weight:bold">=</span> [<span style="color:#a5d6ff">1</span>, <span style="color:#a5d6ff">2</span>, <span style="color:#a5d6ff">3</span>, <span style="color:#a5d6ff">4</span>];
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">const</span> arr2 <span style="color:#ff7b72;font-weight:bold">=</span> arr.slice()</span></span></code></pre></div>
+</div>
+<p>简写：</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">// joining arrays
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#ff7b72">const</span> odd <span style="color:#ff7b72;font-weight:bold">=</span> [<span style="color:#a5d6ff">1</span>, <span style="color:#a5d6ff">3</span>, <span style="color:#a5d6ff">5</span> ];
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">const</span> nums <span style="color:#ff7b72;font-weight:bold">=</span> [<span style="color:#a5d6ff">2</span> ,<span style="color:#a5d6ff">4</span> , <span style="color:#a5d6ff">6</span>, ...odd]; <span style="color:#8b949e;font-style:italic">// [ 2, 4, 6, 1, 3, 5 ]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic">// cloning arrays
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#ff7b72">const</span> arr <span style="color:#ff7b72;font-weight:bold">=</span> [<span style="color:#a5d6ff">1</span>, <span style="color:#a5d6ff">2</span>, <span style="color:#a5d6ff">3</span>, <span style="color:#a5d6ff">4</span>];
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">const</span> arr2 <span style="color:#ff7b72;font-weight:bold">=</span> [...arr]; <span style="color:#8b949e;font-style:italic">// [1, 2, 3, 4]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>还使用扩展运算符来在一个数组中任意处插入另一个数组<span style="color:#f85149">：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">const</span> odd <span style="color:#ff7b72;font-weight:bold">=</span> [<span style="color:#a5d6ff">1</span>, <span style="color:#a5d6ff">3</span>, <span style="color:#a5d6ff">5</span>];
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">const</span> nums <span style="color:#ff7b72;font-weight:bold">=</span> [<span style="color:#a5d6ff">2</span>, ...odd, <span style="color:#a5d6ff">4</span> , <span style="color:#a5d6ff">6</span>]; <span style="color:#8b949e;font-style:italic">// [2, 1, 3, 5, 4 , 6]
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>也可以使用扩展运算符解构<span style="color:#f85149">：</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">const</span> { a, b, ...z } <span style="color:#ff7b72;font-weight:bold">=</span> { a<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">1</span>, b<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">2</span>, c<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">3</span>, d<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">4</span> };
+</span></span><span style="display:flex;"><span>console.log(a) <span style="color:#8b949e;font-style:italic">// 1
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>console.log(b) <span style="color:#8b949e;font-style:italic">// 2
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>console.log(z) <span style="color:#8b949e;font-style:italic">// { c: 3, d: 4 }
+</span></span></span></code></pre></div>
+</div>
+<p>（20）从对象数组中查找某个值
+es6数组的新方法 Array.find() ，但是只能返回一个值，找到多个返回第一个。</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>arr.find(callback[,thisArg])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">function</span> callback(element, index, array){}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">const</span> pets <span style="color:#ff7b72;font-weight:bold">=</span> [
+</span></span><span style="display:flex;"><span>{ type<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">&#39;Dog&#39;</span>, name<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">&#39;Max&#39;</span>},
+</span></span><span style="display:flex;"><span>{ type<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">&#39;Cat&#39;</span>, name<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">&#39;Karl&#39;</span>},
+</span></span><span style="display:flex;"><span>{ type<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">&#39;Dog&#39;</span>, name<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">&#39;Tommy&#39;</span>},
+</span></span><span style="display:flex;"><span>]
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">function</span> findDog(name) {
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">for</span>(<span style="color:#ff7b72">let</span> i <span style="color:#ff7b72;font-weight:bold">=</span> <span style="color:#a5d6ff">0</span>; i<span style="color:#ff7b72;font-weight:bold">&lt;</span>pets.length; <span style="color:#ff7b72;font-weight:bold">++</span>i) {
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">if</span>(pets[i].type <span style="color:#ff7b72;font-weight:bold">===</span> <span style="color:#a5d6ff">&#39;Dog&#39;</span> <span style="color:#ff7b72;font-weight:bold">&amp;&amp;</span> pets[i].name <span style="color:#ff7b72;font-weight:bold">===</span> name) {
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">return</span> pets[i];
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<p>简写：</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#ff7b72">var</span> pet <span style="color:#ff7b72;font-weight:bold">=</span> pets.find(pet =&gt; pet.type <span style="color:#ff7b72;font-weight:bold">===</span><span style="color:#a5d6ff">&#39;Dog&#39;</span> <span style="color:#ff7b72;font-weight:bold">&amp;&amp;</span> pet.name <span style="color:#ff7b72;font-weight:bold">===</span> <span style="color:#a5d6ff">&#39;Tommy&#39;</span>);
+</span></span><span style="display:flex;"><span>console.log(pet); <span style="color:#8b949e;font-style:italic">// { type: &#39;Dog&#39;, name: &#39;Tommy&#39; }
+</span></span></span></code></pre></div>
+</div>
+<p>（21）数组去重
+es6新增数据结构set，元素不重复。</p>
+<p>往常需要循环的代码在这里只有两行。</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#ff7b72">var</span> arr <span style="color:#ff7b72;font-weight:bold">=</span> [<span style="color:#a5d6ff">1</span>,<span style="color:#a5d6ff">2</span>,<span style="color:#a5d6ff">2</span>,<span style="color:#a5d6ff">3</span>,<span style="color:#a5d6ff">4</span>]; <span style="color:#8b949e;font-style:italic">// 需要去重的数组
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#ff7b72">var</span> set <span style="color:#ff7b72;font-weight:bold">=</span> newSet(arr); <span style="color:#8b949e;font-style:italic">// {1,2,3,4}
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span><span style="color:#ff7b72">var</span> newArr <span style="color:#ff7b72;font-weight:bold">=</span>Array.from(set); <span style="color:#8b949e;font-style:italic">// 再把set转变成array
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>console.log(newArr); <span style="color:#8b949e;font-style:italic">// [1,2,3,4]
+</span></span></span></code></pre></div>
+</div>
+<p>参考：为什么js中要用<code>void 0</code> 代替<code>undefined</code>，还是有特别的含义呢</p>
+<p>分享19个<code>JavaScript</code> 有用的简写写法</p>
+<p>课外：在搜索的时候，看到有人觉得<code>object[&quot;key&quot;]</code>和<code>object.key</code>也是简写，个人觉得这就是个不一样的写法。<code>object[keyValue]</code>中的值是属性名字符串，<code>object.key</code>中的<code>key</code>是<code>object</code>下的已知属性。</p>
+<p>有人遇到过 <code>for ( var key in someObject ) { }</code> 导致的在循环体中 <code>someObject.key</code> 取不到值。</p>
+<p>这个for-in语句，相当于 <code>for ( var key of Object.keys( someObject ) ) { }</code>，</p>
+<p><code>Object.keys()</code>返回的是属性名字符串，for-in中的key返回的也是字符串。</p>
+<div class="highlight-container">
+  
+  
+  <div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">var</span> json <span style="color:#ff7b72;font-weight:bold">=</span> {a<span style="color:#ff7b72;font-weight:bold">:</span> <span style="color:#a5d6ff">1</span>};
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">for</span>(<span style="color:#ff7b72">var</span> key <span style="color:#ff7b72">in</span> json ){
+</span></span><span style="display:flex;"><span><span style="color:#ff7b72">typeof</span> key; <span style="color:#8b949e;font-style:italic">//&#34;string&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#8b949e;font-style:italic"></span>}</span></span></code></pre></div>
+</div>
+
+                </div>
+                
+            </article>
+        </main></div>
+    <aside class="l-sidebar mcol c3">
+    
+<section class="sidebar">
+  <header>相关内容</header>
+  
+  
+  
+  
+  
+  
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200227-react-validate/">React关于form的取部分字段数据</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200227-tippy-warning/">Tippy_warning</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200226-react-datepicker/">出现value.locale is not a function问题解决办法</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200215-saga-deprecated-warning/">Saga deprecated 警告</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200210-umi-ui-bug-using-react-document-title/">umi-ui bug using react-document-title</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200209-programmatically-navigate-using-react-router/">Programmatically_navigate_using_react_router</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/20200206-yarn-accelerate-and-modify-mirror-source-in-china/">npm和yarn如何查看源和换源</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722768240/">深入理解DOMContentLoaded的触发时机</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722679457/">解决Noto字体数字和空格使用emoji符号数字</a></article>
+  
+  <article><a href="https://gmyxw.github.io/posts/1722231351/">chrome 全局代理</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200228-encrypt-string-using-openssl/">Encrypt string using Openssl</a></article>
+  
+  
+  <article><a href="https://gmyxw.github.io/posts/20200304-browser-plugins/">Browser plugins</a></article>
+  
+</section>
+
+
+    
+<section class="sidebar">
+  <header>分类</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/categories/linux/">linux <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/file/">file <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/categories/tool/">tool <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+    
+<section class="sidebar">
+  <header>标签</header>
+  <ul class="terms">
+    
+    <li><a href="https://gmyxw.github.io/tags/linux/">linux <span class="count">(44)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/windows/">windows <span class="count">(11)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/js/">js <span class="count">(9)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/react/">react <span class="count">(6)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/android/">android <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/baidu/">baidu <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/chrome/">chrome <span class="count">(4)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/androidstudio/">androidstudio <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/archlinux/">archlinux <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/file/">file <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/java/">java <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/proxy/">proxy <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tool/">tool <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vim/">vim <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/vscode/">vscode <span class="count">(3)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/git/">git <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/github/">github <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/kvm/">kvm <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/libvirt/">libvirt <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/shell/">shell <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/tip/">tip <span class="count">(2)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/7z/">7z <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/antd/">antd <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/c/">c <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/cdn/">cdn <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/code/">code <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/css/">css <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/diskpart/">diskpart <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/dva/">dva <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/firefox/">firefox <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/flash/">flash <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/go/">go <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/golang/">golang <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/gpu/">gpu <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/html/">html <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/i3wm/">i3wm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/mihomo/">mihomo <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/netbios/">netbios <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/network/">network <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/npm/">npm <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/openssl/">openssl <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pagefile/">pagefile <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/pandavan/">pandavan <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/php/">php <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/powershell/">powershell <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/python/">python <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/regex/">regex <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/saga/">saga <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/samba/">samba <span class="count">(1)</span></a></li>
+    
+    <li><a href="https://gmyxw.github.io/tags/smaba/">smaba <span class="count">(1)</span></a></li>
+    
+  </ul>
+</section>
+
+
+
+</aside>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    
+    <small class="footer_copyright">
+        © 2024 gmyxw.
+        <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a>
+    </small><a href="#" id="totop">top</a></footer>
+
+
+
+
+
+
+    
+    <script aysnc src="https://cdn.staticfile.net/clipboard.js/2.0.11/clipboard.min.js"></script>
+    
+     
+  
+
+
+
+
+
+    
+    <script defer src="https://cdn.jsdmirror.com/gh/gmyxw/gmyxw.github.io@master/js/main.min.2fab7d03474408371fe7ecce7dc22fba4986ab9061f4de72f40e6087782c7561.js" integrity="sha256-L6t9A0dECDcf5&#43;zOfcIvukmGq5Bh9N5y9A5gh3gsdWE="></script>
+
+    
+
+</body>
+</html>

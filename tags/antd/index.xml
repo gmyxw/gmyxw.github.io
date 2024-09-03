@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>antd on zhili</title>
-    <link>https://sy123.netlify.app/tags/antd/</link>
-    <description>Recent content in antd on zhili</description>
+    <title>Antd on GM游戏网</title>
+    <link>https://gmyxw.github.io/tags/antd/</link>
+    <description>Recent content in Antd on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <copyright>2007-2022 zhili.</copyright>
-    <lastBuildDate>Wed, 26 Feb 2020 15:28:15 +0800</lastBuildDate><atom:link href="https://sy123.netlify.app/tags/antd/index.xml" rel="self" type="application/rss+xml" />
+    <language>zh-CN</language>
+    <copyright>2007-2024 gmyxw.</copyright>
+    <lastBuildDate>Wed, 26 Feb 2020 15:28:15 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/antd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>出现value.locale is not a function问题解决办法</title>
-      <link>https://sy123.netlify.app/%E5%87%BA%E7%8E%B0value.locale-is-not-a-function%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</link>
+      <link>https://gmyxw.github.io/posts/20200226-react-datepicker/</link>
       <pubDate>Wed, 26 Feb 2020 15:28:15 +0800</pubDate>
       
-      <guid>https://sy123.netlify.app/%E5%87%BA%E7%8E%B0value.locale-is-not-a-function%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/</guid>
-      <description>给datepicker赋值 可以输出赋值,datepicker赋值需要moment格式的数据,如果赋值了string类型的会报错 需要进行moment格式化moment(dateString)
-给普通字符串赋值 如果赋值了moment类型的数据 可以通过moment(date).format(XXX)来解决,如果还不行的话可以使用date&amp;amp;&amp;amp; moment(date).lacale(‘en’).format(XXX)</description>
+      <guid>https://gmyxw.github.io/posts/20200226-react-datepicker/</guid>
+      
+      <description>给datepicker赋值 可以输出赋值,datepicker赋值需要moment格式的数据,如果赋值了string类型的会报错 需要进行mom</description>
+      
     </item>
     
   </channel>
