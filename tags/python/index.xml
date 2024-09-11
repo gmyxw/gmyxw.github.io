@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on GM游戏网</title>
-    <link>http://localhost:1313/tags/python/</link>
+    <link>https://gmyxw.github.io/tags/python/</link>
     <description>Recent content in Python on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sat, 28 Mar 2020 20:54:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 28 Mar 2020 20:54:33 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Boot Download Background Image</title>
-      <link>http://localhost:1313/posts/20200328-boot-download-background-image/</link>
+      <link>https://gmyxw.github.io/posts/20200328-boot-download-background-image/</link>
       <pubDate>Sat, 28 Mar 2020 20:54:33 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200328-boot-download-background-image/</guid>
+      <guid>https://gmyxw.github.io/posts/20200328-boot-download-background-image/</guid>
       
       <description> </description>
       

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Regex on GM游戏网</title>
-    <link>http://localhost:1313/tags/regex/</link>
+    <link>https://gmyxw.github.io/tags/regex/</link>
     <description>Recent content in Regex on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Mon, 24 Feb 2020 01:15:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/regex/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Feb 2020 01:15:09 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/regex/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vim_search_in_file</title>
-      <link>http://localhost:1313/posts/20200224-vim-search-in-file/</link>
+      <link>https://gmyxw.github.io/posts/20200224-vim-search-in-file/</link>
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200224-vim-search-in-file/</guid>
+      <guid>https://gmyxw.github.io/posts/20200224-vim-search-in-file/</guid>
       
       <description>总有人问我 Vim 中能不能查找，当然能！而且是超级强的查找！ 这篇文章来详细介绍 Vim 中查找相关的设置和使用方法。 包括查找与替换、查找光标所在词、高亮前</description>
       

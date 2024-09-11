@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Github on GM游戏网</title>
-    <link>http://localhost:1313/tags/github/</link>
+    <link>https://gmyxw.github.io/tags/github/</link>
     <description>Recent content in Github on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Mon, 10 Feb 2020 13:07:08 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Feb 2020 13:07:08 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/github/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>git clone 指定分支拉代码</title>
-      <link>http://localhost:1313/posts/20200210-git-clone-branch/</link>
+      <link>https://gmyxw.github.io/posts/20200210-git-clone-branch/</link>
       <pubDate>Mon, 10 Feb 2020 13:07:08 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200210-git-clone-branch/</guid>
+      <guid>https://gmyxw.github.io/posts/20200210-git-clone-branch/</guid>
       
       <description>git clone 不指定分支 git clone http://10.1.1.11/service/tmall-service.git git clone 指定分支 git clone -b dev_jk http://10.1.1.11/service/tmall-service.git 命令中：多了一个 -b dev-jk,这个dev_jk就是分支，http://10.1.1.11/ser</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>Github Pull</title>
-      <link>http://localhost:1313/posts/20200108-github-pull/</link>
+      <link>https://gmyxw.github.io/posts/20200108-github-pull/</link>
       <pubDate>Wed, 08 Jan 2020 06:27:26 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200108-github-pull/</guid>
+      <guid>https://gmyxw.github.io/posts/20200108-github-pull/</guid>
       
       <description>github一直都是在上面拿资源。感觉有点愧对大众。是不是应该奉献自己的力量给github来推动开源的发展呢。 在两个月前第一次在github</description>
       

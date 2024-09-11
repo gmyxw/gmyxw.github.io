@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AndroidStudio on GM游戏网</title>
-    <link>http://localhost:1313/tags/androidstudio/</link>
+    <link>https://gmyxw.github.io/tags/androidstudio/</link>
     <description>Recent content in AndroidStudio on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Fri, 15 May 2020 04:26:04 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/androidstudio/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 May 2020 04:26:04 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/androidstudio/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How Do I Remove an Image System for Avd File in Android Studio</title>
-      <link>http://localhost:1313/posts/20200515-how-do-i-remove-an-image-system-for-avd-file-in-android-studio/</link>
+      <link>https://gmyxw.github.io/posts/20200515-how-do-i-remove-an-image-system-for-avd-file-in-android-studio/</link>
       <pubDate>Fri, 15 May 2020 04:26:04 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200515-how-do-i-remove-an-image-system-for-avd-file-in-android-studio/</guid>
+      <guid>https://gmyxw.github.io/posts/20200515-how-do-i-remove-an-image-system-for-avd-file-in-android-studio/</guid>
       
       <description>I want to remove the api 16 of jelly bean but there is not remove button how can I do that. image file is very big size file so I need don&amp;rsquo;t many system image file
 Go to Tools / Android / SDK Manager
@@ -25,10 +25,10 @@ Android Studio 3.6.3 In version 3.6.3 File -&amp;gt; Settings -&amp;gt; Appearan
     
     <item>
       <title>Android Studio preview</title>
-      <link>http://localhost:1313/posts/20200224-android-studio-preview/</link>
+      <link>https://gmyxw.github.io/posts/20200224-android-studio-preview/</link>
       <pubDate>Mon, 24 Feb 2020 07:58:36 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200224-android-studio-preview/</guid>
+      <guid>https://gmyxw.github.io/posts/20200224-android-studio-preview/</guid>
       
       <description>更新 IDE 和 SDK 工具 安装 Android Studio 后，您可以轻松通过自动更新和 Android SDK 管理器让 Android Studio IDE 和 Android SDK 工具保持最新状态。 更新 IDE 和变更版本 若有可用的 IDE 更新，Android</description>
       
@@ -36,10 +36,10 @@ Android Studio 3.6.3 In version 3.6.3 File -&amp;gt; Settings -&amp;gt; Appearan
     
     <item>
       <title>Android Studio emulator ugly black borders</title>
-      <link>http://localhost:1313/posts/20200224-android-studio-emulator-ugly-black-borders/</link>
+      <link>https://gmyxw.github.io/posts/20200224-android-studio-emulator-ugly-black-borders/</link>
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200224-android-studio-emulator-ugly-black-borders/</guid>
+      <guid>https://gmyxw.github.io/posts/20200224-android-studio-emulator-ugly-black-borders/</guid>
       
       <description> Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on GM游戏网</title>
-    <link>http://localhost:1313/tags/linux/</link>
+    <link>https://gmyxw.github.io/tags/linux/</link>
     <description>Recent content in Linux on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sat, 03 Aug 2024 18:04:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Aug 2024 18:04:17 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>解决Noto字体数字和空格使用emoji符号数字</title>
-      <link>http://localhost:1313/posts/1722679457/</link>
+      <link>https://gmyxw.github.io/posts/1722679457/</link>
       <pubDate>Sat, 03 Aug 2024 18:04:17 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/1722679457/</guid>
+      <guid>https://gmyxw.github.io/posts/1722679457/</guid>
       
       <description>前言 今天在浏览网页时发现页面上的数字变成了表情符号，而且空格符号也显示异常 解决 定位到元素的字体后用fc-match逐个测试后才发现找不到最后</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>libvirt升级后虚拟机没网络</title>
-      <link>http://localhost:1313/posts/kvmnonet/</link>
+      <link>https://gmyxw.github.io/posts/kvmnonet/</link>
       <pubDate>Thu, 25 Jul 2024 00:35:58 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/kvmnonet/</guid>
+      <guid>https://gmyxw.github.io/posts/kvmnonet/</guid>
       
       <description>升级后发现虚拟机全炸了，查下日志基本看起来libvirtd不知为何使用了iptables而不是nftables journalctl -u libvirtd -o cat -f libvirtd[2311]: internal error: Failed to apply firewall rules /usr/sbin/ip6tables</description>
       
@@ -32,10 +32,10 @@
     
     <item>
       <title>Incoming changes in JDK / JRE 21 packages may require manual intervention</title>
-      <link>http://localhost:1313/posts/kb2919351/</link>
+      <link>https://gmyxw.github.io/posts/kb2919351/</link>
       <pubDate>Thu, 28 Mar 2024 20:35:42 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/kb2919351/</guid>
+      <guid>https://gmyxw.github.io/posts/kb2919351/</guid>
       
       <description>手动操作需求：在升级过程中，如果涉及到JDK和JRE的更新或替换，可能需要用户手动执行一些操作。这是因为这些软件包之间可能存在依赖关系或冲突</description>
       
@@ -43,10 +43,10 @@
     
     <item>
       <title>无法使用 git clone/push，kex ssh 密钥错误</title>
-      <link>http://localhost:1313/posts/git-pory22/</link>
+      <link>https://gmyxw.github.io/posts/git-pory22/</link>
       <pubDate>Mon, 05 Dec 2022 02:04:31 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/git-pory22/</guid>
+      <guid>https://gmyxw.github.io/posts/git-pory22/</guid>
       
       <description>git clone/push 我的 Github 私人仓库，通过ssh，命令行报错： Cloning into &amp;#39;test&amp;#39;... kex_exchange_identification: Connection closed by remote host Connection closed by 20.205.243.166 port 22 fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists. 但是关闭 clash 之后一切正常，看</description>
       
@@ -54,10 +54,10 @@
     
     <item>
       <title>Chrome内置翻译被抢</title>
-      <link>http://localhost:1313/posts/chrome-translate/</link>
+      <link>https://gmyxw.github.io/posts/chrome-translate/</link>
       <pubDate>Sun, 09 Oct 2022 20:21:45 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/chrome-translate/</guid>
+      <guid>https://gmyxw.github.io/posts/chrome-translate/</guid>
       
       <description>linux下的chrome内置翻译也只能用系统代理，linux还是比windows好解决，不过我懒得折腾还是直接改hosts好了 su echo 180.163.151.34 translate.googleapis.com &amp;gt;&amp;gt; /etc/hosts</description>
       
@@ -65,10 +65,10 @@
     
     <item>
       <title>polybar不显示Awesome字体</title>
-      <link>http://localhost:1313/posts/polybar-awesome/</link>
+      <link>https://gmyxw.github.io/posts/polybar-awesome/</link>
       <pubDate>Sun, 09 Oct 2022 20:20:26 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/polybar-awesome/</guid>
+      <guid>https://gmyxw.github.io/posts/polybar-awesome/</guid>
       
       <description>当配置好i3窗口后，使用polybar显示状态时，如果使用命令行启动polybar时，经常会提示 Dropping unmatched character  (U+f02b) 这样的错误。这时候就需要注意了，可</description>
       
@@ -76,10 +76,10 @@
     
     <item>
       <title>Archlinux PGP Signature</title>
-      <link>http://localhost:1313/posts/20220323-archlinux-pgp-signature/</link>
+      <link>https://gmyxw.github.io/posts/20220323-archlinux-pgp-signature/</link>
       <pubDate>Wed, 23 Mar 2022 05:29:30 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20220323-archlinux-pgp-signature/</guid>
+      <guid>https://gmyxw.github.io/posts/20220323-archlinux-pgp-signature/</guid>
       
       <description>pacman安装软件包出现损坏 很久没用了arch了，更新一下出现了签名过期问题，记录下 File .pkg.tar.xz is corrupted (invalid or corrupted package (PGP signature)).Do you want to delete it? [Y/n] # 更新已知的密钥 (没啥</description>
       
@@ -87,10 +87,10 @@
     
     <item>
       <title>linux 解决i3画面撕裂</title>
-      <link>http://localhost:1313/posts/20210516-picom/</link>
+      <link>https://gmyxw.github.io/posts/20210516-picom/</link>
       <pubDate>Sun, 16 May 2021 06:34:37 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20210516-picom/</guid>
+      <guid>https://gmyxw.github.io/posts/20210516-picom/</guid>
       
       <description>换了新显卡这么久才发现会画面撕裂，网上搜了下在v2看到有人提到关闭渲染器的硬件加速可以解决，试了下果然有效 compton --backend xrender 彻底解决 顺藤摸瓜进去wiki</description>
       
@@ -98,10 +98,10 @@
     
     <item>
       <title>Archlinux Failed to Commit Transaction Conflicting File</title>
-      <link>http://localhost:1313/posts/20201125-archlinux-failed-to-commit-transaction-conflicting-file/</link>
+      <link>https://gmyxw.github.io/posts/20201125-archlinux-failed-to-commit-transaction-conflicting-file/</link>
       <pubDate>Wed, 25 Nov 2020 19:05:37 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20201125-archlinux-failed-to-commit-transaction-conflicting-file/</guid>
+      <guid>https://gmyxw.github.io/posts/20201125-archlinux-failed-to-commit-transaction-conflicting-file/</guid>
       
       <description>前言 今天我试着更新我的 Arch Linux 系统，然后遇到一个错误 error：failed to commit transaction (conflicting files) stfl：/usr/lib/libstfl.so.0 exists in f</description>
       
@@ -109,10 +109,10 @@
     
     <item>
       <title>解决Host key verification failed</title>
-      <link>http://localhost:1313/posts/20201105-how-to-fix-the-error-host-key-verification-failed/</link>
+      <link>https://gmyxw.github.io/posts/20201105-how-to-fix-the-error-host-key-verification-failed/</link>
       <pubDate>Thu, 05 Nov 2020 04:59:06 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20201105-how-to-fix-the-error-host-key-verification-failed/</guid>
+      <guid>https://gmyxw.github.io/posts/20201105-how-to-fix-the-error-host-key-verification-failed/</guid>
       
       <description>错误提示如下 $ ssh root@108.61.163.242 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ @ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY! Someone could be eavesdropping on you right now (man-in-the-middle attack)! It is also possible that a host key has just been changed. The fingerprint for the ECDSA key sent by the remote host is SHA256:HDjXJvu0VYXWF+SKMZjSGn4FQmg/+w6eV9ljJvIXpx0. Please contact your system administrator. Add correct</description>
       
@@ -120,10 +120,10 @@
     
     <item>
       <title>linux 使用usb声卡</title>
-      <link>http://localhost:1313/posts/20200622-usb-card-as-my-default-audio-device/</link>
+      <link>https://gmyxw.github.io/posts/20200622-usb-card-as-my-default-audio-device/</link>
       <pubDate>Mon, 22 Jun 2020 04:38:17 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200622-usb-card-as-my-default-audio-device/</guid>
+      <guid>https://gmyxw.github.io/posts/20200622-usb-card-as-my-default-audio-device/</guid>
       
       <description>前言 新买了耳机发现没声音，上网查了一下发现耳机自带了 usb 驱动，又又又开始了折腾之旅～ 解决声音问题 # 切换一下就完事 ~/site/blog ❯ asoundconf list Names of available sound cards: PCH Device ~/site/blog ❯ asoundconf set-default-card</description>
       
@@ -131,10 +131,10 @@
     
     <item>
       <title>Linux显示彩色Emoji表情</title>
-      <link>http://localhost:1313/posts/20200528-enable-noto_color-emoji-easily/</link>
+      <link>https://gmyxw.github.io/posts/20200528-enable-noto_color-emoji-easily/</link>
       <pubDate>Thu, 28 May 2020 15:13:00 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200528-enable-noto_color-emoji-easily/</guid>
+      <guid>https://gmyxw.github.io/posts/20200528-enable-noto_color-emoji-easily/</guid>
       
       <description>前言 之前安装 noto-fonts-emoji 这个包后一直半彩色半黑白吊着，看着是真的不爽，实在太懒，今天在google意外看到很简单就解决了 解决方法 01-emoji.conf &amp;lt;?xml version=&amp;#39;1.0&amp;#39;?&amp;gt; &amp;lt;!DOCTYPE fontconfig SYSTEM &amp;#39;fonts.dtd&amp;#39;&amp;gt; &amp;lt;fontconfig&amp;gt; &amp;lt;match target=&amp;#34;pattern&amp;#34;&amp;gt; &amp;lt;edit</description>
       
@@ -142,10 +142,10 @@
     
     <item>
       <title>android env</title>
-      <link>http://localhost:1313/files/20200516-android-env/</link>
+      <link>https://gmyxw.github.io/files/20200516-android-env/</link>
       <pubDate>Sat, 16 May 2020 19:27:02 +0800</pubDate>
       
-      <guid>http://localhost:1313/files/20200516-android-env/</guid>
+      <guid>https://gmyxw.github.io/files/20200516-android-env/</guid>
       
       <description>android-env.sh
 #!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &amp;#34;${_android_arch}&amp;#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &amp;#34;${ANDROID_MINIMUM_PLATFORM}&amp;#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &amp;#34;${ANDROID_HOME}&amp;#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &amp;#34;${ANDROID_NDK_HOME}&amp;#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &amp;#34;${ANDROID_BUILD_TOOLS_REVISION}&amp;#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &amp;#34;${ANDROID_API_VERSION}&amp;#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &amp;#34;${ANDROID_NDK_PLATFORM}&amp;#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &amp;#34;$_android_arch&amp;#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang++ export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &amp;#39;Pkg.</description>
@@ -154,10 +154,10 @@
     
     <item>
       <title>GTK开启黑暗模式</title>
-      <link>http://localhost:1313/posts/20200516-enable-dark-mode-in-gtk2/</link>
+      <link>https://gmyxw.github.io/posts/20200516-enable-dark-mode-in-gtk2/</link>
       <pubDate>Sat, 16 May 2020 00:33:08 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200516-enable-dark-mode-in-gtk2/</guid>
+      <guid>https://gmyxw.github.io/posts/20200516-enable-dark-mode-in-gtk2/</guid>
       
       <description># 安装黑暗主题 ~ ❯ sudo pacman -S gnome-themes-extra ~ ❯ cat .gtkrc gtk-icon-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-theme-name = &amp;#34;Adwaita-dark&amp;#34; gtk-font-name = &amp;#34;Cantarell 11&amp;#34; ~ ❯ cat .config/gtk-3.0/settings.ini [Settings] gtk-icon-theme-name = Adwaita-dark gtk-theme-name = Adwaita-dark gtk-application-prefer-dark-theme = true gtk-font-name = Cantarell 11 See also https://wiki.archlinux.org/index.php/GTK</description>
       
@@ -165,10 +165,10 @@
     
     <item>
       <title>解决Windows与Ubuntu双系统时间同步问题</title>
-      <link>http://localhost:1313/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</link>
+      <link>https://gmyxw.github.io/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</link>
       <pubDate>Tue, 12 May 2020 14:31:58 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</guid>
+      <guid>https://gmyxw.github.io/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</guid>
       
       <description>UTC in Windows To dual boot with Windows it is recommended to configure Windows to use UTC, rather than Linux to use localtime. (Windows by default uses localtime [1].) It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal You can do this from an Administrator Command Prompt</description>
       
@@ -176,10 +176,10 @@
     
     <item>
       <title>numfmt:让数字变得更容易理解</title>
-      <link>http://localhost:1313/tips/20200507a-numfmt/</link>
+      <link>https://gmyxw.github.io/tips/20200507a-numfmt/</link>
       <pubDate>Tue, 12 May 2020 12:10:46 +0800</pubDate>
       
-      <guid>http://localhost:1313/tips/20200507a-numfmt/</guid>
+      <guid>https://gmyxw.github.io/tips/20200507a-numfmt/</guid>
       
       <description>像 =ls=, =df=, =du= 这类命令都带有一个选项可以将数字直接转换成人类容易阅读的形式来展现。 比如,直接执行 =df= 时，容量显示的是多少个块，而当用 =df -h= 时，容量会根</description>
       
@@ -187,10 +187,10 @@
     
     <item>
       <title>Warning Secondary Partition Overlaps the Last Partition by X Blocks in Gdisk</title>
-      <link>http://localhost:1313/posts/20200510b-warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</link>
+      <link>https://gmyxw.github.io/posts/20200510b-warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</link>
       <pubDate>Sun, 10 May 2020 17:15:52 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200510b-warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</guid>
+      <guid>https://gmyxw.github.io/posts/20200510b-warning-secondary-partition-overlaps-the-last-partition-by-x-blocks-in-gdisk/</guid>
       
       <description>From what I just found out, it may be unsafe. I was getting this same error
 *************************************************************** Found invalid GPT and valid MBR; converting MBR to GPT format in memory. THIS OPERATION IS POTENTIALLY DESTRUCTIVE! Exit by typing &amp;lsquo;q&amp;rsquo; if you don&amp;rsquo;t want to convert your MBR partitions to GPT format!
@@ -200,10 +200,10 @@ Warning! Secondary partition table overlaps the last partition by 33 blocks! You
     
     <item>
       <title>Failed unmounting /run/user/1000 whenever i shutdown or reboot</title>
-      <link>http://localhost:1313/posts/20200510a-failed-unmounting-xxx/</link>
+      <link>https://gmyxw.github.io/posts/20200510a-failed-unmounting-xxx/</link>
       <pubDate>Sun, 10 May 2020 16:05:28 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200510a-failed-unmounting-xxx/</guid>
+      <guid>https://gmyxw.github.io/posts/20200510a-failed-unmounting-xxx/</guid>
       
       <description>今天虚拟机关机发现出现了Failed unmounting /run/user/1000的红字提示，加上登录注销卡顿等异常，一看就不太正常，cat /etc/fstab 后发现是安装的</description>
       
@@ -211,10 +211,10 @@ Warning! Secondary partition table overlaps the last partition by 33 blocks! You
     
     <item>
       <title>NVRAM storage in libvirt</title>
-      <link>http://localhost:1313/posts/20200509-nvramdir/</link>
+      <link>https://gmyxw.github.io/posts/20200509-nvramdir/</link>
       <pubDate>Sat, 09 May 2020 18:34:24 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200509-nvramdir/</guid>
+      <guid>https://gmyxw.github.io/posts/20200509-nvramdir/</guid>
       
       <description>NVRAM storage in libvirt Libvirt stores pflash/nvram files for privliged users in /var/lib/libvirt/qemu/nvram/ this is a copy of the template var file that is read only. OVMF uses these files to store information such as boot information. The template inforamtion was uesed to be configured in /etc/libvirt/qemu.conf but was moved to json files. [https://bugs.archlinux.org/task/64175]
 Location of master nvram file This configuration option is obsolete. Libvirt will follow the QEMU firmware metadata specification to automatically locate firmware images.</description>
@@ -223,10 +223,10 @@ Location of master nvram file This configuration option is obsolete. Libvirt wil
     
     <item>
       <title>7z command</title>
-      <link>http://localhost:1313/tips/20200507-7z-command/</link>
+      <link>https://gmyxw.github.io/tips/20200507-7z-command/</link>
       <pubDate>Thu, 07 May 2020 15:02:57 +0800</pubDate>
       
-      <guid>http://localhost:1313/tips/20200507-7z-command/</guid>
+      <guid>https://gmyxw.github.io/tips/20200507-7z-command/</guid>
       
       <description>exclude file Specifies which filenames or wildcarded names must be excluded from the operation. Multiple exclude switches are supported. Syntax -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt; &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard} See -i (Include) switch description for information about option parameters. Examples 7z a -tzip archive.zip *.txt -x!temp.* adds to the archive.zip all *.txt files, except temp.* files. 7z a archive.7z Folder1\ -xr!*.png adds to the archive.7z all files from</description>
       
@@ -234,10 +234,10 @@ Location of master nvram file This configuration option is obsolete. Libvirt wil
     
     <item>
       <title>Xf86OpenConsole Cannot Open Virtual Console</title>
-      <link>http://localhost:1313/posts/20200506-xf86openconsole-cannot-open-virtual-console/</link>
+      <link>https://gmyxw.github.io/posts/20200506-xf86openconsole-cannot-open-virtual-console/</link>
       <pubDate>Wed, 06 May 2020 18:00:36 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200506-xf86openconsole-cannot-open-virtual-console/</guid>
+      <guid>https://gmyxw.github.io/posts/20200506-xf86openconsole-cannot-open-virtual-console/</guid>
       
       <description>I can start X only by root. If I am using startx using ordinary user I get the error:
 xf86OpenConsole: Cannot open virtual console 1 (Permission denied)
@@ -247,10 +247,10 @@ $ groups lp wheel games video audio optical storage scanner power users $ ls -l 
     
     <item>
       <title>Thunar sftp.desktop</title>
-      <link>http://localhost:1313/posts/20200425-thunar-sftp.desktop/</link>
+      <link>https://gmyxw.github.io/posts/20200425-thunar-sftp.desktop/</link>
       <pubDate>Sat, 25 Apr 2020 01:15:51 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200425-thunar-sftp.desktop/</guid>
+      <guid>https://gmyxw.github.io/posts/20200425-thunar-sftp.desktop/</guid>
       
       <description> [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -f alsa -i hw:1,1,0 -f alsa -i hw:1,1,1 -filter_complex amerge output.mkv </description>
       
@@ -258,10 +258,10 @@ $ groups lp wheel games video audio optical storage scanner power users $ ls -l 
     
     <item>
       <title>Problems With Hardware Acceleration Environment Variables</title>
-      <link>http://localhost:1313/posts/20200423-problems-with-hardware-acceleration-environment-variables/</link>
+      <link>https://gmyxw.github.io/posts/20200423-problems-with-hardware-acceleration-environment-variables/</link>
       <pubDate>Thu, 23 Apr 2020 00:02:33 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200423-problems-with-hardware-acceleration-environment-variables/</guid>
+      <guid>https://gmyxw.github.io/posts/20200423-problems-with-hardware-acceleration-environment-variables/</guid>
       
       <description>问题 ~ ❯ vainfo libva error: /usr/lib/dri/iHD_drv_video.so init failed vaInitialize failed with error code 1 (operation failed),exit 解决方法 Everything works as it is supposed to by just adding: LIBVA_DRIVER_NAME=i965 # or if using the intel-media-driver which I prefer for newer hardware then it is: LIBVA_DRIVER_NAME=iHD also for intel-media-driver you may want to read the readme and enable guc and huc. I believe it just enables huc</description>
       
@@ -269,10 +269,10 @@ $ groups lp wheel games video audio optical storage scanner power users $ ls -l 
     
     <item>
       <title>解决&#39;ERROR: The certificate of `github.com’ is not trusted.&#39;问题</title>
-      <link>http://localhost:1313/posts/20200415-err-wget-not-trusted/</link>
+      <link>https://gmyxw.github.io/posts/20200415-err-wget-not-trusted/</link>
       <pubDate>Wed, 15 Apr 2020 07:11:46 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200415-err-wget-not-trusted/</guid>
+      <guid>https://gmyxw.github.io/posts/20200415-err-wget-not-trusted/</guid>
       
       <description>今天早上有在GITHUB下载一个脚本到VPS中的时候有出现&amp;quot;ERROR: The certificate of `github.com’ is not trusted.&amp;ldq</description>
       
@@ -280,10 +280,10 @@ $ groups lp wheel games video audio optical storage scanner power users $ ls -l 
     
     <item>
       <title>Linux 图片转pdf</title>
-      <link>http://localhost:1313/posts/20200413-linux-convert-images-to-pdf/</link>
+      <link>https://gmyxw.github.io/posts/20200413-linux-convert-images-to-pdf/</link>
       <pubDate>Mon, 13 Apr 2020 02:39:04 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200413-linux-convert-images-to-pdf/</guid>
+      <guid>https://gmyxw.github.io/posts/20200413-linux-convert-images-to-pdf/</guid>
       
       <description>ImageMagick Just use this: convert &amp;#34;*.{png,jpeg}&amp;#34; -quality 100 outfile.pdf In general case you can combine more files into one pdf file with including them inside {} and separate them with a single comma. adding -quality VALUE to keep quality after conversion(thanks to @iamcreasy) convert &amp;#34;*.{ext1,ext2,ext3,...}&amp;#34; -quality 100 outfile.pdf GhostScript gs #!/bin/sh str=&amp;#34;&amp;#34;; count=0; imgs=`ls *.gif | sort -n | tr &amp;#34; &amp;#34; &amp;#34;|&amp;#34;`; for i in $imgs; do i=${i//&amp;#39;|&amp;#39;/&amp;#39; &amp;#39;}</description>
       
@@ -291,10 +291,10 @@ $ groups lp wheel games video audio optical storage scanner power users $ ls -l 
     
     <item>
       <title>Feh Open SVG</title>
-      <link>http://localhost:1313/posts/20200401-feh-open-svg/</link>
+      <link>https://gmyxw.github.io/posts/20200401-feh-open-svg/</link>
       <pubDate>Wed, 01 Apr 2020 21:58:23 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200401-feh-open-svg/</guid>
+      <guid>https://gmyxw.github.io/posts/20200401-feh-open-svg/</guid>
       
       <description>Without the &amp;ndash;conversion-timeout part, I run into this error: feh: No Imlib2 loader for that file format
 As suggested in the Arch Linux Wiki, I open SVG images like this:
@@ -305,10 +305,10 @@ echo &amp;#34;feh --conversion-timeout 5&amp;#34; &amp;gt; ~/.config/feh/themes 
     
     <item>
       <title>What Does Networkmanager Wait Online Service Do</title>
-      <link>http://localhost:1313/posts/20200401-what-does-networkmanager-wait-online-service-do/</link>
+      <link>https://gmyxw.github.io/posts/20200401-what-does-networkmanager-wait-online-service-do/</link>
       <pubDate>Wed, 01 Apr 2020 20:29:10 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200401-what-does-networkmanager-wait-online-service-do/</guid>
+      <guid>https://gmyxw.github.io/posts/20200401-what-does-networkmanager-wait-online-service-do/</guid>
       
       <description>Some code runs off the network In some multi-user environments part of the boot-up process can come from the network. For this case systemd defaults to waiting for the network to come on-line before certain steps are taken.
 It appears that this service simply waits, doing absolutely nothing, until the network is connected, and when this happens, it changes its state so that other services that depend on the network can be launched to start doing their thing.</description>
@@ -317,10 +317,10 @@ It appears that this service simply waits, doing absolutely nothing, until the n
     
     <item>
       <title>Boot Download Background Image</title>
-      <link>http://localhost:1313/posts/20200328-boot-download-background-image/</link>
+      <link>https://gmyxw.github.io/posts/20200328-boot-download-background-image/</link>
       <pubDate>Sat, 28 Mar 2020 20:54:33 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200328-boot-download-background-image/</guid>
+      <guid>https://gmyxw.github.io/posts/20200328-boot-download-background-image/</guid>
       
       <description> </description>
       
@@ -328,10 +328,10 @@ It appears that this service simply waits, doing absolutely nothing, until the n
     
     <item>
       <title>Linux Force DHCP Client to Renew IP</title>
-      <link>http://localhost:1313/posts/20200324-linux-force-dhcp-client-to-renew-ip/</link>
+      <link>https://gmyxw.github.io/posts/20200324-linux-force-dhcp-client-to-renew-ip/</link>
       <pubDate>Tue, 24 Mar 2020 07:43:59 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200324-linux-force-dhcp-client-to-renew-ip/</guid>
+      <guid>https://gmyxw.github.io/posts/20200324-linux-force-dhcp-client-to-renew-ip/</guid>
       
       <description>am using Ubuntu Linux. How to force Linux to reacquire a new IP address from the DHCP server? What is the command of Linux equivalent to Windows’s “ipconfig /renew” command? You need to use Dynamic Host Configuration Protocol Client i.e., dhclient command. The client normally doe</description>
       
@@ -339,10 +339,10 @@ It appears that this service simply waits, doing absolutely nothing, until the n
     
     <item>
       <title>Linux中拷贝目录跳过指定文件的方法</title>
-      <link>http://localhost:1313/posts/20200320-linux-copy-directory-ignore-files/</link>
+      <link>https://gmyxw.github.io/posts/20200320-linux-copy-directory-ignore-files/</link>
       <pubDate>Fri, 20 Mar 2020 13:57:01 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200320-linux-copy-directory-ignore-files/</guid>
+      <guid>https://gmyxw.github.io/posts/20200320-linux-copy-directory-ignore-files/</guid>
       
       <description>近日在 Linux 环境中做版本迁移的时候遇到一个问题：需要将一个目录遍历拷贝到另一个目录中，但需要忽略其中的某些文件，由于目录中东西比较多，忽略的项也</description>
       
@@ -350,10 +350,10 @@ It appears that this service simply waits, doing absolutely nothing, until the n
     
     <item>
       <title>rename使用正则表达式</title>
-      <link>http://localhost:1313/posts/20200312-rename-regex/</link>
+      <link>https://gmyxw.github.io/posts/20200312-rename-regex/</link>
       <pubDate>Thu, 12 Mar 2020 22:50:06 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200312-rename-regex/</guid>
+      <guid>https://gmyxw.github.io/posts/20200312-rename-regex/</guid>
       
       <description>前言 以前一直用类似rename &amp;quot;s/_/-/&amp;quot; *这样的命令正则替换一些文件名，不过系统切换到Archlinux后用rename一直失败，用man看了下说明</description>
       
@@ -361,10 +361,10 @@ It appears that this service simply waits, doing absolutely nothing, until the n
     
     <item>
       <title>Browser plugins</title>
-      <link>http://localhost:1313/posts/20200304-browser-plugins/</link>
+      <link>https://gmyxw.github.io/posts/20200304-browser-plugins/</link>
       <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200304-browser-plugins/</guid>
+      <guid>https://gmyxw.github.io/posts/20200304-browser-plugins/</guid>
       
       <description>Installation The package you will need to install depends on the browser you use.
 The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package. </description>
@@ -373,10 +373,10 @@ The NPAPI version can be installed with the flashplugin package. The PPAPI versi
     
     <item>
       <title>Encrypt string using Openssl</title>
-      <link>http://localhost:1313/posts/20200228-encrypt-string-using-openssl/</link>
+      <link>https://gmyxw.github.io/posts/20200228-encrypt-string-using-openssl/</link>
       <pubDate>Fri, 28 Feb 2020 11:28:00 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200228-encrypt-string-using-openssl/</guid>
+      <guid>https://gmyxw.github.io/posts/20200228-encrypt-string-using-openssl/</guid>
       
       <description>Try this:
 echo &amp;#39;foo&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -salt echo &amp;#39;U2FsdGVkX1/QGdl4syQE8bLFSr2HzoAlcG299U/T/Xk=&amp;#39; | openssl aes-256-cbc -pbkdf2 -a -d -salt Run
@@ -386,10 +386,10 @@ openssl list-cipher-commands to list all available ciphers.</description>
     
     <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
-      <link>http://localhost:1313/posts/20200225-cp-backup/</link>
+      <link>https://gmyxw.github.io/posts/20200225-cp-backup/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200225-cp-backup/</guid>
+      <guid>https://gmyxw.github.io/posts/20200225-cp-backup/</guid>
       
       <description>GNU cp(1) has a backup option:
 cp --backup SOURCE [SOURCE...] [DESTINATION] This has the following effects which can be controlled with other options as described in the manual page of cp(1):
@@ -399,10 +399,10 @@ cp --backup SOURCE [SOURCE...] [DESTINATION] This has the following effects whic
     
     <item>
       <title>Android Studio emulator ugly black borders</title>
-      <link>http://localhost:1313/posts/20200224-android-studio-emulator-ugly-black-borders/</link>
+      <link>https://gmyxw.github.io/posts/20200224-android-studio-emulator-ugly-black-borders/</link>
       <pubDate>Mon, 24 Feb 2020 04:43:30 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200224-android-studio-emulator-ugly-black-borders/</guid>
+      <guid>https://gmyxw.github.io/posts/20200224-android-studio-emulator-ugly-black-borders/</guid>
       
       <description> Any way to remove the black box behind the emulator? Should run a compositor, something like compton Should try to use xprop WM_CLASS
 For the border, likely a compositor is needed or you can start the AVD without a device frame.
@@ -413,10 +413,10 @@ for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     
     <item>
       <title>Vim_search_in_file</title>
-      <link>http://localhost:1313/posts/20200224-vim-search-in-file/</link>
+      <link>https://gmyxw.github.io/posts/20200224-vim-search-in-file/</link>
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200224-vim-search-in-file/</guid>
+      <guid>https://gmyxw.github.io/posts/20200224-vim-search-in-file/</guid>
       
       <description>总有人问我 Vim 中能不能查找，当然能！而且是超级强的查找！ 这篇文章来详细介绍 Vim 中查找相关的设置和使用方法。 包括查找与替换、查找光标所在词、高亮前</description>
       
@@ -424,10 +424,10 @@ for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     
     <item>
       <title>linux中如何手动清零缓冲</title>
-      <link>http://localhost:1313/posts/20200216-how-do-you-empty-the-buffers-and-cache-on-linux-system/</link>
+      <link>https://gmyxw.github.io/posts/20200216-how-do-you-empty-the-buffers-and-cache-on-linux-system/</link>
       <pubDate>Sun, 16 Feb 2020 15:20:03 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200216-how-do-you-empty-the-buffers-and-cache-on-linux-system/</guid>
+      <guid>https://gmyxw.github.io/posts/20200216-how-do-you-empty-the-buffers-and-cache-on-linux-system/</guid>
       
       <description>Emptying the buffers cache If you ever want to empty it you can use this chain of commands. free &amp;amp;&amp;amp; sync &amp;amp;&amp;amp; echo 3 &amp;gt; /proc/sys/vm/drop_caches &amp;amp;&amp;amp; free total used free shared buffers cached Mem: 1018916 980832 38084 0 46924 355764 -/+ buffers/cache: 578144 440772 Swap: 2064376 128 2064248 total used free shared buffers cached Mem: 1018916 685008 333908 0 224 108252 -/+ buffers/cache: 576532 442384 Swap: 2064376 128 2064248</description>
       
@@ -435,10 +435,10 @@ for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     
     <item>
       <title>使用systemd-analyze优化系统启动时间</title>
-      <link>http://localhost:1313/posts/20200216-systemd-analyze/</link>
+      <link>https://gmyxw.github.io/posts/20200216-systemd-analyze/</link>
       <pubDate>Sun, 16 Feb 2020 14:53:24 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200216-systemd-analyze/</guid>
+      <guid>https://gmyxw.github.io/posts/20200216-systemd-analyze/</guid>
       
       <description>systemd-analyze简介 systemd-analyze是Linux自带的分析系统启动性能的工具。 systemd-analyze可使</description>
       
@@ -446,10 +446,10 @@ for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     
     <item>
       <title>Socket programing Permission denied</title>
-      <link>http://localhost:1313/posts/20200205-linux-privileged-port/</link>
+      <link>https://gmyxw.github.io/posts/20200205-linux-privileged-port/</link>
       <pubDate>Wed, 05 Feb 2020 16:04:13 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200205-linux-privileged-port/</guid>
+      <guid>https://gmyxw.github.io/posts/20200205-linux-privileged-port/</guid>
       
       <description>listen tcp :443: bind: permission denied If you want to bind to a privileged port (ports less than 1024). You either need to be root or have the CAP_NET_BIND_SERVICE capability.</description>
       
@@ -457,10 +457,10 @@ for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     
     <item>
       <title>Linux yay 命令</title>
-      <link>http://localhost:1313/posts/20200205-linux-yay/</link>
+      <link>https://gmyxw.github.io/posts/20200205-linux-yay/</link>
       <pubDate>Wed, 05 Feb 2020 12:57:49 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200205-linux-yay/</guid>
+      <guid>https://gmyxw.github.io/posts/20200205-linux-yay/</guid>
       
       <description>又一个酸奶：Arch Linux的一个实用程序，用于从Arch User Repository构建和安装软件包。 另见pacman。 从repos和AUR交</description>
       
@@ -468,10 +468,10 @@ for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     
     <item>
       <title>Linux_disable_IPv6</title>
-      <link>http://localhost:1313/posts/20200131-linux-disable-ipv6/</link>
+      <link>https://gmyxw.github.io/posts/20200131-linux-disable-ipv6/</link>
       <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200131-linux-disable-ipv6/</guid>
+      <guid>https://gmyxw.github.io/posts/20200131-linux-disable-ipv6/</guid>
       
       <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关</description>
       
@@ -479,10 +479,10 @@ for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     
     <item>
       <title>Linux下格式化U盘</title>
-      <link>http://localhost:1313/posts/20200126-linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</link>
+      <link>https://gmyxw.github.io/posts/20200126-linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</link>
       <pubDate>Sun, 26 Jan 2020 21:41:53 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200126-linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</guid>
+      <guid>https://gmyxw.github.io/posts/20200126-linux%E4%B8%8B%E6%A0%BC%E5%BC%8F%E5%8C%96u%E7%9B%98/</guid>
       
       <description>windows下格式化u盘很简单，要么直接右键格式化，要么进入硬盘分区去格式化。那么Linux下呢？ 其实Linux下格式化u盘也十分简单，只</description>
       
@@ -490,10 +490,10 @@ for_window [title=&amp;#34;.*Emulator.*&amp;#34;] floating enable </description>
     
     <item>
       <title>Set_all_Java_apps_to_use_GTK&#43;_font_&amp;_theme_settings</title>
-      <link>http://localhost:1313/posts/20200122-set-all-java-apps-to-use-gtk&#43;-font--theme-settings/</link>
+      <link>https://gmyxw.github.io/posts/20200122-set-all-java-apps-to-use-gtk&#43;-font--theme-settings/</link>
       <pubDate>Wed, 22 Jan 2020 01:12:54 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200122-set-all-java-apps-to-use-gtk&#43;-font--theme-settings/</guid>
+      <guid>https://gmyxw.github.io/posts/20200122-set-all-java-apps-to-use-gtk&#43;-font--theme-settings/</guid>
       
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
 Java default look Java GTK+ look How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:
@@ -503,10 +503,10 @@ export _JAVA_OPTIONS=&amp;#34;-Dawt.useSystemAAFontSettings=on -Dswing.aatext=tr
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>http://localhost:1313/posts/20200111-set-proxy-for-terminal/</link>
+      <link>https://gmyxw.github.io/posts/20200111-set-proxy-for-terminal/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200111-set-proxy-for-terminal/</guid>
+      <guid>https://gmyxw.github.io/posts/20200111-set-proxy-for-terminal/</guid>
       
       <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置gi</description>
       

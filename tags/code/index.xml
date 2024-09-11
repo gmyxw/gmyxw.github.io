@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Code on GM游戏网</title>
-    <link>http://localhost:1313/tags/code/</link>
+    <link>https://gmyxw.github.io/tags/code/</link>
     <description>Recent content in Code on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Tue, 25 Feb 2020 12:39:44 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/code/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Feb 2020 12:39:44 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/code/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>约定俗成的常见缩写</title>
-      <link>http://localhost:1313/posts/20200225-abbreviations/</link>
+      <link>https://gmyxw.github.io/posts/20200225-abbreviations/</link>
       <pubDate>Tue, 25 Feb 2020 12:39:44 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200225-abbreviations/</guid>
+      <guid>https://gmyxw.github.io/posts/20200225-abbreviations/</guid>
       
       <description>全称 缩写 event evt connect conn server srv address addr request req response rep lenght len collection col signal sig error of last number erron field field property props defines defs object obj system sys message msg number num directory dir dictionory dict protocol proto button btn table tbl label lbl Image img Sprite sp texture tex tween tw transform trans animation anim material mat vecter vec position</description>
       

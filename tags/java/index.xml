@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Java on GM游戏网</title>
-    <link>http://localhost:1313/tags/java/</link>
+    <link>https://gmyxw.github.io/tags/java/</link>
     <description>Recent content in Java on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Thu, 28 Mar 2024 20:35:42 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/java/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 28 Mar 2024 20:35:42 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/java/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Incoming changes in JDK / JRE 21 packages may require manual intervention</title>
-      <link>http://localhost:1313/posts/kb2919351/</link>
+      <link>https://gmyxw.github.io/posts/kb2919351/</link>
       <pubDate>Thu, 28 Mar 2024 20:35:42 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/kb2919351/</guid>
+      <guid>https://gmyxw.github.io/posts/kb2919351/</guid>
       
       <description>手动操作需求：在升级过程中，如果涉及到JDK和JRE的更新或替换，可能需要用户手动执行一些操作。这是因为这些软件包之间可能存在依赖关系或冲突</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>Exception in thread &#34;main&#34; java.lang.OutOfMemoryError: Java heap space</title>
-      <link>http://localhost:1313/posts/20200514-java-heap-size-error/</link>
+      <link>https://gmyxw.github.io/posts/20200514-java-heap-size-error/</link>
       <pubDate>Thu, 14 May 2020 05:31:01 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200514-java-heap-size-error/</guid>
+      <guid>https://gmyxw.github.io/posts/20200514-java-heap-size-error/</guid>
       
       <description>今天用一个游戏资源批量解密程序出现错误提示： Exception in thread &amp;#34;main&amp;#34; java.lang.OutOfMemoryError: Java heap space: failed reallocation of scalar replaced objects 工具太多，直接设置一下环境变量就完事儿 /mnt/win10/Users/zhili/Downloads 15s ❯ export _JAVA_OPTIONS=&amp;#34;-Xms512m -Xmx10G&amp;#34;</description>
       
@@ -32,10 +32,10 @@
     
     <item>
       <title>Set_all_Java_apps_to_use_GTK&#43;_font_&amp;_theme_settings</title>
-      <link>http://localhost:1313/posts/20200122-set-all-java-apps-to-use-gtk&#43;-font--theme-settings/</link>
+      <link>https://gmyxw.github.io/posts/20200122-set-all-java-apps-to-use-gtk&#43;-font--theme-settings/</link>
       <pubDate>Wed, 22 Jan 2020 01:12:54 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200122-set-all-java-apps-to-use-gtk&#43;-font--theme-settings/</guid>
+      <guid>https://gmyxw.github.io/posts/20200122-set-all-java-apps-to-use-gtk&#43;-font--theme-settings/</guid>
       
       <description>Introduction This fix makes your Java apps use your GTK+ theme (colours &amp;amp; such) &amp;amp; your chosen font settings. Here is how it looks like:
 Java default look Java GTK+ look How do you do it? Set the variable _JAVA_OPTIONS by running this command in a terminal:

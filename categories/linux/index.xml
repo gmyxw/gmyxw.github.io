@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Linux on GM游戏网</title>
-    <link>http://localhost:1313/categories/linux/</link>
+    <link>https://gmyxw.github.io/categories/linux/</link>
     <description>Recent content in Linux on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sat, 03 Aug 2024 18:04:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Aug 2024 18:04:17 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>解决Noto字体数字和空格使用emoji符号数字</title>
-      <link>http://localhost:1313/posts/1722679457/</link>
+      <link>https://gmyxw.github.io/posts/1722679457/</link>
       <pubDate>Sat, 03 Aug 2024 18:04:17 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/1722679457/</guid>
+      <guid>https://gmyxw.github.io/posts/1722679457/</guid>
       
       <description>前言 今天在浏览网页时发现页面上的数字变成了表情符号，而且空格符号也显示异常 解决 定位到元素的字体后用fc-match逐个测试后才发现找不到最后</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>libvirt升级后虚拟机没网络</title>
-      <link>http://localhost:1313/posts/kvmnonet/</link>
+      <link>https://gmyxw.github.io/posts/kvmnonet/</link>
       <pubDate>Thu, 25 Jul 2024 00:35:58 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/kvmnonet/</guid>
+      <guid>https://gmyxw.github.io/posts/kvmnonet/</guid>
       
       <description>升级后发现虚拟机全炸了，查下日志基本看起来libvirtd不知为何使用了iptables而不是nftables journalctl -u libvirtd -o cat -f libvirtd[2311]: internal error: Failed to apply firewall rules /usr/sbin/ip6tables</description>
       

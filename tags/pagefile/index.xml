@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pagefile on GM游戏网</title>
-    <link>http://localhost:1313/tags/pagefile/</link>
+    <link>https://gmyxw.github.io/tags/pagefile/</link>
     <description>Recent content in Pagefile on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Mon, 20 Jan 2020 05:36:05 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/pagefile/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jan 2020 05:36:05 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/pagefile/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>cmd命令行修改windows虚拟内存pagefile.sys</title>
-      <link>http://localhost:1313/posts/20200120-pagefile/</link>
+      <link>https://gmyxw.github.io/posts/20200120-pagefile/</link>
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200120-pagefile/</guid>
+      <guid>https://gmyxw.github.io/posts/20200120-pagefile/</guid>
       
       <description># 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t</description>
       

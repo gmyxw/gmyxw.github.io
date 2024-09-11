@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Windows on GM游戏网</title>
-    <link>http://localhost:1313/tags/windows/</link>
+    <link>https://gmyxw.github.io/tags/windows/</link>
     <description>Recent content in Windows on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Fri, 13 Oct 2023 00:23:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/windows/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 13 Oct 2023 00:23:48 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/windows/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows update KB2919355 fails to install - Error code 800F0922</title>
-      <link>http://localhost:1313/posts/kb2919355/</link>
+      <link>https://gmyxw.github.io/posts/kb2919355/</link>
       <pubDate>Fri, 13 Oct 2023 00:23:48 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/kb2919355/</guid>
+      <guid>https://gmyxw.github.io/posts/kb2919355/</guid>
       
       <description>原因：我的系统是Windows Server 2012 R2 Standard首先我是想要安装SVN客户端，然后系统让我安装Windows Server 2012 R2 安装补丁KB29992</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>解决Windows与Ubuntu双系统时间同步问题</title>
-      <link>http://localhost:1313/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</link>
+      <link>https://gmyxw.github.io/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</link>
       <pubDate>Tue, 12 May 2020 14:31:58 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</guid>
+      <guid>https://gmyxw.github.io/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</guid>
       
       <description>UTC in Windows To dual boot with Windows it is recommended to configure Windows to use UTC, rather than Linux to use localtime. (Windows by default uses localtime [1].) It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal You can do this from an Administrator Command Prompt</description>
       
@@ -32,10 +32,10 @@
     
     <item>
       <title>7z command</title>
-      <link>http://localhost:1313/tips/20200507-7z-command/</link>
+      <link>https://gmyxw.github.io/tips/20200507-7z-command/</link>
       <pubDate>Thu, 07 May 2020 15:02:57 +0800</pubDate>
       
-      <guid>http://localhost:1313/tips/20200507-7z-command/</guid>
+      <guid>https://gmyxw.github.io/tips/20200507-7z-command/</guid>
       
       <description>exclude file Specifies which filenames or wildcarded names must be excluded from the operation. Multiple exclude switches are supported. Syntax -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt; &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard} See -i (Include) switch description for information about option parameters. Examples 7z a -tzip archive.zip *.txt -x!temp.* adds to the archive.zip all *.txt files, except temp.* files. 7z a archive.7z Folder1\ -xr!*.png adds to the archive.7z all files from</description>
       
@@ -43,10 +43,10 @@
     
     <item>
       <title>安装Win10提示我们无法创建新的分区，也找不到现在的分区</title>
-      <link>http://localhost:1313/posts/20200505-we-were-unable-to-create-a-new-partition-now-can-not-find-the-partition/</link>
+      <link>https://gmyxw.github.io/posts/20200505-we-were-unable-to-create-a-new-partition-now-can-not-find-the-partition/</link>
       <pubDate>Tue, 05 May 2020 12:14:03 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200505-we-were-unable-to-create-a-new-partition-now-can-not-find-the-partition/</guid>
+      <guid>https://gmyxw.github.io/posts/20200505-we-were-unable-to-create-a-new-partition-now-can-not-find-the-partition/</guid>
       
       <description>前言 系统搬来linux有两年了，今天突然发现还是需要win10用ida的，虚拟机很不方便 虚拟机解决方法 google一下在知乎想起原因: 原因似</description>
       
@@ -54,10 +54,10 @@
     
     <item>
       <title>win10输入法不显示候选词解决方法</title>
-      <link>http://localhost:1313/posts/20200205-win10-input-method-display-candidate-words/</link>
+      <link>https://gmyxw.github.io/posts/20200205-win10-input-method-display-candidate-words/</link>
       <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200205-win10-input-method-display-candidate-words/</guid>
+      <guid>https://gmyxw.github.io/posts/20200205-win10-input-method-display-candidate-words/</guid>
       
       <description>精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法</description>
       
@@ -65,10 +65,10 @@
     
     <item>
       <title>Sysprep命令详解</title>
-      <link>http://localhost:1313/posts/20200120-sysprep/</link>
+      <link>https://gmyxw.github.io/posts/20200120-sysprep/</link>
       <pubDate>Mon, 20 Jan 2020 06:12:53 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200120-sysprep/</guid>
+      <guid>https://gmyxw.github.io/posts/20200120-sysprep/</guid>
       
       <description>如果你打算创建安装映像以部署到不同的计算机上，则必须运行带有 /generalize 选项的 Sysprep 命令，即使其他计算机具有相同的硬件配置。Sysprep /generalize 命令从 Windows 安装删</description>
       
@@ -76,10 +76,10 @@
     
     <item>
       <title>cmd命令行修改windows虚拟内存pagefile.sys</title>
-      <link>http://localhost:1313/posts/20200120-pagefile/</link>
+      <link>https://gmyxw.github.io/posts/20200120-pagefile/</link>
       <pubDate>Mon, 20 Jan 2020 05:36:05 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200120-pagefile/</guid>
+      <guid>https://gmyxw.github.io/posts/20200120-pagefile/</guid>
       
       <description># 查看当前设置 wmic pagefile list /format:list # 取消自动管理分页文件大小 wmic computersystem where name=&amp;#34;%computername%&amp;#34; set AutomaticManagedPagefile=False # 修改页面文件大小 最小1024MB，最大4096MB wmic pagefileset where name=&amp;#34;C:\\pagefile.sys&amp;#34; set InitialSize=1024,MaximumSize=4096 # 重启生效 shutdown -r -t</description>
       
@@ -87,10 +87,10 @@
     
     <item>
       <title>ArchLinux配置Samba服务与Windows共享文件</title>
-      <link>http://localhost:1313/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/</link>
+      <link>https://gmyxw.github.io/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/</link>
       <pubDate>Sun, 19 Jan 2020 15:43:57 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/</guid>
+      <guid>https://gmyxw.github.io/posts/20200119-share-movie-between-archlinux-and-win7-via-samba/</guid>
       
       <description>由于最近加班，俺的高清下载机中，已经累积了200G+的高清电影了，嘿嘿，看来平时的带宽没浪费，充分利用了。在这之前，由于懒于配置Samba，</description>
       
@@ -98,10 +98,10 @@
     
     <item>
       <title>批处理关闭或开启NETBIOS</title>
-      <link>http://localhost:1313/posts/20200117-netbios/</link>
+      <link>https://gmyxw.github.io/posts/20200117-netbios/</link>
       <pubDate>Fri, 17 Jan 2020 19:23:06 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200117-netbios/</guid>
+      <guid>https://gmyxw.github.io/posts/20200117-netbios/</guid>
       
       <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。 以下为批处理自动关闭netbios脚本: @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do</description>
       
@@ -109,10 +109,10 @@
     
     <item>
       <title>玩转WSL-用Samba服务替代Win10原生的文件共享</title>
-      <link>http://localhost:1313/posts/20200117-wsl-samba/</link>
+      <link>https://gmyxw.github.io/posts/20200117-wsl-samba/</link>
       <pubDate>Fri, 17 Jan 2020 18:57:51 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200117-wsl-samba/</guid>
+      <guid>https://gmyxw.github.io/posts/20200117-wsl-samba/</guid>
       
       <description>习惯了Linux系统的人们，肯定觉得Samba服务更加灵活和方便，那如何在Windows系统上搭建高效的Samba服务呢？本文介绍了通过WS</description>
       
@@ -120,10 +120,10 @@
     
     <item>
       <title>Windows 下使用 Diskpart 命令分区</title>
-      <link>http://localhost:1313/posts/20200116-using-diskpart-to-create/</link>
+      <link>https://gmyxw.github.io/posts/20200116-using-diskpart-to-create/</link>
       <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200116-using-diskpart-to-create/</guid>
+      <guid>https://gmyxw.github.io/posts/20200116-using-diskpart-to-create/</guid>
       
       <description>Diskpart 命令简介 Diskpart 命令是 Windows 环境下的一个命令，利用 Diskpart 可实现对硬盘的分区管理，包括创建分区、删除分区、合并（扩展）分区，设置分区后即刻生效，免去了重启</description>
       

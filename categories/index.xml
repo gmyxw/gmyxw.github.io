@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>分类 on GM游戏网</title>
-    <link>http://localhost:1313/categories/</link>
+    <link>https://gmyxw.github.io/categories/</link>
     <description>Recent content in 分类 on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sat, 03 Aug 2024 18:04:17 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Aug 2024 18:04:17 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux</title>
-      <link>http://localhost:1313/categories/linux/</link>
+      <link>https://gmyxw.github.io/categories/linux/</link>
       <pubDate>Sat, 03 Aug 2024 18:04:17 +0800</pubDate>
       
-      <guid>http://localhost:1313/categories/linux/</guid>
+      <guid>https://gmyxw.github.io/categories/linux/</guid>
       
       <description></description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>Tool</title>
-      <link>http://localhost:1313/categories/tool/</link>
+      <link>https://gmyxw.github.io/categories/tool/</link>
       <pubDate>Sun, 28 Jul 2024 01:12:04 +0800</pubDate>
       
-      <guid>http://localhost:1313/categories/tool/</guid>
+      <guid>https://gmyxw.github.io/categories/tool/</guid>
       
       <description></description>
       
@@ -32,10 +32,10 @@
     
     <item>
       <title>File</title>
-      <link>http://localhost:1313/categories/file/</link>
+      <link>https://gmyxw.github.io/categories/file/</link>
       <pubDate>Sun, 07 Jun 2020 19:23:33 +0800</pubDate>
       
-      <guid>http://localhost:1313/categories/file/</guid>
+      <guid>https://gmyxw.github.io/categories/file/</guid>
       
       <description></description>
       

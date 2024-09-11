@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Proxy on GM游戏网</title>
-    <link>http://localhost:1313/tags/proxy/</link>
+    <link>https://gmyxw.github.io/tags/proxy/</link>
     <description>Recent content in Proxy on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Mon, 29 Jul 2024 13:35:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/proxy/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Jul 2024 13:35:51 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/proxy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>chrome 全局代理</title>
-      <link>http://localhost:1313/posts/1722231351/</link>
+      <link>https://gmyxw.github.io/posts/1722231351/</link>
       <pubDate>Mon, 29 Jul 2024 13:35:51 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/1722231351/</guid>
+      <guid>https://gmyxw.github.io/posts/1722231351/</guid>
       
       <description>用了这么多年SwitchyOmega才发现这玩意是多余的，有了clash后除了调试切代理方便真没啥用，旧时代的残党该死死了🤔 Copy &amp;#34;C:\Program Files\Google\Chrome\Application\chrome.exe&amp;#34; --proxy-server=&amp;#34;socks://127.0.0.1:1080&amp;#34; Copy google-chrome-stable --proxy-server=&amp;#34;socks://127.0.0.1:1080&amp;#34;</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>Mihomo</title>
-      <link>http://localhost:1313/posts/mihomo/</link>
+      <link>https://gmyxw.github.io/posts/mihomo/</link>
       <pubDate>Sun, 28 Jul 2024 01:12:04 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/mihomo/</guid>
+      <guid>https://gmyxw.github.io/posts/mihomo/</guid>
       
       <description>订阅转换 https://subweb.sbe.us.kg https://acl4ssr-sub.github.io 面板 https://yacd.metacubex.one/#/proxies https://yacd.haishan.me/ https://yacd-meta.vercel.app/ https://clash.dejavu.moe/ 其他 https://emn178.github.io/online-tools/url_decode.html https://emn178.github.io/online-tools/base64_decode.html https://pb.sbf.us.kg/ 命令 使用以下命令检查 mihomo 的运行日志： Copy journalctl -u mihomo -o cat -e Phasellus nec sem in justo pellentesque facilisis. In consectetuer turpis ut velit. Cras dapibus. Proin magna. Donec sodales sagittis magna.s ante.</description>
       
@@ -32,10 +32,10 @@
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>http://localhost:1313/posts/20200111-set-proxy-for-terminal/</link>
+      <link>https://gmyxw.github.io/posts/20200111-set-proxy-for-terminal/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200111-set-proxy-for-terminal/</guid>
+      <guid>https://gmyxw.github.io/posts/20200111-set-proxy-for-terminal/</guid>
       
       <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置gi</description>
       

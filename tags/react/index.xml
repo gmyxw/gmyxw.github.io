@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>React on GM游戏网</title>
-    <link>http://localhost:1313/tags/react/</link>
+    <link>https://gmyxw.github.io/tags/react/</link>
     <description>Recent content in React on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Thu, 27 Feb 2020 14:19:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/react/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Feb 2020 14:19:24 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/react/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>React关于form的取部分字段数据</title>
-      <link>http://localhost:1313/posts/20200227-react-validate/</link>
+      <link>https://gmyxw.github.io/posts/20200227-react-validate/</link>
       <pubDate>Thu, 27 Feb 2020 14:19:24 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200227-react-validate/</guid>
+      <guid>https://gmyxw.github.io/posts/20200227-react-validate/</guid>
       
       <description>获取查询条件的值 validateFields form.validateFields / validateFieldsAndScroll 校验并获取一组输入域的值与 Error，若 fieldNames 参数为空，则校验全部组件 获取表单的所有数据 this.props.form.validateFieldsAndScroll((err, values) =&amp;gt; { if(err){ return; } console.log(&amp;#39;_values&amp;#39;, values); }); 获取表单的部</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>Tippy_warning</title>
-      <link>http://localhost:1313/posts/20200227-tippy-warning/</link>
+      <link>https://gmyxw.github.io/posts/20200227-tippy-warning/</link>
       <pubDate>Thu, 27 Feb 2020 07:03:10 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200227-tippy-warning/</guid>
+      <guid>https://gmyxw.github.io/posts/20200227-tippy-warning/</guid>
       
       <description>I have the folowing part of code:
 private rootRef = React.createRef&amp;lt;HTMLDivElement&amp;gt;(); const target = ( &amp;lt;div&amp;gt; &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl&amp;#39; /&amp;gt; &amp;lt;/div&amp;gt; ); return ( &amp;lt;React.Fragment&amp;gt; {React.cloneElement(target, { ref: this.rootRef, onMouseOver: this.handleMouseOver, onMouseLeave: this.handleMouseLeave, })} {open &amp;amp;&amp;amp; this.renderTooltip()} &amp;lt;/React.Fragment&amp;gt; ); When target with div element (or any other instead of div) everything is ok, but when target is:
@@ -34,10 +34,10 @@ const target = ( &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl
     
     <item>
       <title>出现value.locale is not a function问题解决办法</title>
-      <link>http://localhost:1313/posts/20200226-react-datepicker/</link>
+      <link>https://gmyxw.github.io/posts/20200226-react-datepicker/</link>
       <pubDate>Wed, 26 Feb 2020 15:28:15 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200226-react-datepicker/</guid>
+      <guid>https://gmyxw.github.io/posts/20200226-react-datepicker/</guid>
       
       <description>给datepicker赋值 可以输出赋值,datepicker赋值需要moment格式的数据,如果赋值了string类型的会报错 需要进行mom</description>
       
@@ -45,10 +45,10 @@ const target = ( &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl
     
     <item>
       <title>Saga deprecated 警告</title>
-      <link>http://localhost:1313/posts/20200215-saga-deprecated-warning/</link>
+      <link>https://gmyxw.github.io/posts/20200215-saga-deprecated-warning/</link>
       <pubDate>Sat, 15 Feb 2020 22:23:37 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200215-saga-deprecated-warning/</guid>
+      <guid>https://gmyxw.github.io/posts/20200215-saga-deprecated-warning/</guid>
       
       <description>What happens? [...effects] has been deprecated in favor of all([...effects]), please update your code it does not effect dva.js, its redux saga api update, you just need to do this effects: { * query(action, {call, put, all}) { yield all([]) } } Redux saga apis:</description>
       
@@ -56,10 +56,10 @@ const target = ( &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl
     
     <item>
       <title>umi-ui bug using react-document-title</title>
-      <link>http://localhost:1313/posts/20200210-umi-ui-bug-using-react-document-title/</link>
+      <link>https://gmyxw.github.io/posts/20200210-umi-ui-bug-using-react-document-title/</link>
       <pubDate>Mon, 10 Feb 2020 15:41:37 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200210-umi-ui-bug-using-react-document-title/</guid>
+      <guid>https://gmyxw.github.io/posts/20200210-umi-ui-bug-using-react-document-title/</guid>
       
       <description>背景 React 项目使用umi时发报： Uncaught Invariant Violation: React.Children.only expected to receive a single React element child. The above error occurred in the component ui socket init CloseEvent {type: &amp;ldquo;close&amp;rdquo;, bubbles: false, cancelable: false, timeStamp: 1571127775342, wasClean: false, …} 异常代码 &amp;lt;DocumentTitle title={this.renderPageTitle()}&amp;gt; &amp;lt;ContainerQuery query={query}&amp;gt; {(params: any) =&amp;gt; &amp;lt;div className={classNames(params)}&amp;gt;{layout}&amp;lt;/div&amp;gt;} &amp;lt;/ContainerQuery&amp;gt; &amp;lt;/DocumentTitle&amp;gt; Docume</description>
       
@@ -67,10 +67,10 @@ const target = ( &amp;lt;Icon design=&amp;#39;accepted&amp;#39; size=&amp;#39;xl
     
     <item>
       <title>Programmatically_navigate_using_react_router</title>
-      <link>http://localhost:1313/posts/20200209-programmatically-navigate-using-react-router/</link>
+      <link>https://gmyxw.github.io/posts/20200209-programmatically-navigate-using-react-router/</link>
       <pubDate>Sun, 09 Feb 2020 11:33:00 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200209-programmatically-navigate-using-react-router/</guid>
+      <guid>https://gmyxw.github.io/posts/20200209-programmatically-navigate-using-react-router/</guid>
       
       <description>React Router v5.1.0 with hooks There is a new useHistory hook in React Router &amp;gt;5.1.0 if you are using React &amp;gt;16.8.0 and functional components. import { useHistory } from &amp;#34;react-router-dom&amp;#34;; function HomeButton() { const history = useHistory(); function handleClick() { history.push(&amp;#34;/home&amp;#34;); } return ( &amp;lt;button type=&amp;#34;button&amp;#34; onClick={handleClick}&amp;gt; Go home &amp;lt;/button&amp;gt; ); } React Router v4 With v4 of React Router, there are three approaches that you can take to programmatic</description>
       

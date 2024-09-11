@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vim on GM游戏网</title>
-    <link>http://localhost:1313/tags/vim/</link>
+    <link>https://gmyxw.github.io/tags/vim/</link>
     <description>Recent content in Vim on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Thu, 12 Mar 2020 21:30:38 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 12 Mar 2020 21:30:38 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>如何在vim保存时获得sudo权限</title>
-      <link>http://localhost:1313/posts/20200312-how-does-the-vim-write-with-sudo-trick-work/</link>
+      <link>https://gmyxw.github.io/posts/20200312-how-does-the-vim-write-with-sudo-trick-work/</link>
       <pubDate>Thu, 12 Mar 2020 21:30:38 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200312-how-does-the-vim-write-with-sudo-trick-work/</guid>
+      <guid>https://gmyxw.github.io/posts/20200312-how-does-the-vim-write-with-sudo-trick-work/</guid>
       
       <description>:w !sudo tee % 命令:w !{cmd}，让vim执行一个外部命令{cmd}，然后把当前缓冲区的内容从stdin传入。 tee是一个把stdin保存到文件</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>vim recording的使用方法</title>
-      <link>http://localhost:1313/posts/20200312-vim-recording/</link>
+      <link>https://gmyxw.github.io/posts/20200312-vim-recording/</link>
       <pubDate>Thu, 12 Mar 2020 17:05:52 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200312-vim-recording/</guid>
+      <guid>https://gmyxw.github.io/posts/20200312-vim-recording/</guid>
       
       <description>使用vim时无意间触碰到q键，左下角出现“recording”这个标识，觉得好奇，遂在网上查了一下，然后这是vim的一个强大功能。他可以录 制</description>
       
@@ -32,10 +32,10 @@
     
     <item>
       <title>Vim_search_in_file</title>
-      <link>http://localhost:1313/posts/20200224-vim-search-in-file/</link>
+      <link>https://gmyxw.github.io/posts/20200224-vim-search-in-file/</link>
       <pubDate>Mon, 24 Feb 2020 01:15:09 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200224-vim-search-in-file/</guid>
+      <guid>https://gmyxw.github.io/posts/20200224-vim-search-in-file/</guid>
       
       <description>总有人问我 Vim 中能不能查找，当然能！而且是超级强的查找！ 这篇文章来详细介绍 Vim 中查找相关的设置和使用方法。 包括查找与替换、查找光标所在词、高亮前</description>
       

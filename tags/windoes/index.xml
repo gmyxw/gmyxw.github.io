@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Windoes on GM游戏网</title>
-    <link>http://localhost:1313/tags/windoes/</link>
+    <link>https://gmyxw.github.io/tags/windoes/</link>
     <description>Recent content in Windoes on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Mon, 20 Jan 2020 23:11:09 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/windoes/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Jan 2020 23:11:09 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/windoes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Win10 清除 PowerShell 历史记录</title>
-      <link>http://localhost:1313/posts/20200120-historysavepath/</link>
+      <link>https://gmyxw.github.io/posts/20200120-historysavepath/</link>
       <pubDate>Mon, 20 Jan 2020 23:11:09 +0800</pubDate>
       
-      <guid>http://localhost:1313/posts/20200120-historysavepath/</guid>
+      <guid>https://gmyxw.github.io/posts/20200120-historysavepath/</guid>
       
       <description>PowerShell&amp;rsquo;s own history mechanism (Get-History, Clear-History) is host-independent, which is why - somewhat unexpectedly - you also need to clear the hosts&amp;rsquo;s command history separately. As for the console host&amp;rsquo;s own history feature: doskey-style history feature, before module PSReadline shipped with PowerShell (see below): There is no saved history - a history is kept only for the duration of the current session. Alt+F7 must be used to clear the console&amp;rsquo;s</description>
       

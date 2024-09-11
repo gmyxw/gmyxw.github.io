@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>File on GM游戏网</title>
-    <link>http://localhost:1313/categories/file/</link>
+    <link>https://gmyxw.github.io/categories/file/</link>
     <description>Recent content in File on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sun, 07 Jun 2020 19:23:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/categories/file/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Jun 2020 19:23:33 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/categories/file/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Rc4</title>
-      <link>http://localhost:1313/files/20200607-rc4/</link>
+      <link>https://gmyxw.github.io/files/20200607-rc4/</link>
       <pubDate>Sun, 07 Jun 2020 19:23:33 +0800</pubDate>
       
-      <guid>http://localhost:1313/files/20200607-rc4/</guid>
+      <guid>https://gmyxw.github.io/files/20200607-rc4/</guid>
       
       <description>rc4.js
 /* * RC4 symmetric cipher encryption/decryption * * @license Public Domain * @param string key - secret key for encryption/decryption * @param string str - string to be encrypted/decrypted * @return string */ function rc4(key, str) { var s = [], j = 0, x, res = &amp;#39;&amp;#39;; for (var i = 0; i &amp;lt; 256; i++) { s[i] = i; } for (i = 0; i &amp;lt; 256; i++) { j = (j + s[i] + key.</description>

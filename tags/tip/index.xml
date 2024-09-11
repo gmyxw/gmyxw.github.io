@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tip on GM游戏网</title>
-    <link>http://localhost:1313/tags/tip/</link>
+    <link>https://gmyxw.github.io/tags/tip/</link>
     <description>Recent content in Tip on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Tue, 12 May 2020 12:10:46 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/tip/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 May 2020 12:10:46 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/tip/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>numfmt:让数字变得更容易理解</title>
-      <link>http://localhost:1313/tips/20200507a-numfmt/</link>
+      <link>https://gmyxw.github.io/tips/20200507a-numfmt/</link>
       <pubDate>Tue, 12 May 2020 12:10:46 +0800</pubDate>
       
-      <guid>http://localhost:1313/tips/20200507a-numfmt/</guid>
+      <guid>https://gmyxw.github.io/tips/20200507a-numfmt/</guid>
       
       <description>像 =ls=, =df=, =du= 这类命令都带有一个选项可以将数字直接转换成人类容易阅读的形式来展现。 比如,直接执行 =df= 时，容量显示的是多少个块，而当用 =df -h= 时，容量会根</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>7z command</title>
-      <link>http://localhost:1313/tips/20200507-7z-command/</link>
+      <link>https://gmyxw.github.io/tips/20200507-7z-command/</link>
       <pubDate>Thu, 07 May 2020 15:02:57 +0800</pubDate>
       
-      <guid>http://localhost:1313/tips/20200507-7z-command/</guid>
+      <guid>https://gmyxw.github.io/tips/20200507-7z-command/</guid>
       
       <description>exclude file Specifies which filenames or wildcarded names must be excluded from the operation. Multiple exclude switches are supported. Syntax -x[&amp;lt;recurse_type&amp;gt;]&amp;lt;file_ref&amp;gt; &amp;lt;recurse_type&amp;gt; ::= r[- | 0] &amp;lt;file_ref&amp;gt; ::= @{listfile} | !{wildcard} See -i (Include) switch description for information about option parameters. Examples 7z a -tzip archive.zip *.txt -x!temp.* adds to the archive.zip all *.txt files, except temp.* files. 7z a archive.7z Folder1\ -xr!*.png adds to the archive.7z all files from</description>
       
