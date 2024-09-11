@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Html on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/html/</link>
+    <link>http://localhost:1313/tags/html/</link>
     <description>Recent content in Html on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sun, 04 Aug 2024 18:44:00 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/html/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Aug 2024 18:44:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/html/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>深入理解DOMContentLoaded的触发时机</title>
-      <link>https://gmyxw.github.io/posts/1722768240/</link>
+      <link>http://localhost:1313/posts/1722768240/</link>
       <pubDate>Sun, 04 Aug 2024 18:44:00 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/1722768240/</guid>
+      <guid>http://localhost:1313/posts/1722768240/</guid>
       
       <description>前端掘金者H 一、DOMContentLoaded的概念 当初始HTML文档已完全加载和解析时，将触发DOMContentLoaded事件，而不</description>
       

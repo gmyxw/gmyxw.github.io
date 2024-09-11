@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Diskpart on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/diskpart/</link>
+    <link>http://localhost:1313/tags/diskpart/</link>
     <description>Recent content in Diskpart on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Thu, 16 Jan 2020 22:27:22 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/diskpart/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 16 Jan 2020 22:27:22 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/diskpart/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Windows 下使用 Diskpart 命令分区</title>
-      <link>https://gmyxw.github.io/posts/20200116-using-diskpart-to-create/</link>
+      <link>http://localhost:1313/posts/20200116-using-diskpart-to-create/</link>
       <pubDate>Thu, 16 Jan 2020 22:27:22 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200116-using-diskpart-to-create/</guid>
+      <guid>http://localhost:1313/posts/20200116-using-diskpart-to-create/</guid>
       
       <description>Diskpart 命令简介 Diskpart 命令是 Windows 环境下的一个命令，利用 Diskpart 可实现对硬盘的分区管理，包括创建分区、删除分区、合并（扩展）分区，设置分区后即刻生效，免去了重启</description>
       

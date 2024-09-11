@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/git/</link>
+    <link>http://localhost:1313/tags/git/</link>
     <description>Recent content in Git on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Mon, 05 Dec 2022 02:04:31 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Dec 2022 02:04:31 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>无法使用 git clone/push，kex ssh 密钥错误</title>
-      <link>https://gmyxw.github.io/posts/git-pory22/</link>
+      <link>http://localhost:1313/posts/git-pory22/</link>
       <pubDate>Mon, 05 Dec 2022 02:04:31 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/git-pory22/</guid>
+      <guid>http://localhost:1313/posts/git-pory22/</guid>
       
       <description>git clone/push 我的 Github 私人仓库，通过ssh，命令行报错： Cloning into &amp;#39;test&amp;#39;... kex_exchange_identification: Connection closed by remote host Connection closed by 20.205.243.166 port 22 fatal: Could not read from remote repository. Please make sure you have the correct access rights and the repository exists. 但是关闭 clash 之后一切正常，看</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>git 出现错误Could not resolve host: github.com</title>
-      <link>https://gmyxw.github.io/posts/20200306-git-clone-not-resolve-host/</link>
+      <link>http://localhost:1313/posts/20200306-git-clone-not-resolve-host/</link>
       <pubDate>Fri, 06 Mar 2020 21:36:57 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200306-git-clone-not-resolve-host/</guid>
+      <guid>http://localhost:1313/posts/20200306-git-clone-not-resolve-host/</guid>
       
       <description>❯ git clone https://github.com/Zhili/GameServer Cloning into &amp;#39;GameServer&amp;#39;... fatal: unable to access &amp;#39;https://github.com/Zhili/GameServer/&amp;#39;: Couldn&amp;#39;t resolve host name (Just a little reminder) If you want the hostname also be resolved by the proxy (that means passing everything through the proxy), especially when you are cloning a gist, you can use the following setting (the key is that it uses socks5h instead of socks5): git config --global http.proxy socks5h://127.0.0.1:1080</description>
       

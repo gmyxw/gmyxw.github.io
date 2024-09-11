@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Network on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/network/</link>
+    <link>http://localhost:1313/tags/network/</link>
     <description>Recent content in Network on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Fri, 31 Jan 2020 12:32:48 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/network/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 31 Jan 2020 12:32:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/network/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux_disable_IPv6</title>
-      <link>https://gmyxw.github.io/posts/20200131-linux-disable-ipv6/</link>
+      <link>http://localhost:1313/posts/20200131-linux-disable-ipv6/</link>
       <pubDate>Fri, 31 Jan 2020 12:32:48 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200131-linux-disable-ipv6/</guid>
+      <guid>http://localhost:1313/posts/20200131-linux-disable-ipv6/</guid>
       
       <description>IPv6被认为是IPv4的替代产品，它用来解决现有IPv4地址空间即将耗尽的问题。 但目前，开启IPv6可能会导致一些问题。因此有时我们需要关</description>
       

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Css on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/css/</link>
+    <link>http://localhost:1313/tags/css/</link>
     <description>Recent content in Css on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Wed, 01 Apr 2020 00:02:15 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/css/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Apr 2020 00:02:15 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/css/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>word-wrap和word-break的区别</title>
-      <link>https://gmyxw.github.io/posts/20200401-difference-between-word-wrap-and-word-break/</link>
+      <link>http://localhost:1313/posts/20200401-difference-between-word-wrap-and-word-break/</link>
       <pubDate>Wed, 01 Apr 2020 00:02:15 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200401-difference-between-word-wrap-and-word-break/</guid>
+      <guid>http://localhost:1313/posts/20200401-difference-between-word-wrap-and-word-break/</guid>
       
       <description>这两个东西是什么，我相信至今还有很多人搞不清，只会死记硬背的写一个word-wrap:break-word;word-break:break</description>
       

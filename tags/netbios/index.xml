@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Netbios on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/netbios/</link>
+    <link>http://localhost:1313/tags/netbios/</link>
     <description>Recent content in Netbios on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Fri, 17 Jan 2020 19:23:06 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/netbios/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 17 Jan 2020 19:23:06 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/netbios/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>批处理关闭或开启NETBIOS</title>
-      <link>https://gmyxw.github.io/posts/20200117-netbios/</link>
+      <link>http://localhost:1313/posts/20200117-netbios/</link>
       <pubDate>Fri, 17 Jan 2020 19:23:06 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200117-netbios/</guid>
+      <guid>http://localhost:1313/posts/20200117-netbios/</guid>
       
       <description>禁用NETBIOS后，局域网内计算机不可以在地址栏用主机名访问你的主机，更安全。 以下为批处理自动关闭netbios脚本: @echo off rem off_netbios_Self_Del for /L %%a in (1,1,20) do</description>
       

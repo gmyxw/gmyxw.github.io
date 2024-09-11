@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Antd on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/antd/</link>
+    <link>http://localhost:1313/tags/antd/</link>
     <description>Recent content in Antd on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Wed, 26 Feb 2020 15:28:15 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/antd/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 Feb 2020 15:28:15 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/antd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>出现value.locale is not a function问题解决办法</title>
-      <link>https://gmyxw.github.io/posts/20200226-react-datepicker/</link>
+      <link>http://localhost:1313/posts/20200226-react-datepicker/</link>
       <pubDate>Wed, 26 Feb 2020 15:28:15 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200226-react-datepicker/</guid>
+      <guid>http://localhost:1313/posts/20200226-react-datepicker/</guid>
       
       <description>给datepicker赋值 可以输出赋值,datepicker赋值需要moment格式的数据,如果赋值了string类型的会报错 需要进行mom</description>
       

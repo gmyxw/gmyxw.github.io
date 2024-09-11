@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Unity3d on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/unity3d/</link>
+    <link>http://localhost:1313/tags/unity3d/</link>
     <description>Recent content in Unity3d on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Wed, 18 Nov 2020 09:44:57 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/unity3d/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Nov 2020 09:44:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/unity3d/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>unity游戏提示 Using memoryadresses from more than 16GB of memory </title>
-      <link>https://gmyxw.github.io/posts/20201118-android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages/</link>
+      <link>http://localhost:1313/posts/20201118-android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages/</link>
       <pubDate>Wed, 18 Nov 2020 09:44:57 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20201118-android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages/</guid>
+      <guid>http://localhost:1313/posts/20201118-android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages/</guid>
       
       <description>新游戏被用户狂喷无奈研究一下，先在官方的问题跟踪器查一下就发现很多开发者纷纷都说是android 11的问题，我当场裂开，修复完又要改代码，之</description>
       

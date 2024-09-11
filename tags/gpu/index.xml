@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Gpu on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/gpu/</link>
+    <link>http://localhost:1313/tags/gpu/</link>
     <description>Recent content in Gpu on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sun, 16 May 2021 06:34:37 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/gpu/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 16 May 2021 06:34:37 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/gpu/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>linux 解决i3画面撕裂</title>
-      <link>https://gmyxw.github.io/posts/20210516-picom/</link>
+      <link>http://localhost:1313/posts/20210516-picom/</link>
       <pubDate>Sun, 16 May 2021 06:34:37 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20210516-picom/</guid>
+      <guid>http://localhost:1313/posts/20210516-picom/</guid>
       
       <description>换了新显卡这么久才发现会画面撕裂，网上搜了下在v2看到有人提到关闭渲染器的硬件加速可以解决，试了下果然有效 compton --backend xrender 彻底解决 顺藤摸瓜进去wiki</description>
       

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Thunar on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/thunar/</link>
+    <link>http://localhost:1313/tags/thunar/</link>
     <description>Recent content in Thunar on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sat, 25 Apr 2020 01:15:51 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/thunar/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 25 Apr 2020 01:15:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/thunar/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Thunar sftp.desktop</title>
-      <link>https://gmyxw.github.io/posts/20200425-thunar-sftp.desktop/</link>
+      <link>http://localhost:1313/posts/20200425-thunar-sftp.desktop/</link>
       <pubDate>Sat, 25 Apr 2020 01:15:51 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200425-thunar-sftp.desktop/</guid>
+      <guid>http://localhost:1313/posts/20200425-thunar-sftp.desktop/</guid>
       
       <description> [Desktop Entry] Type=Application Version=1.0 Encoding=UTF-8 Exec=cp %F /mnt/data/src/yyy/GameServer Name=Copy To Data Store ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0+0,0 -f alsa -i hw:1,1,0 -f alsa -i hw:1,1,1 -filter_complex amerge output.mkv </description>
       

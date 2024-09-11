@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Golang on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/golang/</link>
+    <link>http://localhost:1313/tags/golang/</link>
     <description>Recent content in Golang on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sat, 18 Apr 2020 00:06:48 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Apr 2020 00:06:48 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How can I simulate interactive console in VSCode debugger</title>
-      <link>https://gmyxw.github.io/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/</link>
+      <link>http://localhost:1313/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/</link>
       <pubDate>Sat, 18 Apr 2020 00:06:48 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/</guid>
+      <guid>http://localhost:1313/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/</guid>
       
       <description>the VS Code debugger console doesn&amp;rsquo;t currently support piping any input through to stdin.
 FYI, you can tell the Code debugger to use an external console in the launch config:

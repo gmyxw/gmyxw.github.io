@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Time on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/time/</link>
+    <link>http://localhost:1313/tags/time/</link>
     <description>Recent content in Time on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Tue, 12 May 2020 14:31:58 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/time/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 12 May 2020 14:31:58 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/time/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>解决Windows与Ubuntu双系统时间同步问题</title>
-      <link>https://gmyxw.github.io/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</link>
+      <link>http://localhost:1313/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</link>
       <pubDate>Tue, 12 May 2020 14:31:58 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</guid>
+      <guid>http://localhost:1313/posts/20200512b-how-to-fix-windows-and-linux-showing-different-times-when-dual-booting/</guid>
       
       <description>UTC in Windows To dual boot with Windows it is recommended to configure Windows to use UTC, rather than Linux to use localtime. (Windows by default uses localtime [1].) It can be done by a simple registry fix: Open regedit and add a DWORD value for 32-bit Windows, or QWORD for 64-bit one, with hexadecimal value 1 to the registry: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TimeZoneInformation\RealTimeIsUniversal You can do this from an Administrator Command Prompt</description>
       

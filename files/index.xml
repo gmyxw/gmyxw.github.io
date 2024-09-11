@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Files on GM游戏网</title>
-    <link>https://gmyxw.github.io/files/</link>
+    <link>http://localhost:1313/files/</link>
     <description>Recent content in Files on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sun, 07 Jun 2020 19:23:33 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/files/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 07 Jun 2020 19:23:33 +0800</lastBuildDate><atom:link href="http://localhost:1313/files/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Rc4</title>
-      <link>https://gmyxw.github.io/files/20200607-rc4/</link>
+      <link>http://localhost:1313/files/20200607-rc4/</link>
       <pubDate>Sun, 07 Jun 2020 19:23:33 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/files/20200607-rc4/</guid>
+      <guid>http://localhost:1313/files/20200607-rc4/</guid>
       
       <description>rc4.js
 /* * RC4 symmetric cipher encryption/decryption * * @license Public Domain * @param string key - secret key for encryption/decryption * @param string str - string to be encrypted/decrypted * @return string */ function rc4(key, str) { var s = [], j = 0, x, res = &amp;#39;&amp;#39;; for (var i = 0; i &amp;lt; 256; i++) { s[i] = i; } for (i = 0; i &amp;lt; 256; i++) { j = (j + s[i] + key.</description>
@@ -22,10 +22,10 @@
     
     <item>
       <title>Base64</title>
-      <link>https://gmyxw.github.io/files/20200607-base64/</link>
+      <link>http://localhost:1313/files/20200607-base64/</link>
       <pubDate>Sun, 07 Jun 2020 19:23:22 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/files/20200607-base64/</guid>
+      <guid>http://localhost:1313/files/20200607-base64/</guid>
       
       <description>base64.c
 #include &amp;lt;stdint.h&amp;gt; #include &amp;lt;stdlib.h&amp;gt; static char encoding_table[] = {&amp;#39;A&amp;#39;, &amp;#39;B&amp;#39;, &amp;#39;C&amp;#39;, &amp;#39;D&amp;#39;, &amp;#39;E&amp;#39;, &amp;#39;F&amp;#39;, &amp;#39;G&amp;#39;, &amp;#39;H&amp;#39;, &amp;#39;I&amp;#39;, &amp;#39;J&amp;#39;, &amp;#39;K&amp;#39;, &amp;#39;L&amp;#39;, &amp;#39;M&amp;#39;, &amp;#39;N&amp;#39;, &amp;#39;O&amp;#39;, &amp;#39;P&amp;#39;, &amp;#39;Q&amp;#39;, &amp;#39;R&amp;#39;, &amp;#39;S&amp;#39;, &amp;#39;T&amp;#39;, &amp;#39;U&amp;#39;, &amp;#39;V&amp;#39;, &amp;#39;W&amp;#39;, &amp;#39;X&amp;#39;, &amp;#39;Y&amp;#39;, &amp;#39;Z&amp;#39;, &amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;, &amp;#39;d&amp;#39;, &amp;#39;e&amp;#39;, &amp;#39;f&amp;#39;, &amp;#39;g&amp;#39;, &amp;#39;h&amp;#39;, &amp;#39;i&amp;#39;, &amp;#39;j&amp;#39;, &amp;#39;k&amp;#39;, &amp;#39;l&amp;#39;, &amp;#39;m&amp;#39;, &amp;#39;n&amp;#39;, &amp;#39;o&amp;#39;, &amp;#39;p&amp;#39;, &amp;#39;q&amp;#39;, &amp;#39;r&amp;#39;, &amp;#39;s&amp;#39;, &amp;#39;t&amp;#39;, &amp;#39;u&amp;#39;, &amp;#39;v&amp;#39;, &amp;#39;w&amp;#39;, &amp;#39;x&amp;#39;, &amp;#39;y&amp;#39;, &amp;#39;z&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;4&amp;#39;, &amp;#39;5&amp;#39;, &amp;#39;6&amp;#39;, &amp;#39;7&amp;#39;, &amp;#39;8&amp;#39;, &amp;#39;9&amp;#39;, &amp;#39;+&amp;#39;, &amp;#39;/&amp;#39;}; static char *decoding_table = NULL; static int mod_table[] = {0, 2, 1}; char *base64_encode(const unsigned char *data, size_t input_length, size_t *output_length) { *output_length = 4 * ((input_length + 2) / 3); char *encoded_data = malloc(*output_length); if (encoded_data == NULL) return NULL; for (int i = 0, j = 0; i &amp;lt; input_length;) { uint32_t octet_a = i &amp;lt; input_length ?</description>
@@ -34,10 +34,10 @@
     
     <item>
       <title>android env</title>
-      <link>https://gmyxw.github.io/files/20200516-android-env/</link>
+      <link>http://localhost:1313/files/20200516-android-env/</link>
       <pubDate>Sat, 16 May 2020 19:27:02 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/files/20200516-android-env/</guid>
+      <guid>http://localhost:1313/files/20200516-android-env/</guid>
       
       <description>android-env.sh
 #!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &amp;#34;${_android_arch}&amp;#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &amp;#34;${ANDROID_MINIMUM_PLATFORM}&amp;#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &amp;#34;${ANDROID_HOME}&amp;#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &amp;#34;${ANDROID_NDK_HOME}&amp;#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &amp;#34;${ANDROID_BUILD_TOOLS_REVISION}&amp;#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &amp;#34;${ANDROID_API_VERSION}&amp;#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &amp;#34;${ANDROID_NDK_PLATFORM}&amp;#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &amp;#34;$_android_arch&amp;#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang++ export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &amp;#39;Pkg.</description>

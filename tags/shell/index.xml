@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shell on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/shell/</link>
+    <link>http://localhost:1313/tags/shell/</link>
     <description>Recent content in Shell on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Tue, 25 Feb 2020 04:36:20 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 25 Feb 2020 04:36:20 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/shell/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Copying all files inside subdirectories and renaming instead of overwriting</title>
-      <link>https://gmyxw.github.io/posts/20200225-cp-backup/</link>
+      <link>http://localhost:1313/posts/20200225-cp-backup/</link>
       <pubDate>Tue, 25 Feb 2020 04:36:20 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200225-cp-backup/</guid>
+      <guid>http://localhost:1313/posts/20200225-cp-backup/</guid>
       
       <description>GNU cp(1) has a backup option:
 cp --backup SOURCE [SOURCE...] [DESTINATION] This has the following effects which can be controlled with other options as described in the manual page of cp(1):
@@ -23,10 +23,10 @@ cp --backup SOURCE [SOURCE...] [DESTINATION] This has the following effects whic
     
     <item>
       <title>Linux 让终端走代理的几种方法</title>
-      <link>https://gmyxw.github.io/posts/20200111-set-proxy-for-terminal/</link>
+      <link>http://localhost:1313/posts/20200111-set-proxy-for-terminal/</link>
       <pubDate>Sat, 11 Jan 2020 16:00:15 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200111-set-proxy-for-terminal/</guid>
+      <guid>http://localhost:1313/posts/20200111-set-proxy-for-terminal/</guid>
       
       <description>最近使用终端git的时候觉得速度有点慢，考虑一下是不是可以通过让终端走代理的方式来加快速度，尝试了一下以后确实是可以的。如果只是为了设置gi</description>
       

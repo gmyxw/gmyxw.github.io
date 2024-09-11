@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vscode on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/vscode/</link>
+    <link>http://localhost:1313/tags/vscode/</link>
     <description>Recent content in Vscode on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Mon, 18 May 2020 04:01:27 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 18 May 2020 04:01:27 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/vscode/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>解决Golang在VSCode中调试时无法接收标准输入的问题</title>
-      <link>https://gmyxw.github.io/posts/20200518-vscode-go-interactive-debug-console/</link>
+      <link>http://localhost:1313/posts/20200518-vscode-go-interactive-debug-console/</link>
       <pubDate>Mon, 18 May 2020 04:01:27 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200518-vscode-go-interactive-debug-console/</guid>
+      <guid>http://localhost:1313/posts/20200518-vscode-go-interactive-debug-console/</guid>
       
       <description>Golang 在 VSCode 中的调试配置 （解决Golang在VSCode中调试时无法接收标准输入(stdin)的问题） 最近开始接触Go语言，但在配置VSCode的</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>How can I simulate interactive console in VSCode debugger</title>
-      <link>https://gmyxw.github.io/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/</link>
+      <link>http://localhost:1313/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/</link>
       <pubDate>Sat, 18 Apr 2020 00:06:48 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/</guid>
+      <guid>http://localhost:1313/posts/20200418-how-can-i-simulate-interactive-console-in-vscode-debugger/</guid>
       
       <description>the VS Code debugger console doesn&amp;rsquo;t currently support piping any input through to stdin.
 FYI, you can tell the Code debugger to use an external console in the launch config:
@@ -37,10 +37,10 @@ launch.json
     
     <item>
       <title>Visual Studio Code 偏好设置</title>
-      <link>https://gmyxw.github.io/posts/20200215-my-vscode-config/</link>
+      <link>http://localhost:1313/posts/20200215-my-vscode-config/</link>
       <pubDate>Sat, 15 Feb 2020 17:58:47 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200215-my-vscode-config/</guid>
+      <guid>http://localhost:1313/posts/20200215-my-vscode-config/</guid>
       
       <description>Visual Studio Code 提供了极大的弹性让我们自订想要的编辑器样式，端看使用者设定（User Setting）中，就超过 800 项设定可以让开发者自由调整，而且还有扩</description>
       

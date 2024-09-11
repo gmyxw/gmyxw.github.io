@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Win10 on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/win10/</link>
+    <link>http://localhost:1313/tags/win10/</link>
     <description>Recent content in Win10 on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Wed, 05 Feb 2020 13:12:53 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/win10/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Feb 2020 13:12:53 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/win10/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>win10输入法不显示候选词解决方法</title>
-      <link>https://gmyxw.github.io/posts/20200205-win10-input-method-display-candidate-words/</link>
+      <link>http://localhost:1313/posts/20200205-win10-input-method-display-candidate-words/</link>
       <pubDate>Wed, 05 Feb 2020 13:12:53 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200205-win10-input-method-display-candidate-words/</guid>
+      <guid>http://localhost:1313/posts/20200205-win10-input-method-display-candidate-words/</guid>
       
       <description>精简系统后自带的输入法不显示候选词 懒得折腾直接切换成老版本就完事，位置在输入法-设置-常规-使用以前版本的微软拼音输入法</description>
       

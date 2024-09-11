@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Chrome on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/chrome/</link>
+    <link>http://localhost:1313/tags/chrome/</link>
     <description>Recent content in Chrome on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Mon, 29 Jul 2024 13:35:51 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 29 Jul 2024 13:35:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/chrome/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>chrome 全局代理</title>
-      <link>https://gmyxw.github.io/posts/1722231351/</link>
+      <link>http://localhost:1313/posts/1722231351/</link>
       <pubDate>Mon, 29 Jul 2024 13:35:51 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/1722231351/</guid>
+      <guid>http://localhost:1313/posts/1722231351/</guid>
       
       <description>用了这么多年SwitchyOmega才发现这玩意是多余的，有了clash后除了调试切代理方便真没啥用，旧时代的残党该死死了🤔 Copy &amp;#34;C:\Program Files\Google\Chrome\Application\chrome.exe&amp;#34; --proxy-server=&amp;#34;socks://127.0.0.1:1080&amp;#34; Copy google-chrome-stable --proxy-server=&amp;#34;socks://127.0.0.1:1080&amp;#34;</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>Chrome内置翻译被抢</title>
-      <link>https://gmyxw.github.io/posts/chrome-translate/</link>
+      <link>http://localhost:1313/posts/chrome-translate/</link>
       <pubDate>Sun, 09 Oct 2022 20:21:45 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/chrome-translate/</guid>
+      <guid>http://localhost:1313/posts/chrome-translate/</guid>
       
       <description>linux下的chrome内置翻译也只能用系统代理，linux还是比windows好解决，不过我懒得折腾还是直接改hosts好了 su echo 180.163.151.34 translate.googleapis.com &amp;gt;&amp;gt; /etc/hosts</description>
       
@@ -32,10 +32,10 @@
     
     <item>
       <title>Google Chrome 离线安装包的官方下载</title>
-      <link>https://gmyxw.github.io/posts/20200313-chrome-standalone/</link>
+      <link>http://localhost:1313/posts/20200313-chrome-standalone/</link>
       <pubDate>Fri, 13 Mar 2020 02:46:41 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200313-chrome-standalone/</guid>
+      <guid>http://localhost:1313/posts/20200313-chrome-standalone/</guid>
       
       <description>在chrome首页的链接https://www.google.com/chrome后加上?system=true&amp;amp;standalon</description>
       
@@ -43,10 +43,10 @@
     
     <item>
       <title>Browser plugins</title>
-      <link>https://gmyxw.github.io/posts/20200304-browser-plugins/</link>
+      <link>http://localhost:1313/posts/20200304-browser-plugins/</link>
       <pubDate>Wed, 04 Mar 2020 17:06:34 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200304-browser-plugins/</guid>
+      <guid>http://localhost:1313/posts/20200304-browser-plugins/</guid>
       
       <description>Installation The package you will need to install depends on the browser you use.
 The NPAPI version can be installed with the flashplugin package. The PPAPI version can be installed with the pepper-flash package. Standalone version can be installed with the flashplayer-standaloneAUR package. </description>

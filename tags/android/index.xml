@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Android on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/android/</link>
+    <link>http://localhost:1313/tags/android/</link>
     <description>Recent content in Android on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Wed, 18 Nov 2020 09:44:57 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/android/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 18 Nov 2020 09:44:57 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/android/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>unity游戏提示 Using memoryadresses from more than 16GB of memory </title>
-      <link>https://gmyxw.github.io/posts/20201118-android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages/</link>
+      <link>http://localhost:1313/posts/20201118-android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages/</link>
       <pubDate>Wed, 18 Nov 2020 09:44:57 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20201118-android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages/</guid>
+      <guid>http://localhost:1313/posts/20201118-android-il2cpp-empty-project-crashes-on-launch-with-using-memoryadresses-from-more-than-16gb-of-memory-messages/</guid>
       
       <description>新游戏被用户狂喷无奈研究一下，先在官方的问题跟踪器查一下就发现很多开发者纷纷都说是android 11的问题，我当场裂开，修复完又要改代码，之</description>
       
@@ -21,10 +21,10 @@
     
     <item>
       <title>Android Intent</title>
-      <link>https://gmyxw.github.io/posts/20200517-android-intent/</link>
+      <link>http://localhost:1313/posts/20200517-android-intent/</link>
       <pubDate>Sun, 17 May 2020 20:31:14 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200517-android-intent/</guid>
+      <guid>http://localhost:1313/posts/20200517-android-intent/</guid>
       
       <description>Intent 功能太强大了，比较常用的就是Activity （Service）之间的数据传递。举个简单例百子，在当前Activity1使用startAct</description>
       
@@ -32,10 +32,10 @@
     
     <item>
       <title>android env</title>
-      <link>https://gmyxw.github.io/files/20200516-android-env/</link>
+      <link>http://localhost:1313/files/20200516-android-env/</link>
       <pubDate>Sat, 16 May 2020 19:27:02 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/files/20200516-android-env/</guid>
+      <guid>http://localhost:1313/files/20200516-android-env/</guid>
       
       <description>android-env.sh
 #!/bin/sh # Useful link to keep track of latest API changes: # # https://developer.android.com/ndk/downloads/revision_history _android_arch=$1 if [ -z &amp;#34;${_android_arch}&amp;#34; ]; then _android_arch=armv7a-eabi fi # Minimum Android platform based on: # # http://gs.statcounter.com/os-version-market-share/android/mobile-tablet/worldwide if [ -z &amp;#34;${ANDROID_MINIMUM_PLATFORM}&amp;#34; ]; then export ANDROID_MINIMUM_PLATFORM=24 fi if [ -z &amp;#34;${ANDROID_HOME}&amp;#34; ]; then export ANDROID_HOME=/opt/android-sdk fi if [ -z &amp;#34;${ANDROID_NDK_HOME}&amp;#34; ]; then export ANDROID_NDK_HOME=/opt/android-ndk fi get_last() { ls $1 | sort -V | tail -n 1 } if [ -z &amp;#34;${ANDROID_BUILD_TOOLS_REVISION}&amp;#34; ]; then export ANDROID_BUILD_TOOLS_REVISION=$(get_last ${ANDROID_HOME}/build-tools) fi if [ -z &amp;#34;${ANDROID_API_VERSION}&amp;#34; ]; then export ANDROID_API_VERSION=android-$ANDROID_MINIMUM_PLATFORM fi if [ -z &amp;#34;${ANDROID_NDK_PLATFORM}&amp;#34; ]; then export ANDROID_NDK_PLATFORM=android-$ANDROID_MINIMUM_PLATFORM fi export ANDROID_SDK_PLATFORM=${ANDROID_HOME}/platforms/$ANDROID_API_VERSION export ANDROID_PLATFORM=${ANDROID_NDK_HOME}/platforms/$ANDROID_NDK_PLATFORM export ANDROID_TOOLCHAIN=${ANDROID_NDK_HOME}/toolchains/llvm/prebuilt/linux-x86_64 export ANDROID_SYSROOT=${ANDROID_TOOLCHAIN}/sysroot export ANDROID_CROSS_PREFIX=$ANDROID_TOOLCHAIN/bin export ANDROID_PKGCONFIG=android-${_android_arch}-pkg-config case &amp;#34;$_android_arch&amp;#34; in aarch64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/aarch64-linux-android- export ANDROID_ABI=arm64-v8a ;; armv7a-eabi) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/armv7a-linux-androideabi${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/arm-linux-androideabi- export ANDROID_ABI=armeabi-v7a ;; x86) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/i686-linux-android- export ANDROID_ABI=x86 ;; x86-64) export ANDROID_TOOLS_COMPILER_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android${ANDROID_MINIMUM_PLATFORM}- export ANDROID_TOOLS_PREFIX=${ANDROID_CROSS_PREFIX}/x86_64-linux-android- export ANDROID_ABI=x86_64 ;; esac export ANDROID_CC=${ANDROID_TOOLS_COMPILER_PREFIX}clang export ANDROID_CXX=${ANDROID_TOOLS_COMPILER_PREFIX}clang++ export ANDROID_AR=${ANDROID_TOOLS_PREFIX}ar export ANDROID_AS=${ANDROID_TOOLS_PREFIX}as export ANDROID_NM=${ANDROID_TOOLS_PREFIX}nm export ANDROID_RANLIB=${ANDROID_TOOLS_PREFIX}ranlib export ANDROID_STRIP=${ANDROID_TOOLS_PREFIX}strip export ANDROID_PREFIX=/opt/android-libs/${_android_arch} export ANDROID_PREFIX_USR=${ANDROID_PREFIX}/usr export ANDROID_PREFIX_BIN=${ANDROID_PREFIX}/bin export ANDROID_PREFIX_INCLUDE=${ANDROID_PREFIX}/include export ANDROID_PREFIX_LIB=${ANDROID_PREFIX}/lib export ANDROID_PREFIX_ETC=${ANDROID_PREFIX}/etc export ANDROID_PREFIX_SHARE=${ANDROID_PREFIX}/share export PKG_CONFIG_SYSROOT_DIR=${ANDROID_PREFIX} export PKG_CONFIG_LIBDIR=${ANDROID_PREFIX_LIB}/pkgconfig:${ANDROID_PREFIX_SHARE}/pkgconfig ndk_version() { grep &amp;#39;Pkg.</description>
@@ -44,10 +44,10 @@
     
     <item>
       <title>Android Studio preview</title>
-      <link>https://gmyxw.github.io/posts/20200224-android-studio-preview/</link>
+      <link>http://localhost:1313/posts/20200224-android-studio-preview/</link>
       <pubDate>Mon, 24 Feb 2020 07:58:36 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200224-android-studio-preview/</guid>
+      <guid>http://localhost:1313/posts/20200224-android-studio-preview/</guid>
       
       <description>更新 IDE 和 SDK 工具 安装 Android Studio 后，您可以轻松通过自动更新和 Android SDK 管理器让 Android Studio IDE 和 Android SDK 工具保持最新状态。 更新 IDE 和变更版本 若有可用的 IDE 更新，Android</description>
       

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TypeScript on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/typescript/</link>
+    <link>http://localhost:1313/tags/typescript/</link>
     <description>Recent content in TypeScript on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Tue, 10 Mar 2020 14:51:20 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Mar 2020 14:51:20 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/typescript/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ts属性后面的感叹号有什么用处？</title>
-      <link>https://gmyxw.github.io/posts/20200310-what-does-the-exclamation-point-behind-the-ts-attribute-mean/</link>
+      <link>http://localhost:1313/posts/20200310-what-does-the-exclamation-point-behind-the-ts-attribute-mean/</link>
       <pubDate>Tue, 10 Mar 2020 14:51:20 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200310-what-does-the-exclamation-point-behind-the-ts-attribute-mean/</guid>
+      <guid>http://localhost:1313/posts/20200310-what-does-the-exclamation-point-behind-the-ts-attribute-mean/</guid>
       
       <description>首先看一段代码 import { Vue, Component, Prop } from &amp;#39;vue-property-decorator&amp;#39; @Component export default class YourComponent extends Vue { @Prop(Number) propA!: number @Prop({ default: &amp;#39;default value&amp;#39; }) propB!: string @Prop([String, Boolean]) propC: string | boolean } 这是vue组件的ts写法，仔细观察，里面有一段这样的代码@P</description>
       

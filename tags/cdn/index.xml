@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cdn on GM游戏网</title>
-    <link>https://gmyxw.github.io/tags/cdn/</link>
+    <link>http://localhost:1313/tags/cdn/</link>
     <description>Recent content in Cdn on GM游戏网</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <copyright>2007-2024 gmyxw.</copyright>
-    <lastBuildDate>Sun, 23 Feb 2020 04:36:16 +0800</lastBuildDate><atom:link href="https://gmyxw.github.io/tags/cdn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 23 Feb 2020 04:36:16 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/cdn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>百度云加速NS接入流程</title>
-      <link>https://gmyxw.github.io/posts/20200223-baidu-cdn/</link>
+      <link>http://localhost:1313/posts/20200223-baidu-cdn/</link>
       <pubDate>Sun, 23 Feb 2020 04:36:16 +0800</pubDate>
       
-      <guid>https://gmyxw.github.io/posts/20200223-baidu-cdn/</guid>
+      <guid>http://localhost:1313/posts/20200223-baidu-cdn/</guid>
       
       <description>百度云加速NS接入是最简单的方式，不过还是很多站长管理员不大懂，今天教大家如何NS接入。 首先点域名继续接入 添加子域名，A记录、主机名: WWW</description>
       
